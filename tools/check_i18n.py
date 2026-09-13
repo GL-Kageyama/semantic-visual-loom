@@ -65,6 +65,11 @@ DOCS = (
     "projects/hitosara/takes/README.md",
     "projects/hitosara/timeline/README.md",
     "references/video-spec.md",
+    # ⚠️ **Skill は1行目が frontmatter である**——ヘッダはその直後に在る（R2 を見ること）。
+    "skills/breakdown/SKILL.md",
+    "skills/design/SKILL.md",
+    "skills/ledger/SKILL.md",
+    "skills/shot/SKILL.md",
 )
 
 #: ミラーの言語接尾辞。**正典は英語なので `en` は無い。**
