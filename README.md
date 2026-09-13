@@ -4,15 +4,16 @@
 
 # semantic-visual-loom
 
-**A foundation that carries an AI-generated story all the way to film.**
+**A foundation that carries a story all the way to film.**
 
 > **Footage is not generated. It is edited.**
 
-What the generative model makes is a **sample**. **What turns it into a work is editing.**
-So what this foundation holds is not a generator but the **process of production**—breakdown, design, fixing, generation, selection, editing, acceptance.
-The unit placed at its center is the **shot**, and the vessel that carries state is the **production ledger**.
+**What the model makes is a sample**—and **independent generations have no memory of each other.**
+So state is placed outside the generation: **that vessel is the production ledger, one file**,
+holding continuity and disclosure together.
 
-**Sound's sister**: `semantic-audio-loom`. Paired with the same construction (`semantic-` + a word of the senses + `-loom`).
+The unit placed at its center is the **shot**——⚠️ **one shot exists for one change**,
+and **length is a dependent variable.**
 
 ## Differences from Existing AI Film Tools
 
