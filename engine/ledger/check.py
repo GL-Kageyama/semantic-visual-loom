@@ -32,6 +32,11 @@ except ImportError:
 
 SCHEMAS = ("bible", "ledger", "shot-record", "take", "timeline")
 
+# ⚠️ `disclosure` の変化点は「属性の袋」である。**この2つだけは属性ではない。**
+#    `shot` 以外を属性として読むので、予約しないと `negative` という
+#    開示属性が存在するかのように扱われる。**属性を足すときは、ここを見る。**
+DISCLOSURE_RESERVED = ("shot", "negative")
+
 
 # ---------------------------------------------------------------- 読み込み
 
@@ -93,15 +98,19 @@ class Project:
                 self.takes.setdefault(key, []).append(doc)
 
         # 台帳の disclosure を {shot, attr, value} に均す。
+        # ⚠️ 変化点は「属性の袋」である（`HANA: present` のように書く）。
+        #    **だから、袋に入れてはならない鍵がある。** 予約鍵を属性として読むと、
+        #    `negative` という名前の開示属性が存在するかのように扱われる。
         self.disclosure = []
         for cp in (self.ledger.get("disclosure") or []):
             if not isinstance(cp, dict):
                 continue
             shot = cp.get("shot")
             for k, v in cp.items():
-                if k != "shot":
-                    self.disclosure.append({"shot": shot, "attr": k,
-                                            "value": v, "raw": cp})
+                if k in DISCLOSURE_RESERVED:
+                    continue
+                self.disclosure.append({"shot": shot, "attr": k,
+                                        "value": v, "raw": cp})
 
     # ------------------------------------------------------------ 台帳の座標
 
@@ -403,6 +412,71 @@ def self_test():
         print(f"    {label:<34}{len(got):>10}  "
               f"{verdict if ok else '⚠️ 期待と違う（' + ('鳴るべき' if want else '鳴ってはならない') + '）'}")
         for f in got[:2]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ---- L10（開示の変化点は、モデルに渡る文に現れているか）
+    #     ⚠️ **相手は本物の仕様書である。** 合成した節では、読む側が壊れていても通る。
+    print("\n=== 自己検査 — 開示の変化点と §18 の突き合わせ\n")
+
+    import tempfile
+    from pathlib import Path as _P
+
+    SPEC_A = ("## Negative Prompt\n\nno schoolgirl, no nameplate, no readable text\n\n"
+              "# 19. GENERATION INSTANCE\n")
+    SPEC_B = ("## Negative Prompt\n\nno schoolgirl, no nameplate, no readable text, "
+              "no ghost, no translucent figure\n\n# 19. GENERATION INSTANCE\n")
+    SPEC_NOSEC = "## Instance\n\nsomething else entirely\n"
+
+    def spec_proj(files, disc_raw):
+        """⚠️ `specdoc` に**本物のファイルを読ませる**。合成の節では読む側を検査できない。"""
+        d = _P(tempfile.mkdtemp())
+        for name, body in files.items():
+            (d / name).write_text(body, encoding="utf-8")
+        shots = [s("p-ch01-seg01", spec="a.md" if "a.md" in files else None),
+                 s("p-ch01-seg02", spec="b.md")]
+        p = _One(shots[0])
+        p.root = d
+        p.shots = {x["shot"]: x for x in shots}
+        p.disclosure = [dict(cp) for cp in disc_raw]
+        return p
+
+    def cp(neg, shot="p-ch01-seg02"):
+        raw = {"shot": shot, "HANA": "present"}
+        if neg is not None:
+            raw["negative"] = neg
+        return {"shot": shot, "attr": "HANA", "value": "present", "raw": raw}
+
+    # 差が出る対（b が a と違う）と、出ない対（同じ）
+    SAME = {"a.md": SPEC_A, "b.md": SPEC_A}
+    DIFF = {"a.md": SPEC_A, "b.md": SPEC_B}
+
+    neg_cases = [
+        ("L10 宣言が無い", SAME, cp(None), True,
+         "変化点に `negative:` が無い。**§18 に対して確かめられていない。**"),
+        ("L10 changed と言い、§18 は同じ", SAME, cp("changed"), True,
+         "`negative: changed` と宣言しているが"),
+        ("L10 covered と言い、§18 は違う", DIFF, cp("covered"), True,
+         "`negative: covered` と宣言しているが"),
+        ("L10 値が changed/covered でない", SAME, cp("maybe"), True, "どちらでもない"),
+        ("L10 changed と言い、§18 も違う（鳴ってはならない）", DIFF, cp("changed"), False, None),
+        ("L10 covered と言い、§18 も同じ（鳴ってはならない）", SAME, cp("covered"), False, None),
+        ("L10 spec が無い", {k: v for k, v in SAME.items() if k != "a.md"},
+         cp("changed"), True, "`spec:` が無い"),
+        ("L10 §18 の節が無い", {"a.md": SPEC_NOSEC, "b.md": SPEC_NOSEC},
+         cp("changed"), True, "`Negative Prompt` の節が無い"),
+    ]
+    for label, files, point, want, fragment in neg_cases:
+        p = spec_proj(files, [point])
+        got = semantic.check_negative_response(p)
+        # ⚠️ 註（確かめた報告）と違反を分ける。**註は「鳴った」ではない。**
+        v = [f for f in got if f["severity"] != "note"]
+        n += 1
+        ok = bool(v) == want and (not want or any(fragment in f["message"] for f in v))
+        bad += not ok
+        verdict = f"違反 {len(v)} 件" if v else "違反0件"
+        print(f"    {label:<44}{verdict:>10}  "
+              f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in v[:1]:
             print(f"        {f['code']}  {f['message'][:88]}")
 
     print(f"\n=== {n} 例中 {n - bad} 例が期待どおり")

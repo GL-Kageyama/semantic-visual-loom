@@ -70,15 +70,34 @@ props:
 # 座標がショットIDなのは、開示の座標がクリップの並び順だからである——
 # §16 を30本ぶん測った結果、4つの明かしのうち2つが章の途中で起きるので、
 # レンジでは表現できない。
+#
+# 各変化点の `negative:` は、**モデルに渡る文（§18 Negative Prompt）がこの点で
+# どうなったか**の宣言である。検査 L10 が、§18 を実際に読んで両方向に検算する。
+#
+#   changed  この変化点で §18 の節が変わった
+#   covered  §18 は変わらない。**既にその状態を持っていた**
+#
+# ⚠️ **§18 が変わるのは4点のうち2点だけである。** 変わらないことは、
+#    応答していないことではない——§18 は安全在圏であって、台帳が宣言するより
+#    先にその禁止を持つことがある（§18 の名の禁止は 03-3 から連続している）。
+#    §16 は逆で、本ごとに書き直されるので4点とも動く。**動くことと運ぶことは違う。**
 disclosure:
   - shot: ukebi-v2-ch03-seg03
     HANA: present        # 不在 → 初出＝「少女」。名なし・判なし・実体
+    negative: changed    # §18 52→65 節（+20 −7）。少女を禁じる形から、実体として置く形へ
   - shot: ukebi-v2-ch04-seg03
-    HANA.speech: first   # 初台詞。§16 は no nameplate / no subtitle を加える
+    HANA.speech: first   # 初台詞
+    negative: covered    # §18 は 04-2 と1節も違わない（63 節・順序まで同一）。
+                         # no nameplate / no subtitle naming the girl は 03-3 から在る
   - shot: ukebi-v2-ch06-seg03
     HANA.mark: on_送り火 # 判は送り火の額。少女の額ではない
+    negative: changed    # §18 65→64 節（+1 −2）。no mark on the man's forehead が消え、
+                         # no mark on the girl's forehead が立つ
   - shot: ukebi-v2-ch08-seg02
     HANA.name: revealed  # ＝篠宮花
+    negative: covered    # §18 は 08-1 と1節も違わない（63 節・順序まで同一）。
+                         # no name text / no nameplate は 03-3 から在る。
+                         # ⚠️ 名に固有の禁止（no on-screen text of 花）は 09-2 で立つ
 
 # at は「鍵」ではない。§16 の見出しはレンジを名指すが本体は「この1本」の禁止を
 # 書くので、10レンジのうち9つで禁止集合が割れる。人が読むための群れである。

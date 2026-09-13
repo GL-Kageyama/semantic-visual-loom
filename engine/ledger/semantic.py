@@ -18,6 +18,8 @@
 
 import re
 
+import specdoc
+
 # ---------------------------------------------------------------- 層C 空の検査
 
 
@@ -338,6 +340,110 @@ def check_circular(project):
                     severity="note")]
 
 
+def check_negative_response(project):
+    """L10 — **開示の変化点は、モデルに渡る文に現れているか。**
+
+    `disclosure` の各変化点は `negative:` を宣言する。
+
+      `changed`  この変化点で §18 `Negative Prompt` の節が変わった
+      `covered`  §18 は変わらない。**既にその状態を持っていた**
+
+    ⚠️ **どちらの宣言も、§18 を実際に読んで検算する。** 台帳が「変わった」と言い、
+    §18 が変わっていなければ台帳が誤りである。**「変わらない」と言い、§18 が変わって
+    いれば、その理由も誤りである。** 宣言は両方向に falsify できる。
+
+    ⚠️ **これが「鳴らない分岐」の実体である。** 第2号の検査器は相手を §16 にしていたので
+    「§16 が応答していない」が4つとも偽になり、**分岐は一度も鳴らなかった。**
+    相手を §18 に変えると、**§18 は4つのうち2つでしか変わらない**（実測）ので、
+    この分岐は実データで鳴る。**鳴らして初めて、分岐は存在する。**
+
+    ⚠️ **宣言が無ければ鳴る。** 変化点が `negative:` を書いていないなら、
+    その変化点は**モデルに渡る文に対して一度も確かめられていない**——
+    「違反0件」ではなく「検査していない」。**`disclosure` に4行あって `negative:` が
+    1つも無い状態は、この検査が空である。**
+    """
+    out = []
+    order = project.order()
+    idx = {s: i for i, s in enumerate(order)}
+    checked = []
+
+    for cp in project.disclosure:
+        target = cp.get("shot")
+        if target not in idx:
+            continue          # 座標が無いことは L7 が報告する。ここでは重ねて鳴らさない
+        declared = (cp.get("raw") or {}).get("negative")
+
+        if declared is None:
+            out.append(finding("L10", str(target),
+                               "変化点に `negative:` が無い。**§18 に対して確かめられていない。**"
+                               "`changed`（この変化点で §18 が変わった）か "
+                               "`covered`（§18 が既にその状態を持っていた）を書く。"
+                               "**書かなければ、この変化点は検査されていない**——"
+                               "違反0件ではない。"))
+            continue
+        if declared not in ("changed", "covered"):
+            out.append(finding("L10", str(target),
+                               f"`negative: {declared!r}` は changed / covered のどちらでもない。"))
+            continue
+
+        i = idx[target]
+        if i == 0:
+            out.append(finding("L10", str(target),
+                               "先頭のショットに変化点がある。**前のショットが無いので、"
+                               "「変わった」を言えない。**",
+                               severity="note"))
+            continue
+
+        prev = order[i - 1]
+        try:
+            a = _neg(project, prev)
+            b = _neg(project, target)
+        except _NoSpec as e:
+            out.append(finding("L10", str(target), str(e)))
+            continue
+        if a is None or b is None:
+            out.append(finding("L10", str(target),
+                               f"§18 `Negative Prompt` の節が無い（{prev if a is None else target}）。"
+                               "**節が無いのは、変わらなかったのではない。**"))
+            continue
+
+        changed = set(a) != set(b)
+        if declared == "changed" and not changed:
+            out.append(finding("L10", str(target),
+                               f"`negative: changed` と宣言しているが、§18 は "
+                               f"{prev} と1節も違わない（{len(b)} 節）。**台帳が §18 を予測していない。**"))
+        elif declared == "covered" and changed:
+            out.append(finding("L10", str(target),
+                               f"`negative: covered` と宣言しているが、§18 は "
+                               f"{prev} から変わっている（+{len(set(b) - set(a))} / "
+                               f"−{len(set(a) - set(b))} 節）。**理由が誤っている。**"))
+        else:
+            checked.append(f"{target} {declared}")
+
+    if checked:
+        out.append(finding("L10", f"{len(checked)}点",
+                           "§18 の応答を確かめた: " + "／".join(checked) + "。"
+                           "**§18 が変わらないことは、応答していないことではない**——"
+                           "§18 は安全在圏であり、変化点より先にその禁止を持つことがある。",
+                           severity="note"))
+    return out
+
+
+class _NoSpec(Exception):
+    pass
+
+
+def _neg(project, shot):
+    src = project.shots[shot].get("spec")
+    if not src:
+        raise _NoSpec(f"ショット {shot} に `spec:` が無い。**§18 を読む相手が分からない。**"
+                      "記録が無いので、この変化点は検査されていない。")
+    try:
+        return specdoc.negative_prompt(project.root / src)
+    except FileNotFoundError:
+        raise _NoSpec(f"ショット {shot} の `spec: {src}` が読めない。")
+
+
 # ---------------------------------------------------------------- まとめ
 
 CHECKS_SHOT = (check_unit, check_one_place, check_one_time, check_move,
@@ -353,4 +459,5 @@ def run(project):
         out += check_keys_known(project, shot)
     out += check_disclosure(project)
     out += check_circular(project)
+    out += check_negative_response(project)
     return out

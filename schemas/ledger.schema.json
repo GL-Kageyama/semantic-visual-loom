@@ -86,6 +86,11 @@
             "type": "string",
             "minLength": 1,
             "description": "ショットID。レンジではない。属性はこの字の後ろに並べる（例 HANA・HANA.speech・HANA.mark・HANA.name）。実体・属性・情報を分けて開示する設計。"
+          },
+          "negative": {
+            "type": "string",
+            "enum": ["changed", "covered"],
+            "description": "この変化点で §18 Negative Prompt（モデルに渡る唯一の節）が動いたか。changed＝節が変わった／covered＝変わらないが、既にその状態を持っている。⚠️ 予約鍵である——変化点は属性の袋なので、予約しないと `negative` という開示属性が在るかのように読まれる。⚠️ 相手は §16 MUST NOT ではない——§16 は人が読む注記であって、塊を持たない。"
           }
         }
       }

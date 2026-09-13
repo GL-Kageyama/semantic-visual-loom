@@ -15,6 +15,7 @@ python3 engine/ledger/check.py projects/ukebi/ukebi-v2
 | 欄 | 出所 | 機械か人か |
 |---|---|---|
 | `shot` | ディレクトリ名 | 機械 |
+| `spec` | 移行元のファイルパス（`video-NN/seg-MM/wan-full-spec.md`） | 機械 |
 | `place` | §4 ENVIRONMENT / Location の `ID` | 機械 |
 | `duration` | §1 VIDEO / Basic の `Duration` | 機械 |
 | `beats[].range` `[].density` `[].what` | §8 TEMPORAL STRUCTURE の BEAT 行 | 機械 |
@@ -37,6 +38,19 @@ disclosure_state     宣言された変化点のうち、そのショットま�
 forbidden_set        まだ起きていない変化点の属性をすべて挙げる
 reference_set        OKURIBI.sheet と CROSSING.base は常に。HANA.sheet は 03-3 以降
 ```
+
+⚠️ **`forbidden_set` は4点でちょうど1つずつ減る。** 変化点と1対1である——
+
+| 変化点 | 落ちる禁止 |
+|---|---|
+| `ch03-seg03` 少女が現れる | `HANA` |
+| `ch04-seg03` 少女が話す | `HANA.speech` |
+| `ch06-seg03` 判は送り火の額 | `HANA.mark` |
+| `ch08-seg02` 名が明かされる | `HANA.name` |
+
+**だから `forbidden_set` は台帳から完全に導出できる。** そして**だから L9 が鳴る**
+——記録は台帳に対して何も新しいことを言っていない。**それは欠陥ではなく、
+この2つが同じ一点から出ているという設計の帰結である。**
 
 ⚠️ **`attached` を書かなかった理由。** 受け火 V2 には**参照ディレクトリが1つも無い**——
 どのショットに何を添付したかの記録が、そもそも存在しない。
