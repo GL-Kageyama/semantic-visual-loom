@@ -41,9 +41,22 @@ DISCLOSURE_RESERVED = ("shot", "negative")
 # ---------------------------------------------------------------- 読み込み
 
 
+class Unreadable(Exception):
+    """ファイルは**在る**のに読めない。⚠️ **「無い」とは別である。**"""
+
+
 def _load(path):
-    with open(path, encoding="utf-8") as fh:
-        return yaml.safe_load(fh) or {}
+    """⚠️ **読めないファイルを黙って空にしない。**
+
+    構文が壊れていれば `Unreadable` を投げる——**`{}` を返してはならない。**
+    空の辞書は「0件」として通り、**「0件だから正しい」と読まれる。**
+    """
+    try:
+        with open(path, encoding="utf-8") as fh:
+            return yaml.safe_load(fh) or {}
+    except (yaml.YAMLError, OSError, UnicodeDecodeError) as e:
+        first = str(e).splitlines()[0] if str(e) else type(e).__name__
+        raise Unreadable(f"{path.name}: {type(e).__name__}: {first}") from e
 
 
 def _natural(s):
@@ -59,10 +72,22 @@ class Project:
         self.name = self.root.name
         self.read_errors = []
 
+        def read(path):
+            """⚠️ **1本読めなくても、検査は最後まで走る。**
+
+            例外を上げて止まると、**壊れた1本が他のすべての報告を隠す**——
+            そして**報告しない検査は、通った検査と同じに見える。**
+            """
+            try:
+                return _load(path)
+            except Unreadable as e:
+                self.read_errors.append(f"読めない: {e}")
+                return {}
+
         b = self.root / "bible.yaml"
         l = self.root / "ledger.yaml"
-        self.bible = _load(b) if b.exists() else {}
-        self.ledger = _load(l) if l.exists() else {}
+        self.bible = read(b) if b.exists() else {}
+        self.ledger = read(l) if l.exists() else {}
         if not b.exists():
             self.read_errors.append(f"bible.yaml が無い（{b}）")
         if not l.exists():
@@ -75,7 +100,7 @@ class Project:
             self.read_errors.append(f"shots/ が無い（{d}）")
         else:
             for p in sorted(d.glob("*.y*ml")):
-                doc = _load(p)
+                doc = read(p)
                 key = doc.get("shot")
                 if not key:
                     self.read_errors.append(f"{p.name}: ショットIDが読めない")
@@ -90,7 +115,7 @@ class Project:
             self.read_errors.append(f"takes/ が無い（{d}）— テイクの記録が1本も無い")
         else:
             for p in sorted(d.glob("*.y*ml")):
-                doc = _load(p)
+                doc = read(p)
                 key = (doc.get("take") or {}).get("shot")
                 if not key:
                     self.read_errors.append(f"{p.name}: ショットIDが読めない")
@@ -1592,6 +1617,95 @@ def self_test():
          img_proj(video=video1(line=False)), True, "`Duration:` が無い")
     run1("L23 記録に duration が無い", semantic.check_duration,
          img_proj(video=video1("6s"), duration=None), True, "`duration` が無い")
+
+    # ---- L25（テイクがショット・様式・**実物**と突き合っているか）
+    #     ⚠️ **`S1` は形を見る。ここは中身を見る。** 13本がスキーマを通ることは、
+    #        その13本が何かについて正しいことを、何も言わない。
+    print("\n=== 自己検査 — テイク（実物と仕様の突き合わせ）\n")
+
+    def video_full(dur="6s", fps="24fps", res="1920x1080", ver=None):
+        head = ("# 1. VIDEO\n\n"
+                f"- Duration: `{dur}`\n- Aspect: `16:9`\n"
+                f"- Resolution: `{res}`\n- Frame Rate: `{fps}`\n")
+        body = head + "\n" + "".join(f"# {t}\n\n本文\n" for t in ALL20[1:])
+        if ver:
+            body += f"\n# 19. GENERATION INSTANCE\n\n- Specification Version: `{ver}`\n"
+        return body
+
+    def take_doc(shot="p-ch01-seg01", kind="video", index=1, model="WAN 3.0",
+                 measured=None, adopted=None, source="vid.md", sver=None):
+        tk = {"shot": shot, "kind": kind, "index": index,
+              "provider": {"model": model},
+              "params": {"source": source},
+              "verdict": {"machine": {"measured": dict(measured or {})}}}
+        if sver:
+            tk["params"]["source_version"] = sver
+        if adopted is not None:
+            tk["adopted"] = adopted
+        return {"take": tk}
+
+    def take_proj(docs, **kw):
+        p = img_proj(**kw)
+        p.takes = {}
+        for d in docs:
+            p.takes.setdefault(d["take"]["shot"], []).append(d)
+        return p
+
+    M_OK = {"width": 1920, "height": 1080, "frame_rate": 24,
+            "frames": 144, "duration": 6.0}
+
+    run1("L25 実測が仕様と一致する（鳴ってはならない）", semantic.check_take,
+         take_proj([take_doc(measured=M_OK)], video=video_full()), False, None,
+         note="実測を突き合わせた")
+
+    run1("L25 フレームレートが食い違う", semantic.check_take,
+         take_proj([take_doc(measured={**M_OK, "frame_rate": 30})],
+                   video=video_full()), True, "フレームレートが食い違っている")
+
+    run1("L25 解像度が食い違う", semantic.check_take,
+         take_proj([take_doc(measured={**M_OK, "width": 1672, "height": 941})],
+                   video=video_full()), True, "解像度が食い違っている")
+
+    run1("L25 尺が食い違う（許容は1フレーム）", semantic.check_take,
+         take_proj([take_doc(measured={**M_OK, "duration": 4.0})],
+                   video=video_full()), True, "尺が食い違っている")
+
+    run1("L25 1フレームの違いは鳴らない", semantic.check_take,
+         take_proj([take_doc(measured={**M_OK, "duration": 6.0 + 1 / 24})],
+                   video=video_full()), False, None, note="実測を突き合わせた")
+
+    run1("L25 目録に無いモデル", semantic.check_take,
+         take_proj([take_doc(model="SOME OTHER MODEL", measured=M_OK)],
+                   video=video_full()), True, "`MODELS` に無い")
+
+    run1("L25 経路がモデルと食い違う", semantic.check_take,
+         take_proj([take_doc(kind="image", model="WAN 3.0", measured={})],
+                   video=video_full()), True, "経路が食い違っている")
+
+    run1("L25 存在しないショット", semantic.check_take,
+         take_proj([take_doc(shot="p-ch01-seg99", measured=M_OK)],
+                   video=video_full()), True, "存在しないショット")
+
+    run1("L25 通し番号の重複", semantic.check_take,
+         take_proj([take_doc(measured=M_OK), take_doc(measured=M_OK)],
+                   video=video_full()), True, "2本以上ある")
+
+    run1("L25 採用が2本", semantic.check_take,
+         take_proj([take_doc(index=1, measured=M_OK, adopted=True),
+                    take_doc(index=2, measured=M_OK, adopted=True)],
+                   video=video_full()), True, "採用は1本である")
+
+    run1("L25 正典が失われている", semantic.check_take,
+         take_proj([take_doc(source="missing.md", measured=M_OK)],
+                   video=video_full()), True, "そのファイルが無い")
+
+    run1("L25 仕様が後に直っている（註であって違反ではない）", semantic.check_take,
+         take_proj([take_doc(measured=M_OK, sver="0.1.0")],
+                   video=video_full(ver="0.1.1")), False, None,
+         note="仕様が生成のあとに直っている")
+
+    run1("L25 テイクが空なら何も言わない", semantic.check_take,
+         take_proj([], video=video_full()), False, None)
 
     TC = [{"t": "0-4", "kind": "overlay", "content": "分量"}]
     run1("L24 motion は何も要求しない（鳴ってはならない）", semantic.check_mode_demands,

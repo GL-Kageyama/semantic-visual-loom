@@ -1,0 +1,22 @@
+# seg06 / 画像 / 2 — ChatGPT Image 2.5
+#
+# ⚠️ **測ったことしか書いていない。** 幅・高さは PNG のヘッダから読んだ（画素そのもの）。
+# ⚠️ **参照画像を添付したか／プロンプトをそのまま投入したか／何回で出たか**——
+#    **この記録は持っていない。記録が無いのである。** `takes/README.md` を見よ。
+# ⚠️ **これは撮り直しである。** 1枚目（13:41:49）を置き換えた。
+#    ⚠️ **著者はこの1枚について何も言っていない**——だから `adopted` を書かない。
+#    **書かないことが記録である。**
+take:
+  shot: hitosara-ch01-seg06
+  kind: image
+  index: 2
+  provider:
+    model: CHATGPT IMAGE 2.5
+  params:
+    source: specs/image/shot-06-proof.md
+  file: "06_ChatGPT Image 2026年9月13日 16_10_52.png"
+  verdict:
+    machine:
+      measured:
+        width: 1671
+        height: 941

@@ -1,0 +1,22 @@
+# seg02 / 画像 / 1 — ChatGPT Image 2.5
+#
+# ⚠️ **測ったことしか書いていない。** 幅・高さは PNG のヘッダから読んだ（画素そのもの）。
+# ⚠️ **参照画像を添付したか／プロンプトをそのまま投入したか／何回で出たか**——
+#    **この記録は持っていない。記録が無いのである。** `takes/README.md` を見よ。
+# ⚠️ **採用の根拠は著者の「絵はOKだった」（2026-09-13）である。**
+#    機械は何も判定していない——**この層は一度も動いていない。**
+take:
+  shot: hitosara-ch01-seg02
+  kind: image
+  index: 1
+  provider:
+    model: CHATGPT IMAGE 2.5
+  params:
+    source: specs/image/shot-02-flour-and-water.md
+  file: "02_ChatGPT Image 2026年9月13日 13_36_21.png"
+  verdict:
+    machine:
+      measured:
+        width: 1672
+        height: 941
+  adopted: true

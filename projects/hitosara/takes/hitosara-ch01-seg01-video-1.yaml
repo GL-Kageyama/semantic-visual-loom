@@ -1,0 +1,33 @@
+# seg01 / 動画 / 1 — 3s / 30fps / 90 フレーム
+#
+# ⚠️ **測ったのは映像トラックである。** `measured.duration` は**映像**の尺であって、
+#    フォーマット全体の duration ではない——**音声が在ると、そちらに引っ張られる。**
+#    （この2本はどちらも音声が映像より 0.018s / 0.020s 長い。）
+# ⚠️ **`provider.model` は宣言であって実測ではない。** 著者の経路の宣言が `WAN 3.0` だから
+#    そう書いてある。**このリポジトリは、それをファイルから確かめていない。**
+#    コンテナから読めたのは `encoder: Lavf60.16.100` と AIGC の `ContentProducer`
+#    `001191330106MA2CFLDG4R10001` の2つだけである——**どちらも Wan の証拠にはならない。**
+# ⚠️ **尺は宣言と一致した。フレームレートは一致しなかった**（`takes/README.md` を見よ）。
+# ⚠️ **著者はこの1本について何も言っていない**（2026-09-13 時点）——
+#    だから `adopted` を書かない。**書かないことが記録である。**
+take:
+  shot: hitosara-ch01-seg01
+  kind: video
+  index: 1
+  provider:
+    model: WAN 3.0
+  params:
+    source: specs/video/shot-01-mill-shelf.md
+    source_version: "0.1.0"
+    duration: 3
+    aspect: "16:9"
+  file: "01_53b4902e-e85c-43fe-9cb7-25edd391f3d6.mp4"
+  verdict:
+    machine:
+      measured:
+        width: 1920
+        height: 1080
+        frame_rate: 30
+        frames: 90
+        duration: 3.0
+        audio: true

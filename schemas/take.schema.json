@@ -9,11 +9,27 @@
   "properties": {
     "take": {
       "type": "object",
-      "required": ["shot", "index", "provider", "params"],
+      "required": ["shot", "kind", "index", "provider", "params"],
       "additionalProperties": false,
       "properties": {
         "shot": { "type": "string", "description": "どのショットの標本か。ショット記録の shot を引く。" },
-        "index": { "type": "integer", "minimum": 1, "description": "同じショットの中での通し番号。" },
+
+        "index": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "同じショット・同じ経路の中での通し番号。⚠️ **ショットごとではなく、`(shot, kind)` ごとに数える**——画像と動画は別の列である。"
+        },
+
+        "kind": {
+          "type": "string",
+          "enum": ["image", "video"],
+          "description": "どちらの経路の標本か。⚠️ **語彙は `SPEC_KINDS` と同じである**——別の語を作らない。全ショットが2つの経路を持つので、テイクは**必ずどちらか一方**である。⚠️ **`provider.model` から導けるが、導かない。** 導出できることを理由に欄を省くと、モデル名を書き換えた瞬間に経路が黙って変わる。"
+        },
+
+        "file": {
+          "type": ["string", "null"],
+          "description": "`media/` の中のファイル名（ディレクトリは含めない）。⚠️ **これは名乗りであって、存在の証明ではない。** 基盤は `media/` を開かない（`projects/hitosara/media/README.md`）——だからこの欄が指す物が在るかどうかを、事前検証は確かめない。⚠️ `null` は「まだ置いていない」であり、空文字ではない。"
+        },
 
         "provider": {
           "type": "object",
@@ -31,9 +47,19 @@
           "additionalProperties": true,
           "properties": {
             "seed": { "type": ["integer", "null"] },
-            "duration": { "type": "number" },
+            "duration": { "type": "number", "description": "⚠️ **頼んだ尺である。** 戻ってきた尺は `verdict.machine.measured.duration` に在る——**この2つは別の欄である。**" },
             "aspect": { "type": "string", "description": "アスペクト比（例 \"16:9\"）。" },
-            "references": { "type": "array", "items": { "type": "string" }, "description": "このテイクに実際に渡した参照。" }
+            "references": { "type": "array", "items": { "type": "string" }, "description": "このテイクに実際に渡した参照。" },
+
+            "source": {
+              "type": "string",
+              "description": "投入した文字列が正典として在る場所（仕様ファイルのパス）。⚠️ **投入した文字列をここに写してはならない**——**写しは食い違う。** 第2の正典を作らず、第1の正典を指す。"
+            },
+
+            "source_version": {
+              "type": "string",
+              "description": "⚠️ **`source` が指す仕様の、その時の版。** 仕様は生成のあとに直る（§20 がそのために在る）——だから**パスだけでは足りない。** パスは同じまま中身が変わる。⚠️ **`source` を指した時点の版を、ここに凍結する。** 画像の仕様は §19 を持たないので、この欄は無い。"
+            }
           }
         },
 
@@ -44,12 +70,32 @@
           "properties": {
             "machine": {
               "type": "object",
-              "description": "層1 機械検証。決定論的に判定できるものだけ。",
+              "description": "層1 機械検証。決定論的に判定できるものだけ。⚠️ **「判定」と「測定」を分けない**——`identity_similarity` が既に数値であり、測った数は判定の材料そのものである。",
               "additionalProperties": true,
               "properties": {
                 "disclosure_violation": { "type": "boolean" },
                 "identity_similarity": { "type": "number", "minimum": 0, "maximum": 1 },
-                "artifacts": { "type": "array", "items": { "type": "string" } }
+                "artifacts": { "type": "array", "items": { "type": "string" } },
+
+                "measured": {
+                  "type": "object",
+                  "description": "⚠️ **戻ってきたファイルから実測した値。** `params`（頼んだ条件）と対にして読む——**頼んだ値と来た値は別である。**⚠️ **書くのは、実際に測った値だけである。** 測っていない欄は**置かない**（`null` を並べない——`null` は「測って無い」と「測れない」と「0」を混ぜる）。",
+                  "additionalProperties": false,
+                  "properties": {
+                    "width": { "type": "integer", "minimum": 1 },
+                    "height": { "type": "integer", "minimum": 1 },
+                    "frame_rate": {
+                      "type": "number", "exclusiveMinimum": 0,
+                      "description": "1秒あたりのフレーム数。⚠️ **コンテナが名乗る値をそのまま写さない。** 名乗りが `30/1` でも、フレーム数と尺から割り直して確かめる——**割り直すと食い違うコンテナが在る。**"
+                    },
+                    "frames": { "type": "integer", "minimum": 1 },
+                    "duration": {
+                      "type": "number", "exclusiveMinimum": 0,
+                      "description": "**映像トラックの尺**。⚠️ **フォーマット全体の duration を使わない**——音声が在れば、そちらに引っ張られる。"
+                    },
+                    "audio": { "type": ["boolean", "null"], "description": "音声トラックが在るか。`null` は「確かめていない」。" }
+                  }
+                }
               }
             },
             "adherence": {

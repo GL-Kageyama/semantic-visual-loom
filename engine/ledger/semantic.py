@@ -1192,6 +1192,218 @@ def check_duration(project):
     return out
 
 
+
+_NUM = re.compile(r"\d+(?:\.\d+)?")
+_RESOLUTION = re.compile(r"(\d+)\s*[x×]\s*(\d+)")
+
+
+def _num(text):
+    m = _NUM.search("" if text is None else str(text))
+    return float(m.group(0)) if m else None
+
+
+def _resolution(text):
+    m = _RESOLUTION.search("" if text is None else str(text))
+    return (int(m.group(1)), int(m.group(2))) if m else None
+
+
+def _spec_version(path):
+    """仕様の §19 が名乗る版。⚠️ **画像の仕様は §19 を持たない**——`None` を返す。"""
+    try:
+        text = path.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        return None
+    m = specmap.SPEC_VERSION_LINE.search(text)
+    return m.group(1).strip() if m else None
+
+
+def check_take(project):
+    """L25 — **テイクが、ショットと仕様と実物と突き合っているか。**
+
+    ⚠️ **`S1` は形を見る。ここは中身を見る。** 13本がスキーマを通ることは、
+    **その13本が何かについて正しいことを、何も言わない。**
+
+    ⚠️ **ここが「仕様 ↔ 実物」を比べる唯一の場所である。** `L23` は
+    `shot.duration`（意図）と §1（仕様）を比べる——だが **§1 と、戻ってきた
+    ファイルを比べる検査は、これまでどこにも無かった。** だから
+    「24fps と書いたのに 30fps が返った」を**言える場所が無かった。**
+
+    ⚠️ **`media/` は開かない。** `take.file` が名乗るファイルが在るかどうかは
+    **確かめない**——`projects/hitosara/media/README.md` の宣言である。
+    **これは穴である。穴のまま註で報告する。**
+    """
+    out = []
+    docs = [(s, d.get("take") or {}) for s, v in project.takes.items() for d in v]
+    if not docs:
+        return out          # check.py が「テイクの記録が1本も無い」と報告する
+
+    kinds = {}
+    seen_index = set()
+    adopted = {}
+    n_no_source = n_src_missing = n_unmatched = n_compared = 0
+    drift = []
+
+    for s, tk in docs:
+        kind = tk.get("kind")
+        idx = tk.get("index")
+        where = f"{s}#{idx}"
+
+        if s not in project.shots:
+            out.append(finding("L25", where,
+                               f"テイクが **存在しないショット** `{s}` を名乗っている。"
+                               "記録の側に相手が無い——**このテイクは誰のものでもない。**"))
+            continue
+
+        if kind not in specmap.SPEC_KINDS:
+            out.append(finding("L25", where,
+                               f"`kind` が `{kind}` である。`SPEC_KINDS` の語彙は "
+                               f"{sorted(specmap.SPEC_KINDS)} である——"
+                               "**別の語彙を作れば、経路の検査が黙って外れる。**"))
+            continue
+
+        kinds[(s, kind)] = kinds.get((s, kind), 0) + 1
+
+        if (s, kind, idx) in seen_index:
+            out.append(finding("L25", where,
+                               "同じ `(shot, kind, index)` のテイクが2本以上ある。"
+                               "**記録から、どちらが後の生成かを読めない。**"
+                               "通し番号は「上書き」と「別の生成」を区別しない。"))
+        seen_index.add((s, kind, idx))
+
+        if tk.get("adopted") is True:
+            adopted.setdefault((s, kind), []).append(where)
+
+        model = (tk.get("provider") or {}).get("model")
+        if model not in specmap.MODELS:
+            out.append(finding("L25", where,
+                               f"`provider.model` が `{model}` である。`MODELS` に無い——"
+                               "**目録に無い生成器のテイクは、目録の側から検査できない。**"))
+        elif specmap.MODELS[model]["種別"] != kind:
+            out.append(finding("L25", where,
+                               f"`kind` は `{kind}` だが、`MODELS` は `{model}` を "
+                               f"`{specmap.MODELS[model]['種別']}` と宣言している。"
+                               "**経路が食い違っている。**"))
+
+        params = tk.get("params") or {}
+        src = params.get("source")
+        if not src:
+            n_no_source += 1
+        else:
+            spath = project.root / src
+            if not spath.is_file():
+                n_src_missing += 1
+                out.append(finding("L25", where,
+                                   f"`params.source` が `{src}` を指すが、**そのファイルが無い。**"
+                                   "投入した文字列の正典が失われている——"
+                                   "**このテイクは再生成できない。**"))
+            else:
+                now, was = _spec_version(spath), params.get("source_version")
+                if was and now and was != now:
+                    drift.append(f"{where}（投入 `{was}` → 現在 `{now}`）")
+
+        measured = (((tk.get("verdict") or {}).get("machine") or {})
+                    .get("measured") or {})
+        if not measured:
+            continue
+
+        shot = project.shots[s]
+        vsrc = _spec_of(shot, "video")
+        if kind != "video" or not vsrc:
+            n_unmatched += 1
+            continue
+        vpath = project.root / vsrc
+        body = _section_body(vpath, "1.") if vpath.is_file() else None
+        if not body:
+            continue
+        n_compared += 1
+
+        line = specmap.FRAME_RATE_LINE.search(body)
+        got = measured.get("frame_rate")
+        if line and got is not None:
+            want = _num(line.group(1))
+            if want is not None and abs(want - got) > 1e-6:
+                out.append(finding("L25", where,
+                                   f"**フレームレートが食い違っている**——仕様の §1 は "
+                                   f"`{line.group(1).strip()}`、戻ってきたファイルは `{got}` である。"
+                                   "⚠️ **どちらを正とするかは決まっていない**——"
+                                   "だが、**頼んだ値と来た値が別であることを、記録が黙って持てはならない。**"))
+
+        line = specmap.RESOLUTION_LINE.search(body)
+        if line and measured.get("width") and measured.get("height"):
+            want = _resolution(line.group(1))
+            if want and want != (measured["width"], measured["height"]):
+                out.append(finding("L25", where,
+                                   f"**解像度が食い違っている**——仕様の §1 は `{want[0]}x{want[1]}`、"
+                                   f"戻ってきたファイルは `{measured['width']}x{measured['height']}` である。"))
+
+        line = specmap.DURATION_LINE.search(body)
+        got = measured.get("duration")
+        if line and got is not None:
+            want = _num(line.group(1))
+            fps = measured.get("frame_rate")
+            if want is not None:
+                # ⚠️ **許容は1フレームである**——だから**1フレームは鳴ってはならない。**
+                #    だが `6.0 + 1/24` は浮動小数ではちょうど1フレームにならない
+                #    （`1.0000000000000007`）——**そのまま比べると、境界そのものが検査の誤りになる。**
+                #    差を**フレーム数に直してから丸める。**
+                if fps:
+                    off, tol, unit = round(abs(want - got) * fps, 6), 1.0, "フレーム"
+                else:
+                    off, tol, unit = round(abs(want - got), 6), 0.05, "秒"
+                if off > tol:
+                    out.append(finding("L25", where,
+                                       f"**尺が食い違っている**——仕様の §1 は `{line.group(1).strip()}`、"
+                                       f"戻ってきたファイルは `{got}` である"
+                                       f"（差は {off:g}{unit}、許容は1{unit}）。"))
+
+    for (s, kind), places in adopted.items():
+        if len(places) > 1:
+            out.append(finding("L25", s,
+                               f"`adopted: true` のテイクが `{kind}` の経路に {len(places)} 本ある"
+                               f"（{', '.join(places)}）。**採用は1本である**——"
+                               "採用が2本あるなら、それは**まだ選別していない**ということである。"))
+
+    n_adopted = sum(len(v) for v in adopted.values())
+    out.append(finding("L25", f"{len(docs)}本",
+                       f"テイク {len(docs)} 本を読んだ（"
+                       + "／".join(f"`{k}` {sum(1 for (_, kk) in kinds if kk == k)} 本"
+                                   for k in sorted(specmap.SPEC_KINDS))
+                       + f"）。採用と書いてあるのは {n_adopted} 本である。"
+                       f"⚠️ **採用は著者の判定である**——この層は**書いてあることを読むだけ**で、"
+                       "**良し悪しを判定していない。**",
+                       severity="note"))
+
+    if n_compared:
+        out.append(finding("L25", f"{n_compared}本",
+                           "**仕様の §1 と、戻ってきたファイルの実測を突き合わせた**"
+                           "（フレームレート・解像度・尺）。"
+                           "⚠️ **これが「仕様 ↔ 実物」を比べる唯一の場所である**——"
+                           "`L23` は意図と仕様を比べるが、**実物を見ない。**",
+                           severity="note"))
+
+    holes = []
+    if n_unmatched:
+        holes.append(f"**画像の {n_unmatched} 本には、突き合わせる相手が無い**——"
+                     "画像の仕様は §1–20 を持たないから、`1920x1080` に当たる宣言がどこにも無い。"
+                     "**実測値は記録してあるが、比べていない。**")
+    if n_no_source:
+        holes.append(f"**{n_no_source} 本が `params.source` を持たない**——"
+                     "投入した文字列の正典が指されていない。")
+    if drift:
+        holes.append("**仕様が生成のあとに直っている**（"
+                     + "／".join(drift)
+                     + "）。⚠️ **これは食い違いではない**——`source_version` は"
+                       "**投入した時点の版**を凍結している。"
+                       "**だが、このテイクはもう一度そのままでは再生成できない。**")
+    holes.append("**`take.file` が名乗るファイルの存在は、確かめていない**——"
+                 "基盤は `media/` を開かない（`media/README.md` の宣言）。"
+                 "**名乗りは名乗りであって、証明ではない。**")
+    out.append(finding("L25", f"{len(holes)}点",
+                       "この検査が確かめていないこと——" + " ／ ".join(holes),
+                       severity="note"))
+    return out
+
+
 def check_field_source(schema_dir):
     """L12 — **欄と節の対応が、両方向に閉じているか。**
 
@@ -2139,6 +2351,7 @@ def run(project, schema_dir=None, repo_root=None):
     out += check_image_negative(project)
     out += check_image_vars(project, repo_root=repo_root)
     out += check_duration(project)
+    out += check_take(project)
     out += check_identity(project)
     out += check_beyond_declaration(project)
     out += check_role_registered(project)

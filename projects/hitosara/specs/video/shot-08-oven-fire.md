@@ -1,5 +1,8 @@
 # Wan 3.0 Full Specification — 一皿ができるまで 第1章「窯」Clip 8/10 / 5s
 
+⚠️ **生成器へ投入するのは §18 だけである。** §1–17 は下敷きであり、§19–20 は我々の記録である
+——**どちらも投入しない。** 投入の仕方は同じディレクトリの `README.md` を見よ。
+
 ⚠️ **開示の第1点である。** ここで窯が開く——§18 `Negative Prompt` から
 `no oven interior`・`no visible flame`・`no glow through the door seam` の
 **3節が落ちる**。以後どのショットでも戻らない。**禁止が消えることは、

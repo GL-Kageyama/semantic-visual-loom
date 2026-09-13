@@ -1,0 +1,56 @@
+# seg02 / 動画 / 1 — 2s / 30fps / 60 フレーム
+#
+# ⚠️ **測ったのは映像トラックである。** `measured.duration` は**映像**の尺であって、
+#    フォーマット全体の duration ではない——**音声が在ると、そちらに引っ張られる。**
+#    （この2本はどちらも音声が映像より 0.018s / 0.020s 長い。）
+# ⚠️ **`provider.model` は宣言であって実測ではない。** 著者の経路の宣言が `WAN 3.0` だから
+#    そう書いてある。**このリポジトリは、それをファイルから確かめていない。**
+#    コンテナから読めたのは `encoder: Lavf60.16.100` と AIGC の `ContentProducer`
+#    `001191330106MA2CFLDG4R10001` の2つだけである——**どちらも Wan の証拠にはならない。**
+# ⚠️ **尺は宣言と一致した。フレームレートは一致しなかった**（`takes/README.md` を見よ）。
+# ⚠️ **却下である。** 著者の観察（2026-09-13）:
+#    「粉から突然液体が溢れてきて不自然」／「※映像は綺麗」
+#    ⚠️ **これは生成器の失敗ではない。我々の失敗である。**
+#    仕様 `0.1.0` は「the water touches（水が触れる）」と3箇所に書いていた——
+#    **水が在るのではなく、水が来る。** そして**どこから来るかを書いていなかった。**
+#    画面に器が無いのだから、粉の中から湧かせるのが唯一の手である。**モデルは空欄を埋めた。**
+#    仕様は `0.1.1` で直した（`source_version` は**投入した版** `0.1.0` を凍結している）。
+take:
+  shot: hitosara-ch01-seg02
+  kind: video
+  index: 1
+  provider:
+    model: WAN 3.0
+  params:
+    source: specs/video/shot-02-flour-and-water.md
+    source_version: "0.1.0"
+    duration: 2
+    aspect: "16:9"
+  file: "02_20260913-bbe74819607e4329978f1a6e863846d2.mp4"
+  verdict:
+    machine:
+      measured:
+        width: 1920
+        height: 1080
+        frame_rate: 30
+        frames: 60
+        duration: 2.0
+        audio: true
+    adherence:
+      # ⚠️ **値はブロック記法（`|`）で書いてある。**
+      #    YAML の平坦な値は `` ` `` で始められない——**控えめな引用符で囲めば済むが、
+      #    囲むのを忘れるたびに検査器が落ちる。** 落ちない書き方を選ぶ。
+      "§3 The Water — Behavior（It does not arrive）": |
+        映像の中に水の出所が無いのに、水が粉から湧いて増えた。
+        **仕様が「触れる」と書き、「どこから来るか」を書いていない以上、これは仕様の側の穴である。**
+      "§1 Generation Intent（a single change: two substances stop being two）": |
+        「水が来る」は**2つ目の変化**である。このショットの変化は1つでなければならない
+        ——§1 が名乗る唯一の変化は「two substances stop being two」であって、「水が来る」ではない。
+      "§16 MUST NOT（No water splash, no drops flying in the air）": |
+        水は飛沫ではなかった。**飛沫より悪い**——出所の無い液体が画面の中で増えた。
+        このショットに器は無い（§5）。**だから増える先は粉の中しかない。**
+      "⚠️ 失敗の型（failure_type）": |
+        付けていない。**`A`/`B`/`C` の語彙はこのリポジトリに定義が無い**
+        ——`schemas/take.schema.json` が名乗るだけで、`A` が何を指すかはどこにも書かれていない。
+        **定義の無い語彙を、私が決めない。**
+  adopted: false
