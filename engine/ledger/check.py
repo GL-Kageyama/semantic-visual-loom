@@ -628,6 +628,76 @@ def self_test():
     for f in got[:1]:
         print(f"        {f['code']}  {f['message'][:88]}")
 
+    # ---- L14（宣言を超えた区間）
+    #     ⚠️ **いちばん大事な例は「回転で鳴らない」である。**
+    #        「§18 が動いたのに宣言が無い」で鳴らす素朴な版は、ここで鳴ってしまう。
+    print("\n=== 自己検査 — 宣言を超えた区間\n")
+
+    def beyond_proj(specs, declared_idx=()):
+        """`specs` は各ショットの §18 節の並び。**本物のファイルを読ませる。**"""
+        d = _P(tempfile.mkdtemp())
+        shots = []
+        for i, clauses in enumerate(specs, start=1):
+            name = f"s{i}.md"
+            (d / name).write_text(
+                "## Negative Prompt\n\n" + ", ".join(clauses)
+                + "\n\n# 19. GENERATION INSTANCE\n", encoding="utf-8")
+            shots.append(s(f"p-ch01-seg{i:02d}", spec=name))
+        p = _One(shots[0])
+        p.root = d
+        p.shots = {x["shot"]: x for x in shots}
+        p.disclosure = [{"shot": shots[i]["shot"], "attr": "HANA", "value": "present",
+                         "raw": {"shot": shots[i]["shot"], "negative": "changed"}}
+                        for i in declared_idx]
+        return p
+
+    X, Y = "no nameplate", "no readable text"
+    beyond_cases = [
+        # 宣言済みの増分。**鳴ってはならない**（台帳が届いている）
+        ("L14 増分が宣言済み（鳴ってはならない）",
+         [[X], [X], [X, Y]], (2,), False, None),
+        # ⚠️ 回転。**素朴な版はここで鳴る。** 02 が 00 の集合へ戻る
+        ("L14 回転（鳴ってはならない）",
+         [[X], [X, Y], [X], [X, Y]], (), False, None),
+        # ⚠️ **言い換えは、鳴る。** 意味を見ないからである——`no girl` が消えて
+        #    `no female figure` が以後ずっと残るなら、集合としては**戻らない増分**である。
+        ("L14 戻らない言い換え（鳴る。意味は見ない）",
+         [[X], [X, "no girl"], [X, "no female figure"], [X, "no female figure", "no ghost"]],
+         (), True, "宣言を超えた区間である"),
+        # 持続する増分。**鳴らねばならない**——以後すべてに在り、先行に無い
+        ("L14 宣言を超えた増分",
+         [[X], [X, Y], [X, Y], [X, Y]], (), True, "宣言を超えた区間である"),
+        # 途中で消える節は「持続する増分」ではない
+        ("L14 一度現れて消える節（鳴ってはならない）",
+         [[X], [X, Y], [X], [X]], (), False, None),
+        # ⚠️ **検査が空である。** §18 が1本も読めない
+        ("L14 §18 が1本も読めない", [None, None], (), True, "検査が空である"),
+    ]
+    for label, specs, decl, want, fragment in beyond_cases:
+        if specs and specs[0] is None:
+            d = _P(tempfile.mkdtemp())
+            shots = [s(f"p-ch01-seg{i:02d}", spec="none.md") for i in (1, 2)]
+            p = _One(shots[0])
+            p.root, p.shots, p.disclosure = d, {x["shot"]: x for x in shots}, []
+        else:
+            p = beyond_proj(specs, decl)
+        got = [f for f in semantic.check_beyond_declaration(p) if f["severity"] != "note"]
+        n += 1
+        ok = bool(got) == want and (not want or any(fragment in f["message"] for f in got))
+        bad += not ok
+        print(f"    {label:<44}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in got[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # 回転の註が出ること自体も見る（註は「鳴った」ではない）
+    got = semantic.check_beyond_declaration(
+        beyond_proj([[X], [X, Y], [X], [X, Y]], ()))
+    n += 1
+    note = [f for f in got if f["severity"] == "note" and "回転は明かしではない" in f["message"]]
+    bad += not note
+    print(f"    {'L14 回転を註で報告する':<44}{len(note):>10}  "
+          f"{'期待どおり' if note else '⚠️ 期待と違う'}")
+
     print(f"\n=== {n} 例中 {n - bad} 例が期待どおり")
     return 1 if bad else 0
 

@@ -6,11 +6,13 @@
 `if`/`then` + `const` は**列挙**であって比較ではなく（自由文なので閉じない）、
 `$data` 参照は標準仕様に入らなかった提案である。**測って確かめてある**（`HISTORY.md`）。
 
-**だからここが負う。** 検査は三つの層に分かれる。
+**だからここが負う。** 検査は五つの層に分かれる。
 
   層A  ショット1枚の中で閉じる検査（一変化・一環境・一時刻・一運動）
   層B  台帳と突き合わせる検査（参照・禁制・開示・出所）
   層C  入力そのものの検査（**空を OK と言わない**）
+  層D  §1–20 との対応の検査（目録・両方向の閉包・同一性）
+  層E  宣言の到達の検査（**台帳が届いていない区間**）
 
 ⚠️ 層C を最初に置く理由。**相手が空なら、層A も層B も一件も鳴らない。**
 鳴らないことは、正しいことの証明ではない——`0 == 0` が通った実例が既にある。
@@ -638,6 +640,130 @@ def check_identity(project):
     return out
 
 
+# ---------------------------------------------------------------- 層E 宣言の到達
+
+
+def _negative_series(project):
+    """台帳の順序で、各ショットの §18 節集合を読む。読めない位置は理由つきで `None`。
+
+    ⚠️ **集合にする。** `negative_prompt` はリストを返すが、**節の並び順は
+    意味を持たない**（L10 も `set(a) != set(b)` で見ている）。並びで比べると、
+    **同じ禁止を書き直しただけの位置が「動いた」ことになる。**
+    """
+    out = []
+    for s in project.order():
+        try:
+            out.append((s, frozenset(_neg(project, s)), None))
+        except _NoSpec as e:
+            out.append((s, None, str(e)))
+    return out
+
+
+def check_beyond_declaration(project):
+    """L14 — **宣言を超えた区間。**
+
+    ⚠️ **「§18 が動いたのに宣言が無い」で素朴に鳴らすと、30本で18件鳴る。**
+    そのうち6件は**回転**である——たとえば `02-01` の節集合は `01-01` の集合と
+    **frozenset として完全に同一**である（49節）。`03-01` も同じ集合へ戻る。
+    **回転は明かしではない。**
+
+    ⚠️ **§18 は単調でない。** 台帳は単調（「まだ」→「もう」。戻らない）を前提するが、
+    §18 は**ショットごとに書き出された投影**なので、そのショットの必要に応じて往復する。
+    **だから「動き」は明かしの証拠にならない。** L10 が「台帳の主張を falsify する」
+    検査なのに対し、L14 が問うのは**台帳が届いていない区間**である。
+
+    そこで取るのは**持続する増分**だけである——ある節が
+
+      (a) **どの先行する集合にも無く**（＝新しく現れ）、
+      (b) **以後すべての集合に在る**（＝戻らない）
+
+    とき、その節は**回転ではない**。実測（受け火 V2 の30本）: この条件を満たす位置は
+    **6箇所**——`03-03`・`06-01`・`06-03`・`08-01`・`09-02`・`09-03`。
+    うち台帳が宣言しているのは2つ。**残る4つが、宣言を超えた区間である。**
+
+    ⚠️ **意味は見ない。** L10 と同じ規律である——`no girl` が消えて
+    `no female figure` が以後ずっと残るなら、**集合としては戻らない増分**であり、
+    この検査は鳴る。**それが同じ禁止の言い換えかどうかは、決めない。**
+    決められないものを決めれば、L4 と同じ誤検出になる（片方の作品の語彙に
+    合わせた検出器は、もう片方の作品で鳴る）。
+
+    ⚠️ **戻らない増分は、非可逆である。** §18 は以後ずっとその禁止を持つ。
+    台帳に足すか、**足さない理由を記録に書く**——書かなければ、
+    その区間は**誰も検収していない**（L7a の前提が崩れる）。
+    """
+    out = []
+    series = _negative_series(project)
+    declared = {cp.get("shot") for cp in project.disclosure}
+
+    unread = [s for s, n, _ in series if n is None]
+    if unread:
+        out.append(finding("L14", f"{len(unread)}本",
+                           "`spec:` が無いか読めないので、**この検査はこれらのショットを"
+                           "見ていない**: " + "／".join(unread[:5])
+                           + ("…" if len(unread) > 5 else ""),
+                           severity="note"))
+
+    read = [i for i, (_, n, _) in enumerate(series) if n is not None]
+    if not read:
+        out.append(finding("L14", "",
+                           "§18 を1本も読めない。**違反0件ではなく、検査していない。**"
+                           "**検査が空である。**"))
+        return out
+
+    # ① 動きと回転を数える（註）。**鳴らすためではなく、この検査の形の根拠である。**
+    moves, seen, rot = [], {}, []
+    for i in range(1, len(series)):
+        a, b = series[i - 1][1], series[i][1]
+        if a is None or b is None or a == b:
+            continue
+        moves.append(i)
+        if frozenset(b) in seen:
+            rot.append((series[i][0], series[seen[frozenset(b)]][0]))
+        else:
+            seen[frozenset(b)] = i
+    if rot:
+        out.append(finding("L14", f"{len(rot)}/{len(moves)}",
+                           "§18 が動いた位置のうち、**先行する集合へ戻るもの**が "
+                           f"{len(rot)} 箇所ある（例: {rot[0][0]} は {rot[0][1]} の集合へ戻る）。"
+                           "**回転は明かしではない**——§18 は単調でなく、"
+                           "**動きは開示の証拠にならない。**"
+                           "だから L14 は動きではなく**持続する増分**で鳴らす。",
+                           severity="note"))
+
+    # ② 持続する増分。ここだけが鳴る。
+    beyond = []
+    for i in range(1, len(series)):
+        cur, prv = series[i][1], series[i - 1][1]
+        if cur is None or prv is None or cur == prv:
+            continue
+        acc = [c for c in sorted(cur - prv)
+               if all(c not in series[j][1] for j in range(i) if series[j][1] is not None)
+               and all(c in series[j][1] for j in range(i, len(series)) if series[j][1] is not None)]
+        if acc and series[i][0] not in declared:
+            beyond.append((series[i][0], acc))
+
+    for shot, acc in beyond:
+        head = "／".join(f"`{c}`" for c in acc[:3])
+        out.append(finding("L14", shot,
+                           f"**宣言を超えた区間である。** §18 に**戻らない増分**が "
+                           f"{len(acc)} 節ある（{head}{'…' if len(acc) > 3 else ''}）が、"
+                           "台帳はこの位置に変化点を宣言していない。"
+                           "⚠️ **この区間は、まだ誰も検収していない**——"
+                           "明かしは不可逆なので、宣言が無ければ"
+                           "**先のショットが既にその状態を持っていても鳴らない**（L7a の前提が崩れる）。"
+                           "⚠️ **意味は見ていない**——同じ禁止の言い換えである可能性は残る。"
+                           "だが**どの先行ショットの集合とも違う集合が、以後ずっと続く**"
+                           "という事実は残る。`disclosure` に行を足すか、"
+                           "**足さない理由を記録に書く。**"))
+
+    if not beyond:
+        out.append(finding("L14", f"{len(read)}本",
+                           "§18 の持続する増分に、宣言を超えるものは無い。"
+                           f"（§18 は {len(moves)} 箇所で動いた。）",
+                           severity="note"))
+    return out
+
+
 # ---------------------------------------------------------------- まとめ
 
 CHECKS_SHOT = (check_unit, check_one_place, check_one_time, check_move,
@@ -656,6 +782,7 @@ def run(project, schema_dir=None):
     out += check_negative_response(project)
     out += check_spec_sections(project)
     out += check_identity(project)
+    out += check_beyond_declaration(project)
     if schema_dir:
         out += check_field_source(schema_dir)
     return out
