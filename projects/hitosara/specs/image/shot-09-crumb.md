@@ -15,7 +15,16 @@
 
 - 生成器: `chatgpt-image-2.5`（種別 `image`）
 - 投入: **著者が手で行う。** このリポジトリは生成を実行しない（API キーが環境に無い）
-- 作る道具: `distill-essence-engine` の様式カード `luminous-anime`
+- 作る道具: `distill-essence-engine`——**回される工程である**（決定 2026-09-13）
+  - `format`: `scene-board` ／ `style`: `luminous-anime`
+  - 入力（`content`）: `bible.yaml` ＋ `ledger.yaml` ＋ `shots/hitosara-ch01-seg09.yaml`
+    ——gozen-niji の `series-constants.md`（シリーズ定数＋開示台帳）と同じ型である
+- 投入する文: **下の `Prompt` はエンジンの出力であり、`chatgpt-image-2.5` へ投入する正典である**（決定B）
+- ⚠️ **下の欄はエンジンへの入力である**——出所の記録であると同時に、そのまま流し込む穴である。
+  ⚠️ **`scene-board` が要求する穴は、下の4つでは足りない**（`SCENE`／`CHARACTERS`／`LIGHT` が要る。
+  2層の和で7欄になる——`ACTION`・`LOCATION` は両層に同名で在り、**同じ値が両方の穴に入る**）
+- ⚠️ **⑦Negative の出力はここではなく下の `Negative` 節へ書く。** エンジンの合成プロンプトは
+  Negative を最後の一文に溶かすが、**この記録は節として保つ**——`L21` と開示の系列が節の集合として読む
 - 記録: `shots/hitosara-ch01-seg09.yaml`
 
 ## 主題（英語・`distill-essence-engine` の4欄）
