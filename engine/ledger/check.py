@@ -704,6 +704,66 @@ def self_test():
     print(f"    {'L14 回転を註で報告する':<44}{len(note):>10}  "
           f"{'期待どおり' if note else '⚠️ 期待と違う'}")
 
+    print("\n=== 自己検査 — 形（スキーマ）が鳴るか\n")
+
+    class _Shape:
+        bible = ledger = None
+        takes = {}
+
+        def __init__(self, shot):
+            self.shots = {shot["shot"]: shot}
+
+    def shape(shot, schema_dir):
+        return validate_shape(_Shape(shot), str(schema_dir))
+
+    schemas = REPO / "schemas"
+
+    got = shape(dict(clean), schemas)
+    n += 1
+    bad += bool(got)
+    print(f"    {'S1 正しい記録は鳴らない':<44}{len(got):>10}  "
+          f"{'期待どおり' if not got else '⚠️ 期待と違う'}")
+
+    for label, key, val, frag in (
+            ("S1 必須欄が空", "role", "", "should be non-empty"),
+            ("S1 enum の外", "mode", "wrong", "is not one of"),
+            ("S1 必須欄が無い", "role", None, "'role' is a required property")):
+        r = dict(clean)
+        if val is None:
+            r.pop(key, None)
+        else:
+            r[key] = val
+        got = shape(r, schemas)
+        n += 1
+        ok = any(frag in f["message"] for f in got)
+        bad += not ok
+        print(f"    {label:<44}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in got[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ **検査が空になる側。** スキーマが短ければ、空の必須欄は素通りする。
+    #    L11 が「目録が短くても鳴る」ことを見るのと、同じ形である。
+    d = _P(tempfile.mkdtemp())
+    (d / "shot-record.schema.json").write_text(
+        json.dumps({"type": "object", "properties": {"role": {"type": "string"}}}),
+        encoding="utf-8")
+    empty_role = dict(clean, role="")
+    n += 1
+    short = shape(empty_role, d)
+    bad += bool(short)
+    print(f"    {'S1 スキーマが短いと、空の必須欄は素通りする':<44}{len(short):>10}  "
+          f"{'期待どおり' if not short else '⚠️ 期待と違う'}")
+    print(f"        ← **これが「検査が空になる」である。**"
+          f" 同じ記録が本物のスキーマでは {len(shape(empty_role, schemas))} 件鳴る。")
+
+    # ⚠️ **スキーマそのものが無い場合。** S0 が鳴る（黙って飛ばさない）。
+    got = shape(dict(clean), d / "無いディレクトリ")
+    n += 1
+    ok = any(f["code"] == "S0" for f in got)
+    bad += not ok
+    print(f"    {'S0 スキーマが無い＝検査が空になる':<44}{len(got):>10}  "
+          f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+
     print(f"\n=== {n} 例中 {n - bad} 例が期待どおり")
     return 1 if bad else 0
 
