@@ -567,6 +567,77 @@ def check_field_source(schema_dir):
     return out
 
 
+TAKE_SUFFIX = re.compile(r"-\d+s-\d+$")
+
+
+def check_identity(project):
+    """L13 — **ショットの同一性が、仕様の自己名と一致するか。**
+
+    仕様は §19 で**自分自身の名前**を書いている——`Instance ID: ukebi-v2-ch03-seg03-30s-01`。
+    末尾の `-<秒>s-<テイク>` を落とした本体が、ショットIDである。
+
+    ⚠️ **これが食い違うと、L10 は黙って別の §18 を読む。** 記録が指す `spec:` と
+    記録の名前がずれれば、開示の変化点を**隣のショットの文**に対して検算することになる。
+    **読み違えは、鳴らない。**
+
+    ⚠️ **`Segment ID` は同一性の鍵ではない。** 30本を数えると `NN-N` が27本、
+    **序章の3本だけ `A-N`** である——**同じレンジに2つの綴りがある。**
+    §16 の終章の見出しが `開示台帳` の4文字を欠いているのと**同じ形の逸脱**であり、
+    **素朴に導出すると3本を落とす。** 報告はするが、**既存の成果物は直さない**（記録だから）。
+    """
+    out = []
+    seg_forms = {"NN-N": 0, "A-N": 0, "その他": 0}
+    ok = 0
+    for s in project.order():
+        shot = project.shots[s]
+        src = shot.get("spec")
+        if not src:
+            continue                      # L10・L11 が既に鳴らしている
+        p = project.root / src
+        if not p.is_file():
+            continue
+        inst = specdoc.section(p.read_text(encoding="utf-8"), "Instance")
+        if inst is None:
+            out.append(finding("L13", s, "§19 `Instance` の節が無い。**仕様が自分を名乗っていない。**"))
+            continue
+        m = re.search(r"^-\s+Instance ID:\s*`([^`]*)`", inst, re.M)
+        if not m:
+            out.append(finding("L13", s, "§19 に `Instance ID` が無い。**同一性の出所が無い。**"))
+            continue
+        iid = m.group(1)
+        if not TAKE_SUFFIX.search(iid):
+            out.append(finding("L13", s, f"`Instance ID: {iid}` に `-<秒>s-<テイク>` の接尾辞が無い。"
+                                         "**本体を取り出せない。**"))
+            continue
+        body = TAKE_SUFFIX.sub("", iid)
+        if body != s:
+            out.append(finding("L13", s, f"ショットIDが仕様の自己名と違う——"
+                                         f"`Instance ID: {iid}` の本体は `{body}` である。"
+                                         "⚠️ **このままだと L10 は隣のショットの §18 を読む。**"))
+        else:
+            ok += 1
+        sm = re.search(r"^-\s+Segment ID:\s*`([^`]*)`", inst, re.M)
+        v = sm.group(1) if sm else ""
+        if re.fullmatch(r"\d\d-\d", v):
+            seg_forms["NN-N"] += 1
+        elif re.fullmatch(r"A-\d", v):
+            seg_forms["A-N"] += 1
+        else:
+            seg_forms["その他"] += 1
+    if ok:
+        out.append(finding("L13", f"{ok}本", "ショットの同一性を仕様の §19 と突き合わせた"
+                                             f"（`Instance ID` の本体を使う）。", severity="note"))
+    if seg_forms["A-N"] or seg_forms["その他"]:
+        out.append(finding("L13", "", f"⚠️ **`Segment ID` の形が2つある**——"
+                                      f"`NN-N` {seg_forms['NN-N']}本／`A-N` {seg_forms['A-N']}本"
+                                      f"／その他 {seg_forms['その他']}本。"
+                                      "**同一性の鍵は `Instance ID` の側である。**"
+                                      "`Segment ID` から素朴に導出すると、序章の3本を落とす"
+                                      "——§16 の終章の見出しが4文字を欠いているのと同じ形である。"
+                                      "**既存の成果物は直さない**（記録だから）。", severity="note"))
+    return out
+
+
 # ---------------------------------------------------------------- まとめ
 
 CHECKS_SHOT = (check_unit, check_one_place, check_one_time, check_move,
@@ -584,6 +655,7 @@ def run(project, schema_dir=None):
     out += check_circular(project)
     out += check_negative_response(project)
     out += check_spec_sections(project)
+    out += check_identity(project)
     if schema_dir:
         out += check_field_source(schema_dir)
     return out

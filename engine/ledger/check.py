@@ -537,6 +537,50 @@ def self_test():
     for f in got[:1]:
         print(f"        {f['code']}  {f['message'][:88]}")
 
+    # ---- L13（ショットの同一性が仕様の自己名と一致するか）
+    print("\n=== 自己検査 — ショットの同一性\n")
+
+    def inst(shot_id="p-ch01-seg01", iid=None, seg="01-1", tail=""):
+        iid = iid if iid is not None else f"{shot_id}-30s-01"
+        return (f"# 19. GENERATION INSTANCE\n\n## Instance\n\n"
+                f"- Instance ID: `{iid}`\n- Segment ID: `{seg}`\n{tail}\n")
+
+    def id_proj(body, sid=None):
+        d = _P(tempfile.mkdtemp())
+        (d / "a.md").write_text(body, encoding="utf-8")
+        sh = s(sid or "p-ch01-seg01", spec="a.md")
+        p = _One(sh)
+        p.root = d
+        p.shots = {sh["shot"]: sh}
+        return p
+
+    id_cases = [
+        ("L13 一致（鳴ってはならない）", inst(), None, False, None),
+        ("L13 仕様の自己名と違う", inst(iid="p-ch01-seg07-30s-01"), None, True, "の本体は"),
+        ("L13 接尾辞が無い", inst(iid="p-ch01-seg01"), None, True, "接尾辞が無い"),
+        ("L13 Instance ID が無い",
+         "# 19. GENERATION INSTANCE\n\n## Instance\n\n- Segment ID: `01-1`\n", None, True,
+         "`Instance ID` が無い"),
+        ("L13 Instance の節が無い", "# 19. GENERATION INSTANCE\n\n本文\n", None, True, "の節が無い"),
+    ]
+    for label, body, sid, want, fragment in id_cases:
+        got = [f for f in semantic.check_identity(id_proj(body, sid)) if f["severity"] != "note"]
+        n += 1
+        ok = bool(got) == want and (not want or any(fragment in f["message"] for f in got))
+        bad += not ok
+        print(f"    {label:<40}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in got[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ `Segment ID` の逸脱は**註**であって違反ではない。既存の成果物は直さない。
+    got = semantic.check_identity(id_proj(inst(seg="A-1")))
+    note = [f for f in got if f["severity"] == "note" and "Segment ID" in f["message"]]
+    n += 1
+    ok = not [f for f in got if f["severity"] != "note"] and bool(note)
+    bad += not ok
+    print(f"    {'L13 Segment ID の逸脱は註（違反でない）':<40}{len(note):>10}  "
+          f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+
     # ---- L12（欄と節の対応が閉じているか）
     #     ⚠️ **本物のスキーマを読ませる。** そして**壊したスキーマでも鳴らす。**
     print("\n=== 自己検査 — 欄と節の対応\n")

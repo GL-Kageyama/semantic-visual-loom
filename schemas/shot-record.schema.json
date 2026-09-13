@@ -9,7 +9,7 @@
   "properties": {
     "shot": {
       "type": "string",
-      "description": "ショットID。<project>-<章>-<セグメント> の形をとる（例 ukebi-v2-ch01-seg01）。台帳の disclosure がこの字をキーに引く。",
+      "description": "ショットID。<project>-<章>-<セグメント> の形をとる（例 ukebi-v2-ch01-seg01）。台帳の disclosure がこの字をキーに引く。⚠️ 出所は §19 の `Instance ID` である——末尾の `-<秒>s-<テイク>` を落とした本体。`Segment ID` からは取らない（同じレンジに2つの綴りがある）。",
       "pattern": "^[a-z0-9]+(-[a-z0-9]+)+$"
     },
     "unit": {
