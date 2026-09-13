@@ -55,6 +55,7 @@ in order to fire on "`before` and `after` are the same" — but **JSON Schema ca
 | **L23** | **`shot.duration` contradicts `Duration:` in video specification §1** | "Do the Intent and the Specification Agree on Duration" below |
 | **L24** | **What `mode` requires is missing** — §11 for `still` / `composite`, `text_channel` for `composite` | "What `mode` Requires" below |
 | **L25** | **The take does not match the shot, the style or the real thing** — 11 types | "Does the Take Match the Real Thing" below |
+| **L26** | **`bible.constants.video` contradicts §1's four lines** (Aspect / Resolution / Frame Rate / Orientation) | "Do the Work Constants and §1 Agree" below |
 
 **L2, L3 and L4 are transplants.** Applied to all 57 segments of Gozen-niji,
 a checker that scored **recall 2/2 and 0 false positives** went in just as it was.
@@ -72,7 +73,7 @@ That is why `L4` **does not fire on its own** — only when the place actually s
 And L7 **counts and reports the shots that hold no disclosure state** —
 without counting, you cannot tell whether "0 violations" means "0 after checking" or "not checked".
 
-`--self-test` holds **one example that fires and one that does not, for each check** (169 examples).
+`--self-test` holds **one example that fires and one that does not, for each check** (176 examples).
 ⚠️ **Read the notes too.** Because **a note that does not appear also looks like "0 violations"**
 — with no example that confirms the note, deleting the note leaves the self-test green.
 ⚠️ **Read the note's "count" too.** `L25`'s note says "read N takes (broken down by role)" —
@@ -491,6 +492,43 @@ cannot be read by a machine.** Even if the text says "the dough swells", this la
 So it reports that as a note — **it does not look at "the subject stops" by string-matching vocabulary.**
 That would be **a check I built to match the text I wrote**, and **the same as an empty check.**
 
+### L26 — do the work constants and §1 agree
+
+**`bible.constants.video` ↔ §1's four lines** — `Aspect` / `Resolution` / `Frame Rate` / `Orientation`.
+**These are the constants that do not depend on the shot.**
+
+⚠️ **It sits next to `L23` on purpose.** Both read §1; **their partners differ** — `L23` against
+`shot.duration`, `L26` against the work's constants. **They are the two ends of the same section.**
+
+⚠️ **`duration` is deliberately not one of the four.** Length is a **dependent variable** — its home is
+`shot.duration` and its reader is `L23`. Putting it in `bible.constants.video` would mean
+**two layers reporting the same defect under separate codes.**
+
+⚠️ **These four constants were copied by hand into three places** — §1, §19's `Output:` line, and (in
+Ukebi) `series-constants.md`, which the schema already named `bible` as the successor to.
+**The copies are already drifting**: §19's `Output:` spells the same values differently in **10/10**
+specifications (`1920×1080` / `landscape` against §1's `1920x1080` / `Landscape`).
+⚠️ **So §19's `Output:` is deliberately not read** — the spelling, not the value, differs, and reading it
+would produce **10 false positives.** That hole is recorded in `engine/shot/README.md`.
+
+⚠️ **This layer fires on nothing today** — **160** comparisons across 40 specifications, **0**
+disagreements — and its note reports that. ⚠️ **Reporting nothing is not the same as being
+unnecessary.** §19's `Output:` shows the drift is real, and `L23` is likewise kept while agreeing
+**40/40**. ⚠️ **And a home with no reader would repeat the very defect this layer was written to fix**
+— `bible.constants` was a field **nobody read.**
+
+⚠️ **"There is no §1" and "§1 has no `Aspect:`" are different** — the same discipline as `L23`.
+The former is fired by `L11`; **the latter by nobody, so it fires here.**
+
+⚠️ **Empty is not OK here either.** If the home (`bible.constants.video`) is missing or empty
+**while §1 is present**, that is a **violation** — **the other side is there and the home is not.**
+Delete the bible from a project and `L26` would otherwise **go quietly green**
+(`CLAUDE.md`: a check that reports nothing looks like a check that passed).
+
+⚠️ **It does not decide which side is right.** Where they disagree it reports **both**, exactly as
+`L25` does. ⚠️ **And it opens neither `takes/` nor `media/`** — it reads `bible.yaml` and §1,
+and nothing else.
+
 ### ⚠️ Firing Against a Running Artifact
 
 | Check | Ukebi V2 (30 takes) | What it is saying |
@@ -669,7 +707,7 @@ What it can say is —
 | **Guarantees** | **The intent and the specification agree on duration.** | **L23** |
 | **Guarantees** | **A still shot is written as still** (§11 non-empty. `composite` also needs `text_channel`) | **L24** |
 | **Guarantees** | **What came back matches the shot, the style and the measurement.** | **L25** |
-| **Guarantees** | **It is not broken.** L0–L25 fire before generation, and everything that fired can be explained | all |
+| **Guarantees** | **It is not broken.** L0–L26 fire before generation, and everything that fired can be explained | all |
 | **Does not guarantee** | **That the generator draws the aim.** | —— |
 | **Does not guarantee** | **That a still shot's §11 really stops the subject.** | —— |
 | **Does not guarantee** | **That the file `take.file` names actually exists.** | —— |

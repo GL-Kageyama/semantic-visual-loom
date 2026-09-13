@@ -503,6 +503,34 @@ FRAME_RATE_LINE = re.compile(r"^-\s*Frame Rate:\s*`?([^`\n]+?)`?\s*$", re.M)
 #: ⚠️ **画像の仕様は §19 を持たない**——だから画像のテイクには、この照合の相手が無い。
 SPEC_VERSION_LINE = re.compile(r"^-\s*Specification Version:\s*`?([^`\n]+?)`?\s*$", re.M)
 
+#: §1 の作品定数のうち、上の `RESOLUTION_LINE`・`FRAME_RATE_LINE` が拾わない2行。
+#: **`L26` が `bible.constants.video` と突き合わせる。**
+#:
+#: ⚠️ **`Aspect` の綴りは1つではない。** 実測（リポジトリ全体、4つの仕様書の木）——
+#:    `Aspect Ratio:` が **89本**、`Aspect:` が **10本**。⚠️ **10本はすべて `projects/hitosara` である**
+#:    （同じ構造化した側でも `projects/ukebi/ukebi-v2` は30本とも `Aspect Ratio:` と書く）。
+#:    **つまりこの綴りを揺らしているのは、1つの作品だけである**——それでも受け取れねばならない。
+ASPECT_LINE = re.compile(r"^-\s*Aspect(?: Ratio)?:\s*`?([^`\n]+?)`?\s*$", re.M)
+ORIENTATION_LINE = re.compile(r"^-\s*Orientation:\s*`?([^`\n]+?)`?\s*$", re.M)
+
+#: §1 の作品定数——**ショットに依らない4つ**。`L26` と `engine/shot/print_spec.py` が読む。
+#:
+#: ⚠️ **`duration` はここに無い。** 尺は**従属変数**であり、ショットごとに違う——
+#:    家は `shot.duration` で、読む者は `L23` である（`DURATION_LINE` の註を参照）。
+#: ⚠️ **この4つは、かつて3箇所に手で写されていた**——§1・§19 の `Output:` 行・
+#:    （受け火では）`series-constants.md`。**写しは実際にずれる**: §1 の `1920x1080` に対し
+#:    §19 の `Output:` は `1920×1080` と書き、10/10 で綴りが違う。
+#: ⚠️ **`L26` は §1 だけを読む。** §19 の `Output:` は読まない——値は同じで綴りだけが
+#:    違うので、読めば**10件の偽陽性**が出る。**正規化して読むか、4欄に割るかは未決定である。**
+#:    穴は `engine/shot/README.md` に書いてある。
+#: (bible のキー, §1 の行を読む正規表現, 人が読む名前)
+VIDEO_CONSTANTS = (
+    ("aspect",      ASPECT_LINE,      "Aspect"),
+    ("resolution",  RESOLUTION_LINE,  "Resolution"),
+    ("frame_rate",  FRAME_RATE_LINE,  "Frame Rate"),
+    ("orientation", ORIENTATION_LINE, "Orientation"),
+)
+
 #: 否定詞。**語幹を取るために落とす。**
 #:
 #: ⚠️ **禁止の語を文字列で比べてはならない。** 実測——受け火 V2 の台帳は

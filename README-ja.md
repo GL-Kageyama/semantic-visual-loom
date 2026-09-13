@@ -52,6 +52,7 @@ python3 engine/ledger/check.py --self-test               # 検査器が鳴るか
 semantic-visual-loom/
 ├── schemas/         # データ構造の正典（bible / ledger / shot-record / take / timeline）
 ├── engine/ledger/   # 制作台帳と事前検証（生成を走らせずに設計の破綻を潰す）
+├── engine/shot/     # ショットの仕様のうち、導出できる行を刷る（読み取り専用。何も書かない）
 ├── docs/            # 使い方
 ├── skills/          # 4つの Skill——分解・設計・台帳・ショット
 ├── tools/           # 検査（i18n のミラー）
@@ -91,8 +92,13 @@ semantic-visual-loom/
 
 ```text
 ├── engine/handover/ # 引き渡し票（§18 の7スロット・画像プロンプト・音）と往復検査
-├── engine/shot/     # ショット記録の生成・検証
 ├── engine/visual/   # Visual Asset Engine
+│                    #   ⚠️ 未決定——参照資産はファイルなのか、どこに住むのか。`assets/` は存在しない。
+│                    #      カードの実体は `distill-essence-engine` の持ち物であり、ここからは読むだけである。
+│                    #   ⚠️ 未決定——台帳の値が日本語の註を全角括弧で抱えている
+│                    #      （`…character-sheet（手と前掛け。顔は映さない）`）のに対し、§6 は名前の部分だけを
+│                    #      使う（10/10）。⚠️ 割るなら `projects/` へ書き込むことになり、それを
+│                    #      する道具はこのリポジトリに無い。
 ├── engine/assembly/ # タイムライン・カット・文字合成・レンダ
 ├── providers/       # 画像・動画・合成の生成器
 ├── assets/          # 参照資産（キャラシート・ボード）
@@ -135,7 +141,7 @@ semantic-visual-loom/
 **開発は日本語で進め、文書の正典は英語である。**
 ミラーは接尾辞方式で**同じディレクトリ**に並ぶ——規則は [`CLAUDE.md`](CLAUDE-ja.md) にある。
 
-**15文書 × 3言語が揃っている**——⚠️ **これは [`tools/check_i18n.py`](tools/check_i18n.py) が
+**16文書 × 3言語が揃っている**——⚠️ **これは [`tools/check_i18n.py`](tools/check_i18n.py) が
 正典として報告する本数であって、リポジトリの `.md` を数えた数ではない。**
 **数は、数えた範囲の広さしか持たない。**
 **何を見て、何を見ないか**は [`docs/usage.md`](docs/usage-ja.md) にある。

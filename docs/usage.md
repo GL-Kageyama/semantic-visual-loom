@@ -6,10 +6,11 @@
 
 How to run pre-flight verification over a project's records.
 
-**Only one thing runs here.** Generation does not run inside this foundation—
-**the author runs generation by hand, and the foundation reads the records.**
-What runs is the check that fires contradictions at the specification stage,
-**before anything is generated** (and, afterwards, the matching of what came back).
+**Generation does not run inside this foundation**—**the author runs generation by
+hand, and the foundation reads the records.** What runs is the check that fires
+contradictions at the specification stage, **before anything is generated** (and,
+afterwards, the matching of what came back), plus the tool that prints the lines of a
+specification **whose value is already forced.**
 
 ## Requirements
 
@@ -21,18 +22,51 @@ python3 -m pip install --user pyyaml
 
 ## The commands
 
+**Three commands ship here**—**two for making a work, one for maintaining the
+repository.**
+
 ```bash
+# the checker — fires contradictions at the specification stage
 python3 engine/ledger/check.py --self-test                 # does the checker fire at all
 python3 engine/ledger/check.py projects/hitosara           # pre-flight verification for one project
 python3 engine/ledger/check.py projects/ukebi/ukebi-v2     # Ukebi V2
+
+# the printer — the lines of a specification that can be derived. It writes nothing
+python3 engine/shot/print_spec.py projects/hitosara
+python3 engine/shot/print_spec.py projects/hitosara --shot hitosara-ch01-seg04
+
+# the repository's own document check — not used to make a work
 python3 tools/check_i18n.py                                # the document mirrors
 ```
+
+**`engine/ledger/check.py`**
 
 | flag | |
 |---|---|
 | *(positional)* | the path to a project directory. Required unless `--self-test` is given. |
 | `--schemas` | the schema directory. Defaults to `<repo>/schemas`. |
 | `--self-test` | takes no project. Exits `0` when every case behaved as expected. |
+
+**`engine/shot/print_spec.py`**
+
+| flag | |
+|---|---|
+| *(positional)* | the path to a project directory. |
+| `--shot` | print one shot only. |
+
+⚠️ **The two are not alternatives—they cover disjoint ground.**
+**A line `print_spec.py` prints is a line that goes silent the moment you copy it**
+(that is why each printed line names the check it silences). **So `check.py` can never
+report those lines.** Conversely, **everything `check.py` fires on is something
+`print_spec.py` refused to derive.**
+⚠️ **Run the printer for the forced lines, and the checker for everything the printer
+refuses**—neither one covers what the other does.
+
+⚠️ **`engine/shot/print_spec.py` writes nothing**——it reads the record, the ledger and the bible,
+and prints **only the lines whose value is already forced** (§1's four work constants, `Duration`,
+and §19's `Instance ID`). ⚠️ **Pasting them is the author's act.** Where it disagrees with the
+specification on disk it prints **both** and stops. What it does not derive, and the holes it
+leaves, are in [`engine/shot/README.md`](../engine/shot/README.md).
 
 ⚠️ **The four skills in `skills/` are not commands**——**they are instructions to a Claude Code
 session.** They lay down the order of decisions for **breakdown (①), design (②), ledger (③),
@@ -107,7 +141,7 @@ The counts behind that are in `HISTORY.md`.
 
 ## The layers
 
-The check is **26 layers, `L0`–`L25`**, plus schema-shape validation.
+The check is **27 layers, `L0`–`L26`**, plus schema-shape validation.
 **They are not one verdict**—each layer fires on its own and is reported with the
 number it saw.
 
@@ -151,7 +185,7 @@ and the mirrors does not change.**
 ⚠️ **The working language of development stays Japanese** (commit messages, `HISTORY.md`,
 conversation) **while the canonical of the documents is English.** These two are different
 things: one is the language the work is done in, the other the language the documents are
-authoritative in. **15 documents × 3 languages are in place** (the count
+authoritative in. **16 documents × 3 languages are in place** (the count
 `tools/check_i18n.py` reports as canonical), and the rules are in
 [`CLAUDE.md`](../CLAUDE.md).
 
@@ -161,5 +195,6 @@ authoritative in. **15 documents × 3 languages are in place** (the count
 |---|---|
 | [`README.md`](../README.md) | what this foundation is, and what it is made of |
 | [`engine/ledger/README.md`](../engine/ledger/README.md) | the production ledger, the layers, and what each check does not see |
+| [`engine/shot/README.md`](../engine/shot/README.md) | what the printer derives, and the seven holes it leaves |
 | [`schemas/README.md`](../schemas/README.md) | the data structures |
 | [`projects/hitosara/README.md`](../projects/hitosara/README.md) | the demo—10 shots, independent of Ukebi |

@@ -54,6 +54,7 @@ and the foundation **reads the records**. ⚠️ **`L25` does not open `media/`*
 semantic-visual-loom/
 ├── schemas/         # the canonical of the data structures (bible / ledger / shot-record / take / timeline)
 ├── engine/ledger/   # the production ledger and pre-flight verification (crush breakdowns in the design without running generation)
+├── engine/shot/     # prints the derivable lines of a shot's specification (read-only; writes nothing)
 ├── docs/            # usage
 ├── skills/          # the four skills — breakdown, design, ledger, shot
 ├── tools/           # checks (i18n mirrors)
@@ -93,8 +94,14 @@ Ukebi V2 does not pass (8 of the 15 roles, all three `mode` values, `attached` o
 
 ```text
 ├── engine/handover/ # handover sheets (the 7 slots of §18, image prompts, sound) and round-trip checks
-├── engine/shot/     # generation and verification of shot records
 ├── engine/visual/   # Visual Asset Engine
+│                    #   ⚠️ undecided: whether reference assets are files, and where they live.
+│                    #      `assets/` does not exist; the cards themselves are `distill-essence-engine`'s
+│                    #      property and are only read from here.
+│                    #   ⚠️ undecided: the ledger's values carry a Japanese gloss in full-width
+│                    #      parentheses (`...character-sheet（手と前掛け。顔は映さない）`) while §6 uses
+│                    #      only the name (10/10). ⚠️ Splitting them would mean writing into `projects/`,
+│                    #      which no tool in this repository does.
 ├── engine/assembly/ # timeline, cuts, text compositing, rendering
 ├── providers/       # generators for image, video, compositing
 ├── assets/          # reference assets (character sheets, boards)
@@ -138,7 +145,7 @@ states that `distill-essence-engine` is **read but never rewritten.**
 Mirrors use the suffix scheme and sit in the **same directory**—the rules are in
 [`CLAUDE.md`](CLAUDE.md).
 
-**15 documents × 3 languages are in place**——**that is the count
+**16 documents × 3 languages are in place**——**that is the count
 [`tools/check_i18n.py`](tools/check_i18n.py) reports as the canonical set, not a count of every
 `.md` in the repository.** ⚠️ **A number is only as wide as what was counted.** What that check sees,
 and what it does not, is in [`docs/usage.md`](docs/usage.md).

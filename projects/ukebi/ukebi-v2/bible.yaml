@@ -44,6 +44,18 @@ bible:
     光源: "魂火のみ。bloom も lens flare も無し。"
     カメラ: "あなたの視座。あなたのからだも手も映さない。"
 
+    # §1 の作品定数。**ショットに依らない4つである。**
+    # ⚠️ 出所は §1 の4行そのものである（30本すべてで同一）。この4つは §1 へ手で写され、
+    #    さらに §19 の `Output:` 行へも写されていた——**写しが三つ在った。**
+    # ⚠️ **`duration` はここに無い。** 尺はショットごとに違う——
+    #    **従属変数であり、家は `shot.duration`、読む者は `L23` である。**
+    # ⚠️ **値を変えるときは、§1 を30本とも直すこと。** `L26` が食い違いを鳴らす。
+    video:
+      aspect: "16:9"
+      resolution: "1920x1080"
+      frame_rate: "24fps"
+      orientation: "Landscape"
+
   negative_base:
     - "no readable text"
     - "no Japanese kanji or kana"

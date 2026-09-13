@@ -52,6 +52,7 @@ python3 engine/ledger/check.py --self-test               # 检查器会不会报
 semantic-visual-loom/
 ├── schemas/         # 数据结构的正典（bible / ledger / shot-record / take / timeline）
 ├── engine/ledger/   # 制作台账与事前验证（不跑生成就把设计的破绽压掉）
+├── engine/shot/     # 打印镜头规格中可以导出的行（只读。什么也不写）
 ├── docs/            # 用法
 ├── skills/          # 4 个 Skill——分解、设计、台账、镜头
 ├── tools/           # 检查（i18n 的镜像）
@@ -91,8 +92,13 @@ semantic-visual-loom/
 
 ```text
 ├── engine/handover/ # 交接单（§18 的 7 个槽位、图像提示词、声音）与往返检查
-├── engine/shot/     # 镜头记录的生成与检证
 ├── engine/visual/   # Visual Asset Engine
+│                    #   ⚠️ 未定——参照资产是不是文件，住在哪里。`assets/` 并不存在。
+│                    #      卡的实体是 `distill-essence-engine` 的财产，从这里只能读。
+│                    #   ⚠️ 未定——台账的值用全角括号抱着日文注解
+│                    #      （`…character-sheet（手と前掛け。顔は映さない）`），而 §6 只用名字的部分
+│                    #      （10/10）。⚠️ 要拆开就意味着写入 `projects/`，而本仓库中没有任何
+│                    #      工具这么做。
 ├── engine/assembly/ # 时间线、剪辑、文字合成、渲染
 ├── providers/       # 图像、视频、合成的生成器
 ├── assets/          # 参照资产（角色表、板）
@@ -135,7 +141,7 @@ semantic-visual-loom/
 **开发用日语推进，文档的正典是英语。**
 镜像用后缀方式并排在**同一个目录**里——规则在 [`CLAUDE.md`](CLAUDE-zh.md) 里。
 
-**15 份文档 × 3 种语言已经齐备**——⚠️ **这是 [`tools/check_i18n.py`](tools/check_i18n.py)
+**16 份文档 × 3 种语言已经齐备**——⚠️ **这是 [`tools/check_i18n.py`](tools/check_i18n.py)
 作为正典报告的本数，不是把仓库里的 `.md` 数了一遍的数。**
 **数，只拥有它所数范围那么宽。**
 **它看什么、不看什么**，写在 [`docs/usage.md`](docs/usage-zh.md) 里。

@@ -1618,6 +1618,82 @@ def self_test():
     run1("L23 記録に duration が無い", semantic.check_duration,
          img_proj(video=video1("6s"), duration=None), True, "`duration` が無い")
 
+    # ---- L26（§1 の作品定数が、家 `bible.constants.video` と一致するか）
+    #     ⚠️ **この層は、実データでは1件も鳴らない**（40本 × 4欄 = 160回比べて0件）。
+    #        だからこそ**自己検査で、鳴る姿を見ておかねばならない**——
+    #        **一度も鳴ったのを見ていない検査は、まだ検査ではない。**
+    print("\n=== 自己検査 — §1 の作品定数と、その家\n")
+
+    #: ⚠️ **4行とも本物の値である。** 家と §1 の両方が同じ値を持つ形は、実測そのもの。
+    L26_ROWS = (("aspect", "Aspect", "16:9"),
+                ("resolution", "Resolution", "1920x1080"),
+                ("frame_rate", "Frame Rate", "24fps"),
+                ("orientation", "Orientation", "Landscape"))
+
+    def l26_home(**over):
+        """家。⚠️ **`値=None` は「その欄が無い」**——空文字ではない。**この2つは別である。**"""
+        d = {k: v for k, _, v in L26_ROWS}
+        for k, v in over.items():
+            if v is None:
+                d.pop(k, None)
+            else:
+                d[k] = v
+        return {"video": d}
+
+    def l26_spec(**over):
+        """§1 に4行を持つ動画仕様。⚠️ **`値=None` は「その行が無い」。**"""
+        vals = {k: v for k, _, v in L26_ROWS}
+        vals.update(over)
+        lines = ["# 1. VIDEO", ""]
+        for key, label, _ in L26_ROWS:
+            if vals.get(key) is not None:
+                lines.append(f"- {label}: `{vals[key]}`")
+        return ("\n".join(lines) + "\n\n"
+                + "".join(f"# {t}\n\n本文\n" for t in ALL20[1:]))
+
+    def const_proj(spec=None, constants=None):
+        """⚠️ **`spec=None` は動画の仕様を書かない。`constants=None` は家を書かない。**
+        この2つは**別々に落とせる**——どちらか片方だけが無い形こそが、実測で起きる形である。"""
+        d = _P(tempfile.mkdtemp())
+        kw = {}
+        if spec is not None:
+            (d / "vid.md").write_text(spec, encoding="utf-8")
+            kw["spec"] = "vid.md"
+        sh = s("p-ch01-seg01", mode="motion", duration="6s", **kw)
+        p = _One(sh)
+        p.root = d
+        p.shots = {"p-ch01-seg01": sh}
+        p.bible = {"bible": {}}
+        if constants is not None:
+            p.bible["bible"]["constants"] = constants
+        return p
+
+    run1("L26 家と §1 が一致する（鳴ってはならない）", semantic.check_work_constants,
+         const_proj(spec=l26_spec(), constants=l26_home()), False, None,
+         note="4 件を比較して 4 件が一致")
+    run1("L26 作品定数が食い違う", semantic.check_work_constants,
+         const_proj(spec=l26_spec(orientation="Portrait"), constants=l26_home()),
+         True, "作品定数が食い違っている")
+    run1("L26 §1 に Orientation が無い", semantic.check_work_constants,
+         const_proj(spec=l26_spec(orientation=None), constants=l26_home()),
+         True, "`Orientation:` が無い")
+    # ⚠️ **欠けた欄は、ショットごとではなく一度だけ鳴る。** 家の欠けは作品に1つの欠陥である。
+    run1("L26 家に frame_rate が無い", semantic.check_work_constants,
+         const_proj(spec=l26_spec(), constants=l26_home(frame_rate=None)),
+         True, "`frame_rate` が無い")
+    # ⚠️ **「相手が空なら鳴る」。** さもなければ、家を消した作品でこの層は**静かに緑になる**
+    #    ——`CLAUDE.md`「a check that reports nothing looks like a check that passed」。
+    run1("L26 家そのものが無い（他の側は在る）", semantic.check_work_constants,
+         const_proj(spec=l26_spec()), True, "家（`bible.constants.video`）が無い")
+    # ⚠️ **綴りは2つ在る**（実測: `Aspect Ratio:` が89本、`Aspect:` が10本——後者は
+    #    `projects/hitosara` だけである）。片方しか読めなければ、**89本の側が丸ごと読めない。**
+    run1("L26 `Aspect Ratio:` の綴りも読む（鳴ってはならない）", semantic.check_work_constants,
+         const_proj(spec=l26_spec().replace("- Aspect: ", "- Aspect Ratio: "),
+                    constants=l26_home()), False, None, note="4 件を比較して 4 件が一致")
+    # ⚠️ **動画の仕様が無ければ、この検査は何も見ていない。** `L11`・`L18` が報告する。
+    run1("L26 動画の仕様が無ければ黙る", semantic.check_work_constants,
+         const_proj(spec=None, constants=l26_home()), False, None)
+
     # ---- L25（テイクがショット・様式・**実物**と突き合っているか）
     #     ⚠️ **`S1` は形を見る。ここは中身を見る。** 13本がスキーマを通ることは、
     #        その13本が何かについて正しいことを、何も言わない。

@@ -58,6 +58,7 @@ DOCS = (
     "README.md",
     "docs/usage.md",
     "engine/ledger/README.md",
+    "engine/shot/README.md",
     "schemas/README.md",
     "projects/hitosara/README.md",
     "projects/hitosara/media/README.md",

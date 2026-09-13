@@ -6,10 +6,9 @@
 
 如何对项目的记录跑事前验证。
 
-**这里只跑一件事。** 生成不在这个基盘里跑——
-**由作者手工执行，基盘只读记录。**
-跑的是那个**在生成之前**于规格阶段触发矛盾的检查
-（以及生成之后，把回来的东西对上的那一步）。
+**生成不在这个基盘里跑**——**由作者手工执行，基盘只读记录。**
+跑的是那个**在生成之前**于规格阶段触发矛盾的检查（以及生成之后，把回来的东西对上的
+那一步）。此外，还有打印**值已经被强制的行**的工具。
 
 ## 需要什么
 
@@ -21,18 +20,47 @@ python3 -m pip install --user pyyaml
 
 ## 命令
 
+**命令有 3 个**——**做作品的 2 个，以及维护仓库的 1 个。**
+
 ```bash
+# 检查器——在规格阶段触发矛盾
 python3 engine/ledger/check.py --self-test                 # 检查器到底会不会报警
 python3 engine/ledger/check.py projects/hitosara           # 对一个项目做事前验证
 python3 engine/ledger/check.py projects/ukebi/ukebi-v2     # Ukebi V2
+
+# 打印器——规格中可以导出的行。什么都不写
+python3 engine/shot/print_spec.py projects/hitosara
+python3 engine/shot/print_spec.py projects/hitosara --shot hitosara-ch01-seg04
+
+# 仓库自身的文档检查——不用来做作品
 python3 tools/check_i18n.py                                # 文档的镜像
 ```
+
+**`engine/ledger/check.py`**
 
 | 参数 | |
 |---|---|
 | （位置参数） | 项目目录的路径。除非给了 `--self-test`，否则必需。 |
 | `--schemas` | 模式（schema）目录。默认为 `<仓库>/schemas`。 |
 | `--self-test` | 不接受项目。**当每一条例子都如预期时，以 `0` 退出。** |
+
+**`engine/shot/print_spec.py`**
+
+| 参数 | |
+|---|---|
+| （位置参数） | 项目目录的路径。 |
+| `--shot` | 只打印一个镜头。 |
+
+⚠️ **两者不是二选一——它们覆盖的范围不一样。**
+**`print_spec.py` 打印的行，是抄下去的瞬间就会沉默的行**（所以每一行都会报出它让谁沉默）。
+**也就是说，`check.py` 报告不了那些行。** 反过来，**`check.py` 触发的东西，正是
+`print_spec.py` 拒绝导出的东西。**
+⚠️ **被强制的行交给打印器，被拒绝的交给检查器**——两者都不覆盖对方的范围。
+
+⚠️ **`engine/shot/print_spec.py` 什么都不写**——它读记录、台账与作品台账，只打印
+**值已经被强制的行**（§1 的四个作品常数、`Duration`、§19 的 `Instance ID`）。
+⚠️ **把它贴上去是作者的行为。** 与磁盘上的规格不一致时，它把**两者**并列，然后停下。
+它不导出的东西与留下的洞，在 [`engine/shot/README.md`](../engine/shot/README-zh.md) 里。
 
 ⚠️ **`skills/` 的 4 个不是命令**——**是对 Claude Code 会话的指示。**
 它们定下**分解（①）、设计（②）、台账（③）、镜头（④）**的决定顺序。
@@ -103,7 +131,7 @@ projects/<name>/
 
 ## 层
 
-检查由**26 层，`L0`–`L25`**，以及模式（schema）的形状验证构成。
+检查由**27 层，`L0`–`L26`**，以及模式（schema）的形状验证构成。
 **它不是单一判定**——每一层各自报警，并**连同它看到的数字**一起被报告。
 
 ⚠️ **什么也没看到的层会作为注被报告，而什么也没看到的层，看起来和通过的层一模一样。**
@@ -143,7 +171,7 @@ python3 tools/check_i18n.py               # 实物
 ⚠️ **不使用子文件夹方式（`ja/` `zh/`）**——为了让**正典与镜像的深度不发生变化**。
 ⚠️ **开发的工作语言保持日语**（提交信息、`HISTORY.md`、会话），
 而**文档的正典是英语。** 这两者是不同的东西——**做事所用的语言**，与**文档具有权威所用的语言**。
-**15 份文档 × 3 种语言已经齐备**（这是 `tools/check_i18n.py` 作为正典报告的本数），
+**16 份文档 × 3 种语言已经齐备**（这是 `tools/check_i18n.py` 作为正典报告的本数），
 规则在 [`CLAUDE.md`](../CLAUDE-zh.md) 里。
 
 ## 延伸阅读
@@ -152,5 +180,6 @@ python3 tools/check_i18n.py               # 实物
 |---|---|
 | [`README.md`](../README-zh.md) | 这个基盘是什么，由什么构成 |
 | [`engine/ledger/README.md`](../engine/ledger/README-zh.md) | 制作台账、各层、以及每个检查不看什么 |
+| [`engine/shot/README.md`](../engine/shot/README-zh.md) | 打印器导出什么，以及它留下的七个洞 |
 | [`schemas/README.md`](../schemas/README-zh.md) | 数据结构 |
 | [`projects/hitosara/README.md`](../projects/hitosara/README-zh.md) | 演示——10 个镜头，与 Ukebi 完全独立 |

@@ -1192,6 +1192,111 @@ def check_duration(project):
     return out
 
 
+def check_work_constants(project):
+    """L26 — **§1 の作品定数が、家（`bible.constants.video`）と一致するか。**
+
+    ⚠️ **この4つは、かつて3箇所に手で写されていた**——§1・§19 の `Output:` 行・
+    （受け火では）`series-constants.md`。**写しは実際にずれる。** 実測: §1 の
+    `1920x1080` に対し §19 の `Output:` は `1920×1080` と書き、**10/10 で綴りが違う。**
+    値は同じで、綴りだけが違う——**手で写す運用は、静かに壊れる。**
+
+    ⚠️ **`L23` の隣に在る。** あちらは「意図（`shot.duration`）↔ §1」を比べ、
+    こちらは「家（`bible`）↔ §1」を比べる。**同じ §1 を読むが、相手が違う。**
+
+    ⚠️ **`duration` をここで扱わない。** 尺は**従属変数**であり、家は `shot.duration`、
+    読む者は `L23` である。**同じ欄を2つの層が読めば、同じ欠陥を別の符号で報告する**
+    ——このリポジトリの規律に反する。
+
+    ⚠️ **§19 の `Output:` 行を読まない。** あれはこの4つの**三つ目の写し**だが、
+    綴りが違う（`1920×1080` / `landscape`）ので、読めば**10件の偽陽性**が出る。
+    **正規化して読むか、4欄に割るかは未決定である**（穴は `engine/shot/README.md`）。
+
+    ⚠️ **「§1 が無い」と「§1 に `Aspect` が無い」は別である**（`L23` と同じ規律）。
+    前者は `L11` が報告する。後者は**誰も報告しない**——だからここで報告する。
+    **突き合わせられない定数は、突き合わされていない。**
+
+    ⚠️ **相手が空なら鳴る。** §1 が在るのに家が無いなら、それは「家が無い」である
+    ——**`L21` と同じ形**（覆うべきものが無ければ、この検査は**何も見ていないのと同じである**）。
+
+    ⚠️ **`takes/` も `media/` も開かない。** 開くのは `bible.yaml` と §1 だけである。
+    """
+    out = []
+    home = (((project.bible or {}).get("bible") or {}).get("constants") or {})
+    want = home.get("video") or {}
+
+    pairs = []
+    for s in project.order():
+        shot = project.shots[s]
+        src = _spec_of(shot, "video")
+        if not src:
+            continue                      # L11 が鳴らしている
+        p = project.root / src
+        if not p.is_file():
+            continue                      # L11 が鳴らしている
+        body = _section_body(p, "1.")
+        if not body:
+            continue                      # L11（節が無い）か L18（画像の仕様）が報告する
+        pairs.append((s, p, body))
+    if not pairs:
+        return out                        # 相手が無い。L11・L18 が報告済みである。
+
+    if not want:
+        out.append(finding("L26", "",
+                           "§1 の作品定数（`Aspect` / `Resolution` / `Frame Rate` / "
+                           "`Orientation`）を突き合わせる相手が無い——"
+                           "**家（`bible.constants.video`）が無い。**"
+                           f"⚠️ **他の側は在る**（動画の仕様 {len(pairs)} 本が §1 を持つ）。"
+                           "家が無ければ、この4つは**どこからも機械で読めない**——"
+                           "受け火の `series-constants.md` が手で持っていたものが、"
+                           "**手に戻る。**"))
+        return out
+
+    # ⚠️ **欠けた欄は、ショットごとではなく一度だけ報告する。**
+    #    家の欠けは作品に1つの欠陥であって、40本の欠陥ではない。
+    absent = [k for k, _, _ in specmap.VIDEO_CONSTANTS if k not in want]
+    for k, _, label in specmap.VIDEO_CONSTANTS:
+        if k in absent:
+            out.append(finding("L26", "",
+                               f"家（`bible.constants.video`）に `{k}` が無い。"
+                               f"§1 の `{label}:` を突き合わせる相手が、家の側に無い——"
+                               "**その欄だけが、突き合わされない。**"))
+
+    compared = agreed = 0
+    for s, p, body in pairs:
+        for key, line, label in specmap.VIDEO_CONSTANTS:
+            if key in absent:
+                continue                  # 上の一度きりの報告で足りる
+            m = line.search(body)
+            if not m:
+                out.append(finding("L26", s,
+                                   f"動画の仕様の §1 に `{label}:` が無い。"
+                                   f"**この作品定数は、仕様の側から読めない**——"
+                                   f"家の `{key}` と突き合わせる相手が無い。"))
+                continue
+            got = m.group(1).strip()
+            compared += 1
+            if str(want[key]).strip() != got:
+                out.append(finding("L26", s,
+                                   f"作品定数が食い違っている——家は `{key}: {want[key]}`、"
+                                   f"§1 は `{label}: {got}` である。"
+                                   "**生成へ渡るのは §1 のほうである**——"
+                                   "だから家を直しても、**古い値が仕様に残れば生成へ届く。**"
+                                   "⚠️ **どちらが正しいかは、ここでは決めない。**"))
+                continue
+            agreed += 1
+
+    out.append(finding("L26", f"{agreed}件",
+                       f"作品定数を突き合わせた（動画の仕様 {len(pairs)} 本 × "
+                       f"{len(specmap.VIDEO_CONSTANTS) - len(absent)} 欄、"
+                       f"{compared} 件を比較して {agreed} 件が一致）。"
+                       "⚠️ **この層は、今日のデータでは1件も鳴らない。**"
+                       "**写しはずれる**という実例は既に在る（§19 の `Output:` 行が"
+                       "10/10 で綴り違い）——**だから鳴らないことと、要らないことは別である。**"
+                       "⚠️ **この註は「家が正しい」とは言っていない。**"
+                       "家と §1 が一致した、と言っているだけである。",
+                       severity="note"))
+    return out
+
 
 _NUM = re.compile(r"\d+(?:\.\d+)?")
 _RESOLUTION = re.compile(r"(\d+)\s*[x×]\s*(\d+)")
@@ -2355,6 +2460,7 @@ def run(project, schema_dir=None, repo_root=None):
     out += check_image_negative(project)
     out += check_image_vars(project, repo_root=repo_root)
     out += check_duration(project)
+    out += check_work_constants(project)
     out += check_take(project)
     out += check_identity(project)
     out += check_beyond_declaration(project)

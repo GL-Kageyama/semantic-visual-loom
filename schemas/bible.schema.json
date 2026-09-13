@@ -36,7 +36,20 @@
         "constants": {
           "type": "object",
           "description": "根本律など、作品を貫く定数。",
-          "additionalProperties": { "type": "string" }
+          "additionalProperties": { "type": "string" },
+          "properties": {
+            "video": {
+              "type": "object",
+              "description": "§1 の作品定数——**ショットに依らない4つ**。受け火の `series-constants.md` §1 がこれを手で持っていた（全12本が共有する不変部）——**その跡継ぎがここである**（このファイル冒頭の説明を参照）。⚠️ **`duration` をここに置かない。** 尺は**従属変数**であり、ショットごとに違う（実測: `projects/hitosara` で 2s〜8s）。**家は `shot.duration` であり、読む者は `L23` である。** ⚠️ **4つのキーを `required` にしない**——欠けた欄は `L26` が「家に無い」と鳴らす。ここでも必須にすると、**同じ欠陥を2つの層が別の符号で報告する**（このリポジトリの規律に反する）。⚠️ **この欄を読む者**: `L26`（`engine/ledger/semantic.py`）と `engine/shot/print_spec.py`。**家に読者がいて初めて、家は家である。**",
+              "additionalProperties": false,
+              "properties": {
+                "aspect": { "type": "string", "description": "§1 `Aspect Ratio`。実測: 両作品とも `16:9`（40/40）。" },
+                "resolution": { "type": "string", "description": "§1 `Resolution`。実測: 両作品とも `1920x1080`（40/40）。" },
+                "frame_rate": { "type": "string", "description": "§1 `Frame Rate`。実測: 両作品とも `24fps`（40/40）。⚠️ **実測値と食い違う**——`L25` が「仕様と実物が違う」として鳴らす。**どちらが正しいかは、ここでは決めない。**" },
+                "orientation": { "type": "string", "description": "§1 `Orientation`。実測: 両作品とも `Landscape`（40/40）。" }
+              }
+            }
+          }
         },
         "style": {
           "type": "string",
