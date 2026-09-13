@@ -1,0 +1,42 @@
+{
+  "name": "semantic-visual-loom",
+  "owner": {
+    "name": "GL-Kageyama"
+  },
+  "metadata": {
+    "description": "A foundation that carries a story all the way to film. Footage is not generated — it is edited. The production ledger holds continuity (the state of the world) and disclosure (the state of the audience's knowledge) in one file, and both the reference set and the forbidden set are derived from it. Pre-flight verification crushes the breakdowns in the design without running a single generation."
+  },
+  "plugins": [
+    {
+      "name": "semantic-visual-loom",
+      "source": "./",
+      "description": "Semantic Visual Loom — carries a story to film. The unit is the shot (one shot, one change; length is a dependent variable), and the state is placed outside the generation in one production ledger. Four skills walk the foundation's own body: breakdown (① cut a work into shots), design (② stage a shot and write its two specifications), ledger (③ fix what is fixed), and shot (④ the self-contained record and the sample that comes back). ⚠️ Assembly and acceptance are not among them — the adopted takes are not on the record side, and a skill that cannot be moved is worse than no skill.",
+      "version": "0.22.0",
+      "author": {
+        "name": "GL-Kageyama"
+      },
+      "license": "MIT",
+      "keywords": [
+        "claude-code",
+        "ai",
+        "film",
+        "video",
+        "shot",
+        "production-ledger",
+        "continuity",
+        "disclosure",
+        "pre-flight",
+        "skill"
+      ],
+      "category": "workflow",
+      "tags": [
+        "film",
+        "video",
+        "shot",
+        "continuity",
+        "pre-flight"
+      ],
+      "strict": false
+    }
+  ]
+}
