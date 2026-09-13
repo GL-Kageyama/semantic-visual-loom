@@ -71,6 +71,14 @@ kept.** Why input is not a sample, and what is lost if it is deleted, is in
 **"Until One Plate Is Made"**—from flour and water and salt and time, until bread becomes one plate.
 10 shots. **Completely independent of Ukebi.**
 
+[![Until One Plate Is Made](https://i.ytimg.com/vi/pJyiziIUaPY/hqdefault.jpg)](https://www.youtube.com/watch?v=pJyiziIUaPY)
+
+⚠️ **What is on that video is the work, not a sample**—the distinction is in
+[`projects/hitosara/renders/README.md`](projects/hitosara/renders/README.md).
+⚠️ **And the footage cannot show the thing this foundation is actually about**——
+**the 10 shots come out of one ledger.** That is the second row of the table above,
+and **it is the one claim a video cannot make on its own.**
+
 **It is placed here to show everything this foundation reads**—it steps through a registry that
 Ukebi V2 does not pass (8 of the 15 roles, all three `mode` values, `attached` on every shot,
 `text_channel` and `sound`).

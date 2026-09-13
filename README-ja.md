@@ -68,6 +68,14 @@ semantic-visual-loom/
 **「一皿ができるまで」**——粉と水と塩と時間から、パンが一皿になるまで。
 10ショット。**受け火から完全に独立している。**
 
+[![一皿ができるまで](https://i.ytimg.com/vi/pJyiziIUaPY/hqdefault.jpg)](https://www.youtube.com/watch?v=pJyiziIUaPY)
+
+⚠️ **あれに入っているのは標本ではなく作品である**——区別は
+[`projects/hitosara/renders/README.md`](projects/hitosara/renders/README-ja.md) にある。
+⚠️ **そして、この基盤が本当に言っていることは、映像には映らない**——
+**10ショットは、台帳1枚から出ている。** それが上の表の2行目であり、
+**映像が自分だけでは言えない唯一の主張である。**
+
 **これは、この基盤が何を読むかを全部見せるために置いてある。**
 受け火 V2 が通っていない目録を踏む——種別は15のうち8、`mode` は3つとも、
 `attached` は全ショット、`text_channel` と `sound` も使う。

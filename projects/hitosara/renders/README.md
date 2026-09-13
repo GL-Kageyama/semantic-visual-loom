@@ -78,6 +78,16 @@ What exists is **2 files**——**the same picture, with only the presence of au
 
 ⚠️ **`+` is the mark of "the picture is the same and sound was added."** The picture was not re-encoded (`-c:v copy`).
 
+⚠️ **This version is already published**——on the author's own channel
+(YouTube, `https://www.youtube.com/watch?v=pJyiziIUaPY`).
+**The music record below is carried in that video's description**, so the condition
+"take this table along with it" is met there.
+
+⚠️ **But what is on YouTube and what is in this directory are not the same object.**
+YouTube serves **its own encode** of it, and ⚠️ **whether the file that was uploaded is this one,
+or a lighter one made for it, is not written anywhere.** **Two surfaces exist, and which is
+canonical is not decided**——**and no check fires this** (no one reads `renders/`, as above).
+
 ### ⚠️ The sound of the silent one is not absent but **empty**
 
 `hitosara.mp4` **has** an `aac` audio track. But **its contents are pure digital silence**——

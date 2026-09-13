@@ -68,6 +68,14 @@ semantic-visual-loom/
 **「Until One Plate Is Made」**——从粉、水、盐与时间开始，直到面包变成一盘。
 10 个镜头。**与 Ukebi 完全独立。**
 
+[![Until One Plate Is Made](https://i.ytimg.com/vi/pJyiziIUaPY/hqdefault.jpg)](https://www.youtube.com/watch?v=pJyiziIUaPY)
+
+⚠️ **那里面是作品，不是标本**——区别在
+[`projects/hitosara/renders/README.md`](projects/hitosara/renders/README-zh.md)。
+⚠️ **而且，这个基盘真正要说的事，影像里映不出来**——
+**10 个镜头，是从一张台账里出来的。** 那就是上面表的第 2 行，
+**也是影像自己无法主张的唯一一件事。**
+
 **把它放在这里，是为了展示这个基盘读的全部东西。**
 它踩了一个 Ukebi V2 没有通过的目录——15 种职能中的 8 种、`mode` 的 3 个值全部、
 `attached` 在每个镜头上、还用了 `text_channel` 与 `sound`。
