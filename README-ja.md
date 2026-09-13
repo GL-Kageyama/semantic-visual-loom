@@ -53,6 +53,7 @@ semantic-visual-loom/
 ├── schemas/         # データ構造の正典（bible / ledger / shot-record / take / timeline）
 ├── engine/ledger/   # 制作台帳と事前検証（生成を走らせずに設計の破綻を潰す）
 ├── docs/            # 使い方
+├── skills/          # 4つの Skill——分解・設計・台帳・ショット
 ├── tools/           # 検査（i18n のミラー）
 ├── references/      # カード。distill から移管した video-spec を含む
 └── projects/        # 作品ごとの実体
@@ -89,7 +90,6 @@ semantic-visual-loom/
 ## 予定であって、まだ無いもの
 
 ```text
-├── skills/          # 分解・設計・台帳・ショット・構成・検収
 ├── engine/handover/ # 引き渡し票（§18 の7スロット・画像プロンプト・音）と往復検査
 ├── engine/shot/     # ショット記録の生成・検証
 ├── engine/visual/   # Visual Asset Engine
@@ -98,6 +98,17 @@ semantic-visual-loom/
 ├── assets/          # 参照資産（キャラシート・ボード）
 └── interchange/     # OTIO / EDL / FCPXML
 ```
+
+⚠️ **`skills/` には2段が欠けている**——**⑥構成と⑦検収である。**
+書けない。**入力が記録の側に無いからである。** `clips[]` は定義上**採用テイクの列**であり、
+**動画のテイクに `adopted: true` が1本も無い。**
+書くのが難しいのではない——⚠️ **動かせないのであり、**
+⚠️ **空のタイムラインを吐く Skill は、無い Skill より悪い。** 穴は起きた場所に書いてある——
+[`projects/hitosara/renders/README.md`](projects/hitosara/renders/README-ja.md)。
+
+⚠️ **ここに「予定」として残さないこと。** あれは作業を待っているのではない——
+**採用されたテイクを待っており、採用は著者の行為である。**
+予定として並べると、**待てば向こうから来るように見える。**
 
 **⚠️ `timeline/` はスキーマだけが在って、記録が1本も無い**——⚠️ **`SCHEMAS` 定数に名前は
 在るが、読む者がいない。** スキーマの一覧は [`docs/usage.md`](docs/usage-ja.md) にある。

@@ -34,6 +34,12 @@ python3 tools/check_i18n.py                                # 文書のミラー
 | `--schemas` | スキーマのディレクトリ。既定は `<リポジトリ>/schemas`。 |
 | `--self-test` | プロジェクトを取らない。**全ての例が期待どおりなら `0` で終わる。** |
 
+⚠️ **`skills/` の4本はコマンドではない**——**Claude Code のセッションへの指示である。**
+**分解（①）・設計（②）・台帳（③）・ショット（④）**の決定の順序を定める。
+⚠️ **呼び出しには名前空間が付く**——`/semantic-visual-loom:breakdown`・`:design`・`:ledger`・`:shot`。
+⚠️ **⑥構成と⑦検収はその中に無い**——**入力が記録の側に無いからである。** 理由は
+[`projects/hitosara/renders/README.md`](../projects/hitosara/renders/README-ja.md) にある。
+
 ## ⚠️ 終了コードを正しく読む
 
 | 終了コード | 意味 |

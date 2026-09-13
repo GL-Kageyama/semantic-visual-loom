@@ -34,6 +34,12 @@ python3 tools/check_i18n.py                                # 文档的镜像
 | `--schemas` | 模式（schema）目录。默认为 `<仓库>/schemas`。 |
 | `--self-test` | 不接受项目。**当每一条例子都如预期时，以 `0` 退出。** |
 
+⚠️ **`skills/` 的 4 个不是命令**——**是对 Claude Code 会话的指示。**
+它们定下**分解（①）、设计（②）、台账（③）、镜头（④）**的决定顺序。
+⚠️ **调用带着名字空间**——`/semantic-visual-loom:breakdown`、`:design`、`:ledger`、`:shot`。
+⚠️ **⑥构成与⑦验收不在其中**——**因为输入不在记录那一侧。** 理由在
+[`projects/hitosara/renders/README.md`](../projects/hitosara/renders/README-zh.md)。
+
 ## ⚠️ 正确读取退出码
 
 | 退出码 | 含义 |

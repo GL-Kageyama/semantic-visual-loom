@@ -53,6 +53,7 @@ semantic-visual-loom/
 ├── schemas/         # 数据结构的正典（bible / ledger / shot-record / take / timeline）
 ├── engine/ledger/   # 制作台账与事前验证（不跑生成就把设计的破绽压掉）
 ├── docs/            # 用法
+├── skills/          # 4 个 Skill——分解、设计、台账、镜头
 ├── tools/           # 检查（i18n 的镜像）
 ├── references/      # 卡。包括从 distill 移管过来的 video-spec
 └── projects/        # 每部作品的实体
@@ -89,7 +90,6 @@ semantic-visual-loom/
 ## 预定之中、但还没有的东西
 
 ```text
-├── skills/          # 分解、设计、台账、镜头、构成、验收
 ├── engine/handover/ # 交接单（§18 的 7 个槽位、图像提示词、声音）与往返检查
 ├── engine/shot/     # 镜头记录的生成与检证
 ├── engine/visual/   # Visual Asset Engine
@@ -98,6 +98,17 @@ semantic-visual-loom/
 ├── assets/          # 参照资产（角色表、板）
 └── interchange/     # OTIO / EDL / FCPXML
 ```
+
+⚠️ **`skills/` 里缺着 2 段**——**⑥构成与⑦验收。**
+写不出来。**因为输入不在记录那一侧。** `clips[]` 按定义是**采用镜次的列**，
+而**视频镜次里一张 `adopted: true` 都没有。**
+不是难写——⚠️ **是动不了**，而
+⚠️ **吐出一条空时间线的 Skill，比没有 Skill 更糟。** 洞写在它发生的地方——
+[`projects/hitosara/renders/README.md`](projects/hitosara/renders/README-zh.md)。
+
+⚠️ **不要把它们作为「预定」留在这里。** 它们不是在等作业——
+**是在等被采用的镜次，而采用是作者的行为。**
+排成预定，**看起来就像等一等它们自己会来。**
 
 **⚠️ `timeline/` 只有 schema，一条记录也没有**——⚠️ **`SCHEMAS` 常量里有它的名字，
 但没有人去读它。** schema 的一览在 [`docs/usage.md`](docs/usage-zh.md) 里。

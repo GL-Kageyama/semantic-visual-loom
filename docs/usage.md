@@ -34,6 +34,13 @@ python3 tools/check_i18n.py                                # the document mirror
 | `--schemas` | the schema directory. Defaults to `<repo>/schemas`. |
 | `--self-test` | takes no project. Exits `0` when every case behaved as expected. |
 
+⚠️ **The four skills in `skills/` are not commands**——**they are instructions to a Claude Code
+session.** They lay down the order of decisions for **breakdown (①), design (②), ledger (③),
+and shot (④)**. ⚠️ **The invocation carries a namespace**——`/semantic-visual-loom:breakdown`,
+`:design`, `:ledger`, `:shot`. ⚠️ **Two stages are not among them (⑥ structure, ⑦ acceptance)**——
+the input is not on the record side. The reason is in
+[`projects/hitosara/renders/README.md`](../projects/hitosara/renders/README.md).
+
 ## ⚠️ Read the exit code correctly
 
 | exit | meaning |

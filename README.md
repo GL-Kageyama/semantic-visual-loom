@@ -55,6 +55,7 @@ semantic-visual-loom/
 ├── schemas/         # the canonical of the data structures (bible / ledger / shot-record / take / timeline)
 ├── engine/ledger/   # the production ledger and pre-flight verification (crush breakdowns in the design without running generation)
 ├── docs/            # usage
+├── skills/          # the four skills — breakdown, design, ledger, shot
 ├── tools/           # checks (i18n mirrors)
 ├── references/      # cards. Includes the video-spec moved over from distill
 └── projects/        # the substance of each work
@@ -91,7 +92,6 @@ Ukebi V2 does not pass (8 of the 15 roles, all three `mode` values, `attached` o
 ## Planned, But Not Yet There
 
 ```text
-├── skills/          # breakdown, design, ledger, shots, structure, acceptance
 ├── engine/handover/ # handover sheets (the 7 slots of §18, image prompts, sound) and round-trip checks
 ├── engine/shot/     # generation and verification of shot records
 ├── engine/visual/   # Visual Asset Engine
@@ -100,6 +100,17 @@ Ukebi V2 does not pass (8 of the 15 roles, all three `mode` values, `attached` o
 ├── assets/          # reference assets (character sheets, boards)
 └── interchange/     # OTIO / EDL / FCPXML
 ```
+
+⚠️ **Two stages are missing from `skills/`**——**structure (⑥) and acceptance (⑦).**
+They cannot be written, because **the input is not on the record side.** `clips[]` is by definition
+**a list of adopted takes**, and **not one video take carries `adopted: true`.**
+It is not that they are hard to write——⚠️ **it is that they cannot be moved**, and
+**a skill that emits an empty timeline is worse than no skill.** The hole is written where it happened:
+[`projects/hitosara/renders/README.md`](projects/hitosara/renders/README.md).
+
+⚠️ **Do not leave them here as "planned."** They are not waiting on work——
+**they are waiting on adopted takes, and adoption is the author's act.**
+Listed as a plan, they look like they will arrive on their own.
 
 **⚠️ `timeline/` has only a schema and not a single record**—⚠️ **its name is in the `SCHEMAS`
 constant, but there is no one to read it.** [`docs/usage.md`](docs/usage.md) lists the schemas.
