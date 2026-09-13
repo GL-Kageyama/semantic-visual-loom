@@ -10,7 +10,7 @@
 
 **A foundation that carries a story all the way to film.**
 
-> **Footage is not generated. It is edited.**
+> **A story becomes a run of shots.**
 
 **What the model makes is a sample**—and **independent generations have no memory of each other.**
 So state is placed outside the generation: **that vessel is the production ledger, one file**,

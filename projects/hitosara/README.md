@@ -7,7 +7,7 @@
 From flour, water, salt, and time, until the bread becomes a single dish. **10 shots.**
 A work completely independent of ukebi, and **it is placed here to show everything this foundation reads.**
 
-> **Footage is not generated. It is edited.**
+> **A story becomes a run of shots.**
 
 ---
 

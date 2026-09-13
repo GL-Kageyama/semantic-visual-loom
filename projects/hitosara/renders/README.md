@@ -4,7 +4,7 @@
 
 # `renders/` — where what editing produced (the work) goes
 
-> **Footage is not generated. It is edited.**
+> **A story becomes a run of shots.**
 
 **`media/` is the place for samples, and this is the place for the work.**
 
