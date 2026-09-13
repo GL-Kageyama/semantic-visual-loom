@@ -4,6 +4,10 @@
 
 # semantic-visual-loom
 
+<p align="center">
+  <img src="assets/repo-hero.png" width="100%" alt="semantic-visual-loom">
+</p>
+
 **把故事一直运到电影的基盘。**
 
 > **影像不是被生成的。是被剪辑的。**
@@ -77,6 +81,7 @@ semantic-visual-loom/
 ├── skills/          # 4 个 Skill——分解、设计、台账、镜头
 ├── tools/           # 检查（i18n 的镜像）
 ├── references/      # 从 distill 移管过来的 video-spec
+├── assets/          # 仓库的脸（README 的 hero）
 └── projects/        # 每部作品的实体
 ```
 
@@ -113,7 +118,11 @@ semantic-visual-loom/
 ```text
 ├── engine/handover/ # 交接单（§18 的 7 个槽位、图像提示词、声音）与往返检查
 ├── engine/visual/   # Visual Asset Engine
-│                    #   ⚠️ 未定——参照资产是不是文件，住在哪里。`assets/` 并不存在。
+│                    #   参照资产已经住在各作品自己的 `reference/` 里——69 处、9 种。
+│                    #      那就是它现在的住处。
+│                    #   ⚠️ 未定——中央的置场，与重复的处理（同一张图最多被复制 37 次）。
+│                    #      §6 的 `REF_*` 名字，什么也没有指着。
+│                    #   ⚠️ `assets/` 已成仓库的脸（README 的 hero），所以不能放在那里。
 │                    #      卡的实体是 `distill-essence-engine` 的财产，从这里只能读。
 │                    #   ⚠️ 未定——台账的值用全角括号抱着日文注解
 │                    #      （`…character-sheet（手と前掛け。顔は映さない）`），而 §6 只用名字的部分
@@ -121,7 +130,6 @@ semantic-visual-loom/
 │                    #      工具这么做。
 ├── engine/assembly/ # 时间线、剪辑、文字合成、渲染
 ├── providers/       # 图像、视频、合成的生成器
-├── assets/          # 参照资产（角色表、板）
 └── interchange/     # OTIO / EDL / FCPXML
 ```
 

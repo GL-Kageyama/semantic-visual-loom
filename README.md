@@ -4,6 +4,10 @@
 
 # semantic-visual-loom
 
+<p align="center">
+  <img src="assets/repo-hero.png" width="100%" alt="semantic-visual-loom">
+</p>
+
 **A foundation that carries a story all the way to film.**
 
 > **Footage is not generated. It is edited.**
@@ -78,6 +82,7 @@ semantic-visual-loom/
 ├── skills/          # the four skills — breakdown, design, ledger, shot
 ├── tools/           # checks (i18n mirrors)
 ├── references/      # the video-spec moved over from distill
+├── assets/          # the repository's face (the README hero)
 └── projects/        # the substance of each work
 ```
 
@@ -114,8 +119,12 @@ Ukebi V2 does not pass (8 of the 15 roles, all three `mode` values, `attached` o
 ```text
 ├── engine/handover/ # handover sheets (the 7 slots of §18, image prompts, sound) and round-trip checks
 ├── engine/visual/   # Visual Asset Engine
-│                    #   ⚠️ undecided: whether reference assets are files, and where they live.
-│                    #      `assets/` does not exist; the cards themselves are `distill-essence-engine`'s
+│                    #   Reference assets already live per work, in `reference/` — 69 places,
+│                    #      9 distinct images. That is their home today.
+│                    #   ⚠️ undecided: the central home, and the duplication (one image copied up
+│                    #      to 37 times); §6's `REF_*` names point at nothing.
+│                    #   ⚠️ `assets/` is now the repository's face (the README hero), so they
+│                    #      cannot be put there. The cards are `distill-essence-engine`'s
 │                    #      property and are only read from here.
 │                    #   ⚠️ undecided: the ledger's values carry a Japanese gloss in full-width
 │                    #      parentheses (`...character-sheet（手と前掛け。顔は映さない）`) while §6 uses
@@ -123,7 +132,6 @@ Ukebi V2 does not pass (8 of the 15 roles, all three `mode` values, `attached` o
 │                    #      which no tool in this repository does.
 ├── engine/assembly/ # timeline, cuts, text compositing, rendering
 ├── providers/       # generators for image, video, compositing
-├── assets/          # reference assets (character sheets, boards)
 └── interchange/     # OTIO / EDL / FCPXML
 ```
 

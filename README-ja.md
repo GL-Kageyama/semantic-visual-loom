@@ -4,6 +4,10 @@
 
 # semantic-visual-loom
 
+<p align="center">
+  <img src="assets/repo-hero.png" width="100%" alt="semantic-visual-loom">
+</p>
+
 **物語を、フィルムにするところまで運ぶ基盤。**
 
 > **映像は生成されない。編集される。**
@@ -77,6 +81,7 @@ semantic-visual-loom/
 ├── skills/          # 4つの Skill——分解・設計・台帳・ショット
 ├── tools/           # 検査（i18n のミラー）
 ├── references/      # distill から移管した video-spec
+├── assets/          # リポジトリの顔（README の hero）
 └── projects/        # 作品ごとの実体
 ```
 
@@ -113,7 +118,11 @@ semantic-visual-loom/
 ```text
 ├── engine/handover/ # 引き渡し票（§18 の7スロット・画像プロンプト・音）と往復検査
 ├── engine/visual/   # Visual Asset Engine
-│                    #   ⚠️ 未決定——参照資産はファイルなのか、どこに住むのか。`assets/` は存在しない。
+│                    #   参照資産は、既に作品ごとの `reference/` に住んでいる——69 箇所・9 種。
+│                    #      それが今の住みかである。
+│                    #   ⚠️ 未決定——中央の置き場と、重複の扱い（同じ画像が最大 37 回複製されている）。
+│                    #      §6 の `REF_*` の名前は、何も指していない。
+│                    #   ⚠️ `assets/` はリポジトリの顔（README の hero）になったので、そこには置けない。
 │                    #      カードの実体は `distill-essence-engine` の持ち物であり、ここからは読むだけである。
 │                    #   ⚠️ 未決定——台帳の値が日本語の註を全角括弧で抱えている
 │                    #      （`…character-sheet（手と前掛け。顔は映さない）`）のに対し、§6 は名前の部分だけを
@@ -121,7 +130,6 @@ semantic-visual-loom/
 │                    #      する道具はこのリポジトリに無い。
 ├── engine/assembly/ # タイムライン・カット・文字合成・レンダ
 ├── providers/       # 画像・動画・合成の生成器
-├── assets/          # 参照資産（キャラシート・ボード）
 └── interchange/     # OTIO / EDL / FCPXML
 ```
 
