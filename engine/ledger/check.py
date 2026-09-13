@@ -1707,6 +1707,33 @@ def self_test():
     run1("L25 テイクが空なら何も言わない", semantic.check_take,
          take_proj([], video=video_full()), False, None)
 
+    # ⚠️ **註の内訳を読む。** 註は「違反0件」の中に隠れる——**数え間違えた註は、
+    #    違反が0件であることと見分けがつかない。** だから数える側を検査する。
+    #    ⚠️ **同じショットに2本在るときが本命である。** 種別ごとの本数を
+    #    `(shot, kind)` で数えれば1本になる——**その註は自分の本文と食い違う。**
+    for label, docs, want in [
+        ("L25 註の内訳はテイクの本数を数える",
+         [take_doc(kind="image", model="CHATGPT IMAGE 2.5", index=1,
+                   measured={"width": 1672, "height": 941}),
+          take_doc(kind="image", model="CHATGPT IMAGE 2.5", index=2,
+                   measured={"width": 1672, "height": 941}),
+          take_doc(measured=M_OK)],
+         "`image` 2 本／`video` 1 本"),
+        ("L25 註の内訳は動画も数える",
+         [take_doc(index=1, measured=M_OK), take_doc(index=2, measured=M_OK)],
+         "`image` 0 本／`video` 2 本"),
+    ]:
+        n += 1
+        got = semantic.check_take(take_proj(docs, video=video_full()))
+        nts = [f for f in got if f["severity"] == "note" and "テイク" in f["message"]]
+        ok = (len(nts) == 1 and want in nts[0]["message"]
+              and not [f for f in got if f["severity"] != "note"])
+        bad += not ok
+        print(f"    {label:<44}{f'註 {len(nts)} 件':>10}  "
+              f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in nts[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
     TC = [{"t": "0-4", "kind": "overlay", "content": "分量"}]
     run1("L24 motion は何も要求しない（鳴ってはならない）", semantic.check_mode_demands,
          img_proj(mode="motion", video=video11()), False, None,

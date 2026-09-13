@@ -1237,6 +1237,10 @@ def check_take(project):
     if not docs:
         return out          # check.py が「テイクの記録が1本も無い」と報告する
 
+    # ⚠️ **種別ごとに「テイクの本数」を数える。** `(shot, kind)` を数えると、
+    #    **1つのショットに2本在るときに1本と数える**——この註は
+    #    「テイク N 本を読んだ（内訳）」と言うのだから、
+    #    **内訳の和が N にならなければ、その註は自分の本文と食い違っている。**
     kinds = {}
     seen_index = set()
     adopted = {}
@@ -1261,7 +1265,7 @@ def check_take(project):
                                "**別の語彙を作れば、経路の検査が黙って外れる。**"))
             continue
 
-        kinds[(s, kind)] = kinds.get((s, kind), 0) + 1
+        kinds[kind] = kinds.get(kind, 0) + 1
 
         if (s, kind, idx) in seen_index:
             out.append(finding("L25", where,
@@ -1366,7 +1370,7 @@ def check_take(project):
     n_adopted = sum(len(v) for v in adopted.values())
     out.append(finding("L25", f"{len(docs)}本",
                        f"テイク {len(docs)} 本を読んだ（"
-                       + "／".join(f"`{k}` {sum(1 for (_, kk) in kinds if kk == k)} 本"
+                       + "／".join(f"`{k}` {kinds.get(k, 0)} 本"
                                    for k in sorted(specmap.SPEC_KINDS))
                        + f"）。採用と書いてあるのは {n_adopted} 本である。"
                        f"⚠️ **採用は著者の判定である**——この層は**書いてあることを読むだけ**で、"

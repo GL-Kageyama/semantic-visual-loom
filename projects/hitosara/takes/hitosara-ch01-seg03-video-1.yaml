@@ -1,0 +1,33 @@
+# seg03 / 動画 / 1 — 5s / 30fps / 150 フレーム
+#
+# ⚠️ **測ったのは映像トラックである。** `measured.duration` は**映像**の尺であって、
+#    フォーマット全体の duration ではない——**音声が在ると、そちらに引っ張られる。**
+#    （この1本は音声が映像より 0.038s 長い。）
+# ⚠️ **`provider.model` は宣言であって実測ではない。** 著者の経路の宣言が `WAN 3.0` だから
+#    そう書いてある。**このリポジトリは、それをファイルから確かめていない。**
+# ⚠️ **尺は仕様の §1 と一致した。フレームレートは一致しなかった**（6本すべて 30、仕様は 24）。
+#    `takes/README.md` を見よ——**どちらを正とするかは決まっていない。**
+#
+# ⚠️ **著者はこの1本について何も言っていない**（2026-09-13 時点）——
+#    だから `adopted` を書かない。**書かないことが記録である。**
+take:
+  shot: hitosara-ch01-seg03
+  kind: video
+  index: 1
+  provider:
+    model: WAN 3.0
+  params:
+    source: specs/video/shot-03-quantities.md
+    source_version: "0.1.0"
+    duration: 5
+    aspect: "16:9"
+  file: "03__e9f879bb-f9e5-49bd-a665-3c61828e9d0e.mp4"
+  verdict:
+    machine:
+      measured:
+        width: 1920
+        height: 1080
+        frame_rate: 30
+        frames: 150
+        duration: 5.0
+        audio: true
