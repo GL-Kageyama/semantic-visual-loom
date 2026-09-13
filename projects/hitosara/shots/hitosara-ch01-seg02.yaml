@@ -2,11 +2,11 @@
 #
 # ⚠️ **決定（2026-09-13、著者）で `mode` が変わった。** 以前は `still` だった。
 #    この1枚（画像）は「拡大」であるが、**それは `mode` の話ではない。**
-#    画像の経路は `first_frame:` が、動画の経路は `spec:` が持つ——**種類は欄が決める。**
+#    画像の経路は `key_image:` が、動画の経路は `spec:` が持つ——**種類は欄が決める。**
 #    `mode` が言うのは「主題が動くか」だけであり、**水は動く。**
 shot: hitosara-ch01-seg02
 spec: specs/video/shot-02-flour-and-water.md
-first_frame: specs/image/shot-02-flour-and-water.md
+key_image: specs/image/shot-02-flour-and-water.md
 unit:
   before: 粉は粉であり、水は水である
   after: 粉の一粒ごとに水の膜がかかり、境が消える

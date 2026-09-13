@@ -6,10 +6,10 @@
 #    ここでは動かない——L14 は「動いたのに宣言が無い」を鳴らす検査であり、
 #    **動かないことは鳴らない。**
 # ⚠️ **決定（2026-09-13、著者）で、このショットも画像から始まる。** 動画の仕様は
-#    `spec:`、画像の仕様は `first_frame:` である。
+#    `spec:`、画像の仕様は `key_image:` である。
 shot: hitosara-ch01-seg06
 spec: specs/video/shot-06-proof.md
-first_frame: specs/image/shot-06-proof.md
+key_image: specs/image/shot-06-proof.md
 unit:
   before: 生地は、置かれたまま小さい
   after: 生地は、蓋を持ち上げる

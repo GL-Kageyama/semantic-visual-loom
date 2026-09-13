@@ -8,7 +8,7 @@
 #    のことである。その前提が消えた。**
 shot: hitosara-ch01-seg01
 spec: specs/video/shot-01-mill-shelf.md
-first_frame: specs/image/shot-01-mill-shelf.md
+key_image: specs/image/shot-01-mill-shelf.md
 unit:
   before: 粉屋の棚は、まだ誰にも選ばれていない
   after: 朝の光が、棚の一段だけを選び出す

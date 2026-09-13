@@ -11,7 +11,7 @@
 #    ⚠️ **画像の仕様の Negative でも同じ3節が落ちる**——そちらを読むのは引き渡しの層（段2）。
 shot: hitosara-ch01-seg09
 spec: specs/video/shot-09-crumb.md
-first_frame: specs/image/shot-09-crumb.md
+key_image: specs/image/shot-09-crumb.md
 unit:
   before: パンの外は金である
   after: 内の気泡が光を受ける

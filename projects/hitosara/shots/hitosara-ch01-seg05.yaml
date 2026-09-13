@@ -8,7 +8,7 @@
 #    だから `motion` は要る（L16）。**「動画を回さないから運動が要らない」は、もう成り立たない。**
 shot: hitosara-ch01-seg05
 spec: specs/video/shot-05-under-the-lid.md
-first_frame: specs/image/shot-05-under-the-lid.md
+key_image: specs/image/shot-05-under-the-lid.md
 unit:
   before: ボウルに蓋がされている
   after: 蓋は一度も動かない。動かないことが、このショットの内容である

@@ -9,7 +9,7 @@
 #    `edit:timeline` へも送る（`mode` 次元は無い。**全ショットが同じ場所へ行く**）。
 shot: hitosara-ch01-seg03
 spec: specs/video/shot-03-quantities.md
-first_frame: specs/image/shot-03-quantities.md
+key_image: specs/image/shot-03-quantities.md
 unit:
   before: 分量は、どこにも書かれていない
   after: 分量と順序が、画面の上に一度だけ置かれる

@@ -5,10 +5,10 @@
 #    ⚠️ **この一致を読む検査は、いま無い**——既定モードは目録に在るが、
 #    **誰も読んでいない。**（`HISTORY.md` に記録）
 # ⚠️ **決定（2026-09-13、著者）で、このショットも画像から始まる。** 動画の仕様は
-#    `spec:`、画像の仕様は `first_frame:` である——**`mode: motion` でも画像は要る。**
+#    `spec:`、画像の仕様は `key_image:` である——**`mode: motion` でも画像は要る。**
 shot: hitosara-ch01-seg04
 spec: specs/video/shot-04-knead.md
-first_frame: specs/image/shot-04-knead.md
+key_image: specs/image/shot-04-knead.md
 unit:
   before: 粉と水は、まだ別々にそこにある
   after: 手の下で、ひとつの塊になる

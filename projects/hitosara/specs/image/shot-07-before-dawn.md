@@ -17,41 +17,52 @@
 - 生成器: `chatgpt-image-2.5`（種別 `image`）
 - 投入: **著者が手で行う。** このリポジトリは生成を実行しない（API キーが環境に無い）
 - 作る道具: `distill-essence-engine`——**回される工程である**（決定 2026-09-13）
-  - `format`: `scene-board` ／ `style`: `luminous-anime`
+  - `format`: `scene-board` ／ `style`: `luminous-anime`（**2つの軸を別々に引く**）
   - 入力（`content`）: `bible.yaml` ＋ `ledger.yaml` ＋ `shots/hitosara-ch01-seg07.yaml`
     ——gozen-niji の `series-constants.md`（シリーズ定数＋開示台帳）と同じ型である
 - 投入する文: **下の `Prompt` はエンジンの出力であり、`chatgpt-image-2.5` へ投入する正典である**（決定B）
-- ⚠️ **下の欄はエンジンへの入力である**——出所の記録であると同時に、そのまま流し込む穴である。
-  ⚠️ **`scene-board` が要求する穴は、下の4つでは足りない**（`SCENE`／`CHARACTERS`／`LIGHT` が要る。
-  2層の和で7欄になる——`ACTION`・`LOCATION` は両層に同名で在り、**同じ値が両方の穴に入る**）
+- ⚠️ **下の7欄はエンジンへの入力である**——出所の記録であると同時に、そのまま流し込む穴である。
+  ⚠️ **`REF_FORMAT` と `REF_STYLE` が「どのカードの穴か」を名乗る。** `L22` がそれを読み、
+  **名乗ったカードが実際にその穴を宣言しているか**を確かめる——**名乗りは宣言であって、一致ではない。**
 - ⚠️ **⑦Negative の出力はここではなく下の `Negative` 節へ書く。** エンジンの合成プロンプトは
   Negative を最後の一文に溶かすが、**この記録は節として保つ**——`L21` と開示の系列が節の集合として読む
+- ⚠️ **この1枚は、このショットの動画へ添付（参照画像）として渡る**——最初のコマではない。
+  最初のコマにすると、**そのショットの変化が画面上で起きなくなる**（`mode` と `unit` が偽になる）
 - 焼く層: `timeline` の `text_events`（段3）
 - 記録: `shots/hitosara-ch01-seg07.yaml`
 
-## 主題（英語・`distill-essence-engine` の4欄）
+## 主題（英語・2枚のカードの穴・7欄）
 
+- `REF_FORMAT`: `scene-board` —— 5つの穴（`SCENE`／`CHARACTERS`／`ACTION`／`LOCATION`／`LIGHT`）
+- `REF_STYLE`: `luminous-anime` —— 4つの穴（`SUBJECT`／`ACTION`／`LOCATION`／`ACCENT`）
+
+⚠️ **`ACTION` と `LOCATION` は両方のカードに同名で在る**——だから**同じ値が両方の穴に入る。**
+5＋4＝9 ではなく、**和は7**である。⚠️ **片方だけでは、この1枚は作れない。**
+
+- `SCENE`: the window going from blue to gold and the hand moving to light the fire
+- `CHARACTERS`: a pair of hands stopped in front of the door — no face, no body
 - `SUBJECT`: a closed iron oven door in a far wall, with a pair of hands stopped in front of it
 - `ACTION`: waiting while the window behind goes from blue to gold
 - `LOCATION`: a one-room bakery, before dawn
+- `LIGHT`: the window turning gold, the room filling with the first warm light
 - `ACCENT`: the first gold of the coming morning across the stone floor
 
 ## Prompt（英語・そのまま投入する）
 
-A luminous realist anime illustration of a closed iron oven door set into a far wall, with a
-pair of working hands stopped in front of it, waiting while the window behind goes from blue
-to gold, in a one-room bakery before dawn, with the first gold of the coming morning raking
-across the stone floor as the strongest highlight. Hyper-detailed layered light: one
-volumetric shaft from the window travelling across the room and reaching the oven wall,
-anamorphic lens flare and bloom around the window, fine flour dust suspended in the beam.
-The palette is the hinge of the shot — **deep blue still in the upper half, warm magenta and
-gold already climbing the lower half**, the shift visible as a single gradient across the
-stone floor. The stone floor and the iron door faintly reflective. Composition at the height
-of the door, the door on the same side of frame as in every other shot, the light source
-inside the frame at the window. The hands follow the character sheet — hands and coarse linen
-apron only, **no face, no body, no ring, no watch**. Everything subordinate to the light,
-clean anime lineart. Low visual density; the left of the frame is left quiet and uncrowded
-for text to be placed over later.
+A luminous realist anime illustration of a closed iron oven door in a far wall with a pair of hands
+stopped in front of it, waiting while the window behind goes from blue to gold, at a one-room bakery
+at first light, with the first gold of the coming morning across the stone floor as the strongest
+highlight. A scene board for the master staging of this one scene, in 16:9 — the blocking, the
+camera and the light fixed as the standard every cut of the scene must match. The window turns gold
+and the room fills with the first warm light; the door stays closed and the iron stays dark.
+Hyper-detailed layered light: the shaft travelling across the floor from the window, anamorphic
+flare and bloom around the window at the frame edge, dust suspended and individually rendered rather
+than a flat wash. A saturated palette of magenta and gold on the floor and the near wall against
+deep cyan still holding in the corners of the room, the stone floor faintly reflective and doubling
+the light. Composition fixed and wide, the door off-centre on the far wall with the hands low in the
+frame and the window light entering from behind them; the hands small and subordinate to the light.
+Clean anime lineart on the hands and the iron, held below the light. Hands and coarse linen apron
+only, no face, no body, no ring, no watch. One focal point, generous negative space.
 
 ## Negative（英語）
 

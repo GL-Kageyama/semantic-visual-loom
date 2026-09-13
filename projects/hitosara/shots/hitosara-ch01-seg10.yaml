@@ -12,7 +12,7 @@
 #    `motion.law` と様式カードの `Motion character` を突き合わせる照合は未実装）。
 shot: hitosara-ch01-seg10
 spec: specs/video/shot-10-table.md
-first_frame: specs/image/shot-10-table.md
+key_image: specs/image/shot-10-table.md
 unit:
   before: 皿は空である
   after: 皿の上に、一皿がある

@@ -582,13 +582,13 @@ def self_test():
                 f"- Instance ID: `{iid}`\n- Segment ID: `{seg}`\n{tail}\n")
 
     def id_proj(body, sid=None, first=None):
-        """⚠️ **経路は欄が決める。** `spec:`（動画）と `first_frame:`（画像）を別々に置く。"""
+        """⚠️ **経路は欄が決める。** `spec:`（動画）と `key_image:`（画像）を別々に置く。"""
         d = _P(tempfile.mkdtemp())
         (d / "a.md").write_text(body, encoding="utf-8")
         kw = {}
         if first is not None:
             (d / "b.md").write_text(first, encoding="utf-8")
-            kw["first_frame"] = "b.md"
+            kw["key_image"] = "b.md"
         sh = s(sid or "p-ch01-seg01", spec="a.md", **kw)
         p = _One(sh)
         p.root = d
@@ -622,7 +622,7 @@ def self_test():
         for f in got[:1]:
             print(f"        {f['code']}  {f['message'][:88]}")
 
-    # ⚠️ **画像の仕様は §19 を持たない。** だから `first_frame` に置けば鳴ってはならない。
+    # ⚠️ **画像の仕様は §19 を持たない。** だから `key_image` に置けば鳴ってはならない。
     #    そして**同じ本文を `spec:` に置けば鳴る**——この対でなければ、
     #    「絞った」のか「検査そのものが死んだ」のかを区別できない。
     #    **片方だけ置けば、検査を殺しても自己検査は緑のままになる。**
@@ -630,7 +630,7 @@ def self_test():
     #    いまは**欄の違い**である——`mode` は経路を決めない。
     img_body = "# Shot 01 — 粉屋の棚\n\nAn English one-line prompt, with no sections at all.\n"
     img_cases = [
-        ("L13 画像の仕様は `first_frame`（鳴ってはならない）",
+        ("L13 画像の仕様は `key_image`（鳴ってはならない）",
          inst(), None, img_body, False, None),
         ("L13 同じ本文を `spec:` に置けば鳴る", img_body, None, None, True, "の節が無い"),
     ]
@@ -798,7 +798,7 @@ def self_test():
         """`rows` は `(ショットID, mode, 本文, 経路)`。**本物のファイルを読ませる。**
 
         ⚠️ **経路は欄が決める**（決定 2026-09-13）。だから画像のショットは
-        `spec:` を持たず、`first_frame:` を持つ——**`mode` では決まらない。**
+        `spec:` を持たず、`key_image:` を持つ——**`mode` では決まらない。**
         `mode` を渡しているのは、**`mode` が経路を決めないことを自分で踏むためである**
         （この表の `still` は画像の経路を指すが、それは欄が決めている）。
         """
@@ -1007,7 +1007,7 @@ def self_test():
         kw = {}
         if first is not None:
             (d / "b.md").write_text(first, encoding="utf-8")
-            kw["first_frame"] = "b.md"
+            kw["key_image"] = "b.md"
         sh = s("p-ch01-seg01", spec="a.md", **kw)
         p = _One(sh)
         p.root = d
@@ -1049,12 +1049,12 @@ def self_test():
 
     # ⚠️ **画像の仕様は §18 を持たない。** 「小節が1つも無い」は画像では
     #    欠陥ではない——`L13` と同じ形の誤りである。
-    #    ⚠️ **この対が言っているのは「`L17` は `first_frame` を読まない」ことである。**
-    #    同じ一文（`img_body`）を `first_frame` に置けば鳴らず、`spec:` に置けば鳴る。
+    #    ⚠️ **この対が言っているのは「`L17` は `key_image` を読まない」ことである。**
+    #    同じ一文（`img_body`）を `key_image` に置けば鳴らず、`spec:` に置けば鳴る。
     #    **片方だけ置けば、検査を殺しても自己検査は緑のままになる。**
     #    ⚠️ **決定（2026-09-13）の前は、この対が `mode` の違いだった。**
     img_cases17 = [
-        ("L17 画像の仕様は `first_frame`（鳴ってはならない）",
+        ("L17 画像の仕様は `key_image`（鳴ってはならない）",
          sec18(*SIX, "Style Motion"), img_body, False, None),
         ("L17 同じ本文を `spec:` に置けば鳴る",
          img_body, None, True, "スロットを1つも確かめられない"),
@@ -1114,7 +1114,7 @@ def self_test():
     print("\n=== 自己検査 — 仕様の種類とモデル\n")
 
     def kind_proj(video, first=None, mode="motion", write_first=True):
-        """`spec:`（動画）と `first_frame:`（画像）を別々に置く。
+        """`spec:`（動画）と `key_image:`（画像）を別々に置く。
 
         ⚠️ **`first` が `None` なら欄ごと置かない**（＝記録が無い）。
         `write_first=False` なら**欄は置くがファイルは書かない**（＝読めない）——
@@ -1126,7 +1126,7 @@ def self_test():
         if first is not None:
             if write_first:
                 (d / "b.md").write_text(first, encoding="utf-8")
-            kw["first_frame"] = "b.md"
+            kw["key_image"] = "b.md"
         sh = s("p-ch01-seg01", spec="a.md", mode=mode, **kw)
         p = _One(sh)
         p.root = d
@@ -1190,7 +1190,7 @@ def self_test():
     print(f"    {'L18 mode を読まない（鳴ってはならない）':<46}{len(got):>10}  "
           f"{'期待どおり' if not got else '⚠️ 期待と違う'}")
 
-    # ⚠️ **`first_frame` を持たないことは、違反ではない。** 記録が無いのであって、
+    # ⚠️ **`key_image` を持たないことは、違反ではない。** 記録が無いのであって、
     #    食い違っているのではない——**註であり、しかも1件に畳む。**
     got = semantic.check_spec_kind(kind_proj(VIDEO_WAN))
     n += 1
@@ -1284,7 +1284,7 @@ def self_test():
         # ⚠️ **経路の欄を宣言したのに、行き先が無い。** 送り口が無ければ届かない。
         ("L19 経路の欄に行き先が無い", real_schemas, True, "行き先が宣言されていない",
          {"FIELD_DESTINATION": {k: v for k, v in specmap.FIELD_DESTINATION.items()
-                                if k != "first_frame"}}),
+                                if k != "key_image"}}),
         # ⚠️ **理由が無ければ、行き先は後から変えられない。**
         ("L19 理由が書かれていない", real_schemas, True, "理由が書かれていない",
          {"DESTINATION_WHY": {k: v for k, v in specmap.DESTINATION_WHY.items()
@@ -1417,10 +1417,16 @@ def self_test():
     #        節を割る側・語幹を取る側が壊れていても通る（L10・L11 と同じ理由）。
     print("\n=== 自己検査 — 画像の経路の中身と、mode が要求するもの\n")
 
-    IMG_VARS = ("## 主題（英語・4欄）\n\n"
+    # ⚠️ **7欄である。** エンジンは2つの軸を別々に引く——`format` カードが穴を宣言し、
+    #    `style` カードも穴を宣言する。実測（2026-09-13）: `scene-board` は5、
+    #    `luminous-anime` は4、`ACTION`・`LOCATION` が重なって**和は7**。
+    IMG_VARS = ("## 主題（英語・7欄）\n\n"
+                "- `SCENE`: the first light finding one shelf\n"
+                "- `CHARACTERS`: no figure in frame\n"
                 "- `SUBJECT`: a rustic shelf at dawn\n"
                 "- `ACTION`: holding still while the light crosses\n"
                 "- `LOCATION`: the mill room\n"
+                "- `LIGHT`: a low shaft from the window at the frame edge\n"
                 "- `ACCENT`: warm gold light\n\n")
     # ⚠️ **`no photorealistic`（台帳）と `not photorealistic`（仕様）を混ぜてある。**
     #    これは**実測で見つかった偽陽性そのもの**であり、**語幹を取らなければ
@@ -1429,8 +1435,34 @@ def self_test():
     IMG_NEG_OK = ("no readable text, no watermark, not photorealistic, "
                   "no on-screen subtitles, no steam")
 
-    def img_spec(negative=IMG_NEG_OK, vars_body=IMG_VARS):
-        body = f"# 画像仕様\n\n{vars_body}"
+    # ⚠️ **カードの実物はこのリポジトリの外にある。** 自己検査が**本物の
+    #    `distill-essence-engine` に依存すると、clone した人には通らない。**
+    #    だから**同じ形の偽物を組んで**、`repo_root` で指す——
+    #    形は `_cards_dir` が読む形（`<repo>/../distill-essence-engine/references/<層>`）。
+    def fake_engine(fmt_vars, style_vars, name="scene-board", style_name="luminous-anime"):
+        d = _P(tempfile.mkdtemp())
+        for sub, nm, vs in (("formats", name, fmt_vars), ("styles", style_name, style_vars)):
+            p = d / "distill-essence-engine" / "references" / sub
+            p.mkdir(parents=True, exist_ok=True)
+            (p / f"{nm}.md").write_text(
+                f"# {nm}\n\n## Environment variables\n\n"
+                + ", ".join(f"`{v}`" for v in vs) + "\n", encoding="utf-8")
+        return d / "repo"
+
+    L22_FIVE = ("SCENE", "CHARACTERS", "ACTION", "LOCATION", "LIGHT")
+    L22_FOUR = ("SUBJECT", "ACTION", "LOCATION", "ACCENT")
+    ENGINE_OK = fake_engine(L22_FIVE, L22_FOUR)
+    # ⚠️ **本物の `illustration` カードと同じ形**（`SUBJECT`・`MOOD` の2つだけ）。
+    #    これが「名乗ったカードが、その欄を宣言していない」の実物である。
+    ENGINE_WRONG = fake_engine(("SUBJECT", "MOOD"), L22_FOUR)
+
+    def img_spec(negative=IMG_NEG_OK, vars_body=IMG_VARS, ref_format="scene-board",
+                 ref_style="luminous-anime"):
+        body = f"# 画像仕様\n\n"
+        for key, nm in (("REF_FORMAT", ref_format), ("REF_STYLE", ref_style)):
+            if nm is not None:
+                body += f"- `{key}`: `{nm}`\n"
+        body += "\n" + vars_body
         body += "## Prompt（英語）\n\nA rustic shelf at dawn, one line\n\n"
         if negative is not None:
             body += f"## Negative（英語）\n\n{negative}\n"
@@ -1438,13 +1470,14 @@ def self_test():
 
     def img_proj(negative=IMG_NEG_OK, vars_body=IMG_VARS, base=IMG_BASE,
                  mode="motion", video=None, text_channel=None, duration="6s",
-                 write_img=True):
+                 write_img=True, ref_format="scene-board", ref_style="luminous-anime"):
         """⚠️ **画像の経路と動画の経路を別々に置く。** 決定（2026-09-13）の標準の形。"""
         d = _P(tempfile.mkdtemp())
         kw = {}
         if write_img:
-            (d / "img.md").write_text(img_spec(negative, vars_body), encoding="utf-8")
-            kw["first_frame"] = "img.md"
+            (d / "img.md").write_text(img_spec(negative, vars_body, ref_format, ref_style),
+                                      encoding="utf-8")
+            kw["key_image"] = "img.md"
         if video is not None:
             (d / "vid.md").write_text(video, encoding="utf-8")
             kw["spec"] = "vid.md"
@@ -1498,18 +1531,38 @@ def self_test():
     run1("L21 画像の仕様が無い（鳴ってはならない）", semantic.check_image_negative,
          img_proj(write_img=False), False, None)
 
-    run1("L22 4欄とも非空（鳴ってはならない）", semantic.check_image_vars,
-         img_proj(), False, None, note="確かめたのは空でないことまでである")
-    run1("L22 欄が1つ無い", semantic.check_image_vars,
+    # ⚠️ **`repo_root` を偽のエンジンへ向ける。** 本物に依存させない。
+    l22 = lambda p, eng=ENGINE_OK: semantic.check_image_vars(p, repo_root=eng)
+
+    run1("L22 7欄とも非空（鳴ってはならない）", l22,
+         img_proj(), False, None,
+         note="7 欄を確かめた")
+    run1("L22 欄が1つ無い", l22,
          img_proj(vars_body=IMG_VARS.replace("- `ACCENT`: warm gold light\n", "")),
-         True, "無い様式の欄がある: ACCENT")
-    run1("L22 欄は在るが空", semantic.check_image_vars,
+         True, "無い欄がある: ACCENT")
+    run1("L22 欄は在るが空", l22,
          img_proj(vars_body=IMG_VARS.replace("`ACCENT`: warm gold light", "`ACCENT`: ")),
-         True, "様式の欄が空である: ACCENT")
-    run1("L22 主題の節が無い", semantic.check_image_vars,
-         img_proj(vars_body=""), True, "の節が無い")
-    run1("L22 画像の仕様が無い（鳴ってはならない）", semantic.check_image_vars,
+         True, "欄が空である: ACCENT")
+    run1("L22 主題の節が無い", l22, img_proj(vars_body=""), True, "の節が無い")
+    run1("L22 画像の仕様が無い（鳴ってはならない）", l22,
          img_proj(write_img=False), False, None)
+
+    # ⚠️ **本命。これが実測で見つかった欠陥そのものである。** 4欄しか見ない検査は、
+    #    様式カードだけを名乗る画像仕様を**通してしまう**——4欄は最初から埋まっていた。
+    #    **名乗りを読まなければ、フォーマットカードの不在は見えない。**
+    run1("L22 フォーマットを名乗っていない", l22,
+         img_proj(ref_format=None), True, "`REF_FORMAT` を名乗っていない")
+    run1("L22 様式を名乗っていない", l22,
+         img_proj(ref_style=None), True, "`REF_STYLE` を名乗っていない")
+    run1("L22 カードがその欄を宣言していない", lambda p: semantic.check_image_vars(
+             p, repo_root=ENGINE_WRONG),
+         img_proj(), True, "が宣言していない欄を")
+    run1("L22 名乗られたカードが無い", l22,
+         img_proj(ref_format="no-such-card"), True, "が無い")
+    # ⚠️ **読めないことと、食い違っていることは別である。** 読めなければ註を出す。
+    run1("L22 カードが読めない（註・鳴ってはならない）",
+         lambda p: semantic.check_image_vars(p, repo_root=_P("/nonexistent/repo")),
+         img_proj(), False, None, note="確かめられない")
 
     run1("L23 尺が一致する（鳴ってはならない）", semantic.check_duration,
          img_proj(video=video1("6s"), duration="6s"), False, None, note="1 本が一致")
@@ -1562,8 +1615,8 @@ def self_test():
     try:
         specmap.SPEC_KINDS = {**specmap.SPEC_KINDS,
                               "image": {**saved_img, "vars": None}}
-        run1("L22 様式の欄が宣言されていない", semantic.check_image_vars,
-             img_proj(), True, "様式の4欄を宣言していない")
+        run1("L22 欄が宣言されていない", l22,
+             img_proj(), True, "が画像の仕様の欄を宣言していない")
     finally:
         specmap.SPEC_KINDS = {**specmap.SPEC_KINDS, "image": saved_img}
 
@@ -1672,7 +1725,8 @@ def main():
     p = Project(root)
     sys.path.insert(0, str(HERE))
     import semantic  # noqa: E402
-    return report(p, semantic.run(p, a.schemas), validate_shape(p, a.schemas))
+    return report(p, semantic.run(p, a.schemas, repo_root=REPO),
+                  validate_shape(p, a.schemas))
 
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@
 # ⚠️ ビート本文に時刻の語を3種以上書かない（L3）。ここは2種に留めてある。
 shot: hitosara-ch01-seg07
 spec: specs/video/shot-07-before-dawn.md
-first_frame: specs/image/shot-07-before-dawn.md
+key_image: specs/image/shot-07-before-dawn.md
 unit:
   before: 夜のまま、窯の扉は閉じている
   after: 明け方になり、扉の前の手が火を入れる

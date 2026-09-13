@@ -638,7 +638,7 @@ def check_spec_kind(project):
 
     ⚠️ 決定（2026-09-13、著者）——**全ショット画像 → 全ショット動画。**
     だから **`mode` は仕様の種類を決めない。経路は欄が決める**（`SPEC_KINDS`）。
-    `spec` が動画の仕様、`first_frame` が画像の仕様であり、**10本すべてが両方を持つ。**
+    `spec` が動画の仕様、`key_image` が画像の仕様であり、**10本すべてが両方を持つ。**
 
     ⚠️ **`L11` の絞り方は、ここが持つ。** どの仕様が §1–20 を持つべきかを決めるのは
     `SPEC_KINDS[kind]["sections"]` であり、`L11` は `_spec_of` を通してそれに従う。
@@ -850,25 +850,40 @@ def check_image_negative(project):
     return out
 
 
-def check_image_vars(project):
-    """L22 — **画像の仕様の様式4欄が非空か。** `L20` の画像版である。
+def check_image_vars(project, repo_root=None):
+    """L22 — **画像の仕様の7欄が非空か。そして、名乗ったカードがその欄を宣言しているか。**
 
-    画像の仕様は**節を持たない**（`L18`）。だが**構造を持たないのではない**——
-    `distill-essence-engine` の様式カードが使う4つの変数
-    （`SUBJECT`／`ACTION`／`LOCATION`／`ACCENT`）を埋めることで作られる。
-    **`L11` はここを通す**——相手は §1–20 であって、画像の仕様ではない。
+    `L20` の画像版である。画像の仕様は**節を持たない**（`L18`）。だが
+    **構造を持たないのではない**——`distill-essence-engine` の2枚のカードが
+    宣言する穴を埋めることで作られる。**`L11` はここを通す**（相手は §1–20 である）。
+
+    ⚠️ **7 は 4＋5 の和である。** エンジンは**2つの軸を別々に引く**——
+    `format` カードが穴を宣言し、`style` カードも穴を宣言する。
+    **片方だけでは画像プロンプトは作れない。** 実測（2026-09-13）:
+    `scene-board` は5、`luminous-anime` は4、`ACTION`・`LOCATION` が重なって和は7。
+
+    ⚠️ **この検査は、実測で見つかった欠陥から生まれた。** 画像仕様は様式カードを
+    持っていたが**フォーマットカードを持っていなかった**——だから10本の `Prompt` の
+    構図は**どのカードからも来ておらず**、`luminous-anime` 自身の Visual breakdown
+    （「wide and sky-heavy」）と**食い違っていた**。**7欄を数えるだけの検査では
+    これを捕まえられない**——4欄は最初から全部埋まっていたからである。
+    だから**名乗り**（`REF_FORMAT`／`REF_STYLE`）を読み、
+    **名乗ったカードが実際にその穴を宣言しているか**まで見る。
 
     ⚠️ **欄が在ることは、書いたことではない。** 見出しだけ置いて値を空にすれば、
     この検査が無ければ**誰も気づかない**（`L16` が `motion` に対して言うのと同じこと）。
 
     ⚠️ **中身が正しいかは見ない。** `SUBJECT` の値が本当に主題かは、
     **この層には読めない。** 見るのは**空でないこと**までである。
+
+    ⚠️ **カードはこのリポジトリの外にある**（`L20` と同じ）。読めなければ
+    「確かめられない」と報告する——**確かめていないことを、確かめた顔にしない。**
     """
     out = []
     kind = specmap.SPEC_KINDS.get("image") or {}
     if not kind.get("vars") or not kind.get("vars_section"):
         out.append(finding("L22", "",
-                           "`SPEC_KINDS['image']` が様式の4欄を宣言していない。"
+                           "`SPEC_KINDS['image']` が画像の仕様の欄を宣言していない。"
                            "**何を確かめればよいかが決まっていない検査は、"
                            "何も確かめない。**"))
         return out
@@ -888,11 +903,13 @@ def check_image_vars(project):
     want = tuple(kind["vars"])
     seen = 0
     for s, p in specs:
-        body = specdoc.section(p.read_text(encoding="utf-8"), kind["vars_section"])
+        text = p.read_text(encoding="utf-8")
+        body = specdoc.section(text, kind["vars_section"])
         if body is None:
             out.append(finding("L22", s,
                                f"画像の仕様に `## {kind['vars_section']}` の節が無い。"
-                               f"**様式の4欄（{'／'.join(want)}）を1つも確かめられない。**"))
+                               f"**{len(want)} 欄（{'／'.join(want)}）を"
+                               "1つも確かめられない。**"))
             continue
         seen += 1
         got = {m.group(1).strip(): m.group(2).strip() for m in
@@ -902,21 +919,165 @@ def check_image_vars(project):
         empty = [v for v in want if got.get(v) == ""]
         if absent:
             out.append(finding("L22", s,
-                               f"画像の仕様に無い様式の欄がある: {'／'.join(absent)}。"
+                               f"画像の仕様に無い欄がある: {'／'.join(absent)}。"
                                f"**`{kind['vars_section']}` は "
                                f"{len(want)} 欄で1組である**——"
                                "1つ欠ければ、その変数は空のまま生成へ渡る。"))
         if empty:
             out.append(finding("L22", s,
-                               f"様式の欄が空である: {'／'.join(empty)}。"
+                               f"欄が空である: {'／'.join(empty)}。"
                                "**欄を置いたことは、書いたことではない。**"))
 
+    # ---- 名乗りの側。⚠️ **欄が7つ在ることは、7つが正しい穴であることではない。**
+    out.extend(_image_card_slots(specs, kind, repo_root))
+
     out.append(finding("L22", f"{seen}本",
-                       f"画像の仕様の様式 {len(want)} 欄を確かめた（{seen}/{len(specs)} 本）。"
+                       f"画像の仕様の {len(want)} 欄を確かめた（{seen}/{len(specs)} 本）。"
                        "⚠️ **確かめたのは空でないことまでである**——"
                        "**引いた値が正しいかは、この層には読めない。**",
                        severity="note"))
     return out
+
+
+#: 画像仕様が名乗るカードの行。`` - `REF_FORMAT`: `scene-board` `` の形を読む。
+#: ⚠️ **`REF_FORMAT` は動画仕様（`# 6. REFERENCES`）にも在る。** だが画像仕様は
+#: 節を持たないので、同じ名で書いても**読む側が節で絞らない**——だから衝突しない。
+#: ⚠️ **行頭の空白を許す。** この行は箇条書きの入れ子にも、`## 主題` の直下にも置ける
+#: ——**置き場が2つあることを、読み手が制限してはならない。**
+REF_CARD = re.compile(r"^\s*-\s*`?(REF_(?:FORMAT|STYLE))`?\s*[:：]\s*(.+?)\s*$", re.M)
+
+#: 名乗りの値から**カード名だけ**を取る。`` `scene-board` —— 5つの穴（…） `` の形を許す。
+#: ⚠️ **註を書けなくしてはならない。** 名乗りは人にも読める記録である。
+REF_CARD_NAME = re.compile(r"`([A-Za-z0-9._-]+)`|^([A-Za-z0-9._-]+)")
+
+
+def _card_name(value):
+    """名乗りの値 → カード名。読めなければ `None`。"""
+    m = REF_CARD_NAME.match((value or "").strip())
+    return (m.group(1) or m.group(2)) if m else None
+
+
+def _image_card_slots(specs, kind, repo_root):
+    """**名乗ったカードが、その欄を実際に宣言しているか。**
+
+    ⚠️ **動画の仕様にはこれが無い。** 動画仕様の `REF_FORMAT: video-spec` は
+    `# 6. REFERENCES` に**人向けに**書かれているだけで、**機械は読んでいない。**
+    画像の側で初めて読む——**理由は、こちらで実際に欠陥が出たからである**
+    （様式カードだけを名乗り、フォーマットカードを持っていなかった）。
+
+    ⚠️ **名乗りが書かれていなければ、その仕様は何も名乗っていない。** これは
+    **違反である**——`L19` が欄の行き先を両方向に閉じるのと同じ理屈で、
+    **7つの穴がどこから来たかが書かれていなければ、その7つは検算できない。**
+    """
+    out = []
+    ref_keys = kind.get("ref_keys") or {}
+    vars_from = kind.get("vars_from") or {}
+    if not ref_keys or not vars_from:
+        return out                        # `SPEC_KINDS` が名乗りを持たない
+
+    root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
+    cards = {}
+    for layer in ref_keys:
+        cards[layer] = _cards_dir(root, layer)
+
+    # 名乗りを1本ずつ読む。⚠️ **同じ名乗りが10本に在る**ので、報告は**層ごとに1件**に畳む。
+    unreadable = {}
+    declared = {}
+    for s, p in specs:
+        found = {m.group(1): m.group(2).strip() for m in
+                 REF_CARD.finditer(p.read_text(encoding="utf-8"))}
+        for layer, key in ref_keys.items():
+            name = found.get(key)
+            if not name:
+                out.append(finding("L22", s,
+                                   f"画像の仕様が `{key}` を名乗っていない。"
+                                   f"**{len(vars_from.get(layer, ()))} 欄が"
+                                   "どのカードの穴なのか、書かれていない**——"
+                                   "書かれていなければ、検算できない。"))
+                continue
+            name = _card_name(name)
+            if not name:
+                out.append(finding("L22", s,
+                                   f"`{key}` の値からカード名が読めない: `{found.get(key)}`。"
+                                   "**名乗りが書いてあることと、名乗りが読めることは別である。**"))
+                continue
+            declared.setdefault(layer, {}).setdefault(name, []).append(s)
+
+    for layer, names in declared.items():
+        d = cards.get(layer)
+        if d is None:
+            unreadable[layer] = True
+            continue
+        for name, shots in names.items():
+            card = d / f"{name}.md"
+            if not card.is_file():
+                out.append(finding("L22", "／".join(shots[:3]) + ("…" if len(shots) > 3 else ""),
+                                   f"名乗られたカード `{name}` が無い（`{card}`）。"
+                                   f"**名乗りは在るが、そのカードが実在しない。**"))
+                continue
+            got = _card_env_vars(card)
+            if got is None:
+                out.append(finding("L22", name,
+                                   f"カード `{name}` に `## Environment variables` が無い。"
+                                   "**穴を宣言していないカードは、穴を埋められない。**"))
+                continue
+            wanted = set(vars_from.get(layer, ()))
+            missing = sorted(wanted - got)
+            extra = sorted(got - wanted)
+            if missing:
+                # ⚠️ **これが、実測で見つかった欠陥そのものである。**
+                #    様式カードだけを名乗っていれば、`SCENE`／`CHARACTERS`／`LIGHT` が
+                #    ここに並ぶ——**構図がどのカードからも来ていないことが見える。**
+                out.append(finding("L22", "／".join(shots[:3]) + ("…" if len(shots) > 3 else ""),
+                                   f"{layer} カード `{name}` が宣言していない欄を、"
+                                   f"画像の仕様が持っている: {'／'.join(missing)}。"
+                                   "**その値はどのカードの穴でもない**——"
+                                   "生成へは渡るが、**カードの文法を通っていない。**"))
+            if extra:
+                out.append(finding("L22", "／".join(shots[:3]) + ("…" if len(shots) > 3 else ""),
+                                   f"{layer} カード `{name}` が宣言しているのに、"
+                                   f"画像の仕様に無い欄がある: {'／'.join(extra)}。"
+                                   "**カードの穴が埋まっていない**——"
+                                   "その変数は空のまま生成へ渡る。"))
+
+    if unreadable:
+        out.append(finding("L22", "",
+                           f"カードが**読めない**（{'／'.join(sorted(unreadable))}）——"
+                           f"`{STYLE_CARD_ENV}` を設定するか、"
+                           "`distill-essence-engine` を隣に置くこと。"
+                           "**このリポジトリを clone した人には無い。**"
+                           "だから**名乗ったカードがその欄を宣言しているかは"
+                           "確かめられない**——**確かめていないことを、"
+                           "確かめた顔にしない。**",
+                           severity="note"))
+    elif declared:
+        layers = "／".join(f"{k} {len(v)}枚" for k, v in sorted(declared.items()))
+        out.append(finding("L22", "",
+                           f"画像の仕様が名乗ったカード（{layers}）を読み、"
+                           f"{len(kind.get('vars') or ())} 欄がその穴の和であることを"
+                           "確かめた。⚠️ **カードの中身が正しいかは、この層には"
+                           "読めない**——カードは `distill-essence-engine` の持ち物である。",
+                           severity="note"))
+    return out
+
+
+#: カードの `## Environment variables` 行から、変数名を取る。
+#: ⚠️ **カードによって書き方が違う**——`luminous-anime` は素の並び、`scene-board` は
+#: `NAME＝説明` の形である。**だから名前だけを取る**（`＝` または `=` の手前まで）。
+CARD_VAR = re.compile(r"`([A-Z][A-Z0-9_]*)`")
+
+
+def _card_env_vars(card):
+    """カードが宣言する穴の名前。⚠️ **読めないときは `None`**——空と読めないは違う。"""
+    try:
+        text = card.read_text(encoding="utf-8")
+    except OSError:
+        return None
+    body = specdoc.section(text, "Environment variables")
+    if body is None:
+        return None
+    return {m.group(1) for m in CARD_VAR.finditer(body)}
+
 
 
 def check_duration(project):
@@ -1812,24 +1973,41 @@ def check_field_destination(schema_dir):
     return out
 
 
-#: 様式カードの置き場。⚠️ **このリポジトリの外にある**（`distill-essence-engine`）。
+#: カードの置き場。⚠️ **このリポジトリの外にある**（`distill-essence-engine`）。
 #: だから **clone した人には無い。** 読めないときは「確かめられない」と報告する。
 STYLE_CARD_ENV = "SVL_STYLES_DIR"
 
+#: 層 → エンジンの下のフォルダ名。⚠️ **2層ある。** `L20` は様式だけを読み、
+#: `L22` は両方を読む——**画像プロンプトは2つの軸の和だからである。**
+CARD_DIRS = {"style": "styles", "format": "formats"}
 
-def _styles_dir(repo_root):
-    """様式カードの置き場。⚠️ **指しても、そこに無ければ「読めない」。**
 
-    指した先を確かめずに返すと、**「様式が実在しない」と「置き場が違う」が
+def _cards_dir(repo_root, layer):
+    """カードの置き場（層ごと）。⚠️ **指しても、そこに無ければ「読めない」。**
+
+    指した先を確かめずに返すと、**「カードが実在しない」と「置き場が違う」が
     同じ符号で鳴る**——原因の違うものを同じ顔で報告しない。
     """
     import os
+    sub = CARD_DIRS.get(layer)
+    if not sub:
+        return None
     env = os.environ.get(STYLE_CARD_ENV)
     if env:
         p = Path(env)
-        return p if p.is_dir() else None
-    sib = Path(repo_root).parent / "distill-essence-engine" / "references" / "styles"
+        if layer == "style":
+            return p if p.is_dir() else None
+        # ⚠️ **`SVL_STYLES_DIR` は様式のための環境変数である。** フォーマットの
+        #    ために流用すれば、**様式を指したままフォーマットを読んだ顔をする。**
+        #    だからフォーマットは、指し先が `formats` を名乗るときだけ従う。
+        return p if (p.is_dir() and p.name == sub) else None
+    sib = Path(repo_root).parent / "distill-essence-engine" / "references" / sub
     return sib if sib.is_dir() else None
+
+
+def _styles_dir(repo_root):
+    """様式カードの置き場。`L20` が使う。**中身は `_cards_dir` と同じである。**"""
+    return _cards_dir(repo_root, "style")
 
 
 def check_style_motion(project, repo_root=None):
@@ -1902,7 +2080,7 @@ CHECKS_SHOT = (check_unit, check_one_place, check_one_time, check_move,
                check_reference_forbidden, check_attached, check_motion_required)
 
 
-def run(project, schema_dir=None):
+def run(project, schema_dir=None, repo_root=None):
     out = list(check_not_empty(project))
     for s in project.order():
         shot = project.shots[s]
@@ -1915,13 +2093,13 @@ def run(project, schema_dir=None):
     out += check_spec_sections(project)
     out += check_spec_kind(project)
     out += check_image_negative(project)
-    out += check_image_vars(project)
+    out += check_image_vars(project, repo_root=repo_root)
     out += check_duration(project)
     out += check_identity(project)
     out += check_beyond_declaration(project)
     out += check_role_registered(project)
     out += check_prompt_slots(project)
-    out += check_style_motion(project)
+    out += check_style_motion(project, repo_root=repo_root)
     out += check_mode_demands(project)
     if schema_dir:
         out += check_field_source(schema_dir)

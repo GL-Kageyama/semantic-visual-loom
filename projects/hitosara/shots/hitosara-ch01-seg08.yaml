@@ -10,7 +10,7 @@
 # ⚠️ **決定（2026-09-13、著者）で、このショットも画像から始まる。**
 shot: hitosara-ch01-seg08
 spec: specs/video/shot-08-oven-fire.md
-first_frame: specs/image/shot-08-oven-fire.md
+key_image: specs/image/shot-08-oven-fire.md
 unit:
   before: 窯の扉は閉じている
   after: 扉が開き、中の火だけが動いている

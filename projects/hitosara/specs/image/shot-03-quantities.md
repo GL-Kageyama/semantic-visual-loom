@@ -16,40 +16,50 @@
 - 生成器: `chatgpt-image-2.5`（種別 `image`）
 - 投入: **著者が手で行う。** このリポジトリは生成を実行しない（API キーが環境に無い）
 - 作る道具: `distill-essence-engine`——**回される工程である**（決定 2026-09-13）
-  - `format`: `scene-board` ／ `style`: `luminous-anime`
+  - `format`: `scene-board` ／ `style`: `luminous-anime`（**2つの軸を別々に引く**）
   - 入力（`content`）: `bible.yaml` ＋ `ledger.yaml` ＋ `shots/hitosara-ch01-seg03.yaml`
     ——gozen-niji の `series-constants.md`（シリーズ定数＋開示台帳）と同じ型である
 - 投入する文: **下の `Prompt` はエンジンの出力であり、`chatgpt-image-2.5` へ投入する正典である**（決定B）
-- ⚠️ **下の欄はエンジンへの入力である**——出所の記録であると同時に、そのまま流し込む穴である。
-  ⚠️ **`scene-board` が要求する穴は、下の4つでは足りない**（`SCENE`／`CHARACTERS`／`LIGHT` が要る。
-  2層の和で7欄になる——`ACTION`・`LOCATION` は両層に同名で在り、**同じ値が両方の穴に入る**）
+- ⚠️ **下の7欄はエンジンへの入力である**——出所の記録であると同時に、そのまま流し込む穴である。
+  ⚠️ **`REF_FORMAT` と `REF_STYLE` が「どのカードの穴か」を名乗る。** `L22` がそれを読み、
+  **名乗ったカードが実際にその穴を宣言しているか**を確かめる——**名乗りは宣言であって、一致ではない。**
 - ⚠️ **⑦Negative の出力はここではなく下の `Negative` 節へ書く。** エンジンの合成プロンプトは
   Negative を最後の一文に溶かすが、**この記録は節として保つ**——`L21` と開示の系列が節の集合として読む
+- ⚠️ **この1枚は、このショットの動画へ添付（参照画像）として渡る**——最初のコマではない。
+  最初のコマにすると、**そのショットの変化が画面上で起きなくなる**（`mode` と `unit` が偽になる）
 - 焼く層: `timeline` の `text_events`（段3）。**文字はここではなく、そこで載る**
 - 記録: `shots/hitosara-ch01-seg03.yaml`
 
-## 主題（英語・`distill-essence-engine` の4欄）
+## 主題（英語・2枚のカードの穴・7欄）
 
+- `REF_FORMAT`: `scene-board` —— 5つの穴（`SCENE`／`CHARACTERS`／`ACTION`／`LOCATION`／`LIGHT`）
+- `REF_STYLE`: `luminous-anime` —— 4つの穴（`SUBJECT`／`ACTION`／`LOCATION`／`ACCENT`）
+
+⚠️ **`ACTION` と `LOCATION` は両方のカードに同名で在る**——だから**同じ値が両方の穴に入る。**
+5＋4＝9 ではなく、**和は7**である。⚠️ **片方だけでは、この1枚は作れない。**
+
+- `SCENE`: the quantities and the order laid out to be written over
+- `CHARACTERS`: no figure in frame, no hands
 - `SUBJECT`: flour, water and salt measured out on a flour-dusted bench
 - `ACTION`: lying still and separated, each in its own place
 - `LOCATION`: a wooden kneading bench, straight down from above, morning
+- `LIGHT`: flat even light from directly above, the bench evenly lit, nothing favoured
 - `ACCENT`: the single fingertip of salt, catching the strongest highlight
 
 ## Prompt（英語・そのまま投入する）
 
-A luminous realist anime illustration of flour, water and salt measured out on a
-flour-dusted bench, lying still and separated each in its own place, on a wooden kneading
-bench seen straight down from above in the morning, with the single fingertip of salt
-catching the strongest highlight. Hyper-detailed layered light: one volumetric shaft
-crossing the bench diagonally, anamorphic lens flare and bloom around the light source,
-flour dust suspended and individually rendered. A saturated palette of magenta and gold
-against deep cyan shadow, the damp bench faintly reflective. Overhead composition,
-deliberately uncrowded: the three substances hold the lower two thirds, and **the upper
-third and the lower right corner are left as clean empty bench** — a quiet surface with
-nothing on it, for text to be placed over later. Nothing rests on those areas: no tool, no
-cloth, no crumb, no shadow that would break the flatness. Everything subordinate to the
-light, clean anime lineart, no hands and no figure in frame at all. Low visual density.
-Absolutely no lettering, no numerals, no labels, no marks of any kind anywhere in the image.
+A luminous realist anime illustration of flour, water and salt measured out on a flour-dusted bench,
+lying still and separated, each in its own place, at a wooden kneading bench seen straight down from
+above in the morning, with the single fingertip of salt catching the strongest highlight. A scene
+board for the master staging of this one scene, in 16:9 — the camera and the light fixed as the
+standard every cut of the scene must match. Flat even light from directly above, the bench evenly
+lit, nothing favoured. Hyper-detailed layered light: a soft shaft through the air above the bench,
+bloom held to the salt and the wet rim, flour dust suspended and individually rendered rather than a
+flat wash. A saturated palette of magenta and gold in the lit half against deep cyan beneath the
+bench edge, the damp bench faintly reflective and doubling the light. Composition symmetrical and
+top-down, the three substances on the lower two thirds with the upper corners left open — the even
+light itself is the subject. Clean anime lineart, held below the light. No figure in frame, no
+hands. One focal point, generous negative space. Nothing in this image is written.
 
 ## Negative（英語）
 
