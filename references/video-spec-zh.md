@@ -1,6 +1,6 @@
-<!-- i18n-version: 1.0.0 | canonical: references/video-spec.md | translated: 2026-08-26 -->
+<!-- i18n-version: 2.0.0 | canonical: references/video-spec.md | translated: 2026-09-14 -->
 
-**Language:** [English](video-spec-en.md) | [日本語](video-spec.md) | [中文](video-spec-zh.md)
+**Language:** [English](video-spec.md) | [日本語](video-spec-ja.md) | [中文](video-spec-zh.md)
 
 # 视频规格（video-spec）
 
@@ -16,7 +16,7 @@
 给每个节拍同等时间的摘要，等同于视频里的塞满。**不均等的时长本身就是构图。**
 
 ## 环境变量
-`SUBJECT`＝弧线, `DURATION`＝片段长度（Wan 3.0 为每次生成 30 秒）, `ASPECT`＝画面比例, `BEATS`＝带秒数区间的节拍表, `CORE`＝占据最大份额的节拍, `HOOK`＝片段收束的那个音
+`SUBJECT`＝弧线, `DURATION`＝片段长度（**时长由模型决定**）, `ASPECT`＝画面比例, `BEATS`＝带秒数区间的节拍表, `CORE`＝占据最大份额的节拍, `HOOK`＝片段收束的那个音
 
 ## 构图语法
 
@@ -57,7 +57,7 @@
 
 **不要把这个格式压成一段散文。** 本引擎的其他卡片都以一个填空句收尾——因为静止画就是一条提示词。视频则是一份*文档*：成果物是一份各节可分别指认的规格书，唯其如此，时间、运动、镜头与声音才能各自修订而不必重写其余。一段散文恰恰摧毁了这张卡片为之存在的那四个轴。
 
-散文段落依然存在——但只作为 **§18 六个槽位中的一个**，在生成时由已填好的规格*导出*。
+散文段落依然存在——但只作为 **§18 七个槽位中的一个**，在生成时由已填好的规格*导出*。
 
 ## 规格骨架（§1–20）
 
@@ -82,7 +82,7 @@
 | **15 CONTINUITY** | 同一性・空间・时间・视觉・运动的连续——**同一性锁定** | ④保持一致 |
 | **16 CONSTRAINTS** | MUST / MUST NOT / PREFER / ALLOW | ⑦负面 |
 | **17 GENERATION PRIORITIES** | 冲突时的优先顺序——把对原作的忠实置于观感之上 | ⑧忠于原作 |
-| **18 PROMPT MAPPING** | 六条提示词——**主要出处**是 §1–17 | — |
+| **18 PROMPT MAPPING** | 七条提示词——六条来自 §1–17，第七条来自**样式卡** | — |
 | **19 GENERATION INSTANCE** | 一次生成的解决值（时长・参照・事件・输出） | — |
 | **20 ITERATION** | 观察到的问题 → 变更 → 下次生成 | — |
 
@@ -90,7 +90,9 @@
 
 ## §18 的提示词槽位
 
-六条提示词，各自**主要**取自上表中指名的节。**彼此分离本身就是要点**，不要混为一谈。
+七条提示词。前六条**主要**取自上文指名的各节。
+**第七条不取自规格，而取自样式卡。**
+**彼此分离本身就是要点**，不要混为一谈。
 
 ```text
 Master Prompt   ← §1 + §7 + §8
@@ -115,10 +117,22 @@ Audio Prompt    ← §14
 
 Negative Prompt ← §16 MUST NOT + this card's Negative + the style card's Negative
 
-The sources above are the main ones, not the only ones. The camera-stability
-prohibition is the known case: it is written in §10, and it reaches the model
-through the Negative slot.
+Style Motion    ← the style card's Motion character (not §1–17 — the only slot taken from the style)
+  (how this style moves at all — full animation or limited, whether a held frame
+  is permitted, what the primary mover is. The specification writes what moves in
+  THIS clip; the style card writes what movement MEANS in this style.)
 ```
+
+上文的出处是主要的，不是唯一的。镜头的稳定性禁令就是已知的一例：
+它写在 §10，经由 Negative 槽位抵达模型。
+
+⚠️ **`Style Motion` 之所以是第七条。** 其余六条在**本规格之内**决定——
+改写某一节，它们随之改变。`Style Motion` 在**本规格之外**决定——
+更换样式它随之改变，**同一个 §11 会有不同的含义。**
+「什么在动」与「在这个样式里动意味着什么」是两个不同的问题，
+混在一起会让**规格覆盖样式**（或反之）。
+⚠️ **即使 §11 MOTION 为空，`Style Motion` 也能写。** 即使是主体静止的镜头，
+**这个样式如何处理静止的主体**也是确定的——**这是两个不同的槽位。**
 
 ## Negative
 `no uniform pacing, no equal-length beats, no static slideshow of stills, no floaty weightless motion, no scene cuts to unrelated locations, no on-screen subtitles, no watermark, no morphing or drifting facial identity`

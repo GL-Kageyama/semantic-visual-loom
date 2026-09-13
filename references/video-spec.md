@@ -1,6 +1,6 @@
-<!-- i18n-version: 1.0.0 | canonical: references/video-spec.md | translated: 2026-08-26 -->
+<!-- i18n-version: 2.0.0 | canonical: references/video-spec.md | translated: 2026-09-14 -->
 
-**Language:** [English](video-spec-en.md) | [日本語](video-spec.md) | [中文](video-spec-zh.md)
+**Language:** [English](video-spec.md) | [日本語](video-spec-ja.md) | [中文](video-spec-zh.md)
 
 # Video specification（video-spec）
 
@@ -16,7 +16,7 @@ Every other format in this engine folds time **away** — it lands on a still su
 A digest that gives every beat equal time is the video equivalent of cramming. **Uneven duration is the composition.**
 
 ## Environment variables
-`SUBJECT`＝the arc, `DURATION`＝clip length (Wan 3.0 = 30s per generation), `ASPECT`＝aspect ratio, `BEATS`＝the beat list with second ranges, `CORE`＝the beat that gets the largest share, `HOOK`＝the note the clip ends on
+`SUBJECT`＝the arc, `DURATION`＝clip length (**the model decides the duration**), `ASPECT`＝aspect ratio, `BEATS`＝the beat list with second ranges, `CORE`＝the beat that gets the largest share, `HOOK`＝the note the clip ends on
 
 ## Composition grammar
 
@@ -57,7 +57,7 @@ A digest that gives every beat equal time is the video equivalent of cramming. *
 
 **Do not collapse this format into a prose paragraph.** Every other card in this engine ends in one fillable sentence, because a still image is one prompt. A video is a *document*: the deliverable is a filled specification whose sections are separately addressable, so that timing, motion, camera and sound can each be revised without rewriting the rest. A single paragraph destroys exactly the four axes this card exists to introduce.
 
-The prose paragraph still exists — but only as **one of the six slots in §18**, generated *from* the filled specification at generation time.
+The prose paragraph still exists — but only as **one of the seven slots in §18**, generated *from* the filled specification at generation time.
 
 ## Specification skeleton (§1–20)
 
@@ -82,7 +82,7 @@ Fill in this order. The right-hand column is where each engine principle lands.
 | **15 CONTINUITY** | identity, spatial, temporal, visual, motion — **the identity lock** | ④ Keep consistent |
 | **16 CONSTRAINTS** | MUST / MUST NOT / PREFER / ALLOW | ⑦ Negative |
 | **17 GENERATION PRIORITIES** | the conflict-resolution order — put fidelity to the source above visual appeal | ⑧ Stay faithful |
-| **18 PROMPT MAPPING** | the six prompts — the **main** sources are §1–17 | — |
+| **18 PROMPT MAPPING** | the seven prompts — six from §1–17, the seventh from the **style card** | — |
 | **19 GENERATION INSTANCE** | resolved values for one generation (duration, references, events, output) | — |
 | **20 ITERATION** | observed problems → changes → next generation | — |
 
@@ -90,7 +90,9 @@ Keep §1–18 reusable and put everything duration-dependent in §19, so the sam
 
 ## §18 prompt slots
 
-Six prompts, each drawn mainly from the sections named above. Keep them separate — that separability is the point.
+Seven prompts. The first six are drawn **mainly** from the sections named above.
+**The seventh is drawn not from the specification but from the style card.**
+**The separation itself is the point**, so do not mix them.
 
 ```text
 Master Prompt   ← §1 + §7 + §8
@@ -115,10 +117,25 @@ Audio Prompt    ← §14
 
 Negative Prompt ← §16 MUST NOT + this card's Negative + the style card's Negative
 
+Style Motion    ← the style card's Motion character (not §1–17 — the only slot taken from the style)
+  (how this style moves at all — full animation or limited, whether a held frame
+  is permitted, what the primary mover is. The specification writes what moves in
+  THIS clip; the style card writes what movement MEANS in this style.)
+```
+
 The sources above are the main ones, not the only ones. The camera-stability
 prohibition is the known case: it is written in §10, and it reaches the model
 through the Negative slot.
-```
+
+⚠️ **Why `Style Motion` is the seventh.** The other six are decided **inside this
+specification** — rewrite a section and they change. `Style Motion` is decided
+**outside this specification** — swap the style and it changes, and **the same §11
+means something different.** "What moves" and "what moving means in this style" are
+different questions, and mixing them lets **the specification overwrite the style**
+(or the reverse).
+⚠️ **`Style Motion` can be written even when §11 MOTION is empty.** Even in a shot
+where the subject holds still, **how that style treats a still subject** is decided —
+**these are two different slots.**
 
 ## Negative
 `no uniform pacing, no equal-length beats, no static slideshow of stills, no floaty weightless motion, no scene cuts to unrelated locations, no on-screen subtitles, no watermark, no morphing or drifting facial identity`
