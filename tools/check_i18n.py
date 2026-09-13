@@ -8,9 +8,24 @@
 規則は4つ。**各規則に「鳴る例」と「鳴らない例」が `--self-test` に在る。**
 
     R1 存在と非空   正典 ↔ `-ja` ↔ `-zh` が在り、0バイトでない
-    R2 版           1行目の `i18n-version` ヘッダが3本でバイト一致し、`canonical:` が正典を指す
+    R2 版           ヘッダが3本でバイト一致し、`canonical:` が正典を指す
     R3 切替行       `**Language:**` 行が3本でバイト一致し、3つの名前をその順で指す
     R4 不変ブロック `←` を含むフェンスが3本でバイト一致。見出しの水準列も3本で一致
+
+⚠️ **R2 は「1行目」ではなく「frontmatter を除いた最初の非空行」を見る。**
+
+    frontmatter が無ければ      → 最初の非空行は1行目である（既存の文書はこれ）
+    frontmatter が有れば        → 閉じの `---` の直後の非空行である（Skill はこれ）
+
+**なぜ位置を動かしたか。** Claude Code は **1行目が `---` でなければ Skill の frontmatter を読まず**、
+**`---` と YAML を本文として読む。** ⚠️ **Skill は登録されるので、静かに壊れる**——
+いちばん悪い壊れ方である。だから **Skill の1行目は frontmatter に明け渡し**、
+ヘッダをその後ろへ置く。⚠️ **それでも `DOCS` から外さない**——検査の外に出せば、
+外に出したこと自体が見えなくなる。
+
+⚠️ **frontmatter を読み飛ばす場所はもう1つある。** `heading_levels()` である——
+見出しを選ぶ `HEADING_RE` は**行頭の `#` を見出しとして数える**ので、
+読み飛ばさないと**訳文の `description` に `#` が混ざっただけで水準列がずれる。**
 
 ⚠️ **R4 は推定である。** 「不変ブロック」を宣言から読むのではなく、
 **`←` を含むフェンス**という構造で選んでいる。その根拠は実測である——リポジトリ全体で
@@ -67,6 +82,9 @@ SWITCHER_RE = re.compile(
 FENCE_RE = re.compile(r"^\s*```")
 HEADING_RE = re.compile(r"^(#+)\s")
 
+#: frontmatter の区切り。**Skill は1行目にこれを置く。**
+FRONTMATTER_FENCE = "---"
+
 
 def mirror_of(rel: str, lang: str) -> str:
     """`README.md` + `ja` → `README-ja.md`（**同じディレクトリに並ぶ**）。"""
@@ -99,12 +117,48 @@ def inside_fence(lines: list[str]) -> set[int]:
     return covered
 
 
+def frontmatter_span(lines: list[str]) -> int:
+    """先頭の frontmatter が占める行数。**無ければ 0。**
+
+    ⚠️ **閉じない frontmatter も 0 を返す**——閉じていなければ、それは frontmatter ではない。
+    その壊れ方は **R2 が鳴らす**（ここで黙って読み飛ばすと、見出しだけが静かにずれる）。
+    """
+    if not lines or lines[0].strip() != FRONTMATTER_FENCE:
+        return 0
+    end = next(
+        (i for i in range(1, len(lines)) if lines[i].strip() == FRONTMATTER_FENCE), None
+    )
+    return 0 if end is None else end + 1
+
+
+def header_line(lines: list[str]) -> tuple[str | None, str | None]:
+    """`i18n-version` ヘッダの行と、**見つからなかった理由**を返す。
+
+    ⚠️ **位置は「1行目」ではなく「frontmatter を除いた最初の非空行」である。**
+    frontmatter が無ければ、それは**1行目**である（既存の文書はそのまま通る）。
+    """
+    if not lines:
+        return None, "空である"
+    start = frontmatter_span(lines)
+    if start == 0 and lines[0].strip() == FRONTMATTER_FENCE:
+        return None, "1行目の `---` が閉じない（frontmatter の終わりが無い）"
+    for i in range(start, len(lines)):
+        if not lines[i].strip():
+            continue
+        if HEADER_RE.match(lines[i]):
+            return lines[i], None
+        where = "frontmatter の直後" if start else "1行目"
+        return None, f"{where}の行が `i18n-version` ヘッダでない（`{lines[i].strip()[:48]}`）"
+    return None, "ヘッダが無い（frontmatter の後ろが空である）" if start else "ヘッダが無い"
+
+
 def heading_levels(lines: list[str]) -> list[int]:
-    """見出しの水準の列。**フェンスの中は数えない。**
+    """見出しの水準の列。**フェンスの中と frontmatter の中は数えない。**
 
     ⚠️ 見出しの**文言は訳す**ので、比べるのは数と深さだけである。
+    ⚠️ **frontmatter を数えない理由**は `HEADING_RE` が YAML のコメント `# …` にも当たるためである。
     """
-    skip = inside_fence(lines)
+    skip = inside_fence(lines) | set(range(frontmatter_span(lines)))
     return [
         len(m.group(1))
         for i, line in enumerate(lines)
@@ -128,6 +182,7 @@ def check(root: Path, docs: tuple[str, ...] = DOCS) -> tuple[list[str], dict]:
         "canonical": len(docs),
         "present": 0,
         "invariant": [],  # (rel, 開き行の番号, 行数)
+        "frontmatter": [],  # (rel, frontmatter が占める行数)
     }
 
     for rel in docs:
@@ -160,16 +215,20 @@ def check(root: Path, docs: tuple[str, ...] = DOCS) -> tuple[list[str], dict]:
         heads = {}
         for lang in ("",) + LANGS:
             name = rel if lang == "" else mirror_of(rel, lang)
-            m = HEADER_RE.match(present[lang][0])
-            if not m:
-                bad.append(f"R2 {name}: 1行目が `i18n-version` ヘッダでない")
+            span = frontmatter_span(present[lang])
+            if span:
+                stats["frontmatter"].append((name, span))
+            head, why = header_line(present[lang])
+            if head is None:
+                bad.append(f"R2 {name}: {why}")
                 heads[lang] = None
-            else:
-                heads[lang] = present[lang][0]
-                if m.group(2) != rel:
-                    bad.append(
-                        f"R2 {name}: `canonical: {m.group(2)}` が正典 `{rel}` を指していない"
-                    )
+                continue
+            heads[lang] = head
+            m = HEADER_RE.match(head)
+            if m.group(2) != rel:
+                bad.append(
+                    f"R2 {name}: `canonical: {m.group(2)}` が正典 `{rel}` を指していない"
+                )
         if heads[""] is not None:
             for lang in LANGS:
                 if heads[lang] is not None and heads[lang] != heads[""]:
@@ -267,14 +326,24 @@ More prose.
 
 
 def _write_tree(root: Path, rel: str, *, header: str | None = None, switcher: str | None = None,
-                invariant: str | None = None, headings: int | None = None) -> None:
-    """合成の木を1本ぶん作る。**各引数は「壊す」ためのものである。**"""
+                invariant: str | None = None, headings: int | None = None,
+                frontmatter: str | None = None, frontmatter_mirror: str | None = None) -> None:
+    """合成の木を1本ぶん作る。**各引数は「壊す」ためのものである。**
+
+    ⚠️ `frontmatter` は**生の文字列**をそのまま先頭に置く——**閉じない frontmatter を
+    作れるようにするためである**（`---` を書かなければ閉じない）。
+    `{lang}` は言語名に置き換わる。
+    """
     stem = Path(rel).stem
     for lang in ("",) + LANGS:
         p = root / (rel if not lang else mirror_of(rel, lang))
         p.parent.mkdir(parents=True, exist_ok=True)
         h = header if (header is not None and not lang) else OK_HEADER.format(rel=rel)
         body = OK_BODY.format(stem=stem, lang=lang or "en")
+        fm = frontmatter
+        if lang and frontmatter_mirror is not None:
+            fm = frontmatter_mirror
+        fm = (fm or "").replace("{lang}", lang or "en")
         if switcher is not None and not lang:
             body = body.replace(
                 f"**Language:** [English]({stem}.md) | [日本語]({stem}-ja.md) | [中文]({stem}-zh.md)",
@@ -284,7 +353,7 @@ def _write_tree(root: Path, rel: str, *, header: str | None = None, switcher: st
             body = body.replace("  A {DURATION} continuous cinematic take.", invariant)
         if headings is not None and lang == "ja":
             body = body.replace("## Section A", "\n".join(["## Section A"] * headings))
-        p.write_text(h + "\n" + body, encoding="utf-8")
+        p.write_text(fm + h + "\n" + body, encoding="utf-8")
 
 
 def _rm(root: Path, rel: str, lang: str) -> None:
@@ -304,6 +373,10 @@ def _shift(root: Path, rel: str, lang: str) -> None:
     at = next(i for i, x in enumerate(lines) if x.strip().startswith("```"))
     lines.insert(at, "An extra line of prose that the canonical does not have.")
     p.write_text("\n".join(lines), encoding="utf-8")
+
+
+#: Skill の frontmatter。**1行目に置くものであり、ヘッダはその後ろへ回る。**
+SKILL_FRONTMATTER = "---\nname: a\ndescription: A skill that does a thing ({lang})\n---\n"
 
 
 def self_test() -> int:
@@ -336,6 +409,32 @@ def self_test() -> int:
         (
             "R2 鳴らない — 3本が同じヘッダ",
             lambda r: _write_tree(r, docs[0]),
+            None,
+        ),
+        (
+            "R2 鳴らない — frontmatter の後ろにヘッダが在る",
+            lambda r: _write_tree(r, docs[0], frontmatter=SKILL_FRONTMATTER),
+            None,
+        ),
+        (
+            "R2 鳴る — frontmatter の後ろにヘッダが無い",
+            lambda r: _write_tree(r, docs[0], frontmatter=SKILL_FRONTMATTER, header=""),
+            "R2",
+        ),
+        (
+            "R2 鳴る — frontmatter が閉じない",
+            lambda r: _write_tree(r, docs[0], frontmatter="---\nname: a\ndescription: {lang}\n"),
+            "R2",
+        ),
+        (
+            # ⚠️ **frontmatter は行数を揃える**——ずらすと R4 が不変ブロックの位置で鳴り、
+            #    見出しの検査を確かめたことにならない（実際に一度そうなった）。
+            "R4 鳴らない — frontmatter の中の `#` を見出しに数えない",
+            lambda r: _write_tree(
+                r, docs[0],
+                frontmatter="---\nname: a\n# note\ndescription: {lang}\n---\n",
+                frontmatter_mirror="---\nname: a\nx note\ndescription: {lang}\n---\n",
+            ),
             None,
         ),
         (
@@ -414,6 +513,12 @@ def main(argv: list[str] | None = None) -> int:
     bad, stats = check(root)
 
     print(f"=== 正典 {stats['canonical']} 本 / 在ったファイル {stats['present']} 本")
+    print("=== frontmatter を除いて読んだヘッダ")
+    if not stats["frontmatter"]:
+        print("    ⚠️ 1つも無い——**frontmatter を持つ文書は、この版には無い。**")
+    for name, n in stats["frontmatter"]:
+        print(f"    {name}: 先頭 {n} 行")
+    print()
     print("=== 不変とみなしたブロック")
     if not stats["invariant"]:
         # ⚠️ **空を OK と言わない。**
