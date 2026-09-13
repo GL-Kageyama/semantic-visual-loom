@@ -672,7 +672,7 @@ def check_beyond_declaration(project):
     **だから「動き」は明かしの証拠にならない。** L10 が「台帳の主張を falsify する」
     検査なのに対し、L14 が問うのは**台帳が届いていない区間**である。
 
-    そこで取るのは**持続する増分**だけである——ある節が
+    そこで取るのは**持続する変化**だけである——ある節が
 
       (a) **どの先行する集合にも無く**（＝新しく現れ）、
       (b) **以後すべての集合に在る**（＝戻らない）
@@ -680,6 +680,12 @@ def check_beyond_declaration(project):
     とき、その節は**回転ではない**。実測（受け火 V2 の30本）: この条件を満たす位置は
     **6箇所**——`03-03`・`06-01`・`06-03`・`08-01`・`09-02`・`09-03`。
     うち台帳が宣言しているのは2つ。**残る4つが、宣言を超えた区間である。**
+
+    ⚠️ **削除も鳴らす。** 逆向き——**どの先行する集合にも在り、以後すべてに無い**節も
+    同じく不可逆である。実測で `01-01` が加わる（`no first-person body parts`・
+    `no viewer's hands` が消えて戻らない）。**対称に見ると 7 箇所。**
+    **禁止が消えることは、モデルが何を描いてよいかの恒久的な拡大である**——
+    増分（新たに禁じる）より危ない方向ですらある。
 
     ⚠️ **意味は見ない。** L10 と同じ規律である——`no girl` が消えて
     `no female figure` が以後ずっと残るなら、**集合としては戻らない増分**であり、
@@ -730,35 +736,52 @@ def check_beyond_declaration(project):
                            "だから L14 は動きではなく**持続する増分**で鳴らす。",
                            severity="note"))
 
-    # ② 持続する増分。ここだけが鳴る。
+    # ② 持続する変化（増分と削除の**両方**）。ここだけが鳴る。
+    #
+    #    ⚠️ **削除も鳴らす。** 実測（受け火 V2）: 増分だけだと 6 箇所で、
+    #    `01-01` が落ちる——`no first-person body parts`・`no viewer's hands` が
+    #    消えて以後ずっと戻らない。**禁止が消えることは、モデルが何を描いてよいかの
+    #    恒久的な拡大である。** 増分（新たに禁じる）より危ない方向ですらある。
+    #    対称に見ると 7 箇所（`01-01`・`03-03`・`06-01`・`06-03`・`08-01`・`09-02`・`09-03`）。
     beyond = []
     for i in range(1, len(series)):
         cur, prv = series[i][1], series[i - 1][1]
         if cur is None or prv is None or cur == prv:
             continue
+        before = [series[j][1] for j in range(i) if series[j][1] is not None]
+        after = [series[j][1] for j in range(i, len(series)) if series[j][1] is not None]
         acc = [c for c in sorted(cur - prv)
-               if all(c not in series[j][1] for j in range(i) if series[j][1] is not None)
-               and all(c in series[j][1] for j in range(i, len(series)) if series[j][1] is not None)]
-        if acc and series[i][0] not in declared:
-            beyond.append((series[i][0], acc))
+               if all(c not in b for b in before) and all(c in a for a in after)]
+        rem = [c for c in sorted(prv - cur)
+               if all(c in b for b in before) and all(c not in a for a in after)]
+        if (acc or rem) and series[i][0] not in declared:
+            beyond.append((series[i][0], acc, rem))
 
-    for shot, acc in beyond:
-        head = "／".join(f"`{c}`" for c in acc[:3])
+    for shot, acc, rem in beyond:
+        both = "＋" + str(len(acc)) + "／−" + str(len(rem)) if acc and rem else (
+            "＋" + str(len(acc)) if acc else "−" + str(len(rem)))
+        parts = []
+        if acc:
+            parts.append("**増えた**（" + "／".join(f"`{c}`" for c in acc[:3])
+                         + ("…" if len(acc) > 3 else "") + "）")
+        if rem:
+            parts.append("**消えた**（" + "／".join(f"`{c}`" for c in rem[:3])
+                         + ("…" if len(rem) > 3 else "") + "）")
         out.append(finding("L14", shot,
-                           f"**宣言を超えた区間である。** §18 に**戻らない増分**が "
-                           f"{len(acc)} 節ある（{head}{'…' if len(acc) > 3 else ''}）が、"
+                           f"**宣言を超えた区間である。** §18 に**戻らない変化**がある（{both}）"
+                           "——" + "、".join(parts) + "。以後どのショットでも戻らないのに、"
                            "台帳はこの位置に変化点を宣言していない。"
                            "⚠️ **この区間は、まだ誰も検収していない**——"
                            "明かしは不可逆なので、宣言が無ければ"
                            "**先のショットが既にその状態を持っていても鳴らない**（L7a の前提が崩れる）。"
                            "⚠️ **意味は見ていない**——同じ禁止の言い換えである可能性は残る。"
-                           "だが**どの先行ショットの集合とも違う集合が、以後ずっと続く**"
-                           "という事実は残る。`disclosure` に行を足すか、"
-                           "**足さない理由を記録に書く。**"))
+                           "⚠️ **消えた側は、増えた側より重い**——"
+                           "禁止が消えれば、モデルはそれを描いてよい。"
+                           "`disclosure` に行を足すか、**足さない理由を記録に書く。**"))
 
     if not beyond:
         out.append(finding("L14", f"{len(read)}本",
-                           "§18 の持続する増分に、宣言を超えるものは無い。"
+                           "§18 の持続する変化に、宣言を超えるものは無い。"
                            f"（§18 は {len(moves)} 箇所で動いた。）",
                            severity="note"))
     return out
