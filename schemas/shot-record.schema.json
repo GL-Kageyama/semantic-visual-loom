@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/GL-Kageyama/semantic-visual-loom/schemas/shot-record.schema.json",
+  "title": "ショット記録",
+  "description": "1生成に1枚。単体で完結する（paste 規約）。事前検証はこの一枚だけを見て走る。§2.1「ショットが単位」の実装であり、unit が空なら設計が破綻している。",
+  "type": "object",
+  "required": ["shot", "unit", "role", "place", "time", "mode", "duration"],
+  "additionalProperties": false,
+  "properties": {
+    "shot": {
+      "type": "string",
+      "description": "ショットID。<project>-<章>-<セグメント> の形をとる（例 ukebi-v2-ch01-seg01）。台帳の disclosure がこの字をキーに引く。",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)+$"
+    },
+    "unit": {
+      "type": "object",
+      "description": "「一つの変化」。§2.1 の定義。決定（2026-09-13、著者）——自然文ではなく {before, after} の対で書く。自然文では事前検証の「一変化か」を機械が判定できないが、対なら before と after が同じときに鳴らせる。⚠️ ただし「before と after が同じ」を鳴らすのは、このスキーマではない——JSON Schema は2つのプロパティを比較できない（標準の仕様にその機能が無い）。この制約は engine/ledger の検査器が負う。「対にした」ことと「対を検査できる」ことは別であり、対にしただけでは後者は得られない。",
+      "required": ["before", "after"],
+      "additionalProperties": false,
+      "properties": {
+        "before": { "type": "string", "minLength": 1, "description": "変化の前。このショットが始まる時点の状態。" },
+        "after": { "type": "string", "minLength": 1, "description": "変化の後。このショットが終わる時点の状態。before と同一なら、そのショットは何も起こしていない。" }
+      }
+    },
+    "role": {
+      "type": "string",
+      "minLength": 1,
+      "description": "種別（主役）。検収の基準を決める。§2.2「種別が横断軸」。決定（2026-09-13、著者）——必須フィールド。空なら、このショットが何で裁かれるのかが決まっていない。値の目録は未決定（U06・12種中5種しか使われていない）。"
+    },
+    "effect": {
+      "type": ["string", "null"],
+      "default": null,
+      "description": "種別（効果）。空でもよい（動きだけのショット）。"
+    },
+    "place": {
+      "type": "string",
+      "minLength": 1,
+      "description": "場所。台帳の locations のキー。単数であること——複数環境を1テイクに要求していないかは事前検証が見る。"
+    },
+    "time": {
+      "type": "string",
+      "minLength": 1,
+      "description": "時刻。一時刻であること。衣装は「時刻」ではなく「場所×時刻」で決まる（実測）——§3 の散文が時刻主語になっているのは仕様の欠陥であり、参照の欠陥ではない。"
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["still", "motion", "composite"],
+      "description": "制作モード。still | motion | composite。§2.4 の系。種別とモードが食い違うときは、それが判断か事故かを記録に残す。"
+    },
+    "duration": {
+      "type": "string",
+      "pattern": "^[0-9]+(\\.[0-9]+)?s$",
+      "description": "長さ。従属変数である——話数でも場面でも「30秒セグメント」でも割らない。§2.1。"
+    },
+
+    "motion": {
+      "type": "object",
+      "description": "運動の三つの問い。全ショットが持つという主張がある一方、必須か任意かは未決定（U07）。§2.2「運動も横断軸」——映像では運動が地であって、静止が特殊ケースである。",
+      "required": ["subject", "quality", "law"],
+      "additionalProperties": false,
+      "properties": {
+        "subject": { "type": "string", "description": "何が動くか。" },
+        "quality": { "type": "string", "description": "どう動くか。" },
+        "law": {
+          "type": "string",
+          "description": "どの様式の物理に従うか。様式カードの Motion character と照合される——「限定作画」の様式にフル作画の運動を要求していないか、を事前検証が見る。"
+        }
+      }
+    },
+
+    "beats": {
+      "type": "array",
+      "minItems": 1,
+      "description": "ビート。不均等に配分する（video-spec の核）。density が二値で足りるかは未決定。",
+      "items": {
+        "type": "object",
+        "required": ["range", "density", "what"],
+        "additionalProperties": false,
+        "properties": {
+          "range": { "type": "string", "description": "時間の範囲（例 \"8-22s\"）。" },
+          "density": { "type": "string", "enum": ["sparse", "dense"], "description": "密度。" },
+          "what": { "type": "string", "description": "そこで何が起きるか。" }
+        }
+      }
+    },
+
+    "reference_set": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "生成に固定するもの＝参照集合の「意図」。台帳の一点から導出する（§2.3）ので、実ファイルパスではなく台帳のキーで書く（例 OKURIBI.sheet・crossing.geography）。"
+    },
+    "forbidden_set": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "画面に出してはならないもの＝禁制集合。開示台帳から導出される。参照集合と衝突したとき（＝設計ミス）は事前検証が捕まえる。"
+    },
+    "attached": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "「実際に添付したもの」。reference_set が「意図」であるのに対し、こちらは生成の記録である。実測が要求した欄——受け火 V1 は花が出演しているのに花のシートが reference/ に無いクリップが2本あり、しかも V1 の仕様には添付の宣言が1つも無かった。記録が無いとは、そういうことである（後から読めない。読めないので、原因も決まらない）。事前検証は「意図」と「実際」を突き合わせ、食い違えば鳴る。"
+    },
+    "disclosure_state": {
+      "type": "object",
+      "description": "このショットが実際に持つ開示状態。台帳の disclosure が「意図」であるのに対し、こちらが「実際」。§2.3 の原則——「状態はショットが持ち、台帳はそれを読む」。属性は HANA / HANA.mark / HANA.name のように実体・属性・情報を分けて持つ。値の型は未決定（U20・U21 の残件）。",
+      "additionalProperties": true
+    },
+
+    "text_channel": {
+      "type": "array",
+      "description": "文字チャンネル。画像生成器には描かせない（§2.6）。生成器へ渡る文字列は英語である。",
+      "items": {
+        "type": "object",
+        "required": ["t", "kind"],
+        "additionalProperties": false,
+        "properties": {
+          "t": { "type": "string", "description": "時間の範囲（例 \"12.0-15.0\"）。" },
+          "kind": { "type": "string", "enum": ["overlay", "voice"], "description": "overlay（画面に焼く）か voice（音声）。" },
+          "content": { "type": "string", "description": "overlay のとき、画面に載る文字。解決済みの言語を保つ。" },
+          "speaker": { "type": "string", "description": "voice のとき、話者。" },
+          "line": { "type": "string", "description": "voice のとき、台詞。解決済みの言語を保つ。" }
+        }
+      }
+    },
+
+    "sound": {
+      "type": "object",
+      "description": "Semantic Audio Loom への受け渡し。向こうの Scene Definition との契約は未確定（U26・M6）。",
+      "additionalProperties": false,
+      "properties": {
+        "scene_ref": { "type": "string", "description": "Scene Definition への参照。" }
+      }
+    }
+  }
+}

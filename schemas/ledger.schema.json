@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/GL-Kageyama/semantic-visual-loom/schemas/ledger.schema.json",
+  "title": "制作台帳",
+  "description": "プロジェクトに一つ。連続性（世界の状態）と開示（観客の知識の状態）を同じファイルに持つ。§2.3——生成に渡す参照集合（固定するもの）と禁制集合（出してはならないもの）は、この一点から導かれる。二つに割ってはならない。実際に起きた失敗は「どのショットに、どの参照画像を添付するか」であり、その判断は同時に連続性の判断であり開示の判断だからである。",
+  "type": "object",
+  "required": ["characters", "locations", "disclosure"],
+  "additionalProperties": false,
+  "properties": {
+    "characters": {
+      "type": "object",
+      "description": "人物。キーは台帳内で一意な名前（例 OKURIBI・HANA）。参照集合はこのキーを引く。",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["identity"],
+        "additionalProperties": false,
+        "properties": {
+          "identity": {
+            "type": "string",
+            "minLength": 1,
+            "description": "identity lock に使う参照画像＝「何を identity lock に使うか」という意図。distill が生成したキャラクターシートを指す。"
+          },
+          "states": {
+            "type": "object",
+            "description": "状態ごとの外見。状態の遷移（誰がいつ着替えるか）を台帳に宣言するか、ショット記録側で毎回書くかは未決定。衣装は「時刻」ではなく「場所×時刻」で決まる（実測）——夜の教室・夜の文化祭の裏庭が「夜なのに制服」、夜明けの部屋が「昼でないのにパジャマ」になる偽陽性は、時刻で切ったときに出る。",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "wardrobe": { "type": "string", "description": "衣装。" },
+                "constant": { "type": "object", "description": "その状態を通じて変わらない付属品。", "additionalProperties": { "type": "string" } },
+                "note": { "type": "string", "description": "註。" }
+              }
+            }
+          },
+          "negatives": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "この人物について画面に出してはならないもの（英語不変部）。"
+          }
+        }
+      }
+    },
+
+    "locations": {
+      "type": "object",
+      "description": "場所。キーは台帳内で一意な名前（例 crossing）。",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["base"],
+        "additionalProperties": false,
+        "properties": {
+          "base": { "type": "string", "description": "基準画像。1ボード＝1状態の規約により、状態ごとに基準画像を持つ。" },
+          "states": {
+            "type": "object",
+            "description": "時刻などによる状態ごとの基準画像。",
+            "additionalProperties": { "type": "object", "additionalProperties": true }
+          },
+          "geography": { "type": "string", "description": "位置関係を示すボード。全ショットに添付する。" }
+        }
+      }
+    },
+
+    "props": {
+      "type": "object",
+      "description": "道具。",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "appearance": { "type": "string" },
+          "negative": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+
+    "disclosure": {
+      "type": "array",
+      "description": "開示の「意図」。変化点だけを持つ。全ショットは並べない。座標がショットIDなのは、開示の座標がクリップの並び順だからである——§16 を30本ぶん測った結果、4つの明かしのうち2つが章の途中で起きるので、レンジでは表現できない。座標を at × clip で書く案と Segment ID の列挙案は、どちらも「どのショットか」を台帳側の座標で書こうとしているために落ちた。変化点の間は直前の状態が続く。",
+      "items": {
+        "type": "object",
+        "required": ["shot"],
+        "additionalProperties": true,
+        "properties": {
+          "shot": {
+            "type": "string",
+            "minLength": 1,
+            "description": "ショットID。レンジではない。属性はこの字の後ろに並べる（例 HANA・HANA.speech・HANA.mark・HANA.name）。実体・属性・情報を分けて開示する設計。"
+          }
+        }
+      }
+    },
+
+    "at": {
+      "type": "object",
+      "description": "at の表現。決定——§16 の見出しのレンジ名をそのまま持つ。人手で名づけない。午前二時では人手の分類が1度誤り（S14/S15 を昼の寝室と夜、S56 を夜と朝と誤認）、対象の再確定を強いられた。導出規則は §16 の見出しから取り、ショットIDからは取らない——受け火ではたまたま ID から導けるが、午前二時の Segment ID は S32 の形でレンジ名を持たず、レンジも 31 / S32 / S33–34 / S35 / 36–40 と不均等に切られている。⚠️ at は「鍵」ではない——§16 の見出しはレンジを名指すが本体は「この1本」の禁止を書くので、10レンジのうち9つで禁止集合が割れ、その9つにショットの27/30が属する。人が読むための群れであって、禁止集合を引く鍵にはならない。",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "range": { "type": "string", "description": "§16 の見出しのレンジ名そのもの（例 序・01・終章）。" }
+        }
+      }
+    }
+  }
+}

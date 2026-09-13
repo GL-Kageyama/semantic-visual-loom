@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/GL-Kageyama/semantic-visual-loom/schemas/timeline.schema.json",
+  "title": "タイムライン",
+  "description": "採用テイクの列 ＋ カット点 ＋ 文字イベント ＋ 音。§2.5「意味は編集と音で作られる」。交換形式（OTIO / EDL / FCPXML）で出力でき、自前レンダ（ffmpeg）もできる。交換形式を保つ理由は、人間の NLE へ渡せる形を残すことである——基盤が全部を抱え込まない。自前レンダを持つ理由は文字合成で、これは基盤がやる。⚠️ この一枚は設計が最も薄い。どれを正とするか（内部表現を OTIO にして書き出しを複数持つか）は未決定。",
+  "type": "object",
+  "required": ["timeline"],
+  "additionalProperties": false,
+  "properties": {
+    "timeline": {
+      "type": "object",
+      "required": ["project", "clips"],
+      "additionalProperties": false,
+      "properties": {
+        "project": { "type": "string", "description": "プロジェクト名。" },
+
+        "clips": {
+          "type": "array",
+          "description": "採用テイクの列。これが作品である——§2.4。",
+          "items": {
+            "type": "object",
+            "required": ["shot", "take"],
+            "additionalProperties": false,
+            "properties": {
+              "shot": { "type": "string", "description": "ショットID。" },
+              "take": { "type": "integer", "minimum": 1, "description": "採用したテイクの index。" },
+              "in": { "type": ["number", "null"], "description": "切り出しの開始（秒）。" },
+              "out": { "type": ["number", "null"], "description": "切り出しの終了（秒）。" },
+              "cut_reason": {
+                "type": ["string", "null"],
+                "description": "カットの理由。「切れ目は『引き』で切る」という演出は、タイムライン上では単なる境界である。理由を残すかは未決定——判断を記録に残すという問題は N候補と採用にもある。"
+              }
+            }
+          }
+        },
+
+        "text_events": {
+          "type": "array",
+          "description": "文字イベント。オーバーレイをタイムラインの要素として持つか、別トラックの ASS として焼くかは未決定（後者なら NLE へ渡した時点で編集可能な字幕になる）。",
+          "items": {
+            "type": "object",
+            "required": ["t", "kind"],
+            "additionalProperties": true,
+            "properties": {
+              "t": { "type": "string", "description": "時間の範囲。" },
+              "kind": { "type": "string", "enum": ["overlay", "subtitle", "plate"], "description": "overlay（画面に焼く）／subtitle（字幕トラック）／plate（プレート合成）。" },
+              "content": { "type": "string", "description": "画面に載る文字。解決済みの言語を保つ。" }
+            }
+          }
+        },
+
+        "sound": {
+          "type": "object",
+          "description": "音。Semantic Audio Loom との同期の粒度（フレーム単位かシーン単位か）は未決定。",
+          "additionalProperties": true,
+          "properties": {
+            "scene_ref": { "type": "string" }
+          }
+        },
+
+        "interchange": {
+          "type": "object",
+          "description": "書き出し先。OTIO / EDL / FCPXML / 自前レンダのどれを正とするかは未決定。",
+          "additionalProperties": true
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/GL-Kageyama/semantic-visual-loom/schemas/take.schema.json",
+  "title": "テイク",
+  "description": "標本1つにつき1枚。§2.4「生成は標本」——生成器が作るのは採用候補であって作品ではない。採用は選別であり、作者は編集である。",
+  "type": "object",
+  "required": ["take"],
+  "additionalProperties": false,
+  "properties": {
+    "take": {
+      "type": "object",
+      "required": ["shot", "index", "provider", "params"],
+      "additionalProperties": false,
+      "properties": {
+        "shot": { "type": "string", "description": "どのショットの標本か。ショット記録の shot を引く。" },
+        "index": { "type": "integer", "minimum": 1, "description": "同じショットの中での通し番号。" },
+
+        "provider": {
+          "type": "object",
+          "required": ["model"],
+          "additionalProperties": true,
+          "properties": {
+            "model": { "type": "string", "description": "生成モデル。§2.8「モデル非依存」を保つ。" },
+            "version": { "type": "string" }
+          }
+        },
+
+        "params": {
+          "type": "object",
+          "description": "再生成の条件を完全に保存する。§2.7「仕様が資産である」以上、再生成の条件が残っていなければ仕様は資産にならない。何を入れるかは Provider ごとに違うので、モデル非依存を保ったままどう正規化するかは未決定。",
+          "additionalProperties": true,
+          "properties": {
+            "seed": { "type": ["integer", "null"] },
+            "duration": { "type": "number" },
+            "aspect": { "type": "string", "description": "アスペクト比（例 \"16:9\"）。" },
+            "references": { "type": "array", "items": { "type": "string" }, "description": "このテイクに実際に渡した参照。" }
+          }
+        },
+
+        "verdict": {
+          "type": "object",
+          "description": "検収の三段。層の数が変わればこの構造も変わる。",
+          "additionalProperties": false,
+          "properties": {
+            "machine": {
+              "type": "object",
+              "description": "層1 機械検証。決定論的に判定できるものだけ。",
+              "additionalProperties": true,
+              "properties": {
+                "disclosure_violation": { "type": "boolean" },
+                "identity_similarity": { "type": "number", "minimum": 0, "maximum": 1 },
+                "artifacts": { "type": "array", "items": { "type": "string" } }
+              }
+            },
+            "adherence": {
+              "type": "object",
+              "description": "層2 仕様適合。",
+              "additionalProperties": { "type": "string" }
+            },
+            "council": {
+              "type": "object",
+              "description": "層3 評議会。種別によって呼ばれる評価者が違うので、種別→評価者の対応をここに持つか別表にするかは未決定。",
+              "additionalProperties": { "type": "number" }
+            }
+          }
+        },
+
+        "failure_type": {
+          "type": ["string", "null"],
+          "description": "失敗の型（A/B/C）。§2.9「失敗を型で扱う——そして、いくつかは我々のものでしかない」。失敗テイクも残すなら要る。失敗テイクを残すかは未決定（費用とストレージの関数）。",
+          "enum": ["A", "B", "C", null]
+        },
+
+        "adopted": {
+          "type": "boolean",
+          "description": "採用したか。採用は選別であり、作者は編集である。"
+        }
+      }
+    }
+  }
+}

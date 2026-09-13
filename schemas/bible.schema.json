@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/GL-Kageyama/semantic-visual-loom/schemas/bible.schema.json",
+  "title": "作品台帳",
+  "description": "プロジェクトに一つ。作品の世界の不変部。§2 の「世界」。受け火の series-constants.md（§1–6・§15・§17・Negative の共有不変部）が既にこの先取りである。不変部と可変部の線引き（何が作品台帳に属し、何が制作台帳へ行くか）は未決定。",
+  "type": "object",
+  "required": ["project", "bible"],
+  "additionalProperties": false,
+  "properties": {
+    "project": {
+      "type": "string",
+      "minLength": 1,
+      "description": "プロジェクト名。projects/<project>/ のディレクトリ名と一致する。"
+    },
+    "bible": {
+      "type": "object",
+      "required": ["world"],
+      "additionalProperties": false,
+      "properties": {
+        "world": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "concept": { "type": "string", "description": "世界の概念。" },
+            "rules": { "type": "array", "items": { "type": "string" }, "description": "世界の規則。" },
+            "visual_language": {
+              "type": "object",
+              "description": "視覚言語。art_direction が作品の不変部なのか、ショットごとの様式指定なのかは未決定。",
+              "additionalProperties": true,
+              "properties": {
+                "art_direction": { "type": "string" }
+              }
+            }
+          }
+        },
+        "constants": {
+          "type": "object",
+          "description": "根本律など、作品を貫く定数。",
+          "additionalProperties": { "type": "string" }
+        },
+        "negative_base": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "全ショットに必ず付く禁制（読めない文字・透かし）。英語不変部——訳してはならない。作品台帳に置くのか、基盤が自動で付けるのかは未決定。"
+        }
+      }
+    }
+  }
+}
