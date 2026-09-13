@@ -1,0 +1,33 @@
+shot: ukebi-v2-ch02-seg01
+unit:
+  before: 台帳は閉じられている
+  after: 結城文の魂火が届き、読まれなかった頁が火のなかにあるのが見える
+role: 開示
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:07
+  density: sparse
+  what: 「台帳の前」 — ESTABLISH 送り火 stands before the ledger; the dry paper waits. 結城文's soul-fire slides in,
+    wavering like it wants to turn a page.
+- range: 0:07-0:19
+  density: held
+  what: 「火の中の頁」 — CORE, longest share Within the fire, a translucent writer's hand surfaces — a hard pen
+    callus, and pages written but never read, folded shut, stacked in a dark shelf; half-dissolved, the
+    edg
+- range: 0:19-0:30
+  density: held
+  what: 「揺れる」 The fire holds before the ledger, wavering like it wants to turn a page; the apparition
+    melts back into the flame; the fire is only a fire again. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+forbidden_set:
+- HANA
+- HANA.speech
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: absent

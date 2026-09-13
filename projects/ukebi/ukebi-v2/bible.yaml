@@ -1,0 +1,62 @@
+# 作品台帳 — 受け火 V2
+# 出所: 各 wan-full-spec.md の §2 WORLD（30本で同一）。
+# ⚠️ 不変部と可変部の線引きは未決定である（schemas/README.md）。
+#    ここは「30本すべてで同じだったもの」だけを置いた。
+project: ukebi-v2
+
+bible:
+  world:
+    concept: >-
+      どこにも続かない踏切の境。名のない男が、自分のからだの八つの器官で
+      死者をあの世へ送る——手は送り、指は綴じ、喉は呑み、腕は抱え、
+      耳は測り、目は値付け、声は悼み、背は捨てる。器官はすなわち動詞である。
+    rules:
+      - "根本律：送ることは、受け取られることに先立たれる。送り火は送るばかりで、送られたことが一度もない。"
+      - "八器官＝八動詞。ひとつの魂を、ひとつの器官で、ひとつの動詞で処理する。どの器官にも淀みがなく、どの動きにも迷いがない。"
+      - "超常は演じない、記録する。その証拠は台帳・秤・判という世界の物と、青白い魂火だけ。"
+      - "魂火が唯一の光源。物理世界は何も反応しない——風も、動く影も、乱れる物もない。音はみな遠い（台帳の紙の「かさり」だけが聞こえる）。"
+      - "現世の断片（盆・夏）は匂わせるだけで描き込まない。"
+    visual_language:
+      art_direction: >-
+        Soft cel anime — flat color planes, clean closed thin lineart,
+        soft-edged shadow terminators.
+      color_language: >-
+        Muted, low-saturation. The world is deep indigo and rust red.
+        The soul-fire's pale blue-white is the only bright value — and the only
+        light source. The fire is pale blue-white yet reads red, wavering
+        between blue and red.
+      texture: "No grain, no paper texture, no painterly stroke. Clean flat surfaces. Things read damp though dry."
+      rendering: "Two-step cel shading with softened terminators; faint haze in the damp air; the soul-fire glows without bloom or lens flare."
+      visual_density: "Low. One focal point per beat. Generous negative space. Nothing is crowded."
+      era: "Timeless — the dead of every era mingle at the same crossing."
+      weather: "No rain falls, yet the air is damp; every sound is far away."
+      atmosphere: "Sparse, still, low-saturation deep indigo and rust red, lit only by the pale blue-white soul-fires."
+
+  constants:
+    根本律: "All sending is preceded by being received."
+    光源: "魂火のみ。bloom も lens flare も無し。"
+    カメラ: "あなたの視座。あなたのからだも手も映さない。"
+
+  negative_base:
+    - "no readable text"
+    - "no Japanese kanji or kana"
+    - "no real-world alphabet"
+    - "no English text"
+    - "no captions"
+    - "no on-screen subtitles"
+    - "no watermark"
+    - "no lens flare"
+    - "no god rays"
+    - "no floating particles"
+    - "no glow bloom"
+    - "no sparkle"
+    - "no dramatic camera shake"
+    - "no speed lines"
+    - "no onomatopoeia"
+    - "no photorealistic"
+    - "no 3D render"
+    - "no glossy webtoon gloss"
+    - "no airbrush portrait rendering"
+    - "no heavy gradient"
+    - "no painterly brush strokes"
+    - "no grain"

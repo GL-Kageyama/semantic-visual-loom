@@ -1,0 +1,30 @@
+shot: ukebi-v2-ch06-seg01
+unit:
+  before: 値踏みされた魂は、この境に来たことがない
+  after: 折笠千代の魂火が届き、伏せられたままの目が見える
+role: 開示
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:09
+  density: sparse
+  what: 「火が届く」 — ESTABLISH The pale-blue fire arrives; within it, a woman's half-transparent vision, eyes
+    lowered, dissolving into earth color.
+- range: 0:09-0:21
+  density: held
+  what: 「伏せられた目」 — CORE, longest share The lowered eyes; the days of being priced, the nights she wanted
+    to be recognized, faintly surfacing in the fire.
+- range: 0:21-0:30
+  density: held
+  what: 「誰も見なかった」 No one ever saw her as a thing without value. 送り火 sees it. Cut on the eyes.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set:
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: present

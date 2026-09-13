@@ -71,14 +71,18 @@
     "beats": {
       "type": "array",
       "minItems": 1,
-      "description": "ビート。不均等に配分する（video-spec の核）。density が二値で足りるかは未決定。",
+      "description": "ビート。不均等に配分する（video-spec の核）。",
       "items": {
         "type": "object",
         "required": ["range", "density", "what"],
         "additionalProperties": false,
         "properties": {
           "range": { "type": "string", "description": "時間の範囲（例 \"8-22s\"）。" },
-          "density": { "type": "string", "enum": ["sparse", "dense"], "description": "密度。" },
+          "density": {
+            "type": "string",
+            "enum": ["sparse", "held", "dense", "transition"],
+            "description": "密度。⚠️ 決定（2026-09-13）——**二値では足りない。** 当初は sparse | dense の二値だったが、受け火 V2 の30本が持つビート91個を数えたところ **held が59（65%）・sparse が30（33%）・dense が1・transition が1** で、**65% が enum に表現を持たなかった。** 二値に収めるには held を dense に読み替えることになるが、それは**意味を捨てる**——held は「濃い」ではなく「保たれている」であり、この作品の地である。実測が enum を広げた。"
+          },
           "what": { "type": "string", "description": "そこで何が起きるか。" }
         }
       }

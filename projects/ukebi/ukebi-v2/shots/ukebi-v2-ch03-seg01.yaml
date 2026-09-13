@@ -1,0 +1,32 @@
+shot: ukebi-v2-ch03-seg01
+unit:
+  before: 名のつく前の魂は、この境に来たことがない
+  after: 名なしの魂火が届き、送り火はただ見る
+role: 開示
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:07
+  density: sparse
+  what: 「小さな火」 — ESTABLISH A fire, smaller than any other, rolls along the rail and stops at 送り火's feet
+    — a breath could put it out.
+- range: 0:07-0:19
+  density: held
+  what: 「火の中の腕と声」 — CORE, longest share Within the fire, faintly, someone's arm and someone's voice surface,
+    and the name that was supposed to be given but never was; half-dissolved, the edges wavering betwee
+- range: 0:19-0:30
+  density: held
+  what: 「止まる」 The fire holds at his feet; the apparition melts back into the flame; the fire is only a
+    fire again. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+forbidden_set:
+- HANA
+- HANA.speech
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: absent

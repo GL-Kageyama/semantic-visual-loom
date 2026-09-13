@@ -1,0 +1,28 @@
+shot: ukebi-v2-ch08-seg03
+unit:
+  before: 目は、値付けることだけを知っている
+  after: 目が値付けでなく花を見る——初めての、彼から彼女への器官の動き
+role: 反応
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:08
+  density: sparse
+  what: 「捨てられない」 — ESTABLISH The back stops; she stands before the flow, not falling, not flowing.
+- range: 0:08-0:21
+  density: held
+  what: 「振り返る」 — CORE, longest share She has not turned away — she is looking at him; he turns around,
+    and the valuing eyes see her.
+- range: 0:21-0:30
+  density: held
+  what: 「初めて見た」 Only she ever looked at him; he sees her for the first time. The 定型句. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set: []
+disclosure_state:
+  HANA: present
+effect: 感動

@@ -1,0 +1,28 @@
+shot: ukebi-v2-ch09-seg01
+unit:
+  before: 八つの器官が、動いている
+  after: 八つとも止まり、ただの男が線路の上に立って息をしている
+role: 運動（停止）
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:09
+  density: sparse
+  what: 「装置が止まる」 — ESTABLISH All eight organs stop; the apparatus falls still; a plain man stands on the
+    rails.
+- range: 0:09-0:21
+  density: held
+  what: 「息の音」 — CORE, longest share The first sound in the boundary — not rain, but his breath. He was
+    breathing.
+- range: 0:21-0:30
+  density: held
+  what: 「静かな自分」 He knew his own stillness for the first time. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set: []
+disclosure_state:
+  HANA: present

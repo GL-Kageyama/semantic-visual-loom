@@ -1,0 +1,34 @@
+shot: ukebi-v2-ch03-seg03
+unit:
+  before: 「該当なし」の席は、空いている
+  after: 少女がその席に座り、送り火を見ている
+role: 開示
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:08
+  density: sparse
+  what: 「該当なしの席」 — ESTABLISH The ledger's last row bears the mark 該当なし, in the boundary script. At that
+    seat, someone sits — a girl. The frame widens to her.
+- range: 0:08-0:20
+  density: held
+  what: '「少女だけが、彼を見ていた」 — CORE, longest share The girl, in her dark-indigo sailor uniform, sits and looks
+    at 送り火. She says nothing; her eyes find him and hold. At the boundary, no one had ever looked at him
+    — '
+- range: 0:20-0:30
+  density: held
+  what: '「喉が、小さく動く」 送り火''s throat moves a little — the throat that swallows, forgetting to swallow. Then
+    the 定型句, spoken by the voice: この魂は、まだ誰にも名付けられていない。 Cut.'
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set:
+- HANA.speech
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: present
+effect: 感嘆（少女の初出）

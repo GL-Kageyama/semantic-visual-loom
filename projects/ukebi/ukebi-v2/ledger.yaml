@@ -1,0 +1,93 @@
+# 制作台帳 — 受け火 V2
+# 連続性（世界の状態）と開示（観客の知識の状態）を同じファイルに持つ。
+# ⚠️ 二つに割ってはならない——参照集合も禁制集合も、この一点から導かれる。
+#
+# 出所: 各 wan-full-spec.md の §3 SUBJECTS（実体）・§16 MUST NOT（禁止の文面）。
+#       開示の4変化点は、§16 を30本ぶん測った結果（検証/開示の形.md）。
+
+characters:
+  OKURIBI:
+    identity: okuribi-character-sheet（identity lock。§3 SUBJECTS の Reference）
+    states: {}
+    negatives:
+      - "値のない者に値があるように見せる"
+      - "読める感情を顔に出す"
+
+  HANA:
+    identity: hana-character-sheet（少女。第3章 Clip 3 から画面に出る）
+    states:
+      制服:
+        wardrobe: "standard Japanese school uniform"
+        note: >-
+          雨は降っていないのに、制服は暗い。濡れていないのに、濡れているように暗い（§8 ch08-seg02）。
+      # ⚠️ 衣装が「時刻」で決まらない作品である。境に時刻は流れない。
+      #    gozen-niji の「夜＝パジャマ」に相当する規則は、この作品には無い。
+    negatives:
+      - "no second figure"
+      - "no female figure"
+      - "no silhouette of another person"
+      - "no reflection of a girl"
+
+  TAMABI:
+    identity: "青白い火。人のかたちをしていない。火そのものがからだである"
+    states: {}
+    negatives:
+      - "solid human body inside the fire"
+      - "literal flame"
+
+  YOU:
+    identity: "映らない。カメラの視座そのものであり、像のなかの人物ではない"
+    states: {}
+    negatives:
+      - "no viewer's hands"
+      - "no first-person body parts in frame"
+
+locations:
+  CROSSING:
+    base: crossing-base-board（踏切。§4 ENVIRONMENT の Location）
+    states: {}
+    geography: crossing-geography（線路・遮断機・台帳の位置関係）
+    # ⚠️ 30本すべてが CROSSING である（実測）。一環境の検査は、
+    #    この作品では「複数環境を書いていないか」以上のことを見ていない。
+
+props:
+  魂火:
+    appearance: "青白い火、唯一の光源。人のかたちをしていない"
+    negative: ["glowing object in the throat", "flame inside the throat",
+               "inner light in the throat", "light leaking from the throat"]
+  台帳:
+    appearance: "乾いた白い紙、墨の字。世界に実在する文字が現れる唯一の面"
+    negative: ["readable text", "Japanese kanji or kana", "real-world alphabet"]
+  秤:
+    appearance: "魂の重さを測る。針の傾く音で重さを知る"
+    negative: []
+  判:
+    appearance: "該当なしの印。額に押される"
+    negative: []
+
+# ---------------------------------------------------------------- 開示
+# 変化点だけを持つ。全ショットは並べない。変化点の間は直前の状態が続く。
+# 座標がショットIDなのは、開示の座標がクリップの並び順だからである——
+# §16 を30本ぶん測った結果、4つの明かしのうち2つが章の途中で起きるので、
+# レンジでは表現できない。
+disclosure:
+  - shot: ukebi-v2-ch03-seg03
+    HANA: present        # 不在 → 初出＝「少女」。名なし・判なし・実体
+  - shot: ukebi-v2-ch04-seg03
+    HANA.speech: first   # 初台詞。§16 は no nameplate / no subtitle を加える
+  - shot: ukebi-v2-ch06-seg03
+    HANA.mark: on_送り火 # 判は送り火の額。少女の額ではない
+  - shot: ukebi-v2-ch08-seg02
+    HANA.name: revealed  # ＝篠宮花
+
+# at は「鍵」ではない。§16 の見出しはレンジを名指すが本体は「この1本」の禁止を
+# 書くので、10レンジのうち9つで禁止集合が割れる。人が読むための群れである。
+at:
+  序:
+    range: "序"
+  第1章:
+    range: "01"
+  第9章:
+    range: "09"
+  終章:
+    range: "終章"

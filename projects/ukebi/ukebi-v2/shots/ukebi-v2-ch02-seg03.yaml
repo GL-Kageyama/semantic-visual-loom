@@ -1,0 +1,32 @@
+shot: ukebi-v2-ch02-seg03
+unit:
+  before: 指は、綴じることだけを知っている
+  after: 読む指を持たないことを知り、指が止まる
+role: 運動（停止）
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:07
+  density: sparse
+  what: 「読もうとする」 — ESTABLISH The finger is on the blank page, trying to read. The page is white, still.
+- range: 0:07-0:19
+  density: held
+  what: 「止まる」 — CORE, longest share He cannot read. He has a finger to bind, no finger to read. The page
+    trembles, wanting to be read; the binding finger learns, for the first time, what it is to want to
+    read
+- range: 0:19-0:30
+  density: held
+  what: 「震える頁・定型句」 The blank page trembles under his stopped finger. The 定型句 — この魂は、まだ誰にも名付けられていない。 —
+    as the boundary's whisper. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+forbidden_set:
+- HANA
+- HANA.speech
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: absent

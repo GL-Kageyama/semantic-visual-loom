@@ -1,0 +1,33 @@
+shot: ukebi-v2-ch04-seg01
+unit:
+  before: 引き取り手のない魂は、抱かれたことがない
+  after: コダマの魂火が届き、伸ばされたままの両手が見える
+role: 開示
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:08
+  density: sparse
+  what: 「コダマの火」 — ESTABLISH The girl stands beside 送り火; the orphan's fire arrives, palms up, and stops
+    at his chest — as if waiting to be picked up.
+- range: 0:08-0:20
+  density: held
+  what: 「伸ばされたままの両手」 — CORE, longest share Within the fire, faintly, the two outstretched hands surface,
+    kept stretched and never lowered — the nights never held, the name never called; half-dissolved, the
+    ed
+- range: 0:20-0:30
+  density: held
+  what: 「止まる」 The fire holds at his chest; the apparition melts back into the flame; the hands are only
+    a fire again. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set:
+- HANA.speech
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: present

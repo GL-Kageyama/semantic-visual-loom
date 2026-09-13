@@ -1,0 +1,30 @@
+shot: ukebi-v2-ch05-seg02
+unit:
+  before: 秤にかかれば、針は必ず傾く
+  after: 少女の重さは針を振らせず、まっすぐ真上を指したまま動かない
+role: 運動（停止）
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:08
+  density: sparse
+  what: 「針が振れない」 — ESTABLISH The girl stands on the pan; the needle does not move; the pan does not sink.
+- range: 0:08-0:20
+  density: held
+  what: 「該当なし」 — CORE, longest share On the dial, a mark surfaces — 該当なし, in the boundary script. The
+    needle points straight up, unmoving, silent.
+- range: 0:20-0:30
+  density: held
+  what: 「耳が聞かない」 The ear that measures hears nothing — no sound to measure. The girl stands weightless,
+    neither heavy nor light. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set:
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: present

@@ -1,0 +1,31 @@
+shot: ukebi-v2-ch03-seg02
+unit:
+  before: 八つの器官は、淀みなく動く
+  after: 魂は喉に残り、喉が動かず、台帳に「該当なし」の印が浮かぶ
+role: 運動（停止）
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:08
+  density: sparse
+  what: 「呑む」 — ESTABLISH The throat moves; the nameless fire sinks into it. The throat rises and falls.
+- range: 0:08-0:20
+  density: held
+  what: 「喉が動かない」 — CORE, longest share The throat stops. It will not move. The fire stays lodged; the
+    eight organs stop for the first time. The throat shows nothing — no glow, no flame.
+- range: 0:20-0:30
+  density: held
+  what: 「該当なし」 In the ledger's last row, a mark surfaces — 該当なし, in the boundary script, spoken by the
+    voice. Cut on the mark.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+forbidden_set:
+- HANA
+- HANA.speech
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: absent

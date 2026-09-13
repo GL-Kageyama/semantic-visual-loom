@@ -1,0 +1,30 @@
+shot: ukebi-v2-ch06-seg03
+unit:
+  before: 送り火は、判を押す側にいる
+  after: 額に「該当なし」の判が押され、押される側になる
+role: 所作
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:08
+  density: sparse
+  what: 「判を奪う」 — ESTABLISH The girl takes the seal from his hand, quietly.
+- range: 0:08-0:21
+  density: held
+  what: 「額に押す」 — CORE, longest share She presses the seal to his forehead. 該当なし, a square mark in the
+    boundary script, cold.
+- range: 0:21-0:30
+  density: held
+  what: 「押される側」 He, who always pressed, is now the pressed. Only she ever valued him — 該当なし. The 定型句.
+    Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set:
+- HANA.name
+disclosure_state:
+  HANA: present
+effect: 感嘆（逆転）

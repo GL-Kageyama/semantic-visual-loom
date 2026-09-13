@@ -1,0 +1,29 @@
+shot: ukebi-v2-ch05-seg01
+unit:
+  before: 秤の針は、まだ傾いていない
+  after: 耳が針の軋む音を聞き、少女が秤の皿の上に立つ
+role: 所作
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:07
+  density: sparse
+  what: 「秤」 — ESTABLISH The scale sits at the crossing. 送り火 moves his ear — the fifth organ.
+- range: 0:07-0:19
+  density: held
+  what: 「耳で測る」 — CORE, longest share A soul on the pan; the pan sinks a little; the needle tilts. He listens
+    — not with his eyes, but with his ear. Weight comes to the ear as sound.
+- range: 0:19-0:30
+  density: held
+  what: 「少女が皿の上に立つ」 The girl approaches the scale and steps onto the pan. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set:
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: present

@@ -1,0 +1,30 @@
+shot: ukebi-v2-ch07-seg01
+unit:
+  before: 悼まれなかった死は、この境に来たことがない
+  after: 早瀬甚吾の魂火が届き、読まれなかった手紙が見える
+role: 開示
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:09
+  density: sparse
+  what: 「火が届く」 — ESTABLISH The pale-blue fire arrives; within it, a soldier's half-transparent vision,
+    heavy with a solitary death, dissolving into earth color.
+- range: 0:09-0:21
+  density: held
+  what: 「届かなかった声」 — CORE, longest share The letters no one read, the last voice no one heard, faintly
+    surfacing in the fire.
+- range: 0:21-0:30
+  density: held
+  what: 「誰もいなかった」 He spoke, he wrote, though it would not reach anyone — and no one was there. 送り火 sees
+    it. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set:
+- HANA.name
+disclosure_state:
+  HANA: present

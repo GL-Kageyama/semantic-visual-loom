@@ -1,0 +1,32 @@
+shot: ukebi-v2-ch05-seg03
+unit:
+  before: 送り火は、測る側にいる
+  after: 手首を握られ、測る側が測られ、耳が止まる
+role: 反応
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:08
+  density: sparse
+  what: 「皿から降りる」 — ESTABLISH The girl steps down from the pan; the pan is empty now; the needle no longer
+    matters.
+- range: 0:08-0:20
+  density: held
+  what: 「手首」 — CORE, longest share Her hand reaches, closes lightly on his wrist. 「あなたの重さは」 — her line,
+    once. He knows his own weight for the first time.
+- range: 0:20-0:30
+  density: held
+  what: 「耳が止まる」 The measuring ear falls silent. The 定型句 — 「この魂は、まだ誰にも名付けられていない。」 — spoken by the boundary's
+    voice. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set:
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: present
+effect: 感動

@@ -63,21 +63,34 @@ class Project:
         if not l.exists():
             self.read_errors.append(f"ledger.yaml が無い（{l}）")
 
-        self.shots = {}
-        self.takes = {}
-        for sub, into in (("shots", self.shots), ("takes", self.takes)):
-            d = self.root / sub
-            if not d.is_dir():
-                self.read_errors.append(f"{sub}/ が無い（{d}）")
-                continue
+        self.shots = {}   # ショットID → ショット記録（1本につき1枚）
+        self.takes = {}   # ショットID → テイクの列（1本につき何枚でも）
+        d = self.root / "shots"
+        if not d.is_dir():
+            self.read_errors.append(f"shots/ が無い（{d}）")
+        else:
             for p in sorted(d.glob("*.y*ml")):
                 doc = _load(p)
-                key = (doc.get("shot") if sub == "shots"
-                       else (doc.get("take") or {}).get("shot"))
+                key = doc.get("shot")
                 if not key:
                     self.read_errors.append(f"{p.name}: ショットIDが読めない")
                     continue
-                into.setdefault(key, []).append(doc)
+                if key in self.shots:
+                    self.read_errors.append(f"{p.name}: ショット {key} が二重に在る")
+                    continue
+                self.shots[key] = doc
+
+        d = self.root / "takes"
+        if not d.is_dir():
+            self.read_errors.append(f"takes/ が無い（{d}）— テイクの記録が1本も無い")
+        else:
+            for p in sorted(d.glob("*.y*ml")):
+                doc = _load(p)
+                key = (doc.get("take") or {}).get("shot")
+                if not key:
+                    self.read_errors.append(f"{p.name}: ショットIDが読めない")
+                    continue
+                self.takes.setdefault(key, []).append(doc)
 
         # 台帳の disclosure を {shot, attr, value} に均す。
         self.disclosure = []
@@ -158,9 +171,8 @@ def validate_shape(project, schema_dir):
         apply(project.bible, "bible", project.name)
     if project.ledger:
         apply(project.ledger, "ledger", project.name)
-    for s, docs in project.shots.items():
-        for d in docs:
-            apply(d, "shot-record", s)
+    for s, doc in project.shots.items():
+        apply(doc, "shot-record", s)
     for s, docs in project.takes.items():
         for d in docs:
             apply(d, "take", f"{s}#{(d.get('take') or {}).get('index')}")
@@ -183,24 +195,46 @@ def report(project, findings, shape, stream=sys.stdout):
         print(f"    ⚠️ 読めていない: {e}", file=stream)
     print(file=stream)
 
-    if not findings:
+    allf = shape + findings
+    viol = [f for f in allf if f.get("severity", "violation") == "violation"]
+    notes = [f for f in allf if f.get("severity") == "note"]
+
+    if not allf:
         print("--- 鳴ったもの: 0 件", file=stream)
         if not order:
             print("    ⚠️ **ただしショットが0本である。** 0 件は「正しい」ではない。",
                   file=stream)
         return 0
 
-    by = {}
-    for f in shape + findings:
-        by.setdefault(f["code"], []).append(f)
-    for code in sorted(by):
-        print(f"--- {code}  {len(by[code])} 件", file=stream)
-        for f in by[code]:
-            head = f"    {f['shot']}" if f["shot"] else "    —"
-            print(f"{head}\n        {f['message']}", file=stream)
-        print(file=stream)
-    print(f"=== 合計 {len(shape) + len(findings)} 件", file=stream)
-    return 1
+    def dump(title, items, stream=stream):
+        if not items:
+            return
+        by = {}
+        for f in items:
+            by.setdefault(f["code"], []).append(f)
+        for code in sorted(by):
+            # ⚠️ 同じ所見を30回並べても読めない。**文面で畳み、ショットを連ねる。**
+            groups = {}
+            for f in by[code]:
+                groups.setdefault(f["message"], []).append(f["shot"])
+            print(f"--- {title}{code}  {len(by[code])} 件 / {len(groups)} 種", file=stream)
+            for msg, shots in sorted(groups.items(), key=lambda kv: -len(kv[1])):
+                named = [s for s in shots if s]
+                if len(named) == len(shots) and named:
+                    head = (f"    {', '.join(named[:4])}"
+                            + (f" ほか {len(named) - 4} 本" if len(named) > 4 else ""))
+                else:
+                    head = f"    （{len(shots)} 件）"
+                print(f"{head}\n        {msg}", file=stream)
+            print(file=stream)
+
+    dump("", viol)
+    dump("註 ", notes)
+    print(f"=== 違反 {len(viol)} 件 / 註 {len(notes)} 件", file=stream)
+    if not viol:
+        print("    ⚠️ 違反0件は「正しい」ではない。**註と、検査されていない範囲を読むこと。**",
+              file=stream)
+    return 1 if viol else 0
 
 
 # ---------------------------------------------------------------- 自己検査
@@ -244,6 +278,8 @@ def self_test():
         ("L5 参照と禁制の衝突", {**clean, "forbidden_set": ["OKURIBI.sheet"]},
          (semantic.check_reference_forbidden,)),
         ("L6 意図と実際の食い違い", {**clean, "attached": []}, (semantic.check_attached,)),
+        ("L6 添付の記録が無い", {k: v for k, v in clean.items() if k != "attached"},
+         (semantic.check_attached,)),
     ]
 
     print("=== 自己検査 — 各検査が鳴るか\n")
@@ -331,6 +367,43 @@ def self_test():
     for f in gf:
         print(f"        {f['code']}  {f['message'][:88]}")
     bad += bool(gf)
+
+    # ---- L9（検査が空であることの検査）は、他とは逆に「鳴るのが期待」の場合がある
+    print("\n=== 自己検査 — 検査が空でないか\n")
+
+    disc1 = [{"shot": "p-ch01-seg03", "attr": "HANA", "value": "present"}]
+    circular_cases = [
+        # 台帳から写した記録 → 鳴らねばならない
+        ("L9 台帳から写した（鳴るべき）",
+         [s("p-ch01-seg01", disclosure_state={"HANA": "absent"}),
+          s("p-ch01-seg03", disclosure_state={"HANA": "present"})], disc1, True),
+        # 台帳が宣言していない位置で変わっている → 記録は新しいことを言っている
+        ("L9 台帳に無い遷移（鳴ってはならない）",
+         [s("p-ch01-seg01", disclosure_state={"HANA": "absent"}),
+          s("p-ch01-seg02", disclosure_state={"HANA": "present"}),
+          s("p-ch01-seg03", disclosure_state={"HANA": "present"})], disc1, False),
+        # どのショットも開示状態を書いていない → 比較対象が無い
+        ("L9 誰も書いていない（鳴ってはならない）",
+         [s("p-ch01-seg01"), s("p-ch01-seg03")], disc1, False),
+        # ⚠️ 最も重要——台帳が宣言していて、記録が書いていない属性は、
+        #    食い違いではない。比較に入り込んではならない。
+        ("L9 書いていない属性は無視（鳴るべき）",
+         [s("p-ch01-seg01", disclosure_state={"HANA": "absent"}),
+          s("p-ch01-seg03", disclosure_state={"HANA": "present"})],
+         disc1 + [{"shot": "p-ch01-seg03", "attr": "HANA.speech", "value": "first"}], True),
+    ]
+    print(f"    {'検査':<34}{'鳴った件数':>10}  判定")
+    for label, shots, disc, want in circular_cases:
+        p = proj(shots, disc)
+        got = semantic.check_circular(p)
+        n += 1
+        ok = bool(got) == want
+        bad += not ok
+        verdict = "鳴った" if got else "鳴らなかった"
+        print(f"    {label:<34}{len(got):>10}  "
+              f"{verdict if ok else '⚠️ 期待と違う（' + ('鳴るべき' if want else '鳴ってはならない') + '）'}")
+        for f in got[:2]:
+            print(f"        {f['code']}  {f['message'][:88]}")
 
     print(f"\n=== {n} 例中 {n - bad} 例が期待どおり")
     return 1 if bad else 0

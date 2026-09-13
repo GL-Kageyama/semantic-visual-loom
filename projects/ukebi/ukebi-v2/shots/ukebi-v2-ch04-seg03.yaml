@@ -1,0 +1,31 @@
+shot: ukebi-v2-ch04-seg03
+unit:
+  before: 送り火は、立って預かっている
+  after: 少女がコダマを下ろし、送り火が少女の膝の上に置かれ、からだが重さを持つ
+role: 反応
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:07
+  density: sparse
+  what: 「代わりに、あんたを預からせて」 — ESTABLISH The girl speaks. She lowers the fire from his arms, gently.
+- range: 0:07-0:20
+  density: held
+  what: 「少女の膝の上へ」 — CORE, longest share She lays 送り火 on her lap. The arms made to hold lose what they
+    held, go slack. On her lap, his body gains weight for the first time.
+- range: 0:20-0:30
+  density: held
+  what: '「預かるはずの腕は、いま預けられていた」 The held body, the slack arms. Then the 定型句, spoken by the voice: この魂は、まだ誰にも名付けられていない。
+    Cut.'
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set:
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: present
+effect: 感動

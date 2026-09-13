@@ -1,0 +1,31 @@
+shot: ukebi-v2-ch02-seg02
+unit:
+  before: 魂は、まだ頁に綴じられていない
+  after: 名が一行記され、頁が閉じられ、白紙の頁が「読んで」と震える
+role: 所作
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:08
+  density: sparse
+  what: '「綴じる」 — ESTABLISH The fingers open the ledger, hold the page, and the pen writes the name 結城文
+    in one line of the boundary script — thin, angular, unreadable glyphs, not Japanese — while the narration '
+- range: 0:08-0:20
+  density: held
+  what: 「白い頁」 — CORE, longest share The page is closed. The finger touches the first page — it is blank.
+    Blank is not only the last row.
+- range: 0:20-0:30
+  density: held
+  what: 「読んで」 結城文's fire says 読んで. The blank page trembles. Cut on the blank page.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+forbidden_set:
+- HANA
+- HANA.speech
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: absent

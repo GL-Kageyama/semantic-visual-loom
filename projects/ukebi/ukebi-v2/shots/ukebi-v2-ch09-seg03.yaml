@@ -1,0 +1,29 @@
+shot: ukebi-v2-ch09-seg03
+unit:
+  before: 彼は、送る火である
+  after: 彼は名付けられ、頁の外へ歩いていく——受け取られる火になる
+role: 離脱
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:09
+  density: sparse
+  what: 「送られる」 — ESTABLISH He is sent for the first time. Not to the other world — outside the page. He
+    begins to walk.
+- range: 0:09-0:21
+  density: held
+  what: 「受け火」 — CORE, longest share The fire that sends becomes the fire that is received. 受け火. He walks
+    toward the edge of the page.
+- range: 0:21-0:30
+  density: held
+  what: 「頁の外へ」 He steps out of the frame, into the pale light beyond. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set: []
+disclosure_state:
+  HANA: present
+effect: 感嘆

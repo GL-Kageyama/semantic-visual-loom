@@ -1,0 +1,31 @@
+shot: ukebi-v2-ch04-seg02
+unit:
+  before: 腕は、抱えることを知らない
+  after: 火が腕に収まり、「預けられたことがあるか」と問われ、腕が止まる
+role: 所作
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:07
+  density: sparse
+  what: 「預かる」 — ESTABLISH The arms move; the fire is gathered into them. The fire trembles — held for
+    the first time.
+- range: 0:07-0:19
+  density: held
+  what: 「あなたは、誰かに預けられたことがあるか」 — CORE, longest share コダマ's fire asks. 送り火 does not answer. He has always
+    held, never been held; he could receive two outstretched hands, but never stretched out his own.
+- range: 0:19-0:30
+  density: held
+  what: 「腕が止まる」 The arms stop. Hold. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set:
+- HANA.speech
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: present

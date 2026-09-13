@@ -1,0 +1,29 @@
+shot: ukebi-v2-ch07-seg03
+unit:
+  before: 送り火は、悼む声を持っている
+  after: 悼まれる声を持たないことを知り、声が止まり、悼みが胸に置かれる
+role: 運動（停止）
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:08
+  density: sparse
+  what: 「声が止まる」 — ESTABLISH The mourning voice stops; the silence where it was.
+- range: 0:08-0:21
+  density: held
+  what: 「胸に置かれる」 — CORE, longest share Mourning was not a voice; her hand rests on his chest, a heavy
+    weight placed there. He is mourned.
+- range: 0:21-0:30
+  density: held
+  what: 「払いのけない」 For the first time, he does not brush it off. The 定型句. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set:
+- HANA.name
+disclosure_state:
+  HANA: present
+effect: 感動

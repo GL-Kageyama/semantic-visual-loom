@@ -1,0 +1,28 @@
+shot: ukebi-v2-ch08-seg02
+unit:
+  before: 背の向こうには、流れしかない
+  after: 背の向こうに篠宮花が立っており、背が止まる
+role: 開示
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:08
+  density: sparse
+  what: 「背の向こうに」 — ESTABLISH The turned back; beyond it, something stands.
+- range: 0:08-0:21
+  density: held
+  what: 「篠宮花」 — CORE, longest share The name, spoken once. A girl in a dark uniform, dark though no rain
+    falls. The self he discarded was waiting.
+- range: 0:21-0:30
+  density: held
+  what: 「少女だけが待っていた」 Only she ever waited for him; the back stops. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set: []
+disclosure_state:
+  HANA: present
+effect: 感嘆

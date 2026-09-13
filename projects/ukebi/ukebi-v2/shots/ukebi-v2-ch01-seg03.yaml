@@ -1,0 +1,32 @@
+shot: ukebi-v2-ch01-seg03
+unit:
+  before: 手は、送ることだけを知っている
+  after: 手が喉の裏に触れて、止まる
+role: 運動（停止）
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:07
+  density: sparse
+  what: 「空の手」 — ESTABLISH The open palm, empty; only the fire's warmth remains. The question from Clip
+    2 is still there, unanswered.
+- range: 0:07-0:19
+  density: held
+  what: 「止まる」 — CORE, longest share The hand, without thought, rises to the back of the throat and stops.
+    Completely. The hand that only sent now knows being grasped. The throat shows nothing.
+- range: 0:19-0:30
+  density: held
+  what: 「ぬくもり・定型句」 Only the warmth remains on the palm. The 定型句 — この魂は、まだ誰にも名付けられていない。 — as the boundary's
+    whisper. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+forbidden_set:
+- HANA
+- HANA.speech
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: absent

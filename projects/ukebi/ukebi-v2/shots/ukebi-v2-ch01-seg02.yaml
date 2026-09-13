@@ -1,0 +1,35 @@
+shot: ukebi-v2-ch01-seg02
+unit:
+  before: 魂火は、まだ送られていない
+  after: 名が台帳に一行記され、火は流れへ送られ、問いが手のひらに残る
+role: 所作
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:07
+  density: transition
+  what: 「送る」 — ESTABLISH The hand scoops the fire, raises it, sends it down the flow. The fire brightens
+    a little; the name 幸恵 is written in one line of the ledger.
+- range: 0:07-0:12
+  density: sparse
+  what: 「流れる」 The fire flows away down the rail; beyond the rails brightens a little. The palm is left
+    open and empty.
+- range: 0:12-0:20
+  density: dense
+  what: 「問い」 「あなたは、誰に送られるの」 — the fire's voice returns, laying a question on his palm. He does not answer;
+    he has never been asked.
+- range: 0:20-0:30
+  density: held
+  what: 「空の手」 — CORE, longest share The open palm, empty, the question laid on it. Hold. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+forbidden_set:
+- HANA
+- HANA.speech
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: absent

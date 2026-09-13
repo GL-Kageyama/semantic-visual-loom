@@ -1,0 +1,28 @@
+shot: ukebi-v2-ch09-seg02
+unit:
+  before: 彼は名前を持たない
+  after: 「花」と口が開き、名付けるための動きが初めて生まれる
+role: 対話
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:09
+  density: sparse
+  what: 「問われる」 — ESTABLISH The girl stands before him. 「あんたは、なんと呼ばれたい」 He is asked. He has no name to
+    answer with.
+- range: 0:09-0:21
+  density: held
+  what: 「花」 — CORE, longest share Instead of an answer, her name comes out. His mouth opens. 「花」.
+- range: 0:21-0:30
+  density: held
+  what: 「名付けられる」 The voice for naming is born for the first time. 花は花に名付けられた. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set: []
+disclosure_state:
+  HANA: present
+effect: 感動

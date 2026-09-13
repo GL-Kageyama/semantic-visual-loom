@@ -1,0 +1,28 @@
+shot: ukebi-v2-ch08-seg01
+unit:
+  before: 少女は、この境にいる
+  after: 背が少女へ向けられ、流れへ捨て返されようとしている
+role: 所作
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:09
+  density: sparse
+  what: 「背は魂に触れない」 — ESTABLISH The back, the last organ; it touches no soul; it only turns away.
+- range: 0:09-0:21
+  density: held
+  what: 「捨て返そうとする」 — CORE, longest share He moves to discard her — to throw her back into the flow, so
+    the apparatus may move again.
+- range: 0:21-0:30
+  density: held
+  what: 「背を向ける」 He turns his back. The flow waits beyond it. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set:
+- HANA.name
+disclosure_state:
+  HANA: present

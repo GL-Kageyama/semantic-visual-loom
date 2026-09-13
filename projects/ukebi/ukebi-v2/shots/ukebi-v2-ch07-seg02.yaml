@@ -1,0 +1,27 @@
+shot: ukebi-v2-ch07-seg02
+unit:
+  before: 悼みは、名を声に乗せることである
+  after: 名が呼ばれ、少女が「あなたを悼む声がない」と言う
+role: 所作
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:09
+  density: sparse
+  what: 「名を声に乗せる」 — ESTABLISH The voice moves; a low voice calls the dead man's name. 早瀬甚吾.
+- range: 0:09-0:21
+  density: held
+  what: 「少女のひとこと」 — CORE, longest share あなたを悼む声がない — the girl speaks, once.
+- range: 0:21-0:30
+  density: held
+  what: 「止められる」 The mourning is cut short by her words; the voice left hanging. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set:
+- HANA.name
+disclosure_state:
+  HANA: present

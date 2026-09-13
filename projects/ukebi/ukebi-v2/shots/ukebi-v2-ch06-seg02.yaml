@@ -1,0 +1,29 @@
+shot: ukebi-v2-ch06-seg02
+unit:
+  before: 火を透かせば、値が必ずひとつ浮かぶ
+  after: 少女に値がなく、判を下ろそうとして下ろせない
+role: 所作
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:09
+  density: sparse
+  what: 「値が浮かぶ」 — ESTABLISH The eye prices through 折笠千代's fire; a value surfaces, recorded.
+- range: 0:09-0:21
+  density: held
+  what: '「該当なし」 — CORE, longest share 少女: no value. 該当なし, spoken. The eye that prices through cannot price
+    through.'
+- range: 0:21-0:30
+  density: held
+  what: 「判を下ろせない」 The seal in his hand, unable to come down; the first-ever stopping of the valuing. Cut.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+- HANA.sheet
+forbidden_set:
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: present

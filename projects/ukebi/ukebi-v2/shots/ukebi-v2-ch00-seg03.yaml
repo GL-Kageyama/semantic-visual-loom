@@ -1,0 +1,30 @@
+shot: ukebi-v2-ch00-seg03
+unit:
+  before: 送り火は、喉の奥の留まりに気づいていない
+  after: 境の地の声が、初めてその魂のことを口にする
+role: 開示
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:07
+  density: sparse
+  what: 「静かになる」 — ESTABLISH 送り火 has passed; the crossing is still again; the warmth remains on the palm.
+- range: 0:07-0:19
+  density: held
+  what: 「あなただけが見えている」 — CORE, longest share He does not know. He walks on, the thing in his throat unseen
+    by him, seen by you alone. His back grows smaller.
+- range: 0:19-0:30
+  density: held
+  what: '「定型句」 The boundary''s voice speaks: この魂は、まだ誰にも名付けられていない。 Cut.'
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+forbidden_set:
+- HANA
+- HANA.speech
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: absent

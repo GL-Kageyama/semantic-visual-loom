@@ -1,0 +1,33 @@
+shot: ukebi-v2-ch01-seg01
+unit:
+  before: 踏切に、送り火がひとりで立っている
+  after: 幸恵の魂火が届き、送り火はただ見る
+role: 開示
+place: CROSSING
+time: 境（時刻が流れない）
+mode: motion
+duration: 30s
+beats:
+- range: 0:00-0:07
+  density: sparse
+  what: 「待つ」 — ESTABLISH 送り火 stands on the rails, hand open, waiting. 幸恵's earth-colored soul-fire slides
+    in along the rail and stops before him.
+- range: 0:07-0:19
+  density: held
+  what: 「火の中の一生」 — CORE, longest share Within the fire, a translucent weary traveler surfaces — feet that
+    kept walking, a dry throat, a place never reached; earth-toned, half-dissolved, the edges wavering
+    bet
+- range: 0:19-0:30
+  density: held
+  what: 「止まる」 The fire holds still before his open hand; the traveler melts back into the flame; the fire
+    is only a fire again, waiting. Cut on the earth-colored fire.
+reference_set:
+- OKURIBI.sheet
+- CROSSING.base
+forbidden_set:
+- HANA
+- HANA.speech
+- HANA.mark
+- HANA.name
+disclosure_state:
+  HANA: absent
