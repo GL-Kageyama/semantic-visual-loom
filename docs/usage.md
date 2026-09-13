@@ -69,10 +69,41 @@ specification on disk it prints **both** and stops. What it does not derive, and
 leaves, are in [`engine/shot/README.md`](../engine/shot/README.md).
 
 ⚠️ **The four skills in `skills/` are not commands**——**they are instructions to a Claude Code
-session.** They lay down the order of decisions for **breakdown (①), design (②), ledger (③),
-and shot (④)**. ⚠️ **The invocation carries a namespace**——`/semantic-visual-loom:breakdown`,
-`:design`, `:ledger`, `:shot`. ⚠️ **Two stages are not among them (⑥ structure, ⑦ acceptance)**——
-the input is not on the record side. The reason is in
+session**, and **they are what turns a story into the specifications.** See **The four stages**
+below.
+
+## The four stages
+
+**A story goes in. The strings a generator is handed come out.**
+⚠️ **None of the four is a program**——each is a document that instructs a session, and
+**there is no code for them in this repository.** The one thing that runs is the checker.
+
+| stage | you hand in | it emits | where it lands |
+|---|---|---|---|
+| **① breakdown** | a story, a plot, a draft | the shot list, the work ledger, and the disclosure change points | `bible.yaml`, `ledger.yaml`, `shots/` |
+| **② design** | one shot | the staging record, the §1–20 video specification (**§18's seven slots**), and the image specification | `shots/<id>.yaml`, `specs/video/<id>.md`, `specs/image/<id>.md` |
+| **③ ledger** | one shot | the ledger grown, and the derived sets on each shot record | `ledger.yaml`, `shots/<id>.yaml` |
+| **④ shot** | what came back | the self-contained record, and the take ⚠️ **it does not adopt** | `shots/<id>.yaml`, `takes/<id>-<kind>-<n>.yaml` |
+
+**② is where the prompt is written.** The seven slots are `Master` / `Visual` / `Motion` /
+`Camera` / `Audio` / `Negative` / `Style Motion`——**all English**, and **being separated is
+itself the point** ([`references/video-spec.md`](../references/video-spec.md) §18).
+⚠️ **They are fed separately, and only §18 is fed**——§19 and §20 are our own record.
+
+⚠️ **The invocation carries a namespace**——`/semantic-visual-loom:breakdown`, `:design`,
+`:ledger`, `:shot`.
+
+⚠️ **The shape of ①'s input is undecided.** Nothing in this repository says **whether a work
+arrives as a plot, a script, or a novel**——read it with a person or with a session, and record
+the shape you read.
+⚠️ **And the shot list has no schema**: `shot-record` requires `duration`, **which ② decides**,
+so **① alone cannot emit a record the checker can read.** ⚠️ **The checker reads nothing until
+② is on disk.**
+
+⚠️ **Two stages are not among them (⑥ structure, ⑦ acceptance)**——**the input is not on the
+record side**: `clips[]` is by definition a list of adopted takes, and **not one video take
+carries `adopted: true`.** ⚠️ **They cannot be moved**, and **a skill that emits an empty
+timeline is worse than no skill.** The reason is in
 [`projects/hitosara/renders/README.md`](../projects/hitosara/renders/README.md).
 
 ## ⚠️ Read the exit code correctly

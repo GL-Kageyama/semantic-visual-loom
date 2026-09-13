@@ -27,20 +27,39 @@ and **length is a dependent variable.**
 **The second row is the one that matters most.** Make 30 shots with separate prompts, and
 **by the 8th you no longer know who knew what.** The ledger takes that on.
 
-## State
+## What You Can Do Today
 
-**Generation does not run inside this foundation. Pre-flight verification does.**
+**A story goes in. The strings a generator is handed come out.**
+
+**Generation does not run inside this foundation.** What it does is **turn a story into the shot
+specifications**, and **fire the contradictions in them before anything is generated.**
+
+| | you hand in | you get out |
+| --- | --- | --- |
+| **① breakdown** | a story, a plot, a draft | the **shot list**—the work cut at the unit of one change, each shot given a role—plus the work ledger and the disclosure change points |
+| **② design** | one shot | the **§1–20 specification** and the **image specification**—including **§18's seven English slots**, which is what the generator is handed |
+| **③ ledger** | one shot | the **ledger**, grown—and the **reference set** (what is fixed) and the **forbidden set** (what must not be shown) derived from it |
+| **④ shot** | what came back | the **take**—one generation, one sheet |
+
+**② is where the prompt is written.** The seven slots are `Master` / `Visual` / `Motion` / `Camera` /
+`Audio` / `Negative` / `Style Motion`, and **being separated is itself the point**
+([`references/video-spec.md`](references/video-spec.md) §18).
+
+⚠️ **①–④ are instructions to a Claude Code session, not programs**—they lay down **the order of
+decisions**, and **there is no code for them in this repository.** ⚠️ **And the checker reads
+nothing until ② is on disk**: a shot record requires `duration`, which ② decides.
 
 ```bash
 python3 engine/ledger/check.py projects/hitosara         # demo "until one plate is made"
 python3 engine/ledger/check.py projects/ukebi/ukebi-v2   # Ukebi V2
 python3 engine/ledger/check.py --self-test               # does the checker fire
+python3 engine/shot/print_spec.py projects/hitosara      # the lines of a spec whose value is forced
 ```
 
-The full command list, the requirements, and the layout of a project are in
+The four stages, the full command list, the requirements, and the layout of a project are in
 [`docs/usage.md`](docs/usage.md).
 
-**⚠️ What the foundation does is pre-flight verification and the matching of what came back**
+**⚠️ What actually runs is pre-flight verification and the matching of what came back**
 (`L25`). **Generation, selection, and editing are not in it**—the author runs them by hand,
 and the foundation **reads the records**. ⚠️ **`L25` does not open `media/`**, so
 **a discrepancy between the record and the actual object does not fire.**

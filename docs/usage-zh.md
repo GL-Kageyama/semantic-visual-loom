@@ -62,11 +62,40 @@ python3 tools/check_i18n.py                                # 文档的镜像
 ⚠️ **把它贴上去是作者的行为。** 与磁盘上的规格不一致时，它把**两者**并列，然后停下。
 它不导出的东西与留下的洞，在 [`engine/shot/README.md`](../engine/shot/README-zh.md) 里。
 
-⚠️ **`skills/` 的 4 个不是命令**——**是对 Claude Code 会话的指示。**
-它们定下**分解（①）、设计（②）、台账（③）、镜头（④）**的决定顺序。
+⚠️ **`skills/` 的 4 个不是命令**——**是对 Claude Code 会话的指示**，
+而**把故事变成规格的，正是这 4 个。** 见下面的 **四个阶段**。
+
+## 四个阶段
+
+**故事进去。交给生成器的字符串出来。**
+⚠️ **4 个都不是程序**——是交给会话的文档，而
+**这个仓库里没有这 4 个的代码。** 跑起来的只有检查器。
+
+| 阶段 | 交出去的东西 | 出来的东西 | 落在哪里 |
+|---|---|---|---|
+| **① 分解** | 故事、情节、草稿 | 镜头序列、作品台账、开示的变化点 | `bible.yaml`、`ledger.yaml`、`shots/` |
+| **② 设计** | 一个镜头 | 演出记录、§1–20 的视频规格（**§18 的 7 个槽位**）、图像规格 | `shots/<id>.yaml`、`specs/video/<id>.md`、`specs/image/<id>.md` |
+| **③ 台账** | 一个镜头 | 被养大的台账，以及落在每个镜头记录上的导出集合 | `ledger.yaml`、`shots/<id>.yaml` |
+| **④ 镜头** | 回来的东西 | 能独立成立的记录，以及镜次 ⚠️ **不采用** | `shots/<id>.yaml`、`takes/<id>-<kind>-<n>.yaml` |
+
+**写提示词的是②。** 7 个槽位是 `Master` / `Visual` / `Motion` /
+`Camera` / `Audio` / `Negative` / `Style Motion`——**全部是英语**，而
+**分开这件事本身就是要点**
+（[`references/video-spec.md`](../references/video-spec-zh.md) §18）。
+⚠️ **分开交出去。过去的只有 §18**——§19 与 §20 是我们自己的记录。
+
 ⚠️ **调用带着名字空间**——`/semantic-visual-loom:breakdown`、`:design`、`:ledger`、`:shot`。
-⚠️ **⑥构成与⑦验收不在其中**——**因为输入不在记录那一侧。** 理由在
-[`projects/hitosara/renders/README.md`](../projects/hitosara/renders/README-zh.md)。
+
+⚠️ **①的输入形状未定。** 作品是**以情节来的、以脚本来的、还是以小说来的**，
+这个仓库里哪里都没有写——和人或与会话一起读，**把你读到的形状记下来。**
+⚠️ **而且镜头序列没有 schema**——`shot-record` 要求 `duration`，
+**而决定它的是②。** 所以**只有①，出不了检查器能读的记录。**
+⚠️ **在②落到磁盘上之前，检查器什么都读不到。**
+
+⚠️ **⑥构成与⑦验收不在其中**——**因为输入不在记录那一侧。**
+`clips[]` 按定义是采用镜次的列，而**视频镜次里一张 `adopted: true` 都没有。**
+⚠️ **是动不了**，而⚠️ **吐出一条空时间线的 Skill，比没有 Skill 更糟。**
+理由在 [`projects/hitosara/renders/README.md`](../projects/hitosara/renders/README-zh.md) 里。
 
 ## ⚠️ 正确读取退出码
 
