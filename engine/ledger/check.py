@@ -1462,10 +1462,21 @@ def self_test():
         for key, nm in (("REF_FORMAT", ref_format), ("REF_STYLE", ref_style)):
             if nm is not None:
                 body += f"- `{key}`: `{nm}`\n"
+        # ⚠️ **本物の形である。** 画像の正典は**1つの節の中の2段落**であって、
+        #    `Prompt` と `Negative` は**見出しではない**——見出しが本文の間にあると、
+        #    著者の1回の選択がそれを巻き込む（`specmap.SPEC_KINDS` の註）。
+        #    だからここでも**空行1つ**で2つを並べる。
+        #
+        # ⚠️ **`negative=None` は「節そのものが無い」**（見出しごと落とす）。
+        #    **`negative=""` は「節は在るが Negative が書かれていない」**——
+        #    実物ではこちらが起きる形である（`Prompt` を書いて、`Negative` を忘れる）。
+        #    **この2つは別の欠陥であり、別の符号で鳴らねばならない。**
         body += "\n" + vars_body
-        body += "## Prompt（英語）\n\nA rustic shelf at dawn, one line\n\n"
-        if negative is not None:
-            body += f"## Negative（英語）\n\n{negative}\n"
+        if negative is None:
+            return body
+        body += "## 投入する1本の文字列（英語）\n\nA rustic shelf at dawn, one line\n"
+        if negative:
+            body += f"\n{negative}\n"
         return body
 
     def img_proj(negative=IMG_NEG_OK, vars_body=IMG_VARS, base=IMG_BASE,
@@ -1523,8 +1534,17 @@ def self_test():
     run1("L21 1節足りない", semantic.check_image_negative,
          img_proj(negative="no readable text, not photorealistic"),
          True, "1 節が無い: no watermark")
-    run1("L21 Negative の節が無い", semantic.check_image_negative,
+    # ⚠️ **節は在るのに Negative が無い。** 段落が1つしか無いので、
+    #    `Negative` の index は存在しない——**黙って `Prompt` を読んではならない。**
+    run1("L21 Negative が書かれていない（1段落）", semantic.check_image_negative,
+         img_proj(negative=""), True, "1 段落である")
+    run1("L21 投入する節が無い", semantic.check_image_negative,
          img_proj(negative=None), True, "の節が無い")
+    # ⚠️ **段落の数は名乗りである。** 数が違えば `index` は別の段落を指す——
+    #    `Negative` を読んだつもりで `Prompt` を読む。だから鳴らねばならない。
+    run1("L21 2段落であるはずが3段落", semantic.check_image_negative,
+         img_proj(negative="no readable text\n\nno watermark, not photorealistic"),
+         True, "3 段落である")
     run1("L21 禁制が宣言されていない", semantic.check_image_negative,
          img_proj(base=None), True, "作品の禁制が宣言されていない")
     # ⚠️ **相手が無ければ何も言わない。** 「記録が無い」は `L18` が1件に畳む。

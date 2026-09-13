@@ -23,12 +23,17 @@ Motion character は「何かが常に動いている」と言う。モンター
   - `format`: `scene-board` ／ `style`: `luminous-anime`（**2つの軸を別々に引く**）
   - 入力（`content`）: `bible.yaml` ＋ `ledger.yaml` ＋ `shots/hitosara-ch01-seg10.yaml`
     ——gozen-niji の `series-constants.md`（シリーズ定数＋開示台帳）と同じ型である
-- 投入する文: **下の `Prompt` はエンジンの出力であり、`chatgpt-image-2.5` へ投入する正典である**（決定B）
+- 投入する文: **下の節の1段落目が `Prompt` であり、エンジンの出力であって、`chatgpt-image-2.5` へ
+  投入する正典である**（決定B）。**2段落目が `Negative` である**（決定A）
 - ⚠️ **下の7欄はエンジンへの入力である**——出所の記録であると同時に、そのまま流し込む穴である。
   ⚠️ **`REF_FORMAT` と `REF_STYLE` が「どのカードの穴か」を名乗る。** `L22` がそれを読み、
   **名乗ったカードが実際にその穴を宣言しているか**を確かめる——**名乗りは宣言であって、一致ではない。**
-- ⚠️ **⑦Negative の出力はここではなく下の `Negative` 節へ書く。** エンジンの合成プロンプトは
-  Negative を最後の一文に溶かすが、**この記録は節として保つ**——`L21` と開示の系列が節の集合として読む
+- ⚠️ **⑦Negative の出力はここではなく、下の節の2段落目へ書く。** エンジンの合成プロンプトは
+  Negative を最後の一文に溶かすが、**この記録は2段落として別々に保つ**——`L21` と開示の系列が
+  **段落の集合**として読む。
+- ⚠️ **2段落を1つの節に入れてあるのは、著者が1回で選べるようにするためである**——
+  **見出しが本文の間にあると、選択がそれを巻き込む。** 空行1つが、そのまま `Negative` を
+  繋ぐ空行である。**繋がった文字列の写しは置かない**（写しは食い違う）。
 - ⚠️ **この1枚は、このショットの動画へ添付（参照画像）として渡る**——最初のコマではない。
   最初のコマにすると、**そのショットの変化が画面上で起きなくなる**（`mode` と `unit` が偽になる）
 - 焼く層: `timeline` の `text_events`（段3）
@@ -50,23 +55,9 @@ Motion character は「何かが常に動いている」と言う。モンター
 - `LIGHT`: the window light falling across the plate, the steam catching it
 - `ACCENT`: the warm gold light falling across the plate
 
-## Prompt（英語・そのまま投入する）
+## 投入する1本の文字列（英語・1段落目が `Prompt`、2段落目が `Negative`）
 
-A luminous realist anime illustration of one plate on a bare table with the torn loaf on it and
-steam standing up from it, holding still while only the steam moves, at a plain table by a window in
-a one-room bakery in the morning, with the warm gold light falling across the plate as the strongest
-highlight. A scene board for the master staging of this one scene, in 16:9 — the camera and the
-light fixed as the standard every cut of the scene must match. The window light falls across the
-plate and the steam catches it. Hyper-detailed layered light: the shaft travelling through the air
-from the window at the frame edge, anamorphic flare and bloom around the source, steam and dust
-suspended and individually rendered rather than a flat wash. A saturated palette of magenta and gold
-on the plate and the steam against deep cyan in the room behind, the bare table faintly reflective
-and doubling the light. Composition level and close, the plate on the lower two thirds with the
-table edge and the window behind it and the air above the plate left open; the plate small and
-subordinate to the light. Clean anime lineart, held below the light. No figure in frame — hands may
-enter at the frame edge only if the fragment needs them. One focal point, generous negative space.
-
-## Negative（英語）
+A luminous realist anime illustration of one plate on a bare table with the torn loaf on it and steam standing up from it, holding still while only the steam moves, at a plain table by a window in a one-room bakery in the morning, with the warm gold light falling across the plate as the strongest highlight. A scene board for the master staging of this one scene, in 16:9 — the camera and the light fixed as the standard every cut of the scene must match. The window light falls across the plate and the steam catches it. Hyper-detailed layered light: the shaft travelling through the air from the window at the frame edge, anamorphic flare and bloom around the source, steam and dust suspended and individually rendered rather than a flat wash. A saturated palette of magenta and gold on the plate and the steam against deep cyan in the room behind, the bare table faintly reflective and doubling the light. Composition level and close, the plate on the lower two thirds with the table edge and the window behind it and the air above the plate left open; the plate small and subordinate to the light. Clean anime lineart, held below the light. No figure in frame — hands may enter at the frame edge only if the fragment needs them. One focal point, generous negative space.
 
 no readable text, no Japanese kanji or kana, no real-world alphabet, no watermark, no captions, no on-screen subtitles, no human face, no full body of the baker, no second person, no wall clock, no calendar, no digital timer, no brand label or packaging text, no kitchen appliance with a display, not photorealistic, no 3D render, no muted desaturated palette, no flat gradient sky, no grain, no painterly brush strokes, no photographic faces
 

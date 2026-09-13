@@ -683,6 +683,25 @@ def check_spec_kind(project):
                                f"`SPEC_KINDS['{kind}']` が様式の欄を宣言しているのに、"
                                "その節の見出し（`vars_section`）を持たない。"
                                "**欄の名前だけでは、仕様のどこを読むのかが決まらない。**"))
+    # ⚠️ **段落を名乗る種類は、「その段落がどの節に入っているか」も名乗らねばならない。**
+    #    片方だけでは `L21` が「何を読めばよいか分からない」で止まる
+    #    （`vars`・`vars_section` と同じ形である）。
+    for kind, spec in sorted(specmap.SPEC_KINDS.items()):
+        paras = spec.get("body_paragraphs")
+        if paras is None:
+            continue
+        if not spec.get("body_section"):
+            out.append(finding("L18", "",
+                               f"`SPEC_KINDS['{kind}']` が段落の並びを名乗っているのに、"
+                               "その段落が入る節の名前（`body_section`）を持たない。"
+                               "**段落の名前だけでは、仕様のどこを読むのかが決まらない。**"))
+        # ⚠️ **`negative` は「Negative がどこか」を指す。** 段落の並びに無い名前を
+        #    指していれば、**その種類の Negative は誰にも読めない。**
+        if spec.get("negative") not in paras:
+            out.append(finding("L18", "",
+                               f"`SPEC_KINDS['{kind}']` の `negative`（`{spec.get('negative')}`）が"
+                               f"`body_paragraphs`（{'／'.join(paras)}）に無い。"
+                               "**指す先が名乗られていなければ、Negative は読めない。**"))
 
     seen = collections.Counter()
     missing = collections.Counter()
@@ -788,6 +807,18 @@ def check_image_negative(project):
 
     ⚠️ **語幹で比べる**（`_stem`）。`no` / `not` の違いは偽陽性である。
 
+    ⚠️ **Negative は節ではない。** 画像の仕様は節を持たない——**正典は
+    `## 投入する1本の文字列` の節の中の2段落であり、`Negative` はその2段落目である**
+    （`specmap.SPEC_KINDS` の註を見よ）。だからこの検査は**段落の数も見る**
+    ——数が名乗りと違えば、`index` は別の段落を指す。**動画の側とは指し方が違うだけで、
+    指しているものは同じである**（§18 の Negative）。
+
+    ⚠️ **Negative は節ではない。** 画像の仕様は節を持たない——**正典は
+    `## 投入する1本の文字列` の節の中の2段落であり、`Negative` はその2段落目である**
+    （`specmap.SPEC_KINDS` の註を見よ）。だからこの検査は
+    **段落の数も見る**——数が名乗りと違えば、`index` は別の段落を指す。
+    動画の仕様とは**指し方が違うだけで、指しているものは同じである**（§18 の Negative）。
+
     ⚠️ **動画の仕様の §18 に対して、この検査は走らない。** あちらの Negative は
     **開示台帳と突き合わせる**のが本体であり、それは `L10` と `L14` が負う。
     **「作品の禁制を覆っているか」を動画の側で見る検査は、まだ無い**——
@@ -819,18 +850,31 @@ def check_image_negative(project):
                            "この検査は**何も見ていないのと同じである。**"))
         return out
 
+    kind = specmap.SPEC_KINDS["image"]
+    names = kind["body_paragraphs"]
     caught = 0
     for s, p in specs:
-        body = specdoc.section(p.read_text(encoding="utf-8"),
-                               specmap.SPEC_KINDS["image"]["negative"])
+        body = specdoc.section(p.read_text(encoding="utf-8"), kind["body_section"])
         if body is None:
             out.append(finding("L21", s,
-                               f"`{specmap.SPEC_KINDS['image']['field']}` の仕様に "
-                               f"`## {specmap.SPEC_KINDS['image']['negative']}` の節が無い。"
+                               f"`{kind['field']}` の仕様に "
+                               f"`## {kind['body_section']}` の節が無い。"
                                "**禁制を1つも確かめられない**——"
                                "節が無いのは、禁制が揃っていることではない。"))
             continue
-        got = {_stem(c) for c in specdoc.clausify(body)}
+        # ⚠️ **段落の数も見る。** 「2段落である」は名乗りであって、**名乗りは一致ではない**
+        #    （`L22` のカードの名乗りと同じ形）。**数が違えば、下の `index` は
+        #    別の段落を指す**——黙って読むと、`Prompt` を Negative として読む。
+        paras = specdoc.paragraphs(body)
+        if len(paras) != len(names):
+            out.append(finding("L21", s,
+                               f"`{kind['body_section']}` の節が "
+                               f"{len(names)} 段落（{'／'.join(names)}）であるはずが、"
+                               f"**{len(paras)} 段落である。**"
+                               "**段落の数が違えば、どこを読んでいるのかが決まらない**"
+                               "——`Negative` を読んだつもりで `Prompt` を読むことになる。"))
+            continue
+        got = {_stem(c) for c in specdoc.clausify(paras[names.index(kind["negative"])])}
         miss = [c for c in base if _stem(c) not in got]
         if miss:
             caught += 1

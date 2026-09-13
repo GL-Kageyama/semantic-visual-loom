@@ -5,8 +5,11 @@
 相手は §18 `Negative Prompt` である——**モデルに渡るのはこの節であって、§16 ではない**
 （§16 は本ごとに書き直される注記で、塊を持たない。実測は `HISTORY.md`）。
 
-⚠️ **この層は「意味」を読まない。節を切り出すだけである。**
+⚠️ **この層は「意味」を読まない。節と段落を切り出すだけである。**
 意味の照合（`negative: changed` が本当か）は `semantic.py` の L10 が負う。
+
+⚠️ **切る単位が2つある。** 動画の仕様は**節**（§1–20）で、画像の仕様は**段落**である
+——画像の正典は1つの節の中の段落の列だからである（`paragraphs()` の註を見よ）。
 
 ⚠️ **節の見出しは `#` の数が揃っていない。** 実測: `## Negative Prompt` の次は
 `## Instance` ではなく **`# 19. GENERATION INSTANCE`（h1）** である。
@@ -48,6 +51,22 @@ def section(text, title_prefix):
         if t.startswith(title_prefix):
             return body
     return None
+
+
+def paragraphs(body):
+    """本文を段落（空行区切り）に割る。**空の段落は落とす。**
+
+    ⚠️ **`None` はそのまま返す。** 「本文が無い」と「段落が無い」は別である
+    （`section` と同じ規律）。
+
+    ⚠️ **これは画像の仕様のためだけにある。** 動画の仕様は §1–20 という節を持つが、
+    画像の仕様は節を持たない——**正典は1つの節の中の段落の列である。**
+    なぜ見出しで割らないかは `specmap.SPEC_KINDS` の註を見よ
+    （**見出しが本文の間にあると、著者の1回の選択がその見出しを巻き込む**）。
+    """
+    if body is None:
+        return None
+    return [p.strip() for p in re.split(r"\n[ \t]*\n", body) if p.strip()]
 
 
 def clausify(body):
