@@ -5,6 +5,13 @@
 project: ukebi-v2
 
 bible:
+  # 作品の様式。**様式カードの名前である。**
+  # ⚠️ 30本すべての §18 本文に `soft cel anime` と書いてあるが、**機械で読める形では
+  #    どこにも無かった**——だから §18 の7つ目のスロット `Style Motion`（出所＝
+  #    様式カードの `Motion character`）が、何を引くのかを決められなかった。
+  # ⚠️ カードの中身は distill-essence-engine に在る。ここに置くのは**名前だけ**である。
+  style: soft-cel-anime
+
   world:
     concept: >-
       どこにも続かない踏切の境。名のない男が、自分のからだの八つの器官で

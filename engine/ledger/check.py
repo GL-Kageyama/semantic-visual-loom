@@ -258,14 +258,19 @@ def self_test():
     sys.path.insert(0, str(HERE))
     import semantic  # noqa: E402
 
+    # ⚠️ **`role` は日本語で書く。** 生成器へ渡る文字列ではないからである
+    #    （§1–20 に欄が無い＝モデルに渡る文に現れない）。目録の `establishing` は
+    #    読みのための註であって、綴りの半分ではない。**L15 がそう鳴らす。**
+    # ⚠️ **`motion` を持つ。** `mode: motion` なので L16 が要求する（決定 2026-09-13）。
     clean = {
         "shot": "p-ch01-seg01",
         "unit": {"before": "戸が閉まっている", "after": "戸が開いている"},
-        "role": "establishing",
+        "role": "情景",
         "place": "OKURIBI",
         "time": "night",
         "mode": "motion",
         "duration": "6s",
+        "motion": {"subject": "火", "quality": "揺れる", "law": "限定作画"},
         "reference_set": ["OKURIBI.sheet"],
         "attached": ["OKURIBI.sheet"],
         "forbidden_set": ["HANA"],
@@ -703,6 +708,201 @@ def self_test():
     bad += not note
     print(f"    {'L14 回転を註で報告する':<44}{len(note):>10}  "
           f"{'期待どおり' if note else '⚠️ 期待と違う'}")
+
+    print("\n=== 自己検査 — 種別の目録\n")
+
+    import rolemap  # noqa: E402
+
+    def role_proj(roles):
+        shots = [s(f"p-ch01-seg{i:02d}", role=r) for i, r in enumerate(roles, start=1)]
+        p = _One(shots[0])
+        p.shots = {x["shot"]: x for x in shots}
+        return p
+
+    role_cases = [
+        # ⚠️ **素の名**は引ける。登録された12種のどれでも。
+        ("L15 登録済みの種別（鳴ってはならない）", ["情景", "所作"], False, None),
+        # ⚠️ **目録の外**。名のない種別に出会ったら、登録する。
+        ("L15 目録に無い種別", ["情景", "見立て"], True, "は目録に無い"),
+        # ⚠️ **英語の綴り**。目録の `establishing` は読みであって、値ではない。
+        ("L15 英語の綴り（読みを値にしている）", ["establishing"], True, "は目録に無い"),
+        # ⚠️ **限定つき**。`運動（停止）` は引ける——これが実測の綴りである。
+        ("L15 限定つきの運動（鳴ってはならない）", ["運動（停止）"], False, None),
+        # ⚠️ **限定の側が目録に無い**なら鳴る。
+        ("L15 運動の層に無いパターン", ["運動（跳躍）"], True, "は運動の層の目録に無い"),
+        # ⚠️ **限定をつけられるのは運動だけである。**
+        ("L15 運動以外に限定をつける", ["開示（遅延）"], True, "限定をつけられるのは"),
+    ]
+    for label, roles, want, fragment in role_cases:
+        got = [f for f in semantic.check_role_registered(role_proj(roles))
+               if f["severity"] != "note"]
+        n += 1
+        ok = bool(got) == want and (not want or any(fragment in f["message"] for f in got))
+        bad += not ok
+        print(f"    {label:<44}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in got[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # 註の側。**使われていない種別は違反ではない**——註で報告する。
+    got = semantic.check_role_registered(role_proj(["情景", "運動（停止）", "運動（停止）"]))
+    notes = [f for f in got if f["severity"] == "note"]
+    n += 1
+    has_unused = any("使われていない" in f["message"] for f in notes)
+    has_qual = any("限定つきの綴り" in f["message"] for f in notes)
+    ok = (not [f for f in got if f["severity"] != "note"]) and has_unused and has_qual
+    bad += not ok
+    print(f"    {'L15 未使用の種別と限定つきの綴りを註で報告':<44}{len(notes):>10}  "
+          f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+
+    got = semantic.check_role_registered(role_proj([""]))
+    n += 1
+    ok = (not [f for f in got if f["severity"] != "note"]
+          and any("種別が無い" in f["message"] for f in got))
+    bad += not ok
+    print(f"    {'L15 種別が空：鳴らさないが黙らない':<44}{len(got):>10}  "
+          f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+
+    # ⚠️ **目録そのものが短くなれば、名のない種別を鳴らせない。** L11 と同じ形。
+    saved_roles = rolemap.ROLES
+    try:
+        rolemap.ROLES = dict(list(saved_roles.items())[:3])
+        got = [f for f in semantic.check_role_registered(role_proj(["情景"]))
+               if f["severity"] != "note"]
+    finally:
+        rolemap.ROLES = saved_roles
+    n += 1
+    ok = bool(got) and any("目録が" in f["message"] for f in got)
+    bad += not ok
+    print(f"    {'L15 目録そのものが短い':<44}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+
+    # ---- L16（運動の層が無い）
+    #     ⚠️ **いちばん大事な例は「still なら鳴らない」である。** 決定の後半がそれである。
+    print("\n=== 自己検査 — 運動の層の必須\n")
+
+    MOT = {"subject": "手", "quality": "止まる", "law": "限定作画"}
+    mot_cases = [
+        # 決定の前半: mode: still 以外では必須
+        ("L16 mode: motion で motion が無い",
+         {k: v for k, v in clean.items() if k != "motion"}, True, "運動の層が無い"),
+        ("L16 mode: composite で motion が無い",
+         {**{k: v for k, v in clean.items() if k != "motion"}, "mode": "composite"},
+         True, "運動の層が無い"),
+        # 決定の後半: **静的なショットでは Omit も可**
+        ("L16 mode: still なら Omit できる（鳴ってはならない）",
+         {**{k: v for k, v in clean.items() if k != "motion"}, "mode": "still"}, False, None),
+        # motion があれば鳴らない
+        ("L16 motion がある（鳴ってはならない）", {**clean, "motion": MOT}, False, None),
+        # ⚠️ **欄を置いたことは、書いたことではない。**
+        ("L16 motion はあるが空",
+         {**clean, "motion": {"subject": "", "quality": "  ", "law": "限定作画"}},
+         True, "空の欄がある"),
+        # mode が無ければ、規則を適用できない。**註**であって違反ではない。
+        ("L16 mode が無い（註・違反ではない）",
+         {**{k: v for k, v in clean.items() if k != "motion"}, "mode": None}, False, None),
+    ]
+    for label, shot, want, fragment in mot_cases:
+        got = [f for f in semantic.check_motion_required(shot) if f["severity"] != "note"]
+        n += 1
+        ok = bool(got) == want and (not want or any(fragment in f["message"] for f in got))
+        bad += not ok
+        print(f"    {label:<44}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in got[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    got = semantic.check_motion_required(
+        {**{k: v for k, v in clean.items() if k != "motion"}, "mode": None})
+    n += 1
+    ok = bool(got) and got[0]["severity"] == "note" and "決められない" in got[0]["message"]
+    bad += not ok
+    print(f"    {'L16 mode が無いことを註で報告する':<44}{len(got):>10}  "
+          f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+
+    # ---- L17（§18 のスロットが目録のとおりか）
+    #     ⚠️ **本物の見出しを書いたファイルを読ませる**（L10・L11 と同じ理由）。
+    print("\n=== 自己検査 — §18 のスロットの目録\n")
+
+    def sec18(*slots, title="18. WAN 3.0 PROMPT MAPPING"):
+        body = "".join(f"## {t}\n\n本文\n\n" for t in slots)
+        return f"# {title}\n\n{body}# 19. GENERATION INSTANCE\n\n本文\n"
+
+    def slots_proj(body, style="soft-cel-anime"):
+        d = _P(tempfile.mkdtemp())
+        (d / "a.md").write_text(body, encoding="utf-8")
+        sh = s("p-ch01-seg01", spec="a.md")
+        p = _One(sh)
+        p.root = d
+        p.shots = {"p-ch01-seg01": sh}
+        p.bible = {"project": "p", "bible": {"world": {}}}
+        if style is not None:
+            p.bible["bible"]["style"] = style
+        return p
+
+    SIX = ("Master Prompt", "Visual Prompt", "Motion Prompt",
+           "Camera Prompt", "Audio Prompt", "Negative Prompt")
+
+    slot_cases = [
+        # ⚠️ **7つ揃えば鳴らない。** 行き先が在る状態である。
+        ("L17 7スロット揃い（鳴ってはならない）",
+         sec18(*SIX, "Style Motion"), "soft-cel-anime", False, None),
+        # ⚠️ **実測の状態。** `Style Motion` が無い——これが 99/99 本である。
+        ("L17 Style Motion が無い（実測の状態）",
+         sec18(*SIX), "soft-cel-anime", True, "`Style Motion` は決定"),
+        # 目録に無いスロット
+        ("L17 目録に無いスロット", sec18(*SIX, "Style Motion", "Sound Prompt"),
+         "soft-cel-anime", True, "目録に無いスロットがある"),
+        # §18 の小節が1つも無い
+        ("L17 §18 に小節が無い", "# 18. WAN 3.0 PROMPT MAPPING\n\n本文\n",
+         "soft-cel-anime", True, "スロットを1つも確かめられない"),
+        # ⚠️ **出所が決まっていないスロット**——様式を宣言せずに `Style Motion` を置く。
+        ("L17 Style Motion があるのに様式が未宣言",
+         sec18(*SIX, "Style Motion"), None, True, "様式を宣言していない"),
+    ]
+    for label, body, style, want, fragment in slot_cases:
+        got = [f for f in semantic.check_prompt_slots(slots_proj(body, style))
+               if f["severity"] != "note"]
+        n += 1
+        ok = bool(got) == want and (not want or any(fragment in f["message"] for f in got))
+        bad += not ok
+        print(f"    {label:<44}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in got[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ **出所の無いスロットは、行き先になれない。** 目録と出所を両方向に閉じる。
+    saved_slots = specmap.PROMPT_SLOTS
+    try:
+        specmap.PROMPT_SLOTS = saved_slots + ("Sound Prompt",)
+        got = [f for f in semantic.check_prompt_slots(slots_proj(sec18(*SIX, "Style Motion")))
+               if f["severity"] != "note"]
+    finally:
+        specmap.PROMPT_SLOTS = saved_slots
+    n += 1
+    ok = bool(got) and any("出所が宣言されていない" in f["message"] for f in got)
+    bad += not ok
+    print(f"    {'L17 出所の無いスロット':<44}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+
+    n += 1
+    saved_src = specmap.PROMPT_SLOT_SOURCE
+    try:
+        specmap.PROMPT_SLOT_SOURCE = {**saved_src, "Style Motion": "様式カードの `Motion character`"}
+        got = [f for f in semantic.check_prompt_slots(slots_proj(sec18(*SIX, "Style Motion")))
+               if f["severity"] != "note"]
+        ok = not got
+    finally:
+        specmap.PROMPT_SLOT_SOURCE = saved_src
+    bad += not ok
+    print(f"    {'L17 出所が揃えば鳴らない':<44}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+
+    # ⚠️ **目録そのものが短くなれば、足されたスロットを鳴らせない。**
+    n += 1
+    try:
+        specmap.PROMPT_SLOTS = saved_slots[:5]
+        got = [f for f in semantic.check_prompt_slots(slots_proj(sec18(*SIX, "Style Motion")))
+               if f["severity"] != "note"]
+    finally:
+        specmap.PROMPT_SLOTS = saved_slots
+    ok = bool(got) and any("スロットの目録が" in f["message"] for f in got)
+    bad += not ok
+    print(f"    {'L17 目録そのものが短い':<44}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
 
     print("\n=== 自己検査 — 形（スキーマ）が鳴るか\n")
 

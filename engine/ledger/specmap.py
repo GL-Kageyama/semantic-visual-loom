@@ -172,7 +172,10 @@ SPEC_MAP = {
     "18. WAN 3.0 PROMPT MAPPING": {
         "to": (),
         "rest": "spec",
-        "evidence": "6つのスロット（Master / Visual / Motion / Camera / Audio / Negative）。"
+        "evidence": "⚠️ **スロットは7つである**（Master / Visual / Motion / Camera / Audio / "
+                    "Negative ＋ **Style Motion**）——`PROMPT_SLOTS` を見よ。"
+                    "実測の6つは**仕様に在るもの**で、`Style Motion` は**決定（2026-09-13）で"
+                    "足した行き先**である（実測 0/99）。"
                     "**§6 が「the six §18 slots」と書き、§6 の `REF_FORMAT` がそれを定義する**"
                     "——§18 の形は**様式カード（`references/formats/video-spec.md`）の持ち物**である。"
                     "⚠️ **節の名が `WAN 3.0` を名乗る**＝ここは**モデル固有の投影**であって、記録ではない。"
@@ -195,6 +198,43 @@ SPEC_MAP = {
                     "——**「空ファイルは内容でない」と同じ形である。**"
                     "まだ生成していないのだから空なのは正しいが、**空を「問題なし」と読んではならない。**",
     },
+}
+
+# ---------------------------------------------------------------- §18 のスロット
+
+#: §18 が持つスロット。**順序も含めて目録である。** L17 が仕様と突き合わせる。
+#:
+#: ⚠️ **出所は `video-spec`（`distill-essence-engine`）の §18 が明記している。**
+#: ここに写すのは**このリポジトリが検査するため**である——clone した人に
+#: `video-spec` は無く、**読めないものを検査の相手にはできない。**
+#:
+#: ⚠️ **7つ目 `Style Motion` は決定（2026-09-13、著者）で足された。**
+#: 実測が要求した——55枚の様式カードのうち **2枚だけが `Motion character` を持つ**のに、
+#: その2枚の寄与先が**§18 のどこにも無かった**（様式カードが寄与できる2つのうち
+#: Visual Prompt は運動の語を明示的に禁じており、運動を受け取る Motion Prompt の
+#: 出所は §9＋§11 だけである）。**読まれない節は、書かれた分だけ嘘になる。**
+#:
+#: ⚠️ **7つとも `##` の小節である**（実測: 99本すべてが6小節。`Style Motion` は 0/99）。
+PROMPT_SLOTS = (
+    "Master Prompt",
+    "Visual Prompt",
+    "Motion Prompt",
+    "Camera Prompt",
+    "Audio Prompt",
+    "Negative Prompt",
+    "Style Motion",
+)
+
+#: 各スロットの出所。**目録と対で置く。** 出所の無いスロットは、何も運ばない。
+#: L17 は**両方向**を見る（スロットに出す所が無い／出所がスロットを指す）。
+PROMPT_SLOT_SOURCE = {
+    "Master Prompt": "§1 ＋ §7 ＋ §8",
+    "Visual Prompt": "§2 Visual Language ＋ §3 ＋ §4 ＋ §5 ＋ §13（**運動の語は禁じられている**）",
+    "Motion Prompt": "§9 ＋ §11",
+    "Camera Prompt": "§10",
+    "Audio Prompt": "§14",
+    "Negative Prompt": "§16 ＋ カードの Negative ＋ 様式カードの Negative",
+    "Style Motion": "**様式カードの `Motion character`**",
 }
 
 # ---------------------------------------------------------------- 欄 → 出所

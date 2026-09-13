@@ -6,22 +6,34 @@
 `if`/`then` + `const` は**列挙**であって比較ではなく（自由文なので閉じない）、
 `$data` 参照は標準仕様に入らなかった提案である。**測って確かめてある**（`HISTORY.md`）。
 
-**だからここが負う。** 検査は五つの層に分かれる。
+**だからここが負う。** 検査は六つの層に分かれる。
 
   層A  ショット1枚の中で閉じる検査（一変化・一環境・一時刻・一運動）
   層B  台帳と突き合わせる検査（参照・禁制・開示・出所）
   層C  入力そのものの検査（**空を OK と言わない**）
   層D  §1–20 との対応の検査（目録・両方向の閉包・同一性）
   層E  宣言の到達の検査（**台帳が届いていない区間**）
+  層F  **目録そのものの検査**（種別・運動の層・§18 のスロット——**登録が読まれているか**）
 
 ⚠️ 層C を最初に置く理由。**相手が空なら、層A も層B も一件も鳴らない。**
 鳴らないことは、正しいことの証明ではない——`0 == 0` が通った実例が既にある。
+
+⚠️ 層F を足した理由。**登録するだけでは、目録は読まれない。** 実測で
+**17欄のうち7欄をどの検査も読んでいなかった**（`README.md`）。うち `motion` は
+**読むと名指しされていた検査が存在しなかった。** だから目録を足すときは、
+**それを読む検査を同時に足す**——L15・L16・L17 がそれである。
+
+⚠️ **いまも4欄が読まれていない**——`effect`・`duration`・`text_channel`・`sound`。
+**いずれも読み手が別の層にいる**（⑦検収／timeline／Semantic Audio Loom。契約は M6）ので、
+**この層で鳴らす話ではない。** 数の出所は `HISTORY.md`。
 """
 
+import collections
 import json
 import re
 from pathlib import Path
 
+import rolemap
 import specdoc
 import specmap
 
@@ -787,10 +799,261 @@ def check_beyond_declaration(project):
     return out
 
 
+# ---------------------------------------------------------------- 層F 目録を読む
+
+
+def check_role_registered(project):
+    """L15 — **種別が目録にあるか。** `rolemap.ROLES`。
+
+    ⚠️ **登録の意味は、この検査で初めて生まれる。** 目録を書いても、
+    それを読む検査が無ければ、`role` は**誰も読まない欄**のままである
+    ——実測で17欄のうち7欄がそうだった（`README.md`）。
+
+    ⚠️ **逆向きは鳴らさない。** 目録にあってデータに無い種別は、
+    **作品の性質であって目録の欠陥ではない**（一場所・一反復の作品に
+    情景や様式美は現れない）。**註**で報告する——U11 の材料である。
+
+    ⚠️ **綴りを違反にしない。** 実測の `運動（停止）` は
+    **主役「運動」＋運動の層のパターン「停止」**である。目録の `運動` の行は
+    名前を持たないので、**データが先に名を書いた。** 綴りの違いだけで
+    6本を違反にすれば、それは検出ではなく**目録の側の遅れ**である。
+    だから `rolemap.resolve` がパターンを引いて確かめ、
+    **限定つきの綴りを使っていること自体は註**で報告する。
+    """
+    out = []
+    if len(rolemap.ROLES) < 12:
+        out.append(finding("L15", "",
+                           f"種別の目録が {len(rolemap.ROLES)} 種である。12 のはずである——"
+                           "**目録が短くなれば、名のない種別を鳴らせない。**"))
+    counted = collections.Counter()
+    qualified = []
+    unanswered = []
+    for s in project.order():
+        v = project.shots[s].get("role")
+        if v is None or not str(v).strip():
+            # 形（スキーマ）が必須で見ている。**意味の側は重ねて鳴らさない**が、
+            # 黙ってもいない——註で「分類されていない」と言う。
+            unanswered.append(s)
+            continue
+        kind, pat, why = rolemap.resolve(v)
+        if kind is None:
+            out.append(finding("L15", s, f"種別が目録に引けない——{why}。"
+                                         "⚠️ **名のない種別に出会ったら、その場で定義して"
+                                         "登録する**（`rolemap.py`）。"
+                                         "登録しないまま使えば、この検査が鳴り続ける。"))
+            continue
+        counted[kind] += 1
+        if pat:
+            qualified.append(f"{s}（{kind}・{pat}）")
+
+    if unanswered:
+        out.append(finding("L15", f"{len(unanswered)}本",
+                           f"種別が無い（空である）ショットが {len(unanswered)} 本ある: "
+                           f"{', '.join(unanswered[:5])}{' …' if len(unanswered) > 5 else ''}。"
+                           "**このショットは何で裁かれるのかが決まっていない**——"
+                           "種別が無いと、**全場面が同じ基準で裁かれ、全場面が同一になる。**"
+                           "（形の層も同じことを言う。**重ねて鳴らさないが、黙らない。**）",
+                           severity="note"))
+
+    if counted:
+        unused = [k for k in rolemap.ROLES if k not in counted]
+        out.append(finding("L15", f"{len(counted)}種",
+                           f"種別の目録を確かめた（{len(rolemap.ROLES)} 種のうち "
+                           f"{len(counted)} 種を使っている）。使われていない "
+                           f"{len(unused)} 種: {'／'.join(unused)}。"
+                           "⚠️ **これは目録の欠陥ではない**——一場所・一反復の作品には"
+                           "現れない種別である。**「使われていない」と「使えない」は別である。**",
+                           severity="note"))
+    if qualified:
+        out.append(finding("L15", f"{len(qualified)}本",
+                           "⚠️ **限定つきの綴りを使っているショットがある**: "
+                           + "／".join(qualified[:5])
+                           + ("…" if len(qualified) > 5 else "")
+                           + "。これは**主役 `運動` ＋ 運動の層のパターン**であって、"
+                           "目録の `運動` の行が名前を持たないことの帰結である。"
+                           "**違反ではない**——パターンは目録に在り、引けている。"
+                           "⚠️ **ただし綴りが2つある状態でもある**"
+                           "（素の `運動` と `運動（停止）`）。"
+                           "**どちらを正典にするかは決まっていない。**",
+                           severity="note"))
+    return out
+
+
+def check_motion_required(shot):
+    """L16 — **運動の層が無い。**
+
+    決定（2026-09-13、著者）——**`motion` は必須である。ただし静的なショットでは
+    Omit（無指定）も可。** 判定は `mode` で行う:
+
+      `mode: still`              → **Omit も可**（任意）
+      それ以外（motion/composite） → **必須**
+
+    ⚠️ **`mode` が、ここで初めて読み手を得る。** 実測で17欄のうち7欄を
+    どの検査も読んでいなかった——`mode` はその一つである。
+
+    ⚠️ **この30件は「元が無い」ではない。** 受け火 V2 では §11 MOTION が
+    **30本すべてに在り、4小節とも非空**であるのに、**移り先の欄だけが空いている**。
+    L6 が「添付の記録が無い」で30件鳴っているのと同じ形＝**本物の欠落**である
+    （L13 の `Segment ID` のような註ではない）。
+
+    ⚠️ **規則をスキーマに書かない理由。** `if`/`then` で書ける（JSON Schema は
+    できる）。書かないのは、**同じ欠陥を2つの層が別々の符号で報告する**からであり、
+    そして**決定の理由を書く場所がスキーマには無い**からである——
+    スキーマのエラーは「`'motion' is a required property`」と言うだけで、
+    **なぜ必須なのか、何が欠けているのかを言えない。** `unit` の対と同じ扱いである。
+    """
+    sid = shot["shot"]
+    mode = shot.get("mode")
+
+    if "motion" not in shot:
+        if mode == "still":
+            return []                       # 静的——Omit は可（決定）
+        if mode is None:
+            return [finding("L16", sid,
+                            "`mode` が無いので、**運動の層が要るかどうかを決められない**"
+                            "——規則は `mode` で判定する（`mode: still` なら Omit 可）。"
+                            "形の層も `mode` を必須で見ている。",
+                            severity="note")]
+        return [finding("L16", sid,
+                        f"**運動の層が無い**（`mode: {mode}`）。"
+                        "`mode: still` 以外では `motion` は必須である（決定 2026-09-13）——"
+                        "**映像では運動が地であって、静止が特殊ケースである。**"
+                        "⚠️ **元が無いのではない**——§11 MOTION は在り、"
+                        "**移り先の欄だけが空いている。**"
+                        "`subject`（何が動くか）・`quality`（どう動くか）・"
+                        "`law`（どの様式の物理に従うか）を書く。")]
+
+    m = shot.get("motion")
+    if not isinstance(m, dict):
+        return []                           # 形が辞書でないことはスキーマが見る
+    empty = [k for k in ("subject", "quality", "law") if not str(m.get(k) or "").strip()]
+    if empty:
+        return [finding("L16", sid,
+                        f"運動の層はあるが、空の欄がある: {'／'.join(empty)}。"
+                        "**欄を置いたことは、書いたことではない**"
+                        "——空の `motion` は「運動を宣言した」ではない。"
+                        "（`role` の `minLength` と同じ理由である。）")]
+    return []
+
+
+#: §18 の小節見出しを、順序どおりに返す。**`##` の水準を問わない**——
+#: `specdoc.HEADING` は水準を畳むので、`sections()` の**並び**で切り出す。
+def _prompt_slots(path):
+    out, inside = [], False
+    for t, _ in specdoc.sections(Path(path).read_text(encoding="utf-8")):
+        if TOP_SECTION.match(t):            # トップレベルの節見出し（`18. WAN 3.0 …`）
+            inside = t.startswith("18.")
+            continue
+        if inside:
+            out.append(t)
+    return out
+
+
+def check_prompt_slots(project):
+    """L17 — **§18 のスロットが、目録のとおりであるか。** `specmap.PROMPT_SLOTS`。
+
+    **L11 が §1–20 に対してやっていることの、§18 版である。**
+
+    ⚠️ **これが「様式の運動の行き先を作る」の実体である。** スロットを目録に
+    足すだけでは、`motion.law` と同じ穴になる——**目録は読まれて初めて在る。**
+
+    ⚠️ **両方向を見る。** 仕様に在って目録に無い小節（`extra`）と、
+    目録に在って仕様に無い小節（`miss`）の**両方**を鳴らす。片方だけなら、
+    **目録から消えたスロットが黙って落ちる。**
+
+    ⚠️ **`Style Motion` は実測 0/99 である。** 決定（2026-09-13）で足した
+    **行き先**であって、**まだ誰も書いていない。** だからこの検査は
+    **いま鳴る**——それが正しい。**鳴らない検査は存在しないのと同じである。**
+
+    ⚠️ **様式カードは読まない。** `Motion character` の**中身**は
+    `distill-essence-engine` にあり、**このリポジトリを clone した人には無い。**
+    読めないものを検査の相手にはできない。**穴は穴のまま記録する**（下記）。
+    """
+    out = []
+    if len(specmap.PROMPT_SLOTS) != 7:
+        out.append(finding("L17", "",
+                           f"§18 のスロットの目録が {len(specmap.PROMPT_SLOTS)} 個である。"
+                           "7 のはずである——**目録が短くなれば、足されたスロットを"
+                           "鳴らせない。**"))
+    # ⚠️ 出所の無いスロットは、何も運ばない。**目録と出所を両方向に閉じる**（L12 と同じ形）。
+    for slot in specmap.PROMPT_SLOTS:
+        if slot not in specmap.PROMPT_SLOT_SOURCE:
+            out.append(finding("L17", slot,
+                               f"スロット `{slot}` の出所が宣言されていない。"
+                               "**どこから来るか分からないスロットは、行き先になれない。**"))
+    for slot in sorted(set(specmap.PROMPT_SLOT_SOURCE) - set(specmap.PROMPT_SLOTS)):
+        out.append(finding("L17", slot,
+                           f"`PROMPT_SLOT_SOURCE` が `{slot}` を指しているが、目録に無い。"))
+
+    want = list(specmap.PROMPT_SLOTS)
+    seen, with_slot = 0, 0
+    for s in project.order():
+        shot = project.shots[s]
+        src = shot.get("spec")
+        if not src:
+            continue                        # L11 が鳴らしている
+        p = project.root / src
+        if not p.is_file():
+            continue                        # L11 が鳴らしている
+        got = _prompt_slots(p)
+        seen += 1
+        if not got:
+            out.append(finding("L17", s,
+                               "§18 の小節が1つも無い。**スロットを1つも確かめられない**"
+                               "——節が空なのは、スロットが揃っていることではない。"))
+            continue
+        extra = [t for t in got if t not in want]
+        miss = [t for t in want if t not in got]
+        if extra:
+            out.append(finding("L17", s,
+                               f"目録に無いスロットがある: {'／'.join(extra)}。"
+                               "**スロットが足されたなら、`specmap.PROMPT_SLOTS` と "
+                               "`PROMPT_SLOT_SOURCE` にも足す**——出所の宣言が無いスロットは、"
+                               "**何を運ぶのかが決まっていない。**"))
+        if miss:
+            out.append(finding("L17", s,
+                               f"目録にあるスロットが無い: {'／'.join(miss)}。"
+                               + ("⚠️ **`Style Motion` は決定（2026-09-13）で足した"
+                                  "行き先である**（実測 0/99）。"
+                                  "**様式カードの `Motion character` を引く欄**であり、"
+                                  "これが無いあいだ、"
+                                  "**55枚のうち2枚が持つ運動イディオムは"
+                                  "どこからも読まれない。**"
+                                  if "Style Motion" in miss else "")))
+        if not miss:
+            with_slot += 1
+
+    # ⚠️ **スロットの出所は様式である。** だから `Style Motion` を持つ仕様が在るのに
+    #    作品台帳が様式を宣言していなければ、**その欄は空と同じである**——
+    #    何を引くのかが決まっていない。
+    # ⚠️ **これが `bible.style` の読み手である。** 欄を足して読み手を足さなければ、
+    #    `motion` と同じ穴になる（実測で17欄のうち7欄がそうだった）。
+    style = ((getattr(project, "bible", None) or {}).get("bible") or {}).get("style")
+    if with_slot and not style:
+        out.append(finding("L17", "",
+                           f"{with_slot} 本が `Style Motion` を持つが、"
+                           "**作品台帳が様式を宣言していない**（`bible.style`）。"
+                           "このスロットの出所は**様式カードの `Motion character`** であり、"
+                           "**どの様式かを決めずに置いた欄は、空と同じである。**"))
+
+    if seen:
+        out.append(finding("L17", f"{seen}本",
+                           f"§18 のスロットを目録と突き合わせた（{len(want)} スロット）。"
+                           f"7つとも揃っているのは {with_slot}/{seen} 本である。"
+                           + (f"作品の様式は `{style}` と宣言されている。"
+                              if style else "⚠️ 作品の様式は宣言されていない。")
+                           + "⚠️ **様式カードは読んでいない**——`Motion character` の中身は"
+                           "`distill-essence-engine` にあり、このリポジトリには無い。"
+                           "**`Style Motion` がその中身を正しく引くかは、まだ検査されていない**"
+                           "——**この穴は、穴のまま記録する。**",
+                           severity="note"))
+    return out
+
+
 # ---------------------------------------------------------------- まとめ
 
 CHECKS_SHOT = (check_unit, check_one_place, check_one_time, check_move,
-               check_reference_forbidden, check_attached)
+               check_reference_forbidden, check_attached, check_motion_required)
 
 
 def run(project, schema_dir=None):
@@ -806,6 +1069,8 @@ def run(project, schema_dir=None):
     out += check_spec_sections(project)
     out += check_identity(project)
     out += check_beyond_declaration(project)
+    out += check_role_registered(project)
+    out += check_prompt_slots(project)
     if schema_dir:
         out += check_field_source(schema_dir)
     return out

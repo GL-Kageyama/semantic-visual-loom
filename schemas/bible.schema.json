@@ -38,6 +38,11 @@
           "description": "根本律など、作品を貫く定数。",
           "additionalProperties": { "type": "string" }
         },
+        "style": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "description": "作品の様式。**様式カードの名前である**（例 soft-cel-anime）。決定（2026-09-13、著者）——§1 Duration / Aspect と同じ**作品定数**として、ここに置く。⚠️ **これは §18 の7つ目のスロット `Style Motion` の出所である**（`specmap.PROMPT_SLOTS`）——そのスロットは様式カードの `Motion character` を引く。**だからこの欄が空なら、`Style Motion` は何も引かない**（`L17` が「様式を宣言していない」と鳴らす）。⚠️ **様式カードの中身はこのリポジトリに無い**（`distill-essence-engine` の持ち物である）。機械可読なのは**名前だけ**であり、**それでよい**——何を引くかが決まっていれば、引く先は向こうにある。⚠️ **この欄が機械可読でなければ、様式は散文の中にしか無かった**（実測: 受け火 V2 の30本すべてが `soft cel anime` を使い、§18 の本文にそう書いてあるが、**どこからも機械で読めなかった**）。"
+        },
         "negative_base": {
           "type": "array",
           "items": { "type": "string" },
