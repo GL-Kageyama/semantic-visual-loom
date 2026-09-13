@@ -21,7 +21,7 @@ take:
     source_version: "0.1.0"
     duration: 3
     aspect: "16:9"
-  file: "01_53b4902e-e85c-43fe-9cb7-25edd391f3d6.mp4"
+  file: "01__53b4902e-e85c-43fe-9cb7-25edd391f3d6.mp4"
   verdict:
     machine:
       measured:

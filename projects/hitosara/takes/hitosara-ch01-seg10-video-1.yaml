@@ -1,4 +1,4 @@
-# seg05 / 動画 / 1 — 4s / 30fps / 120 フレーム
+# seg10 / 動画 / 1 — 4s / 30fps / 120 フレーム
 #
 # ⚠️ **測ったのは映像トラックである。** `measured.duration` は**映像**の尺であって、
 #    フォーマット全体の duration ではない——**音声が在ると、そちらに引っ張られる。**
@@ -7,25 +7,21 @@
 #    そう書いてある。**このリポジトリは、それをファイルから確かめていない。**
 # ⚠️ **尺は仕様の §1 と一致した。フレームレートは一致しなかった**（戻ってきたものはどれも 30、仕様は 24）。
 #    `takes/README.md` を見よ——**どちらを正とするかは決まっていない。**
-# ⚠️ **ファイル名の先頭の `5` が、この1本を seg05 とする根拠である。**
-#    ⚠️ **著者が `6__78bbaadd-….mp4` を「ショット6の動画」として指した**（2026-09-13）
-#    ——**先頭の数字がショット番号であることの、実測である。**
-#    残りも同じ規則で読んでいる。**推測ではなく、1点の実測に支えられた読みである。**
 #
 # ⚠️ **著者はこの1本について何も言っていない**（2026-09-13 時点）——
 #    だから `adopted` を書かない。**書かないことが記録である。**
 take:
-  shot: hitosara-ch01-seg05
+  shot: hitosara-ch01-seg10
   kind: video
   index: 1
   provider:
     model: WAN 3.0
   params:
-    source: specs/video/shot-05-under-the-lid.md
+    source: specs/video/shot-10-table.md
     source_version: "0.1.0"
     duration: 4
     aspect: "16:9"
-  file: "05__4238a98e-61e5-46b1-9d74-decee4d339da.mp4"
+  file: "10__bcb6d7ba-cee6-42ee-9eb7-5780460b5376.mp4"
   verdict:
     machine:
       measured:
