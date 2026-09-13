@@ -78,7 +78,7 @@ If the first frame is not what you intended, piling 10 videos on top of it becom
 | | |
 |---|---|
 | `bible.yaml` | World, fundamental laws, visual language. **The style is `luminous-anime`** (the card has `Motion character`) |
-| `ledger.yaml` | The ledger is **one** (continuity + disclosure) |
+| `ledger.yaml` | The ledger is **one** (continuity + disclosure—people, places, props; the position where the oven opens, the position where the bread breaks) |
 | `shots/` | 10 files. `role` / `mode` / `beats` / `reference_set` / `attached` / `disclosure_state` / `motion` |
 | `specs/video/` | 10 files. Has §1–20. **Only §18 is fed** |
 | `specs/image/` | 10 files. Does not have §1–20. **Two paragraphs** are canonical |

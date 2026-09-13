@@ -78,7 +78,7 @@
 | | |
 |---|---|
 | `bible.yaml` | 世界・根本律・視覚言語。**様式は `luminous-anime`**（カードが `Motion character` を持つ） |
-| `ledger.yaml` | 台帳は**ひとつ**（連続性＋開示） |
+| `ledger.yaml` | 台帳は**ひとつ**（連続性＋開示——人物・場所・道具、窯が開く位置、パンが割れる位置） |
 | `shots/` | 10本。`role` / `mode` / `beats` / `reference_set` / `attached` / `disclosure_state` / `motion` |
 | `specs/video/` | 10本。§1–20 を持つ。**投入するのは §18 だけ** |
 | `specs/image/` | 10本。§1–20 を持たない。**2段落**が正典 |

@@ -74,11 +74,29 @@ let **one broken file hide every other report.**
 is not recording it.** So a state is possible in which a file sits in `media/` and has
 no take. **Because the checker does not open `media/`, a discrepancy between the record
 and the actual object does not fire**—that is a hole, and it is reported as one.
+**If `takes/` is empty, the report says "there is not a single take record." Zero is not a pass.**
+
+⚠️ **`projects/` holds two kinds side by side**—**raw specification trees** and
+**structured records** (`bible.yaml` / `ledger.yaml` / `shots/`).
 
 ⚠️ **`projects/ukebi` and `projects/gozen-niji` are raw specification trees, not
 projects.** They hold no `bible.yaml` / `ledger.yaml` / `shots/`, so running the
 checker over them reports **"読めていない"** and `L0` fires **"there is not a single
 shot; the check is looking at nothing."** That is the correct behaviour, not an error.
+
+⚠️ **No generated output is placed beside the raw trees**—**only the records and the
+specifications.** **Old generated output lowers the work's degree of quality uniformity.**
+
+⚠️ **Their `reference/` assets are kept** (**9 distinct images**, copied into each segment).
+**They are not generated output but input**—and **the only record of "which segment had what
+attached to it"** (`wan-full-spec.md` names its references only as `REF_STYLE` / `REF_SOURCE`).
+⚠️ **Delete them, and the record of attachment goes with them.**
+The counts behind that are in `HISTORY.md`.
+
+⚠️ **`renders/` is where editing output—the work—goes; `media/` is where samples go.**
+**Samples and works are separated by place**—they cannot be separated by name.
+⚠️ **The emptiness of `timeline/` is not even reported**, because nothing opens it yet:
+**a check that reports nothing looks the same as a check that passed.**
 
 ## The layers
 
@@ -117,6 +135,17 @@ python3 tools/check_i18n.py               # the real thing
 without that, **a check that saw nothing looks like a check that passed.**
 ⚠️ **It does not see whether the prose is translated correctly**—if the meaning
 contradicts, it still passes as long as the lines and headings agree.
+
+⚠️ **The scheme it checks**: the canonical carries **no suffix**, and the mirrors use the
+**suffix scheme in the same directory** (`README.md` / `README-ja.md` / `README-zh.md`).
+**No `-en` mirror is created**, because the canonical is English.
+⚠️ **The subfolder scheme (`ja/` `zh/`) is not used**—so that **the depth of the canonical
+and the mirrors does not change.**
+⚠️ **The working language of development stays Japanese** (commit messages, `HISTORY.md`,
+conversation) **while the canonical of the documents is English.** These two are different
+things: one is the language the work is done in, the other the language the documents are
+authoritative in. **10 documents × 3 languages are in place**, and the rules are in
+[`CLAUDE.md`](../CLAUDE.md).
 
 ## Where to read more
 

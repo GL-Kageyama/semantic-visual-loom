@@ -78,7 +78,7 @@
 | | |
 |---|---|
 | `bible.yaml` | 世界、根本律、视觉语言。**样式是 `luminous-anime`**（卡持有 `Motion character`） |
-| `ledger.yaml` | 台账是**一个**（连续性＋开示） |
+| `ledger.yaml` | 台账是**一个**（连续性＋开示——人物、地点、道具，窑打开的位置、面包裂开的位置） |
 | `shots/` | 10个。`role` / `mode` / `beats` / `reference_set` / `attached` / `disclosure_state` / `motion` |
 | `specs/video/` | 10个。持有 §1–20。**投入的只有 §18** |
 | `specs/image/` | 10个。不持有 §1–20。**两个段落**是正典 |
