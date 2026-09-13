@@ -24,8 +24,14 @@
 
 ## 状態
 
-**⚠️ 未実装である。** 現在あるのは骨格と設計だけである。
-何が決まっていて何が決まっていないかは、リポジトリ内の各文書に書く。
+**生成はまだ走らない。事前検証は動く。**
+
+```bash
+python3 engine/ledger/check.py projects/ukebi/ukebi-v2   # 事前検証
+python3 engine/ledger/check.py --self-test               # 検査器が鳴るか
+```
+
+**⚠️ 検査は事前検証だけである。** ショットの生成・選別・編集・検収は無い。
 
 ## 構成
 
@@ -33,20 +39,32 @@
 
 ```text
 semantic-visual-loom/
-├── references/      # カード（種別・フォーマット）。distill から移管した video-spec を含む
-└── projects/        # 作品ごとの実体。受け火と午前二時の仕様書（テキストのみ）
+├── schemas/         # データ構造の正典（bible / ledger / shot-record / take / timeline）
+├── engine/ledger/   # 制作台帳と事前検証（生成を走らせずに設計の破綻を潰す）
+├── references/      # カード。distill から移管した video-spec を含む
+└── projects/        # 作品ごとの実体
 ```
+
+**⚠️ `projects/` には2種類が同居している。**
+
+- **生の仕様書**——受け火・午前二時の §1–20（`video-*/seg-*/wan-full-spec.md`）。**そのまま残してある。**
+- **構造化した記録**——`bible.yaml` / `ledger.yaml` / `shots/`。**いまは `ukebi-v2` の1本だけである。**
 
 **予定であって、まだ無いもの**
 
 ```text
-├── engine/          # 制作台帳・ショット記録・事前検証
-├── schemas/         # bible / ledger / shot-record / take / timeline
+├── skills/          # 分解・設計・台帳・ショット・構成・検収
+├── engine/shot/     # ショット記録の生成・検証
+├── engine/visual/   # Visual Asset Engine
+├── engine/assembly/ # タイムライン・カット・文字合成・レンダ
+├── providers/       # 画像・動画・合成の生成器
+├── assets/          # 参照資産（キャラシート・ボード）
+├── interchange/     # OTIO / EDL / FCPXML
 ├── docs/            # 深掘り
-└── tools/           # 検査
+└── tools/           # 検査（i18n のミラー欠落・リンク切れ）
 ```
 
-**⚠️ 仕様書はまだ生のままである。**「1ショット＝1生成」の器（`shots/`）への組み替えは未着手である。
+**⚠️ `takes/` と `timeline/` はスキーマだけが在って、記録が1本も無い。**
 
 ## 言語
 

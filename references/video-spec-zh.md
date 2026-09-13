@@ -82,7 +82,7 @@
 | **15 CONTINUITY** | 同一性・空间・时间・视觉・运动的连续——**同一性锁定** | ④保持一致 |
 | **16 CONSTRAINTS** | MUST / MUST NOT / PREFER / ALLOW | ⑦负面 |
 | **17 GENERATION PRIORITIES** | 冲突时的优先顺序——把对原作的忠实置于观感之上 | ⑧忠于原作 |
-| **18 PROMPT MAPPING** | 由 §1–17 **导出的**六条提示词 | — |
+| **18 PROMPT MAPPING** | 六条提示词——**主要出处**是 §1–17 | — |
 | **19 GENERATION INSTANCE** | 一次生成的解决值（时长・参照・事件・输出） | — |
 | **20 ITERATION** | 观察到的问题 → 变更 → 下次生成 | — |
 
@@ -90,7 +90,7 @@
 
 ## §18 的提示词槽位
 
-六条提示词，各自由上表中指名的节导出。**彼此分离本身就是要点**，不要混为一谈。
+六条提示词，各自**主要**取自上表中指名的节。**彼此分离本身就是要点**，不要混为一谈。
 
 ```text
 Master Prompt   ← §1 + §7 + §8
@@ -114,6 +114,10 @@ Audio Prompt    ← §14
   emotional function)
 
 Negative Prompt ← §16 MUST NOT + this card's Negative + the style card's Negative
+
+The sources above are the main ones, not the only ones. The camera-stability
+prohibition is the known case: it is written in §10, and it reaches the model
+through the Negative slot.
 ```
 
 ## Negative

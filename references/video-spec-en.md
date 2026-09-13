@@ -82,7 +82,7 @@ Fill in this order. The right-hand column is where each engine principle lands.
 | **15 CONTINUITY** | identity, spatial, temporal, visual, motion — **the identity lock** | ④ Keep consistent |
 | **16 CONSTRAINTS** | MUST / MUST NOT / PREFER / ALLOW | ⑦ Negative |
 | **17 GENERATION PRIORITIES** | the conflict-resolution order — put fidelity to the source above visual appeal | ⑧ Stay faithful |
-| **18 PROMPT MAPPING** | the six prompts **generated from** §1–17 | — |
+| **18 PROMPT MAPPING** | the six prompts — the **main** sources are §1–17 | — |
 | **19 GENERATION INSTANCE** | resolved values for one generation (duration, references, events, output) | — |
 | **20 ITERATION** | observed problems → changes → next generation | — |
 
@@ -90,7 +90,7 @@ Keep §1–18 reusable and put everything duration-dependent in §19, so the sam
 
 ## §18 prompt slots
 
-Six prompts, each derived from named sections above. Keep them separate — that separability is the point.
+Six prompts, each drawn mainly from the sections named above. Keep them separate — that separability is the point.
 
 ```text
 Master Prompt   ← §1 + §7 + §8
@@ -114,6 +114,10 @@ Audio Prompt    ← §14
   emotional function)
 
 Negative Prompt ← §16 MUST NOT + this card's Negative + the style card's Negative
+
+The sources above are the main ones, not the only ones. The camera-stability
+prohibition is the known case: it is written in §10, and it reaches the model
+through the Negative slot.
 ```
 
 ## Negative

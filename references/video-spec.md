@@ -82,7 +82,7 @@
 | **15 CONTINUITY** | 同一性・空間・時間・視覚・運動の継続——**同一性のロック** | ④一貫 |
 | **16 CONSTRAINTS** | MUST / MUST NOT / PREFER / ALLOW | ⑦ネガティブ |
 | **17 GENERATION PRIORITIES** | 衝突時の優先順——見栄えより原作への忠実を上に置く | ⑧原作に忠実 |
-| **18 PROMPT MAPPING** | §1–17 **から導かれる**6つのプロンプト | — |
+| **18 PROMPT MAPPING** | 6つのプロンプト——**主な出所**は §1–17 | — |
 | **19 GENERATION INSTANCE** | ひとつの生成の解決値（尺・参照・イベント・出力） | — |
 | **20 ITERATION** | 観測された問題 → 変更 → 次の生成 | — |
 
@@ -90,7 +90,7 @@
 
 ## §18 のプロンプトスロット
 
-6つのプロンプト。それぞれ上記の名指しされた節から導く。**分離されていること自体が要点**なので、混ぜない。
+6つのプロンプト。それぞれ**主に**上記の名指しされた節から取る。**分離されていること自体が要点**なので、混ぜない。
 
 ```text
 Master Prompt   ← §1 + §7 + §8
@@ -114,6 +114,10 @@ Audio Prompt    ← §14
   emotional function)
 
 Negative Prompt ← §16 MUST NOT + this card's Negative + the style card's Negative
+
+The sources above are the main ones, not the only ones. The camera-stability
+prohibition is the known case: it is written in §10, and it reaches the model
+through the Negative slot.
 ```
 
 ## Negative
