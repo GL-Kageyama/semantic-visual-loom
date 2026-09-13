@@ -1,0 +1,107 @@
+# 制作台帳 — 一皿ができるまで（hitosara）
+#
+# 連続性（世界の状態）と開示（観客の知識の状態）を同じファイルに持つ。
+# ⚠️ 二つに割ってはならない——参照集合も禁制集合も、この一点から導かれる。
+#
+# ⚠️ この作品は**まだ1枚も生成していない**。ここにあるのは設計であって、記録ではない。
+
+characters:
+  BAKER:
+    identity: >-
+      hitosara-baker-character-sheet（手と前掛け。顔は映さない）
+    # ⚠️ 衣装が「時刻」で決まる作品ではない。前掛けは朝も昼も夜も同じである
+    #    ——時間は生地の側で進み、作り手は着替えない。
+    states: {}
+    negatives:
+      - "no human face"
+      - "no full body of the baker"
+      - "a second pair of hands"
+      - "clean manicured hands"
+      - "a wedding ring or watch on the hands"
+
+locations:
+  MILL:
+    base: hitosara-mill-board（粉屋の棚。袋が並び、どれも文字が読めない）
+    geography: hitosara-mill-geography（棚・秤・出口の位置関係）
+    states:
+      朝:
+        board: hitosara-mill-board-dawn
+  KITCHEN:
+    base: hitosara-kitchen-board（仕事場。捏ね台・ボウル・窯）
+    geography: hitosara-kitchen-geography（捏ね台と窯の位置関係。窯は常に画面の同じ側）
+    states:
+      朝:
+        board: hitosara-kitchen-board-morning
+      昼:
+        board: hitosara-kitchen-board-midday
+      明け方:
+        board: hitosara-kitchen-board-before-dawn
+  TABLE:
+    base: hitosara-table-board（食卓。皿が一皿だけ置かれている）
+
+props:
+  KONA:
+    appearance: "小麦粉。粒子が細かく、光の中では浮遊する。袋はあるが文字は読めない"
+    negative: ["brand label", "readable text on the bag", "a packaged loaf"]
+  MIZU:
+    appearance: "水。ボウルの中では膜になり、粉を巻き込んでいく"
+    negative: ["water splash", "drops flying in the air", "a running tap"]
+  SHIO:
+    appearance: "塩。指の先に乗る量だけが画面に出る"
+    negative: ["a salt shaker with a label", "pouring from height"]
+  KAMADO:
+    appearance: >-
+      薪の窯。口は鉄の扉で閉じられている。扉の向こうに火がある
+      ——**開くまで、その中は画面に出ない**（開示の第1点）
+    negative: ["visible flame", "a glow through the door seam",
+               "an oven interior", "a digital temperature display"]
+  PAN:
+    appearance: >-
+      焼き上がったパン。外は金、内は気泡
+      ——**割るまで、その中は画面に出ない**（開示の第2点）
+    negative: ["a cut loaf", "a visible crumb", "a torn-open loaf",
+               "sliced bread", "a cross-section"]
+
+# ---------------------------------------------------------------- 開示
+# 変化点だけを持つ。全ショットは並べない。変化点の間は直前の状態が続く。
+#
+# 各変化点の `negative:` は、**モデルに渡る文（§18 Negative Prompt）がこの点で
+# どうなったか**の宣言である。検査 L10 が、§18 を実際に読んで両方向に検算する。
+#
+#   changed  この変化点で §18 の節が変わった
+#   covered  §18 は変わらない。**既にその状態を持っていた**
+#
+# ⚠️ **この作品の変化点は2つで、どちらも §18 で確かめられる。**
+#    窯は 08 で開き、パンは 09 で割れる。**両方とも動画の仕様を持つ**——
+#    決定（2026-09-13、著者）「全ショット画像 → 全ショット動画」の下では、
+#    **どのショットも §1–20 と §18 を持つ**（種類は欄が決める。`mode` は決めない）。
+#    ⚠️ **以前 09 には `negative:` が書けなかった。** あのときは 09 が `mode: still` で、
+#    画像プロンプトしか持たなかった——**読む相手のいない宣言を書かない**という規則である。
+#    **その前提が消えた。** いまは書けるし、**書かなければ L10 が鳴る。**
+disclosure:
+  - shot: hitosara-ch01-seg08
+    KAMADO.interior: opened    # 閉じている → 開く。窯の中が初めて画面に出る
+    negative: changed          # §18 から `no oven interior`・`no visible flame`・
+                               # `no glow through the door seam` が落ちる。
+                               # ⚠️ **落ちるのは禁止が消えることであり、増えることより重い**
+                               #    ——以後、モデルはそれを描いてよい（L14 の註）。
+  - shot: hitosara-ch01-seg09
+    PAN.interior: opened       # 気泡が見える。割った断面が初めて画面に出る
+    negative: changed          # §18 から `no cut loaf`・`no visible crumb`・
+                               # `no cross-section` が落ちる。
+                               # ⚠️ **画像の仕様の Negative でも同じ3節が落ちる**——
+                               #    そちらを読むのは引き渡しの層である（段2）。
+                               #    **だからこの変化点も、画像の側ではまだ検査されていない。**
+
+# at は「鍵」ではない。人が読むための群れである。
+at:
+  粉:
+    range: "01"
+  仕込み:
+    range: "02"
+  発酵:
+    range: "03"
+  窯:
+    range: "04"
+  皿:
+    range: "05"

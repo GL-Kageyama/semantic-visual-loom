@@ -1,0 +1,58 @@
+# 10 / モンタージュ / motion — 盛り付けから食卓
+#
+# ⚠️ **決定（2026-09-13、著者）で `mode` が変わった。** 以前は `composite` だった。
+#    このショットの主題は**皿と、そこへ至る断片**であり、断片は動く——だから `motion`。
+#    ⚠️ **`text_channel` は残る。** `motion` のショットも文字を持てる
+#    ——`composite` ⇒ `text_channel` 非空は片方向の規則である。
+# ⚠️ **ここで `motion.law` が様式と正面から噛み合う。** 様式 `luminous-anime` の
+#    Motion character は「何かが常に動いている」と言う。モンタージュは
+#    **1ショットの中で連続して動かない**——切れ目で動く。
+#    だから `law` がその衝突を明示している: **断片のそれぞれの中で満たされる。**
+#    ⚠️ **この噛み合わせを機械が読むことは、いま無い**（§11 の小節は4つ、欄は3つ。
+#    `motion.law` と様式カードの `Motion character` を突き合わせる照合は未実装）。
+shot: hitosara-ch01-seg10
+spec: specs/video/shot-10-table.md
+first_frame: specs/image/shot-10-table.md
+unit:
+  before: 皿は空である
+  after: 皿の上に、一皿がある
+role: モンタージュ
+place: TABLE
+time: 朝
+mode: motion
+duration: 4s
+motion:
+  subject: カメラと皿
+  quality: 短い断片が繋がる——置く、引く、卓に着く。繋ぎは切れ目で行う
+  law: モンタージュである。連続して動くのではなく、**切れ目で動く**。様式の「常に何かが動いている」は、断片のそれぞれの中で満たされる
+beats:
+- range: 0-1.5s
+  density: dense
+  what: 皿が置かれる。湯気が立つ。パンが割られ、断面が金を受ける。
+- range: 1.5-2.5s
+  density: dense
+  what: 卓。椅子。窓。断片が三つ、短く繋がる。
+- range: 2.5-4s
+  density: held
+  what: 皿の前で止まる。湯気だけが動いている。長く保つ。
+text_channel:
+- t: 3.4-4.0
+  kind: overlay
+  content: 一皿
+reference_set:
+- TABLE.base
+- BAKER.sheet
+- PAN.appearance
+forbidden_set:
+- KAMADO
+- KONA
+- SHIO
+attached:
+- TABLE.base
+- BAKER.sheet
+- PAN.appearance
+disclosure_state:
+  KAMADO.interior: opened
+  PAN.interior: opened
+sound:
+  scene_ref: hitosara-sc10-table

@@ -1,0 +1,59 @@
+# 03 / 図解 / composite — 分量と工程
+#
+# ⚠️ **生成器に文字を描かせない。** `text_channel` は `timeline` の `text_events` が焼く。
+#    だからこのショットは `composite` である——**画像1枚＋文字は、生成ではなく編集である。**
+#    ⚠️ **ここが `composite` の正しい住処である。** 主題は**図**であって、止まっている。
+#    動くのは**載る文字**だけであり、それは生成ではなく編集で動く。
+# ⚠️ **`motion` は `mode` によらず必須である**（L16、決定 2026-09-13）。
+#    ここでの運動は**編集の運動**である——`FIELD_DESTINATION` は `motion` を
+#    `edit:timeline` へも送る（`mode` 次元は無い。**全ショットが同じ場所へ行く**）。
+shot: hitosara-ch01-seg03
+spec: specs/video/shot-03-quantities.md
+first_frame: specs/image/shot-03-quantities.md
+unit:
+  before: 分量は、どこにも書かれていない
+  after: 分量と順序が、画面の上に一度だけ置かれる
+role: 図解
+place: KITCHEN
+time: 朝
+mode: composite
+duration: 5s
+motion:
+  subject: 画面に載る文字そのもの
+  quality: 置かれて、留まり、消える。動きではなく、出現と保持である
+  law: 文字は編集で載る——生成器は描かない。**主題（図）は止まり、光と粉塵だけが動く。**
+    フレームは押しも送りもしない。動くのは文字だけである
+beats:
+- range: 0-3s
+  density: held
+  what: 捏ね台の上の粉と水と塩。分量の文字が画面の隅に置かれ、留まる。
+- range: 3-5s
+  density: sparse
+  what: 文字が入れ替わり、工程の四語が並ぶ。下の絵は動かない。
+text_channel:
+- t: 0.5-3.5
+  kind: overlay
+  content: 粉 250g　水 175g　塩 5g　酵母 1g
+- t: 3.5-5.0
+  kind: overlay
+  content: 混ぜる　捏ねる　休ませる　焼く
+reference_set:
+- KITCHEN.base
+- KITCHEN.geography
+- KONA.appearance
+- MIZU.appearance
+- SHIO.appearance
+forbidden_set:
+- KAMADO
+- PAN
+attached:
+- KITCHEN.base
+- KITCHEN.geography
+- KONA.appearance
+- MIZU.appearance
+- SHIO.appearance
+disclosure_state:
+  KAMADO.interior: sealed
+  PAN.interior: sealed
+sound:
+  scene_ref: hitosara-sc03-quantities

@@ -1,0 +1,54 @@
+# 04 / 運動（躍動）/ motion — 捏ねる
+#
+# ⚠️ **`mode` と `role` の既定が一致している。** 目録（`rolemap.ROLES`）の
+#    `運動` の既定モードは `motion` であり、ここはそれに従っている。
+#    ⚠️ **この一致を読む検査は、いま無い**——既定モードは目録に在るが、
+#    **誰も読んでいない。**（`HISTORY.md` に記録）
+# ⚠️ **決定（2026-09-13、著者）で、このショットも画像から始まる。** 動画の仕様は
+#    `spec:`、画像の仕様は `first_frame:` である——**`mode: motion` でも画像は要る。**
+shot: hitosara-ch01-seg04
+spec: specs/video/shot-04-knead.md
+first_frame: specs/image/shot-04-knead.md
+unit:
+  before: 粉と水は、まだ別々にそこにある
+  after: 手の下で、ひとつの塊になる
+role: 運動（躍動）
+effect: 抵抗
+place: KITCHEN
+time: 朝
+mode: motion
+duration: 6s
+motion:
+  subject: 手と生地
+  quality: 押し、畳み、回す。速く打って、長く休む——均等にこねない
+  law: 様式は limited ではなく full——何かが常に動いている。ただし動くのは atmosphere が先で、手はその中で最大の動きである
+beats:
+- range: 0-1.5s
+  density: dense
+  what: 掌の付け根が生地を押し出す。粉塵が跳ね、光の中に散る。
+- range: 1.5-4s
+  density: held
+  what: 畳んで、回して、また押す。手の速さは一定でなく、打つところと休むところがある。
+- range: 4-6s
+  density: held
+  what: 生地が艶を帯び、表面が張る。手が止まる。止まっても、粉塵はまだ落ちている。
+reference_set:
+- BAKER.sheet
+- KITCHEN.base
+- KITCHEN.geography
+- KONA.appearance
+- MIZU.appearance
+forbidden_set:
+- KAMADO
+- PAN
+attached:
+- BAKER.sheet
+- KITCHEN.base
+- KITCHEN.geography
+- KONA.appearance
+- MIZU.appearance
+disclosure_state:
+  KAMADO.interior: sealed
+  PAN.interior: sealed
+sound:
+  scene_ref: hitosara-sc04-knead

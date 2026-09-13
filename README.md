@@ -27,11 +27,15 @@
 **生成はまだ走らない。事前検証は動く。**
 
 ```bash
-python3 engine/ledger/check.py projects/ukebi/ukebi-v2   # 事前検証
+python3 engine/ledger/check.py projects/hitosara         # デモ「一皿ができるまで」
+python3 engine/ledger/check.py projects/ukebi/ukebi-v2   # 受け火 V2
 python3 engine/ledger/check.py --self-test               # 検査器が鳴るか
 ```
 
 **⚠️ 検査は事前検証だけである。** ショットの生成・選別・編集・検収は無い。
+
+⚠️ **違反0件は「正しい」ではない。** `check.py` は最後にそう言う。
+**註と、検査されていない範囲を読むこと。**
 
 ## 構成
 
@@ -48,12 +52,40 @@ semantic-visual-loom/
 **⚠️ `projects/` には2種類が同居している。**
 
 - **生の仕様書**——受け火・午前二時の §1–20（`video-*/seg-*/wan-full-spec.md`）。**そのまま残してある。**
-- **構造化した記録**——`bible.yaml` / `ledger.yaml` / `shots/`。**いまは `ukebi-v2` の1本だけである。**
+- **構造化した記録**——`bible.yaml` / `ledger.yaml` / `shots/`。**`ukebi-v2` と `hitosara` の2本である。**
 
-**予定であって、まだ無いもの**
+## デモ `projects/hitosara/`
+
+**「一皿ができるまで」**——粉と水と塩と時間から、パンが一皿になるまで。
+10ショット。**受け火から完全に独立している。**
+
+**これは、この基盤が何を読むかを全部見せるために置いてある。**
+受け火 V2 が通っていない目録を踏む——種別は15のうち8、`mode` は3つとも、
+`attached` は全ショット、`text_channel` と `sound` も使う。
+
+⚠️ **全ショットが2つの経路を持つ。** `spec:` は動画の仕様（§1–20 と §18）、
+`first_frame:` は画像の仕様（§1–20 を持たない）——**画像は動画の最初のコマである。**
+**生成は 画像10枚 → 全部見る → 動画10本**の順に回る。
+
+| | |
+|---|---|
+| `bible.yaml` | 世界・根本律・視覚言語。**様式は `luminous-anime`**（カードが `Motion character` を持つ） |
+| `ledger.yaml` | 台帳は**ひとつ**。人物・場所・道具・**開示**（窯が開く位置、パンが割れる位置） |
+| `shots/` | 10本。`role` / `mode` / `beats` / `reference_set` / `attached` / `disclosure_state` / `motion` |
+| `specs/video/` | 10本。§1–20 を持つ。§18 が `WAN 3.0` を名乗り、7スロットを埋める |
+| `specs/image/` | 10本。**§1–20 を持たない。** 様式の4欄と1枚の文と、その Negative |
+| `takes/` `timeline/` `media/` | **空である。** ⚠️ **その空は報告される**（下記） |
+
+⚠️ **`takes/` は空で、それは意図である。** `check.py` は
+**「テイクの記録が1本も無い」**と報告する——**「0件だから正しい」と読んではならない。**
+**置いたことは、撮ったことではない。**
+⚠️ **`timeline/` の空は、それすら報告されない**——まだ誰も開かないからである。
+
+## 予定であって、まだ無いもの
 
 ```text
 ├── skills/          # 分解・設計・台帳・ショット・構成・検収
+├── engine/handover/ # 引き渡し票（§18 の7スロット・画像プロンプト・音）と往復検査
 ├── engine/shot/     # ショット記録の生成・検証
 ├── engine/visual/   # Visual Asset Engine
 ├── engine/assembly/ # タイムライン・カット・文字合成・レンダ
@@ -65,6 +97,7 @@ semantic-visual-loom/
 ```
 
 **⚠️ `takes/` と `timeline/` はスキーマだけが在って、記録が1本も無い。**
+`takes.schema.json` も `timeline.schema.json` も、**まだどの層からも当たっていない。**
 
 ## 言語
 

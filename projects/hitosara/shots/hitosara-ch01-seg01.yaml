@@ -1,0 +1,52 @@
+# 01 / 情景 / motion — 粉屋の棚、朝
+#
+# ⚠️ **決定（2026-09-13、著者）で `mode` が変わった。** 以前は `still` だった。
+#    全ショットが画像 → 動画の2経路を持つようになり、**`mode` は仕様の種類ではなく
+#    「主題が動くか」だけを決めるようになった。** このショットの主題は**光**であり、
+#    光は動く——だから `motion` である。
+#    ⚠️ **`mode` が `still` だったのは「静止のショットは画像で終わる」という前提の下で
+#    のことである。その前提が消えた。**
+shot: hitosara-ch01-seg01
+spec: specs/video/shot-01-mill-shelf.md
+first_frame: specs/image/shot-01-mill-shelf.md
+unit:
+  before: 粉屋の棚は、まだ誰にも選ばれていない
+  after: 朝の光が、棚の一段だけを選び出す
+role: 情景
+place: MILL
+time: 朝
+mode: motion
+duration: 3s
+motion:
+  subject: 窓から差す光
+  quality: ゆっくりと這い、棚の一段だけを選び出す。棚そのものは動かない
+  law: 様式は full animation——**何かが常に動いている。** ここで動くのは光と粉塵であり、
+    主題（棚）は止まっている。止まった主題を、動く光が選ぶ
+beats:
+- range: 0-2s
+  density: sparse
+  what: 棚の全景。袋が並び、どれも文字が読めない。光は窓から差しているだけで、まだ何も選んでいない。
+- range: 2-3s
+  density: held
+  what: 光がわずかに動き、一段だけが明るくなる。粉塵が光の中に浮かぶ。そこへ手が入る。
+reference_set:
+- MILL.base
+- MILL.states.朝
+- MILL.geography
+- KONA.appearance
+forbidden_set:
+- KAMADO
+- PAN
+# ⚠️ **`attached` は宣言であって記録ではない。** この作品はまだ1枚も生成していない
+#    ——だから `check.py` は「テイクの記録が1本も無い」と報告する。
+#    **その報告を「0件だから正しい」と読んではならない。**
+attached:
+- MILL.base
+- MILL.states.朝
+- MILL.geography
+- KONA.appearance
+disclosure_state:
+  KAMADO.interior: sealed
+  PAN.interior: sealed
+sound:
+  scene_ref: hitosara-sc01-mill-shelf

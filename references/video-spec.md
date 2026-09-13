@@ -16,7 +16,7 @@
 すべてのビートに同じ時間を与えるダイジェストは、動画における詰め込みに等しい。**不均等な持続こそが構成である。**
 
 ## 環境変数
-`SUBJECT`＝弧, `DURATION`＝クリップ長（Wan 3.0 は1生成＝30秒）, `ASPECT`＝アスペクト比, `BEATS`＝秒範囲つきのビート表, `CORE`＝最大の配分を取るビート, `HOOK`＝クリップが着地する音
+`SUBJECT`＝弧, `DURATION`＝クリップ長（**尺はモデルが決める**）, `ASPECT`＝アスペクト比, `BEATS`＝秒範囲つきのビート表, `CORE`＝最大の配分を取るビート, `HOOK`＝クリップが着地する音
 
 ## 構成の文法
 
@@ -57,7 +57,7 @@
 
 **このフォーマットを散文の一段落に畳んではならない。** このエンジンの他のカードはすべて穴埋めの一文で終わる——静止画はひとつのプロンプトだからだ。動画は*文書*である。成果物は、節ごとに個別に指し示せる仕様書であり、そうであってこそ時間・運動・カメラ・音を、他を書き直さずに個別に改訂できる。一段落の散文は、このカードが導入するために存在する当の4軸を破壊する。
 
-散文の段落も存在はする——ただし **§18 の6スロットのうちの1つ**として、生成時に埋まった仕様*から*導かれるものとして。
+散文の段落も存在はする——ただし **§18 の7スロットのうちの1つ**として、生成時に埋まった仕様*から*導かれるものとして。
 
 ## 仕様のスケルトン（§1–20）
 
@@ -82,7 +82,7 @@
 | **15 CONTINUITY** | 同一性・空間・時間・視覚・運動の継続——**同一性のロック** | ④一貫 |
 | **16 CONSTRAINTS** | MUST / MUST NOT / PREFER / ALLOW | ⑦ネガティブ |
 | **17 GENERATION PRIORITIES** | 衝突時の優先順——見栄えより原作への忠実を上に置く | ⑧原作に忠実 |
-| **18 PROMPT MAPPING** | 6つのプロンプト——**主な出所**は §1–17 | — |
+| **18 PROMPT MAPPING** | 7つのプロンプト——6つは §1–17 から、7つ目は**様式カード**から | — |
 | **19 GENERATION INSTANCE** | ひとつの生成の解決値（尺・参照・イベント・出力） | — |
 | **20 ITERATION** | 観測された問題 → 変更 → 次の生成 | — |
 
@@ -90,7 +90,9 @@
 
 ## §18 のプロンプトスロット
 
-6つのプロンプト。それぞれ**主に**上記の名指しされた節から取る。**分離されていること自体が要点**なので、混ぜない。
+7つのプロンプト。最初の6つは**主に**上記の名指しされた節から取る。
+**7つ目だけは仕様からではなく、様式カードから取る。**
+**分離されていること自体が要点**なので、混ぜない。
 
 ```text
 Master Prompt   ← §1 + §7 + §8
@@ -115,10 +117,23 @@ Audio Prompt    ← §14
 
 Negative Prompt ← §16 MUST NOT + this card's Negative + the style card's Negative
 
+Style Motion    ← 様式カードの Motion character（§1–17 ではなく、様式から取る唯一の枠）
+  (how this style moves at all — full animation or limited, whether a held frame
+  is permitted, what the primary mover is. The specification writes what moves in
+  THIS clip; the style card writes what movement MEANS in this style.)
+```
+
 The sources above are the main ones, not the only ones. The camera-stability
 prohibition is the known case: it is written in §10, and it reaches the model
 through the Negative slot.
-```
+
+⚠️ **`Style Motion` が7つ目である理由。** 他の6つは**この仕様の中**で決まる——
+節を書き換えれば変わる。`Style Motion` は**この仕様の外**で決まる——
+様式を替えれば変わり、**同じ §11 が別の意味を持つ。**
+「何が動くか」と「この様式で動くとはどういうことか」は別の問いであり、
+混ぜれば**仕様が様式を上書きする**（あるいはその逆）。
+⚠️ **§11 MOTION が空でも `Style Motion` は書ける。** 主題が止まるショットでも、
+**その様式が止まった主題をどう扱うか**は決まっている——**この2つは別の欄である。**
 
 ## Negative
 `no uniform pacing, no equal-length beats, no static slideshow of stills, no floaty weightless motion, no scene cuts to unrelated locations, no on-screen subtitles, no watermark, no morphing or drifting facial identity`

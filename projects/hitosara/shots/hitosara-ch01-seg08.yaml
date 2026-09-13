@@ -1,0 +1,56 @@
+# 08 / 運動（微細運動）/ motion — 窯の中の火
+#
+# ⚠️ **開示の第1点である。** ここで窯が開く——`disclosure_state` が `opened` になり、
+#    `ledger.disclosure` が `negative: changed` を宣言している。
+#    **§18 から `no oven interior`・`no visible flame`・`no glow through the door seam`
+#    の3節が落ちる**——L10 が検算する。
+#    ⚠️ **落ちることは、増えることより重い。** 以後、モデルはそれを描いてよい（L14 の註）。
+#    ⚠️ **画像の経路でも同じ3節が落ちる。** 画像仕様の Negative も同じ系列を持ち、
+#    同じ位置で落ちる——**ただしそれを読む検査はまだ無い**（引き渡しの層。段2）。
+# ⚠️ **決定（2026-09-13、著者）で、このショットも画像から始まる。**
+shot: hitosara-ch01-seg08
+spec: specs/video/shot-08-oven-fire.md
+first_frame: specs/image/shot-08-oven-fire.md
+unit:
+  before: 窯の扉は閉じている
+  after: 扉が開き、中の火だけが動いている
+role: 運動（微細運動）
+effect: 熱
+place: KITCHEN
+time: 明け方
+mode: motion
+duration: 5s
+motion:
+  subject: 火
+  quality: 大きくは動かない。舌が短く揺れ、粉塵が火の前を横切る
+  law: 微細運動——ショットの中で火は位置を変えない。様式は full animation だが、ここでは火が atmosphere の代わりに動き続ける
+beats:
+- range: 0-1.5s
+  density: transition
+  what: 扉の鉄が回る。まだ中は見えない。隙間から光が一本だけ伸びる。
+- range: 1.5-4s
+  density: held
+  what: 扉が開く。火がある。火は動かない——揺れているだけである。
+- range: 4-5s
+  density: sparse
+  what: 粉塵が火の前を横切って、燃える。それだけが起きる。
+reference_set:
+- BAKER.sheet
+- KITCHEN.base
+- KITCHEN.states.明け方
+- KITCHEN.geography
+- KAMADO.appearance
+forbidden_set:
+- PAN
+- KONA
+attached:
+- BAKER.sheet
+- KITCHEN.base
+- KITCHEN.states.明け方
+- KITCHEN.geography
+- KAMADO.appearance
+disclosure_state:
+  KAMADO.interior: opened
+  PAN.interior: sealed
+sound:
+  scene_ref: hitosara-sc08-oven-fire

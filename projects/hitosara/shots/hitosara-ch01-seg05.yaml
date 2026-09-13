@@ -1,0 +1,48 @@
+# 05 / 余白 / still — 蓋の下、何も起きない
+#
+# ⚠️ **このショットは「何も起きない」ことが内容である。** それでも `unit` は対で書く
+#    ——変化が無いのではなく、**「見えない」から「見えないまま見られている」への変化**である。
+#    L1 は `before` と `after` が同じときに鳴る。**同じに見えることと、同じであることは別である。**
+# ⚠️ **このショットだけが `still` のままである**（03 の `composite` と合わせて静止は2本）。
+#    決定（2026-09-13、著者）——**止まるのは主題であって、画面ではない。光と粉塵は動く。**
+#    だから `motion` は要る（L16）。**「動画を回さないから運動が要らない」は、もう成り立たない。**
+shot: hitosara-ch01-seg05
+spec: specs/video/shot-05-under-the-lid.md
+first_frame: specs/image/shot-05-under-the-lid.md
+unit:
+  before: ボウルに蓋がされている
+  after: 蓋は一度も動かない。動かないことが、このショットの内容である
+role: 余白
+place: KITCHEN
+time: 朝
+mode: still
+duration: 4s
+motion:
+  subject: 光と、光の中を横切る粉塵
+  quality: 窓の光が蓋の上をゆっくり渡っていく。粉塵は落ち続ける。**蓋は一度も動かない**
+  law: 様式は full animation——**止まるのは主題であって、画面ではない。**
+    このショットの主題は「何も起きないこと」であり、動くのは光と粉塵だけである
+beats:
+- range: 0-2.5s
+  density: held
+  what: 蓋をしたボウルだけが画面にある。光は窓から動いている。蓋は動かない。
+- range: 2.5-4s
+  density: held
+  what: まだ動かない。粉塵が光の中を横切る。それだけが動いている。
+reference_set:
+- KITCHEN.base
+- KITCHEN.geography
+- KONA.appearance
+forbidden_set:
+- KAMADO
+- PAN
+- MIZU
+attached:
+- KITCHEN.base
+- KITCHEN.geography
+- KONA.appearance
+disclosure_state:
+  KAMADO.interior: sealed
+  PAN.interior: sealed
+sound:
+  scene_ref: hitosara-sc05-under-the-lid

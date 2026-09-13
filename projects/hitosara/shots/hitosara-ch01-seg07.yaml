@@ -1,0 +1,54 @@
+# 07 / 転換 / motion — 夜から明け方へ、窯の前
+#
+# ⚠️ **決定（2026-09-13、著者）で `mode` が変わった。** 以前は `composite` だった。
+#    このショットの主題は**光**であり、光は1ショットの中で青から金へ変わる——
+#    **主題が動くから `motion` である。**
+#    ⚠️ **`text_channel` は残る。** `motion` のショットも文字を持てる——
+#    `composite` ⇒ `text_channel` 非空は成り立つが、**逆向きは成り立たない**（片方向である）。
+# ⚠️ **時刻が跨ぐショットである。** それでも `time` は単数（`明け方`）である——
+#    **跨ぎは `unit` の対が持つ。** ショットは一時刻である（CLAUDE.md 固定方針）。
+# ⚠️ ビート本文に時刻の語を3種以上書かない（L3）。ここは2種に留めてある。
+shot: hitosara-ch01-seg07
+spec: specs/video/shot-07-before-dawn.md
+first_frame: specs/image/shot-07-before-dawn.md
+unit:
+  before: 夜のまま、窯の扉は閉じている
+  after: 明け方になり、扉の前の手が火を入れる
+role: 転換
+place: KITCHEN
+time: 明け方
+mode: motion
+duration: 3s
+motion:
+  subject: 光
+  quality: 窓の青が、ゆっくりと金へ変わる。カメラは据えたまま、光だけが動く
+  law: 光は1ショットの中で変わる（様式の Motion character）。フレームは動かない——転換は光が行う
+beats:
+- range: 0-1.5s
+  density: transition
+  what: 窓が青い。窯の扉は閉じている。手が扉の前で止まっている。
+- range: 1.5-3s
+  density: transition
+  what: 窓が金になる。手が動き、火が入る。扉はまだ閉じている。
+text_channel:
+- t: 0-3
+  kind: overlay
+  content: 一晩
+reference_set:
+- KITCHEN.base
+- KITCHEN.states.明け方
+- KITCHEN.geography
+- KAMADO.appearance
+forbidden_set:
+- PAN
+- KONA
+attached:
+- KITCHEN.base
+- KITCHEN.states.明け方
+- KITCHEN.geography
+- KAMADO.appearance
+disclosure_state:
+  KAMADO.interior: sealed
+  PAN.interior: sealed
+sound:
+  scene_ref: hitosara-sc07-before-dawn

@@ -11,9 +11,11 @@
   層A  ショット1枚の中で閉じる検査（一変化・一環境・一時刻・一運動）
   層B  台帳と突き合わせる検査（参照・禁制・開示・出所）
   層C  入力そのものの検査（**空を OK と言わない**）
-  層D  §1–20 との対応の検査（目録・両方向の閉包・同一性）
+  層D  §1–20 との対応の検査（目録・両方向の閉包・同一性・**仕様の種類とモデル**・
+       **画像の経路の中身**・**尺の一致**）
   層E  宣言の到達の検査（**台帳が届いていない区間**）
-  層F  **目録そのものの検査**（種別・運動の層・§18 のスロット——**登録が読まれているか**）
+  層F  **目録そのものの検査**（種別・運動の層・§18 のスロット・**欄の行き先**・
+       **`mode` が要求するもの**——**登録が読まれているか、行き先が実在するか**）
 
 ⚠️ 層C を最初に置く理由。**相手が空なら、層A も層B も一件も鳴らない。**
 鳴らないことは、正しいことの証明ではない——`0 == 0` が通った実例が既にある。
@@ -23,9 +25,34 @@
 **読むと名指しされていた検査が存在しなかった。** だから目録を足すときは、
 **それを読む検査を同時に足す**——L15・L16・L17 がそれである。
 
-⚠️ **いまも4欄が読まれていない**——`effect`・`duration`・`text_channel`・`sound`。
-**いずれも読み手が別の層にいる**（⑦検収／timeline／Semantic Audio Loom。契約は M6）ので、
+⚠️ **いま読まれていないのは2欄である**——`effect`・`sound`。
+**`duration` と `text_channel` は `L23`・`L24` が読むようになった**（決定 2026-09-13）。
+残る2欄はいずれも読み手が別の層にいる（⑦検収／Semantic Audio Loom。契約は M6）ので、
 **この層で鳴らす話ではない。** 数の出所は `HISTORY.md`。
+
+⚠️ **L18・L19・L20 を足した理由（決定 2026-09-13、U02）。**
+作品が**複数の生成の仕組み**を使えるようになった——動きのあるショットは動画モデル、
+静的なショットは**別の仕組み**（このリポジトリを通らない）。すると2つのことが
+成り立たなくなる。
+
+  1. **「全ショットが §1–20 を持つ」は成り立たない。** 画像プロンプトは節を持たない。
+     `L11` を `mode` で絞らねば、**静的なショットで誤って鳴る**（L18 がその絞り方を持つ）。
+  2. **「欄は生成へ渡る」も成り立たない。** 日本語の欄は渡らず、尺は編集で決まり、
+     参照は API の引数になり、音は別基盤へ行く。**行き先の宣言が無い欄は、
+     黙って落ちる**——これが `L19` である。**「狙いが届く」ことの機械的な形。**
+
+⚠️ **`L20` は空の行き先を鳴らす。** `Style Motion` の出所は様式カードの
+`Motion character` であり、**実測で55枚のうち2枚しか持たない**。
+持たない様式を選べば、**スロットは在るのに何も運ばない**——`L17` はそれを通す。
+**空の検査は OK と言う。** だから別に鳴らす。
+
+⚠️ **`L21`–`L24` を足した理由（決定 2026-09-13、著者）。** 経路が1つから**2つ**になり
+（全ショット画像 → 全ショット動画）、**経路を決めるのが `mode` でなくなった**。
+`L21`・`L22` は**画像の経路の中身**を見る——あちらは §1–20 を持たないので、
+`L11` は原理的にあちらを見られない。`L23` は**意図と仕様の尺**を突き合わせる
+（**値で突き合わせてよいと実測で確かめた唯一の欄である**——`place`・`time` を
+値で比べれば60件の偽陽性が出る）。`L24` は**`mode` が要求するもの**を見る
+——`L16` が `mode` を読まなくなったので、**ここが `mode` の唯一の読み手である。**
 """
 
 import collections
@@ -388,6 +415,26 @@ def check_negative_response(project):
         target = cp.get("shot")
         if target not in idx:
             continue          # 座標が無いことは L7 が報告する。ここでは重ねて鳴らさない
+
+        # ⚠️ **動画の仕様が無ければ、§18 では確かめられない。**
+        #    ——**検査が空なのではなく、相手が違う。** 相手は画像プロンプトであり、
+        #    それを読むのは引き渡しの層である（だから註であって、違反ではない）。
+        #    ⚠️ **決定（2026-09-13）の前は、ここが「画像のショットだから」だった。**
+        #    いまは**全ショットが動画の仕様を持つ**ので、`mode` は理由にならない
+        #    ——理由は**記録が無いこと**である。読めないものを読んだ顔をしない。
+        # ⚠️ **`L11`・`L18` と同じ規則（`_spec_of`）を使う。**
+        if _spec_of(project.shots[target], "video") is None:
+            declared_img = (cp.get("raw") or {}).get("negative")
+            out.append(finding("L10", str(target),
+                               f"`mode: {project.shots[target].get('mode')}` の変化点である。"
+                               "**このショットには動画の仕様（`spec:`）が無い**——"
+                               "この変化点は §18 に対しては確かめられない。"
+                               "相手は画像プロンプトであり、**引き渡しの層が読む**（段2）。"
+                               + (f"⚠️ 宣言された `negative: {declared_img}` は §18 の話であり、"
+                                  "**このショットでは読まれない。**" if declared_img else ""),
+                               severity="note"))
+            continue
+
         declared = (cp.get("raw") or {}).get("negative")
 
         if declared is None:
@@ -404,14 +451,19 @@ def check_negative_response(project):
             continue
 
         i = idx[target]
-        if i == 0:
+        # ⚠️ **相手は「直前の §18 を持つショット」である。** 素朴に1つ前を見ると、
+        #    間に動画の仕様を持たないショットが挟まった瞬間に「`spec:` が無い」と鳴る
+        #    ——**無いのではなく、相手が違う。** 動画の層は連続していない。
+        prev = next((order[j] for j in range(i - 1, -1, -1)
+                     if _spec_of(project.shots[order[j]], "video") is not None), None)
+        if prev is None:
             out.append(finding("L10", str(target),
-                               "先頭のショットに変化点がある。**前のショットが無いので、"
-                               "「変わった」を言えない。**",
+                               "先行する §18 を持つショットが無い。"
+                               "**「変わった」を言えない。**"
+                               "（先頭であっても、動きの層の先頭であっても同じである。）",
                                severity="note"))
             continue
 
-        prev = order[i - 1]
         try:
             a = _neg(project, prev)
             b = _neg(project, target)
@@ -451,7 +503,7 @@ class _NoSpec(Exception):
 
 
 def _neg(project, shot):
-    src = project.shots[shot].get("spec")
+    src = _spec_of(project.shots[shot], "video")
     if not src:
         raise _NoSpec(f"ショット {shot} に `spec:` が無い。**§18 を読む相手が分からない。**"
                       "記録が無いので、この変化点は検査されていない。")
@@ -464,6 +516,25 @@ def _neg(project, shot):
 # ---------------------------------------------------------------- 層D 対応の検査
 
 TOP_SECTION = re.compile(r"^(\d+)\.\s+(\S.*?)\s*$")
+
+
+def _spec_of(shot, kind):
+    """そのショットの、**その種類の**仕様の在り処。`SPEC_KINDS` を引く唯一の場所。
+
+    ⚠️ **規則と、規則を使う検査を離さない。** `L10`・`L11`・`L13`・`L14`・`L17`・`L18` が
+    ここを通る——同じ絞り方を各所に写せば、**片方だけ直したときに、もう片方が
+    別の符号で同じ欠陥を唄る。** 実際にそれが起きた: 混ざった並びを測ると
+    `L10` は「`spec:` が無い」と偽り、`L13` は「仕様が自分を名乗っていない」と偽り、
+    `L17` は「スロットが1つも無い」と偽った——**3つとも、無いのではなく種類が違う。**
+
+    ⚠️ **経路は `mode` ではなく欄が決める。** 決定（2026-09-13、著者）
+    「全ショット画像 → 全ショット動画」の下では、**10本すべてが両方を持つ**——
+    だから `mode` は引かれない。引くのは `SPEC_KINDS[kind]["field"]` である。
+
+    ⚠️ **`None` は「もう一方の種類である」ではない。** 呼び手は `is None` で絞る
+    ——**分からないことを理由に検査を飛ばさない**（`L18` が「記録が無い」と報告する）。
+    """
+    return (shot or {}).get(specmap.SPEC_KINDS[kind]["field"]) or None
 
 
 def _spec_tops(path):
@@ -480,6 +551,13 @@ def check_spec_sections(project):
     3節になっていれば、仕様に節が足されても鳴らない——**検査が空になる。**
 
     ⚠️ **`spec:` が無い／読めないショットは、黙って飛ばさない。** 鳴る。
+
+    ⚠️ **動画の仕様を持たないショットは、ここでは検査しない。** 相手は §1–20 を
+    持つ仕様だけである。**その一致は `L18` が見る**——片方だけを
+    直せば、もう片方が別の符号で同じ欠陥を唄ることになる。
+
+    ⚠️ **決定（2026-09-13）の前は「`mode` が画像を要求するショット」と書いていた。**
+    いまは**全ショットが動画の仕様を持つ**ので、`mode` は絞り方にならない。
     """
     out = []
     if len(specmap.SPEC_SECTIONS) != 20:
@@ -489,15 +567,19 @@ def check_spec_sections(project):
     seen = 0
     for s in project.order():
         shot = project.shots[s]
-        src = shot.get("spec")
+        src = _spec_of(shot, "video")
         if not src:
-            out.append(finding("L11", s, "`spec:` が無い。**このショットの仕様は検査されていない。**"))
+            out.append(finding("L11", s, "`spec:` が無い。**このショットの動画の仕様は"
+                                         "検査されていない。**"))
             continue
         p = project.root / src
         if not p.is_file():
             out.append(finding("L11", s, f"`spec: {src}` が読めない。"))
             continue
-        got = _spec_tops(p)
+        # ⚠️ **族を均してから比べる。** §18 はモデル名を名乗るので、生の見出しでは
+        #    一致しない——**均すのは突き合わせのためであり、報告は生の見出しで行う。**
+        raw = _spec_tops(p)
+        got = [specmap.canonical(t) for t in raw]
         seen += 1
         extra = [t for t in got if t not in want]
         miss = [t for t in want if t not in got]
@@ -511,7 +593,397 @@ def check_spec_sections(project):
             out.append(finding("L11", s, f"節は揃っているが順序が違う。目録は順序も含む。"))
     if seen:
         out.append(finding("L11", f"{seen}本", f"§1–20 の目録を確かめた（{len(want)} 節）。"
-                                               "**節が足されれば鳴る。**", severity="note"))
+                                               "**節が足されれば鳴る。**",
+                      severity="note"))
+    else:
+        out.append(finding("L11", "", "§1–20 を **1本も** 確かめていない。"
+                                      "**検査が空である**——違反0件は「正しい」ではない。",
+                      severity="note"))
+    return out
+
+
+def _section_body(path, prefix):
+    """トップレベルの節の本文を、**小節ごと**返す。`specdoc.section` では足りない。
+
+    ⚠️ **`specdoc.section` は見出しの水準を問わずに割る。** だから `# 11. MOTION` の
+    直後に `## Subject Motion` が来ると、**§11 の本文は空になる**——実測で
+    そうなっている（`hitosara/specs/video/shot-04-knead.md` の §11）。**節の中身は
+    小節にある。** 「空である」と読んでよいのは、**小節も全部空のときだけ**である。
+
+    ⚠️ **画像の仕様に対しては `""` を返す。** あちらは節を持たないのが正しい形である
+    （`L18`）。呼び手は「空」と「節が無い」を混同しないこと。
+    """
+    out, inside = [], False
+    for t, body in specdoc.sections(Path(path).read_text(encoding="utf-8")):
+        if TOP_SECTION.match(t):
+            inside = t.startswith(prefix)
+            if inside and body:
+                out.append(body)
+            continue
+        if inside and body:
+            out.append(body)
+    return "\n".join(out).strip()
+
+
+def _model_of(path):
+    """仕様の §18 が名乗るモデル。§18 が無ければ `None`、名乗らなければ `""`。"""
+    for t in _spec_tops(path):
+        if specmap.canonical(t) == "18. PROMPT MAPPING":
+            return specmap.named_model(t) or ""
+    return None
+
+
+def check_spec_kind(project):
+    """L18 — **2つの経路が、それぞれの形をしているか。**
+
+    ⚠️ 決定（2026-09-13、著者）——**全ショット画像 → 全ショット動画。**
+    だから **`mode` は仕様の種類を決めない。経路は欄が決める**（`SPEC_KINDS`）。
+    `spec` が動画の仕様、`first_frame` が画像の仕様であり、**10本すべてが両方を持つ。**
+
+    ⚠️ **`L11` の絞り方は、ここが持つ。** どの仕様が §1–20 を持つべきかを決めるのは
+    `SPEC_KINDS[kind]["sections"]` であり、`L11` は `_spec_of` を通してそれに従う。
+    **規則と、規則を使う検査を離さない。**
+
+    ⚠️ **モデルが要る理由。** §18 は**モデル固有の投影**である——同じ §1–17 が、
+    モデルが変われば別の文になる。**どのモデルへ束ねたかが書かれていなければ、
+    `Style Motion` が何を引くのかも、`duration` がどこへ行くのかも決まらない。**
+
+    ⚠️ **画像の仕様が無いことは、違反ではない。** 記録が無いのであって、
+    食い違っているのではない——**だから註であり、しかも1件に畳む**
+    （30本ぶんの註は、30本ぶんの情報ではない）。受け火 V2 の30本がここに落ちる。
+    """
+    out = []
+
+    # ① 目録そのものが壊れていないか。**経路が2つとも引けねばならない。**
+    fields = [v.get("field") for v in specmap.SPEC_KINDS.values()]
+    if not specmap.SPEC_KINDS:
+        out.append(finding("L18", "", "`SPEC_KINDS` が空である。**経路が1つも無い。**"))
+    # ⚠️ **目録そのものが短くなっていないか。** L11（20節）・L15（12種）と同じ形である。
+    #    種類を1つ落とせば、**その経路は誰にも検査されない**——しかも黙って落ちる。
+    #    2 は決定（2026-09-13、著者）「全ショット画像 → 全ショット動画」の数である。
+    if len(specmap.SPEC_KINDS) != 2:
+        out.append(finding("L18", "",
+                           f"経路の目録が {len(specmap.SPEC_KINDS)} 種類である。"
+                           "2 のはずである（動画と画像）——**経路が1つ落ちれば、"
+                           "その経路は誰にも検査されない。**"))
+    if any(not f for f in fields):
+        out.append(finding("L18", "", f"`SPEC_KINDS` に欄を持たない種類がある: "
+                                      f"{sorted(specmap.SPEC_KINDS)}。"))
+    if len(set(fields)) != len(fields):
+        out.append(finding("L18", "",
+                           f"`SPEC_KINDS` の2つの種類が同じ欄を指している: {fields}。"
+                           "**同じファイルを動画の仕様とも画像の仕様とも読むことになる。**"))
+    if any(not v.get("negative") for v in specmap.SPEC_KINDS.values()):
+        out.append(finding("L18", "", "`SPEC_KINDS` に、Negative の見出しを持たない種類がある。"))
+    # ⚠️ **様式の4欄を宣言した種類は、その節の見出しも持たねばならない。**
+    #    片方だけでは `L22` が「何を確かめればよいか分からない」で止まる。
+    for kind, spec in sorted(specmap.SPEC_KINDS.items()):
+        if spec.get("vars") is not None and not spec.get("vars_section"):
+            out.append(finding("L18", "",
+                               f"`SPEC_KINDS['{kind}']` が様式の欄を宣言しているのに、"
+                               "その節の見出し（`vars_section`）を持たない。"
+                               "**欄の名前だけでは、仕様のどこを読むのかが決まらない。**"))
+
+    seen = collections.Counter()
+    missing = collections.Counter()
+    for s in project.order():
+        shot = project.shots[s]
+        for kind, spec in sorted(specmap.SPEC_KINDS.items()):
+            src = _spec_of(shot, kind)
+            if not src:
+                missing[kind] += 1
+                continue
+            p = project.root / src
+            if not p.is_file():
+                # ⚠️ **欄は在るのに開けない。** 動画の側は L11 も鳴らすが、
+                #    ここでは「開けない」ことだけを言う——**同じ欠陥を2つの層が
+                #    別々の符号で報告しない**よう、動画の不在は L11 に譲る。
+                if kind != "video":
+                    out.append(finding("L18", s, f"`{spec['field']}: {src}` が読めない。"
+                                                 f"**{kind} の仕様が在ると書いてあるのに開けない。**"))
+                continue
+            has_sections = bool(_spec_tops(p))
+            seen[kind] += 1
+
+            if spec["sections"] and not has_sections:
+                continue                  # L11 が「目録にある節が無い」で鳴らす
+            if not spec["sections"] and has_sections:
+                out.append(finding("L18", s,
+                                   f"`{spec['field']}` の仕様が §1–20 を持っている。"
+                                   "**画像プロンプトは節を持たない**——"
+                                   "`video-spec` 自身が「他のカードはすべて穴埋めの一文で終わる」と"
+                                   "書いている。**画像の経路へ動画の仕様を当てている。**"))
+                continue
+            if kind != "video":
+                continue
+
+            model = _model_of(p)
+            if model is None:
+                continue                  # §18 が無い。L11 が鳴らしている
+            if model == "":
+                out.append(finding("L18", s,
+                                   "§18 が**モデルを名乗っていない**（`18. PROMPT MAPPING`）。"
+                                   "**§18 はモデル固有の投影である**——"
+                                   "どのモデルへ束ねたかが書かれていなければ、"
+                                   "この節が何を引くのかを誰も読めない。"))
+                continue
+            m = specmap.MODELS.get(model)
+            if m is None:
+                out.append(finding("L18", s,
+                                   f"§18 が名乗るモデル `{model}` が `MODELS` に無い。"
+                                   f"登録されているモデル: {'／'.join(specmap.MODELS)}。"
+                                   "**登録されていないモデルへ束ねた仕様は、"
+                                   "そのモデルの性質を誰も知らない。**"))
+                continue
+            if m["種別"] != kind:
+                out.append(finding("L18", s,
+                                   f"§18 は `{model}`（{m['種別']}）を名乗るが、"
+                                   f"`{spec['field']}` は **{kind}** の経路である。"
+                                   "**生成の仕組みが違うものを当てている。**"))
+
+    # ② **画像の経路が無いことを、1件に畳んで報告する。**
+    #    ⚠️ **「記録が無い」と「食い違っている」は別である。**
+    for kind, n in sorted(missing.items()):
+        if kind == "video":
+            continue                      # L11 が1本ずつ鳴らしている
+        out.append(finding("L18", "",
+                           f"**{n} 本が `{specmap.SPEC_KINDS[kind]['field']}` を持たない。**"
+                           "経路が1つしか書かれていない——"
+                           "⚠️ **記録が無いのであって、食い違っているのではない。**"
+                           f"だから違反ではない。**だが、この {n} 本の画像の側は"
+                           "一度も検査されていない。**", severity="note"))
+
+    if seen:
+        out.append(finding("L18", f"{sum(seen.values())}本",
+                           "2つの経路の形を確かめた（"
+                           + "／".join(f"{k} {v} 本" for k, v in sorted(seen.items()))
+                           + "）。**動画は §1–20 を持ち、画像は持たない。**",
+                           severity="note"))
+    else:
+        out.append(finding("L18", "", "仕様を **1本も** 確かめていない。**検査が空である。**",
+                           severity="note"))
+    return out
+
+
+def _stem(clause):
+    """禁止の語から**語幹**を取る。**`L21` の比較の単位である。**
+
+    ⚠️ **禁止の語を文字列で比べてはならない。** 実測——受け火 V2 の台帳は
+    `no photorealistic` と書き、§18 は `not photorealistic` と書く。
+    **生の文字列で比べれば 30/30 が偽陽性になる。**
+    否定の語は意味を持たず、**意味を持つのは語幹のほうである**
+    （`L4` が「移動」を動詞で判定したときに踏んだのと同じ形の誤りである）。
+    """
+    c = specmap.NEGATOR.sub("", str(clause).strip().lower())
+    return re.sub(r"\s+", " ", c).strip()
+
+
+def check_image_negative(project):
+    """L21 — **画像の仕様の Negative が、作品の禁制を覆っているか。**
+
+    ⚠️ **覆うであって、等しいではない。** 画像の Negative は作品の禁制
+    （`bible.negative_base`）を**全部含まねばならない**が、**それ以上を持ってよい**——
+    開示の系列（「窯の中を見せない」等）は**ショットごとに違う**からである。
+    だから足りない節だけを鳴らし、余分な節は鳴らさない。
+
+    ⚠️ **語幹で比べる**（`_stem`）。`no` / `not` の違いは偽陽性である。
+
+    ⚠️ **動画の仕様の §18 に対して、この検査は走らない。** あちらの Negative は
+    **開示台帳と突き合わせる**のが本体であり、それは `L10` と `L14` が負う。
+    **「作品の禁制を覆っているか」を動画の側で見る検査は、まだ無い**——
+    穴である。穴のまま記録する。
+
+    ⚠️ **画像の仕様を持たないショットは、ここへ来ない。** 「記録が無い」ことは
+    `L18` が1件に畳んで報告する——**同じ欠陥を2つの層が別々の符号で報告しない。**
+    だから `L20` と同じく、相手が1本も無ければ**何も言わずに帰る。**
+    """
+    out = []
+    specs = []
+    for s in project.order():
+        src = _spec_of(project.shots[s], "image")
+        if not src:
+            continue                      # L18 が「持たない」と報告している
+        p = project.root / src
+        if not p.is_file():
+            continue                      # L18 が「読めない」と報告している
+        specs.append((s, p))
+    if not specs:
+        return out                        # 相手が無い。L18 が報告済みである。
+
+    base = ((getattr(project, "bible", None) or {}).get("bible") or {}).get("negative_base")
+    if not base:
+        out.append(finding("L21", "",
+                           "作品の禁制が宣言されていない（`bible.negative_base`）。"
+                           f"**{len(specs)} 本の画像の Negative が、何を覆うべきかを"
+                           "誰も決めていない**——覆うべきものが無ければ、"
+                           "この検査は**何も見ていないのと同じである。**"))
+        return out
+
+    caught = 0
+    for s, p in specs:
+        body = specdoc.section(p.read_text(encoding="utf-8"),
+                               specmap.SPEC_KINDS["image"]["negative"])
+        if body is None:
+            out.append(finding("L21", s,
+                               f"`{specmap.SPEC_KINDS['image']['field']}` の仕様に "
+                               f"`## {specmap.SPEC_KINDS['image']['negative']}` の節が無い。"
+                               "**禁制を1つも確かめられない**——"
+                               "節が無いのは、禁制が揃っていることではない。"))
+            continue
+        got = {_stem(c) for c in specdoc.clausify(body)}
+        miss = [c for c in base if _stem(c) not in got]
+        if miss:
+            caught += 1
+            out.append(finding("L21", s,
+                               f"画像の Negative が作品の禁制を覆っていない——"
+                               f"{len(base)} 節のうち {len(miss)} 節が無い: "
+                               f"{'／'.join(miss)}。"
+                               "**Negative は足し算であり、書き忘れは黙って消える**"
+                               "——禁制が届かなければ、描かれてから分かる。"))
+
+    out.append(finding("L21", f"{len(specs)}本",
+                       f"画像の Negative を作品の禁制（{len(base)} 節）と突き合わせた。"
+                       f"覆っているのは {len(specs) - caught}/{len(specs)} 本である。"
+                       "⚠️ **動画の仕様の §18 に対しては、この検査は走らない**"
+                       "——あちらは `L10`・`L14` が開示台帳と突き合わせる。",
+                       severity="note"))
+    return out
+
+
+def check_image_vars(project):
+    """L22 — **画像の仕様の様式4欄が非空か。** `L20` の画像版である。
+
+    画像の仕様は**節を持たない**（`L18`）。だが**構造を持たないのではない**——
+    `distill-essence-engine` の様式カードが使う4つの変数
+    （`SUBJECT`／`ACTION`／`LOCATION`／`ACCENT`）を埋めることで作られる。
+    **`L11` はここを通す**——相手は §1–20 であって、画像の仕様ではない。
+
+    ⚠️ **欄が在ることは、書いたことではない。** 見出しだけ置いて値を空にすれば、
+    この検査が無ければ**誰も気づかない**（`L16` が `motion` に対して言うのと同じこと）。
+
+    ⚠️ **中身が正しいかは見ない。** `SUBJECT` の値が本当に主題かは、
+    **この層には読めない。** 見るのは**空でないこと**までである。
+    """
+    out = []
+    kind = specmap.SPEC_KINDS.get("image") or {}
+    if not kind.get("vars") or not kind.get("vars_section"):
+        out.append(finding("L22", "",
+                           "`SPEC_KINDS['image']` が様式の4欄を宣言していない。"
+                           "**何を確かめればよいかが決まっていない検査は、"
+                           "何も確かめない。**"))
+        return out
+
+    specs = []
+    for s in project.order():
+        src = _spec_of(project.shots[s], "image")
+        if not src:
+            continue                      # L18 が報告している
+        p = project.root / src
+        if not p.is_file():
+            continue                      # L18 が報告している
+        specs.append((s, p))
+    if not specs:
+        return out                        # 相手が無い。L18 が報告済みである。
+
+    want = tuple(kind["vars"])
+    seen = 0
+    for s, p in specs:
+        body = specdoc.section(p.read_text(encoding="utf-8"), kind["vars_section"])
+        if body is None:
+            out.append(finding("L22", s,
+                               f"画像の仕様に `## {kind['vars_section']}` の節が無い。"
+                               f"**様式の4欄（{'／'.join(want)}）を1つも確かめられない。**"))
+            continue
+        seen += 1
+        got = {m.group(1).strip(): m.group(2).strip() for m in
+               (re.match(r"^-\s*`([^`]+)`\s*:\s*(.*)$", ln.strip())
+                for ln in body.splitlines()) if m}
+        absent = [v for v in want if v not in got]
+        empty = [v for v in want if got.get(v) == ""]
+        if absent:
+            out.append(finding("L22", s,
+                               f"画像の仕様に無い様式の欄がある: {'／'.join(absent)}。"
+                               f"**`{kind['vars_section']}` は "
+                               f"{len(want)} 欄で1組である**——"
+                               "1つ欠ければ、その変数は空のまま生成へ渡る。"))
+        if empty:
+            out.append(finding("L22", s,
+                               f"様式の欄が空である: {'／'.join(empty)}。"
+                               "**欄を置いたことは、書いたことではない。**"))
+
+    out.append(finding("L22", f"{seen}本",
+                       f"画像の仕様の様式 {len(want)} 欄を確かめた（{seen}/{len(specs)} 本）。"
+                       "⚠️ **確かめたのは空でないことまでである**——"
+                       "**引いた値が正しいかは、この層には読めない。**",
+                       severity="note"))
+    return out
+
+
+def check_duration(project):
+    """L23 — **意図と仕様の尺が一致するか。** `shot.duration` ↔ 動画仕様 §1 `Duration:`。
+
+    ⚠️ **値を比べてよい欄は、実測でこれだけである。** `place` や `time` を値で
+    比べれば **60件の偽陽性**が出る——**渡るのは欄の値ではなく、欄が指す先**だからである
+    （`FIELD_DESTINATION` が `place` を `handover:distill` へ送るのはそのためである）。
+    尺は違う——**§1 の `Duration:` と `shot.duration` は同じ量を指す。**
+    だからここは比べてよい。実測で **33/33 が一致**している。
+
+    ⚠️ **「§1 が無い」と「§1 に `Duration:` が無い」は別である。** 前者は `L11` が
+    鳴らす（§1–20 の目録）。後者は**誰も鳴らさない**——だからここで鳴らす。
+    **突き合わせられない意図は、突き合わされていない。**
+
+    ⚠️ **動画の仕様を持たないショットは、ここへ来ない**（`L11` が報告する）。
+    """
+    out = []
+    pairs = []
+    for s in project.order():
+        shot = project.shots[s]
+        src = _spec_of(shot, "video")
+        if not src:
+            continue                      # L11 が鳴らしている
+        p = project.root / src
+        if not p.is_file():
+            continue                      # L11 が鳴らしている
+        body = _section_body(p, "1.")
+        if not body:
+            continue                      # L11（節が無い）か L18（画像の仕様）が報告する
+        pairs.append((s, shot.get("duration"), p, body))
+    if not pairs:
+        return out                        # 相手が無い。L11・L18 が報告済みである。
+
+    agreed = 0
+    for s, want, p, body in pairs:
+        m = specmap.DURATION_LINE.search(body)
+        if not m:
+            out.append(finding("L23", s,
+                               "動画の仕様の §1 に `Duration:` が無い。"
+                               "**このショットの尺は、仕様の側から読めない**——"
+                               "`shot.duration` と突き合わせる相手が無い。"))
+            continue
+        got = m.group(1).strip()
+        if want is None:
+            out.append(finding("L23", s,
+                               f"§1 は `Duration: {got}` と言うが、"
+                               "**記録に `duration` が無い。**"
+                               "仕様だけが尺を持ち、意図が無い——"
+                               "形の層も必須で見ている。"))
+            continue
+        if str(want).strip() != got:
+            out.append(finding("L23", s,
+                               f"尺が食い違っている——記録は `{want}`、"
+                               f"§1 は `{got}` である。"
+                               "**生成へ渡るのは §1 のほうである**——"
+                               "記録と食い違えば、**採用の判断が別の尺の上で行われる。**"))
+            continue
+        agreed += 1
+
+    out.append(finding("L23", f"{agreed}本",
+                       f"尺を突き合わせた（{len(pairs)} 本の動画の仕様、"
+                       f"{agreed} 本が一致）。"
+                       "⚠️ **これを値で比べてよいのは、尺が"
+                       "「欄の値そのものが渡る」唯一の欄だからである**"
+                       "——`place`・`time` を値で比べれば偽陽性が出る。",
+                       severity="note"))
     return out
 
 
@@ -581,7 +1053,16 @@ def check_field_source(schema_dir):
     return out
 
 
-TAKE_SUFFIX = re.compile(r"-\d+s-\d+$")
+# ⚠️ **秒は小数でありうる。** 実測で `hitosara-ch01-seg09-2.5s-01` がある——
+#    2.5秒のショットは実在し、**その `Instance ID` が `2.5s` と言うのは正しい。**
+#    整数だけを読む綴りは、**規則（`-<秒>s-<テイク>`）を狭く実装していた**——
+#    読めなかったのは ID の側ではなく、**読み手の側である。**
+#    ⚠️ **広げても、数の無い接尾辞（`-Xs-01`）は鳴る。** 自己検査が両方を確かめる。
+TAKE_SUFFIX = re.compile(r"-\d+(?:\.\d+)?s-\d+$")
+# ⚠️ 同じ形の逸脱が `Segment ID` にもある。`\d\d-\d` は **10本目の `01-10` を読めない**
+#    ——章の本数が2桁になれば、それは逸脱ではなく**同じ綴り**である。
+#    註が鳴るのは `A-1` のような**別の綴り**に対してだけである。
+SEGMENT_FORM = re.compile(r"\d+-\d+")
 
 
 def check_identity(project):
@@ -604,12 +1085,17 @@ def check_identity(project):
     ok = 0
     for s in project.order():
         shot = project.shots[s]
-        src = shot.get("spec")
+        src = _spec_of(shot, "video")
         if not src:
             continue                      # L10・L11 が既に鳴らしている
         p = project.root / src
         if not p.is_file():
             continue
+        # ⚠️ **画像の仕様は §19 を持たない。** だから「仕様が自分を名乗っていない」
+        #    は**欠陥ではない**——**名乗る節が無いのである。**
+        #    ⚠️ **決定（2026-09-13）の前は、この絞り方が `mode` だった。**
+        #    いまは `_spec_of` が「動画の仕様」を引くので、**画像の側は最初から
+        #    ここへ来ない**——`skipped` は「動画の仕様が読めなかった本数」である。
         inst = specdoc.section(p.read_text(encoding="utf-8"), "Instance")
         if inst is None:
             out.append(finding("L13", s, "§19 `Instance` の節が無い。**仕様が自分を名乗っていない。**"))
@@ -632,15 +1118,19 @@ def check_identity(project):
             ok += 1
         sm = re.search(r"^-\s+Segment ID:\s*`([^`]*)`", inst, re.M)
         v = sm.group(1) if sm else ""
-        if re.fullmatch(r"\d\d-\d", v):
+        if SEGMENT_FORM.fullmatch(v):
             seg_forms["NN-N"] += 1
         elif re.fullmatch(r"A-\d", v):
             seg_forms["A-N"] += 1
         else:
             seg_forms["その他"] += 1
     if ok:
-        out.append(finding("L13", f"{ok}本", "ショットの同一性を仕様の §19 と突き合わせた"
-                                             f"（`Instance ID` の本体を使う）。", severity="note"))
+        out.append(finding("L13", f"{ok}本", "ショットの同一性を**動画の仕様**の §19 と"
+                                             "突き合わせた（`Instance ID` の本体を使う）。"
+                                             "⚠️ **画像の仕様は §19 を持たない**——"
+                                             "「名乗っていない」のではなく、**名乗る節が無い。**"
+                                             "だからここでは検査していない。",
+                           severity="note"))
     if seg_forms["A-N"] or seg_forms["その他"]:
         out.append(finding("L13", "", f"⚠️ **`Segment ID` の形が2つある**——"
                                       f"`NN-N` {seg_forms['NN-N']}本／`A-N` {seg_forms['A-N']}本"
@@ -665,9 +1155,17 @@ def _negative_series(project):
     out = []
     for s in project.order():
         try:
-            out.append((s, frozenset(_neg(project, s)), None))
+            n = _neg(project, s)
         except _NoSpec as e:
             out.append((s, None, str(e)))
+            continue
+        # ⚠️ **仕様は読めたが §18 が無い、という場合がある**（画像のショット）。
+        #    `_neg` はそこでも `None` を返す——**`frozenset(None)` で落ちてはならない。
+        #    検査器が落ちるのは、検査が空になるのと同じくらい役に立たない。**
+        if n is None:
+            out.append((s, None, f"ショット {s} の仕様に §18 `Negative Prompt` の節が無い。"))
+            continue
+        out.append((s, frozenset(n), None))
     return out
 
 
@@ -714,11 +1212,23 @@ def check_beyond_declaration(project):
     declared = {cp.get("shot") for cp in project.disclosure}
 
     unread = [s for s, n, _ in series if n is None]
-    if unread:
-        out.append(finding("L14", f"{len(unread)}本",
+    # ⚠️ **「動画の仕様が無い」と「読めない」は別である。** 記録が無ければ
+    #    §18 は在りえない——読めないのではない。同じ符号で報告すると、
+    #    「置き場が違う」と「記録が無い」が見分けられなくなる。
+    #    ⚠️ **決定（2026-09-13）の前は、ここが「画像のショットだから」だった。**
+    no_video = {s for s in unread if _spec_of(project.shots[s], "video") is None}
+    broken = [s for s in unread if s not in no_video]
+    if no_video:
+        out.append(finding("L14", f"{len(no_video)}本",
+                           "**動画の仕様（`spec:`）が無いので、§18 が在りえない**"
+                           "——**この検査の相手ではない。** 相手は画像プロンプトであり、"
+                           "**引き渡しの層が読む**（段2）。「読めない」のではない。",
+                           severity="note"))
+    if broken:
+        out.append(finding("L14", f"{len(broken)}本",
                            "`spec:` が無いか読めないので、**この検査はこれらのショットを"
-                           "見ていない**: " + "／".join(unread[:5])
-                           + ("…" if len(unread) > 5 else ""),
+                           "見ていない**: " + "／".join(broken[:5])
+                           + ("…" if len(broken) > 5 else ""),
                            severity="note"))
 
     read = [i for i, (_, n, _) in enumerate(series) if n is not None]
@@ -728,17 +1238,23 @@ def check_beyond_declaration(project):
                            "**検査が空である。**"))
         return out
 
+    # ⚠️ **動きの層は連続していない。** 静的なショットが間に挟まれば、§18 の列は
+    #    そこで切れる。**切れ目を跨いだ変化は、跨いで比べねば見えない**
+    #    ——1つ前とだけ比べると、`A → (画像) → A'` の `A → A'` が丸ごと落ちる。
+    #    だから **§18 が読めた位置どうしを、隣り合うものとして扱う。**
+    pairs = list(zip(read, read[1:]))
+
     # ① 動きと回転を数える（註）。**鳴らすためではなく、この検査の形の根拠である。**
     moves, seen, rot = [], {}, []
-    for i in range(1, len(series)):
-        a, b = series[i - 1][1], series[i][1]
-        if a is None or b is None or a == b:
+    for i, j in pairs:
+        a, b = series[i][1], series[j][1]
+        if a == b:
             continue
-        moves.append(i)
+        moves.append(j)
         if frozenset(b) in seen:
-            rot.append((series[i][0], series[seen[frozenset(b)]][0]))
+            rot.append((series[j][0], series[seen[frozenset(b)]][0]))
         else:
-            seen[frozenset(b)] = i
+            seen[frozenset(b)] = j
     if rot:
         out.append(finding("L14", f"{len(rot)}/{len(moves)}",
                            "§18 が動いた位置のうち、**先行する集合へ戻るもの**が "
@@ -756,18 +1272,18 @@ def check_beyond_declaration(project):
     #    恒久的な拡大である。** 増分（新たに禁じる）より危ない方向ですらある。
     #    対称に見ると 7 箇所（`01-01`・`03-03`・`06-01`・`06-03`・`08-01`・`09-02`・`09-03`）。
     beyond = []
-    for i in range(1, len(series)):
-        cur, prv = series[i][1], series[i - 1][1]
-        if cur is None or prv is None or cur == prv:
+    for i, k in pairs:
+        cur, prv = series[k][1], series[i][1]
+        if cur == prv:
             continue
-        before = [series[j][1] for j in range(i) if series[j][1] is not None]
-        after = [series[j][1] for j in range(i, len(series)) if series[j][1] is not None]
+        before = [series[j][1] for j in read if j <= i]
+        after = [series[j][1] for j in read if j >= k]
         acc = [c for c in sorted(cur - prv)
                if all(c not in b for b in before) and all(c in a for a in after)]
         rem = [c for c in sorted(prv - cur)
                if all(c in b for b in before) and all(c not in a for a in after)]
-        if (acc or rem) and series[i][0] not in declared:
-            beyond.append((series[i][0], acc, rem))
+        if (acc or rem) and series[k][0] not in declared:
+            beyond.append((series[k][0], acc, rem))
 
     for shot, acc, rem in beyond:
         both = "＋" + str(len(acc)) + "／−" + str(len(rem)) if acc and rem else (
@@ -880,16 +1396,22 @@ def check_role_registered(project):
 
 
 def check_motion_required(shot):
-    """L16 — **運動の層が無い。**
+    """L16 — **運動の層が無い。** `motion` は**全ショットで必須である。**
 
-    決定（2026-09-13、著者）——**`motion` は必須である。ただし静的なショットでは
-    Omit（無指定）も可。** 判定は `mode` で行う:
+    ⚠️ **旧規則（`mode: still` なら Omit も可）は死んだ。** あれは
+    **「動画を回さないショット」にだけ意味があった**——静止のショットは画像で終わり、
+    動画モデルへ運動を渡さないからである。**決定（2026-09-13、著者）
+    「全ショット画像 → 全ショット動画」がその前提を消した。** いまは10本すべてが
+    動画の経路を持つ（`L18`）——だから**どのショットでも、運動の層が無ければ
+    生成へ渡る運動が無い。**
 
-      `mode: still`              → **Omit も可**（任意）
-      それ以外（motion/composite） → **必須**
+    ⚠️ **だからここは `mode` を読まない。** 読まなくなったのは規則が単純になったからで、
+    欄が読まれなくなったからではない——`mode` の読み手は `L24` である。
+    **同じ規則を2箇所で判定しない**（片方だけ直せば、もう片方が別の符号で同じ欠陥を唄る）。
 
-    ⚠️ **`mode` が、ここで初めて読み手を得る。** 実測で17欄のうち7欄を
-    どの検査も読んでいなかった——`mode` はその一つである。
+    ⚠️ **`mode` が無いショットの分岐も消えた。** 「`mode` が無いので要否を決められない」は
+    **旧規則の下でだけ意味があった**——いまは要否が `mode` によらないので、
+    **決められないことは起こらない。** `mode` の不在は形の層が鳴らす。
 
     ⚠️ **この30件は「元が無い」ではない。** 受け火 V2 では §11 MOTION が
     **30本すべてに在り、4小節とも非空**であるのに、**移り先の欄だけが空いている**。
@@ -903,25 +1425,18 @@ def check_motion_required(shot):
     **なぜ必須なのか、何が欠けているのかを言えない。** `unit` の対と同じ扱いである。
     """
     sid = shot["shot"]
-    mode = shot.get("mode")
 
     if "motion" not in shot:
-        if mode == "still":
-            return []                       # 静的——Omit は可（決定）
-        if mode is None:
-            return [finding("L16", sid,
-                            "`mode` が無いので、**運動の層が要るかどうかを決められない**"
-                            "——規則は `mode` で判定する（`mode: still` なら Omit 可）。"
-                            "形の層も `mode` を必須で見ている。",
-                            severity="note")]
         return [finding("L16", sid,
-                        f"**運動の層が無い**（`mode: {mode}`）。"
-                        "`mode: still` 以外では `motion` は必須である（決定 2026-09-13）——"
+                        f"**運動の層が無い**（`mode: {shot.get('mode')}`）。"
+                        "**`motion` は全ショットで必須である**（決定 2026-09-13）——"
                         "**映像では運動が地であって、静止が特殊ケースである。**"
                         "⚠️ **元が無いのではない**——§11 MOTION は在り、"
                         "**移り先の欄だけが空いている。**"
                         "`subject`（何が動くか）・`quality`（どう動くか）・"
-                        "`law`（どの様式の物理に従うか）を書く。")]
+                        "`law`（どの様式の物理に従うか）を書く。"
+                        "⚠️ **`mode: still` でも要る**——止まるのは**主題**であって、"
+                        "画面ではない（決定 2026-09-13）。**光と粉塵は動く。**")]
 
     m = shot.get("motion")
     if not isinstance(m, dict):
@@ -934,6 +1449,102 @@ def check_motion_required(shot):
                         "——空の `motion` は「運動を宣言した」ではない。"
                         "（`role` の `minLength` と同じ理由である。）")]
     return []
+
+
+def _has_content(v):
+    """「書いてある」の最小の判定。**空文字・空の列・空の辞書は、書いていない。**"""
+    if v is None:
+        return False
+    if isinstance(v, str):
+        return bool(v.strip())
+    if isinstance(v, (list, tuple, dict)):
+        return bool(v)
+    return True
+
+
+def check_mode_demands(project):
+    """L24 — **`mode` が要求するもの。** `specmap.MODE_DEMANDS`。
+
+    ⚠️ **ここが `mode` の読み手である。** `L16` はもう `mode` を読まない
+    （運動は全モードで必須になった）。だから `mode` を読む検査がここに無ければ、
+    **`mode` は17欄のうち「どの検査も読まない欄」に戻る。**
+
+    ⚠️ **規則は「主題が動くか」から出ている。**
+      `still`／`composite` → **主題が止まる**——止まる主題を書く場所が §11 MOTION である。
+        空なら、**止まっているのか書き忘れたのかが分からない。**
+      `composite` → **画は層の合成である**——焼く層（`timeline` の `text_events`）へ
+        渡す `text_channel` が空なら、**そのショットは何も合成しない。**
+
+    ⚠️ **確かめられないことを、確かめた顔にしない。**
+    **§11 の中身が本当に主題を止めているかは、機械には読めない。**
+    文が "the dough swells" と書いてあっても、この層は止まっていると読めない。
+    だから註でそう報告する——**「主題は止まる」を語彙の文字列一致で見る、はしない。**
+    それは**私が書いた文に合わせて私が作った検査**であり、**空の検査と同じである。**
+
+    ⚠️ **相手が無ければ何も言わずに帰る**（`L20` と同じ形）。静止のショットが1本も無い
+    作品では、この検査は何も見ていない——**その報告は註が行う**（下記）。
+    """
+    out = []
+
+    # ① 目録そのものが閉じているか。**両方向に。**
+    if set(specmap.MODES) != set(specmap.MODE_DEMANDS):
+        only_modes = sorted(set(specmap.MODES) - set(specmap.MODE_DEMANDS))
+        only_demands = sorted(set(specmap.MODE_DEMANDS) - set(specmap.MODES))
+        out.append(finding("L24", "",
+                           f"`MODES` と `MODE_DEMANDS` の鍵が一致しない"
+                           f"（`MODES` だけ: {only_modes or 'なし'}／"
+                           f"`MODE_DEMANDS` だけ: {only_demands or 'なし'}）。"
+                           "**要求を書いていない `mode` は、"
+                           "何も要求しない `mode` と区別がつかない**"
+                           "——空の行は「要求が無い」の宣言である。"))
+
+    seen = collections.Counter()
+    for s in project.order():
+        shot = project.shots[s]
+        mode = shot.get("mode")
+        seen[str(mode)] += 1
+        for demand in specmap.MODE_DEMANDS.get(mode, ()):
+            kind, _, target = demand.partition(":")
+            if kind == "field":
+                if not _has_content(shot.get(target)):
+                    out.append(finding("L24", s,
+                                       f"`mode: {mode}` は `{target}` を要求するが、"
+                                       "**空である。**"
+                                       "`composite` は「画は層の合成である」を意味する"
+                                       "——焼くものが無ければ、"
+                                       "**そのショットは何も合成しない。**"))
+            elif kind == "section":
+                src = _spec_of(shot, "video")
+                if not src:
+                    continue              # L11 が鳴らしている
+                p = project.root / src
+                if not p.is_file():
+                    continue              # L11 が鳴らしている
+                if not _section_body(p, target):
+                    out.append(finding("L24", s,
+                                       f"`mode: {mode}` は §{target.rstrip('.')} を"
+                                       "要求する（主題が止まる）が、**空である。**"
+                                       "**止まっているのか、書き忘れたのかが"
+                                       "分からない**——"
+                                       "⚠️ **中身が本当に主題を止めているかまでは、"
+                                       "この層には読めない。**"))
+            else:
+                out.append(finding("L24", "",
+                                   f"`MODE_DEMANDS` の要求 `{demand}` の種類 `{kind}` を"
+                                   "知らない。**知らない要求は、確かめられないまま通る。**"))
+
+    if not out:
+        n_still = sum(v for k, v in seen.items() if k in ("still", "composite"))
+        out.append(finding("L24", f"{len(project.shots)}本",
+                           f"`mode` が要求するものを確かめた（"
+                           + "／".join(f"{k} {v} 本" for k, v in sorted(seen.items()))
+                           + f"）。§11 を要求されるショットは {n_still} 本である。"
+                           "⚠️ **確かめたのは「§11 が空でないこと」までである**"
+                           "——**そこに書かれた運動が、本当に主題を止めているかは"
+                           "機械には読めない。**"
+                           "**この穴は、穴のまま記録する。**",
+                           severity="note"))
+    return out
 
 
 #: §18 の小節見出しを、順序どおりに返す。**`##` の水準を問わない**——
@@ -989,12 +1600,18 @@ def check_prompt_slots(project):
     seen, with_slot = 0, 0
     for s in project.order():
         shot = project.shots[s]
-        src = shot.get("spec")
+        src = _spec_of(shot, "video")
         if not src:
             continue                        # L11 が鳴らしている
         p = project.root / src
         if not p.is_file():
             continue                        # L11 が鳴らしている
+        # ⚠️ **画像の仕様は §18 を持たない。** 「§18 の小節が1つも無い」は
+        #    **画像プロンプトでは欠陥ではない**——§18 は `video-spec` のものである。
+        #    ⚠️ **決定（2026-09-13）の前は、この絞り方が `mode` だった。**
+        #    いまは `_spec_of` が動画の仕様を引くので、画像の側はここへ来ない。
+        # ⚠️ **絞る規則は `_spec_of` が持つ。** 各所に写せば、片方だけ直したときに
+        #    もう片方が別の符号で同じ欠陥を唄る。
         got = _prompt_slots(p)
         seen += 1
         if not got:
@@ -1042,10 +1659,239 @@ def check_prompt_slots(project):
                            f"7つとも揃っているのは {with_slot}/{seen} 本である。"
                            + (f"作品の様式は `{style}` と宣言されている。"
                               if style else "⚠️ 作品の様式は宣言されていない。")
-                           + "⚠️ **様式カードは読んでいない**——`Motion character` の中身は"
-                           "`distill-essence-engine` にあり、このリポジトリには無い。"
-                           "**`Style Motion` がその中身を正しく引くかは、まだ検査されていない**"
-                           "——**この穴は、穴のまま記録する。**",
+                           # ⚠️ **ここは「読んでいない」ではない。** `L20` が読む。
+                           #    以前この註は「様式カードは読んでいない」と書いていた
+                           #    ——**`L20` が在るのに、偽であった。**
+                           + "⚠️ **様式カードは `L20` が読む**（`## Motion character` が"
+                           "カードに在るかまで）。**引いた中身が正しいかは、"
+                           "まだ検査されていない**——カードは "
+                           "`distill-essence-engine` の持ち物である。"
+                           "**この穴は、穴のまま記録する。**",
+                           severity="note"))
+    return out
+
+
+def _dests(v):
+    """行き先の値を、タプルに均す。**1つの欄が2箇所へ行くことがある**（尺）。"""
+    return (v,) if isinstance(v, str) else tuple(v)
+
+
+def check_field_destination(schema_dir):
+    """L19 — **記録の欄すべてに、行き先が宣言されているか。** `L12` の双対である。
+
+    ⚠️ **これが「狙いが届く」ことの機械的な形である。** `CLASS` が保証するのは
+    「欄が**どこから**来たか」であって、「**どこへ**行くか」ではない。
+    行き先の無い欄は、**生成へ届かない**——しかも黙って届かない。
+
+    ⚠️ **行き先は `mode` によらない。** 決定（2026-09-13、著者）「全ショット画像 →
+    全ショット動画」の下では、**どのショットも両方の経路を持つ**——だから
+    「静的なショットには生成の尺が無い」は成り立たない。**同じ欄は、いつも同じ場所へ行く。**
+    ⚠️ **これは単純化ではなく、規則の死である。** 以前は値が `mode` → 行き先の辞書で、
+    この検査が「全モードぶん書かれているか」を見ていた——**全モードで同じ値になるなら、
+    その分岐は一度も鳴らない。鳴らない分岐は、鳴ることを確かめるまで存在しないのと同じである。**
+
+    ⚠️ **`自前` は「落ちる」ではない。** 日本語の欄は**そもそも渡らない**
+    （CLAUDE.md「生成に渡す文字列を日本語にしない」）。**渡らないことと、
+    渡すはずのものが届かないことは別である。** だから `自前` にも理由を書く。
+
+    ⚠️ **両方向に閉じる。** 行き先が実在しない欄（`PROMPT_SLOTS` に無いスロットへ
+    送る、`take.params` に無い鍵へ送る）も鳴らす——**送り先が無ければ、届かない。**
+    そして **`SPEC_KINDS` が指す欄がスキーマに実在すること**も見る——
+    **経路を足したのに欄を足していなければ、その経路はどこにも無い。**
+    """
+    out = []
+    path = Path(schema_dir) / "shot-record.schema.json"
+    if not path.is_file():
+        out.append(finding("L19", "", f"ショット記録のスキーマが読めない: {path}"))
+        return out
+    fields = set(json.loads(path.read_text(encoding="utf-8")).get("properties", {}))
+    if not fields:
+        out.append(finding("L19", "", "スキーマに欄が1つも無い。**空のスキーマと検査している。**"))
+        return out
+
+    # ⚠️ **`SPEC_KINDS` の閉包。** 経路の欄は、記録の欄でなければならない。
+    for kind, spec in sorted(specmap.SPEC_KINDS.items()):
+        if spec.get("field") not in fields:
+            out.append(finding("L19", str(spec.get("field")),
+                               f"`SPEC_KINDS['{kind}']` が欄 `{spec.get('field')}` を指すが、"
+                               "ショット記録のスキーマに無い。"
+                               "**経路を宣言したのに、欄が無い**——"
+                               "その経路は**どこにも存在しない。**"))
+
+    # ⚠️ 送り先の実在を確かめるために、**本物の `take` スキーマを読む**。
+    take_params = set()
+    tp = Path(schema_dir) / "take.schema.json"
+    if not tp.is_file():
+        out.append(finding("L19", "", f"テイクのスキーマが読めない: {tp}。"
+                                      "**`params` の鍵を確かめられない。**"))
+    else:
+        take_params = set(json.loads(tp.read_text(encoding="utf-8"))
+                          ["properties"]["take"]["properties"]["params"]
+                          .get("properties", {}))
+
+    # ① 欄 → 行き先。すべての欄が行き先を宣言しているか。
+    for f in sorted(fields - set(specmap.FIELD_DESTINATION)):
+        out.append(finding("L19", f, f"欄 `{f}` の行き先が宣言されていない。"
+                                     "**行き先の無い欄は、生成へ届かない**——"
+                                     "しかも黙って届かない。"))
+    for f in sorted(set(specmap.FIELD_DESTINATION) - fields):
+        out.append(finding("L19", f, f"`FIELD_DESTINATION` が欄 `{f}` を指しているが、"
+                                     "スキーマに無い。"))
+
+    for f, v in sorted(specmap.FIELD_DESTINATION.items()):
+        if f not in fields:
+            continue
+        # ⚠️ **空の行き先は、行き先が無いのと同じである。** 宣言した顔をして、
+        #    1箇所へも行かない——**空の検査は OK と言う。**
+        if not _dests(v):
+            out.append(finding("L19", f, f"欄 `{f}` の行き先が空である。"
+                                         "**宣言した顔をして、1箇所へも行かない**"
+                                         "——行き先の無い欄は、黙って落ちる。"))
+            continue
+        # ② 行き先の種類と、送り先の実在。**送り先が無ければ、届かない。**
+        for d in _dests(v):
+            if d == "自前":
+                continue
+            kind, _, target = d.partition(":")
+            if kind not in specmap.DESTINATIONS:
+                out.append(finding("L19", f, f"欄 `{f}` の行き先 `{d}` の"
+                                             f"種類 `{kind}` が語彙に無い。"
+                                             f"語彙: {'／'.join(specmap.DESTINATIONS)}。"))
+                continue
+            if not target:
+                out.append(finding("L19", f, f"欄 `{f}` の行き先 `{d}` に"
+                                             "送り先が無い。**種類だけでは届かない。**"))
+                continue
+            if kind == "prompt" and target not in specmap.PROMPT_SLOTS:
+                out.append(finding("L19", f, f"欄 `{f}` が §18 のスロット "
+                                             f"`{target}` へ行くと宣言されているが、"
+                                             "そのスロットは目録に無い。"))
+            elif kind == "params" and target not in take_params:
+                out.append(finding("L19", f, f"欄 `{f}` が `take.params` の "
+                                             f"`{target}` へ行くと宣言されているが、"
+                                             "その鍵はテイクのスキーマに無い。"))
+            elif kind == "handover" and target not in specmap.HANDOVER:
+                out.append(finding("L19", f, f"欄 `{f}` が基盤 `{target}` へ"
+                                             "行くと宣言されているが、その基盤は"
+                                             "目録に無い。"))
+            elif kind == "edit" and target not in specmap.EDIT_TARGETS:
+                out.append(finding("L19", f, f"欄 `{f}` が `{target}` へ"
+                                             "行くと宣言されているが、その先は"
+                                             "目録に無い。"))
+
+    # ③ 理由。**渡らないこと、一部だけが渡ることは、書かねば残らない。**
+    for f in sorted(fields - set(specmap.DESTINATION_WHY)):
+        out.append(finding("L19", f, f"欄 `{f}` の行き先の理由が書かれていない。"
+                                     "**なぜそこへ行くのか（あるいは行かないのか）が"
+                                     "無ければ、行き先は後から変えられない。**"))
+    for f in sorted(set(specmap.DESTINATION_WHY) - fields):
+        out.append(finding("L19", f, f"`DESTINATION_WHY` が欄 `{f}` を指しているが、"
+                                     "スキーマに無い。"))
+
+    # ④ 語彙そのものが空でないか。**空の語彙は、すべてを通す。**
+    for name, table in (("DESTINATIONS", specmap.DESTINATIONS),
+                        ("HANDOVER", specmap.HANDOVER),
+                        ("EDIT_TARGETS", specmap.EDIT_TARGETS)):
+        if not table:
+            out.append(finding("L19", "", f"`{name}` が空である。**空の目録は、"
+                                          "何も鳴らさない。**"))
+
+    if not out:
+        n_self = sum(1 for v in specmap.FIELD_DESTINATION.values()
+                     if "自前" in _dests(v))
+        n_dest = sum(len(_dests(v)) for v in specmap.FIELD_DESTINATION.values())
+        out.append(finding("L19", f"{len(fields)}欄",
+                           f"欄の行き先は閉じている（{len(fields)} 欄 ／ "
+                           f"{n_dest} の行き先、うち `自前` が {n_self}）。"
+                           "**行き先の無い欄は1つも無い。**"
+                           f"⚠️ **行き先は `mode` によらない**——経路が2つあるので、"
+                           f"{len(specmap.SPEC_KINDS)} つの経路の欄もここで閉じている。"
+                           "⚠️ **これは「届く」ことの検査であって、"
+                           "「届いた」ことの検査ではない。**",
+                           severity="note"))
+    return out
+
+
+#: 様式カードの置き場。⚠️ **このリポジトリの外にある**（`distill-essence-engine`）。
+#: だから **clone した人には無い。** 読めないときは「確かめられない」と報告する。
+STYLE_CARD_ENV = "SVL_STYLES_DIR"
+
+
+def _styles_dir(repo_root):
+    """様式カードの置き場。⚠️ **指しても、そこに無ければ「読めない」。**
+
+    指した先を確かめずに返すと、**「様式が実在しない」と「置き場が違う」が
+    同じ符号で鳴る**——原因の違うものを同じ顔で報告しない。
+    """
+    import os
+    env = os.environ.get(STYLE_CARD_ENV)
+    if env:
+        p = Path(env)
+        return p if p.is_dir() else None
+    sib = Path(repo_root).parent / "distill-essence-engine" / "references" / "styles"
+    return sib if sib.is_dir() else None
+
+
+def check_style_motion(project, repo_root=None):
+    """L20 — **`Style Motion` の行き先が、空でないか。** 様式カードの `Motion character`。
+
+    ⚠️ **`L17` はここを通す。** スロットが仕様に**在る**ことを見るだけで、
+    **そのスロットが何かを運ぶか**は見ていない。`Motion character` を持たない様式を
+    選べば、`Style Motion` は**在るが空である**——**空の検査は OK と言う。**
+
+    ⚠️ **カードはこのリポジトリの外にある。** 読めなければ「確かめられない」と
+    報告する——**確かめていないことを、確かめた顔にしない**（L9・L14 と同じ形）。
+    """
+    out = []
+    style = ((getattr(project, "bible", None) or {}).get("bible") or {}).get("style")
+    if not style:
+        return out                       # L17 が「様式を宣言していない」と鳴らしている
+
+    # `Style Motion` を実際に持つ仕様があるか。無ければ、この検査は何も見ていない。
+    with_slot = 0
+    for s in project.order():
+        # ⚠️ **`_spec_of` を通す。** ここだけ `shot.get("spec")` を直に読むと、
+        #    経路の決め方が2箇所に分かれる——**片方だけ直したときに、
+        #    もう片方が別の符号で同じ欠陥を唄る。**
+        src = _spec_of(project.shots[s], "video")
+        if not src:
+            continue
+        p = project.root / src
+        if p.is_file() and "Style Motion" in _prompt_slots(p):
+            with_slot += 1
+    if not with_slot:
+        return out                       # L17 が「目録にあるスロットが無い」で鳴らす
+
+    root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
+    d = _styles_dir(root)
+    if d is None:
+        out.append(finding("L20", "",
+                           f"様式 `{style}` のカードが**読めない**——"
+                           f"`{STYLE_CARD_ENV}` を設定するか、"
+                           f"`distill-essence-engine` を隣に置くこと。"
+                           "**このリポジトリを clone した人には無い。**"
+                           "だから `Style Motion` が中身を運ぶかは**確かめられない**"
+                           "——**確かめていないことを、確かめた顔にしない。**",
+                           severity="note"))
+        return out
+    card = d / f"{style}.md"
+    if not card.is_file():
+        out.append(finding("L20", "",
+                           f"様式カード `{card}` が無い。**`bible.style` が指す様式が"
+                           "実在しない**——`Style Motion` は何も引けない。"))
+        return out
+    if "## Motion character" not in card.read_text(encoding="utf-8"):
+        out.append(finding("L20", "",
+                           f"様式 `{style}` のカードに `## Motion character` が無い。"
+                           f"**{with_slot} 本の `Style Motion` は、在るが空である**——"
+                           "`L17` はスロットが在ることで通してしまう。"
+                           "**行き先を宣言したのに、運ぶものが無い。**"))
+    else:
+        out.append(finding("L20", "",
+                           f"様式 `{style}` は `Motion character` を持つ。"
+                           f"{with_slot} 本の `Style Motion` は中身を運ぶ。"
+                           "⚠️ **引いた中身が正しいかは、まだ検査していない**——"
+                           "カードは `distill-essence-engine` の持ち物である。",
                            severity="note"))
     return out
 
@@ -1067,10 +1913,17 @@ def run(project, schema_dir=None):
     out += check_circular(project)
     out += check_negative_response(project)
     out += check_spec_sections(project)
+    out += check_spec_kind(project)
+    out += check_image_negative(project)
+    out += check_image_vars(project)
+    out += check_duration(project)
     out += check_identity(project)
     out += check_beyond_declaration(project)
     out += check_role_registered(project)
     out += check_prompt_slots(project)
+    out += check_style_motion(project)
+    out += check_mode_demands(project)
     if schema_dir:
         out += check_field_source(schema_dir)
+        out += check_field_destination(schema_dir)
     return out

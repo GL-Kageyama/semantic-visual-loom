@@ -1,0 +1,50 @@
+# 02 / 質感 / motion — 粉の粒度と、水の膜
+#
+# ⚠️ **決定（2026-09-13、著者）で `mode` が変わった。** 以前は `still` だった。
+#    この1枚（画像）は「拡大」であるが、**それは `mode` の話ではない。**
+#    画像の経路は `first_frame:` が、動画の経路は `spec:` が持つ——**種類は欄が決める。**
+#    `mode` が言うのは「主題が動くか」だけであり、**水は動く。**
+shot: hitosara-ch01-seg02
+spec: specs/video/shot-02-flour-and-water.md
+first_frame: specs/image/shot-02-flour-and-water.md
+unit:
+  before: 粉は粉であり、水は水である
+  after: 粉の一粒ごとに水の膜がかかり、境が消える
+role: 質感
+place: KITCHEN
+time: 朝
+mode: motion
+duration: 2s
+motion:
+  subject: 水と、水に巻き込まれていく粉
+  quality: 水が粉へ触れ、膜が広がり、粒の境が消えていく。速いのは触れた瞬間だけで、あとは滲む
+  law: 様式は full animation。動くのは界面そのものであり、粉の山は動かない
+    ——**動くのは主題の側である。**
+beats:
+- range: 0-1s
+  density: sparse
+  what: 粉の山の頂点を、ごく浅い角度から見る。粒が一つずつ分かれている。
+- range: 1-2s
+  density: dense
+  what: 水が粉へ触れる。膜が広がり、粒の境が消えていく。この1秒だけ密度が上がる。
+reference_set:
+- KITCHEN.base
+- KITCHEN.geography
+- KONA.appearance
+- MIZU.appearance
+- BAKER.sheet
+forbidden_set:
+- KAMADO
+- PAN
+- SHIO
+attached:
+- KITCHEN.base
+- KITCHEN.geography
+- KONA.appearance
+- MIZU.appearance
+- BAKER.sheet
+disclosure_state:
+  KAMADO.interior: sealed
+  PAN.interior: sealed
+sound:
+  scene_ref: hitosara-sc02-flour-water

@@ -1,0 +1,50 @@
+# 09 / 様式美 / motion — 割った断面
+#
+# ⚠️ **開示の第2点である。ここでパンが割れる。**
+#    ⚠️ **決定（2026-09-13、著者）で `mode` が変わった。** 以前は `still` だった。
+#    このショットの主題は**湯気**であり、湯気は立ちのぼる——だから `motion` である。
+#    **止まるのは断面であって、画面ではない。**
+# ⚠️ **そして、この変化点は §18 でも確かめられるようになった。**
+#    以前は「§18 を持たない」ので台帳に `negative:` を書けなかった——**いまは動画の仕様が在り、
+#    §18 から `no cut loaf`・`no visible crumb`・`no cross-section` の3節が落ちる。**
+#    だから `ledger.disclosure` がこの行にも `negative: changed` を宣言し、L10 が検算する。
+#    ⚠️ **画像の仕様の Negative でも同じ3節が落ちる**——そちらを読むのは引き渡しの層（段2）。
+shot: hitosara-ch01-seg09
+spec: specs/video/shot-09-crumb.md
+first_frame: specs/image/shot-09-crumb.md
+unit:
+  before: パンの外は金である
+  after: 内の気泡が光を受ける
+role: 様式美
+place: KITCHEN
+time: 朝
+mode: motion
+duration: 2.5s
+motion:
+  subject: 湯気と、断面に落ちる光
+  quality: 割れた瞬間に湯気が立ち、立ちのぼりながら薄くなる。**断面そのものは動かない**
+  law: 様式は full animation。動くのは湯気であり、主題（気泡の壁）は止まっている
+    ——止まった主題を、動く光と湯気が照らす
+beats:
+- range: 0-1.5s
+  density: sparse
+  what: 焼き上がったパンが、台の上にひとつ。外は金。まだ割れていない。
+- range: 1.5-2.5s
+  density: held
+  what: 割れる。気泡の壁が光を受けて、内側から明るくなる。湯気が立ちのぼる。
+reference_set:
+- KITCHEN.base
+- KITCHEN.geography
+- PAN.appearance
+forbidden_set:
+- KAMADO
+- KONA
+attached:
+- KITCHEN.base
+- KITCHEN.geography
+- PAN.appearance
+disclosure_state:
+  KAMADO.interior: opened
+  PAN.interior: opened
+sound:
+  scene_ref: hitosara-sc09-crumb

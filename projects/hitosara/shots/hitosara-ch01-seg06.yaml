@@ -1,0 +1,56 @@
+# 06 / 運動（自然現象）/ motion — 発酵
+#
+# ⚠️ **この作品の主題である。** 「発酵が時を運ぶ」——時計は無く、時間は生地の側で進む。
+#    だからこのショットに時刻の語は要らない。**`time: 昼` は画面の色であって、尺度ではない。**
+# ⚠️ **§18 の `Negative Prompt` は 04 と1節も違わない。** 開示の変化点は 08 にあるので、
+#    ここでは動かない——L14 は「動いたのに宣言が無い」を鳴らす検査であり、
+#    **動かないことは鳴らない。**
+# ⚠️ **決定（2026-09-13、著者）で、このショットも画像から始まる。** 動画の仕様は
+#    `spec:`、画像の仕様は `first_frame:` である。
+shot: hitosara-ch01-seg06
+spec: specs/video/shot-06-proof.md
+first_frame: specs/image/shot-06-proof.md
+unit:
+  before: 生地は、置かれたまま小さい
+  after: 生地は、蓋を持ち上げる
+role: 運動（自然現象）
+effect: 圧
+place: KITCHEN
+time: 昼
+mode: motion
+duration: 8s
+motion:
+  subject: 生地そのもの
+  quality: 外から見れば、ほとんど止まっている。内側で気泡が数を増し、表面がゆっくり持ち上がる
+  law: 自然現象である——押されていないものが動く。様式は full animation で、動くのは atmosphere が先である
+beats:
+- range: 0-2s
+  density: sparse
+  what: 蓋の下のボウル。外は何も起きていない。
+- range: 2-5s
+  density: held
+  what: 生地の表面が、見て分かる程度に持ち上がる。気泡の影が内側で動く。
+- range: 5-7s
+  density: held
+  what: 生地が蓋の内側に触れる。触れて、なお膨らもうとする。
+- range: 7-8s
+  density: dense
+  what: 蓋がわずかに浮く。粉が蓋の縁から滑り落ちる。
+reference_set:
+- KITCHEN.base
+- KITCHEN.states.昼
+- KITCHEN.geography
+- KONA.appearance
+forbidden_set:
+- KAMADO
+- PAN
+attached:
+- KITCHEN.base
+- KITCHEN.states.昼
+- KITCHEN.geography
+- KONA.appearance
+disclosure_state:
+  KAMADO.interior: sealed
+  PAN.interior: sealed
+sound:
+  scene_ref: hitosara-sc06-proof

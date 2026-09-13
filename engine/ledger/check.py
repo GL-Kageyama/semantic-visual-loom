@@ -96,6 +96,16 @@ class Project:
                     self.read_errors.append(f"{p.name}: ショットIDが読めない")
                     continue
                 self.takes.setdefault(key, []).append(doc)
+            # ⚠️ **空のディレクトリも報告する。** 「無い」だけを報告すると、
+            #    `takes/` を置いた時点で**「テイクの記録が1本も無い」が消える**
+            #    ——**置いたことは、撮ったことではない。**
+            #    空を OK と言わない（README「⚠️ 空を OK と言わない」）。
+            #    ⚠️ これを「0件だから正しい」と読んではならない——**読むのは人である。**
+            if not self.takes:
+                self.read_errors.append(
+                    "takes/ は在るが、**テイクの記録が1本も無い**——"
+                    "生成は一度も走っていない。"
+                    "「テイク0件」は「違反0件」ではない。**選別の検査が空である。**")
 
         # 台帳の disclosure を {shot, attr, value} に均す。
         # ⚠️ 変化点は「属性の袋」である（`HANA: present` のように書く）。
@@ -465,8 +475,6 @@ def self_test():
         ("L10 値が changed/covered でない", SAME, cp("maybe"), True, "どちらでもない"),
         ("L10 changed と言い、§18 も違う（鳴ってはならない）", DIFF, cp("changed"), False, None),
         ("L10 covered と言い、§18 も同じ（鳴ってはならない）", SAME, cp("covered"), False, None),
-        ("L10 spec が無い", {k: v for k, v in SAME.items() if k != "a.md"},
-         cp("changed"), True, "`spec:` が無い"),
         ("L10 §18 の節が無い", {"a.md": SPEC_NOSEC, "b.md": SPEC_NOSEC},
          cp("changed"), True, "`Negative Prompt` の節が無い"),
     ]
@@ -482,6 +490,29 @@ def self_test():
         print(f"    {label:<44}{verdict:>10}  "
               f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
         for f in v[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ **註の側も読む。** 「違反0件」だけでは註が正しいことは分からない——
+    #    **註が出ないことも「違反0件」に見える**からである。ここで見るのは
+    #    「記録が無いこと」であって「食い違っていること」ではない（決定 2026-09-13）。
+    no_a = {k: v for k, v in SAME.items() if k != "a.md"}
+    note_cases = [
+        ("L10 先行する §18 が無い＝註", no_a, cp("changed"),
+         "先行する §18 を持つショットが無い"),
+        ("L10 変化点に動画の仕様が無い＝註", no_a, cp("changed", shot="p-ch01-seg01"),
+         "動画の仕様（`spec:`）が無い"),
+    ]
+    for label, files, point, fragment in note_cases:
+        p = spec_proj(files, [point])
+        got = semantic.check_negative_response(p)
+        notes = [f for f in got if f["severity"] == "note"]
+        v = [f for f in got if f["severity"] != "note"]
+        n += 1
+        ok = bool(notes) and not v and any(fragment in f["message"] for f in notes)
+        bad += not ok
+        print(f"    {label:<44}{f'註 {len(notes)} 件':>10}  "
+              f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in notes[:1]:
             print(f"        {f['code']}  {f['message'][:88]}")
 
     # ---- L11（仕様の節が目録のとおりか）
@@ -550,26 +581,62 @@ def self_test():
         return (f"# 19. GENERATION INSTANCE\n\n## Instance\n\n"
                 f"- Instance ID: `{iid}`\n- Segment ID: `{seg}`\n{tail}\n")
 
-    def id_proj(body, sid=None):
+    def id_proj(body, sid=None, first=None):
+        """⚠️ **経路は欄が決める。** `spec:`（動画）と `first_frame:`（画像）を別々に置く。"""
         d = _P(tempfile.mkdtemp())
         (d / "a.md").write_text(body, encoding="utf-8")
-        sh = s(sid or "p-ch01-seg01", spec="a.md")
+        kw = {}
+        if first is not None:
+            (d / "b.md").write_text(first, encoding="utf-8")
+            kw["first_frame"] = "b.md"
+        sh = s(sid or "p-ch01-seg01", spec="a.md", **kw)
         p = _One(sh)
         p.root = d
         p.shots = {sh["shot"]: sh}
         return p
 
     id_cases = [
-        ("L13 一致（鳴ってはならない）", inst(), None, False, None),
-        ("L13 仕様の自己名と違う", inst(iid="p-ch01-seg07-30s-01"), None, True, "の本体は"),
-        ("L13 接尾辞が無い", inst(iid="p-ch01-seg01"), None, True, "接尾辞が無い"),
+        ("L13 一致（鳴ってはならない）", inst(), None, None, False, None),
+        ("L13 仕様の自己名と違う", inst(iid="p-ch01-seg07-30s-01"), None, None, True, "の本体は"),
+        ("L13 接尾辞が無い", inst(iid="p-ch01-seg01"), None, None, True, "接尾辞が無い"),
+        # ⚠️ **尺は小数でありうる。** 実測の `hitosara-ch01-seg09-2.5s-01` が読めず、
+        #    検査は「接尾辞が無い」と鳴っていた——**規則ではなく、読み手が狭かった。**
+        #    この2件は対である。**片方だけなら、綴りを消しても自己検査は緑のままになる。**
+        ("L13 尺が小数でも読める（鳴ってはならない）",
+         inst(iid="p-ch01-seg01-2.5s-01"), None, None, False, None),
+        ("L13 接尾辞の尺が数でなければ鳴る",
+         inst(iid="p-ch01-seg01-Xs-01"), None, None, True, "接尾辞が無い"),
         ("L13 Instance ID が無い",
-         "# 19. GENERATION INSTANCE\n\n## Instance\n\n- Segment ID: `01-1`\n", None, True,
+         "# 19. GENERATION INSTANCE\n\n## Instance\n\n- Segment ID: `01-1`\n", None, None, True,
          "`Instance ID` が無い"),
-        ("L13 Instance の節が無い", "# 19. GENERATION INSTANCE\n\n本文\n", None, True, "の節が無い"),
+        ("L13 Instance の節が無い", "# 19. GENERATION INSTANCE\n\n本文\n", None, None, True,
+         "の節が無い"),
     ]
-    for label, body, sid, want, fragment in id_cases:
-        got = [f for f in semantic.check_identity(id_proj(body, sid)) if f["severity"] != "note"]
+    for label, body, sid, first, want, fragment in id_cases:
+        got = [f for f in semantic.check_identity(id_proj(body, sid, first))
+               if f["severity"] != "note"]
+        n += 1
+        ok = bool(got) == want and (not want or any(fragment in f["message"] for f in got))
+        bad += not ok
+        print(f"    {label:<40}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in got[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ **画像の仕様は §19 を持たない。** だから `first_frame` に置けば鳴ってはならない。
+    #    そして**同じ本文を `spec:` に置けば鳴る**——この対でなければ、
+    #    「絞った」のか「検査そのものが死んだ」のかを区別できない。
+    #    **片方だけ置けば、検査を殺しても自己検査は緑のままになる。**
+    #    ⚠️ **決定（2026-09-13）の前は、この対が `mode` の違いだった。**
+    #    いまは**欄の違い**である——`mode` は経路を決めない。
+    img_body = "# Shot 01 — 粉屋の棚\n\nAn English one-line prompt, with no sections at all.\n"
+    img_cases = [
+        ("L13 画像の仕様は `first_frame`（鳴ってはならない）",
+         inst(), None, img_body, False, None),
+        ("L13 同じ本文を `spec:` に置けば鳴る", img_body, None, None, True, "の節が無い"),
+    ]
+    for label, body, sid, first, want, fragment in img_cases:
+        got = [f for f in semantic.check_identity(id_proj(body, sid, first))
+               if f["severity"] != "note"]
         n += 1
         ok = bool(got) == want and (not want or any(fragment in f["message"] for f in got))
         bad += not ok
@@ -584,6 +651,17 @@ def self_test():
     ok = not [f for f in got if f["severity"] != "note"] and bool(note)
     bad += not ok
     print(f"    {'L13 Segment ID の逸脱は註（違反でない）':<40}{len(note):>10}  "
+          f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+
+    # ⚠️ **同じ形の逸脱が `Segment ID` にもあった。** `\d\d-\d` は**10本目の `01-10` を
+    #    読めない**——章の本数が2桁になれば、それは逸脱ではなく**同じ綴り**である。
+    #    ここも対で見る: **2桁の本数は註を出さず**、別の綴り（`A-1`）は註を出す。
+    got2 = semantic.check_identity(id_proj(inst(seg="01-10")))
+    note2 = [f for f in got2 if f["severity"] == "note" and "Segment ID" in f["message"]]
+    n += 1
+    ok = not [f for f in got2 if f["severity"] != "note"] and not note2
+    bad += not ok
+    print(f"    {'L13 Segment ID 01-10 は逸脱でない（鳴ってはならない）':<40}{len(note2):>10}  "
           f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
 
     # ---- L12（欄と節の対応が閉じているか）
@@ -709,6 +787,102 @@ def self_test():
     print(f"    {'L14 回転を註で報告する':<44}{len(note):>10}  "
           f"{'期待どおり' if note else '⚠️ 期待と違う'}")
 
+    # ---- L10・L14 が「モードの混ざった並び」で正しく鳴るか
+    #     ⚠️ **§18 は連続していない。** 静的なショットが間に挟まれば、§18 の列は
+    #        そこで切れる。**切れ目を跨いだ変化は、跨いで比べねば見えない。**
+    #        L10 は「1つ前を見る」で、L14 は「隣り合う2つを見る」で、
+    #        そこを丸ごと落としていた——**鳴らない分岐である。**
+    print("\n=== 自己検査 — モードの混ざった並び\n")
+
+    def mix_proj(rows, points=()):
+        """`rows` は `(ショットID, mode, 本文, 経路)`。**本物のファイルを読ませる。**
+
+        ⚠️ **経路は欄が決める**（決定 2026-09-13）。だから画像のショットは
+        `spec:` を持たず、`first_frame:` を持つ——**`mode` では決まらない。**
+        `mode` を渡しているのは、**`mode` が経路を決めないことを自分で踏むためである**
+        （この表の `still` は画像の経路を指すが、それは欄が決めている）。
+        """
+        d = _P(tempfile.mkdtemp())
+        shots = []
+        for sid, mode, body, kind in rows:
+            (d / f"{sid}.md").write_text(body, encoding="utf-8")
+            field = specmap.SPEC_KINDS[kind]["field"]
+            shots.append(s(sid, mode=mode, **{field: f"{sid}.md"}))
+        p = _One(shots[0])
+        p.root = d
+        p.shots = {x["shot"]: x for x in shots}
+        p.disclosure = [dict(c) for c in points]
+        return p
+
+    S2, S4 = "p-ch01-seg02", "p-ch01-seg04"
+    # ⚠️ **画像のショットの仕様は、§18 を持たない一文である。**
+    #    §18 を持たせてしまうと、この例は「混ざった並び」を再現しない。
+    IMG = "A rustic bakery shelf at dawn, flour dust in warm light, 35mm\n"
+    MIXED = [("p-ch01-seg01", "still", IMG, "image"),
+             (S2, "motion", SPEC_A, "video"),
+             ("p-ch01-seg03", "still", IMG, "image"),
+             (S4, "motion", SPEC_B, "video")]
+
+    # ① L10 — 変化点が画像の経路にある。**違反ではなく註である。**
+    got = semantic.check_negative_response(
+        mix_proj(MIXED, [cp(None, shot="p-ch01-seg03")]))
+    n += 1
+    v = [f for f in got if f["severity"] != "note"]
+    ok = not v and any("動画の仕様（`spec:`）が無い" in f["message"] for f in got)
+    bad += not ok
+    print(f"    {'L10 変化点が画像の経路（註・違反でない）':<46}{len(got):>10}  "
+          f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+    for f in got[:1]:
+        print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ② L10 — **静的なショットを挟んで比べているか。**
+    #     seg02 と seg04 は §18 が違う。`covered` と言えば**理由が誤っている。**
+    got = [f for f in semantic.check_negative_response(
+        mix_proj(MIXED, [cp("covered", shot=S4)])) if f["severity"] != "note"]
+    n += 1
+    ok = bool(got) and any("理由が誤っている" in f["message"] for f in got)
+    bad += not ok
+    print(f"    {'L10 挟まれた静的なショットを跨いで比べる':<46}{len(got):>10}  "
+          f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+    for f in got[:1]:
+        print(f"        {f['code']}  {f['message'][:88]}")
+
+    got = [f for f in semantic.check_negative_response(
+        mix_proj(MIXED, [cp("changed", shot=S4)])) if f["severity"] != "note"]
+    n += 1
+    bad += bool(got)
+    print(f"    {'L10 同じ対で changed は鳴らない':<46}{len(got):>10}  "
+          f"{'期待どおり' if not got else '⚠️ 期待と違う'}")
+
+    # ③ L14 — **跨いだ持続変化を捕まえるか。** 旧い版はここを丸ごと落としていた。
+    got = [f for f in semantic.check_beyond_declaration(mix_proj(MIXED))
+           if f["severity"] != "note"]
+    n += 1
+    ok = bool(got) and all(f["shot"] == S4 for f in got)
+    bad += not ok
+    print(f"    {'L14 画像の経路を跨いだ持続変化':<46}{len(got):>10}  "
+          f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+    for f in got[:1]:
+        print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ **宣言があれば鳴らない。** 跨いだ位置でも、台帳が届いていれば註である。
+    got = [f for f in semantic.check_beyond_declaration(
+        mix_proj(MIXED, [cp("changed", shot=S4)])) if f["severity"] != "note"]
+    n += 1
+    bad += bool(got)
+    print(f"    {'L14 跨いだ変化が宣言済み（鳴ってはならない）':<46}{len(got):>10}  "
+          f"{'期待どおり' if not got else '⚠️ 期待と違う'}")
+
+    # ⚠️ **動画の仕様が無いことは「読めない」ではない。** 同じ符号で報告しない。
+    got = semantic.check_beyond_declaration(mix_proj(MIXED))
+    n += 1
+    notes = [f for f in got if f["severity"] == "note"]
+    ok = (any("動画の仕様（`spec:`）が無い" in f["message"] for f in notes)
+          and not any("`spec:` が無いか読めない" in f["message"] for f in notes))
+    bad += not ok
+    print(f"    {'L14 「持たない」と「読めない」を分ける':<46}{len(notes):>10}  "
+          f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+
     print("\n=== 自己検査 — 種別の目録\n")
 
     import rolemap  # noqa: E402
@@ -776,29 +950,27 @@ def self_test():
     print(f"    {'L15 目録そのものが短い':<44}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
 
     # ---- L16（運動の層が無い）
-    #     ⚠️ **いちばん大事な例は「still なら鳴らない」である。** 決定の後半がそれである。
+    #     ⚠️ **決定（2026-09-13）で、`mode` はここを左右しなくなった。**
+    #        **全モードで必須である**——だから例も**3つのモードすべて**で置く。
+    #        **1つだけ置けば、「全モード」を「1モード」に戻しても緑のままになる。**
     print("\n=== 自己検査 — 運動の層の必須\n")
 
     MOT = {"subject": "手", "quality": "止まる", "law": "限定作画"}
+    NOMOT = {k: v for k, v in clean.items() if k != "motion"}
     mot_cases = [
-        # 決定の前半: mode: still 以外では必須
-        ("L16 mode: motion で motion が無い",
-         {k: v for k, v in clean.items() if k != "motion"}, True, "運動の層が無い"),
+        # ⚠️ **全モードで必須である。** 3つとも鳴らす——**`still` が本命である**
+        #    （決定の前に Omit を許していたのは、そこだけだから）。
+        ("L16 mode: motion で motion が無い", NOMOT, True, "運動の層が無い"),
         ("L16 mode: composite で motion が無い",
-         {**{k: v for k, v in clean.items() if k != "motion"}, "mode": "composite"},
-         True, "運動の層が無い"),
-        # 決定の後半: **静的なショットでは Omit も可**
-        ("L16 mode: still なら Omit できる（鳴ってはならない）",
-         {**{k: v for k, v in clean.items() if k != "motion"}, "mode": "still"}, False, None),
+         {**NOMOT, "mode": "composite"}, True, "運動の層が無い"),
+        ("L16 mode: still で motion が無い",
+         {**NOMOT, "mode": "still"}, True, "運動の層が無い"),
         # motion があれば鳴らない
         ("L16 motion がある（鳴ってはならない）", {**clean, "motion": MOT}, False, None),
         # ⚠️ **欄を置いたことは、書いたことではない。**
         ("L16 motion はあるが空",
          {**clean, "motion": {"subject": "", "quality": "  ", "law": "限定作画"}},
          True, "空の欄がある"),
-        # mode が無ければ、規則を適用できない。**註**であって違反ではない。
-        ("L16 mode が無い（註・違反ではない）",
-         {**{k: v for k, v in clean.items() if k != "motion"}, "mode": None}, False, None),
     ]
     for label, shot, want, fragment in mot_cases:
         got = [f for f in semantic.check_motion_required(shot) if f["severity"] != "note"]
@@ -809,12 +981,15 @@ def self_test():
         for f in got[:1]:
             print(f"        {f['code']}  {f['message'][:88]}")
 
-    got = semantic.check_motion_required(
-        {**{k: v for k, v in clean.items() if k != "motion"}, "mode": None})
+    # ⚠️ **`mode` が無くても、要否は決まる。** 旧規則の下では「決められない」が
+    #    起こりえたが、**いまは要否が `mode` によらない**——だから
+    #    **`mode` の不在は形の層（`required`）が鳴らす。** ここは重ねて鳴らさない。
+    got = [f for f in semantic.check_motion_required({**NOMOT, "mode": None})
+           if f["severity"] != "note"]
     n += 1
-    ok = bool(got) and got[0]["severity"] == "note" and "決められない" in got[0]["message"]
+    ok = bool(got) and any("運動の層が無い" in f["message"] for f in got)
     bad += not ok
-    print(f"    {'L16 mode が無いことを註で報告する':<44}{len(got):>10}  "
+    print(f"    {'L16 mode が無くても要否は決まる':<44}{len(got):>10}  "
           f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
 
     # ---- L17（§18 のスロットが目録のとおりか）
@@ -825,10 +1000,15 @@ def self_test():
         body = "".join(f"## {t}\n\n本文\n\n" for t in slots)
         return f"# {title}\n\n{body}# 19. GENERATION INSTANCE\n\n本文\n"
 
-    def slots_proj(body, style="soft-cel-anime"):
+    def slots_proj(body, style="soft-cel-anime", first=None):
+        """⚠️ **経路は欄が決める。** §18 を読む相手は `spec:` であって `mode` ではない。"""
         d = _P(tempfile.mkdtemp())
         (d / "a.md").write_text(body, encoding="utf-8")
-        sh = s("p-ch01-seg01", spec="a.md")
+        kw = {}
+        if first is not None:
+            (d / "b.md").write_text(first, encoding="utf-8")
+            kw["first_frame"] = "b.md"
+        sh = s("p-ch01-seg01", spec="a.md", **kw)
         p = _One(sh)
         p.root = d
         p.shots = {"p-ch01-seg01": sh}
@@ -860,6 +1040,28 @@ def self_test():
     for label, body, style, want, fragment in slot_cases:
         got = [f for f in semantic.check_prompt_slots(slots_proj(body, style))
                if f["severity"] != "note"]
+        n += 1
+        ok = bool(got) == want and (not want or any(fragment in f["message"] for f in got))
+        bad += not ok
+        print(f"    {label:<44}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in got[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ **画像の仕様は §18 を持たない。** 「小節が1つも無い」は画像では
+    #    欠陥ではない——`L13` と同じ形の誤りである。
+    #    ⚠️ **この対が言っているのは「`L17` は `first_frame` を読まない」ことである。**
+    #    同じ一文（`img_body`）を `first_frame` に置けば鳴らず、`spec:` に置けば鳴る。
+    #    **片方だけ置けば、検査を殺しても自己検査は緑のままになる。**
+    #    ⚠️ **決定（2026-09-13）の前は、この対が `mode` の違いだった。**
+    img_cases17 = [
+        ("L17 画像の仕様は `first_frame`（鳴ってはならない）",
+         sec18(*SIX, "Style Motion"), img_body, False, None),
+        ("L17 同じ本文を `spec:` に置けば鳴る",
+         img_body, None, True, "スロットを1つも確かめられない"),
+    ]
+    for label, body, first, want, fragment in img_cases17:
+        got = [f for f in semantic.check_prompt_slots(
+            slots_proj(body, "luminous-anime", first)) if f["severity"] != "note"]
         n += 1
         ok = bool(got) == want and (not want or any(fragment in f["message"] for f in got))
         bad += not ok
@@ -904,8 +1106,468 @@ def self_test():
     bad += not ok
     print(f"    {'L17 目録そのものが短い':<44}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
 
-    print("\n=== 自己検査 — 形（スキーマ）が鳴るか\n")
+    # ---- L18（2つの経路が、それぞれの形をしているか）
+    #     ⚠️ **決定（2026-09-13）で、この検査は `mode` を読まなくなった。**
+    #        経路を決めるのは**欄**である。だから例も**欄**で組む。
+    #     ⚠️ **いちばん大事な例は「画像の経路で鳴らない」である。**
+    #        画像を動画として読んでしまうのが、この検査を立てた理由だからである。
+    print("\n=== 自己検査 — 仕様の種類とモデル\n")
 
+    def kind_proj(video, first=None, mode="motion", write_first=True):
+        """`spec:`（動画）と `first_frame:`（画像）を別々に置く。
+
+        ⚠️ **`first` が `None` なら欄ごと置かない**（＝記録が無い）。
+        `write_first=False` なら**欄は置くがファイルは書かない**（＝読めない）——
+        **「無い」と「読めない」は別である**（`L14` と同じ区別）。
+        """
+        d = _P(tempfile.mkdtemp())
+        (d / "a.md").write_text(video, encoding="utf-8")
+        kw = {}
+        if first is not None:
+            if write_first:
+                (d / "b.md").write_text(first, encoding="utf-8")
+            kw["first_frame"] = "b.md"
+        sh = s("p-ch01-seg01", spec="a.md", mode=mode, **kw)
+        p = _One(sh)
+        p.root = d
+        p.shots = {"p-ch01-seg01": sh}
+        return p
+
+    # 動画の仕様＝§1–20 を持つ。画像のプロンプト＝**節を持たない**一文である。
+    VIDEO20 = specfile(*ALL20)
+    # ⚠️ **§18 の見出しだけを差し替える。** 節の並びは目録のままである。
+    def video_naming(model):
+        return specfile(*ALL20[:17], f"18. {model} PROMPT MAPPING", *ALL20[18:])
+
+    VIDEO_WAN = video_naming("WAN 3.0")
+    VIDEO_IMG = video_naming("CHATGPT IMAGE 2.5")
+    VIDEO_XX = video_naming("SORA 9")
+    IMAGE_ONELINE = ("A rustic bakery shelf at dawn, flour dust in warm light, "
+                     "35mm, shallow depth of field\n")
+
+    kind_cases = [
+        # 2つの経路が、それぞれの形をしている。**決定のあとの標準の形である。**
+        ("L18 2経路とも正しい（鳴ってはならない）", VIDEO_WAN, IMAGE_ONELINE, False, None),
+        # ⚠️ **ここが本命。** 画像の経路は §1–20 を持たない。
+        ("L18 画像の経路が §1–20 を持つ", VIDEO_WAN, VIDEO20, True,
+         "画像プロンプトは節を持たない"),
+        # §18 がモデルを名乗らない——`18. PROMPT MAPPING` は**族に一致するが名乗りが無い**。
+        ("L18 §18 がモデルを名乗らない", VIDEO20, IMAGE_ONELINE, True, "名乗っていない"),
+        ("L18 目録に無いモデル", VIDEO_XX, IMAGE_ONELINE, True, "`MODELS` に無い"),
+        ("L18 種別が違う（画像のモデルを動画へ）", VIDEO_IMG, IMAGE_ONELINE, True,
+         "生成の仕組みが違う"),
+    ]
+    for label, video, first, want, fragment in kind_cases:
+        got = [f for f in semantic.check_spec_kind(kind_proj(video, first))
+               if f["severity"] != "note"]
+        n += 1
+        ok = bool(got) == want and (not want or any(fragment in f["message"] for f in got))
+        bad += not ok
+        print(f"    {label:<46}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in got[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ **欄は在るのに開けない。** 「無い」とは別の符号で報告する——
+    #    `L14` が「持たない」と「読めない」を分けているのと同じ理由である。
+    got = [f for f in semantic.check_spec_kind(
+        kind_proj(VIDEO_WAN, "A one-line prompt\n", write_first=False))
+        if f["severity"] != "note"]
+    n += 1
+    ok = bool(got) and any("が読めない" in f["message"] for f in got)
+    bad += not ok
+    print(f"    {'L18 画像の経路が読めない':<46}{len(got):>10}  "
+          f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+    for f in got[:1]:
+        print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ **`mode` は経路を決めない。** だから目録の外の `mode` でも、この検査は鳴らない
+    #    ——形の層（`enum`）と L24 が鳴らす。**決定（2026-09-13）の前はここが
+    #    「モードが読めないから検査しない」という分岐だった。分岐ごと消えた。**
+    got = [f for f in semantic.check_spec_kind(kind_proj(VIDEO_WAN, IMAGE_ONELINE, "wrong"))
+           if f["severity"] != "note"]
+    n += 1
+    bad += bool(got)
+    print(f"    {'L18 mode を読まない（鳴ってはならない）':<46}{len(got):>10}  "
+          f"{'期待どおり' if not got else '⚠️ 期待と違う'}")
+
+    # ⚠️ **`first_frame` を持たないことは、違反ではない。** 記録が無いのであって、
+    #    食い違っているのではない——**註であり、しかも1件に畳む。**
+    got = semantic.check_spec_kind(kind_proj(VIDEO_WAN))
+    n += 1
+    notes = [f for f in got if f["severity"] == "note"]
+    ok = (not [f for f in got if f["severity"] != "note"]
+          and any("記録が無いのであって、食い違っているのではない" in f["message"]
+                  for f in notes))
+    bad += not ok
+    print(f"    {'L18 画像の経路が無い＝註（違反でない）':<46}{len(notes):>10}  "
+          f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+    for f in notes[:1]:
+        print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ **目録そのものが短くなれば、その経路を確かめられない。**
+    #    ⚠️ **決定（2026-09-13）で `SPEC_KIND`（`mode` → 種類）は死んだ。**
+    #    いま短くできるのは `SPEC_KINDS` のほうである。
+    n += 1
+    saved_kinds = specmap.SPEC_KINDS
+    try:
+        specmap.SPEC_KINDS = {k: v for k, v in saved_kinds.items() if k != "image"}
+        got = [f for f in semantic.check_spec_kind(kind_proj(IMAGE_ONELINE, "still"))
+               if f["severity"] != "note"]
+    finally:
+        specmap.SPEC_KINDS = saved_kinds
+    ok = bool(got) and any("2 のはずである" in f["message"] for f in got)
+    bad += not ok
+    print(f"    {'L18 経路の目録そのものが短い':<46}{len(got):>10}  "
+          f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+    for f in got[:1]:
+        print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ **受け火の実物で鳴らないこと。** 合成データだけで通る検査は、現場で鳴る。
+    real_v2 = REPO / "projects" / "ukebi" / "ukebi-v2"
+    if real_v2.is_dir():
+        p = Project(real_v2)
+        v = [f for f in semantic.check_spec_kind(p) if f["severity"] != "note"]
+        n += 1
+        bad += bool(v)
+        print(f"    {'L18 受け火 V2 の30本（鳴ってはならない）':<46}{len(v):>10}  "
+              f"{'期待どおり' if not v else '⚠️ 期待と違う'}")
+        for f in v[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ---- L19（記録の欄すべてに、行き先が宣言されているか）
+    #     ⚠️ **本物のスキーマを読ませ、壊したスキーマでも鳴らす**（L12 と同じ形）。
+    print("\n=== 自己検査 — 欄の行き先\n")
+
+    def dest_schema(mutate=None):
+        """⚠️ **`take` も写す。** `params` の鍵を確かめるのに要る。"""
+        d = _P(tempfile.mkdtemp())
+        for name in ("shot-record", "take"):
+            doc = json.loads((real_schemas / f"{name}.schema.json").read_text(encoding="utf-8"))
+            if mutate and name == "shot-record":
+                mutate(doc)
+            (d / f"{name}.schema.json").write_text(
+                json.dumps(doc, ensure_ascii=False), encoding="utf-8")
+        return d
+
+    def add_dest_field(doc):
+        doc["properties"]["camera_note"] = {"type": "string"}
+
+    def drop_dest_field(doc):
+        del doc["properties"]["text_channel"]
+
+    # ⚠️ **行き先は欄ごとに1つである**（`mode` 次元は無い）。差し替えは**まるごと**行う。
+    def dest_of(**override):
+        return {**specmap.FIELD_DESTINATION, **override}
+
+    dest_cases = [
+        ("L19 本物のスキーマ（鳴ってはならない）", dest_schema(), False, None, None),
+        ("L19 行き先の無い欄がある", dest_schema(add_dest_field), True,
+         "行き先が宣言されていない", None),
+        ("L19 宣言が消えた欄を指す", dest_schema(drop_dest_field), True,
+         "スキーマに無い", None),
+        # ⚠️ **空の行き先は、行き先が無いのと同じである。** 宣言した顔をして1箇所へも行かない。
+        ("L19 行き先が空である", real_schemas, True, "行き先が空である",
+         {"FIELD_DESTINATION": dest_of(sound=())}),
+        # ⚠️ **語彙の外の種類。** 種類だけでは届かない。
+        ("L19 目録に無い種類", real_schemas, True, "語彙に無い",
+         {"FIELD_DESTINATION": dest_of(duration="teleport:nowhere")}),
+        ("L19 送り先が無い", real_schemas, True, "送り先が無い",
+         {"FIELD_DESTINATION": dest_of(motion="edit:")}),
+        # ⚠️ **§18 に無いスロットへ送る。** 送り先が実在しなければ届かない。
+        ("L19 §18 に無いスロットへ送る", real_schemas, True, "そのスロットは目録に無い",
+         {"FIELD_DESTINATION": dest_of(place="prompt:No Such Slot")}),
+        # ⚠️ **`take.params` に無い鍵へ送る。**
+        ("L19 take.params に無い鍵へ送る", real_schemas, True, "テイクのスキーマに無い",
+         {"FIELD_DESTINATION": dest_of(duration="params:nope")}),
+        ("L19 目録に無い基盤へ渡す", real_schemas, True, "その基盤は目録に無い",
+         {"FIELD_DESTINATION": dest_of(sound="handover:nowhere")}),
+        # ⚠️ **経路の欄を宣言したのに、行き先が無い。** 送り口が無ければ届かない。
+        ("L19 経路の欄に行き先が無い", real_schemas, True, "行き先が宣言されていない",
+         {"FIELD_DESTINATION": {k: v for k, v in specmap.FIELD_DESTINATION.items()
+                                if k != "first_frame"}}),
+        # ⚠️ **理由が無ければ、行き先は後から変えられない。**
+        ("L19 理由が書かれていない", real_schemas, True, "理由が書かれていない",
+         {"DESTINATION_WHY": {k: v for k, v in specmap.DESTINATION_WHY.items()
+                              if k != "sound"}}),
+    ]
+    for label, sdir, want, fragment, patch in dest_cases:
+        saved_patch = {}
+        try:
+            for k, v in (patch or {}).items():
+                saved_patch[k] = getattr(specmap, k)
+                setattr(specmap, k, v)
+            got = [f for f in semantic.check_field_destination(sdir)
+                   if f["severity"] != "note"]
+        finally:
+            for k, v in saved_patch.items():
+                setattr(specmap, k, v)
+        n += 1
+        ok = bool(got) == want and (not want or any(fragment in f["message"] for f in got))
+        bad += not ok
+        print(f"    {label:<46}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in got[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ **空のスキーマと検査していないか。** 欄が1つも無ければ、すべてが素通りする。
+    d = _P(tempfile.mkdtemp())
+    (d / "shot-record.schema.json").write_text(
+        json.dumps({"type": "object", "properties": {}}), encoding="utf-8")
+    (d / "take.schema.json").write_text(
+        json.dumps({"properties": {"take": {"properties": {"params":
+                   {"properties": {}}}}}}), encoding="utf-8")
+    got = semantic.check_field_destination(d)
+    n += 1
+    ok = any("空のスキーマ" in f["message"] for f in got)
+    bad += not ok
+    print(f"    {'L19 空のスキーマ＝検査が空になる':<46}{len(got):>10}  "
+          f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+    for f in got[:1]:
+        print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ---- L20（`Style Motion` の行き先が空でないか）
+    #     ⚠️ **様式カードはこのリポジトリの外にある。** 読めなければ
+    #        「確かめられない」と報告する——**確かめていないことを、確かめた顔にしない。**
+    print("\n=== 自己検査 — 様式カードの運動イディオム\n")
+
+    def style_proj(style, body):
+        d = _P(tempfile.mkdtemp())
+        (d / "a.md").write_text(body, encoding="utf-8")
+        sh = s("p-ch01-seg01", spec="a.md")
+        p = _One(sh)
+        p.root = d
+        p.shots = {"p-ch01-seg01": sh}
+        p.bible = {"bible": {"style": style}}
+        return p
+
+    WITH_SLOT = sec18(*SIX, "Style Motion")
+    WITHOUT_SLOT = sec18(*SIX)
+    cards = semantic._styles_dir(REPO)
+    n += 1
+    if cards is None:
+        # ⚠️ **clone した人には無い。** だから「確かめられない」が正しい答えである。
+        got = semantic.check_style_motion(style_proj("luminous-anime", WITH_SLOT))
+        ok = any("確かめられない" in f["message"] for f in got)
+        bad += not ok
+        print(f"    {'L20 カードが読めない＝確かめられないと報告':<46}{len(got):>10}  "
+              f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in got[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+    else:
+        # ⚠️ **本物のカードを読ませる。** 合成したカードでは、読む側を検査できない。
+        has = next((p.stem for p in sorted(cards.glob("*.md"))
+                    if "## Motion character" in p.read_text(encoding="utf-8")), None)
+        hasnt = next((p.stem for p in sorted(cards.glob("*.md"))
+                      if "## Motion character" not in p.read_text(encoding="utf-8")), None)
+        print(f"        ← 実測: カード {len(list(cards.glob('*.md')))} 枚。"
+              f" `Motion character` を持つ例 `{has}`／持たない例 `{hasnt}`")
+        style_cases = [
+            # ⚠️ **本命の「鳴ってはならない」例。** 行き先が中身を運ぶ。
+            #    ⚠️ カードが1枚も持たなければ、この例は**立てられない**（鳴るはずが無い）。
+            *([(f"L20 `{has}` は持つ（鳴ってはならない）", has, WITH_SLOT, False, None)]
+              if has else []),
+            (f"L20 `{hasnt}` は持たない", hasnt, WITH_SLOT, True, "在るが空である"),
+            ("L20 カードが実在しない", "no-such-style-9999", WITH_SLOT, True, "実在しない"),
+            # ⚠️ **スロットが1つも無ければ、この検査は何も見ていない。** 黙って通さない。
+            ("L20 Style Motion を持つ仕様が無い（鳴ってはならない）",
+             hasnt, WITHOUT_SLOT, False, None),
+        ]
+        for label, style, body, want, fragment in style_cases:
+            got = [f for f in semantic.check_style_motion(style_proj(style, body))
+                   if f["severity"] != "note"]
+            n += 1
+            ok = bool(got) == want and (not want or any(fragment in f["message"] for f in got))
+            bad += not ok
+            print(f"    {label:<46}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+            for f in got[:1]:
+                print(f"        {f['code']}  {f['message'][:88]}")
+
+        # ⚠️ **受け火の実物。** 99本が `Style Motion` を持たないので、**ここは鳴らない**
+        #    ——だが受け火は `soft-cel-anime`（持つ様式）である。**両方が真である。**
+        real_v2 = REPO / "projects" / "ukebi" / "ukebi-v2"
+        if real_v2.is_dir():
+            p = Project(real_v2)
+            got = [f for f in semantic.check_style_motion(p) if f["severity"] != "note"]
+            n += 1
+            bad += bool(got)
+            print(f"    {'L20 受け火 V2（スロットが無いので鳴らない）':<46}{len(got):>10}  "
+                  f"{'期待どおり' if not got else '⚠️ 期待と違う'}")
+
+    # ⚠️ **環境変数で指せること。** 隣に無くても、在る場所を教えられる。
+    n += 1
+    import os as _os
+    saved_env = _os.environ.get(semantic.STYLE_CARD_ENV)
+    try:
+        _os.environ[semantic.STYLE_CARD_ENV] = str(cards or (REPO / "無いディレクトリ"))
+        got = semantic._styles_dir(REPO)
+        ok = (got is None) if cards is None else (got == cards)
+        if cards is None:
+            # ⚠️ **指しても、そこに無ければ「確かめられない」。** 嘘をつかない。
+            ok = got is None or not Path(got).is_dir()
+    finally:
+        if saved_env is None:
+            _os.environ.pop(semantic.STYLE_CARD_ENV, None)
+        else:
+            _os.environ[semantic.STYLE_CARD_ENV] = saved_env
+    bad += not ok
+    print(f"    {'L20 様式の置き場を環境変数で指せる':<46}{'':>10}  "
+          f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+
+    # ---- L21〜L24（画像の経路の中身・尺の一致・`mode` が要求するもの）
+    #     ⚠️ **本物の節見出しを書いたファイルを読ませる。** 合成の見出しでは、
+    #        節を割る側・語幹を取る側が壊れていても通る（L10・L11 と同じ理由）。
+    print("\n=== 自己検査 — 画像の経路の中身と、mode が要求するもの\n")
+
+    IMG_VARS = ("## 主題（英語・4欄）\n\n"
+                "- `SUBJECT`: a rustic shelf at dawn\n"
+                "- `ACTION`: holding still while the light crosses\n"
+                "- `LOCATION`: the mill room\n"
+                "- `ACCENT`: warm gold light\n\n")
+    # ⚠️ **`no photorealistic`（台帳）と `not photorealistic`（仕様）を混ぜてある。**
+    #    これは**実測で見つかった偽陽性そのもの**であり、**語幹を取らなければ
+    #    下の「鳴ってはならない」例が鳴る**——つまりこの例は `_stem` の検査である。
+    IMG_BASE = ("no readable text", "no watermark", "no photorealistic")
+    IMG_NEG_OK = ("no readable text, no watermark, not photorealistic, "
+                  "no on-screen subtitles, no steam")
+
+    def img_spec(negative=IMG_NEG_OK, vars_body=IMG_VARS):
+        body = f"# 画像仕様\n\n{vars_body}"
+        body += "## Prompt（英語）\n\nA rustic shelf at dawn, one line\n\n"
+        if negative is not None:
+            body += f"## Negative（英語）\n\n{negative}\n"
+        return body
+
+    def img_proj(negative=IMG_NEG_OK, vars_body=IMG_VARS, base=IMG_BASE,
+                 mode="motion", video=None, text_channel=None, duration="6s",
+                 write_img=True):
+        """⚠️ **画像の経路と動画の経路を別々に置く。** 決定（2026-09-13）の標準の形。"""
+        d = _P(tempfile.mkdtemp())
+        kw = {}
+        if write_img:
+            (d / "img.md").write_text(img_spec(negative, vars_body), encoding="utf-8")
+            kw["first_frame"] = "img.md"
+        if video is not None:
+            (d / "vid.md").write_text(video, encoding="utf-8")
+            kw["spec"] = "vid.md"
+        if text_channel is not None:
+            kw["text_channel"] = text_channel
+        sh = s("p-ch01-seg01", mode=mode, duration=duration, **kw)
+        p = _One(sh)
+        p.root = d
+        p.shots = {"p-ch01-seg01": sh}
+        p.bible = {"bible": {"negative_base": base}}
+        return p
+
+    def video1(dur="6s", line=True):
+        head = "# 1. VIDEO\n\n" + (f"- Duration: `{dur}`\n" if line else "- Aspect: 16:9\n")
+        return head + "\n" + "".join(f"# {t}\n\n本文\n" for t in ALL20[1:])
+
+    def video11(motion="## Subject Motion\n\nthe dough holds; only the dust drifts\n\n"):
+        """⚠️ **本文は小節に在る。** `# 11. MOTION` の直後に `## ` が来る形は
+        **実測そのもの**であり、`specdoc.section` では §11 が空に見える——
+        だからこの形で「鳴ってはならない」例を作る。"""
+        return ("".join(f"# {t}\n\n本文\n" for t in ALL20[:10])
+                + "# 11. MOTION\n\n" + motion
+                + "".join(f"# {t}\n\n本文\n" for t in ALL20[11:]))
+
+    def run1(label, fn, proj, want, fragment, note=None):
+        """⚠️ **註も読む。** 註が出ないことも「違反0件」に見えるからである。"""
+        nonlocal n, bad
+        got = fn(proj)
+        v = [f for f in got if f["severity"] != "note"]
+        nts = [f for f in got if f["severity"] == "note"]
+        n += 1
+        ok = (bool(v) == want
+              and (not want or any(fragment in f["message"] for f in v))
+              and (note is None or any(note in f["message"] for f in nts)))
+        bad += not ok
+        head = f"違反 {len(v)} 件" if v else "違反0件"
+        print(f"    {label:<50}{head:>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in v[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    run1("L21 禁制を覆っている（鳴ってはならない）", semantic.check_image_negative,
+         img_proj(), False, None, note="覆っているのは 1/1 本である")
+    run1("L21 1節足りない", semantic.check_image_negative,
+         img_proj(negative="no readable text, not photorealistic"),
+         True, "1 節が無い: no watermark")
+    run1("L21 Negative の節が無い", semantic.check_image_negative,
+         img_proj(negative=None), True, "の節が無い")
+    run1("L21 禁制が宣言されていない", semantic.check_image_negative,
+         img_proj(base=None), True, "作品の禁制が宣言されていない")
+    # ⚠️ **相手が無ければ何も言わない。** 「記録が無い」は `L18` が1件に畳む。
+    run1("L21 画像の仕様が無い（鳴ってはならない）", semantic.check_image_negative,
+         img_proj(write_img=False), False, None)
+
+    run1("L22 4欄とも非空（鳴ってはならない）", semantic.check_image_vars,
+         img_proj(), False, None, note="確かめたのは空でないことまでである")
+    run1("L22 欄が1つ無い", semantic.check_image_vars,
+         img_proj(vars_body=IMG_VARS.replace("- `ACCENT`: warm gold light\n", "")),
+         True, "無い様式の欄がある: ACCENT")
+    run1("L22 欄は在るが空", semantic.check_image_vars,
+         img_proj(vars_body=IMG_VARS.replace("`ACCENT`: warm gold light", "`ACCENT`: ")),
+         True, "様式の欄が空である: ACCENT")
+    run1("L22 主題の節が無い", semantic.check_image_vars,
+         img_proj(vars_body=""), True, "の節が無い")
+    run1("L22 画像の仕様が無い（鳴ってはならない）", semantic.check_image_vars,
+         img_proj(write_img=False), False, None)
+
+    run1("L23 尺が一致する（鳴ってはならない）", semantic.check_duration,
+         img_proj(video=video1("6s"), duration="6s"), False, None, note="1 本が一致")
+    run1("L23 尺が食い違う", semantic.check_duration,
+         img_proj(video=video1("10s"), duration="6s"), True, "尺が食い違っている")
+    run1("L23 §1 に Duration が無い", semantic.check_duration,
+         img_proj(video=video1(line=False)), True, "`Duration:` が無い")
+    run1("L23 記録に duration が無い", semantic.check_duration,
+         img_proj(video=video1("6s"), duration=None), True, "`duration` が無い")
+
+    TC = [{"t": "0-4", "kind": "overlay", "content": "分量"}]
+    run1("L24 motion は何も要求しない（鳴ってはならない）", semantic.check_mode_demands,
+         img_proj(mode="motion", video=video11()), False, None,
+         note="`mode` が要求するものを確かめた")
+    # ⚠️ **本命。** §11 の本文は小節に在る——`_section_body` が無ければ空に見える。
+    run1("L24 still で §11 が非空（鳴ってはならない）", semantic.check_mode_demands,
+         img_proj(mode="still", video=video11()), False, None)
+    run1("L24 still で §11 が空", semantic.check_mode_demands,
+         img_proj(mode="still", video=video11(motion="\n")), True, "は §11 を要求する")
+    run1("L24 composite で text_channel が空", semantic.check_mode_demands,
+         img_proj(mode="composite", video=video11()), True, "`text_channel` を要求する")
+    run1("L24 composite で text_channel 在り（鳴ってはならない）",
+         semantic.check_mode_demands,
+         img_proj(mode="composite", video=video11(), text_channel=TC), False, None)
+    # ⚠️ **逆向きは成り立たない。** `motion` のショットも `text_channel` を持てる。
+    run1("L24 motion は text_channel を要求しない（鳴ってはならない）",
+         semantic.check_mode_demands,
+         img_proj(mode="motion", video=video11(), text_channel=None), False, None)
+    run1("L24 動画の仕様が無い（鳴ってはならない）", semantic.check_mode_demands,
+         img_proj(mode="still"), False, None)
+
+    # ⚠️ **目録そのものが閉じているか。** 要求を書いていない `mode` は、
+    #    何も要求しない `mode` と区別がつかない——**空と、無いことは違う。**
+    saved_demands = specmap.MODE_DEMANDS
+    try:
+        specmap.MODE_DEMANDS = {k: v for k, v in saved_demands.items() if k != "motion"}
+        run1("L24 目録が閉じていない（motion の行が無い）", semantic.check_mode_demands,
+             img_proj(), True, "鍵が一致しない")
+    finally:
+        specmap.MODE_DEMANDS = saved_demands
+    try:
+        specmap.MODE_DEMANDS = {**saved_demands, "still": ("teleport:nowhere",)}
+        run1("L24 知らない要求", semantic.check_mode_demands,
+             img_proj(mode="still", video=video11()), True, "知らない要求は、確かめられないまま通る")
+    finally:
+        specmap.MODE_DEMANDS = saved_demands
+
+    # ⚠️ **欄の目録が空なら、L22 は何も確かめない。** 黙って通さない。
+    saved_img = specmap.SPEC_KINDS["image"]
+    try:
+        specmap.SPEC_KINDS = {**specmap.SPEC_KINDS,
+                              "image": {**saved_img, "vars": None}}
+        run1("L22 様式の欄が宣言されていない", semantic.check_image_vars,
+             img_proj(), True, "様式の4欄を宣言していない")
+    finally:
+        specmap.SPEC_KINDS = {**specmap.SPEC_KINDS, "image": saved_img}
+
+    print("\n=== 自己検査 — 形（スキーマ）が鳴るか\n")
     class _Shape:
         bible = ledger = None
         takes = {}
