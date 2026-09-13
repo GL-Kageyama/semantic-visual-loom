@@ -55,7 +55,7 @@ semantic-visual-loom/
 ├── docs/            # 使い方
 ├── skills/          # 4つの Skill——分解・設計・台帳・ショット
 ├── tools/           # 検査（i18n のミラー）
-├── references/      # カード。distill から移管した video-spec を含む
+├── references/      # distill から移管した video-spec
 └── projects/        # 作品ごとの実体
 ```
 
@@ -135,7 +135,9 @@ semantic-visual-loom/
 **開発は日本語で進め、文書の正典は英語である。**
 ミラーは接尾辞方式で**同じディレクトリ**に並ぶ——規則は [`CLAUDE.md`](CLAUDE-ja.md) にある。
 
-**10文書 × 3言語が揃っており**、[`tools/check_i18n.py`](tools/check_i18n.py) がそれを見る——
+**15文書 × 3言語が揃っている**——⚠️ **これは [`tools/check_i18n.py`](tools/check_i18n.py) が
+正典として報告する本数であって、リポジトリの `.md` を数えた数ではない。**
+**数は、数えた範囲の広さしか持たない。**
 **何を見て、何を見ないか**は [`docs/usage.md`](docs/usage-ja.md) にある。
 
 ## ライセンス

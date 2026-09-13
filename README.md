@@ -57,7 +57,7 @@ semantic-visual-loom/
 ├── docs/            # usage
 ├── skills/          # the four skills — breakdown, design, ledger, shot
 ├── tools/           # checks (i18n mirrors)
-├── references/      # cards. Includes the video-spec moved over from distill
+├── references/      # the video-spec moved over from distill
 └── projects/        # the substance of each work
 ```
 
@@ -138,9 +138,10 @@ states that `distill-essence-engine` is **read but never rewritten.**
 Mirrors use the suffix scheme and sit in the **same directory**—the rules are in
 [`CLAUDE.md`](CLAUDE.md).
 
-**10 documents × 3 languages are in place**, and
-[`tools/check_i18n.py`](tools/check_i18n.py) checks them—**what it sees, and what it does not**,
-is in [`docs/usage.md`](docs/usage.md).
+**15 documents × 3 languages are in place**——**that is the count
+[`tools/check_i18n.py`](tools/check_i18n.py) reports as the canonical set, not a count of every
+`.md` in the repository.** ⚠️ **A number is only as wide as what was counted.** What that check sees,
+and what it does not, is in [`docs/usage.md`](docs/usage.md).
 
 ## License
 

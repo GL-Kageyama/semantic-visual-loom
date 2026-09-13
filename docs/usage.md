@@ -151,7 +151,8 @@ and the mirrors does not change.**
 ⚠️ **The working language of development stays Japanese** (commit messages, `HISTORY.md`,
 conversation) **while the canonical of the documents is English.** These two are different
 things: one is the language the work is done in, the other the language the documents are
-authoritative in. **10 documents × 3 languages are in place**, and the rules are in
+authoritative in. **15 documents × 3 languages are in place** (the count
+`tools/check_i18n.py` reports as canonical), and the rules are in
 [`CLAUDE.md`](../CLAUDE.md).
 
 ## Where to read more

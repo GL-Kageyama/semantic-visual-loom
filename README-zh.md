@@ -55,7 +55,7 @@ semantic-visual-loom/
 ├── docs/            # 用法
 ├── skills/          # 4 个 Skill——分解、设计、台账、镜头
 ├── tools/           # 检查（i18n 的镜像）
-├── references/      # 卡。包括从 distill 移管过来的 video-spec
+├── references/      # 从 distill 移管过来的 video-spec
 └── projects/        # 每部作品的实体
 ```
 
@@ -135,7 +135,9 @@ semantic-visual-loom/
 **开发用日语推进，文档的正典是英语。**
 镜像用后缀方式并排在**同一个目录**里——规则在 [`CLAUDE.md`](CLAUDE-zh.md) 里。
 
-**10 份文档 × 3 种语言已经齐备**，[`tools/check_i18n.py`](tools/check_i18n.py) 检查它们——
+**15 份文档 × 3 种语言已经齐备**——⚠️ **这是 [`tools/check_i18n.py`](tools/check_i18n.py)
+作为正典报告的本数，不是把仓库里的 `.md` 数了一遍的数。**
+**数，只拥有它所数范围那么宽。**
 **它看什么、不看什么**，写在 [`docs/usage.md`](docs/usage-zh.md) 里。
 
 ## 许可证
