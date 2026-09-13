@@ -16,9 +16,12 @@
 鳴らないことは、正しいことの証明ではない——`0 == 0` が通った実例が既にある。
 """
 
+import json
 import re
+from pathlib import Path
 
 import specdoc
+import specmap
 
 # ---------------------------------------------------------------- 層C 空の検査
 
@@ -444,13 +447,133 @@ def _neg(project, shot):
         raise _NoSpec(f"ショット {shot} の `spec: {src}` が読めない。")
 
 
+# ---------------------------------------------------------------- 層D 対応の検査
+
+TOP_SECTION = re.compile(r"^(\d+)\.\s+(\S.*?)\s*$")
+
+
+def _spec_tops(path):
+    """仕様の**トップレベルの節**（`# 1. VIDEO` の形）を、順序どおりに返す。"""
+    return [f"{m.group(1)}. {m.group(2)}"
+            for ln in Path(path).read_text(encoding="utf-8").splitlines()
+            if (h := specdoc.HEADING.match(ln)) and (m := TOP_SECTION.match(h.group(2)))]
+
+
+def check_spec_sections(project):
+    """L11 — **仕様の節が、目録のとおりであるか。**
+
+    ⚠️ **目録そのものが短くなっていないかも見る。** 20節あるはずの目録が
+    3節になっていれば、仕様に節が足されても鳴らない——**検査が空になる。**
+
+    ⚠️ **`spec:` が無い／読めないショットは、黙って飛ばさない。** 鳴る。
+    """
+    out = []
+    if len(specmap.SPEC_SECTIONS) != 20:
+        out.append(finding("L11", "", f"目録の節が {len(specmap.SPEC_SECTIONS)} 個である。"
+                                      "20 のはずである——**目録が短くなれば、足された節を鳴らせない。**"))
+    want = list(specmap.SPEC_SECTIONS)
+    seen = 0
+    for s in project.order():
+        shot = project.shots[s]
+        src = shot.get("spec")
+        if not src:
+            out.append(finding("L11", s, "`spec:` が無い。**このショットの仕様は検査されていない。**"))
+            continue
+        p = project.root / src
+        if not p.is_file():
+            out.append(finding("L11", s, f"`spec: {src}` が読めない。"))
+            continue
+        got = _spec_tops(p)
+        seen += 1
+        extra = [t for t in got if t not in want]
+        miss = [t for t in want if t not in got]
+        if extra:
+            out.append(finding("L11", s, f"目録に無い節がある: {'／'.join(extra)}。"
+                                         "**節が足されたなら、`specmap.SPEC_MAP` にも足す**——"
+                                         "行き先の宣言が無い節は、記録のどこにも現れない。"))
+        if miss:
+            out.append(finding("L11", s, f"目録にある節が無い: {'／'.join(miss)}。"))
+        if not extra and not miss and got != want:
+            out.append(finding("L11", s, f"節は揃っているが順序が違う。目録は順序も含む。"))
+    if seen:
+        out.append(finding("L11", f"{seen}本", f"§1–20 の目録を確かめた（{len(want)} 節）。"
+                                               "**節が足されれば鳴る。**", severity="note"))
+    return out
+
+
+def check_field_source(schema_dir):
+    """L12 — **欄と節の対応が、両方向に閉じているか。**
+
+    片方向だけでは足りない。**節が欄を名指しても、欄が節を名指さなければ、
+    その欄は出所を持たない**——誰かが思いつきで足した欄であり、
+    台帳が読むのかどうかも決まっていない。
+
+    ⚠️ **`("added", None)` の欄は、閉じていなくてよい。** ただし**理由を書く**
+    （`specmap.ADDED_WHY`）——**§1–20 に無いことを、無いまま記録する。**
+    """
+    out = []
+    path = Path(schema_dir) / "shot-record.schema.json"
+    if not path.is_file():
+        out.append(finding("L12", "", f"ショット記録のスキーマが読めない: {path}"))
+        return out
+    schema = json.loads(path.read_text(encoding="utf-8"))
+    fields = set(schema.get("properties", {}))
+    if not fields:
+        out.append(finding("L12", "", "スキーマに欄が1つも無い。**空のスキーマと検査している。**"))
+        return out
+
+    # ① 欄 → 出所。すべての欄が出所を宣言しているか。
+    for f in sorted(fields - set(specmap.FIELD_SOURCE)):
+        out.append(finding("L12", f, f"欄 `{f}` の出所が宣言されていない。"
+                                     "**どこから来た欄か分からないものは、検査できない。**"))
+    for f in sorted(set(specmap.FIELD_SOURCE) - fields):
+        out.append(finding("L12", f, f"`FIELD_SOURCE` が欄 `{f}` を指しているが、スキーマに無い。"))
+    for f, (kind, sec) in sorted(specmap.FIELD_SOURCE.items()):
+        if kind == "added":
+            if f not in specmap.ADDED_WHY:
+                out.append(finding("L12", f, f"`added` の欄 `{f}` に理由が無い。"
+                                             "**§1–20 に無いことを、無いまま書く。**"))
+        elif sec not in specmap.SPEC_SECTIONS:
+            out.append(finding("L12", f, f"欄 `{f}` の出所 `{sec}` は目録に無い節である。"))
+
+    # ② 節 → 行き先。すべての節が宣言されているか。
+    for sec in specmap.SPEC_SECTIONS:
+        m = specmap.SPEC_MAP.get(sec)
+        if m is None:
+            out.append(finding("L12", sec, f"節 `{sec}` の行き先が宣言されていない。"
+                                           "**宣言の無い節は、黙って落ちる。**"))
+            continue
+        if m["rest"] not in specmap.REST:
+            out.append(finding("L12", sec, f"節 `{sec}` の `rest` が `REST` に無い: `{m['rest']}`。"))
+        for f in m["to"]:
+            if f not in fields:
+                out.append(finding("L12", sec, f"節 `{sec}` が欄 `{f}` を名指すが、スキーマに無い。"))
+
+    # ③ 閉じているか。**「追加」でない欄の集合＝節が名指した欄の集合**であること。
+    if fields:
+        named = {f for m in specmap.SPEC_MAP.values() for f in m["to"]}
+        moved = {f for f, (k, _) in specmap.FIELD_SOURCE.items() if k != "added"}
+        for f in sorted(moved - named):
+            out.append(finding("L12", f, f"欄 `{f}` は節から来ているのに、どの節もそれを名指していない。"
+                                         "**節から来た欄は、節の側からも見えなければならない。**"))
+        for f in sorted(named - moved):
+            out.append(finding("L12", f, f"節が欄 `{f}` を名指しているのに、`FIELD_SOURCE` では追加になっている。"))
+
+    if not out:
+        moved = sum(1 for k, _ in specmap.FIELD_SOURCE.values() if k != "added")
+        out.append(finding("L12", f"{len(fields)}欄", f"欄と節の対応は閉じている"
+                                                      f"（{len(specmap.SPEC_SECTIONS)} 節 → {moved} 欄＋"
+                                                      f"{len(fields) - moved} の追加欄）。", severity="note"))
+    return out
+
+
 # ---------------------------------------------------------------- まとめ
 
 CHECKS_SHOT = (check_unit, check_one_place, check_one_time, check_move,
                check_reference_forbidden, check_attached)
 
 
-def run(project):
+def run(project, schema_dir=None):
     out = list(check_not_empty(project))
     for s in project.order():
         shot = project.shots[s]
@@ -460,4 +583,7 @@ def run(project):
     out += check_disclosure(project)
     out += check_circular(project)
     out += check_negative_response(project)
+    out += check_spec_sections(project)
+    if schema_dir:
+        out += check_field_source(schema_dir)
     return out

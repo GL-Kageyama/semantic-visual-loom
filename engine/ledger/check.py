@@ -479,6 +479,111 @@ def self_test():
         for f in v[:1]:
             print(f"        {f['code']}  {f['message'][:88]}")
 
+    # ---- L11（仕様の節が目録のとおりか）
+    #     ⚠️ **本物の節見出しを書いたファイルを読ませる。** 合成の見出しでは、
+    #        節を割る側が壊れていても通る（L10 と同じ理由）。
+    print("\n=== 自己検査 — 仕様の節の目録\n")
+
+    import specmap  # noqa: E402
+
+    def specfile(*titles):
+        return "\n".join(f"# {t}\n\n本文\n" for t in titles)
+
+    ALL20 = tuple(specmap.SPEC_SECTIONS)
+
+    def sec_proj(body):
+        d = _P(tempfile.mkdtemp())
+        (d / "a.md").write_text(body, encoding="utf-8")
+        sh = s("p-ch01-seg01", spec="a.md")
+        p = _One(sh)
+        p.root = d
+        p.shots = {"p-ch01-seg01": sh}
+        return p
+
+    sec_cases = [
+        ("L11 目録どおり（鳴ってはならない）", specfile(*ALL20), False, None),
+        ("L11 目録に無い節がある", specfile(*ALL20, "21. PROVIDER NOTES"), True, "目録に無い節"),
+        ("L11 目録の節が無い", specfile(*ALL20[:-1]), True, "目録にある節が無い"),
+        ("L11 順序が違う",
+         specfile(*ALL20[:17], "19. GENERATION INSTANCE", "18. WAN 3.0 PROMPT MAPPING", "20. ITERATION"),
+         True, "順序が違う"),
+        ("L11 spec が無い", None, True, "`spec:` が無い"),
+    ]
+    for label, body, want, fragment in sec_cases:
+        p = _One(s("p-ch01-seg01"))
+        if body is not None:
+            p = sec_proj(body)
+        got = [f for f in semantic.check_spec_sections(p) if f["severity"] != "note"]
+        n += 1
+        ok = bool(got) == want and (not want or any(fragment in f["message"] for f in got))
+        bad += not ok
+        print(f"    {label:<40}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in got[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ **目録そのものが短くなったら鳴らねばならない。** 短くなれば、
+    #    仕様に節が足されても鳴らない——**検査が空になる。**
+    saved = specmap.SPEC_SECTIONS
+    try:
+        specmap.SPEC_SECTIONS = saved[:3]
+        got = [f for f in semantic.check_spec_sections(sec_proj(specfile(*ALL20)))
+               if f["severity"] != "note"]
+    finally:
+        specmap.SPEC_SECTIONS = saved
+    n += 1
+    ok = bool(got) and any("目録の節が" in f["message"] for f in got)
+    bad += not ok
+    print(f"    {'L11 目録そのものが短い':<40}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+    for f in got[:1]:
+        print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ---- L12（欄と節の対応が閉じているか）
+    #     ⚠️ **本物のスキーマを読ませる。** そして**壊したスキーマでも鳴らす。**
+    print("\n=== 自己検査 — 欄と節の対応\n")
+    real_schemas = REPO / "schemas"
+
+    def broken_schema(**mutate):
+        d = _P(tempfile.mkdtemp())
+        doc = json.loads((real_schemas / "shot-record.schema.json").read_text(encoding="utf-8"))
+        mutate["fn"](doc)
+        (d / "shot-record.schema.json").write_text(json.dumps(doc, ensure_ascii=False),
+                                                   encoding="utf-8")
+        return d
+
+    def add_field(doc):
+        doc["properties"]["camera_note"] = {"type": "string"}
+
+    def drop_field(doc):
+        del doc["properties"]["text_channel"]
+
+    field_cases = [
+        ("L12 本物のスキーマ（鳴ってはならない）", real_schemas, False, None),
+        ("L12 出所の無い欄がある", broken_schema(fn=add_field), True, "の出所が宣言されていない"),
+        ("L12 宣言が消えた欄を指す", broken_schema(fn=drop_field), True, "スキーマに無い"),
+    ]
+    for label, pth, want, fragment in field_cases:
+        got = [f for f in semantic.check_field_source(pth) if f["severity"] != "note"]
+        n += 1
+        ok = bool(got) == want and (not want or any(fragment in f["message"] for f in got))
+        bad += not ok
+        print(f"    {label:<40}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in got[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ **両方向**。節が欄を名指さなくなっても、欄が節から来ていれば鳴る。
+    saved_map = specmap.SPEC_MAP
+    try:
+        specmap.SPEC_MAP = {**saved_map, "14. AUDIO": {**saved_map["14. AUDIO"], "to": ()}}
+        got = [f for f in semantic.check_field_source(real_schemas) if f["severity"] != "note"]
+    finally:
+        specmap.SPEC_MAP = saved_map
+    n += 1
+    ok = bool(got) and any("どの節もそれを名指していない" in f["message"] for f in got)
+    bad += not ok
+    print(f"    {'L12 節が欄を名指さない（逆向き）':<40}{len(got):>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+    for f in got[:1]:
+        print(f"        {f['code']}  {f['message'][:88]}")
+
     print(f"\n=== {n} 例中 {n - bad} 例が期待どおり")
     return 1 if bad else 0
 
@@ -525,7 +630,7 @@ def main():
     p = Project(root)
     sys.path.insert(0, str(HERE))
     import semantic  # noqa: E402
-    return report(p, semantic.run(p), validate_shape(p, a.schemas))
+    return report(p, semantic.run(p, a.schemas), validate_shape(p, a.schemas))
 
 
 if __name__ == "__main__":

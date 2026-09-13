@@ -31,6 +31,83 @@ python3 engine/ledger/check.py projects/ukebi/ukebi-v2
 `bible.yaml` は §2 WORLD（30本で同一）から。`ledger.yaml` は §3 SUBJECTS（実体）と
 §16（禁止の文面）から。
 
+## §1–20 の一対一対応
+
+**20節のどれが、どの欄へ移り、どれが移らないか。** 実測は
+`engine/ledger/specmap.py` に**目録として**置いてある——散文で置くと腐るので、
+`check.py` が**両方向に閉じているか**を確かめる（L11・L12）。
+
+⚠️ **「移らない」は「失われる」ではない。** 移らない節も**仕様（`spec:` が指す先）には
+そのまま在る**。落ちるのは*ショット記録から*であって、*作品から*ではない。
+
+| 節 | 行き先 | 実測（30本） |
+|---|---|---|
+| **1. VIDEO** | `duration` | Basic は**30本で1種**——Duration `30s`・Aspect `16:9`・Resolution `1920x1080`・Frame Rate `24fps`・Orientation `Landscape`。**5つのうち4つは作品定数。** Generation Intent は30種＝散文の要約 |
+| **2. WORLD** | `time` | Concept 9種・Rules 7種・Visual 12種。**不変ではなく、各本が1〜2文だけ書き換える**（`in this clip the soul-fire is gone`）。その差分は §18 Visual Prompt に既に出ている。`Time` の1行だけが `time` へ |
+| **3. SUBJECTS** | （台帳へ） | Appearance 70節で33種・Behavior 55節で43種・Continuity 55節で7種。`Reference:` が台帳の `characters.<名>.identity` になる |
+| **4. ENVIRONMENT** | `place` | Location は3種。`ID:` の1行だけが `place` へ。Elements 22種・Behavior 16種は台帳へ |
+| **5. OBJECTS** | （台帳へ） | 29種。ただし差は1行——`台帳` の頁の状態だけが変わる |
+| **6. REFERENCES** | `reference_set` | 12種。`REF_CHARACTER` / `REF_HANA` の**有無**が開示で変わる。他4つは30本すべてに在る |
+| **7. NARRATIVE** | `unit` | ⚠️ **小節は4つ（Beginning / Turn / Peak / Pull）で、§8 の BEAT は3つ**（29本。1本だけ4つ）——**1対1ではない。** Pull は「切れ目」であって時間ではない |
+| **8. TEMPORAL STRUCTURE** | `beats` | ⚠️ **Timing Policy は30本すべて `STRUCTURED` / `NON_UNIFORM`**——定数である。Temporal Units も2種 |
+| **9. ACTION** | （仕様に残る） | `ACT_*` は86個・73種。`Before` / `After` の鎖。**台帳は読まない** |
+| **10. CAMERA** | （仕様に残る） | Language 30種・Events 30種。Behavior は2種でほぼ定型 |
+| **11. MOTION** | `motion` | ⚠️ **小節は4つ、欄は3つ（`subject` / `quality` / `law`）——1対1ではない。** Physical Characteristics の5項目のうち欄に対応するのは Fluidity だけ。**残り4項目は落ちる** |
+| **12. EMOTION** | （仕様に残る） | Arc 29種・Events 30種 |
+| **13. LIGHTING** | （仕様に残る） | Base 26種・Events 30種。色温度と光源の法は §2・§15 にも書かれ、**三重に書かれている** |
+| **14. AUDIO** | `text_channel` / `sound` | Dialogue 30種。**声の行は `text_channel` の `kind: voice`**になる——画像生成器に描かせないため。残りは Semantic Audio Loom（契約は M6） |
+| **15. CONTINUITY** | （台帳へ） | Identity 13種。⚠️ **仕様自身が「§18 プロンプトへ毎回まるごと書き込まれる」と書いている**——§15 は §18 の材料である |
+| **16. CONSTRAINTS** | `forbidden_set` / `disclosure_state` | ⚠️ **`MUST NOT` の見出しがレンジ名を持つ**（10レンジ×3本＝30）。**台帳はここを読む。** MUST 30種・PREFER 27種・ALLOW 22種は人が読む注記 |
+| **17. GENERATION PRIORITIES** | （仕様に残る） | 30種。**§15・§16 の並べ直しである**（1〜5番目は §16 MUST NOT と §15、6番目は §8、7番目は §16 PREFER）。**優先順そのものは新しい情報である**——何を先に犠牲にするか |
+| **18. WAN 3.0 PROMPT MAPPING** | （仕様に残る） | 6スロット。**§6 が「the six §18 slots」と書き、`REF_FORMAT` がそれを定義する**——§18 の形は**様式カードの持ち物**である |
+| **19. GENERATION INSTANCE** | （テイクへ） | 7つの鍵が30本すべてに揃う（Duration / References / Temporal Structure / Camera Events / Action Events / Audio Events / Output）——**仕様自身が持つ §1–18 への索引である** |
+| **20. ITERATION** | （テイクへ） | ⚠️ **Observed Problems と Changes は30本すべて `_(none yet)_` で、内容が無い** |
+
+### ⚠️ §18 はモデル固有の投影である——**だから `spec:` はここを指す**
+
+節の名が **`WAN 3.0`** を名乗っている。そして §6 の `REF_FORMAT` が
+「**the six §18 slots**」を定義している——**§18 の形は様式カードの持ち物**である。
+
+つまり §18 は**記録ではなく、記録を或るモデル向けに書き出した文**である。
+**だから §18 はショット記録の欄にならない。**
+そして**だから `spec:` がここを指す**のである——**モデルが変われば §18 だけが差し替わり、
+欄（＝台帳が読むもの）はそのまま残る。** これが**モデル非依存**の実装であり、
+`WAN 3.0` という節名が、そのことを仕様自身に書かせている。
+
+### ⚠️ 「落ちるのは1本の連続テイク前提の節」は**外れた**
+
+計画はこう予測していた（`実装計画.md` 第3段の1番目、スキーマ/ショット記録.md）:
+
+> 落ちるものは「1本の連続テイク」前提の節のはず。
+
+**測ると外れている。** 実際に落ちるのは **§9・§10・§12・§13・§17・§18** であり、
+そのどれも「連続テイクだから」落ちてはいない。**逆に、連続テイクを名指す唯一の節は落ちない**
+——§10 Camera Behavior の `One continuous take; no cut until the final.` は
+30本のうち2種で、**ほぼ定型でありながら仕様に残る。**
+
+**実際に落としているのは、別の1つの原則である。**
+
+> **台帳がそのショットについて推論するか。**
+
+- **台帳が読むもの** → 欄になる（`time` ← §2、`place` ← §4、`reference_set` ← §6、
+  `beats` ← §8、`forbidden_set`・`disclosure_state` ← §16）。
+- **台帳が読まないもの** → 仕様に残る（§9–§13・§17・§18）。**§18 がモデルへ渡す材料である。**
+
+これは**開示で決めたのと同じ1つの原則**である——「**状態はショットが持ち、台帳はそれを読む**」。
+ここではその裏から見て「**台帳が読むものだけが欄になる**」と言っている。
+**予測が外れたのは、理由を「仕様の形」に求めたからである。理由は台帳の側にあった。**
+
+### 対応は検査される（L11・L12）
+
+| 符号 | 何を鳴らすか |
+|---|---|
+| **L11** | 仕様の節が目録のとおりでない（足された／欠けた／順序が違う）。⚠️ **目録そのものが短くなっても鳴る** |
+| **L12** | 欄と節の対応が閉じていない（出所の無い欄／消えた欄を指す宣言／宣言の無い節／**逆向きの漏れ**） |
+
+⚠️ **L12 は両方向を見る。** 節が欄を名指しても、欄が節を名指さなければ、その欄は
+**出所を持たない**——誰かが思いつきで足した欄であり、台帳が読むのかどうかも決まっていない。
+**片方向だけでは、対応が閉じていることにならない。**
+
 ## 台帳からの導出規則
 
 ```text
