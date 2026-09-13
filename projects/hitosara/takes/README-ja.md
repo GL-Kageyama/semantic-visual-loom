@@ -1,3 +1,7 @@
+<!-- i18n-version: 1.0.0 | canonical: projects/hitosara/takes/README.md | translated: 2026-09-14 -->
+
+**Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
+
 # `takes/` — 戻ってきたものの記録
 
 テイクの記録は `*.yaml` である（`schemas/take.schema.json`）。**1つの標本につき1枚。**

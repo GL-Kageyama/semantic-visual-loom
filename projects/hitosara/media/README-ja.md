@@ -1,3 +1,7 @@
+<!-- i18n-version: 1.0.0 | canonical: projects/hitosara/media/README.md | translated: 2026-09-14 -->
+
+**Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
+
 # `media/` — 著者が落とす生成物の置き場
 
 **ここは基盤が読まない。** 生成物（画像・動画）を置く場所であり、

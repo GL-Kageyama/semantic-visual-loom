@@ -1,3 +1,7 @@
+<!-- i18n-version: 1.0.0 | canonical: schemas/README.md | translated: 2026-09-14 -->
+
+**Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
+
 # schemas/ — データ構造の正典
 
 **このリポジトリが持つ構造は、ここが正典である。** `projects/<project>/` の `.yaml` は、この5枚に従う。

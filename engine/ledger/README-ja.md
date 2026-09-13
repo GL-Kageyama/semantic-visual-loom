@@ -1,3 +1,7 @@
+<!-- i18n-version: 1.0.0 | canonical: engine/ledger/README.md | translated: 2026-09-14 -->
+
+**Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
+
 # engine/ledger/ — 制作台帳と事前検証
 
 **生成を1回も走らせずに、設計の破綻を潰す。** それがこの層の仕事である。

@@ -1,6 +1,6 @@
-<!-- i18n-version: 1.0.0 | canonical: references/video-spec.md | translated: 2026-08-26 -->
+<!-- i18n-version: 2.0.0 | canonical: references/video-spec.md | translated: 2026-09-14 -->
 
-**Language:** [English](video-spec-en.md) | [日本語](video-spec.md) | [中文](video-spec-zh.md)
+**Language:** [English](video-spec.md) | [日本語](video-spec-ja.md) | [中文](video-spec-zh.md)
 
 # 動画仕様（video-spec）
 
@@ -117,7 +117,7 @@ Audio Prompt    ← §14
 
 Negative Prompt ← §16 MUST NOT + this card's Negative + the style card's Negative
 
-Style Motion    ← 様式カードの Motion character（§1–17 ではなく、様式から取る唯一の枠）
+Style Motion    ← the style card's Motion character (not §1–17 — the only slot taken from the style)
   (how this style moves at all — full animation or limited, whether a held frame
   is permitted, what the primary mover is. The specification writes what moves in
   THIS clip; the style card writes what movement MEANS in this style.)

@@ -1,3 +1,7 @@
+<!-- i18n-version: 1.0.0 | canonical: projects/hitosara/README.md | translated: 2026-09-14 -->
+
+**Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
+
 # `hitosara/` — 一皿ができるまで
 
 粉と水と塩と時間から、パンが一皿になるまで。**10ショット。**

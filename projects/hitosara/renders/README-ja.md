@@ -1,3 +1,7 @@
+<!-- i18n-version: 1.0.0 | canonical: projects/hitosara/renders/README.md | translated: 2026-09-14 -->
+
+**Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
+
 # `renders/` — 編集で出来たもの（作品）の置き場
 
 > **映像は生成されない。編集される。**

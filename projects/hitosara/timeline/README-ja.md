@@ -1,3 +1,7 @@
+<!-- i18n-version: 1.0.0 | canonical: projects/hitosara/timeline/README.md | translated: 2026-09-14 -->
+
+**Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
+
 # `timeline/` — 編集がまだ無い
 
 **このディレクトリは意図的に空である。** タイムラインは `*.yaml` である
