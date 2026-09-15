@@ -88,7 +88,7 @@ semantic-visual-loom/
 
 **⚠️ Two kinds live side by side in `projects/`**—**raw specification trees** (§1–20 of Ukebi and
 Gozen Niji, left as they are) and **structured records** (`bible.yaml` / `ledger.yaml` / `shots/`;
-two of them, `ukebi-v2` and `hitosara`).
+three of them, `ukebi-v2`, `hitosara` and `habits`).
 ⚠️ **No generated output is placed beside the raw trees, while their `reference/` assets are
 kept.** Why input is not a sample, and what is lost if it is deleted, is in
 [`docs/usage.md`](docs/usage.md).

@@ -87,7 +87,7 @@ semantic-visual-loom/
 
 **⚠️ `projects/` 里同居着两种东西**——**生的规格书**（Ukebi 与 Gozen-niji 的 §1–20，
 就那样留着）与**结构化的记录**（`bible.yaml` / `ledger.yaml` / `shots/`；
-有 `ukebi-v2` 与 `hitosara` 两本）。
+有 `ukebi-v2`、`hitosara` 与 `habits` 三本）。
 ⚠️ **生的规格书那一侧不放生成物，而 `reference/` 里的参照资产留着。**
 **输入不是标本这件事、删掉会失去什么**，写在 [`docs/usage.md`](docs/usage-zh.md) 里。
 

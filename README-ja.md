@@ -87,7 +87,7 @@ semantic-visual-loom/
 
 **⚠️ `projects/` には2種類が同居している**——**生の仕様書**（受け火・午前二時の §1–20。
 そのまま残してある）と、**構造化した記録**（`bible.yaml` / `ledger.yaml` / `shots/`。
-`ukebi-v2` と `hitosara` の2本である）。
+`ukebi-v2` と `hitosara`、`habits` の3本である）。
 ⚠️ **生の仕様書の側には生成物を置かず、`reference/` の参照資産は残してある。**
 **入力は標本ではないこと、消せば何が失われるか**は [`docs/usage.md`](docs/usage-ja.md) にある。
 
