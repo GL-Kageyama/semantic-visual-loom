@@ -82,14 +82,14 @@ beats:
       紙と手の音だけが在る。呼び声は無い。
 
 # ⚠️ **`reference_set` の鍵は、すべて `ledger.yaml` に在る。**（`L8`）
-#    ⚠️ **実在するものは、いま一つも無い。**
-#       2026-09-16 まで、`碓氷千夏.identity` が指す初稿の一枚だけが実在していた
-#       （`distill-essence-engine`）。**その一枚は旧題を持つため退避された**
-#       （`distill-essence-engine/examples/habits/_backup_20260916/`）。
-#       **他は元から無い。**（方針 §5c——この段では資産を作らない）
-#    ⚠️ **このショットは、いま何も添付できない。** `attached` は宣言であって記録ではない（下）。
+#    ⚠️ **2026-09-16——`碓氷千夏.identity` は実在する。** 指し先は
+#       `distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/prompt.md`。
+#       ⚠️ **在るのはプロンプトであって、画像ではない。** **画像はまだ一枚も生成していない**
+#       （方針 §7 実行の記録 ④）。⚠️ 退避された初稿は
+#       `distill-essence-engine/examples/habits/_backup_20260916/` に在る（**凍結した記録**）。
+#    ⚠️ **画像の側は、まだ何も添付できない。** `attached` は宣言であって記録ではない（下）。
 reference_set:
-  - 碓氷千夏.identity      # 初稿の設定画（`habits-usui-chinatsu-character-sheet-luminous-anime`）——⚠️ **2026-09-16 退避。いま実在しない。**
+  - 碓氷千夏.identity      # `character/メイン/01_碓氷千夏/prompt.md`——⚠️ **画像は未生成。**
   - 碓氷千夏.negatives
   - 名札.appearance        # 第1話の「扱う癖」の対象
   - 出席簿の転出欄.base
@@ -135,6 +135,8 @@ forbidden_set:
 #
 # ⚠️ **`attached: []` と書いてはいけない。** 空欄は「何も添付しなかった」という
 #    **別の主張**になる（`L6` の註・`ukebi-v2/MIGRATION.md`）。**ここは「書いた」のである。**
+#    ⚠️ **2026-09-16——`identity` の側は在る**（`character/メイン/01_碓氷千夏/prompt.md`）。
+#       **添付できないのは、画像の側だけである。**
 attached:
   - 碓氷千夏.identity
   - 碓氷千夏.negatives
