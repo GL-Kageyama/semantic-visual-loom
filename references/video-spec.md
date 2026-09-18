@@ -1,4 +1,4 @@
-<!-- i18n-version: 2.0.0 | canonical: references/video-spec.md | translated: 2026-09-14 -->
+<!-- i18n-version: 2.1.0 | canonical: references/video-spec.md | translated: 2026-09-18 -->
 
 **Language:** [English](video-spec.md) | [日本語](video-spec-ja.md) | [中文](video-spec-zh.md)
 
@@ -42,6 +42,8 @@ A digest that gives every beat equal time is the video equivalent of cramming. *
 - Fix physics — weight, inertia, fluidity — so motion has mass
 - Write the identity lock in full, and repeat it verbatim per instance
 - Separate the reusable specification (WHAT/HOW) from the resolved instance (WHEN, duration, output)
+- Name the work's language in §14 and carry it into the `Audio Prompt` — **if there is speech it is in that language**, and a work with no speech declares it too, because a blank is not neutral
+- Write the subtitle and BGM prohibitions into the Negative — **they are off unless you ask for them**
 - End on the hook
 
 ## avoid
@@ -49,6 +51,8 @@ A digest that gives every beat equal time is the video equivalent of cramming. *
 - A shot list with no camera movement (a slideshow of stills)
 - Motion with no stated weight or inertia (floaty drift)
 - Silence by omission — leaving dialogue, SFX, ambient and music unspecified
+- Leaving the language unstated — **the generator speaks its own default** (measured: Chinese subtitles burned into a video that had speech)
+- Assuming music and subtitles arrive only when asked for — **an omission is a request for whatever the model does by default** (measured: `no on-screen subtitles` was already in the Negative, and subtitles were burned in anyway)
 - Summarizing the continuity block instead of pasting it
 - Adding a beat after the hook
 - Showing anything the source has not yet revealed at this point in the arc (see ⑧ Stay faithful — a later reveal leaking into an earlier clip is the characteristic failure of this format)
@@ -78,7 +82,7 @@ Fill in this order. The right-hand column is where each engine principle lands.
 | **11 MOTION** | subject / object / environmental motion ／ **physics: weight, inertia, acceleration, fluidity, impact** | ⑤ Compose over time |
 | **12 EMOTION** | the emotional arc as a chain ／ emotional events with intensity | ③ Translate |
 | **13 LIGHTING** | key, fill, rim, ambient, color temperature ／ lighting events | ③ Translate ＋ ⑥ Style |
-| **14 AUDIO** | dialogue (speaker, content, delivery), SFX, ambient, music + its emotional function | **this format's own axis** |
+| **14 AUDIO** | dialogue (speaker, content, delivery), SFX, ambient, music + its emotional function ／ **the work's language, named** | **this format's own axis** |
 | **15 CONTINUITY** | identity, spatial, temporal, visual, motion — **the identity lock** | ④ Keep consistent |
 | **16 CONSTRAINTS** | MUST / MUST NOT / PREFER / ALLOW | ⑦ Negative |
 | **17 GENERATION PRIORITIES** | the conflict-resolution order — put fidelity to the source above visual appeal | ⑧ Stay faithful |
@@ -111,9 +115,10 @@ Motion Prompt   ← §9 + §11
 Camera Prompt   ← §10
   (the camera events in order: timing, movement, target, speed, transition)
 
-Audio Prompt    ← §14
+Audio Prompt    ← §14 + the work's language (`bible.language`)
   (dialogue with speaker and delivery, sound effects, ambient bed, music and its
-  emotional function)
+  emotional function — and the work's language, named, so that the generator does
+  not fill the blank with its own default)
 
 Negative Prompt ← §16 MUST NOT + this card's Negative + the style card's Negative
 
@@ -138,7 +143,7 @@ where the subject holds still, **how that style treats a still subject** is deci
 **these are two different slots.**
 
 ## Negative
-`no uniform pacing, no equal-length beats, no static slideshow of stills, no floaty weightless motion, no scene cuts to unrelated locations, no on-screen subtitles, no watermark, no morphing or drifting facial identity`
+`no uniform pacing, no equal-length beats, no static slideshow of stills, no floaty weightless motion, no scene cuts to unrelated locations, no on-screen subtitles, no background music, no watermark, no morphing or drifting facial identity`
 
 ## Examples
 - 午前二時に、あなたは誰の時間を生きていますか (At Two in the Morning, Whose Time Are You Living?) ep.1 → a 30-second digest (gozen-niji-video-01, soft-cel-anime)

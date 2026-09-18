@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.0.0 | canonical: docs/usage.md | translated: 2026-09-14 -->
+<!-- i18n-version: 1.1.0 | canonical: docs/usage.md | translated: 2026-09-18 -->
 
 **Language:** [English](usage.md) | [日本語](usage-ja.md) | [中文](usage-zh.md)
 
@@ -172,7 +172,7 @@ The counts behind that are in `HISTORY.md`.
 
 ## The layers
 
-The check is **27 layers, `L0`–`L26`**, plus schema-shape validation.
+The check is **28 layers, `L0`–`L27`**, plus schema-shape validation.
 **They are not one verdict**—each layer fires on its own and is reported with the
 number it saw.
 

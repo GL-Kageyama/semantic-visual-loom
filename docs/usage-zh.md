@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.0.0 | canonical: docs/usage.md | translated: 2026-09-14 -->
+<!-- i18n-version: 1.1.0 | canonical: docs/usage.md | translated: 2026-09-18 -->
 
 **Language:** [English](usage.md) | [日本語](usage-ja.md) | [中文](usage-zh.md)
 
@@ -160,7 +160,7 @@ projects/<name>/
 
 ## 层
 
-检查由**27 层，`L0`–`L26`**，以及模式（schema）的形状验证构成。
+检查由**28 层，`L0`–`L27`**，以及模式（schema）的形状验证构成。
 **它不是单一判定**——每一层各自报警，并**连同它看到的数字**一起被报告。
 
 ⚠️ **什么也没看到的层会作为注被报告，而什么也没看到的层，看起来和通过的层一模一样。**

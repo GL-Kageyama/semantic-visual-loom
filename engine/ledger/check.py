@@ -1458,7 +1458,7 @@ def self_test():
     #    下の「鳴ってはならない」例が鳴る**——つまりこの例は `_stem` の検査である。
     IMG_BASE = ("no readable text", "no watermark", "no photorealistic")
     IMG_NEG_OK = ("no readable text, no watermark, not photorealistic, "
-                  "no on-screen subtitles, no steam")
+                  "no on-screen subtitles, no background music, no steam")
 
     # ⚠️ **カードの実物はこのリポジトリの外にある。** 自己検査が**本物の
     #    `distill-essence-engine` に依存すると、clone した人には通らない。**
@@ -1506,7 +1506,8 @@ def self_test():
 
     def img_proj(negative=IMG_NEG_OK, vars_body=IMG_VARS, base=IMG_BASE,
                  mode="motion", video=None, text_channel=None, duration="6s",
-                 write_img=True, ref_format="scene-board", ref_style="luminous-anime"):
+                 write_img=True, ref_format="scene-board", ref_style="luminous-anime",
+                 waived=None):
         """⚠️ **画像の経路と動画の経路を別々に置く。** 決定（2026-09-13）の標準の形。"""
         d = _P(tempfile.mkdtemp())
         kw = {}
@@ -1523,7 +1524,10 @@ def self_test():
         p = _One(sh)
         p.root = d
         p.shots = {"p-ch01-seg01": sh}
-        p.bible = {"bible": {"negative_base": base}}
+        b = {"negative_base": base}
+        if waived is not None:
+            b["base_negatives_waived"] = waived
+        p.bible = {"bible": b}
         return p
 
     def video1(dur="6s", line=True):
@@ -1554,27 +1558,65 @@ def self_test():
         for f in v[:1]:
             print(f"        {f['code']}  {f['message'][:88]}")
 
-    run1("L21 禁制を覆っている（鳴ってはならない）", semantic.check_image_negative,
+    run1("L21 禁制を覆っている（鳴ってはならない）", semantic.check_negative_coverage,
          img_proj(), False, None, note="覆っているのは 1/1 本である")
-    run1("L21 1節足りない", semantic.check_image_negative,
+    run1("L21 1節足りない", semantic.check_negative_coverage,
          img_proj(negative="no readable text, not photorealistic"),
-         True, "1 節が無い: no watermark")
+         True, "3 節が無い: no watermark")
     # ⚠️ **節は在るのに Negative が無い。** 段落が1つしか無いので、
     #    `Negative` の index は存在しない——**黙って `Prompt` を読んではならない。**
-    run1("L21 Negative が書かれていない（1段落）", semantic.check_image_negative,
+    run1("L21 Negative が書かれていない（1段落）", semantic.check_negative_coverage,
          img_proj(negative=""), True, "1 段落である")
-    run1("L21 投入する節が無い", semantic.check_image_negative,
+    run1("L21 投入する節が無い", semantic.check_negative_coverage,
          img_proj(negative=None), True, "の節が無い")
     # ⚠️ **段落の数は名乗りである。** 数が違えば `index` は別の段落を指す——
     #    `Negative` を読んだつもりで `Prompt` を読む。だから鳴らねばならない。
-    run1("L21 2段落であるはずが3段落", semantic.check_image_negative,
+    run1("L21 2段落であるはずが3段落", semantic.check_negative_coverage,
          img_proj(negative="no readable text\n\nno watermark, not photorealistic"),
          True, "3 段落である")
-    run1("L21 禁制が宣言されていない", semantic.check_image_negative,
+    run1("L21 禁制が宣言されていない", semantic.check_negative_coverage,
          img_proj(base=None), True, "作品の禁制が宣言されていない")
     # ⚠️ **相手が無ければ何も言わない。** 「記録が無い」は `L18` が1件に畳む。
-    run1("L21 画像の仕様が無い（鳴ってはならない）", semantic.check_image_negative,
+    run1("L21 画像の仕様が無い（鳴ってはならない）", semantic.check_negative_coverage,
          img_proj(write_img=False), False, None)
+
+    # ⚠️ **基盤の禁制は、作品が書き忘れても掛かる**（決定 2026-09-18、著者）。
+    #    作品が自分の分を全部書いていても、`no on-screen subtitles` が無ければ鳴る
+    #    ——**床が無ければ、思い出した者だけが守ることになる。**
+    run1("L21 基盤の禁制が無い（作品の分は揃っている）", semantic.check_negative_coverage,
+         img_proj(negative="no readable text, no watermark, not photorealistic, no steam"),
+         True, "2 節が無い: no on-screen subtitles")
+
+    # ⚠️ **祖父条項**（決定 2026-09-18、著者——「hitosara は対象外にする」）。
+    #    基盤の禁制は増える。**規則より前に書かれた作品**は、書いていなかったことを
+    #    理由に赤が立つ——**規則は遡らない。** ゆえに作品が除外を宣言する。
+    run1("L21 祖父条項で外した節は要求されない", semantic.check_negative_coverage,
+         img_proj(negative="no readable text, no watermark, no on-screen subtitles, "
+                           "not photorealistic, no steam",
+                  waived=["no background music"]),
+         False, None, note="祖父条項が掛かっている")
+    # ⚠️ **除外できるのは基盤の節だけである。** 作品が自分の禁制を除けば、
+    #    この検査は作品の側を何も見ていない——**黙って通してはならない。**
+    run1("L21 作品の禁制を除外しようとしている", semantic.check_negative_coverage,
+         img_proj(negative=IMG_NEG_OK, waived=["no steam"]),
+         True, "基盤の禁制に無い節を名指している")
+
+    # ⚠️ **動画の §18 も見る。** かつては「検査がまだ無い——穴である」と記録されていた。
+    #    **その穴から実際の欠陥が出た**（実測 2026-09-18: 動画に中国語の字幕が焼かれた）。
+    def vid_spec(negative):
+        return ("# 18. WAN 3.0 PROMPT MAPPING\n\n"
+                "## Master Prompt\n\n本文\n\n"
+                f"## Negative Prompt\n\n{negative}\n\n"
+                "# 19. GENERATION INSTANCE\n\n本文\n")
+
+    run1("L21 動画の §18 が覆っていない", semantic.check_negative_coverage,
+         img_proj(video=vid_spec("no watermark")),
+         True, "動画の §18 Negative が禁制を覆っていない")
+    run1("L21 動画の §18 も覆っている（鳴ってはならない）", semantic.check_negative_coverage,
+         img_proj(video=vid_spec(IMG_NEG_OK)), False, None)
+    run1("L21 動画の §18 に Negative の節が無い", semantic.check_negative_coverage,
+         img_proj(video="# 18. WAN 3.0 PROMPT MAPPING\n\n## Master Prompt\n\n本文\n"),
+         True, "`## Negative Prompt` の節が無い")
 
     # ⚠️ **`repo_root` を偽のエンジンへ向ける。** 本物に依存させない。
     l22 = lambda p, eng=ENGINE_OK: semantic.check_image_vars(p, repo_root=eng)
@@ -1693,6 +1735,45 @@ def self_test():
     # ⚠️ **動画の仕様が無ければ、この検査は何も見ていない。** `L11`・`L18` が報告する。
     run1("L26 動画の仕様が無ければ黙る", semantic.check_work_constants,
          const_proj(spec=None, constants=l26_home()), False, None)
+
+    # ---- L27（作品の言語が宣言され、§18 の `Audio Prompt` に届いているか）
+    #     ⚠️ **この検査は、この基盤自身の穴から出た。** 実測（2026-09-18）——
+    #        発話のある動画に**中国語の字幕が焼かれた。** 作品は言語を
+    #        **どこにも書けなかった**（`bible` にも §14 の定義にも欄が無かった）。
+    #        **空欄は、生成器の既定で埋まる**——Wan 3.0 の既定は中国語である。
+    print("\n=== 自己検査 — 作品の言語と、生成器へ渡る文への到達\n")
+
+    def lang_proj(language=None,
+                  audio="The language of this work is Japanese. No dialogue."):
+        """⚠️ **`audio=None` は「`Audio Prompt` のスロットが無い」。** `L17` の欠陥であり、
+        ここでは鳴らさない——**同じ欠陥を2つの層が別々の符号で報告しない。**"""
+        d = _P(tempfile.mkdtemp())
+        body = ("# 18. WAN 3.0 PROMPT MAPPING\n\n## Master Prompt\n\n本文\n\n")
+        if audio is not None:
+            body += f"## Audio Prompt\n\n{audio}\n\n"
+        body += ("## Negative Prompt\n\nno watermark, no on-screen subtitles\n\n"
+                 "# 19. GENERATION INSTANCE\n\n本文\n")
+        (d / "vid.md").write_text(body, encoding="utf-8")
+        sh = s("p-ch01-seg01", spec="vid.md")
+        p = _One(sh)
+        p.root = d
+        p.shots = {"p-ch01-seg01": sh}
+        p.bible = {"bible": {}}
+        if language is not None:
+            p.bible["bible"]["language"] = language
+        return p
+
+    run1("L27 言語が宣言され、届いている（鳴ってはならない）", semantic.check_work_language,
+         lang_proj(language="Japanese"), False, None,
+         note="届いているのは 1/1 本である")
+    run1("L27 言語が宣言されていない", semantic.check_work_language,
+         lang_proj(), True, "作品が言語を宣言していない")
+    run1("L27 宣言は在るが、`Audio Prompt` に無い", semantic.check_work_language,
+         lang_proj(language="Japanese", audio="No dialogue. Silence, specified."),
+         True, "`Audio Prompt` に作品の言語")
+    # ⚠️ **スロットが無ければ黙る。** `L17` が「スロットが無い」と報告している。
+    run1("L27 `Audio Prompt` が無ければ黙る", semantic.check_work_language,
+         lang_proj(language="Japanese", audio=None), False, None)
 
     # ---- L25（テイクがショット・様式・**実物**と突き合っているか）
     #     ⚠️ **`S1` は形を見る。ここは中身を見る。** 13本がスキーマを通ることは、

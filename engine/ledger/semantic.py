@@ -46,6 +46,20 @@
 持たない様式を選べば、**スロットは在るのに何も運ばない**——`L17` はそれを通す。
 **空の検査は OK と言う。** だから別に鳴らす。
 
+⚠️ **`L21` は両方の経路を見るようになった（決定 2026-09-18、著者）。** それまでは
+画像の経路だけを見ており、**動画の §18 を読む検査は「まだ無い——穴である」と
+記録されていた。** その穴から実際の欠陥が出た——**動画に中国語の字幕が焼かれた。**
+**禁制が届かなかったのは、動画の経路である。** 同時に、要求が
+**基盤の禁制（`specmap.BASE_NEGATIVES`）＋ 作品の禁制（`bible.negative_base`）**の
+和になった——**作品が書き忘れても消えない床を、基盤が持つ。**
+
+⚠️ **`L27` を足した理由（決定 2026-09-18、著者）——「言語指定で触っているなら、
+必ずその言語を話す」。** それまでこの基盤は、**作品が何語で話すかをどこにも
+書けなかった**（`bible` に `language` が無く、§14 AUDIO の定義にも無かった）。
+**空欄は、生成器の既定で埋まる**——Wan 3.0 の既定は中国語である。
+`L27` は**宣言**（`bible.language`）と**到達**（§18 `Audio Prompt`）を見る。
+⚠️ **生成物が実際にその言語で喋ったかは見えない**——穴である。
+
 ⚠️ **`L21`–`L24` を足した理由（決定 2026-09-13、著者）。** 経路が1つから**2つ**になり
 （全ショット画像 → 全ショット動画）、**経路を決めるのが `mode` でなくなった**。
 `L21`・`L22` は**画像の経路の中身**を見る——あちらは §1–20 を持たないので、
@@ -797,99 +811,205 @@ def _stem(clause):
     return re.sub(r"\s+", " ", c).strip()
 
 
-def check_image_negative(project):
-    """L21 — **画像の仕様の Negative が、作品の禁制を覆っているか。**
+def _specs_of(project, kind):
+    """その経路の仕様を `[(ショットID, パス)]` で返す。**読めないものは数えない。**
 
-    ⚠️ **覆うであって、等しいではない。** 画像の Negative は作品の禁制
-    （`bible.negative_base`）を**全部含まねばならない**が、**それ以上を持ってよい**——
-    開示の系列（「窯の中を見せない」等）は**ショットごとに違う**からである。
-    だから足りない節だけを鳴らし、余分な節は鳴らさない。
-
-    ⚠️ **語幹で比べる**（`_stem`）。`no` / `not` の違いは偽陽性である。
-
-    ⚠️ **Negative は節ではない。** 画像の仕様は節を持たない——**正典は
-    `## 投入する1本の文字列` の節の中の2段落であり、`Negative` はその2段落目である**
-    （`specmap.SPEC_KINDS` の註を見よ）。だからこの検査は**段落の数も見る**
-    ——数が名乗りと違えば、`index` は別の段落を指す。**動画の側とは指し方が違うだけで、
-    指しているものは同じである**（§18 の Negative）。
-
-    ⚠️ **Negative は節ではない。** 画像の仕様は節を持たない——**正典は
-    `## 投入する1本の文字列` の節の中の2段落であり、`Negative` はその2段落目である**
-    （`specmap.SPEC_KINDS` の註を見よ）。だからこの検査は
-    **段落の数も見る**——数が名乗りと違えば、`index` は別の段落を指す。
-    動画の仕様とは**指し方が違うだけで、指しているものは同じである**（§18 の Negative）。
-
-    ⚠️ **動画の仕様の §18 に対して、この検査は走らない。** あちらの Negative は
-    **開示台帳と突き合わせる**のが本体であり、それは `L10` と `L14` が負う。
-    **「作品の禁制を覆っているか」を動画の側で見る検査は、まだ無い**——
-    穴である。穴のまま記録する。
-
-    ⚠️ **画像の仕様を持たないショットは、ここへ来ない。** 「記録が無い」ことは
-    `L18` が1件に畳んで報告する——**同じ欠陥を2つの層が別々の符号で報告しない。**
-    だから `L20` と同じく、相手が1本も無ければ**何も言わずに帰る。**
+    ⚠️ **「記録が無い」は `L18` が1件に畳んで報告する**——**同じ欠陥を2つの層が
+    別々の符号で報告しない。** だからここは黙って落とし、呼び手も黙って帰る。
     """
     out = []
-    specs = []
     for s in project.order():
-        src = _spec_of(project.shots[s], "image")
+        src = _spec_of(project.shots[s], kind)
         if not src:
             continue                      # L18 が「持たない」と報告している
         p = project.root / src
         if not p.is_file():
             continue                      # L18 が「読めない」と報告している
-        specs.append((s, p))
-    if not specs:
+        out.append((s, p))
+    return out
+
+
+def _negative_of(path, kind):
+    """その仕様の Negative を**節の列**として返す。`(節, 欠陥の文)`——片方は必ず `None`。
+
+    ⚠️ **種類ごとに指し方が違う**（`specmap.SPEC_KINDS`）。動画は**節の見出し**
+    （`## Negative Prompt`）、画像は**1つの節の中の2段落目**である。
+    **指しているものは同じで、指し方が違う。**
+
+    ⚠️ **段落の数も見る。** 「2段落である」は名乗りであって、**名乗りは一致ではない**
+    （`L22` のカードの名乗りと同じ形）。**数が違えば、`index` は別の段落を指す**
+    ——黙って読むと、`Prompt` を Negative として読む。
+    """
+    k = specmap.SPEC_KINDS[kind]
+    text = path.read_text(encoding="utf-8")
+    if not k["sections"]:
+        body = specdoc.section(text, k["body_section"])
+        if body is None:
+            return None, (f"`{k['field']}` の仕様に `## {k['body_section']}` の節が無い。"
+                          "**禁制を1つも確かめられない**——"
+                          "節が無いのは、禁制が揃っていることではない。")
+        names = k["body_paragraphs"]
+        paras = specdoc.paragraphs(body) or []
+        if len(paras) != len(names):
+            return None, (f"`{k['body_section']}` の節が "
+                          f"{len(names)} 段落（{'／'.join(names)}）であるはずが、"
+                          f"**{len(paras)} 段落である。**"
+                          "**段落の数が違えば、どこを読んでいるのかが決まらない**"
+                          "——`Negative` を読んだつもりで `Prompt` を読むことになる。")
+        return specdoc.clausify(paras[names.index(k["negative"])]), None
+    body = specdoc.section(text, k["negative"])
+    if body is None:
+        return None, (f"§18 に `## {k['negative']}` の節が無い。"
+                      "**禁制を1つも確かめられない**——"
+                      "節が無いのは、禁制が揃っていることではない。")
+    return specdoc.clausify(body), None
+
+
+def check_negative_coverage(project):
+    """L21 — **両方の経路の Negative が、基盤と作品の禁制を覆っているか。**
+
+    ⚠️ **覆うであって、等しいではない。** Negative は要求された禁制を
+    **全部含まねばならない**が、**それ以上を持ってよい**——開示の系列
+    （「窯の中を見せない」等）は**ショットごとに違う**からである。
+    だから足りない節だけを鳴らし、余分な節は鳴らさない。
+
+    ⚠️ **要求は2層の和である**（決定 2026-09-18、著者）。
+      · **基盤が必ず付けるもの**（`specmap.BASE_NEGATIVES`）——作品が書き忘れても消えない。
+      · **作品が決めるもの**（`bible.negative_base`）——作品ごとに違う。
+    どちらか一方でも欠ければ鳴る。**和でなければ、基盤の層は床にならない。**
+
+    ⚠️ **語幹で比べる**（`_stem`）。`no` / `not` の違いは偽陽性である。
+
+    ⚠️ **かつてこの検査は画像の経路しか見ていなかった。** 動画の §18 を読む検査は
+    「まだ無い——穴である」と記録されていた。**その穴から実際の欠陥が出た**
+    （実測 2026-09-18——動画に**中国語の字幕が焼かれた**）。
+    **禁制が届かなかったのは、動画の経路である。** だから両方を見る。
+
+    ⚠️ **相手が1本も無ければ、何も言わずに帰る。** 「記録が無い」ことは `L18` が
+    1件に畳んで報告する——**同じ欠陥を2つの層が別々の符号で報告しない。**
+
+    ⚠️ **祖父条項がある**（`specmap.WAIVED_KEY`、決定 2026-09-18、著者——「**hitosara は
+    対象外にする**」）。基盤の禁制は増える。**規則より前に書かれた作品**には、書いていなかった
+    ことを理由に赤が立つ——**規則は遡らない。** ゆえに**作品が自分で除外を宣言する。**
+    ⚠️ **除外は註で報告する**——**報告しない除外は、通った検査に見える。**
+    ⚠️ **除外できるのは基盤の節だけである。** 作品が自分の禁制を除けば、
+    この検査は作品の側を何も見ていない。
+    """
+    out = []
+    bible = ((getattr(project, "bible", None) or {}).get("bible") or {})
+    work = bible.get("negative_base") or []
+    waived = [c for c in (bible.get(specmap.WAIVED_KEY) or []) if isinstance(c, str)]
+    loom = list(specmap.BASE_NEGATIVES)
+    loom_stems = {_stem(c) for c in loom}
+    waived_stems = {_stem(c) for c in waived}
+    dropped = [c for c in loom if _stem(c) in waived_stems]
+    stray = [c for c in waived if _stem(c) not in loom_stems]
+    loom = [c for c in loom if _stem(c) not in waived_stems]
+    extra = [c for c in work if _stem(c) not in {_stem(x) for x in specmap.BASE_NEGATIVES}]
+    required = loom + extra
+
+    paths = [(kind, _specs_of(project, kind)) for kind in ("video", "image")]
+    if not any(specs for _, specs in paths):
         return out                        # 相手が無い。L18 が報告済みである。
 
-    base = ((getattr(project, "bible", None) or {}).get("bible") or {}).get("negative_base")
-    if not base:
+    if not work:
         out.append(finding("L21", "",
                            "作品の禁制が宣言されていない（`bible.negative_base`）。"
-                           f"**{len(specs)} 本の画像の Negative が、何を覆うべきかを"
-                           "誰も決めていない**——覆うべきものが無ければ、"
-                           "この検査は**何も見ていないのと同じである。**"))
+                           f"**掛かるのは基盤の {len(loom)} 節だけである**——"
+                           "作品が決めた禁制が1つも無ければ、この検査は"
+                           "**作品の側を何も見ていない。**"))
+
+    if dropped:
+        out.append(finding("L21", "",
+                           f"**祖父条項が掛かっている**（`bible.{specmap.WAIVED_KEY}`）——"
+                           f"基盤の {len(dropped)} 節を要求から外した: "
+                           f"{'／'.join(dropped)}。"
+                           "**この作品は、その節が基盤に来る前に書かれた。**"
+                           "⚠️ **除外は作品の宣言であって、基盤の判断ではない。**",
+                           severity="note"))
+    if stray:
+        out.append(finding("L21", "",
+                           f"`bible.{specmap.WAIVED_KEY}` が、基盤の禁制に無い節を名指している: "
+                           f"{'／'.join(stray)}。**除外できるのは基盤の節だけである**——"
+                           "作品が自分の禁制を除けば、この検査は作品の側を何も見ていない。"))
+
+    for kind, specs in paths:
+        if not specs:
+            continue
+        label = "動画の §18 Negative" if kind == "video" else "画像の Negative"
+        caught = 0
+        for s, p in specs:
+            clauses, flaw = _negative_of(p, kind)
+            if flaw:
+                out.append(finding("L21", s, f"{label}: {flaw}"))
+                continue
+            got = {_stem(c) for c in clauses}
+            miss = [c for c in required if _stem(c) not in got]
+            if miss:
+                caught += 1
+                out.append(finding("L21", s,
+                                   f"{label} が禁制を覆っていない——"
+                                   f"{len(required)} 節のうち {len(miss)} 節が無い: "
+                                   f"{'／'.join(miss)}。"
+                                   "**Negative は足し算であり、書き忘れは黙って消える**"
+                                   "——禁制が届かなければ、描かれてから分かる。"))
+        loom_label = (f"基盤の {len(loom)} 節"
+                      + (f"（祖父条項で {len(dropped)} 節を外した）" if dropped else ""))
+        out.append(finding("L21", f"{len(specs)}本",
+                           f"{label} を、{loom_label} ＋ 作品の {len(work)} 節"
+                           f"（重複を除いて {len(required)} 節）と突き合わせた。"
+                           f"覆っているのは {len(specs) - caught}/{len(specs)} 本である。",
+                           severity="note"))
+    return out
+
+
+def check_work_language(project):
+    """L27 — **作品が言語を宣言しているか。そして、その言語が §18 `Audio Prompt` に届いているか。**
+
+    ⚠️ **なぜ要るか**（決定 2026-09-18、著者）——「**言語指定で触っているなら、
+    必ずその言語を話す。**」**生成器は、言語を指定されなければ自分の既定で喋る。**
+    実測——Wan 3.0 の既定は中国語であり、**発話を検出した動画に中国語の字幕が焼かれた。**
+    **空欄は、モデルの母語で埋まる。**
+
+    ⚠️ **この検査が読むのは「宣言が届いたか」までである。** 生成物が実際にその言語で
+    喋ったかは**この層からは見えない**（生成はこの基盤の外で起きる）——
+    **穴である。穴のまま記録する。**
+
+    ⚠️ **`Audio Prompt` のスロットが無ければ、ここでは鳴らさない。** それは `L17` の
+    欠陥である——**同じ欠陥を2つの層が別々の符号で報告しない。**
+    """
+    out = []
+    bib = (getattr(project, "bible", None) or {}).get("bible") or {}
+    lang = str(bib.get("language") or "").strip()
+    if not lang:
+        out.append(finding("L27", "",
+                           "作品が言語を宣言していない（`bible.language`）。"
+                           "**生成器は、言語を指定されなければ自分の既定で喋る**"
+                           "——空欄は、モデルの母語で埋まる。"
+                           "実測: 発話のある動画に**中国語の字幕が焼かれた。**"))
         return out
 
-    kind = specmap.SPEC_KINDS["image"]
-    names = kind["body_paragraphs"]
-    caught = 0
+    specs = _specs_of(project, "video")
+    checked = caught = 0
     for s, p in specs:
-        body = specdoc.section(p.read_text(encoding="utf-8"), kind["body_section"])
+        body = specdoc.section(p.read_text(encoding="utf-8"), "Audio Prompt")
         if body is None:
-            out.append(finding("L21", s,
-                               f"`{kind['field']}` の仕様に "
-                               f"`## {kind['body_section']}` の節が無い。"
-                               "**禁制を1つも確かめられない**——"
-                               "節が無いのは、禁制が揃っていることではない。"))
-            continue
-        # ⚠️ **段落の数も見る。** 「2段落である」は名乗りであって、**名乗りは一致ではない**
-        #    （`L22` のカードの名乗りと同じ形）。**数が違えば、下の `index` は
-        #    別の段落を指す**——黙って読むと、`Prompt` を Negative として読む。
-        paras = specdoc.paragraphs(body)
-        if len(paras) != len(names):
-            out.append(finding("L21", s,
-                               f"`{kind['body_section']}` の節が "
-                               f"{len(names)} 段落（{'／'.join(names)}）であるはずが、"
-                               f"**{len(paras)} 段落である。**"
-                               "**段落の数が違えば、どこを読んでいるのかが決まらない**"
-                               "——`Negative` を読んだつもりで `Prompt` を読むことになる。"))
-            continue
-        got = {_stem(c) for c in specdoc.clausify(paras[names.index(kind["negative"])])}
-        miss = [c for c in base if _stem(c) not in got]
-        if miss:
+            continue                      # L17 が「スロットが無い」と報告している
+        checked += 1
+        if lang.lower() not in body.lower():
             caught += 1
-            out.append(finding("L21", s,
-                               f"画像の Negative が作品の禁制を覆っていない——"
-                               f"{len(base)} 節のうち {len(miss)} 節が無い: "
-                               f"{'／'.join(miss)}。"
-                               "**Negative は足し算であり、書き忘れは黙って消える**"
-                               "——禁制が届かなければ、描かれてから分かる。"))
+            out.append(finding("L27", s,
+                               f"§18 `Audio Prompt` に作品の言語（`{lang}`）が無い。"
+                               "**宣言は作品台帳に在るのに、生成器へ渡る文に無い**"
+                               "——届かなければ、モデルは自分の既定で喋る。"))
+    if not checked:
+        return out                        # 相手が無い。L17 が報告済みである。
 
-    out.append(finding("L21", f"{len(specs)}本",
-                       f"画像の Negative を作品の禁制（{len(base)} 節）と突き合わせた。"
-                       f"覆っているのは {len(specs) - caught}/{len(specs)} 本である。"
-                       "⚠️ **動画の仕様の §18 に対しては、この検査は走らない**"
-                       "——あちらは `L10`・`L14` が開示台帳と突き合わせる。",
+    out.append(finding("L27", f"{checked}本",
+                       f"§18 `Audio Prompt` を作品の言語（`{lang}`）と突き合わせた。"
+                       f"届いているのは {checked - caught}/{checked} 本である。"
+                       "⚠️ **生成物が実際にその言語で喋ったかは、この層からは見えない**"
+                       "——生成はこの基盤の外で起きる。",
                        severity="note"))
     return out
 
@@ -2457,7 +2577,8 @@ def run(project, schema_dir=None, repo_root=None):
     out += check_negative_response(project)
     out += check_spec_sections(project)
     out += check_spec_kind(project)
-    out += check_image_negative(project)
+    out += check_negative_coverage(project)
+    out += check_work_language(project)
     out += check_image_vars(project, repo_root=repo_root)
     out += check_duration(project)
     out += check_work_constants(project)

@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.0.0 | canonical: CLAUDE.md | translated: 2026-09-14 -->
+<!-- i18n-version: 1.1.0 | canonical: CLAUDE.md | translated: 2026-09-18 -->
 
 **Language:** [English](CLAUDE.md) | [日本語](CLAUDE-ja.md) | [中文](CLAUDE-zh.md)
 
@@ -36,6 +36,8 @@ Therefore, **do not** link from this repository's documents to the design notes 
 - **The production ledger is one.** The continuity ledger (the state of the world) and the disclosure ledger (the state of the audience's knowledge) are **held in the same file**. The **reference set** (what is fixed) and the **forbidden set** (what must not be shown) handed to generation are **derived from this single point**. **Do not split it in two**—the failure that actually happened was "which reference image to attach to which shot," and that judgment is at once a judgment of continuity and a judgment of disclosure.
 - **Generation is a sample.** What the generator makes is a candidate for adoption, not the work. **Adoption is selection, and the author is the editor.**
 - **The strings handed to the generator are English.** The word sequences of the specification, prompt, and Negative are **written in English**—the canonical is English. **Do not translate them**—translating changes the output.
+- **The work has a language, and it speaks it.** If there is speech it is in `bible.language`—**and a work with no speech declares one too, because a blank is not neutral: the generator fills it with its own default.** Measured: a video with speech in it came back with **Chinese subtitles burned into the picture.** ⚠️ **Name the language; do not forbid the symptom** (`L27`).
+- **Subtitles and background music are off unless asked for.** The foundation carries both as its floor (`specmap.BASE_NEGATIVES`), and **`L21` requires them on both paths**—the video's §18 `Negative Prompt` and the image's `Negative`. ⚠️ **A work that predates the floor declares `bible.base_negatives_waived`**—**the work writes the exclusion, because an engine that remembers which works are special has stopped being an engine.**
 
 ## Language (i18n)
 
@@ -49,7 +51,7 @@ Therefore, **do not** link from this repository's documents to the design notes 
 - **Invariant blocks** (the strings handed to the generator = specification, prompt, Negative, enum values) are **left in English, untranslated**.
 - **`HISTORY.md` stays Japanese.** It is the record of the work, not a document for readers.
 
-**16 documents × 3 languages are in place.** `tools/check_i18n.py` checks them: mirror existence and non-emptiness, the `i18n-version` header, the switcher line, the invariant blocks, and the heading levels.
+**17 documents × 3 languages are in place.** `tools/check_i18n.py` checks them: mirror existence and non-emptiness, the `i18n-version` header, the switcher line, the invariant blocks, and the heading levels.
 
 ⚠️ **That check does not see whether the prose is translated correctly.** It reports **how many files it looked at and which blocks it treated as invariant**—because a check that reports nothing looks like a check that passed.
 

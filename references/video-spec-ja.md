@@ -1,4 +1,4 @@
-<!-- i18n-version: 2.0.0 | canonical: references/video-spec.md | translated: 2026-09-14 -->
+<!-- i18n-version: 2.1.0 | canonical: references/video-spec.md | translated: 2026-09-18 -->
 
 **Language:** [English](video-spec.md) | [日本語](video-spec-ja.md) | [中文](video-spec-zh.md)
 
@@ -42,6 +42,8 @@
 - 物理——重さ・慣性・流動——を固定し、動きに質量を持たせる
 - 同一性のロックを省略せずに書き、インスタンスごとに一字一句そのまま繰り返す
 - 再利用可能な仕様（WHAT/HOW）と、解決されたインスタンス（WHEN・尺・出力）を分ける
+- §14 で作品の言語を名指し、`Audio Prompt` へ届かせる——**発話があるならそれはその言語であり**、発話の無い作品も宣言する。**空欄は中立ではない**（空欄は、生成器の既定で埋まる）
+- 字幕と BGM の禁制を Negative に書く——**こちらから指定しない限り、どちらも出ない**
 - フックで終える
 
 ## avoid
@@ -49,6 +51,8 @@
 - カメラの移動が無いショットリスト（静止画のスライドショー）
 - 重さも慣性も述べられていない運動（浮わついた漂い）
 - 省略による無音——台詞・効果音・環境音・音楽を未指定のまま残すこと
+- 言語を書かずに残すこと——**生成器は自分の既定で喋る**（実測: 発話のある動画に中国語の字幕が焼かれた）
+- 音楽と字幕は頼んだときだけ来ると思うこと——**省略は、モデルの既定を頼むことである**（実測: `no on-screen subtitles` は既に Negative に在り、それでも焼かれた）
 - 継続性ブロックを貼らずに要約すること
 - フックの後にビートを足すこと
 - 弧のこの時点で原作がまだ開示していないものを映すこと（⑧原作に忠実 を参照——後の開示が前のクリップに漏れることが、このフォーマット特有の失敗）
@@ -78,7 +82,7 @@
 | **11 MOTION** | 主体／物体／環境の運動 ／ **物理：重さ・慣性・加速・流動・衝撃** | ⑤構成を時間へ |
 | **12 EMOTION** | 連鎖としての情動の弧 ／ 強度つきの情動イベント | ③翻訳 |
 | **13 LIGHTING** | キー・フィル・リム・アンビエント・色温度 ／ 照明イベント | ③翻訳 ＋ ⑥様式 |
-| **14 AUDIO** | 台詞（話者・内容・言い方）・効果音・環境音・音楽とその情動的機能 | **このフォーマット固有の軸** |
+| **14 AUDIO** | 台詞（話者・内容・言い方）・効果音・環境音・音楽とその情動的機能 ／ **作品が話す言語（名指し）** | **このフォーマット固有の軸** |
 | **15 CONTINUITY** | 同一性・空間・時間・視覚・運動の継続——**同一性のロック** | ④一貫 |
 | **16 CONSTRAINTS** | MUST / MUST NOT / PREFER / ALLOW | ⑦ネガティブ |
 | **17 GENERATION PRIORITIES** | 衝突時の優先順——見栄えより原作への忠実を上に置く | ⑧原作に忠実 |
@@ -111,9 +115,10 @@ Motion Prompt   ← §9 + §11
 Camera Prompt   ← §10
   (the camera events in order: timing, movement, target, speed, transition)
 
-Audio Prompt    ← §14
+Audio Prompt    ← §14 + the work's language (`bible.language`)
   (dialogue with speaker and delivery, sound effects, ambient bed, music and its
-  emotional function)
+  emotional function — and the work's language, named, so that the generator does
+  not fill the blank with its own default)
 
 Negative Prompt ← §16 MUST NOT + this card's Negative + the style card's Negative
 
@@ -136,7 +141,7 @@ through the Negative slot.
 **その様式が止まった主題をどう扱うか**は決まっている——**この2つは別の欄である。**
 
 ## Negative
-`no uniform pacing, no equal-length beats, no static slideshow of stills, no floaty weightless motion, no scene cuts to unrelated locations, no on-screen subtitles, no watermark, no morphing or drifting facial identity`
+`no uniform pacing, no equal-length beats, no static slideshow of stills, no floaty weightless motion, no scene cuts to unrelated locations, no on-screen subtitles, no background music, no watermark, no morphing or drifting facial identity`
 
 ## 事例
 - 午前二時に、あなたは誰の時間を生きていますか 第1話 → 30秒ダイジェスト（gozen-niji-video-01・soft-cel-anime）

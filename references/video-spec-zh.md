@@ -1,4 +1,4 @@
-<!-- i18n-version: 2.0.0 | canonical: references/video-spec.md | translated: 2026-09-14 -->
+<!-- i18n-version: 2.1.0 | canonical: references/video-spec.md | translated: 2026-09-18 -->
 
 **Language:** [English](video-spec.md) | [日本語](video-spec-ja.md) | [中文](video-spec-zh.md)
 
@@ -42,6 +42,8 @@
 - 固定物理——重量・惯性・流动——让动作具有质量
 - 完整写出同一性锁定，并在每个实例中逐字重复
 - 分开可复用的规格（WHAT/HOW）与已解决的实例（WHEN・时长・输出）
+- 在 §14 指名作品的语言，并让它抵达 `Audio Prompt`——**若有说话，那就是该语言**；没有说话的作品也要声明。**空白不是中立**（空白会被生成器的默认语言填满）
+- 把字幕与 BGM 的禁令写进 Negative——**除非我方指定，两者都不出现**
 - 停在钩子上
 
 ## avoid
@@ -49,6 +51,8 @@
 - 没有镜头移动的镜头清单（静止画的幻灯片）
 - 未说明重量与惯性的运动（轻飘的漂移）
 - 因省略而造成的无声——把台词、音效、环境音、音乐留作未指定
+- 把语言留作未指定——**生成器会用它的默认语言说话**（实测：带说话的影片被烧上了中文字幕）
+- 以为音乐和字幕只在你要求时才出现——**省略就是在要求模型的默认行为**（实测：`no on-screen subtitles` 已在 Negative 里，字幕仍被烧上）
 - 用概括代替贴入连续性区块
 - 在钩子之后再加节拍
 - 呈现原作在弧线的此刻尚未揭示的内容（参见⑧忠于原作——后续的揭示泄漏进较早的片段，是这个格式特有的失败）
@@ -78,7 +82,7 @@
 | **11 MOTION** | 主体／物体／环境的运动 ／ **物理：重量・惯性・加速・流动・冲击** | ⑤构图延伸至时间 |
 | **12 EMOTION** | 作为链条的情绪弧 ／ 带强度的情绪事件 | ③翻译 |
 | **13 LIGHTING** | 主光・辅光・轮廓光・环境光・色温 ／ 照明事件 | ③翻译 ＋ ⑥样式 |
-| **14 AUDIO** | 台词（说话者・内容・语气）・音效・环境音・音乐及其情绪功能 | **本格式独有的轴** |
+| **14 AUDIO** | 台词（说话者・内容・语气）・音效・环境音・音乐及其情绪功能 ／ **作品所说的语言（指名）** | **本格式独有的轴** |
 | **15 CONTINUITY** | 同一性・空间・时间・视觉・运动的连续——**同一性锁定** | ④保持一致 |
 | **16 CONSTRAINTS** | MUST / MUST NOT / PREFER / ALLOW | ⑦负面 |
 | **17 GENERATION PRIORITIES** | 冲突时的优先顺序——把对原作的忠实置于观感之上 | ⑧忠于原作 |
@@ -111,9 +115,10 @@ Motion Prompt   ← §9 + §11
 Camera Prompt   ← §10
   (the camera events in order: timing, movement, target, speed, transition)
 
-Audio Prompt    ← §14
+Audio Prompt    ← §14 + the work's language (`bible.language`)
   (dialogue with speaker and delivery, sound effects, ambient bed, music and its
-  emotional function)
+  emotional function — and the work's language, named, so that the generator does
+  not fill the blank with its own default)
 
 Negative Prompt ← §16 MUST NOT + this card's Negative + the style card's Negative
 
@@ -135,7 +140,7 @@ Style Motion    ← the style card's Motion character (not §1–17 — the only
 **这个样式如何处理静止的主体**也是确定的——**这是两个不同的槽位。**
 
 ## Negative
-`no uniform pacing, no equal-length beats, no static slideshow of stills, no floaty weightless motion, no scene cuts to unrelated locations, no on-screen subtitles, no watermark, no morphing or drifting facial identity`
+`no uniform pacing, no equal-length beats, no static slideshow of stills, no floaty weightless motion, no scene cuts to unrelated locations, no on-screen subtitles, no background music, no watermark, no morphing or drifting facial identity`
 
 ## 事例
 - 凌晨两点、你在活着谁的时间 第1话 → 30 秒摘要（gozen-niji-video-01・soft-cel-anime）

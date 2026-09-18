@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.0.0 | canonical: docs/usage.md | translated: 2026-09-14 -->
+<!-- i18n-version: 1.1.0 | canonical: docs/usage.md | translated: 2026-09-18 -->
 
 **Language:** [English](usage.md) | [日本語](usage-ja.md) | [中文](usage-zh.md)
 
@@ -160,7 +160,7 @@ projects/<name>/
 
 ## 層
 
-検査は**27の層、`L0`–`L26`** と、スキーマの形の検証から成る。
+検査は**28の層、`L0`–`L27`** と、スキーマの形の検証から成る。
 **ひとつの判定ではない**——層はそれぞれ独立に鳴り、**見た数とともに**報告される。
 
 ⚠️ **何も見なかった層は註として報告され、何も見なかった層は、通った層とまったく同じに見える。**

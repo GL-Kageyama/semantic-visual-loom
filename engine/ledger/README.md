@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.0.0 | canonical: engine/ledger/README.md | translated: 2026-09-14 -->
+<!-- i18n-version: 1.1.0 | canonical: engine/ledger/README.md | translated: 2026-09-18 -->
 
 **Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
 
@@ -50,12 +50,13 @@ in order to fire on "`before` and `after` are the same" — but **JSON Schema ca
 | **L18** | **The shape of the two paths does not fit that field** — or the model §18 names cannot be resolved to the registry | "The Path Is Decided by the Field, Not by `mode`" below |
 | **L19** | **A record field has no declared destination** — the dual of `L12` | "That the Aim Arrives" below |
 | **L20** | **`Style Motion`'s destination is empty** — the style card has no `Motion character` | "That the Aim Arrives" below |
-| **L21** | **The image Negative does not cover the work's prohibitions (`bible.negative_base`)** | "Does the Image Negative Cover the Work's Prohibitions" below |
+| **L21** | **The Negative does not cover what is required** — the foundation's floor (`specmap.BASE_NEGATIVES`) **plus** the work's own (`bible.negative_base`). **Both paths** (§18 `Negative Prompt`, image `Negative`). Waivable: the foundation's clauses only | "Does the Negative Cover the Work's Prohibitions" below |
 | **L22** | **The image specification's 7 fields are empty** — or **the card it names does not declare that field** | "Are the Image Specification's 7 Fields Non-Empty" below |
 | **L23** | **`shot.duration` contradicts `Duration:` in video specification §1** | "Do the Intent and the Specification Agree on Duration" below |
 | **L24** | **What `mode` requires is missing** — §11 for `still` / `composite`, `text_channel` for `composite` | "What `mode` Requires" below |
 | **L25** | **The take does not match the shot, the style or the real thing** — 11 types | "Does the Take Match the Real Thing" below |
 | **L26** | **`bible.constants.video` contradicts §1's four lines** (Aspect / Resolution / Frame Rate / Orientation) | "Do the Work Constants and §1 Agree" below |
+| **L27** | **The work does not declare a language** — or the declared language does not reach §18 `Audio Prompt` | "Does the Work Say What Language It Speaks" below |
 
 **L2, L3 and L4 are transplants.** Applied to all 57 segments of Gozen-niji,
 a checker that scored **recall 2/2 and 0 false positives** went in just as it was.
@@ -73,7 +74,7 @@ That is why `L4` **does not fire on its own** — only when the place actually s
 And L7 **counts and reports the shots that hold no disclosure state** —
 without counting, you cannot tell whether "0 violations" means "0 after checking" or "not checked".
 
-`--self-test` holds **one example that fires and one that does not, for each check** (176 examples).
+`--self-test` holds **one example that fires and one that does not, for each check** (186 examples).
 ⚠️ **Read the notes too.** Because **a note that does not appear also looks like "0 violations"**
 — with no example that confirms the note, deleting the note leaves the self-test green.
 ⚠️ **Read the note's "count" too.** `L25`'s note says "read N takes (broken down by role)" —
@@ -383,6 +384,55 @@ choose a style that does not, and `Style Motion` **exists but is empty. An empty
 because the disclosure series (such as "do not show the inside of the kiln") **differs from shot to shot.**
 So only **the missing sections** fire, and surplus sections do not fire.
 
+⚠️ **What is required is the sum of two lists, and this is the layer's load-bearing change.**
+
+```
+required = loom + extra
+  loom  = specmap.BASE_NEGATIVES     the foundation's floor — 3 clauses
+  extra = bible.negative_base        the work's own prohibitions
+```
+
+⚠️ **The foundation has a floor.** `specmap.BASE_NEGATIVES` holds **3 clauses** —
+`no watermark` · `no on-screen subtitles` · `no background music` — required of **every work**,
+whether or not the work wrote them down. **A prohibition the work forgot to declare is a prohibition
+nobody applied.** The work's `bible.negative_base` sits **on top of** that floor, not in place of it.
+
+⚠️ **It reads both paths.** The video path's **§18 `Negative Prompt`** and the image path's
+**`Negative`** paragraph. ⚠️ **This used to be image-only**, and the reason then recorded here was
+that the video side had no such check — **that hole is closed.** The two paths differ in **how they
+are pointed at**, not in **what they must cover.** One reading of the Negative that holds for both
+is worth more than two that can drift apart.
+
+### ⚠️ The grandfather clause — and why the work writes the exclusion
+
+⚠️ **A rule does not reach backwards.** Adding a clause to the floor on 2026-09-18 would have made
+every work already on disk retroactively in violation — **not because anything about those works
+changed, but because the floor moved under them.** So there is a seat for an exclusion:
+
+```yaml
+bible:
+  base_negatives_waived:
+    - "no background music"
+```
+
+⚠️ **The work writes the exclusion.** `L21` must not remember work names — **an engine that knows
+which works are special has stopped being an engine** (`CLAUDE.md`: one directory = one work, and
+the work declares). The waiver is a **declaration**, and it lives in the same file as everything
+else the work declares.
+
+| | |
+|---|---|
+| **Waivable** | **only the foundation's clauses** (`loom`) |
+| **Not waivable** | **the work's own** (`extra`) — naming one of those is a violation, and it fires |
+
+⚠️ **`L21` reports the waiver as a note, never silently.** 「報告しない除外は、通った検査に見える」
+— an exclusion the checker honours without saying so produces **exactly the reading a passing check
+produces.** The note names which foundation clauses were dropped.
+
+⚠️ **A waiver is not a claim that the work wants the thing.** Waiving `no background music` means
+**the generator is not forbidden to emit it** — it does not mean music was asked for. The two are
+different, and `projects/hitosara/bible.yaml` records the distinction in place.
+
 ⚠️ **This check reads the Negative as a "paragraph."** The image specification holds no sections —
 the canonical form is the 2 paragraphs inside the section `## 投入する1本の文字列`, and `Negative` is its **2nd paragraph**
 (see the `L18` section). So **the paragraph count is also matched against the naming** —
@@ -528,6 +578,43 @@ Delete the bible from a project and `L26` would otherwise **go quietly green**
 ⚠️ **It does not decide which side is right.** Where they disagree it reports **both**, exactly as
 `L25` does. ⚠️ **And it opens neither `takes/` nor `media/`** — it reads `bible.yaml` and §1,
 and nothing else.
+
+### L27 — does the work say what language it speaks
+
+⚠️ **The decision** (2026-09-18, author): 「**日本語の言語指定で触っているなら必ず日本語を話すべき。**」
+Written as a rule: **if there is speech, it is in the work's language** — and a work with no speech
+declares its language too. **A blank is not neutral. A blank is filled with the model's own default.**
+
+⚠️ **This is measured, not anticipated.** A video was generated with speech in it and **Chinese
+subtitles were burned into the picture** — Wan 3.0's default output language is Chinese, and it burns
+subtitles when it detects speech. ⚠️ **`no on-screen subtitles` was already in that video's Negative.**
+**The Negative is a floor, not a guarantee** — the fix that works is to **name the language**, not to
+forbid the symptom.
+
+**Two things fire, and they are different defects:**
+
+| | |
+|---|---|
+| **the work declares nothing** (`bible.language` empty) | **Nobody decided.** There is no language to carry — and the generator will supply one |
+| **the declaration does not arrive** (§18 `Audio Prompt` omits it) | **Decided and not delivered.** The bible holds it; the string handed to the generator does not |
+
+⚠️ **The second is the one that actually reaches the model.** A declaration that stops at the bible
+is a declaration the generator never hears, and **§18 is the only part of the specification that
+reaches it** (`engine/shot/README.md`).
+
+⚠️ **An absent `Audio Prompt` slot is not fired here.** That is `L17`'s defect —
+**two layers do not report the same defect under separate codes.**
+
+⚠️ **What this layer cannot see, and the hole is recorded rather than papered over:** it reads
+**whether the declaration arrived.** ⚠️ **Whether the generated thing actually spoke that language is
+outside this foundation** — generation happens elsewhere, and no file in this repository holds the
+result. **"The declaration arrived" and "the output complied" are different claims**, and only the
+first is checkable.
+
+⚠️ **It notes the count it looked at** — `到達 n/m 本` — because **a check that reports nothing looks
+like a check that passed.** ⚠️ **Measured 2026-09-18: `projects/hitosara` declares no language and
+its 10 `Audio Prompt` slots name none** — the work predates this decision, and **whether it is
+backfilled or exempted is the author's call**, not this layer's.
 
 ### ⚠️ Firing Against a Running Artifact
 
@@ -707,7 +794,7 @@ What it can say is —
 | **Guarantees** | **The intent and the specification agree on duration.** | **L23** |
 | **Guarantees** | **A still shot is written as still** (§11 non-empty. `composite` also needs `text_channel`) | **L24** |
 | **Guarantees** | **What came back matches the shot, the style and the measurement.** | **L25** |
-| **Guarantees** | **It is not broken.** L0–L26 fire before generation, and everything that fired can be explained | all |
+| **Guarantees** | **It is not broken.** L0–L27 fire before generation, and everything that fired can be explained | all |
 | **Does not guarantee** | **That the generator draws the aim.** | —— |
 | **Does not guarantee** | **That a still shot's §11 really stops the subject.** | —— |
 | **Does not guarantee** | **That the file `take.file` names actually exists.** | —— |
