@@ -71,3 +71,8 @@ README / docs 里**只写当前的信息**。当前的功能、CLI、设计的�
 
 - `git push` **只在用户明确要求时**执行。未经要求的 push 是禁止的。
 - 在提交信息的末尾附上 `Co-Authored-By: Claude Code <noreply@anthropic.com>`。
+- **manifest 的版本跟随 `HISTORY.md`。** 在 `HISTORY.md` 里立起 `## <版本>` 的标题时，
+  **把同一个版本写进 `.claude-plugin/plugin.json` 和 `.claude-plugin/marketplace.json` 两处**。
+  ⚠️ **两个文件，一个版本**——只升一个，另一个就成了谎言
+  （`claude plugin validate --strict` 会抓住它：它把两者互相对照）。
+  ⚠️ **两者都不会与 `HISTORY.md` 对照**——所以**忘记升的版本会通过所有检查。**

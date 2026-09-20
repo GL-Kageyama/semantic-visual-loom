@@ -71,3 +71,8 @@ README / docs には**現在の情報だけ**を書く。現在の機能・CLI�
 
 - `git push` は**ユーザーが明示的に依頼した時だけ**。依頼なしの push は禁止。
 - コミットメッセージ末尾に `Co-Authored-By: Claude Code <noreply@anthropic.com>` を付ける。
+- **manifest の版は `HISTORY.md` に従う。** `HISTORY.md` に `## <版>` の見出しを立てたら、
+  **同じ版を `.claude-plugin/plugin.json` と `.claude-plugin/marketplace.json` の両方へ書く**。
+  ⚠️ **2ファイルで1つの版である**——片方だけ上げれば、もう片方が嘘になる
+  （`claude plugin validate --strict` がそれを捕まえる。2つを突き合わせている）。
+  ⚠️ **どちらも `HISTORY.md` とは突き合わされない**——ゆえに**上げ忘れた版は、どの検査も通る。**

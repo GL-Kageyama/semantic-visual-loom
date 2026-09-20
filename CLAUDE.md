@@ -71,3 +71,8 @@ Therefore, **do not** link from this repository's documents to the design notes 
 
 - `git push` **only when the user explicitly asks for it**. A push without a request is forbidden.
 - Append `Co-Authored-By: Claude Code <noreply@anthropic.com>` to the end of commit messages.
+- **The manifest version tracks `HISTORY.md`.** When a `## <version>` heading goes into `HISTORY.md`,
+  **the same version goes into both `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`**.
+  ⚠️ **Two files, one version**—bump one and the other becomes a lie. (`claude plugin validate --strict`
+  catches that: it compares the two against each other.) ⚠️ **Nothing compares either of them against
+  `HISTORY.md`**—so **a version that was never bumped passes every check.**
