@@ -50,13 +50,15 @@ in order to fire on "`before` and `after` are the same" — but **JSON Schema ca
 | **L18** | **The shape of the two paths does not fit that field** — or the model §18 names cannot be resolved to the registry | "The Path Is Decided by the Field, Not by `mode`" below |
 | **L19** | **A record field has no declared destination** — the dual of `L12` | "That the Aim Arrives" below |
 | **L20** | **`Style Motion`'s destination is empty** — the style card has no `Motion character` | "That the Aim Arrives" below |
-| **L21** | **The Negative does not cover what is required** — the foundation's floor (`specmap.BASE_NEGATIVES`) **plus** the work's own (`bible.negative_base`). **Both paths** (§18 `Negative Prompt`, image `Negative`). Waivable: the foundation's clauses only | "Does the Negative Cover the Work's Prohibitions" below |
+| **L21** | **The Negative does not cover what is required** — the foundation's floor (`specmap.BASE_NEGATIVES`) **plus** the work's own (`bible.negative_base`). **Both paths** (§18 `Negative Prompt`, image `Negative`). Waivable: the foundation's clauses only — **and only by the work (`bible.base_negatives_waived`)** | "Does the Negative Cover the Work's Prohibitions" below |
 | **L22** | **The image specification's 7 fields are empty** — or **the card it names does not declare that field** | "Are the Image Specification's 7 Fields Non-Empty" below |
 | **L23** | **`shot.duration` contradicts `Duration:` in video specification §1** | "Do the Intent and the Specification Agree on Duration" below |
 | **L24** | **What `mode` requires is missing** — §11 for `still` / `composite`, `text_channel` for `composite` | "What `mode` Requires" below |
 | **L25** | **The take does not match the shot, the style or the real thing** — 11 types | "Does the Take Match the Real Thing" below |
 | **L26** | **`bible.constants.video` contradicts §1's four lines** (Aspect / Resolution / Frame Rate / Orientation) | "Do the Work Constants and §1 Agree" below |
 | **L27** | **The work does not declare a language** — or the declared language does not reach §18 `Audio Prompt` | "Does the Work Say What Language It Speaks" below |
+| **L28** | **§18 carries a phrase that belongs to the other route** (`MINIMAX H3` only; the phrases and their reasons are in `specmap.MODEL_ROUTE`) | "Is §18 Written in This Route's Grammar" below |
+| **L29** | **This run does not read every work below it** — a work holding a work is a violation; a work held by a material directory is a note | "Does This Run Read Every Work Below It" below |
 
 **L2, L3 and L4 are transplants.** Applied to all 57 segments of Gozen-niji,
 a checker that scored **recall 2/2 and 0 false positives** went in just as it was.
@@ -67,6 +69,14 @@ a checker that scored **recall 2/2 and 0 false positives** went in just as it wa
 **Write a detector for one work and it false-positives on the other work.**
 That is why `L4` **does not fire on its own** — only when the place actually spans a boundary (`L2`) does the movement word become its support.
 
+⚠️ **`L2`'s premise is the `WAN 3.0` route's.** On `MINIMAX H3` **each panel of the storyboard is
+its own scene**, so **one shot legitimately holds more than one place** — and **this layer cannot
+see it**: it reads one ledger key (`place`), and opens neither §10's camera description nor §18's
+string. **So it does not fire — and a layer that saw nothing looks exactly like a layer that
+passed.** ⚠️ **Its behaviour is not changed**; detecting this would mean reading `spec`, and that
+reaches too far. **Recorded here, where it happens, as a hole.**
+⚠️ **The constraints that hold on that route are listed in [`docs/h3-route.md`](../../docs/h3-route.md).**
+
 ## ⚠️ Do Not Call Empty OK
 
 **If the other side is empty, not a single check fires.** Not firing is not proof of correctness
@@ -74,7 +84,7 @@ That is why `L4` **does not fire on its own** — only when the place actually s
 And L7 **counts and reports the shots that hold no disclosure state** —
 without counting, you cannot tell whether "0 violations" means "0 after checking" or "not checked".
 
-`--self-test` holds **one example that fires and one that does not, for each check** (186 examples).
+`--self-test` holds **one example that fires and one that does not, for each check** (213 examples).
 ⚠️ **Read the notes too.** Because **a note that does not appear also looks like "0 violations"**
 — with no example that confirms the note, deleting the note leaves the self-test green.
 ⚠️ **Read the note's "count" too.** `L25`'s note says "read N takes (broken down by role)" —
@@ -203,6 +213,7 @@ So **layer F** looks at **the registry itself** — **whether the registration i
 | **the motion axis** | `rolemap.MOTION_PATTERNS` | 13 patterns (body 6, object and environment 3, frame 3, style 1) | **L15** (qualified spelling), **L16** |
 | **§18's slots** | `specmap.PROMPT_SLOTS` | 7 (Master / Visual / Motion / Camera / Audio / Negative / **Style Motion**) | **L17** |
 | **models** | `specmap.MODELS` | name, kind (`video` / `image`), source. **Prices are not written** | **L18** |
+| **a route's own grammar** | `specmap.MODEL_ROUTE` | per video route, the phrases its §18 must not carry, **each with its reason**. `WAN 3.0`'s row is **empty** — that route has no forbidden phrase | **L28** |
 | **specification kinds** | `specmap.SPEC_KINDS` | `video` (field `spec`, holds §1–20) / `image` (field `key_image`, holds neither) | **L18** (`L11`, `L21` and `L22` follow it) |
 | **field destinations** | `specmap.FIELD_DESTINATION` | 18 fields. **There is no `mode` dimension.** The vocabulary is `自前` (own) / `prompt:<slot>` / `params:<key>` / `handover:<base>` / `edit:timeline` | **L19** |
 | **what `mode` requires** | `specmap.MODE_DEMANDS` | `still` (§11), `composite` (§11 + `text_channel`), **`motion` (empty row)** | **L24** |
@@ -416,8 +427,8 @@ bible:
 ```
 
 ⚠️ **The work writes the exclusion.** `L21` must not remember work names — **an engine that knows
-which works are special has stopped being an engine** (`CLAUDE.md`: one directory = one work, and
-the work declares). The waiver is a **declaration**, and it lives in the same file as everything
+which works are special has stopped being an engine** (`CLAUDE.md`: **a work carries its own
+`bible.yaml` and `ledger.yaml`**, and the work declares). The waiver is a **declaration**, and it lives in the same file as everything
 else the work declares.
 
 | | |
@@ -432,6 +443,17 @@ produces.** The note names which foundation clauses were dropped.
 ⚠️ **A waiver is not a claim that the work wants the thing.** Waiving `no background music` means
 **the generator is not forbidden to emit it** — it does not mean music was asked for. The two are
 different, and `projects/hitosara/bible.yaml` records the distinction in place.
+
+⚠️ **The seat for that exclusion is the work's, and there is only one of it.** ⚠️ **A second seat
+was built and then removed on the same day (2026-09-20).** It let **one specification** lift a
+foundation clause for itself, written as **one backticked line under `# 16. CONSTRAINTS`**. It was
+built for a single ruling — 「BGM の免除：今回だけ」 — and **the ruling was withdrawn the same day**
+(「1話を分割するのであれば、やっぱりBGMは禁止しよう」). ⚠️ **With no specification using it, the
+mechanism went with it** — **a documented path with no caller is a path the docs send you down for
+nothing.** ⚠️ **What the removal cost is recorded in `HISTORY.md`**, including the trap that was
+measured while building it: `specdoc.sections()` splits on **every heading, whatever its level**, so
+text placed under a `##` inside §16 is **not part of §16's body** — **you write the clause, and the
+checker reports the floor clause as missing.**
 
 ⚠️ **This check reads the Negative as a "paragraph."** The image specification holds no sections —
 the canonical form is the 2 paragraphs inside the section `## 投入する1本の文字列`, and `Negative` is its **2nd paragraph**
@@ -616,6 +638,102 @@ like a check that passed.** ⚠️ **Measured 2026-09-18: `projects/hitosara` de
 its 10 `Audio Prompt` slots name none** — the work predates this decision, and **whether it is
 backfilled or exempted is the author's call**, not this layer's.
 
+### L28 — is §18 written in this route's grammar
+
+⚠️ **The decision** (2026-09-20, author): **the tips learned from making a video on this route are
+promoted into the basic constraints of using the route.** The ones that belong to the grammar are
+checkable — **the routes do not share a grammar of time.**
+
+⚠️ **This is measured, not anticipated.** A shot on `MINIMAX H3` wrote
+`One continuous take … never by a cut` into §18. **That phrase is the `WAN 3.0` house style**, and
+**the generator obeyed it**: the counter and the van came back as **one continuous room**, with no
+transition. ⚠️ **`no cuts to unrelated locations` was already in that §18** — what had been added was
+**the unconditional rule**, and it closed the only lawful way for a panel to change place.
+
+**Three phrases fire, and the registry holds them with their reasons:**
+
+| phrase | why it is not this route's |
+|---|---|
+| `one continuous take` | **The other route's house style** — the first line of `references/video-spec.md` |
+| `never by a cut` | **An unconditional `no cut`** closes the only lawful way for a panel to change place |
+| `one and the same man` | **Folds the protagonist into "the only person"** — the second person is erased or merged into him |
+
+⚠️ **The layer reads §18's body only** (`_section_body`). ⚠️ **That is load-bearing: §20's
+`Observed Problems` quotes the removed strings as the cause of the failure** — so **a layer that
+scanned the whole file would fire on the corrected specification.** (`L4` fell into this shape.)
+
+⚠️ **It is scoped by route, and that is the whole of its design.** This repository holds **117 video
+specifications — 114 on `WAN 3.0`, 3 on `MINIMAX H3`.** ⚠️ **`one continuous take` sits in §18 of 15
+of those 114, and there it is correct** — and those 15 are exactly the specifications a shot record
+points at, which is **the whole of what this layer can reach** (10 in `hitosara`, 5 in
+`promo-chinatsu`). **Unscoped, this layer would fire on all 15** — and a note that fires on correct
+work **is a note nobody reads.**
+
+⚠️ **Four candidate phrases were rejected, and every one of them fires on the corrected
+specifications:**
+
+| rejected | measurement |
+|---|---|
+| `no additional person` | The corrected §18s say **`no additional person beyond the storyboard`** — **the flattened form the constraint is about, and the corrected side carries it** |
+| `no colleague at the counter` | The corrected form is `no colleague **invented** at the counter` |
+| `no cut` (bare) | The corrected §18s hold **`no cuts to unrelated locations`** — the clause the card tells you to keep |
+| `continuous` (bare) | The corrected §18s hold **`particles fall continuously`** — an invariant quote from the style card |
+
+**A brittleness that does not fire is accepted; a brittleness that fires too much is not.**
+
+⚠️ **What this layer cannot see, and the hole is recorded rather than papered over:** it reads
+**whether the phrase belongs to the route**, not **whether the phrase is right.**
+⚠️ **Whether a flat negation is a defect depends on what §18's `Master` and `Visual` place in the
+scene** — the corrected §18s hold `no additional person beyond the storyboard` **and are right to**,
+because in those scenes nobody but him is present. **That is a judgment of meaning, and it needs a
+ledger of the entities.** This layer has neither.
+
+⚠️ **A project with no `MINIMAX H3` §18 gets no output at all — not even a note.** That is
+**"there is no other side"**, not **"it was checked and agreed"** — and it is **the largest hole this
+layer leaves.** It is listed under "What Is Still Missing".
+
+⚠️ **When the registry itself is broken, the layer reads no bodies at all.** **An empty phrase
+matches every §18** — so a broken registry is reported **as a broken registry**, and the bodies are
+left unread. **A check that would fire on the corrected text is not a check.**
+
+### L29 — does this run read every work below it
+
+⚠️ **The decision** (2026-09-20, author): **a work must not hold a work.**
+`check.py` does not recurse — it loads `root/shots/*.yaml` with a **flat glob**, so
+**a nested work is invisible to a run over its parent.** ⚠️ **And the output says nothing about it.**
+
+⚠️ **This is measured, not anticipated.** `python3 engine/ledger/check.py projects/habits`
+loaded **4 shots**, and its output contains **0 occurrences of `promo-chinatsu`**——
+**the promo's five shots were not read, and the run did not say so.** **The harm had already
+happened once**: 0.29.0 nearly dropped that work from the ledger list, because
+`find -maxdepth 2` cannot see `projects/habits/promo-chinatsu` (`HISTORY.md`).
+That work now sits directly under `projects/`, as **`projects/habits-promo-chinatsu`**——
+**the name its own `project:` field and its five shot IDs had carried all along.**
+
+⚠️ **The rule, in its one-directional form.** The converse does not hold, and
+`projects/ukebi/` is why——**it holds 11 raw segment trees and one work**:
+
+> **Every work carries its own `bible.yaml` and `ledger.yaml` in its own directory.
+> But a directory that holds a work is not necessarily a work itself.**
+> ⚠️ **The converse does not hold: a work must not hold a work.**
+
+⚠️ **That asymmetry is the whole of the severity rule.** It fires as a **violation only when
+the root is itself a work**——there, **a reader is entitled to think the run covers what is below
+it, and it does not.** ⚠️ **A work held by a material directory is a note**——
+`projects/ukebi` is not a work, so **nobody expects `ukebi-v2` to be read by a run over it.**
+
+⚠️ **A work is `bible.yaml` and `ledger.yaml` in the same directory.** A bare `bible.yaml`
+is not a work, and **the self-test holds that case separately**——otherwise the predicate
+would be "there is a bible below", which is a different and much wider claim.
+
+⚠️ **It descends into works.** Stopping at the first work would miss **exactly the case the
+rule is about**——a work inside a work.
+
+⚠️ **What this layer cannot see, and the hole is recorded rather than papered over:** it walks
+the disk, so **it names the works it found and does not read them.** **The note says "this run
+does not read them"——it does not say they are fine.** ⚠️ **A work that is not on disk is not
+named**, and **it is not read either**——which is the same silence, arrived at from the other side.
+
 ### ⚠️ Firing Against a Running Artifact
 
 | Check | Ukebi V2 (30 takes) | What it is saying |
@@ -794,7 +912,7 @@ What it can say is —
 | **Guarantees** | **The intent and the specification agree on duration.** | **L23** |
 | **Guarantees** | **A still shot is written as still** (§11 non-empty. `composite` also needs `text_channel`) | **L24** |
 | **Guarantees** | **What came back matches the shot, the style and the measurement.** | **L25** |
-| **Guarantees** | **It is not broken.** L0–L27 fire before generation, and everything that fired can be explained | all |
+| **Guarantees** | **It is not broken.** L0–L29 fire before generation, and everything that fired can be explained | all |
 | **Does not guarantee** | **That the generator draws the aim.** | —— |
 | **Does not guarantee** | **That a still shot's §11 really stops the subject.** | —— |
 | **Does not guarantee** | **That the file `take.file` names actually exists.** | —— |
@@ -834,6 +952,18 @@ Write only `spec:` and not `key_image:`, and **the image side is never checked**
 
 ## What Is Still Missing
 
+- ⚠️ **`L29` names the works it does not read — it does not read them.** Making a run over a
+  parent **cover its children** is a different change, and **it is not made**: a run that silently
+  widened its own scope **is the same failure from the other side.** ⚠️ **The note is the fix,
+  and it is a note**——**a work can be correctly raised with a work below it** (`check.py projects`),
+  so this cannot be a violation everywhere. **It is one only where the root is itself a work.**
+- ⚠️ **`L28` is silent where there is no `MINIMAX H3` §18.** In those projects it prints **not even a
+  note**, so **its silence and its agreement look the same** — and the two are different. It says
+  **"there is no other side to compare against"**, which is the same shape as `L0` and `L9`.
+- ⚠️ **`L28` cannot see a flat negation.** `no additional person` **occurs in the corrected
+  specifications and is correct there** — deciding it means **matching meaning against the entities
+  §18 places**, and **no ledger of those entities exists.** **Do not add the string: it would fire on
+  the corrected text.**
 - **The handover sheet.** A layer that assembles **what is passed from the record to the generator** (§18's 7 slots,
   `take.params`, the image prompt, the sound) **does not exist yet.** What `L19` looks at is
   **the declaration of the destination**, not **whether the assembled text actually carries that field.**

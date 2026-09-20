@@ -105,7 +105,7 @@
 - REF_CHARACTER: the frozen pair (`20_29_36.png` ＋ `21_56_32.png`) (CRITICAL)
 - REF_FORMAT: `video-spec` — this defines the seven §18 slots
 - REF_STYLE: `luminous-anime` (HIGH)
-- REF_SOURCE: `projects/habits/promo-chinatsu/bible.yaml` (CRITICAL)
+- REF_SOURCE: `projects/habits-promo-chinatsu/bible.yaml` (CRITICAL)
 - ⚠️ **No board for the register is referenced — it does not exist yet** (same note as the fourth shot).
 
 # 7. NARRATIVE

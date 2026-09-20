@@ -10,7 +10,7 @@
 
   層A  ショット1枚の中で閉じる検査（一変化・一環境・一時刻・一運動）
   層B  台帳と突き合わせる検査（参照・禁制・開示・出所）
-  層C  入力そのものの検査（**空を OK と言わない**）
+  層C  入力そのものの検査（**空を OK と言わない**・**読まなかったものを名指しする**）
   層D  §1–20 との対応の検査（目録・両方向の閉包・同一性・**仕様の種類とモデル**・
        **画像の経路の中身**・**尺の一致**）
   層E  宣言の到達の検査（**台帳が届いていない区間**）
@@ -60,6 +60,24 @@
 `L27` は**宣言**（`bible.language`）と**到達**（§18 `Audio Prompt`）を見る。
 ⚠️ **生成物が実際にその言語で喋ったかは見えない**——穴である。
 
+⚠️ **`L28` を足した理由（決定 2026-09-20、著者）——「この生成手法で上手く生成させる
+ための Tips を、基本的な制約へ格上げする」。** 経路が2つ在るのに、**時間の文法が
+2つ在ることを検査は見ていなかった。** 実測——`MINIMAX H3` の §18 が
+`One continuous take … never by a cut` と書き（**それは `WAN 3.0` の家風である**）、
+**生成器は受付の机と車内を、ひと続きの部屋として走らせた。**
+`L28` は**その語がその経路のものか**だけを見る（`specmap.MODEL_ROUTE`）。
+⚠️ **意味は見ない**——平板な否定が欠陥かどうかは**実体の台帳**が要る。穴である。
+⚠️ **`MINIMAX H3` の §18 を持たない作品では、1文字も出ない**——**それも穴である。**
+
+⚠️ **`L29` を足した理由（決定 2026-09-20、著者）——「作品が作品を抱えてはならない」。**
+`check.py` は再帰しない。ゆえに**作品が作品を抱えていると、親を走らせても子は読まれず**、
+**しかも出力はそれを言わない**——**読み手は読んだと思う。** 実測: `check.py projects/habits` は
+4本を読み、**出力に `promo-chinatsu` は0回**であった。**実害は既に出ている**——
+0.29.0 が台帳の一覧からこの作品を落としかけた（**`find -maxdepth 2` では見えない**）。
+`projects/habits/promo-chinatsu` は**直下へ出した**（`projects/habits-promo-chinatsu`）。
+⚠️ **根が作品であるときだけ違反である**——題材の置き場（`projects/ukebi`）が作品を抱えるのは
+**正しい**（親に台帳が無いので、読まれると思われようがない）。**そちらは註である。**
+
 ⚠️ **`L21`–`L24` を足した理由（決定 2026-09-13、著者）。** 経路が1つから**2つ**になり
 （全ショット画像 → 全ショット動画）、**経路を決めるのが `mode` でなくなった**。
 `L21`・`L22` は**画像の経路の中身**を見る——あちらは §1–20 を持たないので、
@@ -91,6 +109,45 @@ def check_not_empty(project):
     if not project.disclosure:
         out.append(finding("L0", "", "台帳の disclosure が空である。開示の検査は走らない。"))
     return out
+
+
+def check_nested_works(project):
+    """⚠️ **この走りが読まない作品を、名指しする。**
+
+    **作品が作品を抱えていると、`check.py` は再帰しない**（`shots/*.yaml` を平らに読む）——
+    親を走らせても、**子は1本も読まれない。** そして出力はそれを言わない。
+    実測（2026-09-20）: `check.py projects/habits` は4本を読み、
+    **出力に `promo-chinatsu` は0回**であった。**読み手は読んだと思う。**
+
+    ⚠️ **根が作品であるときだけ違反である。** 作品が作品を抱えることは、
+    **この基盤の規則に反する**——`docs/usage.md`「What a project is」。
+    根が作品でなければ（`projects/ukebi` のような題材の置き場）、
+    **註である**——**題材の置き場を走らせる者は、そもそも読まれると思っていない。**
+    """
+    root = project.root
+    below = []
+    for b in sorted(root.glob("**/bible.yaml")):
+        d = b.parent
+        # ⚠️ **`bible.yaml` だけでは作品ではない。** 作品は台帳も持つ。
+        if ".git" in d.parts or d == root or not (d / "ledger.yaml").is_file():
+            continue
+        below.append(d)
+    if not below:
+        return []
+
+    rel = [str(d.relative_to(root)) for d in below]
+    named = "、".join(f"`{r}`" for r in rel[:3])
+    if len(rel) > 3:
+        named += f" ほか {len(rel) - 3} 本"
+
+    msg = (f"この下に別の作品が {len(rel)} 本在る——{named}。"
+           "**この走りはそれらを1本も読まない。**")
+    if project.bible:
+        msg += ("⚠️ **そして、このディレクトリはそれ自体が作品である**"
+                "——**作品が作品を抱えている。**")
+    msg += "**作品ごとに走らせること。**"
+    return [finding("L29", f"{len(rel)}本", msg,
+                    severity="violation" if project.bible else "note")]
 
 
 def finding(code, shot, message, severity="violation", **extra):
@@ -139,7 +196,15 @@ def _norm(s):
 
 
 def check_one_place(shot):
-    """L2 — 一環境か。**D1 の移植。** 連続テイク1本に複数環境は物理的に不可能。"""
+    """L2 — 一環境か。**D1 の移植。** 連続テイク1本に複数環境は物理的に不可能。
+
+    ⚠️ **その前提は `WAN 3.0` の経路のものである。** `MINIMAX H3` の経路では、
+    絵コンテの**各コマがそれ自体で1つのシーン**であり、**1つのショットが複数の場所を正当に持つ。**
+    ⚠️ **この層はそれを読めない**——見るのは台帳の `place` ただ1つであり、
+    §10 のカメラの記述も §18 の文字列も開かない。**だから鳴らない。**
+    **何も見なかった層は、通った層とまったく同じに見える**——ここに穴として書く。
+    ⚠️ **挙動は変えない。** 検出するには `spec` を読むことになり、波及が大きい。
+    """
     p = shot.get("place", "")
     parts = [x for x in SPLIT.split(p) if x.strip()]
     if len(parts) > 1:
@@ -894,6 +959,15 @@ def check_negative_coverage(project):
     ⚠️ **除外は註で報告する**——**報告しない除外は、通った検査に見える。**
     ⚠️ **除外できるのは基盤の節だけである。** 作品が自分の禁制を除けば、
     この検査は作品の側を何も見ていない。
+
+    ⚠️ **除外の席は1つだけである。** ⚠️ **かつて2つ目を作った**（2026-09-20——
+    仕様の §16 にバッククォートで1行書き、**一枚に限り**基盤の節を外す仕組み）。
+    著者の裁定「**BGM の免除：今回だけ**」のために作った。**同じ日のうちに裁定が
+    撤回され**（「**1話を分割するのであれば、やっぱりBGMは禁止しよう**」）、
+    **使い手が居なくなったので、機構ごと外した。**
+    ⚠️ **外したのは、使い手のいない経路を文書が案内しないためである**
+    （`bible.base_negatives_waived` の註と同じ規律——**読む相手のいない宣言を書かない**）。
+    **床を外す席は、作品の側の1つに戻っている。**
     """
     out = []
     bible = ((getattr(project, "bible", None) or {}).get("bible") or {})
@@ -1010,6 +1084,107 @@ def check_work_language(project):
                        f"届いているのは {checked - caught}/{checked} 本である。"
                        "⚠️ **生成物が実際にその言語で喋ったかは、この層からは見えない**"
                        "——生成はこの基盤の外で起きる。",
+                       severity="note"))
+    return out
+
+
+def _route_phrase_ok(route):
+    """`MODEL_ROUTE` の1行が、**本文を走査してよい形か。** 破れていれば理由を、正しければ `""`。
+
+    ⚠️ **空の語は、どの §18 にも当たる。** だから目録が壊れているときは
+    **本文を1行も読まない**——読めば、**直した仕様の上で鳴る検査**になる
+    （空の検査はOKと言う、の裏返しである）。**目録の欠陥は目録の欠陥として鳴らす。**
+    """
+    if not isinstance(route, (tuple, list)):
+        return "行がタプルでない"
+    for pair in route:
+        if not isinstance(pair, (tuple, list)) or len(pair) != 2:
+            return "`(語, 理由)` の対でない項目が在る"
+        phrase, why = pair
+        if not str(phrase).strip():
+            return "空の語が在る——**空の語は、どの §18 にも当たる**"
+        if not str(why).strip():
+            return f"`{phrase}` に理由が無い——**理由の無い語は、次の者が消してよいと読む**"
+    return ""
+
+
+def check_model_route(project):
+    """L28 — **§18 が、その経路のものでない語を運んでいないか。**
+
+    ⚠️ **なぜ要るか**（決定 2026-09-20、著者）——**この会話で得た Tips を、
+    生成手法を用いる際の基本的な制約へ格上げする。** そのうち**文法に属するもの**は
+    検査できる: **経路が違えば、時間の文法が違う。**
+    実測——`habits-ch02-seg01` の §18 が `One continuous take … never by a cut` と書き、
+    **生成器は受付の机と車内を、ひと続きの部屋として走らせた。**
+    **その句は `WAN 3.0` の家風であり、この経路のものではなかった。**
+
+    ⚠️ **この層が読むのは §18 の本文だけである**（`_section_body`）。§20
+    `Observed Problems` は**消した文字列を原因として引用している**ので、
+    **ファイル全体を走査すれば、直した仕様の上で鳴る**——`L4` が踏んだ形である。
+
+    ⚠️ **経路で絞るのがこの層の仕事である。** `one continuous take` は
+    **`WAN 3.0` の15本すべての §18 に在り、それは正しい。**
+    絞らなければ15件の偽陽性が出て、**註が読まれなくなる。**
+
+    ⚠️ **この層は「その語が正しいか」を決めない。「どの経路の語か」を決める。**
+    平板な否定（`no additional person`）が欠陥かどうかは、**§18 が置く実体との照合**で
+    決まり、**実体の台帳が要る**——**この層にはできない。穴である。**
+    却下した4語とその実測は `specmap.MODEL_ROUTE` の註に在る。
+
+    ⚠️ **`MINIMAX H3` の §18 を1本も持たない作品では、この層は1文字も出さない。**
+    それは「確かめて正しい」ではなく**「相手が無い」**である——
+    **この沈黙がこの層の最大の穴であり、`README.md` の穴の表に書く。**
+    """
+    # ① **目録そのものを見る。** 壊れていれば本文を読まない。
+    #    ⚠️ **動画の経路についてだけ閉じる。** 画像の経路（`CHATGPT IMAGE 2.5`）は
+    #    §18 を持たない——**この層が読むものが無いので、行も要らない**
+    #    （`_specs_of(project, "video")` と同じ範囲である）。
+    routes = {m for m, d in specmap.MODELS.items() if d.get("種別") == "video"}
+    if set(specmap.MODEL_ROUTE) != routes:
+        return [finding("L28", "",
+                        "`MODEL_ROUTE` の鍵が、`MODELS` の**動画の経路**と一致しない。"
+                        f"動画の経路: {'／'.join(sorted(routes)) or '（無し）'} ／ "
+                        f"`MODEL_ROUTE`: {'／'.join(specmap.MODEL_ROUTE) or '（空）'}。"
+                        "**語彙を持たない経路の行も要る**——"
+                        "落とせば「禁じる語が無い」と「書き忘れた」の区別が消える。")]
+    broken = [f"`{m}`: {why}" for m, r in specmap.MODEL_ROUTE.items()
+              if (why := _route_phrase_ok(r))]
+    if broken:
+        return [finding("L28", "",
+                        "`MODEL_ROUTE` が本文を走査してよい形になっていない——"
+                        + "／".join(broken)
+                        + "。**空の語はどの §18 にも当たる。**"
+                        "ゆえにこの層は**本文を1行も読んでいない**。")]
+
+    out = []
+    specs = _specs_of(project, "video")
+    routed = 0
+    for s, p in specs:
+        model = _model_of(p)
+        if not model:
+            continue            # §18 が無い（None）／名乗らない（""）——L18 が報告している
+        route = specmap.MODEL_ROUTE.get(model)
+        if route is None:
+            continue            # 目録に無いモデル——L18 が報告している
+        if not route:
+            continue            # その経路に禁じる語は無い（`WAN 3.0`）
+        body = _section_body(p, "18.")
+        if not body:
+            continue            # §18 が空——L11 が報告している
+        routed += 1
+        low = body.lower()
+        for phrase, why in route:
+            if phrase.lower() in low:
+                out.append(finding("L28", s,
+                                   f"§18（`{model}`）に `{phrase}` が在る。{why}"
+                                   "**この経路の文法ではない**——`docs/h3-route.md`。"))
+    if not routed:
+        return out              # 相手が無い。**沈黙は「正しい」ではない**（穴である）
+
+    out.append(finding("L28", f"{routed}本",
+                       f"`MINIMAX H3` の §18 を {routed} 本、経路の禁じる語と突き合わせた。"
+                       "⚠️ **この層が見るのは「その語が別の経路のものか」だけである**——"
+                       "**平板な否定が欠陥かどうかは、意味の照合と実体の台帳が要る。**",
                        severity="note"))
     return out
 
@@ -2567,6 +2742,8 @@ CHECKS_SHOT = (check_unit, check_one_place, check_one_time, check_move,
 
 def run(project, schema_dir=None, repo_root=None):
     out = list(check_not_empty(project))
+    # ⚠️ **層C の隣に置く。** 同じ仕事である——**この走りが見ていないものを言う。**
+    out += check_nested_works(project)
     for s in project.order():
         shot = project.shots[s]
         for fn in CHECKS_SHOT:
@@ -2579,6 +2756,7 @@ def run(project, schema_dir=None, repo_root=None):
     out += check_spec_kind(project)
     out += check_negative_coverage(project)
     out += check_work_language(project)
+    out += check_model_route(project)
     out += check_image_vars(project, repo_root=repo_root)
     out += check_duration(project)
     out += check_work_constants(project)

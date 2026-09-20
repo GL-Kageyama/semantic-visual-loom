@@ -34,6 +34,7 @@ Therefore, **do not** link from this repository's documents to the design notes 
 - **Motion is also a cross-cutting axis.** Role decides "that shot's job," whereas motion runs beneath every shot. **In film, motion is the ground, and stillness is the special case.**
 - **State is placed in the ledger.** Independent generations have no memory of each other. So state is placed outside the generation.
 - **The production ledger is one.** The continuity ledger (the state of the world) and the disclosure ledger (the state of the audience's knowledge) are **held in the same file**. The **reference set** (what is fixed) and the **forbidden set** (what must not be shown) handed to generation are **derived from this single point**. **Do not split it in two**—the failure that actually happened was "which reference image to attach to which shot," and that judgment is at once a judgment of continuity and a judgment of disclosure.
+- **A work does not hold a work.** **Every work carries its own `bible.yaml` and `ledger.yaml` in its own directory**—but **a directory that holds a work is not necessarily a work itself** (`projects/ukebi/` holds 11 raw segment trees and one work). ⚠️ **The converse does not hold.** `check.py` **does not recurse**—it loads `root/shots/*.yaml` with a flat glob—so **a work held by a work is not read by a run over its parent, and the output does not say so.** `L29` names the works a run does not read.
 - **Generation is a sample.** What the generator makes is a candidate for adoption, not the work. **Adoption is selection, and the author is the editor.**
 - **The strings handed to the generator are English.** The word sequences of the specification, prompt, and Negative are **written in English**—the canonical is English. **Do not translate them**—translating changes the output.
 - **The work has a language, and it speaks it.** If there is speech it is in `bible.language`—**and a work with no speech declares one too, because a blank is not neutral: the generator fills it with its own default.** Measured: a video with speech in it came back with **Chinese subtitles burned into the picture.** ⚠️ **Name the language; do not forbid the symptom** (`L27`).
@@ -51,7 +52,7 @@ Therefore, **do not** link from this repository's documents to the design notes 
 - **Invariant blocks** (the strings handed to the generator = specification, prompt, Negative, enum values) are **left in English, untranslated**.
 - **`HISTORY.md` stays Japanese.** It is the record of the work, not a document for readers.
 
-**17 documents × 3 languages are in place.** `tools/check_i18n.py` checks them: mirror existence and non-emptiness, the `i18n-version` header, the switcher line, the invariant blocks, and the heading levels.
+**18 documents × 3 languages are in place.** `tools/check_i18n.py` checks them: mirror existence and non-emptiness, the `i18n-version` header, the switcher line, the invariant blocks, and the heading levels.
 
 ⚠️ **That check does not see whether the prose is translated correctly.** It reports **how many files it looked at and which blocks it treated as invariant**—because a check that reports nothing looks like a check that passed.
 

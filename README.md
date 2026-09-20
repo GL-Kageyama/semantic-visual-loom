@@ -78,7 +78,7 @@ semantic-visual-loom/
 ├── schemas/         # the canonical of the data structures (bible / ledger / shot-record / take / timeline)
 ├── engine/ledger/   # the production ledger and pre-flight verification (crush breakdowns in the design without running generation)
 ├── engine/shot/     # prints the derivable lines of a shot's specification (read-only; writes nothing)
-├── docs/            # usage
+├── docs/            # usage, and the deep dives
 ├── skills/          # the four skills — breakdown, design, ledger, shot
 ├── tools/           # checks (i18n mirrors)
 ├── references/      # the video-spec moved over from distill
@@ -88,7 +88,10 @@ semantic-visual-loom/
 
 **⚠️ Two kinds live side by side in `projects/`**—**raw specification trees** (§1–20 of Ukebi and
 Gozen Niji, left as they are) and **structured records** (`bible.yaml` / `ledger.yaml` / `shots/`;
-three of them, `ukebi-v2`, `hitosara` and `habits`).
+**four** of them—`hitosara`, `ukebi-v2`, `habits` and `habits-promo-chinatsu`).
+⚠️ **Every work carries its own `bible.yaml` and `ledger.yaml`, and a work does not hold a work**
+—and this is why that matters: **`check.py` does not recurse**, so **a work held by a work is not
+read by a run over its parent.** `L29` names the works a run does not read.
 ⚠️ **No generated output is placed beside the raw trees, while their `reference/` assets are
 kept.** Why input is not a sample, and what is lost if it is deleted, is in
 [`docs/usage.md`](docs/usage.md).
@@ -112,6 +115,11 @@ Ukebi V2 does not pass (8 of the 15 roles, all three `mode` values, `attached` o
 
 ⚠️ **Every shot has two paths**—`spec:` for the video, `key_image:` for the image—and
 **only §18 is fed into the generator.** ⚠️ **Generation runs 10 images → look at all → 10 videos.**
+⚠️ **This is the route where the video names `WAN 3.0`.** On the second video route (`MINIMAX H3`)
+**a shot has no image path at all**—the generator is handed a storyboard image instead, and the
+paper that makes it lives in `specs/board/` ([`docs/usage.md`](docs/usage.md)).
+⚠️ **The two routes do not share a grammar of time**, and the constraints that hold on the second
+one are in [`docs/h3-route.md`](docs/h3-route.md).
 **The rest is in [`projects/hitosara/README.md`](projects/hitosara/README.md).**
 
 ## Planned, But Not Yet There
@@ -166,13 +174,23 @@ and since **their multilingualization is complete** (en / ja / zh), **one line b
 states that `distill-essence-engine` is **read but never rewritten.**
 ⚠️ **The owner of §1–20 and `video-spec.md` has already moved here.**
 
+### Run ② for `habits-ch01-seg01`—⚠️ **gated on its prose**
+
+That shot record carries **no `spec:`**, and it is the one violation
+`python3 engine/ledger/check.py projects/habits` reports. **A declared state, not an oversight**—
+the minimal form (policy §7) cuts `bible.yaml` + `ledger.yaml` + `shots/` and **no `specs/`**.
+**② has never been run for the first volume, because its prose does not exist yet.**
+⚠️ **Run ② when that episode is written—and settle `duration` in the same pass.** The record's `8s`
+is marked **invention (awaiting approval)**; running ② first would freeze an unapproved guess into
+§1, and `L23` would then report it as a match.
+
 ## Language
 
 **Development proceeds in Japanese, and the canonical of the documents is English.**
 Mirrors use the suffix scheme and sit in the **same directory**—the rules are in
 [`CLAUDE.md`](CLAUDE.md).
 
-**16 documents × 3 languages are in place**——**that is the count
+**18 documents × 3 languages are in place**——**that is the count
 [`tools/check_i18n.py`](tools/check_i18n.py) reports as the canonical set, not a count of every
 `.md` in the repository.** ⚠️ **A number is only as wide as what was counted.** What that check sees,
 and what it does not, is in [`docs/usage.md`](docs/usage.md).

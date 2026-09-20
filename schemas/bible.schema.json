@@ -10,7 +10,7 @@
     "project": {
       "type": "string",
       "minLength": 1,
-      "description": "プロジェクト名。projects/<project>/ のディレクトリ名と一致する。"
+      "description": "プロジェクト名。**その作品のディレクトリ名と一致する**（`projects/hitosara/` なら `hitosara`、`projects/ukebi/ukebi-v2/` なら `ukebi-v2`）。⚠️ **この欄を読む層は無い**——`check.py` が名指しに使うのは `Project.name`（＝ディレクトリ名）である。ゆえに**一致していなくても鳴らない**（穴）。"
     },
     "bible": {
       "type": "object",

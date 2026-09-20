@@ -25,6 +25,7 @@ stage ② in this repository** — the only command that runs is the checker, an
 | **the staging record** | `place` · `time` · `mode` · `motion` · `beats` · `duration` · `spec` · `key_image` · `text_channel` | `projects/<name>/shots/<id>.yaml` |
 | **the video specification** | §1–20 in the registry's order, §18's 7 slots, §19's self-name | `projects/<name>/specs/video/<id>.md` |
 | **the image specification** | named paragraphs inside one section — `Prompt`, `Negative` | `projects/<name>/specs/image/<id>.md` |
+| **the board prompt** | ⚠️ **only on the video route that goes through a storyboard** — the ① of that route: a storyboard sheet for `distill-essence-engine` (`storyboard` × `luminous-anime`) | `projects/<name>/specs/board/<id>-board.md` |
 
 **It does not own** `reference_set` / `forbidden_set` / `attached` / `disclosure_state`
 (those are **③ `ledger`**). ⚠️ **They are derived, not written here** — this stage decides
@@ -90,6 +91,28 @@ because `L3` and `L4` read the beat body, not only the field.**
    `Motion character`, and **most style cards do not have one** — a card without it makes the
    slot present and empty, and `L17` passes it. **Fires if wrong:** `L20`.
    ⚠️ **Pick a style whose card carries `Motion character`, or record why the slot is empty.**
+   ⚠️ **§18's heading names the model, and the name decides the route** (`specmap.MODELS`).
+   **`WAN 3.0` attaches a `key_image`; `MINIMAX H3` attaches a storyboard image and has no image
+   path at all.** On that second route **this stage also writes the board prompt** (the row in the
+   table above) and points at it from §6's `REF_BOARD`. ⚠️ **The board is not a `key_image` and
+   must not be written as one**——**its paper draws lettering** (panel numbers, captions, margin
+   columns), and **the image path's floor forbids text on screen.** ⚠️ **Nothing checks the
+   board**: no field points at it, so **`check.py` never opens it. A hole.**
+   ⚠️ **On this route a panel is a scene, not a frame of one take.** The source method the route
+   came from says **treat each panel as its own scene and join still to still with natural
+   animation** — so **§18's `Master` / `Camera` / `Motion` must not forbid that join.**
+   ⚠️ **`no cut` written as a blanket rule closes the only lawful way for a panel to change
+   place**, and the generator answers by running two places together as one room.
+   **Forbid the cut to an unrelated location; do not forbid the transition** — and when a panel
+   changes place, **the specification must say how it changes, because the source does not**: it
+   never uses the word カット, so **cut-versus-continuous is the shot's own decision, and leaving
+   it unwritten is how two places come back as a single room.**
+   ⚠️ **`one continuous take`** ([`references/video-spec.md`](../../references/video-spec.md)) **is
+   the `WAN 3.0` house style and does not carry to this route.** The two routes do not share a
+   grammar of time, and **the string handed over must say what this route does, not what the other
+   one does** — the failure that produced this warning is recorded in `HISTORY.md`.
+   ⚠️ **The full list of the constraints that hold on this route — the strings handed over and the
+   paper alike — is [`docs/h3-route.md`](../../docs/h3-route.md).**
 9. **The image specification** — ⚠️ **not sections.** It is **named paragraphs inside one
    section**: `Prompt` first, `Negative` second, in that order. Write `key_image:` in the
    record to point at it. **Fires if wrong:** `L18` (the shape of the path).

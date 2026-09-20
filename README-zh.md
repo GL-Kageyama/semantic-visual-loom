@@ -77,7 +77,7 @@ semantic-visual-loom/
 ├── schemas/         # 数据结构的正典（bible / ledger / shot-record / take / timeline）
 ├── engine/ledger/   # 制作台账与事前验证（不跑生成就把设计的破绽压掉）
 ├── engine/shot/     # 打印镜头规格中可以导出的行（只读。什么也不写）
-├── docs/            # 用法
+├── docs/            # 用法，以及更深入的解说
 ├── skills/          # 4 个 Skill——分解、设计、台账、镜头
 ├── tools/           # 检查（i18n 的镜像）
 ├── references/      # 从 distill 移管过来的 video-spec
@@ -87,7 +87,10 @@ semantic-visual-loom/
 
 **⚠️ `projects/` 里同居着两种东西**——**生的规格书**（Ukebi 与 Gozen-niji 的 §1–20，
 就那样留着）与**结构化的记录**（`bible.yaml` / `ledger.yaml` / `shots/`；
-有 `ukebi-v2`、`hitosara` 与 `habits` 三本）。
+有 `hitosara`、`ukebi-v2`、`habits` 与 `habits-promo-chinatsu` **四本**）。
+⚠️ **所有作品都带着自己的 `bible.yaml` 和 `ledger.yaml`，作品不抱着作品**
+——而这正是它要紧的理由：**`check.py` 不递归**，所以
+**作品抱着作品时，跑父目录也读不到。** `L29` 会点名没有被读到的作品。
 ⚠️ **生的规格书那一侧不放生成物，而 `reference/` 里的参照资产留着。**
 **输入不是标本这件事、删掉会失去什么**，写在 [`docs/usage.md`](docs/usage-zh.md) 里。
 
@@ -111,6 +114,11 @@ semantic-visual-loom/
 ⚠️ **所有镜头都有两条路径**——`spec:` 是视频，`key_image:` 是图像，而
 **投进生成器的只有 §18。**
 ⚠️ **生成按 10 张图像 → 全部看过 → 10 段视频的顺序转。**
+⚠️ **这是视频自称 `WAN 3.0` 的那条路径。** 在第二条视频路径（`MINIMAX H3`）上，
+**镜头根本没有图像路径**——生成器拿到的是分镜图像，
+而制作那张纸的提示词住在 `specs/board/`（[`docs/usage.md`](docs/usage-zh.md)）。
+⚠️ **两条路径不共享时间的文法**——落在第二条上的约束在
+[`docs/h3-route.md`](docs/h3-route-zh.md) 里。
 **其余在 [`projects/hitosara/README.md`](projects/hitosara/README-zh.md) 里。**
 
 ## 预定之中、但还没有的东西
@@ -164,12 +172,20 @@ semantic-visual-loom/
 本仓库的 `CLAUDE.md` 规定 `distill-essence-engine` **可以读，但绝不改写**。
 ⚠️ **§1–20 与 `video-spec.md` 的主人，已经移到这边了。**
 
+### 为 `habits-ch01-seg01` 跑 ②——⚠️ **等正文写出来之后**
+
+这条镜头记录没有 `spec:`，而**它正是 `python3 engine/ledger/check.py projects/habits` 报告的唯一违规。**
+**这不是事故，而是被声明的状态**——最小形（方针 §7）只切 `bible.yaml` ＋ `ledger.yaml` ＋ `shots/`，
+**不切 `specs/`。****第一卷一次也没有跑过 ②，因为它的正文还不存在。**
+⚠️ **等那一话的正文写出来再跑 ②——并在同一轮裁定 `duration`。** 这条记录里的 `8s` 是
+**「发明（待承认）」**，先跑 ② 就会把**未经承认的推测固定进 §1，此后 `L23` 会把它称作「一致」。**
+
 ## 语言
 
 **开发用日语推进，文档的正典是英语。**
 镜像用后缀方式并排在**同一个目录**里——规则在 [`CLAUDE.md`](CLAUDE-zh.md) 里。
 
-**16 份文档 × 3 种语言已经齐备**——⚠️ **这是 [`tools/check_i18n.py`](tools/check_i18n.py)
+**18 份文档 × 3 种语言已经齐备**——⚠️ **这是 [`tools/check_i18n.py`](tools/check_i18n.py)
 作为正典报告的本数，不是把仓库里的 `.md` 数了一遍的数。**
 **数，只拥有它所数范围那么宽。**
 **它看什么、不看什么**，写在 [`docs/usage.md`](docs/usage-zh.md) 里。

@@ -74,7 +74,7 @@ python3 tools/check_i18n.py                                # 文档的镜像
 | 阶段 | 交出去的东西 | 出来的东西 | 落在哪里 |
 |---|---|---|---|
 | **① 分解** | 故事、情节、草稿 | 镜头序列、作品台账、开示的变化点 | `bible.yaml`、`ledger.yaml`、`shots/` |
-| **② 设计** | 一个镜头 | 演出记录、§1–20 的视频规格（**§18 的 7 个槽位**）、图像规格 | `shots/<id>.yaml`、`specs/video/<id>.md`、`specs/image/<id>.md` |
+| **② 设计** | 一个镜头 | 演出记录、§1–20 的视频规格（**§18 的 7 个槽位**）、图像规格——以及在**经由分镜（絵コンテ）的视频路径上，交给 `distill-essence-engine` 的板式提示词** | `shots/<id>.yaml`、`specs/video/<id>.md`、`specs/image/<id>.md`、`specs/board/<id>-board.md` |
 | **③ 台账** | 一个镜头 | 被养大的台账，以及落在每个镜头记录上的导出集合 | `ledger.yaml`、`shots/<id>.yaml` |
 | **④ 镜头** | 回来的东西 | 能独立成立的记录，以及镜次 ⚠️ **不采用** | `shots/<id>.yaml`、`takes/<id>-<kind>-<n>.yaml` |
 
@@ -83,6 +83,25 @@ python3 tools/check_i18n.py                                # 文档的镜像
 **分开这件事本身就是要点**
 （[`references/video-spec.md`](../references/video-spec-zh.md) §18）。
 ⚠️ **分开交出去。过去的只有 §18**——§19 与 §20 是我们自己的记录。
+
+⚠️ **§18 的标题自称模型，而视频的路径有两条。** `L18` 把这个标题与
+登记簿（`specmap.MODELS`）对照——**`WAN 3.0` 取 `key_image`，`MINIMAX H3` 不取。**
+后者的附件是**分镜图像**，而**制作那张图像的纸是 `distill-essence-engine`**
+（格式 `storyboard`、样式 `luminous-anime`）。所以板式提示词也是这个基盘的文档，
+住在 `specs/board/`。
+⚠️ **分镜不是「图像的路径」。** 那张纸**要画文字**——格号、说明文、栏位——
+而**图像路径的底板禁止画面上的文字。** 所以 `key_image` 持不了它。
+**纸是拍摄之前的、整段视频的设计。** 生成器按顺序读它的格子，
+**把每一格当作它自己的一场戏，与下一格之间由自然的动画接起来。**
+⚠️ **两条路线不共享时间的文法。** 落在 `MINIMAX H3` 上的约束——**交给它的字符串、
+以及那张纸的文字，两者都在内**——在 [`docs/h3-route-zh.md`](h3-route-zh.md)。
+⚠️ **没有任何东西检查板子。** 镜头记录没有任何栏指向它，所以 **`check.py` 从不打开它**
+——**这是一个洞，并且作为一个洞被报告**
+（见 [`engine/ledger/README.md`](../engine/ledger/README-zh.md) 的 `L18` 注）。
+⚠️ **能解除底板某一节的，是作品，而且只能是作品。** `bible.base_negatives_waived` 是它唯一的席位。
+⚠️ **曾经存在过第二个席位**——在一份规格的 §16 里写一行反引号，**仅限那个镜头**解除基础的节。
+**它在造出来的当天就被拆掉了**，因为它所服务的那条裁定被撤回，而**再没有一份规格使用它。**
+规则与实测在 [`engine/ledger/README.md`](../engine/ledger/README-zh.md)（`L21`）。
 
 ⚠️ **调用带着名字空间**——`/semantic-visual-loom:breakdown`、`:design`、`:ledger`、`:shot`。
 
@@ -119,14 +138,27 @@ projects/<name>/
 ├── ledger.yaml     # 连续性＋开示，放在同一个文件里（必需）
 ├── shots/          # 一个镜头一张镜头记录（<id>.yaml）（必需）
 ├── takes/          # 回来的东西的记录
-├── specs/          # §1–20 的文档（video/ 与 image/）
+├── specs/          # §1–20 的文档（video/ 与 image/），以及板式提示词（board/）
 ├── media/          # 生成物的存放处   ⚠️ 基盘不打开这里
 ├── renders/        # 由剪辑做出的东西（作品）
 └── timeline/       # 剪辑
 ```
 
+⚠️ **那个目录待在哪儿不是随意的。而且规则是单向的**——
+**反过来不成立。** `projects/ukebi/` 就是理由（**11 棵生的规格书之树和 1 本作品**）：
+
+> **所有作品都在自己的目录里带着自己的 `bible.yaml` 和 `ledger.yaml`。
+> 但抱着作品的目录，并不一定本身就是作品。**
+> ⚠️ **反过来不成立——作品不得抱着作品。**
+
+⚠️ **`check.py` 不递归**——它**平着**读 `root/shots/*.yaml`。所以
+**作品抱着作品时，跑父目录也读不到，而且输出不会说出来。**
+`L29` 会点名没有被读到的作品。
+
 检查读的是 `bible.yaml` / `ledger.yaml` / `shots/` / `takes/`，以及
 **镜头记录所指的规格文档**（`spec:` 与 `key_image:`）。
+⚠️ **`specs/board/` 不在其中**——**没有任何栏指向板子**，所以分镜提示词
+**在任何一层之外。那是洞，不是豁免。**
 
 ⚠️ **缺 `bible.yaml` / `ledger.yaml` / `shots/` 会被报告，而不会被悄悄当成空。**
 而且**一个文件读不了，检查也会跑到底**——中途停下，
@@ -160,7 +192,7 @@ projects/<name>/
 
 ## 层
 
-检查由**28 层，`L0`–`L27`**，以及模式（schema）的形状验证构成。
+检查由**30 层，`L0`–`L29`**，以及模式（schema）的形状验证构成。
 **它不是单一判定**——每一层各自报警，并**连同它看到的数字**一起被报告。
 
 ⚠️ **什么也没看到的层会作为注被报告，而什么也没看到的层，看起来和通过的层一模一样。**
@@ -200,7 +232,7 @@ python3 tools/check_i18n.py               # 实物
 ⚠️ **不使用子文件夹方式（`ja/` `zh/`）**——为了让**正典与镜像的深度不发生变化**。
 ⚠️ **开发的工作语言保持日语**（提交信息、`HISTORY.md`、会话），
 而**文档的正典是英语。** 这两者是不同的东西——**做事所用的语言**，与**文档具有权威所用的语言**。
-**16 份文档 × 3 种语言已经齐备**（这是 `tools/check_i18n.py` 作为正典报告的本数），
+**18 份文档 × 3 种语言已经齐备**（这是 `tools/check_i18n.py` 作为正典报告的本数），
 规则在 [`CLAUDE.md`](../CLAUDE-zh.md) 里。
 
 ## 延伸阅读
@@ -209,6 +241,7 @@ python3 tools/check_i18n.py               # 实物
 |---|---|
 | [`README.md`](../README-zh.md) | 这个基盘是什么，由什么构成 |
 | [`engine/ledger/README.md`](../engine/ledger/README-zh.md) | 制作台账、各层、以及每个检查不看什么 |
+| [`docs/h3-route.md`](h3-route-zh.md) | 落在 `MINIMAX H3` 这条路径上的约束——交出去的字符串，以及那张纸 |
 | [`engine/shot/README.md`](../engine/shot/README-zh.md) | 打印器导出什么，以及它留下的七个洞 |
 | [`schemas/README.md`](../schemas/README-zh.md) | 数据结构 |
 | [`projects/hitosara/README.md`](../projects/hitosara/README-zh.md) | 演示——10 个镜头，与 Ukebi 完全独立 |

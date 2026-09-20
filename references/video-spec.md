@@ -92,6 +92,28 @@ Fill in this order. The right-hand column is where each engine principle lands.
 
 Keep §1–18 reusable and put everything duration-dependent in §19, so the same specification survives a change of clip length or generation model.
 
+⚠️ **§18 is the only section whose heading is a family**: `18. <MODEL> PROMPT MAPPING`. The name is
+read against the registry (`specmap.MODELS`), and **that name is what picks the route.** Two video
+routes are registered — **`WAN 3.0` attaches a `key_image`**, and **`MINIMAX H3` attaches a
+storyboard image and has no image path at all**: its paper is made by `distill-essence-engine`
+(format `storyboard`, style `luminous-anime`) and lives at `specs/board/<id>-board.md`.
+⚠️ **One shot carries one `spec`**, so **a shot cannot hold both routes** — shooting the same shot
+on both and comparing them is not possible yet.
+
+⚠️ **The two routes do not share a grammar of time, and the line at the top of this document
+describes only one of them.** `Granularity×time: whole arc × one continuous take` is the
+**`WAN 3.0` house style**; on `MINIMAX H3` it does not hold. **There, each panel is its own scene,
+joined to the next by natural animation** — ⚠️ **so §18 must not forbid that join.** **`no cut` as
+a blanket rule closes the only lawful way for a panel to change place**, and the generator answers
+by running two places together as one room. **Forbid the cut to an unrelated location; do not
+forbid the transition** — and when a panel changes place, **the specification must say which it is**:
+the source never uses the word カット, so cut-versus-continuous is the shot's own decision.
+⚠️ **A reader who copies the top line into an `H3` specification has copied the other route's
+rule**; the failure that produced this warning is recorded in `HISTORY.md`.
+**This paragraph is read by `L28`** (the phrases and their reasons are in `specmap.MODEL_ROUTE`).
+⚠️ **The full list of the constraints that hold on this route — the strings handed over and the
+paper alike — is [`docs/h3-route.md`](../docs/h3-route.md).**
+
 ## §18 prompt slots
 
 Seven prompts. The first six are drawn **mainly** from the sections named above.

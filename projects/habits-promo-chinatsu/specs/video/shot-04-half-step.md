@@ -96,7 +96,7 @@
 - REF_CHARACTER: the frozen pair (`20_29_36.png` ＋ `21_56_32.png`) (CRITICAL)
 - REF_FORMAT: `video-spec` — this defines the seven §18 slots
 - REF_STYLE: `luminous-anime` (HIGH)
-- REF_SOURCE: `projects/habits/promo-chinatsu/bible.yaml` (CRITICAL)
+- REF_SOURCE: `projects/habits-promo-chinatsu/bible.yaml` (CRITICAL)
 - ⚠️ **No board for the register is referenced — it does not exist yet.** The ledger records it as `habits-tenshutsu-ran-board`, and records that it is **still to be made** (発明・要承認). **曰く付きの参照を、在ることにしない。**
 
 # 7. NARRATIVE

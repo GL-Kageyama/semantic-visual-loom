@@ -92,7 +92,7 @@
 - REF_CHARACTER: the frozen pair (`20_29_36.png` ＋ `21_56_32.png`) (CRITICAL)
 - REF_FORMAT: `video-spec` — this defines the seven §18 slots
 - REF_STYLE: `luminous-anime` (HIGH)
-- REF_SOURCE: `projects/habits/promo-chinatsu/bible.yaml` (CRITICAL)
+- REF_SOURCE: `projects/habits-promo-chinatsu/bible.yaml` (CRITICAL)
 - ⚠️ **No location board is referenced.** The site is a body and a cloth.
 
 # 7. NARRATIVE

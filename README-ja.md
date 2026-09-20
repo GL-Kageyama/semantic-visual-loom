@@ -77,7 +77,7 @@ semantic-visual-loom/
 ├── schemas/         # データ構造の正典（bible / ledger / shot-record / take / timeline）
 ├── engine/ledger/   # 制作台帳と事前検証（生成を走らせずに設計の破綻を潰す）
 ├── engine/shot/     # ショットの仕様のうち、導出できる行を刷る（読み取り専用。何も書かない）
-├── docs/            # 使い方
+├── docs/            # 使い方と、踏み込んだ解説
 ├── skills/          # 4つの Skill——分解・設計・台帳・ショット
 ├── tools/           # 検査（i18n のミラー）
 ├── references/      # distill から移管した video-spec
@@ -87,7 +87,11 @@ semantic-visual-loom/
 
 **⚠️ `projects/` には2種類が同居している**——**生の仕様書**（受け火・午前二時の §1–20。
 そのまま残してある）と、**構造化した記録**（`bible.yaml` / `ledger.yaml` / `shots/`。
-`ukebi-v2` と `hitosara`、`habits` の3本である）。
+`hitosara`・`ukebi-v2`・`habits`・`habits-promo-chinatsu` の**4本**である）。
+⚠️ **すべての作品は自分の `bible.yaml` と `ledger.yaml` を持ち、作品は作品を抱えない**
+——そしてこれが効く理由である：**`check.py` は再帰しない**ので、
+**作品が作品を抱えていると、親を走らせても読まれない。** `L29` が、
+読まれなかった作品を名指しする。
 ⚠️ **生の仕様書の側には生成物を置かず、`reference/` の参照資産は残してある。**
 **入力は標本ではないこと、消せば何が失われるか**は [`docs/usage.md`](docs/usage-ja.md) にある。
 
@@ -111,6 +115,11 @@ semantic-visual-loom/
 ⚠️ **全ショットが2つの経路を持つ**——`spec:` は動画、`key_image:` は画像であり、
 **生成器へ投入するのは §18 だけである。**
 ⚠️ **生成は 画像10枚 → 全部見る → 動画10本**の順に回る。
+⚠️ **これは動画が `WAN 3.0` を名乗る経路である。** 2つ目の動画の経路（`MINIMAX H3`）では
+**ショットは画像の経路をまったく持たない**——生成器は絵コンテの画像を受け取り、
+それを作る紙は `specs/board/` に住む（[`docs/usage.md`](docs/usage-ja.md)）。
+⚠️ **二つの経路は時間の文法を共有しない**——2つ目に掛かる制約は
+[`docs/h3-route.md`](docs/h3-route-ja.md) にある。
 **残りは [`projects/hitosara/README.md`](projects/hitosara/README-ja.md) にある。**
 
 ## 予定であって、まだ無いもの
@@ -164,12 +173,22 @@ semantic-visual-loom/
 このリポジトリの `CLAUDE.md` は `distill-essence-engine` を**読むことはあっても、書き換えない**と定めている。
 ⚠️ **§1–20 と `video-spec.md` の持ち主は、既にこちらへ移っている。**
 
+### `habits-ch01-seg01` のために②を走らせる——⚠️ **本文が書けてから**
+
+このショット記録は `spec:` を持たず、**`python3 engine/ledger/check.py projects/habits` が報告する
+唯一の違反である。****事故ではなく、宣言された状態である**——最小形（方針 §7）は
+`bible.yaml` ＋ `ledger.yaml` ＋ `shots/` を切り、**`specs/` を切らない。**
+**第一巻には②が一度も走っていない。本文がまだ無いからである。**
+⚠️ **その話の本文が書けたら②を走らせ——同じ回で `duration` を裁定する。** この記録の `8s` は
+**「発明（要承認）」**であり、先に②を走らせれば**未承認の推測が §1 に固定され、以後 `L23` が
+それを「一致」と呼ぶ。**
+
 ## 言語
 
 **開発は日本語で進め、文書の正典は英語である。**
 ミラーは接尾辞方式で**同じディレクトリ**に並ぶ——規則は [`CLAUDE.md`](CLAUDE-ja.md) にある。
 
-**16文書 × 3言語が揃っている**——⚠️ **これは [`tools/check_i18n.py`](tools/check_i18n.py) が
+**18文書 × 3言語が揃っている**——⚠️ **これは [`tools/check_i18n.py`](tools/check_i18n.py) が
 正典として報告する本数であって、リポジトリの `.md` を数えた数ではない。**
 **数は、数えた範囲の広さしか持たない。**
 **何を見て、何を見ないか**は [`docs/usage.md`](docs/usage-ja.md) にある。

@@ -87,7 +87,7 @@ went wrong is not the count; it is which layers are quiet.**
 | `L25` | **nothing has been generated** — and this stage does not generate |
 
 ⚠️ **Run `--self-test` and read why it exists.** It proves the checker fires at all
-(**176 examples**). **A check that reports nothing looks the same as a check that passed** —
+(**213 examples**). **A check that reports nothing looks the same as a check that passed** —
 and the self-test is the only thing that tells the two apart.
 
 ## ⚠️ Fields and rules that nobody reads

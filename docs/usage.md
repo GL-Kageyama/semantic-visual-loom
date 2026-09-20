@@ -81,7 +81,7 @@ below.
 | stage | you hand in | it emits | where it lands |
 |---|---|---|---|
 | **① breakdown** | a story, a plot, a draft | the shot list, the work ledger, and the disclosure change points | `bible.yaml`, `ledger.yaml`, `shots/` |
-| **② design** | one shot | the staging record, the §1–20 video specification (**§18's seven slots**), and the image specification | `shots/<id>.yaml`, `specs/video/<id>.md`, `specs/image/<id>.md` |
+| **② design** | one shot | the staging record, the §1–20 video specification (**§18's seven slots**), and the image specification — and, on the video route that goes through a storyboard, **the board prompt handed to `distill-essence-engine`** | `shots/<id>.yaml`, `specs/video/<id>.md`, `specs/image/<id>.md`, `specs/board/<id>-board.md` |
 | **③ ledger** | one shot | the ledger grown, and the derived sets on each shot record | `ledger.yaml`, `shots/<id>.yaml` |
 | **④ shot** | what came back | the self-contained record, and the take ⚠️ **it does not adopt** | `shots/<id>.yaml`, `takes/<id>-<kind>-<n>.yaml` |
 
@@ -89,6 +89,27 @@ below.
 `Camera` / `Audio` / `Negative` / `Style Motion`——**all English**, and **being separated is
 itself the point** ([`references/video-spec.md`](../references/video-spec.md) §18).
 ⚠️ **They are fed separately, and only §18 is fed**——§19 and §20 are our own record.
+
+⚠️ **§18's heading names the model, and there are two video routes.** `L18` reads that heading
+against the registry (`specmap.MODELS`): **`WAN 3.0` takes a `key_image`, and `MINIMAX H3` does
+not**——its attachment is **a storyboard image**, and **the paper that makes that image is
+`distill-essence-engine`** (format `storyboard`, style `luminous-anime`). So the board prompt is a
+document of this foundation too, and it lives in `specs/board/`.
+⚠️ **The storyboard is not the image path.** That route's paper **draws lettering**——panel numbers,
+captions and margin columns——and **the image path's floor forbids text on screen**, which is why
+`key_image` cannot hold it. **The paper is the design of the whole video, drawn before anything is
+shot**; the generator then reads its panels in order, **each panel as its own scene, joined to the
+next by natural animation**.
+⚠️ **The two routes do not share a grammar of time.** The constraints that hold on `MINIMAX H3`——for
+the strings handed over and for the paper——are in [`docs/h3-route.md`](h3-route.md).
+⚠️ **Nothing checks the board.** No field of a shot record points at it, so **`check.py` never opens
+it**——**a hole, and it is reported as one** (see the `L18` note in
+[`engine/ledger/README.md`](../engine/ledger/README.md)).
+⚠️ **A floor clause is lifted by the work, and only by the work.** `bible.base_negatives_waived`
+is the one seat for it. ⚠️ **A second seat once existed** — a backticked line in one specification's
+§16, lifting a foundation clause **for that shot alone** — and it was **removed the day it was
+built**, because the ruling it served was withdrawn and **no specification used it.** The rule and
+the measurement are in [`engine/ledger/README.md`](../engine/ledger/README.md) (`L21`).
 
 ⚠️ **The invocation carries a namespace**——`/semantic-visual-loom:breakdown`, `:design`,
 `:ledger`, `:shot`.
@@ -129,14 +150,27 @@ projects/<name>/
 ├── ledger.yaml     # continuity + disclosure, in ONE file (required)
 ├── shots/          # one shot record per shot, <id>.yaml (required)
 ├── takes/          # the record of what came back
-├── specs/          # the §1–20 documents (video/ and image/)
+├── specs/          # the §1–20 documents (video/ and image/), and the board prompts (board/)
 ├── media/          # where generated output goes   ⚠️ THE FOUNDATION DOES NOT OPEN THIS
 ├── renders/        # what editing produced (the work)
 └── timeline/       # the edit
 ```
 
+⚠️ **Where that directory sits is not arbitrary, and the rule is one-directional**——
+**the converse does not hold**, and `projects/ukebi/` is why (**11 raw segment trees and one work**):
+
+> **Every work carries its own `bible.yaml` and `ledger.yaml` in its own directory.
+> But a directory that holds a work is not necessarily a work itself.**
+> ⚠️ **The converse does not hold: a work must not hold a work.**
+
+⚠️ **`check.py` does not recurse**——it loads `root/shots/*.yaml` with a **flat glob**. So
+**a work held by a work is not read by a run over its parent, and the output does not say so.**
+`L29` names the works a run does not read.
+
 The checker reads `bible.yaml`, `ledger.yaml`, `shots/`, `takes/`, and **the
 specification documents the shot records point at** (`spec:` and `key_image:`).
+⚠️ **`specs/board/` is not among them**——**no field points at a board**, so the storyboard prompt
+is outside every layer. **That is a hole, not an exemption.**
 
 ⚠️ **A missing `bible.yaml`, `ledger.yaml`, or `shots/` is reported, not silently
 treated as empty.** And **one unreadable file does not stop the run**—stopping would
@@ -172,7 +206,7 @@ The counts behind that are in `HISTORY.md`.
 
 ## The layers
 
-The check is **28 layers, `L0`–`L27`**, plus schema-shape validation.
+The check is **30 layers, `L0`–`L29`**, plus schema-shape validation.
 **They are not one verdict**—each layer fires on its own and is reported with the
 number it saw.
 
@@ -216,7 +250,7 @@ and the mirrors does not change.**
 ⚠️ **The working language of development stays Japanese** (commit messages, `HISTORY.md`,
 conversation) **while the canonical of the documents is English.** These two are different
 things: one is the language the work is done in, the other the language the documents are
-authoritative in. **16 documents × 3 languages are in place** (the count
+authoritative in. **18 documents × 3 languages are in place** (the count
 `tools/check_i18n.py` reports as canonical), and the rules are in
 [`CLAUDE.md`](../CLAUDE.md).
 
@@ -226,6 +260,7 @@ authoritative in. **16 documents × 3 languages are in place** (the count
 |---|---|
 | [`README.md`](../README.md) | what this foundation is, and what it is made of |
 | [`engine/ledger/README.md`](../engine/ledger/README.md) | the production ledger, the layers, and what each check does not see |
+| [`docs/h3-route.md`](h3-route.md) | the constraints that hold on the `MINIMAX H3` route—the strings handed over, and the paper |
 | [`engine/shot/README.md`](../engine/shot/README.md) | what the printer derives, and the seven holes it leaves |
 | [`schemas/README.md`](../schemas/README.md) | the data structures |
 | [`projects/hitosara/README.md`](../projects/hitosara/README.md) | the demo—10 shots, independent of Ukebi |

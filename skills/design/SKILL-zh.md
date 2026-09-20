@@ -24,6 +24,7 @@ argument-hint: '（任意）项目名，或要演出的镜头。例: /semantic-v
 | **演出的记录** | `place`・`time`・`mode`・`motion`・`beats`・`duration`・`spec`・`key_image`・`text_channel` | `projects/<name>/shots/<id>.yaml` |
 | **影片规格** | 目録顺序的 §1–20、§18 的7个槽、§19 的自称 | `projects/<name>/specs/video/<id>.md` |
 | **图像规格** | 一个节之中、有名字的段落——`Prompt`・`Negative` | `projects/<name>/specs/image/<id>.md` |
+| **板式提示词** | ⚠️ **只在经由分镜的视频路径上**——那条路径的①：交给 `distill-essence-engine` 的分镜表（`storyboard` × `luminous-anime`） | `projects/<name>/specs/board/<id>-board.md` |
 
 **不持有的**——`reference_set` / `forbidden_set` / `attached` / `disclosure_state`（**③ `ledger`**）。
 ⚠️ **那些是导出，不是在这里写的东西**——这一段决定镜头**是什么**，
@@ -85,6 +86,26 @@ argument-hint: '（任意）项目名，或要演出的镜头。例: /semantic-v
    `Motion character`，而**大多数样式卡没有它**——选了没有的卡，槽就在却是空的，
    **`L17` 会放它过去。** **弄错了会响:** `L20`。
    ⚠️ **选一张带 `Motion character` 的卡的样式，或者记下这个槽为什么是空的。**
+   ⚠️ **§18 的标题自称模型，而名字决定路径**（`specmap.MODELS`）。
+   **`WAN 3.0` 附上 `key_image`；`MINIMAX H3` 附上分镜图像，根本没有图像路径。**
+   在第二条路径上，**这一段还要写板式提示词**（上表的行），并在 §6 的 `REF_BOARD` 指向它。
+   ⚠️ **板子不是 `key_image`，也不得写成 `key_image`**——**那张纸要画文字**
+   （格号、说明文、栏位），而**图像路径的底板禁止画面上的文字。**
+   ⚠️ **没有任何东西检查板子**：没有栏指向它，所以 **`check.py` 从不打开它。一个洞。**
+   ⚠️ **在这条路径上，一格是一个场景，不是一条镜头里的一帧。** 这条路来源的手法规定
+   **把每一格当作独立的场景，用自然的动画把静画与静画接起来**——所以
+   **§18 的 `Master` / `Camera` / `Motion` 不得禁止这个接缝。**
+   ⚠️ **把 `no cut` 写成无条件的规则，会堵死一格改变地点的唯一合法手段**，
+   生成器就会把两个地点当成一个房间连下去。
+   **禁止切到无关的地点，而不禁止过渡**——并且当一格改变地点时，
+   **由规格写明它怎么变，因为出处没有写**：它从不使用 `カット` 一词，所以
+   **切还是连，由那个镜头自己决定。不写，两个地点就会作为一个房间回来。**
+   ⚠️ **`one continuous take`**（[`references/video-spec.md`](../../references/video-spec.md)）
+   **是 `WAN 3.0` 的家风，不及于这条路径。** 两条路径不共享时间的文法。
+   **交出去的字符串必须写这条路径在做什么，而不是另一条**——
+   产生这条警告的失败记录在 `HISTORY.md` 里。
+   ⚠️ **落在这条路径上的约束的清单——交出去的字符串与那张纸，两者都在内——是
+   [`docs/h3-route.md`](../../docs/h3-route-zh.md)。**
 9. **图像规格**——⚠️ **不是节。** 它是**一个节之中、有名字的段落**——
    `Prompt` 是第1段，`Negative` 是第2段，按这个顺序。记录的 `key_image:` 指向它。
    **弄错了会响:** `L18`（路径的形状）。

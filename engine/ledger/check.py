@@ -1775,6 +1775,164 @@ def self_test():
     run1("L27 `Audio Prompt` が無ければ黙る", semantic.check_work_language,
          lang_proj(language="Japanese", audio=None), False, None)
 
+    # ---- L28（§18 が、その経路のものでない語を運んでいないか）
+    #     ⚠️ **この検査の要点は「鳴らない例」のほうである。** 語を足す変更も、
+    #        門を外す変更も、**鳴らない例が無ければ自己検査は緑のまま通る**——
+    #        `L25` が踏んだ形の事故である。実測（2026-09-20）——`WAN 3.0` の15本が
+    #        `one continuous take` を §18 に持ち、**それは正しい**（この経路の家風）。
+    print("\n=== 自己検査 — 経路の文法（§18 が、その経路のものでない語を運んでいないか）\n")
+
+    def route_spec(model, slots="本文", problems="本文"):
+        """§18 の見出しと `Master Prompt`、そして §20 を差し替えた動画の仕様。"""
+        body = "".join(f"# {t}\n\n本文\n" for t in ALL20[:17])
+        body += f"# 18. {model} PROMPT MAPPING\n\n## Master Prompt\n\n{slots}\n\n"
+        body += "# 19. GENERATION INSTANCE\n\n本文\n"
+        return body + f"# 20. ITERATION\n\n## Observed Problems\n\n{problems}\n"
+
+    # 直した3本の §18 が実際に持つ形である（**却下した4語の生きた形**）。
+    FIXED = ("the protagonist is kept the same person in every panel; "
+             "no additional person beyond the storyboard; "
+             "no colleague invented at the counter; "
+             "no cuts to unrelated locations; "
+             "the atmosphere is the primary mover: particles fall continuously")
+
+    run1("L28 H3 の §18 に `one continuous take`",
+         semantic.check_model_route,
+         kind_proj(route_spec("MINIMAX H3", "One continuous take of the room.")),
+         True, "`one continuous take` が在る")
+    run1("L28 H3 の §18 に `never by a cut`",
+         semantic.check_model_route,
+         kind_proj(route_spec("MINIMAX H3", "Joined by movement, never by a cut.")),
+         True, "`never by a cut` が在る")
+    run1("L28 H3 の §18 に `one and the same man`",
+         semantic.check_model_route,
+         kind_proj(route_spec("MINIMAX H3", "keep one and the same man in every panel")),
+         True, "`one and the same man` が在る")
+    # ⚠️ **門。** 同じ句が `WAN 3.0` の §18 に在るのは正しい——**絞らねば15件の偽陽性。**
+    run1("L28 `WAN 3.0` を名乗れば鳴らない（門）", semantic.check_model_route,
+         kind_proj(route_spec("WAN 3.0", "One continuous take, never by a cut.")),
+         False, None)
+    # ⚠️ **§20 は原因として引用している。** ファイル全体を走査すれば、
+    #    **直した仕様の上で鳴る**——`L4` が踏んだ形である（`_section_body` が閉じる）。
+    run1("L28 §20 が原因として引用していても鳴らない", semantic.check_model_route,
+         kind_proj(route_spec("MINIMAX H3", FIXED,
+                              problems="Cause: §10 and §18 both said "
+                                       "`One continuous take … never by a cut`.")),
+         False, None)
+    run1("L28 直した H3 の形では鳴らない", semantic.check_model_route,
+         kind_proj(route_spec("MINIMAX H3", FIXED)), False, None)
+    # ⚠️ **§18 が名乗らない・目録に無いモデルは `L18` の欠陥である。**
+    #    **同じ欠陥を2つの層が別々の符号で報告しない。**
+    run1("L28 §18 が名乗らなければ黙る", semantic.check_model_route,
+         kind_proj(specfile(*ALL20)), False, None)
+    run1("L28 目録に無いモデルなら黙る", semantic.check_model_route,
+         kind_proj(route_spec("SORA 9", "One continuous take.")), False, None)
+    # ⚠️ **動画の仕様が1本も無ければ、1文字も出さない**——**註も出さない。**
+    #    それは「確かめて正しい」ではなく**「相手が無い」**である（穴）。
+    #    ここだけ `run1` を通さない——**註の不在まで見る**ためである。
+    got = semantic.check_model_route(_One(s("p-ch01-seg01")))
+    n += 1
+    bad += bool(got)
+    print(f"    {'L28 動画の仕様が無ければ沈黙する（註も無い）':<50}"
+          f"{len(got):>10}  {'期待どおり' if not got else '⚠️ 期待と違う'}")
+
+    # ⚠️ **目録そのものが壊れているときは、本文を走査しない。**
+    #    **空の語は、どの §18 にも当たる**——走査すれば**直した仕様の上で鳴る。**
+    saved_route = specmap.MODEL_ROUTE
+    try:
+        specmap.MODEL_ROUTE = {"WAN 3.0": ()}
+        run1("L28 目録に動画の経路が欠けている", semantic.check_model_route,
+             kind_proj(route_spec("MINIMAX H3")), True, "鍵が")
+        specmap.MODEL_ROUTE = {"WAN 3.0": (), "MINIMAX H3": (("", "理由"),)}
+        run1("L28 目録に空の語が在る（本文を読まない）", semantic.check_model_route,
+             kind_proj(route_spec("MINIMAX H3", "One continuous take.")),
+             True, "本文を1行も読んでいない")
+        specmap.MODEL_ROUTE = {"WAN 3.0": (), "MINIMAX H3": (("no cut", ""),)}
+        run1("L28 目録の語に理由が無い", semantic.check_model_route,
+             kind_proj(route_spec("MINIMAX H3")), True, "理由が無い")
+    finally:
+        specmap.MODEL_ROUTE = saved_route
+
+    # ⚠️ **実物で鳴らないこと。** 合成データだけで通る検査は、現場で鳴る。
+    for label, rel, note in (("promo-chinatsu の5本（WAN・鳴ってはならない）",
+                              "projects/habits-promo-chinatsu", None),
+                             ("hitosara の10本（WAN・鳴ってはならない）",
+                              "projects/hitosara", None),
+                             ("habits の3本（H3・註だけである）",
+                              "projects/habits", "突き合わせた")):
+        rp = REPO / rel
+        if not rp.is_dir():
+            continue
+        run1(f"L28 {label}", semantic.check_model_route, Project(rp), False, None, note=note)
+
+    # ---- L29（この走りが読まない作品を名指しするか）
+    #     ⚠️ **走査はディスクを見る。** 合成の辞書では代われない——
+    #        実物のディレクトリを切って鳴らす。
+    def nested_proj(names=("child",), ledger=True, is_work=True):
+        d = _P(tempfile.mkdtemp())
+        for nm in names:
+            sub = d / nm
+            sub.mkdir(parents=True, exist_ok=True)
+            (sub / "bible.yaml").write_text("project: x\nbible: {}\n", encoding="utf-8")
+            if ledger:
+                (sub / "ledger.yaml").write_text("x: 1\n", encoding="utf-8")
+        p = _One(s("p-ch01-seg01", mode="motion"))
+        p.root = d
+        p.bible = {"project": "p", "bible": {}} if is_work else None
+        return p
+
+    run1("L29 作品が作品を抱えている", semantic.check_nested_works,
+         nested_proj(), True, "作品を抱えている")
+    run1("L29 題材の置き場が作品を抱えている", semantic.check_nested_works,
+         nested_proj(is_work=False), False, None, note="1 本在る")
+    # 2段下でも見つける——**作品の中を降りる。** 降りなければ、
+    # 「作品が作品を抱えている」を一度も見ない（掛けたい相手はそこにしか居ない）。
+    run1("L29 2段下の作品も名指しする", semantic.check_nested_works,
+         nested_proj(names=("a/b",), is_work=False), False, None, note="1 本在る")
+    run1("L29 4本在れば畳む", semantic.check_nested_works,
+         nested_proj(names=("a", "b", "c", "d")), True, "ほか 1 本")
+
+    # ⚠️ **鳴らない例を3つ。** ここだけ `run1` を通さない——**註の不在まで見る**ためである
+    #    （註が出ないことも「違反0件」に見える）。
+    for label, proj in (
+            ("L29 下に作品が無ければ沈黙する（註も無い）",
+             nested_proj(names=(), is_work=False)),
+            ("L29 `bible.yaml` だけでは作品ではない（註も無い）",
+             nested_proj(ledger=False, is_work=False)),
+            ("L29 台帳の無い `bible.yaml` は作品ではない（註も無い）",
+             nested_proj(names=("a", "b"), ledger=False, is_work=False))):
+        got = semantic.check_nested_works(proj)
+        n += 1
+        bad += bool(got)
+        print(f"    {label:<50}{len(got):>10}  "
+              f"{'期待どおり' if not got else '⚠️ 期待と違う'}")
+
+    # ⚠️ **実物で鳴ること・鳴らないこと。**
+    #    ⚠️ **相手が無ければ黙って飛ばさない**——**「検査しなかった」を緑に数えれば、
+    #       自己検査は緑のまま何も見ていない**（`空の検査は OK と言う`）。
+    for label, rel, want_note in (
+            ("L29 実物 ukebi（題材が作品を抱える・註1件）", "projects/ukebi", "1 本在る"),
+            ("L29 実物 gozen-niji（題材だけ・沈黙）", "projects/gozen-niji", None),
+            ("L29 実物 hitosara（下に作品が無い・沈黙）", "projects/hitosara", None),
+            ("L29 実物 habits（直下へ出した後・沈黙）", "projects/habits", None),
+            ("L29 実物 habits-promo-chinatsu（直下へ出した）",
+             "projects/habits-promo-chinatsu", None)):
+        rp = REPO / rel
+        n += 1
+        if not rp.is_dir():
+            bad += 1
+            print(f"    {label:<50}{'相手が無い':>10}  "
+                  f"⚠️ 期待と違う（実物が無い——この1本は走っていない）")
+            continue
+        got = semantic.check_nested_works(Project(rp))
+        v = [f for f in got if f["severity"] != "note"]
+        nts = [f for f in got if f["severity"] == "note"]
+        ok = (not v and len(nts) == (1 if want_note else 0)
+              and (not want_note or any(want_note in f["message"] for f in nts)))
+        bad += not ok
+        print(f"    {label:<50}{f'違反{len(v)}/註{len(nts)}':>10}  "
+              f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+
     # ---- L25（テイクがショット・様式・**実物**と突き合っているか）
     #     ⚠️ **`S1` は形を見る。ここは中身を見る。** 13本がスキーマを通ることは、
     #        その13本が何かについて正しいことを、何も言わない。
