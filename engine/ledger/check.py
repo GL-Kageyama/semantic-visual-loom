@@ -1452,6 +1452,103 @@ def self_test():
     print(f"    {'L20 様式の置き場を環境変数で指せる':<46}{'':>10}  "
           f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
 
+    def run1(label, fn, proj, want, fragment, note=None):
+        """⚠️ **註も読む。** 註が出ないことも「違反0件」に見えるからである。"""
+        nonlocal n, bad
+        got = fn(proj)
+        v = [f for f in got if f["severity"] != "note"]
+        nts = [f for f in got if f["severity"] == "note"]
+        n += 1
+        ok = (bool(v) == want
+              and (not want or any(fragment in f["message"] for f in v))
+              and (note is None or any(note in f["message"] for f in nts)))
+        bad += not ok
+        head = f"違反 {len(v)} 件" if v else "違反0件"
+        print(f"    {label:<50}{head:>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in v[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ---- L31（家と §6 が名乗る様式が、同じか）
+    #     ⚠️ **カードは1枚も要らない。** 家も §6 も、このリポジトリの中に在る
+    #        ——だからこの層は、clone した人の手元でも鳴る（`L20` と違う点である）。
+    #     ⚠️ **`run1` の定義をここへ上げた。** 検査の順は `L20` → `L31` → `L21` であり、
+    #        **自己検査もその順に並べる**——道具が下に在るという理由で順を崩さない。
+    print("\n=== 自己検査 — 家と §6 の様式\n")
+
+    # ⚠️ **3つの綴りを、実際に書いて読ませる。** 綴りはこの検査の主題である
+    #    ——定数を直に当てるだけでは、**読む側が3つとも読めることを検査できない。**
+    REF_A = "- REF_STYLE: `soft-cel-anime`\n"
+    REF_B = "- `REF_STYLE` — `soft-cel-anime`\n"
+    REF_C = "## REF_STYLE\n\n- Type: `STYLE`\n- Source: `references/styles/soft-cel-anime.md`\n"
+    REF_NONE = "- REF_FORMAT: `cinematic-16x9`\n"
+
+    def ref_proj(style, ref):
+        """§6 を持つ動画の仕様。`style_proj` に、節を1つ足しただけである。"""
+        return style_proj(style,
+                          "# 1. VIDEO\n\n- Duration: `6s`\n\n"
+                          "# 6. REFERENCES\n\n" + ref +
+                          "\n# 18. WAN 3.0 PROMPT MAPPING\n\n本文\n")
+
+    # ⚠️ **本命の「鳴ってはならない」例。** 家と §6 が同じ名を指している。
+    run1("L31 家と §6 が一致する（鳴ってはならない）", semantic.check_style_reference,
+         ref_proj("soft-cel-anime", REF_A), False, None, note="A/B が 1本")
+    # ⚠️ **本命の「鳴る」例。** 家を直しても、§6 に古い名が残れば生成へ届く。
+    run1("L31 §6 が別の様式を名乗る", semantic.check_style_reference,
+         ref_proj("soft-cel-anime", "- REF_STYLE: `luminous-anime`\n"),
+         True, "食い違っている")
+    # ⚠️ **語彙が違っても、同じ名に畳まれる。** 家はカード名、§6 はパス。
+    run1("L31 語彙が違っても一致する（家はカード名・§6 はパス）",
+         semantic.check_style_reference,
+         ref_proj("luminous-anime", "- REF_STYLE: `references/styles/luminous-anime.md`\n"),
+         False, None, note="パス が 1本")
+    # ⚠️ **綴りB**（em ダッシュ形・実測30本）。**読めなければ、一致が食い違いに見える。**
+    run1("L31 綴りB（`- `REF_STYLE` — `x``）も読む", semantic.check_style_reference,
+         ref_proj("soft-cel-anime", REF_B), False, None, note="A/B が 1本")
+    # ⚠️ **綴りC**（`## REF_STYLE` の小節・実測69本）。**見出しを落とす読み方では届かない**
+    #    ——`_section_body` は見出しを落とすので、ここが C を読む唯一の証拠である。
+    run1("L31 綴りC（`## REF_STYLE` の `- Source:`）も読む",
+         semantic.check_style_reference,
+         ref_proj("soft-cel-anime", REF_C), False, None, note="C が 1本")
+    # ⚠️ **名乗りが読めない側の「鳴る」例。** 家は在るのに、§6 から引けない。
+    run1("L31 §6 が様式を名乗っていない", semantic.check_style_reference,
+         ref_proj("soft-cel-anime", REF_NONE), True, "名乗っていない")
+    # ⚠️ **名乗りが0本なら、内訳を並べない。** 「綴り: 。」と書かない。
+    run1("L31 1本も名乗らない（註の内訳も空にしない）", semantic.check_style_reference,
+         ref_proj("soft-cel-anime", REF_NONE), True, "名乗っていない",
+         note="1本も名乗っていない")
+
+    # ⚠️ **黙る例も2つ要る。** どちらも**相手が無い**——だから鳴らさない。
+    #    そして**註すら出してはならない**（註は「突き合わせた」と言う。
+    #    突き合わせていないのだから——`L26` の規律1・4と同じである）。
+    NOSPEC = style_proj("soft-cel-anime", "# 1. VIDEO\n\n本文\n")
+    NOSPEC.shots["p-ch01-seg01"] = {k: v for k, v in NOSPEC.shots["p-ch01-seg01"].items()
+                                    if k != "spec"}
+    for label, proj in (("L31 家が無ければ黙る（註も出さない）",
+                         ref_proj(None, REF_A)),
+                        ("L31 動画の仕様が無ければ黙る", NOSPEC)):
+        got = semantic.check_style_reference(proj)
+        n += 1
+        bad += bool(got)
+        print(f"    {label:<50}{len(got):>10}  "
+              f"{'期待どおり' if not got else '⚠️ 期待と違う'}")
+        for f in got[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ **受け火の実物。** 実測では、4作品のどれも1件も鳴らない。
+    #    そして**註は4作品とも1件出る**——「何本を突き合わせたか」を言うためである。
+    real_v2 = REPO / "projects" / "ukebi" / "ukebi-v2"
+    if real_v2.is_dir():
+        got = semantic.check_style_reference(Project(real_v2))
+        v = [f for f in got if f["severity"] != "note"]
+        nts = [f for f in got if f["severity"] == "note"]
+        n += 1
+        ok = not v and len(nts) == 1 and "30 本" in nts[0]["message"]
+        bad += not ok
+        print(f"    {'L31 受け火 V2（0件・註に30本）':<50}{len(v):>10}  "
+              f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in v[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
     # ---- L21〜L24（画像の経路の中身・尺の一致・`mode` が要求するもの）
     #     ⚠️ **本物の節見出しを書いたファイルを読ませる。** 合成の見出しでは、
     #        節を割る側・語幹を取る側が壊れていても通る（L10・L11 と同じ理由）。
@@ -1557,22 +1654,8 @@ def self_test():
                 + "# 11. MOTION\n\n" + motion
                 + "".join(f"# {t}\n\n本文\n" for t in ALL20[11:]))
 
-    def run1(label, fn, proj, want, fragment, note=None):
-        """⚠️ **註も読む。** 註が出ないことも「違反0件」に見えるからである。"""
-        nonlocal n, bad
-        got = fn(proj)
-        v = [f for f in got if f["severity"] != "note"]
-        nts = [f for f in got if f["severity"] == "note"]
-        n += 1
-        ok = (bool(v) == want
-              and (not want or any(fragment in f["message"] for f in v))
-              and (note is None or any(note in f["message"] for f in nts)))
-        bad += not ok
-        head = f"違反 {len(v)} 件" if v else "違反0件"
-        print(f"    {label:<50}{head:>10}  {'期待どおり' if ok else '⚠️ 期待と違う'}")
-        for f in v[:1]:
-            print(f"        {f['code']}  {f['message'][:88]}")
-
+    # ⚠️ **`run1` は上の L31 の節で定義してある。** 検査の順が `L31` → `L21` なので、
+    #    道具もその順の先頭に置いた——**使う側の隣に無いが、上げた先に在る。**
     run1("L21 禁制を覆っている（鳴ってはならない）", semantic.check_negative_coverage,
          img_proj(), False, None, note="覆っているのは 1/1 本である")
     run1("L21 1節足りない", semantic.check_negative_coverage,

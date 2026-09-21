@@ -53,6 +53,12 @@ python3 engine/shot/print_spec.py projects/<project> --shot <id>  # 只打印一
 行、以同一格式，在两部作品中都打印出一个**自信的错误值**。所以 §6 不予解析。这些洞
 记录在下面。
 
+⚠️ **只有一个键例外——`REF_STYLE`**（`L31`、`check_style_reference`）。
+**它被读取，因为读它不会变成猜测**——上面的三种拼写由**一个正则表达式**接收，
+**两种词汇（卡片名、路径）在比较之前被归并成一个名字**（取末尾一段，去掉 `.md`）。
+⚠️ **因此 `L31` 并不判定哪种词汇正确**——**它只是让两者可以互比。**
+⚠️ **其他键仍然不读**——上面的规则对它们照旧成立。
+
 ## 作品常数的家
 
 `bible.constants.video`——`aspect` / `resolution` / `frame_rate` / `orientation`。

@@ -78,6 +78,24 @@
 ⚠️ **根が作品であるときだけ違反である**——題材の置き場（`projects/ukebi`）が作品を抱えるのは
 **正しい**（親に台帳が無いので、読まれると思われようがない）。**そちらは註である。**
 
+⚠️ **`L31` を足した理由（決定 2026-09-21、著者）。** それまでこの基盤は、
+**作品が名乗る様式（`bible.style`）と、動画の仕様の §6 `REFERENCES` が名乗る様式を、
+一度も突き合わせていなかった。** `L17` は仕様にスロットが**在る**ことを見て、
+`L20` はそのスロットの**行き先が空でない**ことを見る——**だが、両方に書かれた名は
+誰も読まなかった。** 穴は文書化されていた——`engine/shot/README.md` が
+「**形が安定していない欄は、導出できない**」と書いており、**§6 は機械の読み手を
+持たなかった。** 実測（2026-09-21、動画の仕様118本）: **49本が `- REF_STYLE:` の行で
+名乗り**（名乗り形19本・em ダッシュ形30本）、**69本は §6 を小節で持ち `- Source:` に
+パスを書く**（`gozen-niji` 57・`ukebi/ukebi-video-*` 12——**どちらも家を持たない**）。
+語彙も2つに割れている（**カード名 19本・パス 99本**、同じ `luminous-anime` を
+ある作品は名で、ある作品は `references/styles/…md` と書く）。
+`L31` は**両方を1つの名に畳んでから**比べる——ゆえに**語彙が違っても鳴らない。**
+⚠️ **カードを1枚も開かない。** ゆえに**「様式が正しく適用されたか」を何も言わない**
+——**「2つの層が同じ名を名乗っているか」だけを言う。** 穴である。
+⚠️ **どちらの語彙が正かは決めない**——**新しい仕様を何で書くかは、いまも未決定である。**
+⚠️ **家を持たない作品では鳴らない**（`L17` が「様式を宣言していない」で鳴らす）
+——**同じ欠陥を2つの層が別々の符号で報告しない。**
+
 ⚠️ **`L21`–`L24` を足した理由（決定 2026-09-13、著者）。** 経路が1つから**2つ**になり
 （全ショット画像 → 全ショット動画）、**経路を決めるのが `mode` でなくなった**。
 `L21`・`L22` は**画像の経路の中身**を見る——あちらは §1–20 を持たないので、
@@ -3042,6 +3060,212 @@ def check_style_motion(project, repo_root=None):
     return out
 
 
+#: §6 `REFERENCES` が様式を名乗る行。**2つの綴りを1つの正規表現で受ける。**
+#: ⚠️ **`REF_CARD` を広げない。** あちらは画像仕様の名乗りを読む（`L22`）——
+#: **別の欄であり、広げれば画像の側が別のものを拾う。**
+#: ⚠️ **前例は `ASPECT_LINE` である。** `Aspect Ratio:` と `Aspect:` の2綴りを
+#: 1つで受けている。**同じ形の決定を、ここでもする。**
+STYLE_REF_LINE = re.compile(r"^\s*-\s*`?REF_STYLE`?\s*[:：]\s*(.+?)\s*$"
+                            r"|^\s*-\s*`REF_STYLE`\s*[—–-]\s*(.+?)\s*$", re.M)
+
+#: 名乗りの値から**様式の名**を取る。⚠️ **名乗りは人にも読める記録である**——
+#: 註が後ろに付いていても、値だけを取る（`REF_CARD_NAME` と同じ心持）。
+STYLE_REF_BACKTICK = re.compile(r"`([^`]+)`")
+
+#: ⚠️ **`[^A-Za-z0-9._/-]` を含む値は読まない。** 様式の名はスラグである。
+_STYLE_SLUG = re.compile(r"^[A-Za-z0-9._/-]+$")
+
+
+def _style_ref_name(value):
+    """名乗りの値 → **様式の名**。読めなければ `None`。
+
+    ⚠️ **語彙は2つ在る。** 実測（2026-09-21）: カード名（`luminous-anime`）が19本、
+    **パス**（`references/styles/soft-cel-anime.md`）が99本である。
+    ⚠️ **どちらの語彙が正かは、ここでは決めない。** 決めるのは著者である——
+    ここは**両方を1つの名に畳む**だけである（末尾の要素を取り、`.md` を落とす）。
+    **それで118本すべてが、実在するカードの名に着地する**（走らせて確認）。
+    """
+    v = (value or "").strip().strip("`").strip()
+    if not v or not _STYLE_SLUG.match(v):
+        return None
+    v = v.rsplit("/", 1)[-1]             # ⚠️ 名乗りのパスは POSIX である（`os` を持ち込まない）
+    if v.endswith(".md"):
+        v = v[:-3]
+    return v or None
+
+
+def _style_ref_vocab(value):
+    """名乗りの**語彙**。`"パス"` か `"カード名"` か。
+
+    ⚠️ **どちらが正かは決めない。** 註が「この作品はどちらで書いているか」を
+    言えるようにするためだけに数える——**作品ごとに違いうる**（実測: `hitosara` は
+    カード名、`ukebi-v2` はパス）。
+    """
+    v = (value or "").strip().strip("`").strip()
+    return "パス" if "/" in v else "カード名"
+
+
+def _style_ref_of(path):
+    """動画の仕様の §6 が名乗る様式。`(名, 綴り, 語彙)`。読めなければ `(None, None, None)`。
+
+    ⚠️ **綴りは3つ在る**（実測 2026-09-21、動画の仕様118本）:
+
+    | 綴り | 本数 | 形 |
+    |---|---|---|
+    | **A/B** | **49** | ``- REF_STYLE: `x` (HIGH)`` ／ ``- `REF_STYLE` — `path` · `HIGH`。`` |
+    | **C** | **69** | `## REF_STYLE` の小節が `- Source: `path`` を持つ |
+
+    ⚠️ **C は「節」である。** `_section_body` は見出しを落とすので、**C は読めない**
+    ——だからここは `specdoc.sections` を直に歩き、**§6 の中の小節**を探す。
+    ⚠️ **C は、いまのところ家を持たない作品にしか現れない**（`gozen-niji` 57・
+    `ukebi/ukebi-video-*` 12）。**だが家が足された日に読めなくなる**——だから受ける。
+    """
+    try:
+        text = Path(path).read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError):
+        return None, None, None
+    inside = False
+    for t, body in specdoc.sections(text):
+        if TOP_SECTION.match(t):
+            inside = t.startswith("6.")
+            if inside:
+                m = STYLE_REF_LINE.search(body)          # A / B
+                if m:
+                    raw = next(g for g in m.groups() if g)
+                    b = STYLE_REF_BACKTICK.search(raw)
+                    val = b.group(1) if b else raw
+                    name = _style_ref_name(val)
+                    if name:
+                        return name, "A/B", _style_ref_vocab(val)
+            continue
+        if not inside:
+            continue
+        if t.strip() == "REF_STYLE":                     # C
+            m = specmap.STYLE_SOURCE_LINE.search(body)
+            if m:
+                name = _style_ref_name(m.group(1))
+                if name:
+                    return name, "C", _style_ref_vocab(m.group(1))
+    return None, None, None
+
+
+def check_style_reference(project):
+    """L31 — **家（`bible.style`）と、仕様の §6 が名乗る様式が、同じか。**
+
+    ⚠️ **`L20` の隣に在る。** あちらは「**カードが `Motion character` を持つか**」を
+    訊く。こちらは「**家と仕様が、同じ名を指しているか**」を訊く。
+    **同じ `bible.style` を読むが、相手が違う**（`L23` と `L26` の関係と同じである）。
+
+    ⚠️ **この検査にカードは1枚も要らない。** 家と §6 だけで書ける——
+    **両方ともこのリポジトリの中に在る。** カードを要するのは `L20` と `L22` である。
+    ⚠️ **ゆえに `L20` と違い、clone した人の手元でも鳴る。**
+
+    ⚠️ **実測（2026-09-21、動画の仕様118本）。** **49本が `REF_STYLE` の行で名乗り、
+    69本が §6 の小節で名乗る。語彙はカード名19本・パス99本に割れている。**
+    そして——**リポジトリの4作品を突き合わせて、この層は1件も鳴らなかった。**
+
+    ⚠️ **そして、この2つは一度も突き合わされていなかった。** `L20` が訊くのは
+    「カードに節が在るか」だけであり、**仕様が名乗った名と家の名が同じかは、
+    誰も訊いていなかった。** `SPEC_KINDS["video"]` は `ref_keys` を持たず、
+    名乗りを読む `_image_card_slots` は、その1行目で降りる——
+    **動画の §6 は、人向けに書かれているだけで、機械は読んでいない。**
+
+    ⚠️ **語彙は2つ、綴りは3つである**（`_style_ref_of` の表を見よ）。
+    ここは**両方を1つの名に畳んでから**比べる。**どちらの語彙が正しいかは決めない**
+    ——`L26` が「正規化して読むか、4欄に割るかは未決定である」と書いたのと同じ形の
+    未決定が、2箇所目に来ている。**この検査は、その決定を待たずに書ける。**
+
+    ⚠️ **食い違ったとき、どちらが正しいかは決めない。** 家が古いのか、仕様が古いのかは、
+    **ここでは分からない**——`L26` と同じである。
+    ⚠️ **生成へ渡るのは §6 のほうである**（`L22` が名乗りを読み、`L20` がその名で
+    カードを引く）。**だが家を直しても、古い名が仕様に残れば生成へ届く。**
+
+    ⚠️ **読まないもの。**
+    - **§6 の他のキー**（`REF_CHARACTER` / `REF_FORMAT` / `REF_SOURCE` / `REF_BIBLE`）。
+      **この検査は `REF_STYLE` 1つだけを読む。**
+    - **画像の仕様。** あちらは節を持たない（`L18`）——**§6 が無いので、相手にならない。**
+    - **`takes/` も `media/` も開かない。** 開くのは `bible.yaml` と §6 だけである。
+    - ⚠️ **家を持たない作品の §6**（実測 69本）。**突き合わせる相手が無い**——
+      `L17` が「様式を宣言していない」で鳴らす。**同じ欠陥を2つの層が別々の符号で
+      報告しない**（`L26` が `duration` を読まないのと同じ規律）。
+
+    ⚠️ **相手が無ければ鳴らさない。** 動画の仕様が1本も無ければ、この層は
+    **何も見ていない**——`L11`・`L18` が報告する。
+    """
+    out = []
+    style = ((getattr(project, "bible", None) or {}).get("bible") or {}).get("style")
+    if not style:
+        return out                       # L17 が「様式を宣言していない」と鳴らしている
+
+    pairs = []
+    for s in project.order():
+        # ⚠️ **`_spec_of` を通す。** ここだけ `shot.get("spec")` を直に読むと、
+        #    経路の決め方が2箇所に分かれる（`L20` と同じ理由）。
+        src = _spec_of(project.shots[s], "video")
+        if not src:
+            continue                      # L11・L18 が鳴らしている
+        p = project.root / src
+        if not p.is_file():
+            continue
+        pairs.append((s, p))
+    if not pairs:
+        return out                        # 相手が無い。L11・L18 が報告済みである。
+
+    compared = agreed = 0
+    spellings, vocabularies = {}, {}
+    for s, p in pairs:
+        got, how, vocab = _style_ref_of(p)
+        if got is None:
+            out.append(finding("L31", s,
+                               "動画の仕様の §6 が、様式を名乗っていない——"
+                               f"**`REF_STYLE` が読めない。**"
+                               f"家は `style: {style}` を宣言しているのに、"
+                               "**この仕様の側からは、どの様式を引くのかが読めない。**"
+                               "⚠️ **綴りは3つ在る**（`- REF_STYLE: `x`` ／ "
+                               "`- `REF_STYLE` — `x`` ／ `## REF_STYLE` の `- Source:`）。"))
+            continue
+        compared += 1
+        spellings[how] = spellings.get(how, 0) + 1
+        vocabularies[vocab] = vocabularies.get(vocab, 0) + 1
+        if got != style:
+            out.append(finding("L31", s,
+                               f"様式が食い違っている——家は `style: {style}`、"
+                               f"§6 は `{got}` を名乗る。"
+                               "**生成へ渡るのは §6 のほうである**——"
+                               "だから家を直しても、**古い名が仕様に残れば生成へ届く。**"
+                               "⚠️ **どちらが正しいかは、ここでは決めない。**"))
+            continue
+        agreed += 1
+
+    # ⚠️ **名乗りが0本なら、内訳を並べない。** 空の内訳は「綴り: 。」になる
+    #    ——**註は、読める形でだけ書く。**
+    if compared:
+        told = "・".join(f"{k} が {v}本" for k, v in sorted(spellings.items()))
+        vocab = "・".join(f"{k} が {v}本" for k, v in sorted(vocabularies.items()))
+        head = (f"家と §6 の様式を突き合わせた（動画の仕様 {len(pairs)} 本、"
+                f"{compared} 本が名乗り、{agreed} 本が一致）。"
+                f"⚠️ **この作品の綴り**: {told}。"
+                f"⚠️ **この作品の語彙**: {vocab}。")
+    else:
+        head = (f"家と §6 の様式を突き合わせた（動画の仕様 {len(pairs)} 本、"
+                f"**だが1本も名乗っていない**）。"
+                "⚠️ **この作品には、突き合わせる相手が無い。**")
+    out.append(finding("L31", f"{agreed}件", head +
+                       # ⚠️ **「今日は0件」は、測った範囲つきで書く。**
+                       #    「この層は鳴らない」とだけ書けば、**鳴る作品が現れた回に
+                       #    嘘になる**——だから作品ではなく**実測**を名乗る。
+                       "⚠️ **実測したリポジトリの4作品を突き合わせた限り、"
+                       "この層は1件も鳴らなかった**（2026-09-21）。"
+                       "**綴りは3つ、語彙は2つ**——リポジトリ全体ではそうである"
+                       "（同じ家 `luminous-anime` を、ある作品はカード名で、"
+                       "ある作品は `references/styles/…md` と書く）。"
+                       "**だから鳴らないことと、要らないことは別である。**"
+                       "⚠️ **この註は「家が正しい」とは言っていない。**"
+                       "家と §6 が同じ名に畳まれた、と言っているだけである。",
+                       severity="note"))
+    return out
+
+
 # ---------------------------------------------------------------- まとめ
 
 CHECKS_SHOT = (check_unit, check_one_place, check_one_time, check_move,
@@ -3075,6 +3299,9 @@ def run(project, schema_dir=None, repo_root=None):
     out += check_role_registered(project)
     out += check_prompt_slots(project)
     out += check_style_motion(project, repo_root=repo_root)
+    # ⚠️ **`L20` の直後に置く。** 同じ `bible.style` を読み、相手だけが違う
+    #    ——あちらはカード、こちらは仕様の §6。**離すと、片方だけが直される。**
+    out += check_style_reference(project)
     out += check_mode_demands(project)
     if schema_dir:
         out += check_field_source(schema_dir)

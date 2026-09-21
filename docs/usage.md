@@ -214,7 +214,7 @@ The counts behind that are in `HISTORY.md`.
 
 ## The layers
 
-The check is **31 layers, `L0`–`L30`**, plus schema-shape validation.
+The check is **32 layers, `L0`–`L31`**, plus schema-shape validation.
 **They are not one verdict**—each layer fires on its own and is reported with the
 number it saw.
 

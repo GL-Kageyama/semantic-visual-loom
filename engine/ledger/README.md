@@ -60,6 +60,7 @@ in order to fire on "`before` and `after` are the same" — but **JSON Schema ca
 | **L28** | **§18 carries a phrase that belongs to the other route** (`MINIMAX H3` only; the phrases and their reasons are in `specmap.MODEL_ROUTE`) | "Is §18 Written in This Route's Grammar" below |
 | **L29** | **This run does not read every work below it** — a work holding a work is a violation; a work held by a material directory is a note | "Does This Run Read Every Work Below It" below |
 | **L30** | **§18 fills a slot the route does not receive** (`SEEDANCE 2.5` only; the slots and their reasons are in `specmap.MODEL_UNRECEIVED_SLOTS`). **Waivable — by the work (`bible.route_limits_accepted`)** | "The Slots a Route Does Not Receive" below |
+| **L31** | **The home and §6 do not name the same style** — `bible.style` against the video specification's §6 `REFERENCES`. ⚠️ **Needs no cards; both sides are in this repository.** 3 spellings, 2 vocabularies, **folded to one name before comparing** | "Do the Home and §6 Name the Same Style" below |
 
 **L2, L3 and L4 are transplants.** Applied to all 57 segments of Gozen-niji,
 a checker that scored **recall 2/2 and 0 false positives** went in just as it was.
@@ -811,6 +812,44 @@ layer **says so** — "0 本", as a note — because **`L28` printing nothing an
 the same, and they are not the same.** ⚠️ **When the registry itself is broken, it reads no bodies
 at all** and names the broken row — **the same shape as `L28`.**
 
+### L31 — do the home and §6 name the same style
+
+**The home declares one style** (`bible.style`). **The video specification's §6 `REFERENCES` names
+one too** — and ⚠️ **it is §6's name that reaches the generator** (`L22` reads the naming, `L20`
+pulls the card by it). **The two were never compared.**
+
+⚠️ **Three spellings, two vocabularies.** The layer folds both to a single name before comparing:
+
+| Spelling | Shape | Measured (video specifications) |
+|---|---|---|
+| **A** | ``- REF_STYLE: `x` `` | **19** |
+| **B** | ``- `REF_STYLE` — `x` `` | **30** |
+| **C** | a `## REF_STYLE` subsection, ``- Source: `x` `` | **69** |
+
+**The vocabulary is the card name** (`soft-cel-anime`) **in 19**, and **a path**
+(`references/styles/soft-cel-anime.md`) **in 99**. **The home always speaks a card name.**
+
+⚠️ **This layer needs no cards.** Both sides are inside this repository — so unlike `L20`, **it
+works in a fresh clone** (no "cannot be confirmed"). The fold is **the basename with `.md`
+stripped**, and **it resolves 118/118** to one of exactly two styles, **both of which are real
+cards**. ⚠️ **The spellings do not overlap by accident**: the 69 C-form specifications are
+**exactly the ones whose work has no `bible.yaml`** — **the checkable set (49) uses two spellings,
+which is the `ASPECT_LINE` situation** (two spellings, one reader).
+
+⚠️ **It does not decide which spelling or which vocabulary is canonical.** It folds them and
+compares. ⚠️ **So a work that changes the home's name fires until §6 changes too** — and **the
+layer does not say which of the two is stale**, because **that cannot be read from these two
+places alone.**
+
+⚠️ **Where the work has no home, this layer is silent** — **69 specifications name a style with no
+`bible.yaml` to compare against.** `L17` reports those. **The same defect is not reported twice
+under two codes.**
+
+⚠️ **A note always fires, once per run** — it says **how many specifications were compared and
+which spelling and vocabulary that work uses.** ⚠️ **On the four works measured (2026-09-21)
+nothing fires** — **which spelling is canonical is undecided**, and **this layer was written so
+that it does not wait for that decision** (see "What Is Still Missing").
+
 ### ⚠️ Firing Against a Running Artifact
 
 | Check | Ukebi V2 (30 takes) | What it is saying |
@@ -827,6 +866,12 @@ at all** and names the broken row — **the same shape as `L28`.**
 | L22 | **0** | same as above. ⚠️ **Ukebi V2 holds no `key_image`, so the naming side has never been read either** — **this check has actually fired only inside the self-test.** |
 | L23 | **0** (1 note) | the durations agree 30/30 |
 | L24 | **0** (1 note) | all 30 are `mode: motion` and **hold no requirement** — so this check **sees nothing on Ukebi**. The note reports that. |
+| L31 | **0** (1 note) | the home and §6 fold to the same name in all 30. ⚠️ **Ukebi V2 is the work that names the style by path** — the note says so (30 specifications, spelling `A/B`, vocabulary = a path). **Both vocabularies are real, and one work writes each.** |
+
+⚠️ **`L31` reads only the home and the specification** — **`L20` and `L22` need the style cards,
+and the cards are not in this repository.** So **two green rows here can mean different things**:
+a green `L31` says the two sides agree, **and a green `L20` says the card was read** — where the
+cards are absent, `L20` reports "cannot be confirmed" and **this row's meaning does not change.**
 
 **Decide a rule and the existing artifacts still do not satisfy it.**
 §11 MOTION **exists in all 30 and all 4 subsections are non-empty** — **only the destination field is empty.
@@ -989,7 +1034,8 @@ What it can say is —
 | **Guarantees** | **The intent and the specification agree on duration.** | **L23** |
 | **Guarantees** | **A still shot is written as still** (§11 non-empty. `composite` also needs `text_channel`) | **L24** |
 | **Guarantees** | **What came back matches the shot, the style and the measurement.** | **L25** |
-| **Guarantees** | **It is not broken.** L0–L30 fire before generation, and everything that fired can be explained | all |
+| **Guarantees** | **The home and the specification name the same style.** | **L31** |
+| **Guarantees** | **It is not broken.** L0–L31 fire before generation, and everything that fired can be explained | all |
 | **Does not guarantee** | **That the generator draws the aim.** | —— |
 | **Does not guarantee** | **That a still shot's §11 really stops the subject.** | —— |
 | **Does not guarantee** | **That the file `take.file` names actually exists.** | —— |
@@ -1019,6 +1065,10 @@ Write only `spec:` and not `key_image:`, and **the image side is never checked**
   **"changed" is not "became new."**
 - **L14** It does not decide whether the increment that does not return is **a disclosure** or **a rewording**. Likewise it **only looks at the set**.
   Decide what cannot be decided and you get the same false positives as L4.
+- **L31** **When the home and §6 name different styles, it does not decide which is right.**
+  Whether the home is stale or the specification is, **cannot be decided from those two places
+  alone** — ⚠️ **and it does not stay silent either**: **the name in §6 is the one that reaches the
+  generator, so fixing the home alone leaves the old name in the specification.**
 - **L8** A key not in the ledger fires, but **the key naming convention itself is undecided**
   (`<entity>.sheet` / `<place>.geography` are accepted by derivation. Not canonical).
 - **L25** **When the specification and the measurement contradict, it does not decide which is right.**
@@ -1061,6 +1111,11 @@ Write only `spec:` and not `key_image:`, and **the image side is never checked**
 - **Matching `motion.law`.** The 3 parts — §18's slots, the record's `motion`, and `bible.style` — are
   now in place, but **the matching that ties the two together still does not exist.** ⚠️ **Write it now and it becomes a check that never fires**
   (`motion` is 0/30). **With the other side empty, nothing fires** (the same discipline as L0 and L9).
+- **Which spelling of the style is canonical.** `L31` reads **three spellings** of §6's
+  `REF_STYLE` and **two vocabularies** (a card name, a path), **and folds them before comparing.**
+  ⚠️ **So it never fires on a spelling** — **what a new specification should be written as is not
+  decided.** ⚠️ **Deciding it is what would give this layer something to fire on**, and **there are
+  two parties** (the home and §6) — **so the decision has to say which side moves.**
 - **The canonical spelling of a role.** 6 shots use the qualified spelling (`motion (halt)`),
   and **whether to make the registry's name or that one canonical is not decided.** L15 reports it **as a note**.
 - ⚠️ **Not one person resolves `ROLES[...]["既定モード"]`.** The registry holds a default mode and

@@ -733,6 +733,14 @@ FRAME_RATE_LINE = re.compile(r"^-\s*Frame Rate:\s*`?([^`\n]+?)`?\s*$", re.M)
 #: ⚠️ **画像の仕様は §19 を持たない**——だから画像のテイクには、この照合の相手が無い。
 SPEC_VERSION_LINE = re.compile(r"^-\s*Specification Version:\s*`?([^`\n]+?)`?\s*$", re.M)
 
+#: §6 の `## REF_STYLE` 小節が名乗る**出所**。**`L31` が、家と突き合わせる。**
+#: ⚠️ **これは3つ目の綴りである。** 実測（2026-09-21、動画の仕様118本）——
+#:    `- REF_STYLE: `x`` が19本・`- `REF_STYLE` — `x`` が30本・
+#:    **`## REF_STYLE` の `- Source: `x`` が69本。**
+#: ⚠️ **この綴りは `##` の小節である。** `_section_body` は見出しを落とすので、
+#:    **本文からは読めない**——読む側は `specdoc.sections` を歩くこと。
+STYLE_SOURCE_LINE = re.compile(r"^-\s*Source:\s*`?([^`\n]+?)`?\s*$", re.M)
+
 #: §1 の作品定数のうち、上の `RESOLUTION_LINE`・`FRAME_RATE_LINE` が拾わない2行。
 #: **`L26` が `bible.constants.video` と突き合わせる。**
 #:
