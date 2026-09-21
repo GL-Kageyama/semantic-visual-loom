@@ -1,0 +1,109 @@
+# 作品台帳 — 一筆（ippitsu）
+#
+# ⚠️ **この作品は物語ではない。**
+#    1ショットだけの最小の作品であり、**Style 4.3「動く絵画」が成立するかを試すために在る。**
+#    決定（2026-09-21、著者）D-14。
+#    ⚠️ **ゆえに、この作品を物語として読まないこと。** ここには人物も、開示も、話数も無い。
+#       **試すのは様式の運動イディオムが1本の動画として立つかどうか、その1点である。**
+#
+# ⚠️ **このリポジトリで、出典を持たない最初の作品である。**
+#    他の4作品は台帳の先に原作を持つ。**この作品の出典は、様式カード1枚
+#    （`references/styles/sumi-e.md`）と、その `## Motion character` だけである。**
+#    だから `world` は世界ではなく、**紙の上の一行為**を書く。
+#
+# ⚠️ **走らせ方。** リポジトリの直下から `SVL_STYLES_DIR=references/styles` を張って走らせる。
+#    張らなければ `L20` が**違反として**鳴る——このリポジトリの中に置いたカード
+#    （`## Motion character` を持つ側）が読まれず、**隣の55枚（持たない側）が読まれる**ためである。
+#    ⚠️ **これは作品の欠陥ではなく、置き場の性質である**——実測は `HISTORY.md` の `## 0.33.4` に在る。
+#    ⚠️ **張らなくても、この作品の記録は正しい。** 鳴るのは「カードが読めない」であって
+#       「この作品が何か間違っている」ではない。
+
+project: ippitsu
+
+bible:
+  # ⚠️ **このリポジトリの作品で、`luminous-anime` 以外を選んだ最初の1本である。**
+  #    `bible.style` は**名前を1つだけ書く欄**である（決定 2026-09-13）——
+  #    だから「画像は `sumi-e`、動画は `luminous-anime`」とは書けない。
+  #    この作品は**両方の経路を `sumi-e` で通す。**
+  #    ⚠️ **`L31` が §6 の `REF_STYLE` と突き合わせる。** ここを変えれば仕様も変わる。
+  style: sumi-e
+
+  # ⚠️ **発話は無い（§14）。それでも宣言する。**
+  #    **空欄は中立ではない**——生成器は、指定されなければ自分の既定で喋る
+  #    （実測: 発話のある動画に**中国語の字幕が焼かれた**）。
+  #    `L27` は宣言が §18 `Audio Prompt` まで届いているかを見る。
+  language: Japanese
+
+  world:
+    concept: >-
+      紙と墨。それ以外は何も無い。**時計が無いのではない——時間が無い。**
+      あるのは一筆が置かれる前と後だけで、その間で**紙が墨を持ち、持ち続ける。**
+
+    rules:
+      - "**一筆は一度だけ置かれる。** 直されない。なぞられない。二度目は無い。"
+      - "**墨は広がる方向にしか動かない。** 狭まらない。戻らない。白へ乾かない。"
+      - "**筆は去る。** 止まったあとに動くものは、手のものではなく**紙のもの**である。"
+      - "**余白は空いたままである。** 埋めるために何かが漂ってくることはない——埃も、靄も、光の筋も。"
+      - "**墨は単色である。** 色も、色温度の移動も無い。"
+      - "**この作品に、読み取れる文字は無い。** 落款も、印も、署名も無い。"
+      - "**この作品に、人物は居ない。** 紙と墨と、それを一度だけ置く筆だけである。"
+
+    visual_language:
+      art_direction: >-
+        Graded black ink on washi. The five inks, dry-brush strokes, bleeding, boldly reserved
+        negative space, single-stroke economy, paper grain, dark ink dots. Monochrome throughout —
+        no colour and no colour-temperature shift anywhere in the shot.
+
+      # ⚠️ **時代が無い。** これは空欄ではなく宣言である——**枠の中の何も、これを年代に結びつけない。**
+      era: >-
+        None. Nothing in the frame dates it, and nothing in the frame changes across the work.
+
+  constants:
+    # ⚠️ **この4つは §1 と突き合わされる**（`L26`）。写しはずれる——だから家を1つに決める。
+    video:
+      aspect: "16:9"
+      resolution: "1920x1080"
+      frame_rate: "24fps"
+      orientation: "Landscape"
+
+    # ⚠️ **以下はこの作品の定数である。** §1–20 に欄が無い（`自前`）——
+    #    生成へは渡らない。**渡らないことは、落ちることではない。**
+    一筆: "**一度だけである。** 直されない。なぞられない。二度目は無い。"
+    墨: "**広がる方向にしか動かない。** 狭まらない。戻らない。白へ乾かない。"
+    余白: "**空いたままである。** 埋めるために何も漂ってこない。"
+
+  # ⚠️ **2経路の Negative は一字も違わない**（この作品の規約）。
+  #    ⚠️ **この作品は基盤の禁制（字幕・BGM）の床を免れない。**
+  #       他の4作品のうち `hitosara` だけが祖父条項を持つ（`base_negatives_waived`）。
+  #       この作品は床のあとに書かれた——**ゆえに床は掛かる。**
+  #    ⚠️ **`L21` は両経路を覆っているかを見る。覆うであって、等しいではない。**
+  negative_base:
+    - no watermark
+    - no on-screen subtitles
+    - no background music
+    # ---- 様式（様式カード `sumi-e` の `## Negative` から）
+    - no color
+    - no photorealistic
+    - no hard outline
+    # ---- この1本の一方向（§16・§17 の最優先）
+    - no second stroke
+    - no retracing of the stroke
+    - no ink retreating
+    - no ink narrowing
+    - no drying back to white
+    # ---- 筆は去る
+    - no brush after the stroke lands
+    # ---- 余白は空いたまま
+    - no filled negative space
+    - no ambient particles
+    - no haze
+    - no light shafts crossing the frame
+    # ---- 紙のものでもない動き
+    - no morphing contours
+    - no motion blur
+    - no camera move for its own sake
+    # ---- 文字
+    - no seal
+    - no signature
+    - no stamp
+    - no readable text
