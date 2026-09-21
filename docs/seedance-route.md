@@ -6,7 +6,7 @@
 
 Video has three routes. **`WAN 3.0` attaches a `key_image`** — it generates from text and pulls the look toward that image. **`MINIMAX H3` attaches a storyboard image** — the generator receives the board as the design of the whole clip and draws every panel of it. **`SEEDANCE 2.5` attaches nothing by default** — it reads one long prompt, and that prompt may carry its own clock. As with the others, the route is not chosen by a flag: it is read off the heading of §18, and the name in that heading picks it.
 
-⚠️ **This route is registered, and nothing has been shot on it yet.** Its constraint list is short because of that, and the shortness is the measured state — **not a claim that the route has no constraints.**
+⚠️ **One shot has been taken on this route** (measured 2026-09-21, `habits-ch02-seg07`), **and its constraint list below is still empty** — because **no defect has been traced to a word.** The emptiness is the measured state — **not a claim that the route has no constraints.**
 
 ## What is measured
 
