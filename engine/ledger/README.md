@@ -1117,6 +1117,15 @@ Write only `spec:` and not `key_image:`, and **the image side is never checked**
   not **whether what it pulled matches `motion` or `Style Motion`.**
   The cards live in `distill-essence-engine` and **someone who cloned this repository does not have them.**
   **When it cannot be read, report "cannot be confirmed"** — **record the hole as a hole.**
+  ⚠️ **A card of this repository's own can be read** (put it in `references/styles/`
+  and point `SVL_STYLES_DIR` at that directory) — **the note names the file it actually read**,
+  so which side answered is readable.
+- ⚠️ **The place is searched, not the purpose.** `SVL_STYLES_DIR` **overlays by directory**, and the same
+  list answers **`L20` (video) and `L22` (image, board)**. So a card written here for the video side
+  **also answers for an image specification that names the same style** — and if it is thinner than the
+  card it shadows (**no `## Environment variables`, no `## Prompt template`**), `L22` will report the
+  thinness as a defect of the *specification*. **A card placed here has to stand on its own**,
+  or carry the name of a style nothing else names.
 - **Matching `motion.law`.** The 3 parts — §18's slots, the record's `motion`, and `bible.style` — are
   now in place, but **the matching that ties the two together still does not exist.** ⚠️ **Write it now and it becomes a check that never fires**
   (`motion` is 0/30). **With the other side empty, nothing fires** (the same discipline as L0 and L9).

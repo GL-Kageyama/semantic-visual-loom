@@ -80,7 +80,7 @@ semantic-visual-loom/
 ├── docs/            # 用法，以及更深入的解说
 ├── skills/          # 4 个 Skill——分解、设计、台账、镜头
 ├── tools/           # 检查（i18n 的镜像）
-├── references/      # 从 distill 移管过来的 video-spec
+├── references/      # 从 distill 移管过来的 video-spec，以及这一侧的样式卡
 ├── assets/          # 仓库的脸（README 的 hero）
 └── projects/        # 每部作品的实体
 ```

@@ -1649,7 +1649,7 @@ def _image_card_slots(specs, kind, repo_root):
                            f"画像の仕様が名乗ったカード（{layers}）を読み、"
                            f"{len(kind.get('vars') or ())} 欄がその穴の和であることを"
                            "確かめた。⚠️ **カードの中身が正しいかは、この層には"
-                           "読めない**——カードは `distill-essence-engine` の持ち物である。",
+                           "読めない**——**見ているのは、名乗りと欄の和が合うことまでである。**",
                            severity="note"))
     return out
 
@@ -2772,8 +2772,7 @@ def check_prompt_slots(project):
                            #    ——**`L20` が在るのに、偽であった。**
                            + "⚠️ **様式カードは `L20` が読む**（`## Motion character` が"
                            "カードに在るかまで）。**引いた中身が正しいかは、"
-                           "まだ検査されていない**——カードは "
-                           "`distill-essence-engine` の持ち物である。"
+                           "まだ検査されていない。**"
                            "**この穴は、穴のまま記録する。**",
                            severity="note"))
     return out
@@ -3104,7 +3103,7 @@ def check_style_motion(project, repo_root=None):
                            f"（`{card}`）。"
                            f"{with_slot} 本の `Style Motion` は中身を運ぶ。"
                            "⚠️ **引いた中身が正しいかは、まだ検査していない**——"
-                           "カードは `distill-essence-engine` の持ち物である。",
+                           "**見ているのは `## Motion character` が在るかどうかだけである。**",
                            severity="note"))
     return out
 

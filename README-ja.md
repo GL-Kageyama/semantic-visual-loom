@@ -80,7 +80,7 @@ semantic-visual-loom/
 ├── docs/            # 使い方と、踏み込んだ解説
 ├── skills/          # 4つの Skill——分解・設計・台帳・ショット
 ├── tools/           # 検査（i18n のミラー）
-├── references/      # distill から移管した video-spec
+├── references/      # distill から移管した video-spec と、こちら側の様式カード
 ├── assets/          # リポジトリの顔（README の hero）
 └── projects/        # 作品ごとの実体
 ```

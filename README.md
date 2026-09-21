@@ -81,7 +81,7 @@ semantic-visual-loom/
 ├── docs/            # usage, and the deep dives
 ├── skills/          # the four skills — breakdown, design, ledger, shot
 ├── tools/           # checks (i18n mirrors)
-├── references/      # the video-spec moved over from distill
+├── references/      # the video-spec moved over from distill, and this side's own style cards
 ├── assets/          # the repository's face (the README hero)
 └── projects/        # the substance of each work
 ```
