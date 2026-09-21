@@ -123,7 +123,14 @@
 - ⚠️ **REF_BOARD は無い。** この経路は絵コンテを要求しない。**この経路の参照素材は `role` を持つ**——
   `reference_image`（最大30点）・`reference_video`・`reference_audio`・**`first_frame`**・**`last_frame`**。
   **この経路の入力の型は5つである**（テキストのみ／参照画像／先頭フレーム／動画編集／動画延長）。
-  ⚠️ **このショットは「テキストのみ」の型で立っている**——**参照素材がまだ一枚も無いからである。**
+  ⚠️ **このショットは「テキストのみ」の型ではない。参照画像を1点持つ**（2026-09-21）——
+  `key_image: specs/image/habits-ch02-seg07.md`。**その1枚が `reference_image` として並ぶ**
+  ——**`first_frame` ではない**（先頭フレームの型は `ratio: adaptive` を要求する。`specmap.MODELS` の註）。
+  ⚠️ **訂正（2026-09-21）。** 以前ここには「**参照素材がまだ一枚も無いからである**」と書いてあった。
+  **無かったのは事実である**——**だが、その書き方は理由を「経路が `key_image` を取らないから」と
+  読ませる。それは誤りである**（`key_image` は `specmap.FIELD_DESTINATION` で経路を見ない）。
+  ⚠️ **参照画像は1点だけである。** この経路は**画像30点と5つの `role`** を持つが、
+  `key_image` が名指せるのは1枚である——**その差は、まだ誰も書いていない。穴である。**
 - ⚠️ **この経路は、実在の顔を含む参照画像・参照動画を受け取らない**（公式の警告）。
   **この作品の人物は実在しないので、この制限には当たらない。**——**当たらないことを、ここに書く。**
 
@@ -311,7 +318,7 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 ## Resolved Values
 
 - Duration: `12s`
-- References: `REF_CHARACTER (setting sheet rev.5, CRITICAL) ／ REF_FORMAT (video-spec) ／ REF_STYLE (luminous-anime, HIGH) ／ REF_SOURCE (bible.yaml ＋ ledger.yaml, CRITICAL)`
+- References: `REF_CHARACTER (setting sheet rev.5, CRITICAL) ／ REF_FORMAT (video-spec) ／ REF_STYLE (luminous-anime, HIGH) ／ REF_SOURCE (bible.yaml ＋ ledger.yaml, CRITICAL) ／ KEY_IMAGE (specs/image/habits-ch02-seg07.md — 1点, as reference_image, not first_frame)`
 - Temporal Structure: `4 movements, NON_UNIFORM — 3s / 3s / 3s / 3s. The held movement = MOVEMENT 4`
 - Camera Events: `1 event as listed in §10`
 - Action Events: `ACT_CARRY → ACT_CHECK → ACT_STOP`

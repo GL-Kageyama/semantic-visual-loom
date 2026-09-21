@@ -52,11 +52,19 @@ shot: habits-ch02-seg07
 
 # 動画の仕様（§1–20 を持つ）。**§18 の見出しがモデルを名乗る**——この一枚は
 # **`18. SEEDANCE 2.5 PROMPT MAPPING`** である（`L18` が読む）。
-# ⚠️ **画像の仕様（`key_image:`）は無い。** この経路の参照素材は
-#    **`reference_image` / `reference_video` / `reference_audio` / `first_frame` / `last_frame`** である
-#    （`specmap.MODELS` の註）——**`key_image` ではない。**
-#    ⚠️ **ゆえに `key_image` の欄は、この経路では埋まらない。穴である**（`L18` が註で報告する）。
+# ⚠️ **画像の仕様も持つ。** `key_image` は**経路を見ない欄である**——
+#    `specmap.FIELD_DESTINATION["key_image"]` の行き先は `handover:distill` と
+#    `params:references` であり、**経路ごとの分岐が無い。**
+#    ⚠️ **訂正（2026-09-21）。** 以前ここには「**ゆえに `key_image` の欄は、
+#       この経路では埋まらない。穴である**」と書いてあった。**それは誤りである。**
+#       `SEEDANCE 2.5` が禁じているのではない——**参照させる1枚が、まだ無かった**だけである。
+#       **「無い」と「禁じられている」は違う。****この作品の最初の画像仕様が、それを埋めた。**
+#    ⚠️ **そして、その1枚がこの経路で行く先は `params.references` である**——
+#       `role` を持つ素材のうちの `reference_image` として（**最大30点**）。
+#       **`first_frame` ではない**——先頭フレームの型は `ratio: adaptive` を要求するので、
+#       `16:9` を名乗れなくなる（`specmap.MODELS` の註）。
 spec: specs/video/habits-ch02-seg07.md
+key_image: specs/image/habits-ch02-seg07.md
 
 unit:
   before: 宛名票の名が、**紙の上にあり、まだ表札へ運ばれていない**
@@ -191,9 +199,14 @@ forbidden_set:
 # ⚠️ **`attached` は宣言であって記録ではない。**（`hitosara` の同じ註）
 #    ここに書いてあるのは「何を添付するつもりか」であって、「何を添付したか」ではない。
 #    **記録はテイクの側に在る**（`take.params.references`）——⚠️ **`takes/` はまだ無い。**
-#    ⚠️ **`SEEDANCE 2.5` の経路では、添付は `key_image` でも「絵コンテ全体」でもない。**
+#    ⚠️ **`SEEDANCE 2.5` の経路では、添付は「絵コンテ全体」ではない。**
 #       **`role` を持った参照素材である**——`reference_image`（**最大30点**）・`reference_video`・
 #       `reference_audio`・**`first_frame`**・**`last_frame`**（`specmap.MODELS` の註）。
+#       ⚠️ **訂正（2026-09-21）。** 以前ここには「添付は `key_image` でもない」と書いてあった。
+#          **`key_image` は、そこへ行く1点目の作り方である**（`specmap.FIELD_DESTINATION`）——
+#          **この1枚が、`reference_image` として並ぶ。** ⚠️ **ただし1点だけである。**
+#          **この経路は30点の画像と5つの `role` を持つが、`key_image` が名指せるのは1枚である**
+#          ——**その差は、まだ誰も書いていない。穴として残す。**
 #       ⚠️ **この経路は、実在の顔を含む参照を受け取らない。**
 #          **この作品の人物は実在しないので、その制限には当たらない**——**当たらないことを、ここに書く。**
 attached:
