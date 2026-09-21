@@ -62,6 +62,7 @@ in order to fire on "`before` and `after` are the same" — but **JSON Schema ca
 | **L30** | **§18 fills a slot the route does not receive** (`SEEDANCE 2.5` only; the slots and their reasons are in `specmap.MODEL_UNRECEIVED_SLOTS`). **Waivable — by the work (`bible.route_limits_accepted`)** | "The Slots a Route Does Not Receive" below |
 | **L31** | **The home and §6 do not name the same style** — `bible.style` against the video specification's §6 `REFERENCES`. ⚠️ **Needs no cards; both sides are in this repository.** 3 spellings, 2 vocabularies, **folded to one name before comparing** | "Do the Home and §6 Name the Same Style" below |
 | **L32** | **The format card §6 names cannot be read, or declares no `## Negative`** — the video specification's §6 `REF_FORMAT`. ⚠️ **Three outcomes: no card directory is a note; a missing card is a violation; a card missing its section is a violation.** ⚠️ **Here it fires by default — the neighbour holds no `video-spec` card; one environment variable clears it** | "Can the Format Card Be Read, and Does It Declare a `Negative`" below |
+| **L33** | **§18's `Camera Prompt` forbids a gesture the style card offers** — the style card's `## Motion character`, against a slot the generator actually receives. ⚠️ **The comparison words are quoted from the card** (`skills/staging/cards.yaml`); **a quote that no longer matches the card is a note, not a firing** | "Does §18's `Camera Prompt` Forbid a Gesture the Card Offers" below |
 
 **L2, L3 and L4 are transplants.** Applied to all 57 segments of Gozen-niji,
 a checker that scored **recall 2/2 and 0 false positives** went in just as it was.
@@ -87,7 +88,7 @@ reaches too far. **Recorded here, where it happens, as a hole.**
 And L7 **counts and reports the shots that hold no disclosure state** —
 without counting, you cannot tell whether "0 violations" means "0 after checking" or "not checked".
 
-`--self-test` holds **one example that fires and one that does not, for each check** (265 examples).
+`--self-test` holds **one example that fires and one that does not, for each check** (273 examples).
 ⚠️ **Read the notes too.** Because **a note that does not appear also looks like "0 violations"**
 — with no example that confirms the note, deleting the note leaves the self-test green.
 ⚠️ **Read the note's "count" too.** `L25`'s note says "read N takes (broken down by role)" —
@@ -108,6 +109,16 @@ and **`L24` holds one that does not fire on `motion`.**
 **rewriting `specdoc.section` into a raw string test leaves the self-test green.**
 ⚠️ **And it holds the pair that proves the two layers are separable**: with one variable set,
 **only its own layer moves** — the same shape as the `L13` / `L17` pair above.
+⚠️ **`L33` holds eight examples, and two of them are the ones that would silently disappear** —
+**a shot that declines in the form the staging document names** (*The style permits a drift; this
+shot spends neither* — does not fire, because **a check that cannot be satisfied is a check that
+cannot be fixed**) and **a slot that never mentions the gesture** (does not fire: **silence is not
+a prohibition**). ⚠️ **It also holds a pair that one word would collapse** — **no index at all** is
+one note (*cannot be confirmed*) and **an index that does not name this style** is another
+(*this work's camera was not compared*). **Give both the same sentence, and the self-test stays
+green while the layer stops reporting which of the two happened.** ⚠️ **And it holds the "the
+reading is stale" side** — an index whose quote is not in the card — because **a comparison table
+that is never re-checked is a table of my own prose** (`skills/design/SKILL.md`).
 And **it reads the real thing** — `L18` reads Ukebi V2's 30 takes, `L19` reads the real schema,
 `L20` the real 55 style cards. **A check that passes only on synthetic data will fire in the field.**
 ⚠️ **`L25` was fixed once by "an example that should not have fired, firing."** The duration tolerance is one frame, but
@@ -966,6 +977,65 @@ already records.
 ⚠️ **It sits directly after `L31` on purpose.** **The two read the same §6 and differ only in the
 key** — separated, one gets fixed and the other is forgotten.
 
+### L33 — does §18's `Camera Prompt` forbid a gesture the card offers
+
+**The staging stage's only check, and it opens the same card `L20` opens — from the other side.**
+`L20` asks **whether the card declares a `## Motion character`**; `L33` asks **whether a gesture that
+card offers is negated in §18's `Camera Prompt`** — ⚠️ **the slot a generator actually receives**
+(`PROMPT_SLOT_SOURCE`: `Camera Prompt ← §10`).
+
+⚠️ **The failure it exists for is recorded, not imagined.** Seven works were generated from grammar
+cards, and **their §18s collapsed to nearly the same phrasing although their §10s differed in all
+seven** — a specification naming `macro-photo` (*the camera is the mover*) wrote *the camera does
+not move at all — no rack, no drift.* So **`Style Motion` (the card's own words) and `Camera
+Prompt` (its prohibition) contradict each other inside one §18, and no layer compared them.**
+⚠️ **The camera was decided in two hands, and §10's reasons stayed in §10.**
+
+⚠️ **The comparison words come from the card side, not from this document's prose.**
+[`skills/staging/cards.yaml`](../../skills/staging/cards.yaml) holds **this side's reading of the 16
+cards** — for each, a `clause` and, per gesture, a `term` and a `quote`. **`clause` and `quote` are
+verbatim, and the layer re-checks them against the card on every run.** ⚠️ **Without the quotes,
+this would be a check written to match someone's own sentences** — the thing
+`skills/design/SKILL.md` forbids — **so the words are quoted from the card, and an index whose quote
+is not in the card is reported rather than used.**
+
+**It fires** when an offered gesture appears in §18's `Camera Prompt` **only inside a negation** —
+every occurrence negated, none allowing it.
+
+⚠️ **It does not fire when the same slot also allows the gesture.** A shot may **decline** a
+gesture the style permits — but **the decline is written as a decline** (*The style permits a focus
+rack; this shot spends neither*), and then the slot holds an occurrence that is not a negation.
+**A check that cannot be satisfied is a check that cannot be fixed.**
+
+**It reports a note instead** when —
+- **the index cannot be read** — *cannot be confirmed*, and it says so rather than passing quietly;
+- **the index does not name this style** — ⚠️ **a different note**: *this work's camera was not
+  compared.* The index holds 16 cards, and **a work whose style is not among them is not compared**
+  (measured: `projects/ukebi/ukebi-v2`, style `soft-cel-anime` — one note, nothing fired);
+- **the card itself cannot be read** — the same "cannot be confirmed" discipline as `L20`;
+- **no video specification is visible for this work** — *this layer has not seen this work at all*;
+- ⚠️ **the card offers no camera gesture at all** — **there is nothing to compare**, and the note
+  says exactly that. **That is not a pass** — three of the seven grammar works report this note, and
+  **the note names which gestures were compared**, so the reading is audible;
+- **nothing fired** — the note reports **how many specifications were compared and which gestures
+  were held against them.**
+
+⚠️ **What it does not read:**
+- **Whether the gesture actually happened on screen.** Generation happens outside this foundation
+  (the same hole as `L19`).
+- **Whether §10's reason reached §18.** That is the staging stage's work, and **the round-trip check
+  is built together with the handover sheet** (see "What Is Still Missing").
+- ⚠️ **The `Negative Prompt` slot** — **where the camera's prohibitions actually travel on some
+  routes.** A prohibition written there is invisible to this layer.
+- **Whether the card is right.** The card is the upstream property; this layer reads it.
+- ⚠️ **Whether the reading of `offers` is complete.** It compares **only the gestures this side
+  wrote down** — **a gesture nobody wrote down never fires.** So the note says what was compared,
+  and **an incomplete reading does not announce itself.**
+
+⚠️ **It needs the cards pointed at it** — `SVL_STYLES_DIR=references/styles` (and
+`SVL_FORMATS_DIR` for the sibling layers). **Without them this repository's own cards are not read**,
+and this layer falls to the "cannot be confirmed" note **that `L20` also reports**.
+
 ### ⚠️ Firing Against a Running Artifact
 
 | Check | Ukebi V2 (30 takes) | What it is saying |
@@ -984,6 +1054,7 @@ key** — separated, one gets fixed and the other is forgotten.
 | L24 | **0** (1 note) | all 30 are `mode: motion` and **hold no requirement** — so this check **sees nothing on Ukebi**. The note reports that. |
 | L31 | **0** (1 note) | the home and §6 fold to the same name in all 30. ⚠️ **Ukebi V2 is the work that names the style by path** — the note says so (30 specifications, spelling `A/B`, vocabulary = a path). **Both vocabularies are real, and one work writes each.** |
 | L32 | **1** (1 note) | **all 30 specifications name the format card `video-spec`, and the neighbor holds no such card.** ⚠️ **This is `a-2`, not `a-1`** — the place was found, the card was not — and the note distinguishes them: "30 specifications, 30 naming, 1 card, **0 of them readable**." ⚠️ **The naming side is where the hole is declared, and this is the first layer to read it.** |
+| L33 | **0** (1 note) | ⚠️ **The style is not in the comparison table** — `soft-cel-anime` is not one of this repository's 16 cards, so **the note says the camera was not compared.** **Nothing fired** — and **a quiet layer here is not the same as a satisfied one.** |
 
 ⚠️ **`L31` reads only the home and the specification** — **`L20` and `L22` need the style cards,
 and the cards are not in this repository.** So **two green rows here can mean different things**:
@@ -1153,7 +1224,8 @@ What it can say is —
 | **Guarantees** | **What came back matches the shot, the style and the measurement.** | **L25** |
 | **Guarantees** | **The home and the specification name the same style.** | **L31** |
 | **Guarantees** | **The format card §6 names can be read, and declares a `Negative`** — so `Negative Prompt`'s second term is not empty | **L32** |
-| **Guarantees** | **It is not broken.** L0–L32 fire before generation, and everything that fired can be explained | all |
+| **Guarantees** | **§18's `Camera Prompt` does not forbid a gesture the style card offers** — unless the same slot writes the decline as a decline | **L33** |
+| **Guarantees** | **It is not broken.** L0–L33 fire before generation, and everything that fired can be explained | all |
 | **Does not guarantee** | **That the generator draws the aim.** | —— |
 | **Does not guarantee** | **That a still shot's §11 really stops the subject.** | —— |
 | **Does not guarantee** | **That the file `take.file` names actually exists.** | —— |
@@ -1229,11 +1301,17 @@ Write only `spec:` and not `key_image:`, and **the image side is never checked**
   ⚠️ Add the **round-trip check** (reading the assembled text back into the record) at the same time as that layer.
 - **Matching the style card's contents.** What `L20` looks at is the **existence** of `Motion character`,
   not **whether what it pulled matches `motion` or `Style Motion`.**
-  The cards live in `distill-essence-engine` and **someone who cloned this repository does not have them.**
-  **When it cannot be read, report "cannot be confirmed"** — **record the hole as a hole.**
+  ⚠️ **`L33` reads the same card from the other side** — the gestures it *offers*, against §18's
+  `Camera Prompt` — **so two layers open that card and neither compares `Style Motion`'s text to
+  `motion`.**
   ⚠️ **A card of this repository's own can be read** (put it in `references/styles/`
   and point `SVL_STYLES_DIR` at that directory) — **the note names the file it actually read**,
   so which side answered is readable.
+  ⚠️ **Two reasons recorded here have expired, and an expired reason is a different hole** —
+  **`motion` is no longer 0/30** (measured 2026-09-22: **0 of the 28 shot records on disk carry an
+  empty `motion`**), and **the cards are no longer out of reach** (16 of them are in
+  `references/styles/`, and `L33` reads them). **What is still missing is the comparison itself**,
+  not the ingredients.
 - ⚠️ **The style card's `## Negative` is still unread — half of a declared destination.**
   `specmap.PROMPT_SLOT_SOURCE["Negative Prompt"]` names **three terms** (`§16 + this card's `Negative`
   + the style card's `Negative`), and **`L32` reads the second of them only.** ⚠️ **So a style card

@@ -1,0 +1,103 @@
+# 様式カードが「カメラに何を許しているか」——**この側の読みである。**
+#
+# ⚠️ **これは上流（`distill-essence-engine`）の財産の写しではない。** 写しなのは
+#    `references/styles/*.md` である。ここに在るのは**この側が読んだ結果**であり、
+#    `L33` が「§18 `Camera Prompt` が、カードの許した身振りを禁じていないか」を見るための照合表である。
+#
+# ⚠️ **`clause` と `quote` は逐語である。** `L33` は毎回カードを開き、
+#    **この2つがカードに実在するかを確かめる**——実在しなければ「この側の読みが古い」と註を出す。
+#    **引用が無ければ、この表は自分の散文を照合する表になる**（`skills/design/SKILL.md` の戒め）。
+#
+# ⚠️ **`term` は語幹である。** 照合は語頭一致（`refram` は `reframing` に当たる）。
+#    `offers` は**カードが許した身振りだけ**である——カードが禁じた身振り
+#    （「a travelling camera spends it」の `travel` など）は**ここに書かない**。
+#    書けば、正しい仕様が鳴る。
+#
+# ⚠️ **カードが増えたら、ここに1つ足す。** 足していなければ `L33` は
+#    「この様式を読んでいない」と註を出す——**黙って素通りさせない。**
+version: 1
+cards:
+  blueprint-plan:
+    clause: "**The camera holds on the plan.** A camera that travels around it turns the plan back into a scene, which is the one thing this style is not."
+    offers: []
+  cinematic-still:
+    clause: "**The camera moves with a real rig's weight** — dolly, crane, Steadicam — or holds. But a hold here is a decision a camera makes, not a photograph's stillness."
+    offers:
+      - term: dolly
+        quote: "The camera moves with a real rig's weight — dolly, crane, Steadicam — or holds."
+      - term: crane
+        quote: "The camera moves with a real rig's weight — dolly, crane, Steadicam — or holds."
+      - term: steadicam
+        quote: "The camera moves with a real rig's weight — dolly, crane, Steadicam — or holds."
+  documentary-photo:
+    clause: "**The camera stands and watches, at eye level.** It holds; if it moves at all it moves to keep the subject in frame, never to make a point."
+    offers:
+      - term: move
+        quote: "It holds; if it moves at all it moves to keep the subject in frame, never to make a point."
+  gouache-abstract:
+    clause: "**The camera is one page of a sketchbook.** It holds still, or drifts once. Following the shapes makes them a scene, and the ambiguity is what the shot is about."
+    offers:
+      - term: drift
+        quote: "It holds still, or drifts once."
+  impossible-medium:
+    clause: "**The camera is a camera.** This style's impossibility is in the image's constitution, not in its viewpoint, so the shot frames the subject plainly and the wrongness stays inside the frame."
+    offers: []
+  instant-photo:
+    clause: "**The camera does not travel.** An instant photograph is a thing held in a hand — the only drift available is the small unsteadiness of holding it."
+    offers:
+      - term: drift
+        quote: "An instant photograph is a thing held in a hand — the only drift available is the small unsteadiness of holding it."
+  lab-notebook:
+    clause: "**The camera holds on the page** and may drift down it as the record descends, but never leaves it."
+    offers:
+      - term: drift
+        quote: "The camera holds on the page and may drift down it as the record descends, but never leaves it."
+  landscape-photo:
+    clause: "**The camera is set up, not followed.** A large-format frame stands on a tripod; the shot is composed and then left alone."
+    offers: []
+  macro-photo:
+    clause: "**The camera is the mover, and it moves less than in any other style.** A focus rack, or a few millimetres of drift, is a full gesture."
+    offers:
+      - term: rack
+        quote: "A focus rack, or a few millimetres of drift, is a full gesture."
+      - term: drift
+        quote: "A focus rack, or a few millimetres of drift, is a full gesture."
+  mokuhanga:
+    clause: "**The camera is a sheet, not a window.** The frame holds still. A print is an object on paper, and a camera that travels turns it back into a scene."
+    offers: []
+  oil-painting:
+    clause: "**The camera has weight.** It holds, or moves with the slowness of a heavy dolly. Chiaroscuro is spent by a camera that hurries."
+    offers:
+      - term: move
+        quote: "It holds, or moves with the slowness of a heavy dolly."
+      - term: dolly
+        quote: "It holds, or moves with the slowness of a heavy dolly."
+  sketch-broadstroke:
+    clause: "**The camera holds.** Following a sketch turns it into a scene; the undrawn areas *are* what the shot is about, and a travelling camera fills them."
+    offers: []
+  street-photo:
+    clause: "**The camera is handheld and imperfect.** Tilt, late reframing, cropping that stays accidental — the camera reacts after the moment, not before it."
+    offers:
+      - term: handheld
+        quote: "The camera is handheld and imperfect."
+      - term: tilt
+        quote: "Tilt, late reframing, cropping that stays accidental — the camera reacts after the moment, not before it."
+      - term: refram
+        quote: "Tilt, late reframing, cropping that stays accidental — the camera reacts after the moment, not before it."
+  studio-portrait:
+    clause: "**The camera is locked on the eyes and holds.** A portrait rig does not wander; if it moves, it is a few centimetres of drift at most."
+    offers:
+      - term: move
+        quote: "A portrait rig does not wander; if it moves, it is a few centimetres of drift at most."
+      - term: drift
+        quote: "A portrait rig does not wander; if it moves, it is a few centimetres of drift at most."
+  sumi-e:
+    clause: "**The camera is a scroll, not a window.** The frame holds still, or drifts once and slowly. The bold negative space *is* what the shot is about, and a moving camera spends it."
+    offers:
+      - term: drift
+        quote: "The frame holds still, or drifts once and slowly."
+  watercolor:
+    clause: "**The camera is a page, not a window.** The frame holds still, or drifts once and slowly. The reserved white *is* what the shot is about, and a travelling camera spends it."
+    offers:
+      - term: drift
+        quote: "The frame holds still, or drifts once and slowly."

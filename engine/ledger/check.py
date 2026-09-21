@@ -297,12 +297,12 @@ def self_test():
 
     | 張った変数 | 例 | 期待どおり |
     |---|---|---|
-    | なし | **265** | **265** |
-    | `SVL_FORMATS_DIR` | 265 | **264** |
-    | `SVL_STYLES_DIR` | 263 | **261** |
-    | 両方 | 263 | **261** |
+    | なし | **273** | **273** |
+    | `SVL_FORMATS_DIR` | 273 | **272** |
+    | `SVL_STYLES_DIR` | 271 | **269** |
+    | 両方 | 271 | **269** |
 
-    ⚠️ **`SVL_STYLES_DIR` の行だけ例の数が違う（263）。** それは、この変数が
+    ⚠️ **`SVL_STYLES_DIR` の行だけ例の数が違う（271）。** それは、この変数が
     1枚だけの置き場を指すと、**`Motion character` を持たないカードが其処に無くなり、
     `hasnt` の2例が立てられない**ためである（`hasnt` の註を見よ）——**落ちたのでは
     なく、走っていない。** 数を省くと、**この2つが同じ顔になる。**
@@ -319,7 +319,7 @@ def self_test():
     （`docs/cards.md`）。**指示どおりに走らせた者が、壊れた自己検査を見ることになる。**
 
     ⇒ **検査が環境で変わるなら、検査ではない。** だからここで外す。
-    **外した状態で、4条件すべてが 265 例中 265 例である**（実測 2026-09-22）。
+    **外した状態で、4条件すべてが 273 例中 273 例である**（実測 2026-09-22）。
     """
     import os
     sys.path.insert(0, str(HERE))
@@ -1572,6 +1572,89 @@ def _self_test():
                   f"{'期待どおり' if _ok else '⚠️ 期待と違う'}")
             if not _ok:
                 print(f"        {_got[:88]}")
+
+    # ---- L33（カードが許した身振りを、§18 Camera Prompt が禁じていないか）
+    #     ⚠️ **照合語はカード側である。** だから自己検査もカードを1枚作り、
+    #        そこから逐語で引いた引用を照合表に置く——**自分の散文で試さない。**
+    print("\n=== 自己検査 — 演出（カメラ）と様式カード\n")
+
+    T_CARD = ("# Test style\n\n## Motion character\n\n"
+              "- **The water is the mover.** A slow drift is a full gesture here.\n")
+    T_CLAUSE = "**The water is the mover.** A slow drift is a full gesture here."
+    T_QUOTE = "A slow drift is a full gesture here."
+
+    def cam_index(quote=T_QUOTE, cards_block=None):
+        """照合表の中身。⚠️ **引用を差し替えられるようにしてある**（読みが古い例のため）。"""
+        if cards_block is None:
+            cards_block = (f"  t-card:\n    clause: \"{T_CLAUSE}\"\n    offers:\n"
+                           f"      - term: drift\n        quote: \"{quote}\"\n")
+        return f"version: 1\ncards:\n{cards_block}"
+
+    def cam_repo(index=None, with_card=True):
+        """**カードと照合表を持つ、使い捨てのリポジトリ。** 戻り値は (根, プロジェクト)。
+
+        ⚠️ **カードはリポジトリの隣に置く**（`_cards_dirs` がそう探す）。
+        ゆえに使い捨ての根は `<temp>/repo` であり、カードは `<temp>/distill-essence-engine/` に在る
+        ——**`<temp>` を直に根にすると、隣はシステムの一時置き場になり、事例どうしが混ざる。**
+        """
+        d = _P(tempfile.mkdtemp())
+        repo = d / "repo"
+        repo.mkdir()
+        if index is not None:
+            (repo / "skills" / "staging").mkdir(parents=True)
+            (repo / "skills" / "staging" / "cards.yaml").write_text(index, encoding="utf-8")
+        if with_card:
+            cd = d / "distill-essence-engine" / "references" / "styles"
+            cd.mkdir(parents=True)
+            (cd / "t-card.md").write_text(T_CARD, encoding="utf-8")
+        return repo, style_proj("t-card", "# 18. WAN 3.0 PROMPT MAPPING\n\n")
+
+    # ⚠️ **「照合表を置かない」と「既定の照合表を置く」は別のことである。**
+    #    `None` を既定の意味に使うと、**置かない事例が書けなくなる**（1つ書けずに残った）。
+    _NO_INDEX = object()
+
+    def cam_case(label, camera_text, want, fragment, *, index=_NO_INDEX, with_card=True,
+                 style="t-card", empty_proj=False):
+        """`(名前, 成否, 実測)` を返す。**`want` は違反の有無である。**"""
+        repo, p = cam_repo(cam_index() if index is _NO_INDEX else index,
+                           with_card=with_card)
+        p.bible = {"bible": {"style": style}}
+        if empty_proj:
+            p.shots = {}
+        body = (f"# 18. WAN 3.0 PROMPT MAPPING\n\n## Camera Prompt\n\n{camera_text}\n")
+        (p.root / "a.md").write_text(body, encoding="utf-8")
+        got = semantic.check_camera_slot(p, repo_root=repo)
+        v = [f for f in got if f["severity"] != "note"]
+        nts = [f for f in got if f["severity"] == "note"]
+        ok = (bool(v) == want
+              and (not want or any(fragment in f["message"] for f in v))
+              and (want or any(fragment in f["message"] for f in nts)))
+        return label, ok, (v[0]["message"] if v else (nts[0]["message"] if nts else "（何も出ない）"))
+
+    for _label, _ok, _got in [
+        cam_case("L33 カードの許した身振りを禁じている", "The camera does not move — no drift.",
+                 True, "禁じている"),
+        cam_case("L33 辞退として認めていれば鳴らない",
+                 "The style permits a drift; this shot spends neither.", False, "禁じていない"),
+        cam_case("L33 身振りに触れていなければ鳴らない",
+                 "The camera holds for the whole take.", False, "禁じていない"),
+        cam_case("L33 照合表の引用がカードに無い＝読みが古い",
+                 "The camera does not move — no drift.", False, "この側の読みが古い",
+                 index=cam_index(quote="A drift that the card does not name.")),
+        cam_case("L33 照合表に無い様式", "The camera does not move — no drift.", False,
+                 "照合表に**無い**", style="no-such-style"),
+        cam_case("L33 カードが読めない＝比べない", "The camera does not move — no drift.",
+                 False, "読めない", with_card=False),
+        cam_case("L33 照合表が無い＝確かめられない", "The camera does not move — no drift.",
+                 False, "照合表が**読めない**", index=None),
+        cam_case("L33 動画の仕様が1本も無い＝1本も見ていない", "x", False,
+                 "1本も見ていない", empty_proj=True),
+    ]:
+        n += 1
+        bad += not _ok
+        print(f"    {_label:<50}{'':>10}  {'期待どおり' if _ok else '⚠️ 期待と違う'}")
+        if not _ok:
+            print(f"        {_got[:88]}")
 
     def run1(label, fn, proj, want, fragment, note=None):
         """⚠️ **註も読む。** 註が出ないことも「違反0件」に見えるからである。"""

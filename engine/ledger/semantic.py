@@ -2688,9 +2688,11 @@ def check_prompt_slots(project):
     **行き先**であって、**まだ誰も書いていない。** だからこの検査は
     **いま鳴る**——それが正しい。**鳴らない検査は存在しないのと同じである。**
 
-    ⚠️ **様式カードは読まない。** `Motion character` の**中身**は
-    `distill-essence-engine` にあり、**このリポジトリを clone した人には無い。**
-    読めないものを検査の相手にはできない。**穴は穴のまま記録する**（下記）。
+    ⚠️ **この層は様式カードを読まない**——読むのは**スロットの名**である。
+    `Motion character` の**中身**を読む層は別に在る（`L33`。同じカードを、
+    **許された身振り**という側から読む）ので、**ここで読む必要はもう無い。**
+    ⚠️ **ただし、`Style Motion` に引いた中身が `motion` と合うかは、まだ誰も読まない**
+    ——**穴は穴のまま記録する**（下記）。
     """
     out = []
     if len(specmap.PROMPT_SLOTS) != 7:
@@ -3121,6 +3123,190 @@ def check_style_motion(project, repo_root=None):
                            f"{with_slot} 本の `Style Motion` は中身を運ぶ。"
                            "⚠️ **引いた中身が正しいかは、まだ検査していない**——"
                            "**見ているのは `## Motion character` が在るかどうかだけである。**",
+                           severity="note"))
+    return out
+
+
+# ---------------------------------------------------------------- 演出（カメラ）の層
+
+#: 否定の語。**§18 `Camera Prompt` の中で、身振りが禁じられているかを見る。**
+#: ⚠️ **語彙であって、文ではない。** この一覧で数えるのは「禁じられているか」だけであり、
+#: **何を禁じるべきかは、この層は言わない**（それは様式のカードと演出の段が決める）。
+CAMERA_NEGATORS = re.compile(
+    r"\b(?:no|not|never|without|none|neither|cannot|nor)\b|n't\b", re.I)
+
+#: 節の切れ目。**否定は同じ節の中だけを見る**——越えて数えると、
+#: 「禁じた」と「許した」が同じ文の中で混ざる（照合表の `quote` がその形である）。
+CAMERA_CLAUSE_SPLIT = re.compile(r"[.;—:!?]|\n")
+
+#: 照合表の置き場。**このリポジトリの中である**——カードと違い、clone した人にも在る。
+STAGING_INDEX = ("skills", "staging", "cards.yaml")
+
+
+def _staging_index(repo_root):
+    """演出の照合表を読む。`(表, 読めなかった理由)` を返す。"""
+    p = Path(repo_root).joinpath(*STAGING_INDEX)
+    if not p.is_file():
+        return None, f"`{p}` が無い"
+    try:
+        import yaml
+        d = yaml.safe_load(p.read_text(encoding="utf-8"))
+    except Exception as e:                # noqa: BLE001 — 理由を報告するのが仕事である
+        return None, f"`{p}` が読めない（{e.__class__.__name__}）"
+    cards = (d or {}).get("cards")
+    if not isinstance(cards, dict):
+        return None, f"`{p}` に `cards:` が無い"
+    return cards, None
+
+
+def _camera_occurrences(text, term):
+    """`term`（語幹）の出現を、**その語が属する節の前半**とともに返す。"""
+    out = []
+    for m in re.finditer(r"\b" + re.escape(term), text, re.I):
+        start = 0
+        for sep in CAMERA_CLAUSE_SPLIT.finditer(text, 0, m.start()):
+            start = sep.end()
+        out.append(text[start:m.start()])
+    return out
+
+
+def check_camera_slot(project, repo_root=None):
+    """L33 — **カードが許した身振りを、§18 `Camera Prompt` が禁じていないか。**
+
+    ⚠️ **なぜ要るか。** 様式カードは**カメラを所有する**——`## Motion character` に
+    「The camera …」で始まる条項を持ち、そこに**その媒体でカメラが何をしてよいか**を
+    書いている（16枚すべてが持つ。実測）。ところが `L20` が見るのは
+    **`Style Motion` の行き先が空でないこと**だけであり、**`Camera Prompt` の中身は
+    どの層も読まない。** 実測（2026-09-22）——7本の文法カード作品の §18 は、
+    §10 が7本とも違うのに**ほぼ同じ文型**に潰れており、
+    `macro-photo`（「The camera is the mover」）を名乗る仕様が
+    「The camera does not move at all — no rack, no drift」と書いている。
+    **`Style Motion`（カードの逐語）と `Camera Prompt`（その禁止）が、同じ §18 の中で
+    矛盾し、比べる層が無い。**
+
+    ⚠️ **照合語はカード側である。** この層は `skills/staging/cards.yaml` を読み、
+    そこに書かれた**カードからの逐語引用**を、毎回カードに対して確かめる——
+    **引用が実在しなければ「この側の読みが古い」と註を出して、その作品では比べない。**
+    ⚠️ **引用が無い照合表は、自分の散文を照合する表である**——
+    `skills/design/SKILL.md` が「自分で書いた文に合わせた検査を作るな」と書いているのは
+    これである。**だから照合語は、この層の文ではなくカードの文から来る。**
+
+    ⚠️ **禁じてよい場合がある。** カードが許した身振りを**この1本が辞退する**ことは
+    できる——ただし**辞退は辞退として書く**（`macro-photo` の
+    「The style permits a focus rack …; this shot spends neither」）。
+    だからこの層は**両方を見る**: 身振りが**禁じられており**、かつ
+    **同じスロットのどこでも許されていない**ときにだけ鳴る。**認めていれば鳴らない**
+    ——**鳴らせない検査は、直せない検査である。**
+
+    ⚠️ **この層が見ていないもの。**
+      * **身振りが実際に画面で起きたか。** 生成はこの基盤の外で起きる（`L19` と同じ穴）。
+      * **§10 の理由が §18 に届いたか。** それは演出の段の仕事であり、
+        **往復の検査は handover の層と同時に建てる**（`skills/design/SKILL.md` の穴）。
+      * **カードの側が正しいか。** カードは上流の財産であり、この層は読むだけである。
+      * **`offers` の読みが完全か。** この側が読んだ身振りだけを見る——
+        **読み落としは鳴らない。** ゆえに**読んだ範囲を言う**（下の註）。
+    """
+    out = []
+    bible = (getattr(project, "bible", None) or {}).get("bible") or {}
+    style = bible.get("style")
+    if not style:
+        return out                       # L17 が「様式を宣言していない」と鳴らしている
+
+    root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
+    cards, why = _staging_index(root)
+    if cards is None:
+        out.append(finding("L33", "",
+                           f"演出の照合表が**読めない**——{why}。"
+                           "**カメラの身振りは確かめられない**"
+                           "——**確かめていないことを、確かめた顔にしない。**",
+                           severity="note"))
+        return out
+
+    if style not in cards:
+        out.append(finding("L33", "",
+                           f"様式 `{style}` は照合表に**無い**——"
+                           f"`skills/staging/cards.yaml` に1つ足すこと。"
+                           f"**この作品のカメラは、カードと比べられていない。**",
+                           severity="note"))
+        return out
+
+    card = _card_path(root, "style", style)
+    if card is None:
+        out.append(finding("L33", "",
+                           f"様式カード `{style}` が**読めない**——**探した範囲**: "
+                           f"{_cards_searched(root, 'style', style)}。"
+                           "**引用をカードに当てられないので、比べない**"
+                           "——**確かめていないことを、確かめた顔にしない。**",
+                           severity="note"))
+        return out
+
+    body = re.sub(r"\s+", " ", card.read_text(encoding="utf-8"))
+    entry = cards.get(style) or {}
+    clause = str(entry.get("clause") or "")
+    offers = entry.get("offers") or []
+
+    # ⚠️ **引用をカードに当てる。** 当たらなければ、この側の読みが古い。
+    stale = [q for q in [clause] + [str(o.get("quote") or "") for o in offers]
+             if q and q not in body]
+    if stale:
+        out.append(finding("L33", "",
+                           f"照合表の引用が**カードに無い**（{style}）——"
+                           f"**この側の読みが古い。** 当たらなかった引用: "
+                           + "／".join(f"`{q[:60]}…`" if len(q) > 60 else f"`{q}`"
+                                       for q in stale[:3])
+                           + "。**読み直すまで、この様式は比べられない。**",
+                           severity="note"))
+        return out
+
+    terms = [str(o.get("term") or "") for o in offers if o.get("term")]
+    seen, fired = 0, 0
+    for s in project.order():
+        shot = project.shots[s]
+        src = _spec_of(shot, "video")
+        if not src:
+            continue
+        p = project.root / src
+        if not p.is_file():
+            continue
+        slot = _slot_body(p, "Camera Prompt")
+        if not slot.strip():
+            continue                     # L17 が「スロットが無い」と言う
+        seen += 1
+        banned = []
+        for t in terms:
+            occ = _camera_occurrences(slot, t)
+            if not occ:
+                continue
+            negated = [c for c in occ if CAMERA_NEGATORS.search(c)]
+            allowed = [c for c in occ if not CAMERA_NEGATORS.search(c)]
+            if negated and not allowed:
+                banned.append(t)
+        if banned:
+            fired += 1
+            out.append(finding("L33", s,
+                               f"§18 `Camera Prompt` が、様式 `{style}` の許した身振りを"
+                               f"**禁じている**——{'／'.join('`' + t + '`' for t in banned)}。"
+                               f"カードの条項: {clause[:120]}… "
+                               "⚠️ **辞退は辞退として書く**——"
+                               "「The style permits …; this shot spends neither」の形で"
+                               "**同じスロットに認めれば、この層は鳴らない。**"
+                               "**禁じる理由は §10 に在る。落とさずに運ぶこと。**"))
+    if not seen:
+        out.append(finding("L33", "",
+                           f"様式 `{style}` を名乗る**動画の仕様が1本も無い**——"
+                           "**この層は、この作品を1本も見ていない。**",
+                           severity="note"))
+    elif not fired:
+        out.append(finding("L33", f"{seen}本",
+                           f"様式 `{style}` の許した身振りを、{seen} 本の `Camera Prompt` が"
+                           f"禁じていない（照合した身振り: "
+                           f"{'／'.join('`' + t + '`' for t in terms) if terms else '**無し**'}"
+                           f"）。"
+                           + ("⚠️ **このカードはカメラの身振りを1つも許していない**"
+                              "——比べる語が無い。**読んでいないのではなく、読むものが無い。**"
+                              if not terms else
+                              "⚠️ **見ているのは、この側が読んだ身振りだけである**"
+                              "——**読み落としは鳴らない。**"),
                            severity="note"))
     return out
 
@@ -3563,7 +3749,11 @@ def run(project, schema_dir=None, repo_root=None):
     out += check_role_registered(project)
     out += check_prompt_slots(project)
     out += check_style_motion(project, repo_root=repo_root)
-    # ⚠️ **`L20` の直後に置く。** 同じ `bible.style` を読み、相手だけが違う
+    # ⚠️ **`L20` の隣に置く。** 同じカードの `## Motion character` を読み、
+    #    相手だけが違う——あちらは `Style Motion` の**行き先**、こちらは
+    #    `Camera Prompt` の**中身**。**離すと、片方だけが直される。**
+    out += check_camera_slot(project, repo_root=repo_root)
+    # ⚠️ **カードを読む層の次に置く。** 同じ `bible.style` を読み、相手だけが違う
     #    ——あちらはカード、こちらは仕様の §6。**離すと、片方だけが直される。**
     out += check_style_reference(project)
     # ⚠️ **`L31` の直後に置く。** 同じ §6 を読み、鍵だけが違う（`REF_STYLE` ⇄

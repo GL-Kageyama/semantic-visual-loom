@@ -73,6 +73,9 @@ DOCS = (
     # ⚠️ **Skill は1行目が frontmatter である**——ヘッダはその直後に在る（R2 を見ること）。
     "skills/breakdown/SKILL.md",
     "skills/design/SKILL.md",
+    # ⚠️ **`staging` は5つ目の段ではない**——②の中の第7段である。それでも
+    #    **`DOCS` に並べる**: 検査の外に出せば、外に出したこと自体が見えなくなる。
+    "skills/staging/SKILL.md",
     "skills/ledger/SKILL.md",
     "skills/shot/SKILL.md",
 )

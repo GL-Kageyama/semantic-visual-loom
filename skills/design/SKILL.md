@@ -27,6 +27,14 @@ stage ② in this repository** — the only command that runs is the checker, an
 | **the image specification** | named paragraphs inside one section — `Prompt`, `Negative` | `projects/<name>/specs/image/<id>.md` |
 | **the board prompt** | ⚠️ **only on the video route that goes through a storyboard** — the ① of that route: a storyboard sheet for `distill-essence-engine` (`storyboard` × `luminous-anime`) | `projects/<name>/specs/board/<id>-board.md` |
 
+⚠️ **§10 is this stage's staging document, and it is the one section with a handover inside it.**
+The camera is decided there — and **its reasons are kept there** — because §18's `Camera Prompt`
+is **derived from §10** (the format card's own derivation; `specmap.PROMPT_SLOT_SOURCE` says the
+same). ⚠️ **So the camera has its own document: [`skills/staging/SKILL.md`](../staging/SKILL.md)**,
+and it is step 7 below. ⚠️ **A camera decided only in the session reaches §18 as a slot full of
+prohibitions** with nothing saying what they protect — and **§18 is the only section a generator
+receives.**
+
 **It does not own** `reference_set` / `forbidden_set` / `attached` / `disclosure_state`
 (those are **③ `ledger`**). ⚠️ **They are derived, not written here** — this stage decides
 what the shot *is*, and ③ computes what it is *allowed to show* from the ledger.
@@ -80,12 +88,23 @@ because `L3` and `L4` read the beat body, not only the field.**
    `timeline.clips[].in`/`out` is the **adoption**. **Intent does not bind adoption** — the
    author finds the right length per take. ⚠️ **This is the only field the checker may compare
    by value** (33 of 33 agreed, measured).
-7. **The video specification, §1–20** — in `specmap.SPEC_SECTIONS`' order, all twenty. Write
+7. **The camera — §10, and its handover into §18's `Camera Prompt`.**
+   ⚠️ **This step has its own document: [`skills/staging/SKILL.md`](../staging/SKILL.md).**
+   It decides **where the camera stands, what the style permits it, how many camera events the
+   shot has, and the reason for every prohibition** — and **writes the reasons into §10 first**,
+   because §18 is *derived* from §10. ⚠️ **The same hand writes both**: a camera decided in the
+   session becomes, in §18, prohibitions with nothing behind them — and §18 is **the only section
+   a generator receives.** ⚠️ **The style owns the camera**; the format may narrow it, **never
+   invert it** — and **a decline is written as a decline** (*The style permits a focus rack; this
+   shot spends neither*), in §18.
+   **Fires if wrong:** `L33` (a gesture the card offers, negated in §18's `Camera Prompt`) ·
+   `L17` (the slot itself) · `L20` (`Style Motion`'s destination).
+8. **The video specification, §1–20** — in `specmap.SPEC_SECTIONS`' order, all twenty. Write
    `spec:` in the record to point at it. **Fires if wrong:** `L11`.
    ⚠️ **Two failures are different and live in different layers.** "§1 is missing" is `L11`;
    "§1 is there but has no `Duration:` line" is **`L23` and nobody else.** A requirement that
    cannot be matched up **is not being matched up.**
-8. **§18's 7 slots** — `Master Prompt` · `Visual Prompt` · `Motion Prompt` · `Camera Prompt` ·
+9. **§18's 7 slots** — `Master Prompt` · `Visual Prompt` · `Motion Prompt` · `Camera Prompt` ·
    `Audio Prompt` · `Negative Prompt` · `Style Motion`. **Fires if wrong:** `L17`.
    ⚠️ **A slot may exist and carry nothing.** `Style Motion`'s source is the style card's
    `Motion character`, and **most style cards do not have one** — a card without it makes the
@@ -126,7 +145,7 @@ because `L3` and `L4` read the beat body, not only the field.**
    fire stays until the work declares `bible.route_limits_accepted`** — **an exclusion is the
    work's to write**, and writing it is a decision for the author, not for this stage. The route's
    constraints are [`docs/seedance-route.md`](../../docs/seedance-route.md).
-9. **The image specification** — ⚠️ **not sections.** It is **named paragraphs inside one
+10. **The image specification** — ⚠️ **not sections.** It is **named paragraphs inside one
    section**: `Prompt` first, `Negative` second, in that order. Write `key_image:` in the
    record to point at it. **Fires if wrong:** `L18` (the shape of the path).
    ⚠️ **Why paragraphs and not sections**: the author selects the whole thing **in one
@@ -134,12 +153,12 @@ because `L3` and `L4` read the beat body, not only the field.**
    in `specmap.SPEC_KINDS`; do not re-derive it.**
    **Fires if wrong:** `L21` (the Negative does not cover `bible.negative_base` — **cover, not
    equal**) · `L22` (one of the 7 fields is empty, or the card it names does not declare it).
-10. **§19's `Instance ID`** — ⚠️ **the identity is taken from the specification side, not from
+11. **§19's `Instance ID`** — ⚠️ **the identity is taken from the specification side, not from
     the record side.** The shot's `shot` id is that string with the trailing
     `-<seconds>s-<take>` dropped. ⚠️ **Never from `Segment ID`** — the same range carries two
     spellings there, and deriving from it drops records.
     **Fires if wrong:** `L13`.
-11. **`text_channel`** — only `composite` requires it, and the three kinds go to three different
+12. **`text_channel`** — only `composite` requires it, and the three kinds go to three different
     places: `overlay` is burned by `timeline` (**the generator does not draw text**), `voice`
     goes to §14 as the Audio Prompt, and **`lettering` is drawn by the generator inside the
     picture** — its destination is §18's `Master Prompt`. **Fires if wrong:** `L24` (a `composite`
@@ -147,7 +166,7 @@ because `L3` and `L4` read the beat body, not only the field.**
     ⚠️ **`lettering` says who draws the text and nothing about whether it can be read.** **That is
     the shot's own decision, written into §18's slots** — a work may need one shot that is legible
     and another that is not, and **a kind that fixed legibility would be too narrow for both.**
-12. **Run it.**
+13. **Run it.**
 
 ```bash
 python3 engine/ledger/check.py projects/<name>   # read the violations AND the notes
@@ -166,8 +185,11 @@ python3 engine/ledger/check.py --self-test       # confirm the checker fires at 
 | `L25` | **nothing has been generated** — and this stage does not generate |
 
 ⚠️ **The layers ② owns should now be quiet.** If `L11`, `L16`, `L17`, `L18`, `L20`, `L21`,
-`L22`, `L23` or `L24` is still firing, **this stage is not done** — and the note each one
-prints tells you which decision above it belongs to.
+`L22`, `L23`, `L24` or **`L33`** is still firing, **this stage is not done** — and the note each
+one prints tells you which decision above it belongs to. ⚠️ **`L33` is step 7's own check**:
+it fires when §18's `Camera Prompt` forbids a gesture the style card offers — and **the fix is
+not to delete the prohibition, it is to carry §10's reason into the slot**
+([`skills/staging/SKILL.md`](../staging/SKILL.md)).
 
 ## ⚠️ Fields and rules that nobody reads
 
@@ -179,15 +201,24 @@ prints tells you which decision above it belongs to.
   **the contract with that side's Scene Definition is undecided.** A field whose reader is in
   another repository is **a hole, not a defect.** Note also that `sound`'s `scene_ref` is not
   required — **an empty `sound` passes the form layer too.**
-- **Matching `motion.law` is deliberately not written.** The three parts now exist (§18's
+- **Matching `motion.law` is deliberately not written.** The three parts exist (§18's
   `Style Motion` slot, the record's `motion`, and `bible.style`), but **the check that ties them
-  together does not** — and ⚠️ **writing it now would produce a check that never fires**,
-  because `motion` is empty across every shot on disk and **the style cards live in
-  `distill-essence-engine`, which someone who cloned this repository does not have.**
-  **With the other side empty, nothing fires** (the same discipline as "do not call empty OK").
+  together does not.** ⚠️ **Both of the reasons this entry used to give are gone** — and they are
+  recorded here because **a hole whose reason expired is a different hole**:
+  ⚠️ **`motion` is no longer empty** — measured 2026-09-22, **0 of the 28 shot records on disk
+  carry an empty `motion`** (the reason used to be "empty across every shot").
+  ⚠️ **The style cards are no longer out of reach** — **16 of them are in this repository's
+  `references/styles/`**, and **`L33` reads them.** **A card-reading check was impossible when
+  this entry was written, and is possible now.**
+  ⚠️ **What remains missing is not what was missing before.** `L33` compares **the gestures a card
+  offers** against §18's `Camera Prompt`; **it does not compare `Style Motion`'s text against
+  `motion`**, and a gesture nobody wrote into `skills/staging/cards.yaml` **is not compared at
+  all.** **Record the remainder as a hole** (the same discipline as "do not call empty OK").
 - **`Style Motion`'s contents are not compared to the card's `Motion character`.** `L20` looks
   at the **existence** of `Motion character`, never at whether what it pulled matches `motion`
-  or the slot. Same reason as above. **When it cannot be read, report "cannot be confirmed."**
+  or the slot. ⚠️ **`L33` reads the same card from the other side** — the gestures it *offers*,
+  against §18's `Camera Prompt` — so **two layers now open that card and neither compares
+  `Style Motion`'s text.** **When it cannot be read, report "cannot be confirmed."**
 - **The handover sheet does not exist.** The layer that assembles **what is passed from the
   record to the generator** (§18's 7 slots, `take.params`, the image prompt, the sound) is not
   built. What `L19` looks at is **the declaration of a destination**, not **whether the

@@ -47,7 +47,9 @@ specifications**, and **fire the contradictions in them before anything is gener
 
 **② is where the prompt is written.** The seven slots are `Master` / `Visual` / `Motion` / `Camera` /
 `Audio` / `Negative` / `Style Motion`, and **being separated is itself the point**
-([`references/formats/video-spec.md`](references/formats/video-spec.md) §18).
+([`references/formats/video-spec.md`](references/formats/video-spec.md) §18). ⚠️ **The `Camera` slot
+is written by [`skills/staging/`](skills/staging/SKILL.md)**—**the camera decided in one hand**,
+inside ②, between `motion`/`duration` and the specification.
 
 ⚠️ **The prompt is built from two axes, and both are cards**—**Format** (the shape of the
 specification) and **Style** (the visual language). **A card lives beside this repository by
@@ -94,7 +96,7 @@ semantic-visual-loom/
 ├── engine/ledger/   # the production ledger and pre-flight verification (crush breakdowns in the design without running generation)
 ├── engine/shot/     # prints the derivable lines of a shot's specification (read-only; writes nothing)
 ├── docs/            # usage, and the deep dives (cards / routes)
-├── skills/          # the four skills — breakdown, design, ledger, shot
+├── skills/          # the skills — breakdown, design, ledger, shot, and staging (inside ②)
 ├── tools/           # checks (i18n mirrors)
 ├── references/      # this side's own cards — formats/ (video-spec) and styles/ (sumi-e)
 ├── assets/          # the repository's face (the README hero)
@@ -209,7 +211,7 @@ is marked **invention (awaiting approval)**; running ② first would freeze an u
 Mirrors use the suffix scheme and sit in the **same directory**—the rules are in
 [`CLAUDE.md`](CLAUDE.md).
 
-**20 documents × 3 languages are in place**——**that is the count
+**21 documents × 3 languages are in place**——**that is the count
 [`tools/check_i18n.py`](tools/check_i18n.py) reports as the canonical set, not a count of every
 `.md` in the repository.** ⚠️ **A number is only as wide as what was counted.** What that check sees,
 and what it does not, is in [`docs/usage.md`](docs/usage.md).

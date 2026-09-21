@@ -68,9 +68,10 @@ and §19's `Instance ID`). ⚠️ **Pasting them is the author's act.** Where it
 specification on disk it prints **both** and stops. What it does not derive, and the holes it
 leaves, are in [`engine/shot/README.md`](../engine/shot/README.md).
 
-⚠️ **The four skills in `skills/` are not commands**——**they are instructions to a Claude Code
+⚠️ **The skills in `skills/` are not commands**——**they are instructions to a Claude Code
 session**, and **they are what turns a story into the specifications.** See **The four stages**
-below.
+below. ⚠️ **Not every skill is a stage**——`staging` (the camera, decided in one hand) **runs
+inside ②**, and **the count of stages does not move because it exists.**
 
 ## The four stages
 
@@ -120,7 +121,7 @@ built**, because the ruling it served was withdrawn and **no specification used 
 the measurement are in [`engine/ledger/README.md`](../engine/ledger/README.md) (`L21`).
 
 ⚠️ **The invocation carries a namespace**——`/semantic-visual-loom:breakdown`, `:design`,
-`:ledger`, `:shot`.
+`:ledger`, `:shot`, `:staging`.
 
 ⚠️ **The shape of ①'s input is undecided.** Nothing in this repository says **whether a work
 arrives as a plot, a script, or a novel**——read it with a person or with a session, and record
@@ -214,7 +215,7 @@ The counts behind that are in `HISTORY.md`.
 
 ## The layers
 
-The check is **33 layers, `L0`–`L32`**, plus schema-shape validation.
+The check is **34 layers, `L0`–`L33`**, plus schema-shape validation.
 **They are not one verdict**—each layer fires on its own and is reported with the
 number it saw.
 
@@ -258,7 +259,7 @@ and the mirrors does not change.**
 ⚠️ **The working language of development stays Japanese** (commit messages, `HISTORY.md`,
 conversation) **while the canonical of the documents is English.** These two are different
 things: one is the language the work is done in, the other the language the documents are
-authoritative in. **20 documents × 3 languages are in place** (the count
+authoritative in. **21 documents × 3 languages are in place** (the count
 `tools/check_i18n.py` reports as canonical), and the rules are in
 [`CLAUDE.md`](../CLAUDE.md).
 

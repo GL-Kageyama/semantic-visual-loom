@@ -47,7 +47,9 @@
 
 **プロンプトが書かれるのは②である。** 7スロットは `Master` / `Visual` / `Motion` / `Camera` /
 `Audio` / `Negative` / `Style Motion` であり、**分かれていること自体が要点である**
-（[`references/formats/video-spec.md`](references/formats/video-spec-ja.md) §18）。
+（[`references/formats/video-spec.md`](references/formats/video-spec-ja.md) §18）。⚠️ **`Camera`
+スロットを書くのは [`skills/staging/`](skills/staging/SKILL-ja.md) である**——**カメラをひとつの手で
+決める段**であり、②の中、`motion`・`duration` と仕様の間に座る。
 
 ⚠️ **プロンプトは2つの軸から作られ、どちらもカードである**——**Format（形式＝仕様の形）** と
 **Style（様式＝視覚言語）**。⚠️ **カードは既定ではこのリポジトリの隣に在る**
@@ -93,7 +95,7 @@ semantic-visual-loom/
 ├── engine/ledger/   # 制作台帳と事前検証（生成を走らせずに設計の破綻を潰す）
 ├── engine/shot/     # ショットの仕様のうち、導出できる行を刷る（読み取り専用。何も書かない）
 ├── docs/            # 使い方と、踏み込んだ解説（cards / routes）
-├── skills/          # 4つの Skill——分解・設計・台帳・ショット
+├── skills/          # Skill——分解・設計・台帳・ショット、そして staging（②の中のカメラ）
 ├── tools/           # 検査（i18n のミラー）
 ├── references/      # こちら側のカード——formats/（video-spec）と styles/（sumi-e）
 ├── assets/          # リポジトリの顔（README の hero）
@@ -206,7 +208,7 @@ semantic-visual-loom/
 **開発は日本語で進め、文書の正典は英語である。**
 ミラーは接尾辞方式で**同じディレクトリ**に並ぶ——規則は [`CLAUDE.md`](CLAUDE-ja.md) にある。
 
-**20文書 × 3言語が揃っている**——⚠️ **これは [`tools/check_i18n.py`](tools/check_i18n.py) が
+**21文書 × 3言語が揃っている**——⚠️ **これは [`tools/check_i18n.py`](tools/check_i18n.py) が
 正典として報告する本数であって、リポジトリの `.md` を数えた数ではない。**
 **数は、数えた範囲の広さしか持たない。**
 **何を見て、何を見ないか**は [`docs/usage.md`](docs/usage-ja.md) にある。
