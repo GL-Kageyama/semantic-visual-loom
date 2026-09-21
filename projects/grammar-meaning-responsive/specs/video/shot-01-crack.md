@@ -130,9 +130,9 @@ A kitchen in the afternoon. One word is placed in it — 「大丈夫」, once. 
 
 # 10. CAMERA
 
-- Camera Language: An oil painting's frame, held. **The camera has weight and does not hurry** — chiaroscuro is spent by a camera that moves.
-- Camera Events: `0-5s` none. **The camera does not move at all** — no pan, no push, no rack, no handheld. ⚠️ **In particular, no move answers the crack.**
-- Camera Behavior: **Still, and it stays a statement about the world rather than about the meaning.** ⚠️ **A camera move here would be the shot telling the audience what the crack means — which is the one thing this grammar refuses to do.** One continuous take; no cut.
+- Camera Language: **An oil painting's frame, placed with the weight of something set down.** The composition is decided once, the figure at the window sits inside it, and the frame is left where it was put. ⚠️ **The style's physical law, in the card's own words** (`oil-painting`) — **The camera has weight.** It holds, or moves with the slowness of a heavy dolly. Chiaroscuro is spent by a camera that hurries.
+- Camera Events: `0-5s` none — **the frame is set down once and holds.** ⚠️ **A hold is an event, written with its range like any other**: timing `0-5s`; movement none; target the window and the figure inside it; speed none. **What the hold is spent on is the surface** — the light travels across the impasto and the paint stays, **and the frame does not have to travel for that to be visible.**
+- Camera Behavior: **Held, and the hold stays a statement about the world rather than about the meaning.** ⚠️ **The reason, which travels on into §18: a camera move here would be the shot telling the audience what the crack means** — and **naming the meaning is the one thing this grammar refuses.** One continuous take; no cut.
 
 # 11. MOTION
 
@@ -229,7 +229,7 @@ A kitchen in the afternoon. One word is placed in it — 「大丈夫」, once. 
 
 ## Master Prompt
 
-A 5-second continuous take (16:9) of an afternoon kitchen, one clip, from a camera that does not move. Beats: [0-2s] one word is placed in the room once — 「大丈夫」 — while a figure seated at the window faces out through the glass, and nothing else happens: nothing enters, the light does not change, nobody moves; [2-3s] **the delay** — nothing happens at all, and this one second is the lag itself; [3-4s] **one crack runs across the window glass and stops** — nobody moves, and nothing has touched the glass; [4-5s] the crack stays stopped and nothing follows it. **Nothing in the frame causes the crack: no object enters, no light source changes, and no one acts — the picture answers the meaning itself, and it is never named.** The camera does not move. (No visible cause, no on-screen actor causing the change, no camera move answering the meaning, no rack focus carrying the meaning, no second crack, no shattering, no falling glass, no caption naming the meaning, no voice-over naming the meaning.)
+A 5-second continuous take (16:9) of an afternoon kitchen, one clip, from a frame set down once and held. Beats: [0-2s] one word is placed in the room once — 「大丈夫」 — while a figure seated at the window faces out through the glass, and nothing else happens: nothing enters, the light does not change, nobody moves; [2-3s] **the delay** — nothing happens at all, and this one second is the lag itself; [3-4s] **one crack runs across the window glass and stops** — nobody moves, and nothing has touched the glass; [4-5s] the crack stays stopped and nothing follows it. **Nothing in the frame causes the crack: no object enters, no light source changes, and no one acts — the picture answers the meaning itself, and it is never named.** **The camera is set down once and holds — a camera move here would be the shot telling the audience what the crack means.** (No visible cause, no on-screen actor causing the change, no camera move answering the meaning, no rack focus carrying the meaning, no second crack, no shattering, no falling glass, no caption naming the meaning, no voice-over naming the meaning.)
 
 ## Visual Prompt
 
@@ -237,11 +237,11 @@ An oil painting of an afternoon kitchen with a figure seated at the window. Thic
 
 ## Motion Prompt
 
-**The subject does not move at all.** The figure seated at the window holds posture, gaze and hands for the whole shot — **the stillness is the ground the answer lands in.** What moves is the light: it travels across the raised impasto so ridges catch and release, **and the paint stays while the reading of it changes.** At the third beat **one crack runs across the window glass and stops** — it does not shatter, it does not fall, and no second crack comes. **Nothing strikes the glass and nothing in the frame causes it.** After the crack the light keeps doing exactly what it was doing: the answer does not spread and does not change the room. **The camera does not move, and no camera move answers the crack.** No flowing liquid motion, no contour morphing, no motion blur, no camera move, no rack focus carrying the meaning.
+**The subject does not move at all.** The figure seated at the window holds posture, gaze and hands for the whole shot — **the stillness is the ground the answer lands in.** What moves is the light: it travels across the raised impasto so ridges catch and release, **and the paint stays while the reading of it changes.** At the third beat **one crack runs across the window glass and stops** — it does not shatter, it does not fall, and no second crack comes. **Nothing strikes the glass and nothing in the frame causes it.** After the crack the light keeps doing exactly what it was doing: the answer does not spread and does not change the room. **The camera is set down once and holds, and no move of any kind answers the crack** — the crack is the event, and the camera is not a second one. No flowing liquid motion, no contour morphing, no motion blur, no camera move, no rack focus carrying the meaning.
 
 ## Camera Prompt
 
-An oil painting's frame, held with weight. **The camera does not move at all** — no pan, no push, no pull, no rack, no handheld, and **no move answering the crack.** Chiaroscuro is spent by a camera that hurries, so this one does not hurry and does not go anywhere. One continuous take; no cut, and no rack focus carrying the meaning.
+**An oil painting's frame, set down once and left where it was put** — the composition is decided before the shot, the figure at the window sits inside it, and **the frame does not travel.** ⚠️ **The style permits a camera that moves with the slowness of a heavy dolly; this shot spends none of it** — **the light already travels across the impasto, and a still frame is what lets the reading of the paint change without the camera announcing it.** No move of any kind answers the crack: **the crack is the event, and the camera is not a second one.** One continuous take; no cut, and no rack focus carrying the meaning.
 
 ## Audio Prompt
 
@@ -263,16 +263,18 @@ not digital, no flat color, no airbrush smoothness, no visible cause, no camera 
 
 - Instance ID: `grammar-meaning-responsive-s01-5s-01`
 - Segment ID: `01-1`
-- Specification Version: `0.2.0`
+- Specification Version: `0.3.0`
   ⚠️ **この行は、この仕様の*現在*の版である**——`L25` がここを読み、各テイクの
   `source_version`（**投入した時点の版**）と突き合わせて、**ずれを註に書く。**
   ⚠️ **註を同じ行に足してはならない。** **足すと、この行は読まれなくなる**
   （`specmap.SPEC_VERSION_LINE` は行末までを版とする）。
   **検査が黙ったことは、検査が通ったことではない。**
-  ⚠️ **`0.1.0` から変わったのは §19 と §20 だけである**——**§1–18 は同一**である。
-  ゆえに **`0.1.0` を投入したテイクに `L25` がずれを註に書いても、投入文字列は変わっていない。**
+  ⚠️ **`0.2.0` から変わったのは §10 と §18 の `Camera Prompt`、そして §19 と §20 である**
+  ——**演出の段（`skills/staging/`）がカメラを書き直した。** ⚠️ **ゆえに投入文字列が変わった**——
+  **`media/` に在る1本は `0.2.0` の投入に対するものであり、この版はまだ生成されていない。**
 - Generation Date: `2026-09-22`（⚠️ **根拠は戻ってきたファイルの時刻**——`media/f04ee826-ba52-4bd7-99e0-601b219f29ea.mp4` の `03:20`。
-  **著者が名乗った日付ではない。**）
+  **著者が名乗った日付ではない。** ⚠️ **そのファイルは `0.2.0` の投入に対するものである**——
+  **この版の投入は、まだ無い。**）
 - Adopted Take: `—`（**まだ採用されていない。**⚠️ **テイクは1本、`media/` に在る**——
   **テイクの記録はまだ無い。** 記録を書くのは著者である（`projects/hitosara/media/README.md`）。
   ⚠️ **ファイル名は `NN__` の接頭辞を持たない**——**名前から記録を引けない。**
@@ -285,7 +287,7 @@ not digital, no flat color, no airbrush smoothness, no visible cause, no camera 
   ⚠️ **この行は「仕様が名指した参照」であって、「実際に渡した参照」ではない。**
   **この1本は、いま何も渡していない**（`attached: []`）。
 - Temporal Structure: `4 beats, NON_UNIFORM — 2s / 1s / 1s / 1s. The delay = BEAT 2 at 1s; the answer = BEAT 3 at 1s`
-- Camera Events: `none — the camera does not move, and it does not answer`
+- Camera Events: `none — the frame is set down once at 0s and holds; it does not answer`
 - Action Events: `ACT_PLACE → ACT_WAIT → ACT_ANSWER`
 - Audio Events: `one word, once ／ no music ／ no narration`
 - Output: `1920×1080, 24fps, 16:9 landscape, single clip`
@@ -294,13 +296,16 @@ not digital, no flat color, no airbrush smoothness, no visible cause, no camera 
 
 ## Version
 
-`0.2.0` — **①（生成する）は済んだ**（著者の手）。⚠️ **②（測る）は開いていない**——
+`0.3.0` — **演出の段（`skills/staging/`）で §10 と §18 の `Camera Prompt` を書き直した。**
+⚠️ **変わったのはこの2つと §19・§20 だけである**——**§1–9 と §11–17 は同一。**
+⚠️ **この版はまだ生成されていない**——`media/` に在る1本は `0.2.0` の投入に対するものである。
+①（生成する）は著者のものであり、**②（測る）は開いていない**——
 **測定はテイクの記録を要する**（`L25` はテイクが1本も無ければ走らない）。**テイクの記録はまだ無い。**
 ③（型の同定）と ④（直す）も開いていない。
 
 ⚠️ **この仕様で確かめたのは、文法が仕様として書けるかどうかである。**
 **文法が効いたかどうかではない**——⚠️ **生成はこの基盤の外で起きる。**
-⚠️ **生成は1度走った。** だが **`## Examples` はまだ `- —` である**——
+⚠️ **生成は1度走った**（`0.2.0` の投入に対して）。 だが **`## Examples` はまだ `- —` である**——
 **文法が効いたという記録は、まだどこにも無い。**
 
 ⚠️ **この作品は、形式カード `meaning-responsive` が初めて使われた記録である。**

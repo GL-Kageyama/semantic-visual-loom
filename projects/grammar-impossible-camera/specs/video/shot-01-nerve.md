@@ -132,9 +132,9 @@ The inside of an eye, and the road back along the optic nerve to the light of a 
 
 # 10. CAMERA
 
-- Camera Language: **A page.** The frame is a sheet of paper and it does not travel — **the viewpoint's advance is the wash's advance, and the camera is not a thing placed at a point at all.**
-- Camera Events: `0-12s` none. **There is no camera move, no pan, no zoom, no rack, and no travelling shot** — ⚠️ **not because a camera is being held still, but because the premise "the camera is somewhere" has been dropped.**
-- Camera Behavior: **The page holds.** ⚠️ **A travelling camera would spend the reserved white, and the reserved white is this shot's road** — so the frame staying put is not a limitation here, it is what makes the journey legible. One continuous take; no cut.
+- Camera Language: **A page, and not a camera placed at a point** — ⚠️ **this is the style's own answer to where the camera stands: it stands nowhere, because the premise that the camera is somewhere has been dropped.** The frame is a sheet of paper, and **the viewpoint's advance is the wash's advance.** ⚠️ **The style's physical law, in the card's own words** (`watercolor`) — **The camera is a page, not a window.** The frame holds still, or drifts once and slowly. The reserved white *is* what the shot is about, and a travelling camera spends it.
+- Camera Events: `0-12s` none — **and the page is not held still against a pull to move; it was never placed.** ⚠️ **A hold is an event, written with its range like any other**: timing `0-12s`; movement none; target none, because there is no point to aim from; speed none. **What the hold is spent on is the road** — the white stays reserved, and **the journey is legible as the white receding.**
+- Camera Behavior: **The page holds, and the holding is the premise rather than a restraint.** ⚠️ **The reason, which travels on into §18: the reserved white is this shot's road, and a travelling camera would spend it** — so the frame staying put is **what makes the journey legible, not a limitation accepted.** One continuous take; no cut.
 
 # 11. MOTION
 
@@ -233,7 +233,7 @@ The inside of an eye, and the road back along the optic nerve to the light of a 
 
 ## Master Prompt
 
-A 12-second continuous watercolor take (16:9), one clip, of a viewpoint travelling where no camera can be — **this is not a camera move: the frame is a page and it does not travel.** Beats, deliberately uneven: [0-3s] the entry is shown — one round edge of pale colour at the near side of reserved white paper, and the way in is stated by the wash crossing it; [3-7s] **the journey** — the wash blooms outward into the white and the wet edge becomes the viewpoint's position, and the white ahead is where it has not been; [7-10s] the white thins and light gathers from the far side, and **the law does not change** — same scale, same bleeding, all the way through; [10-12s] **the arrival** — the frame fills with light and the viewpoint ends there. **The reserved white is the road, so the white running out is the arrival.** (No conventional camera position, no fisheye distortion standing in for an impossible viewpoint, no unstated entry, no path that changes its own physics, no shot without an arrival, no cut.)
+A 12-second continuous watercolor take (16:9), one clip, of a viewpoint travelling where no camera can be — **the frame is a page and not a camera placed at a point: the viewpoint's advance is the wash's advance.** Beats, deliberately uneven: [0-3s] the entry is shown — one round edge of pale colour at the near side of reserved white paper, and the way in is stated by the wash crossing it; [3-7s] **the journey** — the wash blooms outward into the white and the wet edge becomes the viewpoint's position, and the white ahead is where it has not been; [7-10s] the white thins and light gathers from the far side, and **the law does not change** — same scale, same bleeding, all the way through; [10-12s] **the arrival** — the frame fills with light and the viewpoint ends there. **The reserved white is the road, so the white running out is the arrival.** (No conventional camera position, no fisheye distortion standing in for an impossible viewpoint, no unstated entry, no path that changes its own physics, no shot without an arrival, no cut.)
 
 ## Visual Prompt
 
@@ -241,11 +241,11 @@ A watercolor painting of an advancing wash on reserved white paper. Soft wet-on-
 
 ## Motion Prompt
 
-**The water is the mover, not the brush.** What changes between frames is a wash spreading into wet paper — pigment blooming outward and settling — **never a contour redrawn by a hand.** The wet edge keeps advancing: the same silhouette is a little different a moment later, **and it does not return to where it was.** **The viewpoint's position is the wet edge**, and the reserved white ahead is where it has not been — so **the journey is legible as the white receding, and the white running out is the arrival.** The path keeps one law: the same scale and the same bleeding from the first frame to the last. **The paper's white stays reserved for the whole shot** — nothing drifts in to fill it, no ambient particles, no haze, no colour arriving. **The frame does not travel.** No path that changes its own physics, no fisheye distortion, no motion blur, no full animation, no contours that hold their shape.
+**The water is the mover, not the brush.** What changes between frames is a wash spreading into wet paper — pigment blooming outward and settling — **never a contour redrawn by a hand.** The wet edge keeps advancing: the same silhouette is a little different a moment later, **and it does not return to where it was.** **The viewpoint's position is the wet edge**, and the reserved white ahead is where it has not been — so **the journey is legible as the white receding, and the white running out is the arrival.** The path keeps one law: the same scale and the same bleeding from the first frame to the last. **The paper's white stays reserved for the whole shot** — nothing drifts in to fill it, no ambient particles, no haze, no colour arriving. **The frame is a page, and it does not travel** — the white is the road, and a drift would spend it. No path that changes its own physics, no fisheye distortion, no motion blur, no full animation, no contours that hold their shape.
 
 ## Camera Prompt
 
-A single sheet of paper, held still. **There is no camera move here — not a held camera, but no camera placed at a point at all**, because the premise that the camera is somewhere has been dropped. No pan, no zoom, no rack, no travelling shot, **no conventional camera position, and no fisheye distortion standing in for an impossible viewpoint.** The page holds for the whole shot and the white is never crossed as a device. One continuous take; no cut.
+**A single sheet of paper, and not a camera placed at a point** — ⚠️ **the premise "the camera is somewhere" has been dropped, so there is no position to move from, and no move is being forbidden.** The page holds for the whole shot and **the white is never crossed as a device.** ⚠️ **The style permits the frame to drift once, slowly; this shot spends none of it** — **the journey here is the wash crossing the white, and a drift would be a second motion in a frame whose only subject is that crossing.** No pan, no zoom, no rack, no travelling shot, **no conventional camera position, and no fisheye distortion standing in for an impossible viewpoint.** One continuous take; no cut.
 
 ## Audio Prompt
 
@@ -267,16 +267,18 @@ not photorealistic, no oil, no digital, no hard outline, no conventional camera 
 
 - Instance ID: `grammar-impossible-camera-s01-12s-01`
 - Segment ID: `01-1`
-- Specification Version: `0.2.0`
+- Specification Version: `0.3.0`
   ⚠️ **この行は、この仕様の*現在*の版である**——`L25` がここを読み、各テイクの
   `source_version`（**投入した時点の版**）と突き合わせて、**ずれを註に書く。**
   ⚠️ **註を同じ行に足してはならない。** **足すと、この行は読まれなくなる**
   （`specmap.SPEC_VERSION_LINE` は行末までを版とする）。
   **検査が黙ったことは、検査が通ったことではない。**
-  ⚠️ **`0.1.0` から変わったのは §19 と §20 だけである**——**§1–18 は同一**である。
-  ゆえに **`0.1.0` を投入したテイクに `L25` がずれを註に書いても、投入文字列は変わっていない。**
+  ⚠️ **`0.2.0` から変わったのは §10 と §18 の `Camera Prompt`、そして §19 と §20 である**
+  ——**演出の段（`skills/staging/`）がカメラを書き直した。** ⚠️ **ゆえに投入文字列が変わった**——
+  **`media/` に在る1本は `0.2.0` の投入に対するものであり、この版はまだ生成されていない。**
 - Generation Date: `2026-09-22`（⚠️ **根拠は戻ってきたファイルの時刻**——`media/b7588c5e-6348-4bba-bd51-1d85106dab73.mp4` の `03:14`。
-  **著者が名乗った日付ではない。**）
+  **著者が名乗った日付ではない。** ⚠️ **そのファイルは `0.2.0` の投入に対するものである**——
+  **この版の投入は、まだ無い。**）
 - Adopted Take: `—`（**まだ採用されていない。**⚠️ **テイクは1本、`media/` に在る**——
   **テイクの記録はまだ無い。** 記録を書くのは著者である（`projects/hitosara/media/README.md`）。
   ⚠️ **ファイル名は `NN__` の接頭辞を持たない**——**名前から記録を引けない。**
@@ -289,7 +291,7 @@ not photorealistic, no oil, no digital, no hard outline, no conventional camera 
   ⚠️ **この行は「仕様が名指した参照」であって、「実際に渡した参照」ではない。**
   **この1本は、いま何も渡していない**（`attached: []`）。
 - Temporal Structure: `4 beats, NON_UNIFORM — 3s / 4s / 3s / 2s. The journey = BEAT 2 at 4s (33%)`
-- Camera Events: `none — the frame is a page and it does not travel`
+- Camera Events: `none — the frame is a page; it was never placed, and it does not travel`
 - Action Events: `ACT_ENTER → ACT_TRAVEL → ACT_ARRIVE`
 - Audio Events: `no dialogue ／ no music`
 - Output: `1920×1080, 24fps, 16:9 landscape, single clip`
@@ -298,13 +300,16 @@ not photorealistic, no oil, no digital, no hard outline, no conventional camera 
 
 ## Version
 
-`0.2.0` — **①（生成する）は済んだ**（著者の手）。⚠️ **②（測る）は開いていない**——
+`0.3.0` — **演出の段（`skills/staging/`）で §10 と §18 の `Camera Prompt` を書き直した。**
+⚠️ **変わったのはこの2つと §19・§20 だけである**——**§1–9 と §11–17 は同一。**
+⚠️ **この版はまだ生成されていない**——`media/` に在る1本は `0.2.0` の投入に対するものである。
+①（生成する）は著者のものであり、**②（測る）は開いていない**——
 **測定はテイクの記録を要する**（`L25` はテイクが1本も無ければ走らない）。**テイクの記録はまだ無い。**
 ③（型の同定）と ④（直す）も開いていない。
 
 ⚠️ **この仕様で確かめたのは、文法が仕様として書けるかどうかである。**
 **文法が効いたかどうかではない**——⚠️ **生成はこの基盤の外で起きる。**
-⚠️ **生成は1度走った。** だが **`## Examples` はまだ `- —` である**——
+⚠️ **生成は1度走った**（`0.2.0` の投入に対して）。 だが **`## Examples` はまだ `- —` である**——
 **文法が効いたという記録は、まだどこにも無い。**
 
 ⚠️ **この作品は、形式カード `impossible-camera` が初めて使われた記録である。**

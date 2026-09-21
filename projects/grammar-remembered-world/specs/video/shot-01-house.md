@@ -129,9 +129,9 @@ A tatami room seen in a dream: everything in it is slightly wrong, and one thing
 
 # 10. CAMERA
 
-- Camera Language: An instant photograph held and looked at. The frame is composed once — window left, refrigerator right — and **does not travel.**
-- Camera Events: `0-9s` none. **The camera goes nowhere** — no pan, no zoom, no rack, no travel. The only drift available to this style is the small unsteadiness of holding a print.
-- Camera Behavior: **Still.** ⚠️ **The white border is part of the frame and the picture never leaves it** — the border is not a device to be crossed. One continuous take; no cut.
+- Camera Language: **A print held in a hand and looked at** — the frame is an instant photograph, composed once (window on the left, refrigerator on the right) and then kept, **and the hand is the placement: the picture is looked at from where it is held.** ⚠️ **The style's physical law, in the card's own words** (`instant-photo`) — **The camera does not travel.** An instant photograph is a thing held in a hand — the only drift available is the small unsteadiness of holding it.
+- Camera Events: `0-9s` none — **the print goes nowhere for the whole take.** ⚠️ **A hold is an event, written with its range like any other**: timing `0-9s`; movement the small unsteadiness of a held print, and nothing beyond it; target the room, window left and refrigerator right; speed none. **What the hold is spent on is the room's one exact thing** — the drawing on the refrigerator never moves, **and it is what the garden's slipping is measured against.**
+- Camera Behavior: **Held, and the holding is this style's own state rather than a restraint.** ⚠️ **The reason, which travels on into §18: time does not pass in this shot; the world slips** — the movement belongs to the garden and to the emulsion, **and a travelling frame would put a third motion into a room whose whole point is that it holds.** One continuous take; no cut.
 
 # 11. MOTION
 
@@ -233,7 +233,7 @@ None. The refrigerator, the window, the tatami, and the drawing are all still fo
 
 ## Master Prompt
 
-A 9-second continuous take (16:9) of a tatami room seen in a dream, one clip, from a camera that does not travel. Beats: [0-3s] the room as remembered — a window on the left, a refrigerator on the right, a child's drawing taped to its door; [3-6s] **the slipping** — outside, the trees change in number, the wall changes height, and the ground tilts, while the garden stays a garden, and the room and the drawing do not move by a hair; [6-9s] **the return** — the garden comes back to its shape and leaves nothing behind. **This is a memory, not a record: time does not pass, and the world is what moves.** One thing in the frame is exact — the drawing on the refrigerator — and it never moves; it is what the slipping is measured against. (No people, no figure, no second room, no camera travel, no caption or voice-over explaining that this is a memory.)
+A 9-second continuous take (16:9) of a tatami room seen in a dream, one clip, seen in an instant photograph held in a hand and looked at. Beats: [0-3s] the room as remembered — a window on the left, a refrigerator on the right, a child's drawing taped to its door; [3-6s] **the slipping** — outside, the trees change in number, the wall changes height, and the ground tilts, while the garden stays a garden, and the room and the drawing do not move by a hair; [6-9s] **the return** — the garden comes back to its shape and leaves nothing behind. **This is a memory, not a record: time does not pass, and the world is what moves.** One thing in the frame is exact — the drawing on the refrigerator — and it never moves; it is what the slipping is measured against. (No people, no figure, no second room, no camera travel, no caption or voice-over explaining that this is a memory.)
 
 ## Visual Prompt
 
@@ -241,11 +241,11 @@ An instant photograph of a tatami room, taken with on-camera flash. White instan
 
 ## Motion Prompt
 
-**Time does not pass; the world slips.** The room does not move at all — its walls, its tatami, and the positions of the window and the refrigerator hold for the whole shot. **The shape of the garden outside the window is what changes**: its trees shift in number and shape, its wall changes height, its ground tilts — **and it returns, completely, by the last frame, so that the slipping leaves nothing behind.** The slipping keeps its meaning: **the garden stays a garden and the room stays the room.** **The child's drawing taped to the refrigerator never moves by a hair** — it is exact for the whole shot, and it is what the drift is measured against. The flash does not relight, and the colours keep ageing. No drift that destroys identity, no slipping that never returns, no melting or warping faces, no garbled characters, no camera travel.
+**Time does not pass; the world slips.** The room does not move at all — its walls, its tatami, and the positions of the window and the refrigerator hold for the whole shot. **The shape of the garden outside the window is what changes**: its trees shift in number and shape, its wall changes height, its ground tilts — **and it returns, completely, by the last frame, so that the slipping leaves nothing behind.** The slipping keeps its meaning: **the garden stays a garden and the room stays the room.** **The child's drawing taped to the refrigerator never moves by a hair** — it is exact for the whole shot, and it is what the drift is measured against. The flash does not relight, and the colours keep ageing. **The frame is a print held in a hand** — the small unsteadiness of holding it is the only movement the frame has, and **the world is what slips.** No drift that destroys identity, no slipping that never returns, no melting or warping faces, no garbled characters, no camera travel.
 
 ## Camera Prompt
 
-A single instant-photograph frame, held and looked at, composed once — window on the left, refrigerator on the right — and then left alone. **The camera goes nowhere** — no pan, no zoom, no rack, no travel, no handheld walk. The white border holds the picture for the whole shot and is never crossed. One continuous take; no cut.
+**A single instant-photograph frame, held in a hand and looked at, composed once — window on the left, refrigerator on the right — and then kept.** **The camera goes nowhere** — no pan, no zoom, no rack, no travel, no handheld walk. ⚠️ **The only drift this style has is the small unsteadiness of holding a print; this shot spends exactly that much and not a hair more** — **the world is what slips here, and the frame is the still thing that the slipping is measured against.** The white border holds the picture for the whole shot and is never crossed. One continuous take; no cut.
 
 ## Audio Prompt
 
@@ -267,16 +267,18 @@ no studio lighting, no professional color grading, no crisp digital sharpness, n
 
 - Instance ID: `grammar-remembered-world-s01-9s-01`
 - Segment ID: `01-1`
-- Specification Version: `0.2.0`
+- Specification Version: `0.3.0`
   ⚠️ **この行は、この仕様の*現在*の版である**——`L25` がここを読み、各テイクの
   `source_version`（**投入した時点の版**）と突き合わせて、**ずれを註に書く。**
   ⚠️ **註を同じ行に足してはならない。** **足すと、この行は読まれなくなる**
   （`specmap.SPEC_VERSION_LINE` は行末までを版とする）。
   **検査が黙ったことは、検査が通ったことではない。**
-  ⚠️ **`0.1.0` から変わったのは §19 と §20 だけである**——**§1–18 は同一**である。
-  ゆえに **`0.1.0` を投入したテイクに `L25` がずれを註に書いても、投入文字列は変わっていない。**
+  ⚠️ **`0.2.0` から変わったのは §10 と §18 の `Camera Prompt`、そして §19 と §20 である**
+  ——**演出の段（`skills/staging/`）がカメラを書き直した。** ⚠️ **ゆえに投入文字列が変わった**——
+  **`media/` に在る1本は `0.2.0` の投入に対するものであり、この版はまだ生成されていない。**
 - Generation Date: `2026-09-22`（⚠️ **根拠は戻ってきたファイルの時刻**——`media/affada3c-82c7-4482-8a7b-08357ef00dd1.mp4` の `03:05`。
-  **著者が名乗った日付ではない。**）
+  **著者が名乗った日付ではない。** ⚠️ **そのファイルは `0.2.0` の投入に対するものである**——
+  **この版の投入は、まだ無い。**）
 - Adopted Take: `—`（**まだ採用されていない。**⚠️ **テイクは1本、`media/` に在る**——
   **テイクの記録はまだ無い。** 記録を書くのは著者である（`projects/hitosara/media/README.md`）。
   ⚠️ **ファイル名は `NN__` の接頭辞を持たない**——**名前から記録を引けない。**
@@ -289,7 +291,7 @@ no studio lighting, no professional color grading, no crisp digital sharpness, n
   ⚠️ **この行は「仕様が名指した参照」であって、「実際に渡した参照」ではない。**
   **この1本は、いま何も渡していない**（`attached: []`）。
 - Temporal Structure: `3 beats, NON_UNIFORM — 3s / 3s / 3s. The slipping = BEAT 2; the return = BEAT 3`
-- Camera Events: `none — the camera goes nowhere`
+- Camera Events: `none — the print is held once at 0s, and it goes nowhere`
 - Action Events: `ACT_SHOW → ACT_SLIP → ACT_RETURN`
 - Audio Events: `no dialogue ／ no music`
 - Output: `1920×1080, 24fps, 16:9 landscape, single clip`
@@ -298,13 +300,16 @@ no studio lighting, no professional color grading, no crisp digital sharpness, n
 
 ## Version
 
-`0.2.0` — **①（生成する）は済んだ**（著者の手）。⚠️ **②（測る）は開いていない**——
+`0.3.0` — **演出の段（`skills/staging/`）で §10 と §18 の `Camera Prompt` を書き直した。**
+⚠️ **変わったのはこの2つと §19・§20 だけである**——**§1–9 と §11–17 は同一。**
+⚠️ **この版はまだ生成されていない**——`media/` に在る1本は `0.2.0` の投入に対するものである。
+①（生成する）は著者のものであり、**②（測る）は開いていない**——
 **測定はテイクの記録を要する**（`L25` はテイクが1本も無ければ走らない）。**テイクの記録はまだ無い。**
 ③（型の同定）と ④（直す）も開いていない。
 
 ⚠️ **この仕様で確かめたのは、文法が仕様として書けるかどうかである。**
 **文法が効いたかどうかではない**——⚠️ **生成はこの基盤の外で起きる。**
-⚠️ **生成は1度走った。** だが **`## Examples` はまだ `- —` である**——
+⚠️ **生成は1度走った**（`0.2.0` の投入に対して）。 だが **`## Examples` はまだ `- —` である**——
 **文法が効いたという記録は、まだどこにも無い。**
 
 ⚠️ **この作品は、形式カード `remembered-world` が初めて使われた記録である。**

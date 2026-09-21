@@ -119,9 +119,9 @@ the flower is there: that is all of it.
 
 # 10. CAMERA
 
-- Camera Language: Macro. The frame is at the cube's own scale, its plane of focus razor-thin, and it is composed once and then left alone.
-- Camera Events: `0-8s` none. **The camera does not move for the whole shot** — no push, no drift, no pan, no rack.
-- Camera Behavior: **Still.** ⚠️ **The style permits a focus rack or a few millimetres of drift; this shot spends neither.** A camera move would compete with the change, and **the change is the event.** One continuous take; no cut.
+- Camera Language: **A macro frame placed at the cube's own scale, its plane of focus razor-thin and set across the cube's middle.** ⚠️ **This is a placement and not a viewpoint that watches**: the frame is the place the change happens, and it is composed once at `0s` and left there. ⚠️ **The style's physical law, in the card's own words** (`macro-photo`) — **The camera is the mover, and it moves less than in any other style.** A focus rack, or a few millimetres of drift, is a full gesture.
+- Camera Events: `0-8s` none — **the frame is placed once and holds for the whole take.** ⚠️ **A hold is an event, written with its range like any other**: timing `0-8s`; movement none; target the cube's near face, inside the thin plane; speed none. **What the hold is spent on is the passage** — the outline travels, the frame does not.
+- Camera Behavior: **Still, and the stillness is the decision.** ⚠️ **The reason, which travels on into §18: the change is the event** — a camera move would be a second event at the same moment, **and it would also throw the subject out of the razor-thin plane** (a millimetre of travel is enough). One continuous take; no cut.
 
 # 11. MOTION
 
@@ -218,7 +218,7 @@ The tea immediately around the cube moves — **a slow, warm local current, made
 
 ## Master Prompt
 
-An 8-second continuous macro take (16:9) of a single white sugar cube in hot tea, one clip. Beats, deliberately uneven: [0-2s] the cube is whole — six faces, eight corners, unbroken; [2-5s] the passage — the corners round and the mass loosens outward, and the shot spends itself here; [5-7s] the form resolves, once, into a flower; [7-8s] the flower holds and is not undone. **The change is not compressed and it is never cut — there is no intermediate stage held for the viewer, and no caption names what is happening.** Whiteness is kept across the whole change: the flower is sugar, and sugar is white. The camera does not move. (No second subject changing, no spoon, no hand, no cup rim, no readable text.)
+An 8-second continuous macro take (16:9) of a single white sugar cube in hot tea, one clip. Beats, deliberately uneven: [0-2s] the cube is whole — six faces, eight corners, unbroken; [2-5s] the passage — the corners round and the mass loosens outward, and the shot spends itself here; [5-7s] the form resolves, once, into a flower; [7-8s] the flower holds and is not undone. **The change is not compressed and it is never cut — there is no intermediate stage held for the viewer, and no caption names what is happening.** Whiteness is kept across the whole change: the flower is sugar, and sugar is white. **The camera is a macro frame placed at the cube's own scale and held there — the change is the event, and the frame does not travel away from it.** (No second subject changing, no spoon, no hand, no cup rim, no readable text.)
 
 ## Visual Prompt
 
@@ -226,11 +226,11 @@ Extreme macro photography of a single white sugar cube in hot tea. Granular face
 
 ## Motion Prompt
 
-Macro. **The change is the time, and it is spent on the passage — not on the two states at either end.** The corners go first, then the mass loosens outward and resolves, once, into a flower. **The motion is one-way and it happens once**: the outline is never tied twice, never corrected, and the form is never undone inside the clip. **The cube keeps its place in the frame throughout — what travels is the outline, not the position.** Whiteness is carried across the whole change; only the silhouette moves. The tea immediately around the cube makes a slow, warm local current and nothing else in the frame moves. **The camera does not move at all.** No second simultaneous transformation, no stated process, no intermediate stage held, no morphing contours, no motion blur, no full animation.
+Macro. **The change is the time, and it is spent on the passage — not on the two states at either end.** The corners go first, then the mass loosens outward and resolves, once, into a flower. **The motion is one-way and it happens once**: the outline is never tied twice, never corrected, and the form is never undone inside the clip. **The cube keeps its place in the frame throughout — what travels is the outline, not the position.** Whiteness is carried across the whole change; only the silhouette moves. The tea immediately around the cube makes a slow, warm local current and nothing else in the frame moves. **The camera is placed once at the cube's own scale and holds** — the outline travels, and the frame does not. No second simultaneous transformation, no stated process, no intermediate stage held, no morphing contours, no motion blur, no full animation.
 
 ## Camera Prompt
 
-A macro frame at the cube's own scale, composed once and left alone. **The camera does not move at all** — no push, no pull, no drift, no pan, no handheld, no whip, no rack. The plane of focus stays razor-thin for the whole shot. One continuous take; no cut, no dissolve, no wipe.
+**A macro frame placed at the cube's own scale, composed once at the start and held there for the whole take.** The cube sits inside a razor-thin plane of focus and stays inside it while its outline loosens — **the frame is the place the change happens, and it does not travel away from it.** ⚠️ **The style permits a focus rack, or a few millimetres of drift; this shot spends neither** — **the change is already the largest event in the frame, and a millimetre of travel would throw the subject out of the plane that holds it.** Nothing pushes in and nothing pulls back: **the passage is the event, and the camera is not a second one.** Focus stays razor-thin from the first frame to the last. One continuous take; no cut, no dissolve, no wipe.
 
 ## Audio Prompt
 
@@ -252,16 +252,18 @@ no wide shot, no flat even lighting, no CGI, no illustration, no painted texture
 
 - Instance ID: `grammar-transformation-s01-8s-01`
 - Segment ID: `01-1`
-- Specification Version: `0.2.0`
+- Specification Version: `0.3.0`
   ⚠️ **この行は、この仕様の*現在*の版である**——`L25` がここを読み、各テイクの
   `source_version`（**投入した時点の版**）と突き合わせて、**ずれを註に書く。**
   ⚠️ **註を同じ行に足してはならない。** **足すと、この行は読まれなくなる**
   （`specmap.SPEC_VERSION_LINE` は行末までを版とする）。
   **検査が黙ったことは、検査が通ったことではない。**
-  ⚠️ **`0.1.0` から変わったのは §19 と §20 だけである**——**§1–18 は同一**である。
-  ゆえに **`0.1.0` を投入したテイクに `L25` がずれを註に書いても、投入文字列は変わっていない。**
+  ⚠️ **`0.2.0` から変わったのは §10 と §18 の `Camera Prompt`、そして §19 と §20 である**
+  ——**演出の段（`skills/staging/`）がカメラを書き直した。** ⚠️ **ゆえに投入文字列が変わった**——
+  **`media/` に在る1本は `0.2.0` の投入に対するものであり、この版はまだ生成されていない。**
 - Generation Date: `2026-09-22`（⚠️ **根拠は戻ってきたファイルの時刻**——`media/4466d551-1479-49c0-936a-d543d85785d5.mp4` の `02:53`。
-  **著者が名乗った日付ではない。**）
+  **著者が名乗った日付ではない。** ⚠️ **そのファイルは `0.2.0` の投入に対するものである**——
+  **この版の投入は、まだ無い。**）
 - Adopted Take: `—`（**まだ採用されていない。**⚠️ **テイクは1本、`media/` に在る**——
   **テイクの記録はまだ無い。** 記録を書くのは著者である（`projects/hitosara/media/README.md`）。
   ⚠️ **ファイル名は `NN__` の接頭辞を持たない**——**名前から記録を引けない。**
@@ -274,7 +276,7 @@ no wide shot, no flat even lighting, no CGI, no illustration, no painted texture
   ⚠️ **この行は「仕様が名指した参照」であって、「実際に渡した参照」ではない。**
   **この1本は、いま何も渡していない**（`attached: []`）。
 - Temporal Structure: `4 beats, NON_UNIFORM — 2s / 3s / 2s / 1s. The passage = BEAT 2 at 3s (38%)`
-- Camera Events: `none — the camera does not move`
+- Camera Events: `none — the frame is placed once at 0s and holds for the whole shot`
 - Action Events: `ACT_GIVE → ACT_RESOLVE → ACT_HOLD`
 - Audio Events: `no dialogue ／ no music`
 - Output: `1920×1080, 24fps, 16:9 landscape, single clip`
@@ -283,13 +285,16 @@ no wide shot, no flat even lighting, no CGI, no illustration, no painted texture
 
 ## Version
 
-`0.2.0` — **①（生成する）は済んだ**（著者の手）。⚠️ **②（測る）は開いていない**——
+`0.3.0` — **演出の段（`skills/staging/`）で §10 と §18 の `Camera Prompt` を書き直した。**
+⚠️ **変わったのはこの2つと §19・§20 だけである**——**§1–9 と §11–17 は同一。**
+⚠️ **この版はまだ生成されていない**——`media/` に在る1本は `0.2.0` の投入に対するものである。
+①（生成する）は著者のものであり、**②（測る）は開いていない**——
 **測定はテイクの記録を要する**（`L25` はテイクが1本も無ければ走らない）。**テイクの記録はまだ無い。**
 ③（型の同定）と ④（直す）も開いていない。
 
 ⚠️ **この仕様で確かめたのは、文法が仕様として書けるかどうかである。**
 **文法が効いたかどうかではない**——⚠️ **生成はこの基盤の外で起きる。**
-⚠️ **生成は1度走った。** だが **`## Examples` はまだ `- —` である**——
+⚠️ **生成は1度走った**（`0.2.0` の投入に対して）。 だが **`## Examples` はまだ `- —` である**——
 **文法が効いたという記録は、まだどこにも無い。**
 
 ⚠️ **この作品は、形式カード `transformation` が初めて使われた記録である。**

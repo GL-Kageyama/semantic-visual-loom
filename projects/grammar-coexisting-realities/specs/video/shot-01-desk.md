@@ -143,9 +143,9 @@ A study desk, present twice in one frame. On the left the desk as it was in 昭�
 
 # 10. CAMERA
 
-- Camera Language: **A camera.** ⚠️ This style's impossibility is in the image's constitution and not in its viewpoint, so the shot frames the desk plainly and the wrongness stays inside the frame. ⚠️ **This shot is written for the `MINIMAX H3` route**, where a shot is made of panels joined to the next by natural animation — **and the panels must not be forbidden that join.**
-- Camera Events: `0-10s` none. **The camera does not move at all** — no pan, no push, no rack, no handheld.
-- Camera Behavior: ⚠️ **No panel changes place.** Both realities are held in one frame for the whole shot, so **there is no cut to specify and no move to keep continuous.** The camera holds at one middle distance, and no part of a body is split across two distances. **No cuts to unrelated locations** — and there is none.
+- Camera Language: **A camera, standing at one middle distance in front of the desk and framing it plainly.** ⚠️ **The style's physical law, in the card's own words** (`impossible-medium`) — **The camera is a camera.** This style's impossibility is in the image's constitution, not in its viewpoint, so the shot frames the subject plainly and the wrongness stays inside the frame. ⚠️ **This shot is written for the `MINIMAX H3` route**, where a shot is made of panels joined to the next by natural animation — **and the camera does not stand in the way of that join.**
+- Camera Events: `0-10s` none — **one distance for the whole take.** ⚠️ **A hold is an event, written with its range like any other**: timing `0-10s`; movement none; target the desk, with both realities inside one frame and no part of a body split across two distances; speed none. **What the hold is spent on is the coexistence** — both realities stay present at once, **and neither is given its own shot.**
+- Camera Behavior: **Held, and the holding is what keeps the wrongness out of the camera's hands.** ⚠️ **The reason, which travels on into §18: the two realities are joined inside the image, and a viewpoint that moved would make the difference between them a matter of where the camera went** — which is the one reading this grammar refuses. ⚠️ **No panel changes place, and no cut is owed**: the frame holds for the whole shot. One continuous take.
 
 # 11. MOTION
 
@@ -248,7 +248,7 @@ A study desk, present twice in one frame. On the left the desk as it was in 昭�
 
 ## Master Prompt
 
-A 10-second shot (16:9) of a study desk standing twice in one frame — on the left the desk as it was in 昭和, on the right the same desk now — and neither of them is earlier. **Keep the protagonist the same person in every panel**: the child seated at the left desk and the adult seated at the right desk are one person, and the same four features are drawn on both — the same parting in the hair, the same shape of eyebrow, the same small mole above the left eyebrow, and the same right hand. The child: hair parted in the middle, white short-sleeved shirt, shorts, bare feet, both knees up on the chair, a pencil in the right hand. The adult: the same parting with the hair shortened at the sides, navy work shirt with the sleeves rolled once, seated squarely with both feet on the floor, the same hand flat on the desk. Beats, deliberately uneven: [0-3s] both desks present, both seated, both present now; [3-6s] the four shared features, and **neither looks at the other** — each looks down at their own desk; [6-9s] **one eraser lies on the desk and is drawn once**, at the place where the two desks overlap, while two pencils, two notebooks and two sets of scars in the wood are all present twice; [9-10s] the drawn contour holds perfectly still while the photographed light keeps travelling, and the sheen on the desk's varnish crosses the eraser and leaves it. One frame ruled by two media that do not agree: everything is a flat two-ink drawing, and the light alone is photographic. The two desks overlap and no line divides them. Nothing declares a year and no panel changes place — both realities are held in one frame throughout. (No blended media, no averaged style, no transition zone, no gradient between media, no single consistent medium, no named existing style, no age makeup, no ghosting of either figure, no acknowledgement between the two, no sepia, no cross-fade, no morph, no readable text, no camera move.)
+A 10-second shot (16:9) of a study desk standing twice in one frame — on the left the desk as it was in 昭和, on the right the same desk now — and neither of them is earlier. **Keep the protagonist the same person in every panel**: the child seated at the left desk and the adult seated at the right desk are one person, and the same four features are drawn on both — the same parting in the hair, the same shape of eyebrow, the same small mole above the left eyebrow, and the same right hand. The child: hair parted in the middle, white short-sleeved shirt, shorts, bare feet, both knees up on the chair, a pencil in the right hand. The adult: the same parting with the hair shortened at the sides, navy work shirt with the sleeves rolled once, seated squarely with both feet on the floor, the same hand flat on the desk. Beats, deliberately uneven: [0-3s] both desks present, both seated, both present now; [3-6s] the four shared features, and **neither looks at the other** — each looks down at their own desk; [6-9s] **one eraser lies on the desk and is drawn once**, at the place where the two desks overlap, while two pencils, two notebooks and two sets of scars in the wood are all present twice; [9-10s] the drawn contour holds perfectly still while the photographed light keeps travelling, and the sheen on the desk's varnish crosses the eraser and leaves it. One frame ruled by two media that do not agree: everything is a flat two-ink drawing, and the light alone is photographic. The two desks overlap and no line divides them. **The camera stands at one middle distance in front of the desk for the whole shot** — nothing declares a year, no panel changes place, and both realities are held in one frame throughout. (No blended media, no averaged style, no transition zone, no gradient between media, no single consistent medium, no named existing style, no age makeup, no ghosting of either figure, no acknowledgement between the two, no sepia, no cross-fade, no morph, no readable text, no camera move.)
 
 ## Visual Prompt
 
@@ -260,7 +260,7 @@ One frame ruled by two media that do not agree. Everything in it is a **flat two
 
 ## Camera Prompt
 
-**A camera, framing the desk plainly.** The camera does not move at all — no pan, no push, no pull, no rack, no handheld, no travel — because this image's wrongness is in its constitution and not in its viewpoint, and the frame holds it. **No panel changes place**: both realities are held in one frame for the whole shot, so there is no cut to specify and no move to keep continuous. One middle distance for the whole shot, with no part of a body split across two distances. The two desks overlap in the frame, the left slightly further and the right slightly nearer, and that layout does not change. No split screen and no dividing line. **No cuts to unrelated locations**, and none occurs.
+**A camera, standing at one middle distance in front of the desk and framing it plainly**, and it stays at that distance for the whole shot. ⚠️ **This style's impossibility is in the image's constitution and not in its viewpoint** — **the wrongness is held inside one frame, and the camera has nothing to answer with.** **No panel changes place**: both realities are held in one frame for the whole shot, **and the panels are joined to the next by natural animation — nothing here forbids that join.** The two desks overlap in the frame, the left slightly further and the right slightly nearer, and that layout does not change. No split screen and no dividing line. **No cuts to unrelated locations**, and none occurs. **A viewpoint that moved would make the difference between the two realities a matter of where the camera went**, and that is the one reading this grammar refuses. One middle distance for the whole shot, with no part of a body split across two distances.
 
 ## Audio Prompt
 
@@ -282,16 +282,22 @@ no watermark, no on-screen subtitles, no background music, no blended media, no 
 
 - Instance ID: `grammar-coexisting-realities-s01-10s-01`
 - Segment ID: `01-1`
-- Specification Version: `0.2.0`
+- Specification Version: `0.3.0`
   ⚠️ **この行は、この仕様の*現在*の版である**——`L25` がここを読み、各テイクの
   `source_version`（**投入した時点の版**）と突き合わせて、**ずれを註に書く。**
   ⚠️ **註を同じ行に足してはならない。** **足すと、この行は読まれなくなる**
   （`specmap.SPEC_VERSION_LINE` は行末までを版とする）。
   **検査が黙ったことは、検査が通ったことではない。**
-  ⚠️ **`0.1.0` から変わったのは §19 と §20 だけである**——**§1–18 は同一**である。
-  ゆえに **`0.1.0` を投入したテイクに `L25` がずれを註に書いても、投入文字列は変わっていない。**
-- Generation Date: （**まだ生成されていない。**）
-- Adopted Take: （**まだ生成されていない。**）
+  ⚠️ **`0.2.0` から変わったのは §10 と §18 の `Camera Prompt`、そして §19 と §20 である**
+  ——**演出の段（`skills/staging/`）がカメラを書き直した。** ⚠️ **ゆえに投入文字列が変わった**——
+  **この版の投入は、まだ無い。**
+- Generation Date: `—`（**この版（`0.3.0`）の投入は、まだ無い。** ⚠️ **`media/` には1本、ファイルが在る**——
+  `media/e2688d6d-ff79-45ff-8881-72ec51bb056b.mp4` の `04:26`。**それはこの版より前の仕様に対するものであり、
+  どの版を投入したかを、この記録は名乗っていない。**）
+- Adopted Take: `—`（**まだ採用されていない。**⚠️ **テイクは1本、`media/` に在る**——
+  **テイクの記録はまだ無い。** 記録を書くのは著者である（`projects/hitosara/media/README.md`）。
+  ⚠️ **ファイル名は `NN__` の接頭辞を持たない**——**名前から記録を引けない。**
+  ⚠️ **採用は選別であり、著者が編集である**（`CLAUDE.md`）。）
 
 ## Resolved Values
 
@@ -301,7 +307,7 @@ no watermark, no on-screen subtitles, no background music, no blended media, no 
   **この1本は、いま何も渡していない**（`attached: []`）。
   ⚠️ **この経路は絵コンテを渡す経路である**（`docs/h3-route.md`）——**板はまだ1枚も描かれていない。**
 - Temporal Structure: `4 beats, NON_UNIFORM — 3s / 3s / 3s / 1s. The survey = BEAT 1–3; the light's crossing = BEAT 4 at 1s`
-- Camera Events: `none — the camera does not move, and no panel changes place`
+- Camera Events: `none — the camera stands at one middle distance from 0s to 10s`
 - Action Events: `ACT_HOLD → ACT_FOLD → ACT_SHARE → ACT_PASS`
 - Audio Events: `no dialogue ／ no music ／ one room tone for the whole frame`
 - Output: `1920×1080, 24fps, 16:9 landscape, single clip`
@@ -310,14 +316,17 @@ no watermark, no on-screen subtitles, no background music, no blended media, no 
 
 ## Version
 
-`0.2.0` — **仕様は書けている。** ⚠️ **①（生成する）は著者のものであり、まだ開いていない。**
+`0.3.0` — **演出の段（`skills/staging/`）で §10 と §18 の `Camera Prompt` を書き直した。**
+⚠️ **変わったのはこの2つと §19・§20 だけである**——**§1–9 と §11–17 は同一。**
+⚠️ **この版はまだ生成されていない。**
+①（生成する）は著者のものである——⚠️ **生成は1度、走っている**（`media/` に1本在る）が、
+**そのファイルがどの版の投入に対するものかを、この記録は名乗っていない。**
 ②（測る）③（型の同定）④（直す）も開いていない。⚠️ **段階の名を正典の「四つの手」に合わせた**——
 ここには以前 `②（書く）` と在ったが、**`②` は `測る` である。**
 
 ⚠️ **この仕様で確かめたのは、文法が仕様として書けるかどうかである。**
 **文法が効いたかどうかではない**——⚠️ **生成はこの基盤の外で起きる。**
-⚠️ **生成は1度走った。** だが **`## Examples` はまだ `- —` である**——
-**文法が効いたという記録は、まだどこにも無い。**
+⚠️ **`## Examples` はまだ `- —` である**——**文法が効いたという記録は、まだどこにも無い。**
 
 ⚠️ **この作品は、形式カード `coexisting-realities` が初めて使われた記録である。**
 ⚠️ **7枚のうち、経路が到達可能性を決めるのはこの1枚だけである。**

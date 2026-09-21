@@ -129,9 +129,9 @@ At the last second a bird lands on it.
 
 # 10. CAMERA
 
-- Camera Language: Large format, deep focus, on a tripod. The frame is composed once — rock low in the frame, horizon on the upper third — and then **left alone completely.**
-- Camera Events: `0-10s` none. **The camera does not move for the whole shot** — no pan, no zoom, no drift, no rack, no handheld.
-- Camera Behavior: **Fixed.** ⚠️ **This is the card's own requirement, not a stylistic preference**: coming back to the place after leaving it is a second shot, and **this grammar's whole claim is that the place was never left.** One continuous take; no cut.
+- Camera Language: **A large-format frame on a tripod, set up before the shot begins** — composed once (rock low and slightly off-centre, horizon on the upper third) with deep focus from the near water to the far horizon, and then **left alone completely. The tripod is the placement: the camera stands in the place and follows nothing through it.** ⚠️ **The style's physical law, in the card's own words** (`landscape-photo`) — **The camera is set up, not followed.** A large-format frame stands on a tripod; the shot is composed and then left alone.
+- Camera Events: `0-10s` none — **the frame stands for the whole hundred years.** ⚠️ **A hold is an event, written with its range like any other**: timing `0-10s`; movement none; target the rock, with the horizon on the upper third; speed none. **What the hold is spent on is the span** — the time passes through the frame, **and everything except the rock is what moves.**
+- Camera Behavior: **Fixed, and the fixing is the grammar's own requirement rather than a stylistic preference.** ⚠️ **The reason, which travels on into §18: coming back to the place after leaving it is a second shot, and this grammar's whole claim is that the place was never left** — the camera cannot leave, **or the hundred years become a cut.** One continuous take; no cut.
 
 # 11. MOTION
 
@@ -229,7 +229,7 @@ This is where the shot lives. Waves come and return at the rock's foot; the sea'
 
 ## Master Prompt
 
-A 10-second continuous take (16:9) of a rock standing out of the sea, one clip, from a camera that never leaves the place. Beats, deliberately uneven: [0-3s] rock, sea, sky, and a wave returning at the rock's foot — nothing has begun; [3-7s] time moves through the frame — waves come and return, the sea's colour turns, the light crosses, the clouds replace one another, and only the rock holds; [7-9s] everything around the rock is worn down — the sea thins and the far shoreline drops — and the rock's own face is not touched; [9-10s] a bird lands on the rock and stays. **A hundred years pass inside this one frame: the times are stacked, not laid end to end, and the shot never cuts and never skips time.** Nothing in the frame dates it. **The rock is the one survivor** — the whole span is legible because that one thing does not change. (No camera move, no pan, no zoom, no date stamp, no caption, no title card carrying elapsed time, no people, no boat, no building.)
+A 10-second continuous take (16:9) of a rock standing out of the sea, one clip, from a large-format frame on a tripod, standing in the place for the whole shot. Beats, deliberately uneven: [0-3s] rock, sea, sky, and a wave returning at the rock's foot — nothing has begun; [3-7s] time moves through the frame — waves come and return, the sea's colour turns, the light crosses, the clouds replace one another, and only the rock holds; [7-9s] everything around the rock is worn down — the sea thins and the far shoreline drops — and the rock's own face is not touched; [9-10s] a bird lands on the rock and stays. **A hundred years pass inside this one frame: the times are stacked, not laid end to end, and the shot never cuts and never skips time.** Nothing in the frame dates it. **The rock is the one survivor** — the whole span is legible because that one thing does not change. (No camera move, no pan, no zoom, no date stamp, no caption, no title card carrying elapsed time, no people, no boat, no building.)
 
 ## Visual Prompt
 
@@ -237,11 +237,11 @@ Large-format landscape photography of a rock standing out of the sea, the sea an
 
 ## Motion Prompt
 
-**The rock does not move at all — it is the one thing the hundred years do not touch.** Everything around it moves: waves come and return at its foot, the sea's level and colour turn across the span, the light crosses the frame, the clouds replace one another, and the far shoreline is worn lower and lower. **The motion is continuous; the frame is never still even though the camera is.** At the last second **one bird lands and stays**, and after that it does not move. **The camera never moves and never cuts** — this is one place, held, with time passing through it. No cut, no cross-dissolve, no time-skip, no return to the place after leaving it, no aging makeup, no stated "years later."
+**The rock does not move at all — it is the one thing the hundred years do not touch.** Everything around it moves: waves come and return at its foot, the sea's level and colour turn across the span, the light crosses the frame, the clouds replace one another, and the far shoreline is worn lower and lower. **The motion is continuous; the frame is never still even though the camera is.** At the last second **one bird lands and stays**, and after that it does not move. **The camera is set up on its tripod and stays there** — this is one place, held, with time passing through it; **a camera that left would make the return a second shot.** No cut, no cross-dissolve, no time-skip, no return to the place after leaving it, no aging makeup, no stated "years later."
 
 ## Camera Prompt
 
-A large-format frame on a tripod, composed once — rock low and slightly off-centre, horizon on the upper third — and then left alone completely. **The camera does not move at all** for the whole shot — no pan, no zoom, no drift, no rack, no handheld, no whip. Deep focus is held from the first frame to the last. One continuous take; no cut, no cross-dissolve, no time-skip.
+**A large-format frame on a tripod, set up before the shot and standing in the place for the whole take** — composed once, rock low and slightly off-centre with the horizon on the upper third, and then **left alone completely.** ⚠️ **This is the style's own setting — a large-format frame stands on a tripod and the shot is composed and then left alone — and this shot asks for nothing beyond it** — **a camera that left the place would make the return a second shot, and this grammar's whole claim is that the place was never left.** No pan, no zoom, no drift, no rack, no handheld, no whip. Deep focus is held from the first frame to the last: the near water and the far horizon stay sharp at once. **What moves is the world** — waves, light, cloud, the far shoreline — **and the frame is the one thing the hundred years do not touch.** One continuous take; no cut, no cross-dissolve, no time-skip.
 
 ## Audio Prompt
 
@@ -263,16 +263,18 @@ no shallow depth of field, no HDR oversaturation, no people, no CGI, no illustra
 
 - Instance ID: `grammar-time-fold-s01-10s-01`
 - Segment ID: `01-1`
-- Specification Version: `0.2.0`
+- Specification Version: `0.3.0`
   ⚠️ **この行は、この仕様の*現在*の版である**——`L25` がここを読み、各テイクの
   `source_version`（**投入した時点の版**）と突き合わせて、**ずれを註に書く。**
   ⚠️ **註を同じ行に足してはならない。** **足すと、この行は読まれなくなる**
   （`specmap.SPEC_VERSION_LINE` は行末までを版とする）。
   **検査が黙ったことは、検査が通ったことではない。**
-  ⚠️ **`0.1.0` から変わったのは §19 と §20 だけである**——**§1–18 は同一**である。
-  ゆえに **`0.1.0` を投入したテイクに `L25` がずれを註に書いても、投入文字列は変わっていない。**
+  ⚠️ **`0.2.0` から変わったのは §10 と §18 の `Camera Prompt`、そして §19 と §20 である**
+  ——**演出の段（`skills/staging/`）がカメラを書き直した。** ⚠️ **ゆえに投入文字列が変わった**——
+  **`media/` に在る1本は `0.2.0` の投入に対するものであり、この版はまだ生成されていない。**
 - Generation Date: `2026-09-22`（⚠️ **根拠は戻ってきたファイルの時刻**——`media/16d3bd84-1f31-4a40-8ddc-4d01c8727ad6.mp4` の `02:59`。
-  **著者が名乗った日付ではない。**）
+  **著者が名乗った日付ではない。** ⚠️ **そのファイルは `0.2.0` の投入に対するものである**——
+  **この版の投入は、まだ無い。**）
 - Adopted Take: `—`（**まだ採用されていない。**⚠️ **テイクは1本、`media/` に在る**——
   **テイクの記録はまだ無い。** 記録を書くのは著者である（`projects/hitosara/media/README.md`）。
   ⚠️ **ファイル名は `NN__` の接頭辞を持たない**——**名前から記録を引けない。**
@@ -285,7 +287,7 @@ no shallow depth of field, no HDR oversaturation, no people, no CGI, no illustra
   ⚠️ **この行は「仕様が名指した参照」であって、「実際に渡した参照」ではない。**
   **この1本は、いま何も渡していない**（`attached: []`）。
 - Temporal Structure: `4 beats, NON_UNIFORM — 3s / 4s / 2s / 1s. The passage = BEAT 2 at 4s (40%)`
-- Camera Events: `none — the camera never moves`
+- Camera Events: `none — the frame is set up once, before 0s, and stands for the whole shot`
 - Action Events: `ACT_HOLD → ACT_WEAR → ACT_LAND`
 - Audio Events: `no dialogue ／ no music`
 - Output: `1920×1080, 24fps, 16:9 landscape, single clip`
@@ -294,13 +296,16 @@ no shallow depth of field, no HDR oversaturation, no people, no CGI, no illustra
 
 ## Version
 
-`0.2.0` — **①（生成する）は済んだ**（著者の手）。⚠️ **②（測る）は開いていない**——
+`0.3.0` — **演出の段（`skills/staging/`）で §10 と §18 の `Camera Prompt` を書き直した。**
+⚠️ **変わったのはこの2つと §19・§20 だけである**——**§1–9 と §11–17 は同一。**
+⚠️ **この版はまだ生成されていない**——`media/` に在る1本は `0.2.0` の投入に対するものである。
+①（生成する）は著者のものであり、**②（測る）は開いていない**——
 **測定はテイクの記録を要する**（`L25` はテイクが1本も無ければ走らない）。**テイクの記録はまだ無い。**
 ③（型の同定）と ④（直す）も開いていない。
 
 ⚠️ **この仕様で確かめたのは、文法が仕様として書けるかどうかである。**
 **文法が効いたかどうかではない**——⚠️ **生成はこの基盤の外で起きる。**
-⚠️ **生成は1度走った。** だが **`## Examples` はまだ `- —` である**——
+⚠️ **生成は1度走った**（`0.2.0` の投入に対して）。 だが **`## Examples` はまだ `- —` である**——
 **文法が効いたという記録は、まだどこにも無い。**
 
 ⚠️ **この作品は、形式カード `time-fold` が初めて使われた記録である。**

@@ -130,9 +130,9 @@ A shrine at midnight. Snow that no one has walked on takes the shape of footprin
 
 # 10. CAMERA
 
-- Camera Language: A woodblock print's frame. **The frame holds still** — a print is an object on paper, and a camera that travels turns it back into a scene.
-- Camera Events: `0-9s` none. **The camera does not move at all** — no pan, no push, no rack, no handheld.
-- Camera Behavior: **Still, and the composition is a print's**: a bold diagonal from the near side to the torii at the far end, with the lanterns dividing the frame along it. One continuous take; no cut.
+- Camera Language: **A woodblock print's sheet, laid flat and held still** — the frame is an object on paper and not a window, and the composition is a print's: a bold diagonal from the near side to the torii at the far end, with the lanterns dividing the frame along it. ⚠️ **The style's physical law, in the card's own words** (`mokuhanga`) — **The camera is a sheet, not a window.** The frame holds still. A print is an object on paper, and a camera that travels turns it back into a scene.
+- Camera Events: `0-9s` none — **the sheet is laid down once and holds for the whole take.** ⚠️ **A hold is an event, written with its range like any other**: timing `0-9s`; movement none; target the approach, from the near side to the torii; speed none. **What the hold is spent on is the registering** — the snow takes the marks, and **the frame does not have to travel for a place to answer.**
+- Camera Behavior: **Still, and the stillness is what keeps this a print.** ⚠️ **The reason, which travels on into §18: the one thing that changes here changes in the snow and not in the viewpoint** — a camera that travelled would turn the sheet back into a scene, **and the scene is where the recognition would have to be staged instead of registered.** One continuous take; no cut.
 
 # 11. MOTION
 
@@ -231,7 +231,7 @@ A shrine at midnight. Snow that no one has walked on takes the shape of footprin
 
 ## Master Prompt
 
-A 9-second continuous take (16:9) of a shrine approach at midnight under untouched snow, one clip, from a camera that does not move. Beats, deliberately uneven: [0-3s] midnight — snow that no one has walked on, lanterns along both sides of the approach, and not one of them lit; [3-6s] **the snow takes the shape of footprints, front to back, with no walker anywhere in the frame** — and this accumulates, one mark after another, rather than switching on; [6-8s] past the footprints the snow gives way and **a way opens**; [8-9s] **the lanterns do not light.** Everything in the frame answers except that one thing: **the place registers a presence that is never shown, and stops at what it will not do.** Nothing social happens — nobody turns, greets or appears — and the recognition is never announced. (No character reacting in place of the setting, no cut between unrecognised and recognised states, no lantern lighting, no blanket mood change, no person, no figure, no animal, no wind, no on-screen caption, no voice-over announcing recognition.)
+A 9-second continuous take (16:9) of a shrine approach at midnight under untouched snow, one clip, from a woodblock print's sheet laid flat and held still. Beats, deliberately uneven: [0-3s] midnight — snow that no one has walked on, lanterns along both sides of the approach, and not one of them lit; [3-6s] **the snow takes the shape of footprints, front to back, with no walker anywhere in the frame** — and this accumulates, one mark after another, rather than switching on; [6-8s] past the footprints the snow gives way and **a way opens**; [8-9s] **the lanterns do not light.** Everything in the frame answers except that one thing: **the place registers a presence that is never shown, and stops at what it will not do.** Nothing social happens — nobody turns, greets or appears — and the recognition is never announced. (No character reacting in place of the setting, no cut between unrecognised and recognised states, no lantern lighting, no blanket mood change, no person, no figure, no animal, no wind, no on-screen caption, no voice-over announcing recognition.)
 
 ## Visual Prompt
 
@@ -239,11 +239,11 @@ A Japanese ukiyo-e woodblock print of a snow-covered shrine approach at midnight
 
 ## Motion Prompt
 
-**The block re-prints rather than flows** — an image lands, and then lands again, and **between impressions the colour planes slip a little against the ink line so an edge doubles and settles.** The drift is the print's and not the subject's. **The snow is what registers**: footprints take shape in it, front to back, **with no walker anywhere in the frame**, and past them the snow gives way and a way opens. **The marks accumulate — one after another, never switched on at once.** Everything else holds completely: the lanterns, the torii and the ground do not move, **and the lanterns do not light at any point, including the last frame.** Nothing social happens and no figure enters. **The camera does not move.** No smooth continuous animation, no dissolving gradients, no morphing contours, no motion blur, no camera travel, no blanket mood change.
+**The block re-prints rather than flows** — an image lands, and then lands again, and **between impressions the colour planes slip a little against the ink line so an edge doubles and settles.** The drift is the print's and not the subject's. **The snow is what registers**: footprints take shape in it, front to back, **with no walker anywhere in the frame**, and past them the snow gives way and a way opens. **The marks accumulate — one after another, never switched on at once.** Everything else holds completely: the lanterns, the torii and the ground do not move, **and the lanterns do not light at any point, including the last frame.** Nothing social happens and no figure enters. **The sheet is laid flat and held still** — the marks change in the snow, and the frame stays where it was laid. No smooth continuous animation, no dissolving gradients, no morphing contours, no motion blur, no camera travel, no blanket mood change.
 
 ## Camera Prompt
 
-A woodblock print's frame, held still — **the frame is a sheet of paper and not a window.** No pan, no push, no pull, no rack, no handheld, and no camera travel: a print is an object on paper, and a camera that travels turns it back into a scene. The composition is a bold diagonal from the near side of the frame to the torii at the far end, with the lanterns dividing the frame along it, and it does not change for the whole shot. One continuous take; no cut.
+**A woodblock print's sheet, laid flat and held still for the whole take** — **the frame is an object on paper and not a window.** No pan, no push, no pull, no rack, no handheld, and no camera travel: **a print is an object on paper, and a camera that travels turns it back into a scene.** The composition is a bold diagonal from the near side of the frame to the torii at the far end, with the lanterns dividing the frame along it, and it does not change for the whole shot. **The one thing that changes here changes in the snow** — the marks take shape in it, front to back, with no walker — and **the frame stays where it was laid while that happens.** One continuous take; no cut.
 
 ## Audio Prompt
 
@@ -265,16 +265,18 @@ not photorealistic, no digital gradient, no 3D render, no soft shading, no chara
 
 - Instance ID: `grammar-recognizing-world-s01-9s-01`
 - Segment ID: `01-1`
-- Specification Version: `0.2.0`
+- Specification Version: `0.3.0`
   ⚠️ **この行は、この仕様の*現在*の版である**——`L25` がここを読み、各テイクの
   `source_version`（**投入した時点の版**）と突き合わせて、**ずれを註に書く。**
   ⚠️ **註を同じ行に足してはならない。** **足すと、この行は読まれなくなる**
   （`specmap.SPEC_VERSION_LINE` は行末までを版とする）。
   **検査が黙ったことは、検査が通ったことではない。**
-  ⚠️ **`0.1.0` から変わったのは §19 と §20 だけである**——**§1–18 は同一**である。
-  ゆえに **`0.1.0` を投入したテイクに `L25` がずれを註に書いても、投入文字列は変わっていない。**
+  ⚠️ **`0.2.0` から変わったのは §10 と §18 の `Camera Prompt`、そして §19 と §20 である**
+  ——**演出の段（`skills/staging/`）がカメラを書き直した。** ⚠️ **ゆえに投入文字列が変わった**——
+  **`media/` に在る1本は `0.2.0` の投入に対するものであり、この版はまだ生成されていない。**
 - Generation Date: `2026-09-22`（⚠️ **根拠は戻ってきたファイルの時刻**——`media/9ba21ee4-b44b-4e50-9114-bbdd05690fe5.mp4` の `03:22`。
-  **著者が名乗った日付ではない。**）
+  **著者が名乗った日付ではない。** ⚠️ **そのファイルは `0.2.0` の投入に対するものである**——
+  **この版の投入は、まだ無い。**）
 - Adopted Take: `—`（**まだ採用されていない。**⚠️ **テイクは1本、`media/` に在る**——
   **テイクの記録はまだ無い。** 記録を書くのは著者である（`projects/hitosara/media/README.md`）。
   ⚠️ **ファイル名は `NN__` の接頭辞を持たない**——**名前から記録を引けない。**
@@ -287,7 +289,7 @@ not photorealistic, no digital gradient, no 3D render, no soft shading, no chara
   ⚠️ **この行は「仕様が名指した参照」であって、「実際に渡した参照」ではない。**
   **この1本は、いま何も渡していない**（`attached: []`）。
 - Temporal Structure: `4 beats, NON_UNIFORM — 3s / 3s / 2s / 1s. The accumulation = BEAT 2 and 3; the refusal = BEAT 4 at 1s`
-- Camera Events: `none — the camera does not move`
+- Camera Events: `none — the sheet is laid down once at 0s and holds for the whole shot`
 - Action Events: `ACT_BLANK → ACT_REGISTER → ACT_OPEN → ACT_REFUSE`
 - Audio Events: `no dialogue ／ no music ／ no footsteps`
 - Output: `1920×1080, 24fps, 16:9 landscape, single clip`
@@ -296,13 +298,16 @@ not photorealistic, no digital gradient, no 3D render, no soft shading, no chara
 
 ## Version
 
-`0.2.0` — **①（生成する）は済んだ**（著者の手）。⚠️ **②（測る）は開いていない**——
+`0.3.0` — **演出の段（`skills/staging/`）で §10 と §18 の `Camera Prompt` を書き直した。**
+⚠️ **変わったのはこの2つと §19・§20 だけである**——**§1–9 と §11–17 は同一。**
+⚠️ **この版はまだ生成されていない**——`media/` に在る1本は `0.2.0` の投入に対するものである。
+①（生成する）は著者のものであり、**②（測る）は開いていない**——
 **測定はテイクの記録を要する**（`L25` はテイクが1本も無ければ走らない）。**テイクの記録はまだ無い。**
 ③（型の同定）と ④（直す）も開いていない。
 
 ⚠️ **この仕様で確かめたのは、文法が仕様として書けるかどうかである。**
 **文法が効いたかどうかではない**——⚠️ **生成はこの基盤の外で起きる。**
-⚠️ **生成は1度走った。** だが **`## Examples` はまだ `- —` である**——
+⚠️ **生成は1度走った**（`0.2.0` の投入に対して）。 だが **`## Examples` はまだ `- —` である**——
 **文法が効いたという記録は、まだどこにも無い。**
 
 ⚠️ **この作品は、形式カード `recognizing-world` が初めて使われた記録である。**
