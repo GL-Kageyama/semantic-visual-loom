@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.0.0 | canonical: docs/cards.md | translated: 2026-09-22 -->
+<!-- i18n-version: 1.1.0 | canonical: docs/cards.md | translated: 2026-09-22 -->
 
 **Language:** [English](cards.md) | [日本語](cards-ja.md) | [中文](cards-zh.md)
 
@@ -35,6 +35,37 @@ references/styles/     # this side's style cards — `sumi-e`
 
 ⚠️ **The two directories are the same thing seen from two sides**—`_cards_dirs()` searches
 **one list per layer**, and **the order of that list is what the environment variable sets.**
+
+## How many cards there are
+
+**Counted 2026-09-22**, over the two directories `_cards_dirs()` searches, by **counting the
+`.md` files in each and setting the mirrors aside**—`video-spec-ja.md` and `video-spec-zh.md`
+are translations of `video-spec.md`, not cards of their own, so the three are one card.
+
+| directory | format cards | style cards |
+|---|---|---|
+| `references/` — **this repository's own** | **8** | **16** |
+| `distill-essence-engine/references/` — the neighbour, where it is there | 45 | 55 |
+
+**What the 8 and the 16 are.**
+
+- **8 format cards** = `video-spec` **+ the seven grammars this side added**: `transformation`,
+  `time-fold`, `remembered-world`, `impossible-camera`, `meaning-responsive`,
+  `recognizing-world`, `coexisting-realities`.
+- **16 style cards** = `sumi-e` **+ fifteen carried over from the image side** (`watercolor`,
+  `mokuhanga`, `oil-painting`, `gouache-abstract`, `cinematic-still`, `documentary-photo`,
+  `instant-photo`, `landscape-photo`, `macro-photo`, `street-photo`, `studio-portrait`,
+  `sketch-broadstroke`, `blueprint-plan`, `lab-notebook`) **+ `impossible-medium`, the one card
+  here with no image-side original.**
+
+⚠️ **Of these 24 cards, one has mirrors.** `video-spec-ja.md` and `video-spec-zh.md` are the
+only pair, so **23 cards are canonical English with no translation**—and
+[`tools/check_i18n.py`](../tools/check_i18n.py) does not count them among its documents: **it
+checks the documents handed to a reader, and these are cards a run opens.**
+
+⚠️ **The neighbour's 45 and 55 are counted by the same rule, over that directory as it stands
+today.** They are **the image side's inventory, and this repository does not own them**—so
+**those two numbers can move without anything here changing.**
 
 ## The environment variables
 

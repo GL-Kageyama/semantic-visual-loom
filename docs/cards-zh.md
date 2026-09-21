@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.0.0 | canonical: docs/cards.md | translated: 2026-09-22 -->
+<!-- i18n-version: 1.1.0 | canonical: docs/cards.md | translated: 2026-09-22 -->
 
 **Language:** [English](cards.md) | [日本語](cards-ja.md) | [中文](cards-zh.md)
 
@@ -32,6 +32,36 @@ references/styles/     # this side's style cards — `sumi-e`
 
 ⚠️ **两个目录是同一个东西从两侧看过去的样子**——`_cards_dirs()` **每个层找一份清单**，
 而**决定那份清单顺序的，是环境变量。**
+
+## 一共有多少张卡片
+
+**数于 2026-09-22。** 数的范围是 `_cards_dirs()` 会去搜的两个目录，数的办法是
+**数每个目录里的 `.md`，把镜像搁在一边**——`video-spec-ja.md` 与 `video-spec-zh.md`
+是 `video-spec.md` 的译文，不是它们自己的卡片，所以这三份是一张。
+
+| 目录 | 形式的卡片 | 样式的卡片 |
+|---|---|---|
+| `references/`——**本仓库自己的** | **8** | **16** |
+| `distill-essence-engine/references/`——旁边那个，在它存在的时候 | 45 | 55 |
+
+**这 8 和 16 是什么。**
+
+- **8 张形式卡片** = `video-spec` **＋ 这一侧添的七个文法**：`transformation`、`time-fold`、
+  `remembered-world`、`impossible-camera`、`meaning-responsive`、`recognizing-world`、
+  `coexisting-realities`。
+- **16 张样式卡片** = `sumi-e` **＋ 从图像侧搬过来的十五张**（`watercolor`、`mokuhanga`、
+  `oil-painting`、`gouache-abstract`、`cinematic-still`、`documentary-photo`、`instant-photo`、
+  `landscape-photo`、`macro-photo`、`street-photo`、`studio-portrait`、`sketch-broadstroke`、
+  `blueprint-plan`、`lab-notebook`）**＋ `impossible-medium`，这里是唯一一张没有图像侧原盘的
+  卡片。**
+
+⚠️ **这 24 张里，有镜像的只有一张。** 只有 `video-spec-ja.md` 与 `video-spec-zh.md` 这一对，
+所以**23 张是没有译文的英语正典**——而
+[`tools/check_i18n.py`](../tools/check_i18n.py) 不把它们算进自己的文档里：**它数的是交给
+读者的文档，而这些是跑的时候被打开的卡片。**
+
+⚠️ **旁边那 45 和 55 也是用同一条规则，按那个目录今天的样子数的。**
+它们是**图像侧的库存，不是本仓库的东西**——所以**这边什么都不变，那两个数也可能动。**
 
 ## 环境变量
 

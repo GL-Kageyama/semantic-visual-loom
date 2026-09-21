@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.0.0 | canonical: docs/cards.md | translated: 2026-09-22 -->
+<!-- i18n-version: 1.1.0 | canonical: docs/cards.md | translated: 2026-09-22 -->
 
 **Language:** [English](cards.md) | [日本語](cards-ja.md) | [中文](cards-zh.md)
 
@@ -35,6 +35,37 @@ references/styles/     # this side's style cards — `sumi-e`
 
 ⚠️ **2つのディレクトリは、同じものが2つの側から見えているものである**——`_cards_dirs()` は
 **層ごとに1つの一覧**を探し、**その一覧の順を決めるのが環境変数である。**
+
+## カードは何枚あるか
+
+**2026-09-22 に数えた。** 数えた範囲は `_cards_dirs()` が探す2つのディレクトリであり、
+数え方は**各ディレクトリの `.md` を数え、ミラーを脇に置く**である——`video-spec-ja.md` と
+`video-spec-zh.md` は `video-spec.md` の訳であって独立したカードではないので、3つで1枚である。
+
+| ディレクトリ | 形式カード | 様式カード |
+|---|---|---|
+| `references/`——**このリポジトリ自身のもの** | **8** | **16** |
+| `distill-essence-engine/references/`——隣。そこに在る場合 | 45 | 55 |
+
+**8 と 16 の中身。**
+
+- **形式カード 8 枚** = `video-spec` **＋ こちら側が足した7つの文法**: `transformation`、
+  `time-fold`、`remembered-world`、`impossible-camera`、`meaning-responsive`、
+  `recognizing-world`、`coexisting-realities`。
+- **様式カード 16 枚** = `sumi-e` **＋ 画像側から引き継いだ15枚**（`watercolor`、`mokuhanga`、
+  `oil-painting`、`gouache-abstract`、`cinematic-still`、`documentary-photo`、`instant-photo`、
+  `landscape-photo`、`macro-photo`、`street-photo`、`studio-portrait`、`sketch-broadstroke`、
+  `blueprint-plan`、`lab-notebook`）**＋ `impossible-medium`。これがここで唯一、
+  画像側の原盤を持たないカードである。**
+
+⚠️ **この 24 枚のうち、ミラーを持つのは1枚だけである。** `video-spec-ja.md` と
+`video-spec-zh.md` がその1組であり、**23 枚は訳を持たない英語の正典である**——そして
+[`tools/check_i18n.py`](../tools/check_i18n.py) はそれらを自分の文書として数えない。
+**あれが数えるのは読み手に渡される文書であり、これらは走る時に開かれるカードである。**
+
+⚠️ **隣の 45 と 55 も同じ規則で、今日のそのディレクトリのままを数えたものである。**
+それらは**画像側の在庫であり、このリポジトリのものではない**——ゆえに
+**こちらの何も変わらないうちに、その2つの数は動きうる。**
 
 ## 環境変数
 
