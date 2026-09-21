@@ -57,11 +57,22 @@ these the author writes. `print_spec.py` names this list on every run, because
 **lies once per work**—it would print a confident wrong value, in the same format,
 for the same line, in both works. So §6 is not parsed. The holes are recorded below.
 
-⚠️ **One key is an exception: `REF_STYLE`** (`L31`, `check_style_reference`).
-**It is read, because it can be read without a guess**—the three spellings above
-are matched by one pattern, and **the two vocabularies (card name, path) are folded
-into one name before comparing** (take the last path segment, drop `.md`).
-**So `L31` does not decide which vocabulary is right—it makes both comparable.**
+⚠️ **Two keys are the exception: `REF_STYLE` (`L31`) and `REF_FORMAT` (`L32`).**
+
+**`REF_STYLE` is read by `L31` (`check_style_reference`), because it can be read
+without a guess**—the three spellings above are matched by one pattern, and **the two
+vocabularies (card name, path) are folded into one name before comparing** (take the
+last path segment, drop `.md`). **So `L31` does not decide which vocabulary is
+right—it makes both comparable**, and it compares the result against `bible.style`.
+
+**`REF_FORMAT` is read by `L32` (`check_format_reference`), to reach the card
+itself.** `L31` compares a naming against the work's home; **`L32` asks whether the
+named card can be read at all, and whether it declares `## Negative`**—because
+`Negative Prompt` is defined as `§16 + this card's Negative + the style card's
+Negative` (`specmap.PROMPT_SLOT_SOURCE`), **and nothing read that card's `Negative`
+before.** ⚠️ **`L32` does not compare against a home—`REF_FORMAT` has none** (see
+[`docs/cards.md`](../../docs/cards.md)).
+
 ⚠️ **The other §6 keys are still not read**—the rule above holds for them.
 
 ## The Home of the Work Constants

@@ -81,7 +81,7 @@ python3 tools/check_i18n.py                                # 文档的镜像
 **写提示词的是②。** 7 个槽位是 `Master` / `Visual` / `Motion` /
 `Camera` / `Audio` / `Negative` / `Style Motion`——**全部是英语**，而
 **分开这件事本身就是要点**
-（[`references/video-spec.md`](../references/video-spec-zh.md) §18）。
+（[`references/formats/video-spec.md`](../references/formats/video-spec-zh.md) §18）。
 ⚠️ **分开交出去。过去的只有 §18**——§19 与 §20 是我们自己的记录。
 
 ⚠️ **§18 的标题自称模型，而视频的路径有三条。** `L18` 把这个标题与
@@ -199,7 +199,7 @@ projects/<name>/
 
 ## 层
 
-检查由**32 层，`L0`–`L31`**，以及模式（schema）的形状验证构成。
+检查由**33 层，`L0`–`L32`**，以及模式（schema）的形状验证构成。
 **它不是单一判定**——每一层各自报警，并**连同它看到的数字**一起被报告。
 
 ⚠️ **什么也没看到的层会作为注被报告，而什么也没看到的层，看起来和通过的层一模一样。**
@@ -239,7 +239,7 @@ python3 tools/check_i18n.py               # 实物
 ⚠️ **不使用子文件夹方式（`ja/` `zh/`）**——为了让**正典与镜像的深度不发生变化**。
 ⚠️ **开发的工作语言保持日语**（提交信息、`HISTORY.md`、会话），
 而**文档的正典是英语。** 这两者是不同的东西——**做事所用的语言**，与**文档具有权威所用的语言**。
-**19 份文档 × 3 种语言已经齐备**（这是 `tools/check_i18n.py` 作为正典报告的本数），
+**20 份文档 × 3 种语言已经齐备**（这是 `tools/check_i18n.py` 作为正典报告的本数），
 规则在 [`CLAUDE.md`](../CLAUDE-zh.md) 里。
 
 ## 延伸阅读
@@ -247,6 +247,7 @@ python3 tools/check_i18n.py               # 实物
 | | |
 |---|---|
 | [`README.md`](../README-zh.md) | 这个基盘是什么，由什么构成 |
+| [`docs/cards.md`](cards-zh.md) | **卡片的那两个轴**（Format / Style）、它们住在哪，以及**哪个检查读什么** |
 | [`engine/ledger/README.md`](../engine/ledger/README-zh.md) | 制作台账、各层、以及每个检查不看什么 |
 | [`docs/h3-route.md`](h3-route-zh.md) | 落在 `MINIMAX H3` 这条路径上的约束——交出去的字符串，以及那张纸 |
 | [`docs/seedance-route.md`](seedance-route-zh.md) | 落在 `SEEDANCE 2.5` 这条路径上的约束——实测到的、它不接收的槽位、以及检查看不见的东西 |

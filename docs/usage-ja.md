@@ -81,7 +81,7 @@ python3 tools/check_i18n.py                                # 文書のミラー
 **プロンプトが書かれるのは②である。** 7スロットは `Master` / `Visual` / `Motion` /
 `Camera` / `Audio` / `Negative` / `Style Motion`——**すべて英語**であり、
 **分かれていること自体が要点である**
-（[`references/video-spec.md`](../references/video-spec-ja.md) §18）。
+（[`references/formats/video-spec.md`](../references/formats/video-spec-ja.md) §18）。
 ⚠️ **別々に渡す。渡るのは §18 だけである**——§19 と §20 は我々自身の記録である。
 
 ⚠️ **§18 の見出しはモデルを名乗る。そして動画の経路は3つある。** `L18` はその見出しを
@@ -200,7 +200,7 @@ projects/<name>/
 
 ## 層
 
-検査は**32の層、`L0`–`L31`** と、スキーマの形の検証から成る。
+検査は**33の層、`L0`–`L32`** と、スキーマの形の検証から成る。
 **ひとつの判定ではない**——層はそれぞれ独立に鳴り、**見た数とともに**報告される。
 
 ⚠️ **何も見なかった層は註として報告され、何も見なかった層は、通った層とまったく同じに見える。**
@@ -240,7 +240,7 @@ python3 tools/check_i18n.py               # 実物
 ⚠️ **サブフォルダ方式（`ja/` `zh/`）は使わない**——**正典とミラーの深さが変わらない**ようにするためである。
 ⚠️ **開発の作業言語は日本語のままである**（コミットメッセージ・`HISTORY.md`・会話）が、
 **文書の正典は英語である。** この2つは別である——**仕事をする言語**と、**文書が権威を持つ言語**である。
-**19文書 × 3言語が揃っており**（`tools/check_i18n.py` が正典として報告する本数である）、
+**20文書 × 3言語が揃っており**（`tools/check_i18n.py` が正典として報告する本数である）、
 規則は [`CLAUDE.md`](../CLAUDE-ja.md) にある。
 
 ## もっと読む
@@ -248,6 +248,7 @@ python3 tools/check_i18n.py               # 実物
 | | |
 |---|---|
 | [`README.md`](../README-ja.md) | この基盤が何であり、何で出来ているか |
+| [`docs/cards.md`](cards-ja.md) | **カードの2つの軸**（Format / Style）、その置き場、そして**どの検査が何を読むか** |
 | [`engine/ledger/README.md`](../engine/ledger/README-ja.md) | 制作台帳・層・各検査が見ないもの |
 | [`docs/h3-route.md`](h3-route-ja.md) | `MINIMAX H3` の経路に掛かる制約——渡す文字列と、その紙 |
 | [`docs/seedance-route.md`](seedance-route-ja.md) | `SEEDANCE 2.5` の経路に掛かる制約——実測したこと、受け取らないスロット、検査から見えないもの |

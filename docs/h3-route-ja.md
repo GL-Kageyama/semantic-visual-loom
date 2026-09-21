@@ -18,7 +18,7 @@
 
 **1. コマは、それ自体で一つのシーンである。ひと続きのテイクの1コマではない。** 板のコマはそれぞれ独立したシーンであり、次のコマとは自然なアニメーションで繋がる。**`Master`・`Camera`・`Motion` は、その継ぎ目を禁じてはならない**——**禁じれば、生成器は二つの場所をひと続きの部屋として走らせる。**
 
-**2. `one continuous take` は `WAN 3.0` の家風である。** この経路の仕様へ写さない。あれは `references/video-spec.md` の冒頭行であり、**もう一方の経路を記述している。**
+**2. `one continuous take` は `WAN 3.0` の家風である。** この経路の仕様へ写さない。あれは `references/formats/video-spec.md` の冒頭行であり、**もう一方の経路を記述している。**
 
 **3. 無条件の `no cut` を書かない。** 禁じてよいのは**無関係な場所へのカット**だけである——成り立つ形は `no cuts to unrelated locations` である。**平板な規則は、コマが場所を変える唯一の合法な手段を塞ぐ。**
 
@@ -60,7 +60,7 @@
 
 ## さらに読む
 
-- [`references/video-spec.md`](../references/video-spec-ja.md) — §18 のスロットと、経路が共有しない時間の文法
+- [`references/formats/video-spec.md`](../references/formats/video-spec-ja.md) — §18 のスロットと、経路が共有しない時間の文法
 - [`docs/seedance-route.md`](seedance-route-ja.md) — 3つ目の経路
 - [`skills/design/SKILL.md`](../skills/design/SKILL-ja.md) — 設計の段が経路を選び、板のプロンプトを書く場所
 - [`engine/ledger/README.md`](../engine/ledger/README-ja.md) — `L28`——この経路の文字列を読む層と、それが残す穴

@@ -25,7 +25,7 @@
 
 ⚠️ **7スロットは分けて入れる。** `Master` / `Visual` / `Motion` / `Camera` / `Audio` /
 `Negative` / `Style Motion`。「**分離されていること自体が要点**なので、混ぜない」
-（`references/video-spec.md`）。
+（`references/formats/video-spec.md`）。
 ⚠️ **投入先が1つの欄しか持たない場合は繋ぐ。**
 ⚠️ **`{DURATION}` には、そのショットの尺を入れる**（この作品では 2s〜8s）。
 

@@ -100,7 +100,7 @@ argument-hint: '（任意）项目名，或要演出的镜头。例: /semantic-v
    **禁止切到无关的地点，而不禁止过渡**——并且当一格改变地点时，
    **由规格写明它怎么变，因为出处没有写**：它从不使用 `カット` 一词，所以
    **切还是连，由那个镜头自己决定。不写，两个地点就会作为一个房间回来。**
-   ⚠️ **`one continuous take`**（[`references/video-spec.md`](../../references/video-spec.md)）
+   ⚠️ **`one continuous take`**（[`references/formats/video-spec.md`](../../references/formats/video-spec.md)）
    **是 `WAN 3.0` 的家风，不及于这条路径。** 各路径不共享时间的文法。
    **交出去的字符串必须写这条路径在做什么，而不是另一条**——
    产生这条警告的失败记录在 `HISTORY.md` 里。

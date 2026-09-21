@@ -18,7 +18,7 @@
 
 **1. 一格本身就是一场戏，不是一个长镜头里的一帧。** 纸上的每一格各自是一场戏，与下一格由自然的动画接起来。**`Master`、`Camera`、`Motion` 不得禁止那个接缝**——**一旦禁止，生成器就会把两个地方当成一个连通的房间跑下去。**
 
-**2. `one continuous take` 是 `WAN 3.0` 的家风。** 不要把它抄进这条路线的规格。它是 `references/video-spec.md` 的第一行，**描述的是另一条路线。**
+**2. `one continuous take` 是 `WAN 3.0` 的家风。** 不要把它抄进这条路线的规格。它是 `references/formats/video-spec.md` 的第一行，**描述的是另一条路线。**
 
 **3. 不要写无条件的 `no cut`。** 唯一可以禁止的，是**切到无关的地方**——成立的形式是 `no cuts to unrelated locations`。**一条平板的规定，会堵死一格改变地点的唯一合法手段。**
 
@@ -60,7 +60,7 @@
 
 ## 延伸阅读
 
-- [`references/video-spec.md`](../references/video-spec-zh.md) — §18 的槽位，以及各路线不共享的时间文法
+- [`references/formats/video-spec.md`](../references/formats/video-spec-zh.md) — §18 的槽位，以及各路线不共享的时间文法
 - [`docs/seedance-route.md`](seedance-route-zh.md) — 第三条路线
 - [`skills/design/SKILL.md`](../skills/design/SKILL-zh.md) — 设计阶段选择路线、写那张纸的提示词的地方
 - [`engine/ledger/README.md`](../engine/ledger/README-zh.md) — `L28`：读这条路线上的字符串的那一层，以及它留下的洞

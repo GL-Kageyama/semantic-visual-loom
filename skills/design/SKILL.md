@@ -107,7 +107,7 @@ because `L3` and `L4` read the beat body, not only the field.**
    changes place, **the specification must say how it changes, because the source does not**: it
    never uses the word カット, so **cut-versus-continuous is the shot's own decision, and leaving
    it unwritten is how two places come back as a single room.**
-   ⚠️ **`one continuous take`** ([`references/video-spec.md`](../../references/video-spec.md)) **is
+   ⚠️ **`one continuous take`** ([`references/formats/video-spec.md`](../../references/formats/video-spec.md)) **is
    the `WAN 3.0` house style and does not carry to this route.** The routes do not share a
    grammar of time, and **the string handed over must say what this route does, not what the other
    one does** — the failure that produced this warning is recorded in `HISTORY.md`.

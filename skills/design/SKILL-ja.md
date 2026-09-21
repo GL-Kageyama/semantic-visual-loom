@@ -102,7 +102,7 @@ argument-hint: '（任意）プロジェクト名、または演出するショ�
    **無関係な場所へのカットは禁じ、遷移そのものは禁じない**——そしてコマが場所を変えるときは、
    **どう変わるのかを仕様が書く。出典は書いていないからである**——`カット` という語を使わないので、
    **切るか繋ぐかはそのショットが決める。書かなければ、二つの場所はひとつの部屋になって戻ってくる。**
-   ⚠️ **`one continuous take`**（[`references/video-spec.md`](../../references/video-spec.md)）は
+   ⚠️ **`one continuous take`**（[`references/formats/video-spec.md`](../../references/formats/video-spec.md)）は
    **`WAN 3.0` の家風であり、この経路には及ばない。** 経路は時間の文法を共有しない。
    **渡す文字列は、もう一方ではなくこの経路のことを書かなければならない**——
    この警告を生んだ失敗は `HISTORY.md` に記録してある。

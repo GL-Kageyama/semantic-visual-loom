@@ -94,7 +94,7 @@
 
 ## 延伸阅读
 
-- [`references/video-spec.md`](../references/video-spec.md)——§18 的槽位，以及各路线不共享的时间文法
+- [`references/formats/video-spec.md`](../references/formats/video-spec.md)——§18 的槽位，以及各路线不共享的时间文法
 - [`docs/h3-route.md`](h3-route.md)——第二条路线，以及**带实测支撑的约束清单的实例**
 - [`engine/ledger/README.md`](../engine/ledger/README.md)——`L30`，以及它留下的洞
 - [`engine/ledger/specmap.py`](../engine/ledger/specmap.py)——`MODELS["SEEDANCE 2.5"]`、`MODEL_UNRECEIVED_SLOTS`、`ROUTE_LIMITS_KEY`

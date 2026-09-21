@@ -29,7 +29,7 @@
 
 ⚠️ **R4 は推定である。** 「不変ブロック」を宣言から読むのではなく、
 **`←` を含むフェンス**という構造で選んでいる。その根拠は実測である——リポジトリ全体で
-`←` を含むフェンスは**1つだけ**（`references/video-spec.md` の §18）であり、
+`←` を含むフェンスは**1つだけ**（`references/formats/video-spec.md` の §18）であり、
 **それは唯一「日本語0行」のフェンス**である。他のフェンスはすべて訳すべき散文である。
 だから——
   * **どれを不変とみなしたかを報告する**（報告しない検査は、通った検査に見える）。
@@ -59,6 +59,7 @@ DOCS = (
     "docs/h3-route.md",
     "docs/seedance-route.md",
     "docs/usage.md",
+    "docs/cards.md",
     "engine/ledger/README.md",
     "engine/shot/README.md",
     "schemas/README.md",
@@ -68,7 +69,7 @@ DOCS = (
     "projects/habits-promo-chinatsu/renders/README.md",
     "projects/hitosara/takes/README.md",
     "projects/hitosara/timeline/README.md",
-    "references/video-spec.md",
+    "references/formats/video-spec.md",
     # ⚠️ **Skill は1行目が frontmatter である**——ヘッダはその直後に在る（R2 を見ること）。
     "skills/breakdown/SKILL.md",
     "skills/design/SKILL.md",

@@ -25,7 +25,7 @@
 
 ⚠️ **7个槽位要分开投入。** `Master` / `Visual` / `Motion` / `Camera` / `Audio` /
 `Negative` / `Style Motion`。「**彼此分离本身就是要点**，所以不要混在一起」
-（`references/video-spec.md`）。
+（`references/formats/video-spec.md`）。
 ⚠️ **投入目标只有一个栏位时，就把它们接起来。**
 ⚠️ **把那个镜头的时长放进 `{DURATION}`**（本作品里是 2s〜8s）。
 

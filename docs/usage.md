@@ -87,7 +87,7 @@ below.
 
 **② is where the prompt is written.** The seven slots are `Master` / `Visual` / `Motion` /
 `Camera` / `Audio` / `Negative` / `Style Motion`——**all English**, and **being separated is
-itself the point** ([`references/video-spec.md`](../references/video-spec.md) §18).
+itself the point** ([`references/formats/video-spec.md`](../references/formats/video-spec.md) §18).
 ⚠️ **They are fed separately, and only §18 is fed**——§19 and §20 are our own record.
 
 ⚠️ **§18's heading names the model, and there are three video routes.** `L18` reads that heading
@@ -214,7 +214,7 @@ The counts behind that are in `HISTORY.md`.
 
 ## The layers
 
-The check is **32 layers, `L0`–`L31`**, plus schema-shape validation.
+The check is **33 layers, `L0`–`L32`**, plus schema-shape validation.
 **They are not one verdict**—each layer fires on its own and is reported with the
 number it saw.
 
@@ -258,7 +258,7 @@ and the mirrors does not change.**
 ⚠️ **The working language of development stays Japanese** (commit messages, `HISTORY.md`,
 conversation) **while the canonical of the documents is English.** These two are different
 things: one is the language the work is done in, the other the language the documents are
-authoritative in. **19 documents × 3 languages are in place** (the count
+authoritative in. **20 documents × 3 languages are in place** (the count
 `tools/check_i18n.py` reports as canonical), and the rules are in
 [`CLAUDE.md`](../CLAUDE.md).
 
@@ -267,6 +267,7 @@ authoritative in. **19 documents × 3 languages are in place** (the count
 | | |
 |---|---|
 | [`README.md`](../README.md) | what this foundation is, and what it is made of |
+| [`docs/cards.md`](cards.md) | **the two card axes** (Format / Style), where they live, and **which check reads what** |
 | [`engine/ledger/README.md`](../engine/ledger/README.md) | the production ledger, the layers, and what each check does not see |
 | [`docs/h3-route.md`](h3-route.md) | the constraints that hold on the `MINIMAX H3` route—the strings handed over, and the paper |
 | [`docs/seedance-route.md`](seedance-route.md) | the constraints that hold on the `SEEDANCE 2.5` route—what is measured, the slot it does not receive, and what no check can see |

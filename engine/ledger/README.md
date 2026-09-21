@@ -61,6 +61,7 @@ in order to fire on "`before` and `after` are the same" — but **JSON Schema ca
 | **L29** | **This run does not read every work below it** — a work holding a work is a violation; a work held by a material directory is a note | "Does This Run Read Every Work Below It" below |
 | **L30** | **§18 fills a slot the route does not receive** (`SEEDANCE 2.5` only; the slots and their reasons are in `specmap.MODEL_UNRECEIVED_SLOTS`). **Waivable — by the work (`bible.route_limits_accepted`)** | "The Slots a Route Does Not Receive" below |
 | **L31** | **The home and §6 do not name the same style** — `bible.style` against the video specification's §6 `REFERENCES`. ⚠️ **Needs no cards; both sides are in this repository.** 3 spellings, 2 vocabularies, **folded to one name before comparing** | "Do the Home and §6 Name the Same Style" below |
+| **L32** | **The format card §6 names cannot be read, or declares no `## Negative`** — the video specification's §6 `REF_FORMAT`. ⚠️ **Three outcomes: no card directory is a note; a missing card is a violation; a card missing its section is a violation.** ⚠️ **Here it fires by default — the neighbour holds no `video-spec` card; one environment variable clears it** | "Can the Format Card Be Read, and Does It Declare a `Negative`" below |
 
 **L2, L3 and L4 are transplants.** Applied to all 57 segments of Gozen-niji,
 a checker that scored **recall 2/2 and 0 false positives** went in just as it was.
@@ -86,7 +87,7 @@ reaches too far. **Recorded here, where it happens, as a hole.**
 And L7 **counts and reports the shots that hold no disclosure state** —
 without counting, you cannot tell whether "0 violations" means "0 after checking" or "not checked".
 
-`--self-test` holds **one example that fires and one that does not, for each check** (254 examples).
+`--self-test` holds **one example that fires and one that does not, for each check** (265 examples).
 ⚠️ **Read the notes too.** Because **a note that does not appear also looks like "0 violations"**
 — with no example that confirms the note, deleting the note leaves the self-test green.
 ⚠️ **Read the note's "count" too.** `L25`'s note says "read N takes (broken down by role)" —
@@ -101,6 +102,12 @@ and deleting the narrowing leaves the self-test green** — with no firing side,
 and **`L24` holds one that does not fire on `motion`.**
 **`L22` holds four examples** — all 7 fields filled and the naming matching (does not fire), a field empty (fires),
 **a named card that does not declare that field** (fires), **a named card that cannot be read** (does not fire; a note).
+⚠️ **`L32` holds an example for each of its three outcomes** — a readable card carrying `## Negative` (does not fire),
+**a card that is not there** (fires), **a card with no `## Negative`** (fires), **no card directory at all** (a note, not a violation).
+**It also holds a card that spells the heading `## Negative Prompt`** — without that example,
+**rewriting `specdoc.section` into a raw string test leaves the self-test green.**
+⚠️ **And it holds the pair that proves the two layers are separable**: with one variable set,
+**only its own layer moves** — the same shape as the `L13` / `L17` pair above.
 And **it reads the real thing** — `L18` reads Ukebi V2's 30 takes, `L19` reads the real schema,
 `L20` the real 55 style cards. **A check that passes only on synthetic data will fire in the field.**
 ⚠️ **`L25` was fixed once by "an example that should not have fired, firing."** The duration tolerance is one frame, but
@@ -404,6 +411,18 @@ when the neighbor can no longer be read, `L20` still only says **"there is no ca
 **it does not say that the place it looked was the wrong place.** When both point at the same
 directory, it is folded to one, and **the card is not read twice and the directory is not named twice.**
 
+⚠️ **The rule is the same on both layers, and each layer reads its own variable** —
+`SVL_STYLES_DIR` for `style`, `SVL_FORMATS_DIR` for `format`. ⚠️ **A naming that is not read must
+not look like one that is read**, so **pointing at a style directory does not move the format
+layer**, and the converse holds too. ⚠️ **One older spelling survives**: `SVL_STYLES_DIR` is still
+read for `format` **when the destination it points at is a `formats` directory** — the layer's own
+variable **wins** where both are set.
+⚠️ **This repository keeps cards of both layers of its own** (`references/styles/sumi-e.md` and
+`references/formats/video-spec.md`), and **that directory is not searched unless the variable
+points at it** — **a card nothing points at is a card nothing reads.**
+⚠️ **What each layer's card declares, and which check reads it, is in
+[`docs/cards.md`](../../docs/cards.md).**
+
 ⚠️ **It only reads.** The cards are `distill-essence-engine`'s property and are
 **not rewritten** (`CLAUDE.md`). Whether what was pulled is correct **has not been checked yet** — the note says so.
 
@@ -533,11 +552,17 @@ what `L22` confirms is the latter, and **it does not look at the former (whether
 
 ⚠️ **If the card cannot be read, it does not fire. It is a note.** `distill-essence-engine` is
 **a separate repository**, and someone who cloned this does not have it — **do not make the absence of the other side a violation.**
-⚠️ **`SVL_STYLES_DIR` always applies to `style` and does not apply to `format`**
-(it applies only when the destination it points at ends in `formats`) — **so as not to tell the lie of
-reading a style card as a format card while still pointing at styles.**
-⚠️ **On `style` it overlays; on `format` there is nothing to overlay onto** (this repository has no
-format cards of its own), **so there the variable is still the only place looked at.**
+⚠️ **Each layer reads its own variable** — `SVL_STYLES_DIR` for `style`, `SVL_FORMATS_DIR` for
+`format` — **so as not to tell the lie of reading a style card as a format card while still
+pointing at styles.** ⚠️ **One older spelling survives**: `SVL_STYLES_DIR` is still read for
+`format` **when the destination it points at is a `formats` directory** — and the layer's own
+variable **wins** where both are set.
+⚠️ **Both layers overlay; neither replaces.** The layer's own variable is searched **first** and the
+neighbor **after it**, so **a card this repository adds does not make the engine's cards
+unreadable.** ⚠️ **This repository carries cards of both layers of its own**
+(`references/formats/video-spec.md` and `references/styles/sumi-e.md`) — **and neither directory is
+searched until the variable points at it**, which is why the default run reports the format layer
+as a hole rather than passing it.
 
 ⚠️ **It does not look at whether the contents are correct.** Whether `SUBJECT`'s value is really the subject **cannot be read by this layer.**
 All it sees is **that it is non-empty** and **that the naming matches** — the note says so.
@@ -675,7 +700,7 @@ transition. ⚠️ **`no cuts to unrelated locations` was already in that §18**
 
 | phrase | why it is not this route's |
 |---|---|
-| `one continuous take` | **The other route's house style** — the first line of `references/video-spec.md` |
+| `one continuous take` | **The other route's house style** — the first line of `references/formats/video-spec.md` |
 | `never by a cut` | **An unconditional `no cut`** closes the only lawful way for a panel to change place |
 | `one and the same man` | **Folds the protagonist into "the only person"** — the second person is erased or merged into him |
 
@@ -867,6 +892,77 @@ which spelling and vocabulary that work uses.** ⚠️ **On the four works measu
 nothing fires** — **which spelling is canonical is undecided**, and **this layer was written so
 that it does not wait for that decision** (see "What Is Still Missing").
 
+### L32 — can the format card be read, and does it declare a `Negative`
+
+**The format layer's `L20`, and it reads a declaration nobody had read.** §6 `REFERENCES` names a
+format card (`REF_FORMAT`), and ⚠️ **two places declare what that naming is for**:
+
+- `specmap.PROMPT_SLOT_SOURCE["Negative Prompt"]` — `§16 + this card's Negative + the style card's Negative`
+- `references/formats/video-spec.md` §18's table — the same three-term sum
+
+**So the specification side declares that `Negative Prompt` is drawn from the card — and no code
+read it.** This layer is what makes that declaration carry.
+
+⚠️ **It reports three outcomes, not two** — **the same discipline as `L20`**:
+
+| | What | How it reports |
+|---|---|---|
+| **a-1** | **there is no card directory at all** | **a note** — "cannot be confirmed" |
+| **a-2** | **the directory has no card by that name** | **a violation**, with `_cards_searched` listing **the range that was searched** |
+| **b** | the card **does not declare `## Negative`** | **a violation** — *the destination is declared and there is nothing to carry* |
+
+⚠️ **Do not fold a-1 into a-2.** "The neighbor is not there" and "the card `video-spec` is not
+there" are **different causes**, and **reporting both with one face leaves the fixer unable to tell
+which one to fix.**
+
+⚠️ **The section is read by `specdoc.section(text, "Negative")`, not by a string test** —
+so a card that writes `## Negative Prompt` **is read and does not fire falsely** (`L20` compares
+`"## Motion character"` as a raw string; on `video-spec.md` both give the same answer, and the
+prefix match is the one that does not lie about a card that spells the heading longer).
+
+⚠️ **The gate.** **A work with no video specifications does not fire this** — the same early return
+`L20` makes when no specification holds `Style Motion`. **Otherwise every work without video would
+be told its format card is missing.**
+
+⚠️ **The naming is folded the same way `L31` folds it** — **the basename with `.md` stripped** — so
+**a card name and a path both resolve.** ⚠️ **The spellings are not `REF_STYLE`'s**: of the **140**
+files under `projects/` that write `REF_FORMAT`, **the reader reads a naming from 119** — **50 use the
+inline form (A/B) and 69 the `## REF_FORMAT` subsection (C)**. The other 21 are image specifications,
+board and constant files, and `MIGRATION.md` — **they have no §6, so they are not this reader's
+counterpart; no video specification is among them.** ⚠️ **The count is given with its cut**
+(`git grep -lF REF_FORMAT -- projects`, then this repository's own reader) — **a number without its
+instrument cannot be re-measured.**
+**The two sets do not overlap at all**, and **the 69 C-form ones are exactly the specifications in the
+two trees that have no `bible.yaml`** (`gozen-niji` and `ukebi` — the only two under `projects/`),
+which is the split `L31` measured.
+⚠️ **Two layers, two different mixes, one reader** — which is why the fold lives in the helper both
+layers call.
+
+⚠️ **It fires by default in this repository, and that is the honest reading.** The neighbor
+(`distill-essence-engine/references/formats`) **exists but holds no `video-spec` card** — so this is
+**a-2, a violation**, not a-1. ⚠️ **A card nothing points at is a card nothing reads**: the card
+`references/formats/video-spec.md` **is inside this repository**, and **it is not searched until
+`SVL_FORMATS_DIR` points at it.** **One environment variable clears it**
+([`docs/cards.md`](../../docs/cards.md)). ⚠️ **On a clone with no neighbor it is a-1, a note** —
+**the same code reports a different sign depending on where it is placed**, which is what `L20`
+already records.
+
+⚠️ **What it does not read:**
+- **The style card's `## Negative`.** The same `PROMPT_SLOT_SOURCE` line names it — **that term is
+  still unread**, and it is recorded under "What Is Still Missing."
+- **Whether the card's contents are right.** It sees **that the section is there** — not **what the
+  words in it do.**
+- **§6's other keys** (`REF_CHARACTER` / `REF_SOURCE` / `REF_BIBLE`). ⚠️ **`L31` reads `REF_STYLE`
+  and `L32` reads `REF_FORMAT`, and nothing reads the rest.**
+- **The remaining sections of the card.** A format card declares the holes it fills and the
+  exclusions it adds; **anything else it says is addressed to a reader.** ⚠️ **This is also why
+  `L22` is not extended to the video route** — a video specification uses §1–20 and fills **none**
+  of the holes a video format card declares, so **the check would fire on every correct
+  specification.**
+
+⚠️ **It sits directly after `L31` on purpose.** **The two read the same §6 and differ only in the
+key** — separated, one gets fixed and the other is forgotten.
+
 ### ⚠️ Firing Against a Running Artifact
 
 | Check | Ukebi V2 (30 takes) | What it is saying |
@@ -884,6 +980,7 @@ that it does not wait for that decision** (see "What Is Still Missing").
 | L23 | **0** (1 note) | the durations agree 30/30 |
 | L24 | **0** (1 note) | all 30 are `mode: motion` and **hold no requirement** — so this check **sees nothing on Ukebi**. The note reports that. |
 | L31 | **0** (1 note) | the home and §6 fold to the same name in all 30. ⚠️ **Ukebi V2 is the work that names the style by path** — the note says so (30 specifications, spelling `A/B`, vocabulary = a path). **Both vocabularies are real, and one work writes each.** |
+| L32 | **1** (1 note) | **all 30 specifications name the format card `video-spec`, and the neighbor holds no such card.** ⚠️ **This is `a-2`, not `a-1`** — the place was found, the card was not — and the note distinguishes them: "30 specifications, 30 naming, 1 card, **0 of them readable**." ⚠️ **The naming side is where the hole is declared, and this is the first layer to read it.** |
 
 ⚠️ **`L31` reads only the home and the specification** — **`L20` and `L22` need the style cards,
 and the cards are not in this repository.** So **two green rows here can mean different things**:
@@ -1052,7 +1149,8 @@ What it can say is —
 | **Guarantees** | **A still shot is written as still** (§11 non-empty. `composite` also needs `text_channel`) | **L24** |
 | **Guarantees** | **What came back matches the shot, the style and the measurement.** | **L25** |
 | **Guarantees** | **The home and the specification name the same style.** | **L31** |
-| **Guarantees** | **It is not broken.** L0–L31 fire before generation, and everything that fired can be explained | all |
+| **Guarantees** | **The format card §6 names can be read, and declares a `Negative`** — so `Negative Prompt`'s second term is not empty | **L32** |
+| **Guarantees** | **It is not broken.** L0–L32 fire before generation, and everything that fired can be explained | all |
 | **Does not guarantee** | **That the generator draws the aim.** | —— |
 | **Does not guarantee** | **That a still shot's §11 really stops the subject.** | —— |
 | **Does not guarantee** | **That the file `take.file` names actually exists.** | —— |
@@ -1086,6 +1184,11 @@ Write only `spec:` and not `key_image:`, and **the image side is never checked**
   Whether the home is stale or the specification is, **cannot be decided from those two places
   alone** — ⚠️ **and it does not stay silent either**: **the name in §6 is the one that reaches the
   generator, so fixing the home alone leaves the old name in the specification.**
+- **L32** **It does not decide which spelling or vocabulary of `REF_FORMAT` is canonical** —
+  it folds them and resolves, **so a work that changes one side fires until the other changes too**,
+  ⚠️ **and it does not say which of the two is stale** (the same discipline as `L31`).
+  ⚠️ **Nor does it read whether the card's contents match what the specification means by them** —
+  **it sees that the section is there.**
 - **L8** A key not in the ledger fires, but **the key naming convention itself is undecided**
   (`<entity>.sheet` / `<place>.geography` are accepted by derivation. Not canonical).
 - **L25** **When the specification and the measurement contradict, it does not decide which is right.**
@@ -1128,12 +1231,19 @@ Write only `spec:` and not `key_image:`, and **the image side is never checked**
   ⚠️ **A card of this repository's own can be read** (put it in `references/styles/`
   and point `SVL_STYLES_DIR` at that directory) — **the note names the file it actually read**,
   so which side answered is readable.
-- ⚠️ **The place is searched, not the purpose.** `SVL_STYLES_DIR` **overlays by directory**, and the same
-  list answers **`L20` (video) and `L22` (image, board)**. So a card written here for the video side
-  **also answers for an image specification that names the same style** — and if it is thinner than the
-  card it shadows (**no `## Environment variables`, no `## Prompt template`**), `L22` will report the
-  thinness as a defect of the *specification*. **A card placed here has to stand on its own**,
-  or carry the name of a style nothing else names.
+- ⚠️ **The style card's `## Negative` is still unread — half of a declared destination.**
+  `specmap.PROMPT_SLOT_SOURCE["Negative Prompt"]` names **three terms** (`§16 + this card's `Negative`
+  + the style card's `Negative`), and **`L32` reads the second of them only.** ⚠️ **So a style card
+  that declares no `## Negative` is not reported** — and, unlike the format card, **there is no
+  answer to "where is it written that the style card contributes one" beyond that same line.**
+  **Record the hole as a hole; do not read half a sum and call the destination covered.**
+- ⚠️ **The place is searched, not the purpose.** Each layer's variable **overlays by directory**, and
+  the same list answers **more than one reader** — `SVL_STYLES_DIR` serves **`L20` (video) and
+  `L22` (image, board)**, and **`SVL_FORMATS_DIR` serves `L22` and `L32`.** So a card written here for
+  the video side **also answers for an image specification that names the same card** — and if it is
+  thinner than the card it shadows (**no `## Environment variables`, no `## Prompt template`**), `L22`
+  will report the thinness as a defect of the *specification*. **A card placed here has to stand on
+  its own**, or carry a name nothing else names.
 - **Matching `motion.law`.** The 3 parts — §18's slots, the record's `motion`, and `bible.style` — are
   now in place, but **the matching that ties the two together still does not exist.** ⚠️ **Write it now and it becomes a check that never fires**
   (`motion` is 0/30). **With the other side empty, nothing fires** (the same discipline as L0 and L9).

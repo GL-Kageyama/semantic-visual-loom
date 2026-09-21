@@ -1634,9 +1634,13 @@ def _image_card_slots(specs, kind, repo_root):
                                    "その変数は空のまま生成へ渡る。"))
 
     if unreadable:
+        # ⚠️ **層ごとの変数を名指す。** 様式の名を形式へ流用すれば、**直す者が
+        #    張るべきでない変数を張る**——`_cards_dirs` が層で分かれているのと同じ理由である。
+        read = "／".join(f"`{CARD_ENVS.get(layer, STYLE_CARD_ENV)}`"
+                         f"（{layer}）" for layer in sorted(unreadable))
         out.append(finding("L22", "",
                            f"カードが**読めない**（{'／'.join(sorted(unreadable))}）——"
-                           f"`{STYLE_CARD_ENV}` を設定するか、"
+                           f"{read} を設定するか、"
                            "`distill-essence-engine` を隣に置くこと。"
                            "**このリポジトリを clone した人には無い。**"
                            "だから**名乗ったカードがその欄を宣言しているかは"
@@ -2958,9 +2962,15 @@ def check_field_destination(schema_dir):
     return out
 
 
-#: カードの置き場。⚠️ **このリポジトリの外にある**（`distill-essence-engine`）。
+#: カードの置き場を指す環境変数。⚠️ **層ごとに別である。**
+#: 様式を指したまま**フォーマットを読んだ顔をしない**ためである。
+#: ⚠️ **既定の置き場はこのリポジトリの外にある**（`distill-essence-engine`）。
 #: だから **clone した人には無い。** 読めないときは「確かめられない」と報告する。
 STYLE_CARD_ENV = "SVL_STYLES_DIR"
+FORMAT_CARD_ENV = "SVL_FORMATS_DIR"
+
+#: 層 → 環境変数。**名だけが違う。**
+CARD_ENVS = {"style": STYLE_CARD_ENV, "format": FORMAT_CARD_ENV}
 
 #: 層 → エンジンの下のフォルダ名。⚠️ **2層ある。** `L20` は様式だけを読み、
 #: `L22` は両方を読む——**画像プロンプトは2つの軸の和だからである。**
@@ -2974,15 +2984,18 @@ def _cards_dirs(repo_root, layer):
     **「カードが実在しない」と「置き場が違う」が同じ符号で鳴る**——原因の違うものを
     同じ顔で報告しない。
 
-    ⚠️ **`SVL_STYLES_DIR` は、置き換えではなく重ねる**（決定 2026-09-21、著者）。
+    ⚠️ **環境変数は、置き換えではなく重ねる**（決定 2026-09-21、著者）。
     指した先を**先に**読み、**無ければ隣へ降りる**——ゆえに動画側にカードを1枚
     足しても、**隣の55枚は読めなくならない。**
-    ⚠️ **これが要る理由。** このリポジトリは自前の様式カードを持てるが、
+    ⚠️ **これが要る理由。** このリポジトリは自前のカードを持てるが、
     `bible.style` は**名前を1つ書く欄**であり、`L20` はその1つだけを引く。
     置き換えであれば、**1枚足した作品は、隣の55枚を全部失う。**
-    ⚠️ **フォーマットは重ねない。** `SVL_STYLES_DIR` は**様式のための環境変数**である
-    ——様式を指したままフォーマットを読んだ顔をしないため、指し先が
-    `formats` を名乗るときだけ従う（従来どおり）。
+    ⚠️ **層ごとに、自分の環境変数を読む**（`CARD_ENVS`）。`SVL_STYLES_DIR` は様式の、
+    `SVL_FORMATS_DIR` はフォーマットのものである——**規則は層で同じであり、
+    様式を指したままフォーマットを読んだ顔をしない。**
+    ⚠️ **ただし、従来の書き方は生きている。****`SVL_STYLES_DIR` が `formats` を
+    名乗るとき、フォーマットはそれに従う**——新しい変数が張られていれば、
+    **そちらが勝つ。**
     """
     import os
     sub = CARD_DIRS.get(layer)
@@ -2990,13 +3003,17 @@ def _cards_dirs(repo_root, layer):
         return []
     sib = Path(repo_root).parent / "distill-essence-engine" / "references" / sub
     sibling = [sib] if sib.is_dir() else []
-    env = os.environ.get(STYLE_CARD_ENV)
-    if not env:
-        return sibling
-    p = Path(env)
+    env = os.environ.get(CARD_ENVS.get(layer, STYLE_CARD_ENV))
+    p = Path(env) if env else None
     if layer != "style":
-        # ⚠️ **様式のための環境変数を、フォーマットへ流用しない。**
-        return [p] + sibling if (p.is_dir() and p.name == sub) else sibling
+        if p is None:
+            # ⚠️ **様式のための環境変数を、フォーマットへ流用しない**——ただし
+            # **それが `formats` を名乗るときだけ**は、従来どおりフォーマットの指示である。
+            legacy = os.environ.get(STYLE_CARD_ENV)
+            p = Path(legacy) if legacy and Path(legacy).name == sub else None
+        return [p] + sibling if (p is not None and p.is_dir()) else sibling
+    if p is None:
+        return sibling
     if not p.is_dir():
         return sibling                   # 指した先が無い——**隣は生きている**
     # ⚠️ **同じ場所を2度読まない。** 指し先が隣と同じなら、重ねるものは無い。
@@ -3108,33 +3125,45 @@ def check_style_motion(project, repo_root=None):
     return out
 
 
-#: §6 `REFERENCES` が様式を名乗る行。**2つの綴りを1つの正規表現で受ける。**
+#: §6 `REFERENCES` がカードを名乗る行。**2つの綴りを1つの正規表現で受ける。**
 #: ⚠️ **`REF_CARD` を広げない。** あちらは画像仕様の名乗りを読む（`L22`）——
 #: **別の欄であり、広げれば画像の側が別のものを拾う。**
 #: ⚠️ **前例は `ASPECT_LINE` である。** `Aspect Ratio:` と `Aspect:` の2綴りを
 #: 1つで受けている。**同じ形の決定を、ここでもする。**
-STYLE_REF_LINE = re.compile(r"^\s*-\s*`?REF_STYLE`?\s*[:：]\s*(.+?)\s*$"
-                            r"|^\s*-\s*`REF_STYLE`\s*[—–-]\s*(.+?)\s*$", re.M)
+#:
+#: ⚠️ **層ごとに1本ずつ作る。****2層は同じ形であり、違うのは鍵の名だけである**
+#: ——だから型を1つ置き、鍵を差し替える。**写しにしない**（写せば、片方だけが
+#: 直ったときに、2つの層が別の綴りを受ける）。
+def _ref_line(key):
+    return re.compile(r"^\s*-\s*`?" + key + r"`?\s*[:：]\s*(.+?)\s*$"
+                      r"|^\s*-\s*`" + key + r"`\s*[—–-]\s*(.+?)\s*$", re.M)
 
-#: 名乗りの値から**様式の名**を取る。⚠️ **名乗りは人にも読める記録である**——
+
+STYLE_REF_LINE = _ref_line("REF_STYLE")
+FORMAT_REF_LINE = _ref_line("REF_FORMAT")
+
+#: 名乗りの値から**カードの名**を取る。⚠️ **名乗りは人にも読める記録である**——
 #: 註が後ろに付いていても、値だけを取る（`REF_CARD_NAME` と同じ心持）。
 STYLE_REF_BACKTICK = re.compile(r"`([^`]+)`")
 
-#: ⚠️ **`[^A-Za-z0-9._/-]` を含む値は読まない。** 様式の名はスラグである。
-_STYLE_SLUG = re.compile(r"^[A-Za-z0-9._/-]+$")
+#: ⚠️ **`[^A-Za-z0-9._/-]` を含む値は読まない。** カードの名はスラグである。
+#: ⚠️ **層で変わらない。** 様式の名も形式の名も、同じ字種である。
+_REF_SLUG = re.compile(r"^[A-Za-z0-9._/-]+$")
 
 
-def _style_ref_name(value):
-    """名乗りの値 → **様式の名**。読めなければ `None`。
+def _ref_name(value):
+    """名乗りの値 → **カードの名**。読めなければ `None`。**層で変わらない。**
 
     ⚠️ **語彙は2つ在る。** 実測（2026-09-21）: カード名（`luminous-anime`）が19本、
     **パス**（`references/styles/soft-cel-anime.md`）が99本である。
     ⚠️ **どちらの語彙が正かは、ここでは決めない。** 決めるのは著者である——
     ここは**両方を1つの名に畳む**だけである（末尾の要素を取り、`.md` を落とす）。
     **それで118本すべてが、実在するカードの名に着地する**（走らせて確認）。
+    ⚠️ **`REF_FORMAT` も同じ畳み方をする**——`references/formats/video-spec.md` が
+    `video-spec` に着地するのは、この関数である。
     """
     v = (value or "").strip().strip("`").strip()
-    if not v or not _STYLE_SLUG.match(v):
+    if not v or not _REF_SLUG.match(v):
         return None
     v = v.rsplit("/", 1)[-1]             # ⚠️ 名乗りのパスは POSIX である（`os` を持ち込まない）
     if v.endswith(".md"):
@@ -3142,8 +3171,8 @@ def _style_ref_name(value):
     return v or None
 
 
-def _style_ref_vocab(value):
-    """名乗りの**語彙**。`"パス"` か `"カード名"` か。
+def _ref_vocab(value):
+    """名乗りの**語彙**。`"パス"` か `"カード名"` か。**層で変わらない。**
 
     ⚠️ **どちらが正かは決めない。** 註が「この作品はどちらで書いているか」を
     言えるようにするためだけに数える——**作品ごとに違いうる**（実測: `hitosara` は
@@ -3153,20 +3182,25 @@ def _style_ref_vocab(value):
     return "パス" if "/" in v else "カード名"
 
 
-def _style_ref_of(path):
-    """動画の仕様の §6 が名乗る様式。`(名, 綴り, 語彙)`。読めなければ `(None, None, None)`。
+def _card_ref_of(path, key, line_re):
+    """動画の仕様の §6 が名乗るカード。`(名, 綴り, 語彙)`。読めなければ `(None, None, None)`。
 
-    ⚠️ **綴りは3つ在る**（実測 2026-09-21、動画の仕様118本）:
+    ⚠️ **層はここで分かれない。****分かれるのは鍵の名だけである**——だから
+    `_style_ref_of` と `_format_ref_of` は、ここへ鍵を渡して降りる。
 
-    | 綴り | 本数 | 形 |
-    |---|---|---|
-    | **A/B** | **49** | ``- REF_STYLE: `x` (HIGH)`` ／ ``- `REF_STYLE` — `path` · `HIGH`。`` |
-    | **C** | **69** | `## REF_STYLE` の小節が `- Source: `path`` を持つ |
+    ⚠️ **綴りは3つ在る。**
+
+    | 綴り | 形 |
+    |---|---|
+    | **A/B** | ``- REF_XXX: `x` (HIGH)`` ／ ``- `REF_XXX` — `path` · `HIGH`。`` |
+    | **C** | `## REF_XXX` の小節が `- Source: `path`` を持つ |
 
     ⚠️ **C は「節」である。** `_section_body` は見出しを落とすので、**C は読めない**
     ——だからここは `specdoc.sections` を直に歩き、**§6 の中の小節**を探す。
-    ⚠️ **C は、いまのところ家を持たない作品にしか現れない**（`gozen-niji` 57・
-    `ukebi/ukebi-video-*` 12）。**だが家が足された日に読めなくなる**——だから受ける。
+
+    ⚠️ **§6 に絞るのは、この歩きである。** `REF_CARD`（`L22` の側）は節で絞らない
+    ——画像仕様が節を持たないからである。**動画の側は絞れる。ゆえに絞る**
+    ——**§6 の外に `REF_FORMAT` が在っても、ここは読まない。**
     """
     try:
         text = Path(path).read_text(encoding="utf-8")
@@ -3177,24 +3211,61 @@ def _style_ref_of(path):
         if TOP_SECTION.match(t):
             inside = t.startswith("6.")
             if inside:
-                m = STYLE_REF_LINE.search(body)          # A / B
+                m = line_re.search(body)                 # A / B
                 if m:
                     raw = next(g for g in m.groups() if g)
                     b = STYLE_REF_BACKTICK.search(raw)
                     val = b.group(1) if b else raw
-                    name = _style_ref_name(val)
+                    name = _ref_name(val)
                     if name:
-                        return name, "A/B", _style_ref_vocab(val)
+                        return name, "A/B", _ref_vocab(val)
             continue
         if not inside:
             continue
-        if t.strip() == "REF_STYLE":                     # C
+        if t.strip() == key:                             # C
             m = specmap.STYLE_SOURCE_LINE.search(body)
             if m:
-                name = _style_ref_name(m.group(1))
+                name = _ref_name(m.group(1))
                 if name:
-                    return name, "C", _style_ref_vocab(m.group(1))
+                    return name, "C", _ref_vocab(m.group(1))
     return None, None, None
+
+
+def _style_ref_of(path):
+    """動画の仕様の §6 が名乗る**様式**。`(名, 綴り, 語彙)`。
+
+    ⚠️ **綴りは3つ在る**（実測 2026-09-21、動画の仕様118本）:
+
+    | 綴り | 本数 | 形 |
+    |---|---|---|
+    | **A/B** | **49** | ``- REF_STYLE: `x` (HIGH)`` ／ ``- `REF_STYLE` — `path` · `HIGH`。`` |
+    | **C** | **69** | `## REF_STYLE` の小節が `- Source: `path`` を持つ |
+
+    ⚠️ **C は、いまのところ家を持たない作品にしか現れない**（`gozen-niji` 57・
+    `ukebi/ukebi-video-*` 12）。**だが家が足された日に読めなくなる**——だから受ける。
+    ⚠️ **この本数は `REF_STYLE` のものである。** `REF_FORMAT` の内訳は**別である**
+    （`_format_ref_of` を見よ）。
+    """
+    return _card_ref_of(path, "REF_STYLE", STYLE_REF_LINE)
+
+
+def _format_ref_of(path):
+    """動画の仕様の §6 が名乗る**形式**。`(名, 綴り, 語彙)`。
+
+    ⚠️ **手は様式とまったく同じである**（`_card_ref_of`）。**違うのは鍵だけである。**
+
+    ⚠️ **実測（2026-09-22。`projects/` の中で `REF_FORMAT` を書くファイル140本を、
+    この関数自身に通した値）。** 名乗りを読めたのは **119本**——**A/B（行の形）が
+    50本・C（小節の形）が69本。** 読めなかった21本は、**画像の仕様17・定数2・
+    ボード1・`MIGRATION.md` 1** である——**§6 を持たないので、この関数の相手ではない**
+    （⚠️ **映像の仕様は1本も落ちていない。**）
+    ⚠️ **`REF_STYLE` の内訳（49本／69本）とは違う。**
+    **だから表を写さない。****層が違えば、数え直す。**
+    ⚠️ **計器を書いておく。** 数を出したのは `git grep -lF REF_FORMAT -- projects` と
+    この関数であり、**綴りの判定は正規表現ではなく読み手そのものである**——
+    **数を写す者は、同じ計器で測り直せる。**
+    """
+    return _card_ref_of(path, "REF_FORMAT", FORMAT_REF_LINE)
 
 
 def check_style_reference(project):
@@ -3314,6 +3385,151 @@ def check_style_reference(project):
     return out
 
 
+def check_format_reference(project, repo_root=None):
+    """L32 — **§6 が名乗る形式カードが、読めるか。** そして `## Negative` を持つか。
+
+    ⚠️ **`L31` の隣に在る。** あちらは `REF_STYLE` を**家と**突き合わせる。こちらは
+    `REF_FORMAT` を**カードそのものへ**突き合わせる——**同じ §6 を読む2つの層は、
+    隣に置く**（`L20` と `L31` を離すなと書いたのと同じ理由である）。
+
+    ⚠️ **この検査が読むのは、いままで誰も読まなかった行き先である。**
+    `specmap.PROMPT_SLOT_SOURCE["Negative Prompt"]` は「§16 ＋ **カードの Negative** ＋
+    様式カードの Negative」と書き、`video-spec` の §18 対応表も同じことを書いている
+    ——**だが、その「カードの Negative」を読む実装は、1つも無かった。**
+    ここが読むのは**その1つだけである**（様式カードの Negative は、まだ読まない）。
+
+    ⚠️ **3つに分ける。原因の違うものを同じ顔で報告しない**（`L20` と同じ規律）:
+
+    | | 何を | 鳴り方 |
+    |---|---|---|
+    | **a-1** | **置き場が1つも無い** | **註**——読もうとして読めない |
+    | **a-2** | **カードが無い** | **違反**——**探した範囲**を並べる |
+    | **b** | カードが `## Negative` を宣言していない | **違反** |
+
+    ⚠️ **a-1 と a-2 を混ぜない。** 「隣に `distill` が無い」と「`video-spec` という
+    カードが無い」は**別の原因**である——同じ註で流せば、**直す者がどちらを直すのか
+    分からない。**
+
+    ⚠️ **clone した人の手元では a-1、このマシンでは a-2 である。** ここでは隣が
+    在るが、**その中に `video-spec` は無い**——**「置き場が無い」のではない。**
+    ⇒ **ゆえに既定では違反が鳴る。** `SVL_FORMATS_DIR` を張れば消える。
+    ⚠️ **同じコードが、置かれた環境で違う符号を出す**——`L20` が既にそうである。
+
+    ⚠️ **門を1つ置く。動画の仕様を持たない作品では鳴らない**——さもなければ、
+    **動画を持たない作品が「形式カードが無い」と鳴る。**
+
+    ⚠️ **`L22` を動画へ広げたのではない。** `L22` は「カードの穴」と「仕様の欄」を
+    突き合わせる検査であり、`video-spec` の穴（`SUBJECT` など）は動画仕様が使わない
+    ——**広げれば、正しい仕様の上で鳴る。**
+    """
+    out = []
+    pairs = []
+    for s in project.order():
+        # ⚠️ **`_spec_of` を通す。** ここだけ `shot.get("spec")` を直に読むと、
+        #    経路の決め方が2箇所に分かれる（`L20`・`L31` と同じ理由）。
+        src = _spec_of(project.shots[s], "video")
+        if not src:
+            continue                      # L11・L18 が鳴らしている
+        p = project.root / src
+        if p.is_file():
+            pairs.append((s, p))
+    if not pairs:
+        return out                        # 相手が無い。L11・L18 が報告済みである。
+
+    # ⚠️ **同じ名乗りが20本に在るので、層ごとに1件へ畳む**（`_image_card_slots` と同じ）。
+    named, spellings, vocabularies = {}, {}, {}
+    silent = 0
+    for s, p in pairs:
+        got, how, vocab = _format_ref_of(p)
+        if got is None:
+            silent += 1
+            continue
+        named.setdefault(got, []).append(s)
+        spellings[how] = spellings.get(how, 0) + 1
+        vocabularies[vocab] = vocabularies.get(vocab, 0) + 1
+
+    if not named:
+        # ⚠️ **鳴らさない。** 名乗りが無ければ、確かめる相手が無い——**だが
+        #    「見た」ことは書く。****何も言わない検査は、走っていない検査と同じである。**
+        # ⚠️ **宛先は「名乗った本数」であり、単位はこの検査の他の註と同じ `本` である**
+        #    ——**同じ量を、註ごとに違う単位で書かない。**（実測 2026-09-22 に `件` が
+        #    ここ1箇所だけに残っていた。**読む者は、単位の違いを量の違いと読む。**）
+        out.append(finding("L32", f"{len(pairs) - silent}本",
+                           f"形式カードを確かめた（動画の仕様 {len(pairs)} 本、"
+                           "**だが1本も `REF_FORMAT` を名乗っていない**）。"
+                           "⚠️ **この作品には、確かめる相手が無い。**",
+                           severity="note"))
+        return out
+
+    root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
+
+    # ---- a-1 / a-2。⚠️ **「置き場が無い」と「カードが無い」を、同じ顔で出さない。**
+    if not _cards_dirs(root, "format"):
+        out.append(finding("L32", "",
+                           "形式カードの**置き場が1つも無い**——"
+                           f"`{FORMAT_CARD_ENV}` を設定するか、"
+                           "`distill-essence-engine` を隣に置くこと。"
+                           "**このリポジトリを clone した人には無い。**"
+                           "だから §6 の `REF_FORMAT` が何を引くのかは"
+                           "**確かめられない**——"
+                           "**確かめていないことを、確かめた顔にしない。**",
+                           severity="note"))
+        return out
+
+    checked = 0
+    for name in sorted(named):
+        shots = named[name]
+        card = _card_path(root, "format", name)
+        if card is None:
+            out.append(finding("L32", shots[0] if len(shots) == 1 else f"{len(shots)}本",
+                               f"形式カード `{name}` が無い——**探した範囲**: "
+                               f"{_cards_searched(root, 'format', name)}。"
+                               "**§6 が名指ししたカードが実在しない**——"
+                               "`Negative Prompt` は、このカードの `Negative` を"
+                               "引けない。"
+                               f"⚠️ **この名乗りは {len(shots)} 本の仕様に在る。**"))
+            continue
+        checked += 1
+        if specdoc.section(card.read_text(encoding="utf-8"), "Negative") is None:
+            out.append(finding("L32", shots[0] if len(shots) == 1 else f"{len(shots)}本",
+                               f"形式カード `{name}` に `## Negative` が無い。"
+                               "**行き先を宣言したのに、運ぶものが無い**——"
+                               "`specmap.PROMPT_SLOT_SOURCE` も `video-spec` の §18 も、"
+                               "**`Negative Prompt` がこのカードの `Negative` を"
+                               "引くと書いている。**"
+                               f"⇒ **{len(shots)} 本の `Negative Prompt` は、"
+                               "在るが空である。**"))
+        else:
+            out.append(finding("L32", shots[0] if len(shots) == 1 else f"{len(shots)}本",
+                               f"形式カード `{name}` は読める（`{card}`）。"
+                               f"`## Negative` を持つ——{len(shots)} 本の "
+                               "`Negative Prompt` は中身を運ぶ。"
+                               "⚠️ **引いた中身が正しいかは、まだ検査していない**"
+                               "——**見ているのは `## Negative` が在るかどうかだけである。**",
+                               severity="note"))
+
+    # ⚠️ **名乗りが0本の枝は上で返っている。** ここへ来るなら `named` は空でない。
+    told = "・".join(f"{k} が {v}本" for k, v in sorted(spellings.items()))
+    vocab = "・".join(f"{k} が {v}本" for k, v in sorted(vocabularies.items()))
+    head = (f"§6 の `REF_FORMAT` を確かめた（動画の仕様 {len(pairs)} 本、"
+            f"{len(pairs) - silent} 本が名乗り、{len(named)} 種のカード、"
+            # ⚠️ **「読めたカードの数」を書く。** 数を省くと、**カードが1枚も読めない
+            #    作品で「0件」だけが残る**——それは「何も見ていない」と読めるが、
+            #    実際には30本の名乗りを読んでいる。**見た範囲を、数で書く。**
+            f"うち読めたカード {checked} 種）。"
+            f"⚠️ **この作品の綴り**: {told}。"
+            f"⚠️ **この作品の語彙**: {vocab}。")
+    if silent:
+        # ⚠️ **名乗っていない仕様を、数えずに流さない。** 数えなければ、
+        #    **§6 に鍵を1つ書き忘れた仕様が、検査を素通りする。**
+        head += (f"⚠️ **`REF_FORMAT` を名乗っていない仕様が {silent} 本ある**"
+                 "——**この層は、その仕様を1本も見ていない。**")
+    # ⚠️ **宛先は「確かめた本数」である**（`L31` が `agreed` を置くのと同じ位置）。
+    #    **読めたカードの数ではない**——0枚でも、確かめた本数は0本ではない。
+    out.append(finding("L32", f"{len(pairs) - silent}本", head, severity="note"))
+    return out
+
+
 # ---------------------------------------------------------------- まとめ
 
 CHECKS_SHOT = (check_unit, check_one_place, check_one_time, check_move,
@@ -3350,6 +3566,9 @@ def run(project, schema_dir=None, repo_root=None):
     # ⚠️ **`L20` の直後に置く。** 同じ `bible.style` を読み、相手だけが違う
     #    ——あちらはカード、こちらは仕様の §6。**離すと、片方だけが直される。**
     out += check_style_reference(project)
+    # ⚠️ **`L31` の直後に置く。** 同じ §6 を読み、鍵だけが違う（`REF_STYLE` ⇄
+    #    `REF_FORMAT`）。**`L20` と `L31` を離すなと書いたのと同じ理由である。**
+    out += check_format_reference(project, repo_root=repo_root)
     out += check_mode_demands(project)
     if schema_dir:
         out += check_field_source(schema_dir)

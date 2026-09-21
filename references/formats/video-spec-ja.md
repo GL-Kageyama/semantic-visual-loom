@@ -1,4 +1,4 @@
-<!-- i18n-version: 2.1.0 | canonical: references/video-spec.md | translated: 2026-09-18 -->
+<!-- i18n-version: 2.1.0 | canonical: references/formats/video-spec.md | translated: 2026-09-18 -->
 
 **Language:** [English](video-spec.md) | [日本語](video-spec-ja.md) | [中文](video-spec-zh.md)
 

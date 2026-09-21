@@ -285,6 +285,56 @@ def report(project, findings, shape, stream=sys.stdout):
 
 
 def self_test():
+    """⚠️ **カードの置き場の環境変数を外してから走らせる。**
+
+    ⚠️ **これが要る理由。** 自己検査は**偽のエンジンを `repo_root` で指す**が、
+    環境変数はそれより**先に**読まれる。だから
+    `SVL_FORMATS_DIR=references/formats` を張った手元では、**このリポジトリの
+    本物のカードが偽のエンジンを覆い、鳴るはずの例が静かに通る。**
+
+    ⚠️ **これは机上の話ではない。** 実測（2026-09-22、**このガードを通さず
+    `_self_test()` を直に呼んだ値**）:
+
+    | 張った変数 | 例 | 期待どおり |
+    |---|---|---|
+    | なし | **265** | **265** |
+    | `SVL_FORMATS_DIR` | 265 | **264** |
+    | `SVL_STYLES_DIR` | 263 | **261** |
+    | 両方 | 263 | **261** |
+
+    ⚠️ **`SVL_STYLES_DIR` の行だけ例の数が違う（263）。** それは、この変数が
+    1枚だけの置き場を指すと、**`Motion character` を持たないカードが其処に無くなり、
+    `hasnt` の2例が立てられない**ためである（`hasnt` の註を見よ）——**落ちたのでは
+    なく、走っていない。** 数を省くと、**この2つが同じ顔になる。**
+
+    ⚠️ **`L20` の重ねる例も、外へは無傷ではない。** ここを「自分で張って自分で
+    戻すから影響を受けない」と書いていたが、**それは偽である**——重ねる例は
+    `cards = _styles_dir(REPO)`（＝環境変数が在ればその答え）を**「隣」と呼んで**
+    組み立てられており、外から `SVL_STYLES_DIR` が張られていれば、**指し先が
+    隣でなくなる**——ゆえに「指した先が隣それ自体なら1箇所に畳まれる」が
+    **2箇所**を返す。（`L22` の「カードが読めない」も同じ形で崩れる——
+    置き場が無いのではなく**在って探して居ない**になり、註ではなく違反が鳴る。）
+
+    ⚠️ **そして、このリポジトリはその変数を張れと文書で指示している**
+    （`docs/cards.md`）。**指示どおりに走らせた者が、壊れた自己検査を見ることになる。**
+
+    ⇒ **検査が環境で変わるなら、検査ではない。** だからここで外す。
+    **外した状態で、4条件すべてが 265 例中 265 例である**（実測 2026-09-22）。
+    """
+    import os
+    sys.path.insert(0, str(HERE))
+    import semantic  # noqa: E402
+    saved = {k: os.environ.pop(k, None)
+             for k in (semantic.FORMAT_CARD_ENV, semantic.STYLE_CARD_ENV)}
+    try:
+        return _self_test()
+    finally:
+        for k, v in saved.items():
+            if v is not None:
+                os.environ[k] = v
+
+
+def _self_test():
     """⚠️ **検査器が実際に鳴ることを、検査器自身で確かめる。**
 
     相手が空なら何も鳴らない。だから「1件も鳴らなかった」は
@@ -1400,16 +1450,27 @@ def self_test():
                       if "## Motion character" not in p.read_text(encoding="utf-8")), None)
         print(f"        ← 実測: カード {len(list(cards.glob('*.md')))} 枚。"
               f" `Motion character` を持つ例 `{has}`／持たない例 `{hasnt}`")
+        if hasnt is None:
+            print(f"        ← 実測: `Motion character` を持たないカードがこの置き場に無いので、"
+                  f"「持たない」の2例は**立てていない**")
         style_cases = [
             # ⚠️ **本命の「鳴ってはならない」例。** 行き先が中身を運ぶ。
             #    ⚠️ カードが1枚も持たなければ、この例は**立てられない**（鳴るはずが無い）。
             *([(f"L20 `{has}` は持つ（鳴ってはならない）", has, WITH_SLOT, False, None)]
               if has else []),
-            (f"L20 `{hasnt}` は持たない", hasnt, WITH_SLOT, True, "在るが空である"),
+            # ⚠️ **`has` と同じ規則を、`hasnt` にも当てる。** 逆向きの例が立てられないとき、
+            #    **`None` という名前のカードを名乗る例を走らせてはならない**——それは
+            #    「節を持たないカード」の検査ではなく**存在しないカード**の検査であり、
+            #    ⚠️ **落ちた原因を、fixture の外にあるように読ませる。**
+            #    （実測 2026-09-22: `SVL_STYLES_DIR` が1枚だけの置き場を指すと
+            #     `hasnt` が `None` になり、この2例が `L20 None は持たない` として落ちた。）
+            *([(f"L20 `{hasnt}` は持たない", hasnt, WITH_SLOT, True, "在るが空である")]
+              if hasnt else []),
             ("L20 カードが実在しない", "no-such-style-9999", WITH_SLOT, True, "実在しない"),
             # ⚠️ **スロットが1つも無ければ、この検査は何も見ていない。** 黙って通さない。
-            ("L20 Style Motion を持つ仕様が無い（鳴ってはならない）",
-             hasnt, WITHOUT_SLOT, False, None),
+            *([("L20 Style Motion を持つ仕様が無い（鳴ってはならない）",
+                hasnt, WITHOUT_SLOT, False, None)]
+              if hasnt else []),
         ]
         for label, style, body, want, fragment in style_cases:
             got = [f for f in semantic.check_style_motion(style_proj(style, body))
@@ -1608,6 +1669,173 @@ def self_test():
               f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
         for f in v[:1]:
             print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ---- L32（§6 が名乗る形式カードが、読めるか・`Negative` を持つか）
+    #     ⚠️ **`L31` の直後に並べる。** 検査の順が `L31` → `L32` だからである
+    #        ——道具が下に在るという理由で順を崩さない（`run1` を上げたのと同じ心持）。
+    #     ⚠️ **`L20` と同じ3つの符号を、別々に鳴らして確かめる。** 「置き場が無い」と
+    #        「カードが無い」を混ぜれば、**直す者がどちらを直すのか分からなくなる。**
+    print("\n=== 自己検査 — §6 の形式カード\n")
+
+    # ⚠️ **カードの実物はこのリポジトリの外にある。** 自己検査が本物の
+    #    `distill-essence-engine` に依存すれば、clone した人には通らない——
+    #    だから**同じ形の偽物を組んで**、`repo_root` で指す（`L22` と同じ手）。
+    def fmt_engine(card_body, name="video-spec", others=()):
+        """⚠️ **`others` は「置き場は在るが、目当ての1枚が無い」を作るためである**
+        ——**このマシンの既定が、まさにその形だからである。**"""
+        d = _P(tempfile.mkdtemp())
+        p = d / "distill-essence-engine" / "references" / "formats"
+        p.mkdir(parents=True, exist_ok=True)
+        for nm in others:
+            (p / f"{nm}.md").write_text("# x\n\n## Negative\n\nnothing\n", encoding="utf-8")
+        if card_body is not None:
+            (p / f"{name}.md").write_text(card_body, encoding="utf-8")
+        return d / "repo"
+
+    FMT_OK = "# video-spec\n\n## Negative\n\nno subtitles, no background music\n"
+    FMT_NO_NEG = "# video-spec\n\n## Prompt shape\n\nseven slots\n"
+    # ⚠️ **実物の書き方である。** `## Negative` ではなく `## Negative Prompt` と書く
+    #    カードを、**偽って鳴らしてはならない**——`L20` の文字列一致は、この形で鳴る。
+    #    ここが `specdoc.section`（前置き一致）を使っていることの、唯一の証拠である。
+    FMT_NEG_PROMPT = "# video-spec\n\n## Negative Prompt\n\nno subtitles\n"
+
+    REF_FMT = "- REF_FORMAT: `video-spec` — this defines the seven §18 slots\n"
+
+    def l32(p, eng):
+        """`L32` を、**走らせる者の環境変数に依らせずに**呼ぶ。
+
+        ⚠️ **これが要る理由。** 偽のエンジンを `repo_root` で指していても、
+        **環境変数は CWD からの相対で、それより先に読まれる**——だから
+        `SVL_FORMATS_DIR=references/formats` を張った手元では、**このリポジトリの
+        本物の `references/formats/video-spec.md` が偽のエンジンを覆い、
+        「カードが無い」の例は其処では鳴らない。**
+        ⇒ **検査が環境で変わるなら、検査ではない。****ここで外して、必ず戻す。**
+
+        ⚠️ **効いていることの実測（2026-09-22、この関数を**通した**まま4条件で
+        走らせた値）。** なし・`SVL_FORMATS_DIR`・`SVL_STYLES_DIR`・両方の
+        **どれでも `L32` の例は1つも落ちない。** 落ちるのは `L20` と `L22` の
+        例だけである——**この関数が外しているのはカードの変数2つであり、
+        `L32` にはそれで足りている。**
+        """
+        saved = {k: _os.environ.pop(k, None)
+                 for k in (semantic.FORMAT_CARD_ENV, semantic.STYLE_CARD_ENV)}
+        try:
+            return semantic.check_format_reference(p, repo_root=eng)
+        finally:
+            for k, v in saved.items():
+                if v is not None:
+                    _os.environ[k] = v
+
+    run1("L32 カードが読め、`## Negative` を持つ（鳴ってはならない）",
+         lambda p: l32(p, fmt_engine(FMT_OK)),
+         ref_proj(None, REF_FMT), False, None, note="`## Negative` を持つ")
+    # ⚠️ **本命である。** このマシンの既定がこの形である——**置き場（隣）は在るが、
+    #    その中に目当ての1枚が無い。****「置き場が無い」のではない。**
+    run1("L32 置き場は在るが、カードが無い",
+         lambda p: l32(p, fmt_engine(None, others=("scene-board",))),
+         ref_proj(None, REF_FMT), True, "形式カード `video-spec` が無い")
+    # ⚠️ **b。カードは在るのに、`Negative` を宣言していない**——「行き先を宣言したのに、
+    #    運ぶものが無い」。`specmap.PROMPT_SLOT_SOURCE` が名指しした行き先が空回りする形である。
+    run1("L32 カードは在るが、`## Negative` が無い",
+         lambda p: l32(p, fmt_engine(FMT_NO_NEG)),
+         ref_proj(None, REF_FMT), True, "`## Negative` が無い")
+    run1("L32 `## Negative Prompt` と書くカードも読む（鳴ってはならない）",
+         lambda p: l32(p, fmt_engine(FMT_NEG_PROMPT)),
+         ref_proj(None, REF_FMT), False, None, note="`## Negative` を持つ")
+    # ⚠️ **a-1。置き場が1つも無い**——clone した人の手元の形である。
+    #    **註であって、違反ではない**（`L20` の `check.py:1391` と同じ符号）。
+    run1("L32 置き場が1つも無い（註であって、違反ではない）",
+         lambda p: l32(p, _P("/nonexistent/repo")),
+         ref_proj(None, REF_FMT), False, None, note="置き場が1つも無い")
+
+    # ⚠️ **§6 の外に名乗りが在っても、読まない。** `REF_CARD`（`L22` の側）は節で絞らない
+    #    ——**画像仕様が節を持たないからである。****動画の側は絞れる。ゆえに絞る。**
+    #    この1例が、**その絞りが効いていることの証拠である**（絞らなければ違反が鳴る）。
+    OUTSIDE = ("# 1. VIDEO\n\n- Duration: `6s`\n\n"
+               "# 6. REFERENCES\n\n- `REF_SOURCE`: `bible.yaml`\n\n"
+               "# 18. WAN 3.0 PROMPT MAPPING\n\n" + REF_FMT)
+    run1("L32 §6 の外の `REF_FORMAT` は読まない（鳴ってはならない）",
+         lambda p: l32(p, fmt_engine(FMT_OK)),
+         style_proj(None, OUTSIDE), False, None,
+         note="1本も `REF_FORMAT` を名乗っていない")
+
+    # ⚠️ **同じ名乗りが2本に在っても、報告は1件に畳む。** 畳まなければ、20本の仕様を
+    #    持つ作品で**同じ欠陥が20回鳴る**——`L22` が層ごとに畳んでいるのと同じ理由である。
+    two = ref_proj(None, REF_FMT)
+    two.shots["p-ch01-seg02"] = dict(two.shots["p-ch01-seg01"])
+    _got = l32(two, fmt_engine(None, others=("scene-board",)))
+    _v = [f for f in _got if f["severity"] != "note"]
+    _ok = len(_v) == 1 and "2 本の仕様に在る" in _v[0]["message"]
+    n += 1
+    bad += not _ok
+    print(f"    {'L32 同じ名乗りは1件に畳む（2本→1件）':<50}{len(_v):>10}  "
+          f"{'期待どおり' if _ok else '⚠️ 期待と違う'}")
+    for f in _v[:1]:
+        print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ **門。動画の仕様を持たない作品では、1件も出さない**（註すら出さない）
+    #    ——さもなければ、**動画を持たない作品が「形式カードが無い」と鳴る。**
+    got = l32(NOSPEC, fmt_engine(FMT_OK))
+    n += 1
+    bad += bool(got)
+    print(f"    {'L32 動画の仕様が無ければ黙る（註も出さない）':<50}{len(got):>10}  "
+          f"{'期待どおり' if not got else '⚠️ 期待と違う'}")
+
+    # ⚠️ **受け火の実物。** 実測では、動画の仕様を持つ4作品のどれも
+    #    **`SVL_FORMATS_DIR` を張らなければ違反が1件増える**——このマシンの隣は
+    #    **在るが、`video-spec` を持たない**からである。⚠️ **clone した人の手元では
+    #    註になる**（隣が無い）——**同じコードが、置かれた環境で違う符号を出す。**
+    real_v2 = REPO / "projects" / "ukebi" / "ukebi-v2"
+    if real_v2.is_dir():
+        got = l32(Project(real_v2), None)
+        v = [f for f in got if f["severity"] != "note"]
+        n += 1
+        ok = (len(v) == 1 and "形式カード" in v[0]["message"]) or not v
+        bad += not ok
+        print(f"    {'L32 受け火 V2（このマシンでは違反1件／clone では註）':<50}{len(v):>10}  "
+              f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
+        for f in v[:1]:
+            print(f"        {f['code']}  {f['message'][:88]}")
+
+    # ⚠️ **層ごとに、自分の環境変数を読む。** 規則は層で同じである（決定 2026-09-22）
+    #    ——だから**片方だけを確かめても足りない。****両方向を1度に試す。**
+    #    ⚠️ **これが要るのは、昔は様式の変数が形式へ流れていたからである**
+    #       （`SVL_STYLES_DIR` が `formats` を名乗るときだけ従う、という門）。
+    #       **門を外したのではない**——**層ごとの変数を足した**のである。
+    def _layer_split():
+        """`(名前, 成否, 実測)` を返す。**張って、確かめて、必ず戻す。**"""
+        keep = {k: _os.environ.get(k)
+                for k in (semantic.STYLE_CARD_ENV, semantic.FORMAT_CARD_ENV)}
+        try:
+            own = _P(tempfile.mkdtemp())
+            for sub in ("styles", "formats"):
+                (own / sub).mkdir(parents=True, exist_ok=True)
+            _os.environ[semantic.STYLE_CARD_ENV] = str(own / "styles")
+            _os.environ.pop(semantic.FORMAT_CARD_ENV, None)
+            # ① 様式は自分の変数に従う ② 形式は**それに従わない**
+            a = semantic._cards_dir(REPO, "style") == own / "styles"
+            b = semantic._cards_dir(REPO, "format") != own / "styles"
+            _os.environ.pop(semantic.STYLE_CARD_ENV, None)
+            _os.environ[semantic.FORMAT_CARD_ENV] = str(own / "formats")
+            # ③ 形式は自分の変数に従う ④ 様式は**それに従わない**
+            c = semantic._cards_dir(REPO, "format") == own / "formats"
+            d = semantic._cards_dir(REPO, "style") != own / "formats"
+            return [("`SVL_STYLES_DIR` は様式だけを動かす", a and b, f"{a}／{b}"),
+                    ("`SVL_FORMATS_DIR` は形式だけを動かす", c and d, f"{c}／{d}")]
+        finally:
+            for k, v in keep.items():
+                if v is None:
+                    _os.environ.pop(k, None)
+                else:
+                    _os.environ[k] = v
+
+    for _label, _ok, _got in _layer_split():
+        n += 1
+        bad += not _ok
+        print(f"    {'L32 ' + _label:<50}{'':>10}  "
+              f"{'期待どおり' if _ok else '⚠️ 期待と違う'}")
+        if not _ok:
+            print(f"        {_got}")
 
     # ---- L21〜L24（画像の経路の中身・尺の一致・`mode` が要求するもの）
     #     ⚠️ **本物の節見出しを書いたファイルを読ませる。** 合成の見出しでは、

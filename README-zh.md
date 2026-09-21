@@ -47,7 +47,22 @@
 
 **写提示词的是②。** 7 个槽位是 `Master` / `Visual` / `Motion` / `Camera` /
 `Audio` / `Negative` / `Style Motion`，而**分开这件事本身就是要点**
-（[`references/video-spec.md`](references/video-spec-zh.md) §18）。
+（[`references/formats/video-spec.md`](references/formats/video-spec-zh.md) §18）。
+
+⚠️ **提示词由两个轴构成，而两者都是卡片**——**Format（形式＝规格的形状）**与
+**Style（样式＝视觉语言）**。⚠️ **卡片默认位于本仓库的旁边**
+（`distill-essence-engine/references/formats` 与 `.../styles`）——而
+**这一侧作品的卡片，是叠加而不是替换**：
+
+```bash
+SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles \
+  python3 engine/ledger/check.py projects/ippitsu
+```
+
+⚠️ **没有人指点的卡片，没有人读**——而**被点名却读不到的卡片会触发违规**。
+所以要**设置环境变量。不设置，作品自己的卡片就不可见。**
+**两个轴是什么、它们在哪里、哪一项检查读什么**，见
+[`docs/cards-zh.md`](docs/cards-zh.md)。
 
 ⚠️ **①–④ 是对 Claude Code 会话的指示，不是程序**——它们定下的是
 **决定的顺序**，而**这个仓库里没有这 4 个的代码。**
@@ -77,10 +92,10 @@ semantic-visual-loom/
 ├── schemas/         # 数据结构的正典（bible / ledger / shot-record / take / timeline）
 ├── engine/ledger/   # 制作台账与事前验证（不跑生成就把设计的破绽压掉）
 ├── engine/shot/     # 打印镜头规格中可以导出的行（只读。什么也不写）
-├── docs/            # 用法，以及更深入的解说
+├── docs/            # 用法，以及更深入的解说（cards / routes）
 ├── skills/          # 4 个 Skill——分解、设计、台账、镜头
 ├── tools/           # 检查（i18n 的镜像）
-├── references/      # 从 distill 移管过来的 video-spec，以及这一侧的样式卡
+├── references/      # 这一侧的卡片——formats/（video-spec）与 styles/（sumi-e）
 ├── assets/          # 仓库的脸（README 的 hero）
 └── projects/        # 每部作品的实体
 ```
@@ -188,7 +203,7 @@ semantic-visual-loom/
 **开发用日语推进，文档的正典是英语。**
 镜像用后缀方式并排在**同一个目录**里——规则在 [`CLAUDE.md`](CLAUDE-zh.md) 里。
 
-**19 份文档 × 3 种语言已经齐备**——⚠️ **这是 [`tools/check_i18n.py`](tools/check_i18n.py)
+**20 份文档 × 3 种语言已经齐备**——⚠️ **这是 [`tools/check_i18n.py`](tools/check_i18n.py)
 作为正典报告的本数，不是把仓库里的 `.md` 数了一遍的数。**
 **数，只拥有它所数范围那么宽。**
 **它看什么、不看什么**，写在 [`docs/usage.md`](docs/usage-zh.md) 里。

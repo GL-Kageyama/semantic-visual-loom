@@ -250,9 +250,11 @@ SPEC_MAP = {
 
 #: §18 が持つスロット。**順序も含めて目録である。** L17 が仕様と突き合わせる。
 #:
-#: ⚠️ **出所は `video-spec`（`distill-essence-engine`）の §18 が明記している。**
-#: ここに写すのは**このリポジトリが検査するため**である——clone した人に
-#: `video-spec` は無く、**読めないものを検査の相手にはできない。**
+#: ⚠️ **出所は `video-spec` の §18 が明記している。** あのカードは
+#: `references/formats/video-spec.md` に在る（`distill-essence-engine` から
+#: このリポジトリへ移管された）。ここに写すのは**このリポジトリが検査するため**である
+#: ——**`L17` はカードを読みに行かず、この目録と突き合わせる。**
+#: ⚠️ **カードが読めるかどうかは `L32` が見る**（別の検査である）。
 #:
 #: ⚠️ **7つ目 `Style Motion` は決定（2026-09-13、著者）で足された。**
 #: 実測が要求した——55枚の様式カードのうち **2枚だけが `Motion character` を持つ**のに、
@@ -262,7 +264,7 @@ SPEC_MAP = {
 #:
 #: ⚠️ **7つとも `##` の小節である。** 実測（2026-09-13）——既存の99本はすべて**6小節**で、
 #:    `Style Motion` は **0/99** である。**カードの側も6つと書いていた**ので、
-#:    決定（2026-09-13）で **`references/video-spec.md` を7つに直した**
+#:    決定（2026-09-13）で **`references/formats/video-spec.md` を7つに直した**
 #:    （あのカードは `distill-essence-engine` からこのリポジトリへ移管されている）。
 #:    **だから `Style Motion` を持つ仕様は、いま新しく書かれるものだけである。**
 PROMPT_SLOTS = (
@@ -369,7 +371,7 @@ MODELS = {
               "「**添付画像の服がテキスト指定に勝つ**」（受け火、制服が勝った）。"
               "だから**最初のコマにすると失われる変化**（割る・盛り付ける）が、"
               "この渡し方なら**画面上で起きる**。"
-              "⚠️ `references/video-spec.md` は「Wan 3.0 は1生成＝30秒」と書いていたが、"
+              "⚠️ `references/formats/video-spec.md` は「Wan 3.0 は1生成＝30秒」と書いていたが、"
               "著者は**一秒ごとに指定できる**と言う。**このリポジトリのカードなので直した**"
               "（決定 2026-09-13）——設計は**尺を可変として組む**（`take.params.duration`）。",
     },
@@ -542,7 +544,7 @@ MODELS = {
 #:    `engine/ledger/README.md` の穴の表に書く。
 MODEL_ROUTE = {
     # **禁じる語を持たない経路である。** 空のタプルは「書き忘れ」ではない——
-    # `one continuous take` はこの経路では正しい（`references/video-spec.md` の冒頭行
+    # `one continuous take` はこの経路では正しい（`references/formats/video-spec.md` の冒頭行
     # `Granularity×time: whole arc × one continuous take`。実測で15本が §18 に持つ）。
     "WAN 3.0": (),
     # ⚠️ **3語とも、直した3本の §18 には1つも無い**（実測 2026-09-20）。
@@ -551,7 +553,7 @@ MODEL_ROUTE = {
     # **ファイル全体を走査すれば、直した仕様の上で鳴る**（`L4` が踏んだ形である）。
     "MINIMAX H3": (
         ("one continuous take",
-         "**`WAN 3.0` の家風である**（`references/video-spec.md` の冒頭行）。"
+         "**`WAN 3.0` の家風である**（`references/formats/video-spec.md` の冒頭行）。"
          "この経路では**コマはそれぞれ独立したシーンであり、自然なアニメーションで繋がる**——"
          "資料②「各コマを独立したシーンとして扱い、静止画と静止画の間を自然なアニメーションで"
          "つないでください」。**この句を写した仕様が、実際に欠陥を出した**"
@@ -589,7 +591,7 @@ MODEL_ROUTE = {
 #:
 #: ⚠️ **`MODEL_ROUTE` と同じ範囲へ閉じる**（`L28` の①が両方を見る）。
 MODEL_ROUTE_DOC = {
-    "WAN 3.0": "references/video-spec.md",
+    "WAN 3.0": "references/formats/video-spec.md",
     "MINIMAX H3": "docs/h3-route.md",
     "SEEDANCE 2.5": "docs/seedance-route.md",
 }

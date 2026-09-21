@@ -25,7 +25,7 @@ A work completely independent of ukebi, and **it is placed here to show everythi
 
 ⚠️ **The 7 slots are fed separately.** `Master` / `Visual` / `Motion` / `Camera` / `Audio` /
 `Negative` / `Style Motion`. "**Being separated is itself the point**, so do not mix them"
-(`references/video-spec.md`).
+(`references/formats/video-spec.md`).
 ⚠️ **If the destination has only one field, join them.**
 ⚠️ **Put that shot's duration into `{DURATION}`** (in this work, 2s–8s).
 

@@ -47,7 +47,22 @@
 
 **プロンプトが書かれるのは②である。** 7スロットは `Master` / `Visual` / `Motion` / `Camera` /
 `Audio` / `Negative` / `Style Motion` であり、**分かれていること自体が要点である**
-（[`references/video-spec.md`](references/video-spec-ja.md) §18）。
+（[`references/formats/video-spec.md`](references/formats/video-spec-ja.md) §18）。
+
+⚠️ **プロンプトは2つの軸から作られ、どちらもカードである**——**Format（形式＝仕様の形）** と
+**Style（様式＝視覚言語）**。⚠️ **カードは既定ではこのリポジトリの隣に在る**
+（`distill-essence-engine/references/formats` と `.../styles`）——そして
+**こちら側の作品のカードは、置き換えるのではなく重ねる**:
+
+```bash
+SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles \
+  python3 engine/ledger/check.py projects/ippitsu
+```
+
+⚠️ **誰も指さないカードは、誰も読まない**——そして**名指しされたカードが読めなければ違反が鳴る**。
+ゆえに**環境変数を張ること。張らなければ、作品自身のカードは見えない。**
+**2つの軸とは何か、どこに在るか、どの検査が何を読むか**は
+[`docs/cards-ja.md`](docs/cards-ja.md) に在る。
 
 ⚠️ **①–④ は Claude Code のセッションへの指示であって、プログラムではない**——定めるのは
 **決定の順序**であり、**このリポジトリに4本のコードは無い。**
@@ -77,10 +92,10 @@ semantic-visual-loom/
 ├── schemas/         # データ構造の正典（bible / ledger / shot-record / take / timeline）
 ├── engine/ledger/   # 制作台帳と事前検証（生成を走らせずに設計の破綻を潰す）
 ├── engine/shot/     # ショットの仕様のうち、導出できる行を刷る（読み取り専用。何も書かない）
-├── docs/            # 使い方と、踏み込んだ解説
+├── docs/            # 使い方と、踏み込んだ解説（cards / routes）
 ├── skills/          # 4つの Skill——分解・設計・台帳・ショット
 ├── tools/           # 検査（i18n のミラー）
-├── references/      # distill から移管した video-spec と、こちら側の様式カード
+├── references/      # こちら側のカード——formats/（video-spec）と styles/（sumi-e）
 ├── assets/          # リポジトリの顔（README の hero）
 └── projects/        # 作品ごとの実体
 ```
@@ -191,7 +206,7 @@ semantic-visual-loom/
 **開発は日本語で進め、文書の正典は英語である。**
 ミラーは接尾辞方式で**同じディレクトリ**に並ぶ——規則は [`CLAUDE.md`](CLAUDE-ja.md) にある。
 
-**19文書 × 3言語が揃っている**——⚠️ **これは [`tools/check_i18n.py`](tools/check_i18n.py) が
+**20文書 × 3言語が揃っている**——⚠️ **これは [`tools/check_i18n.py`](tools/check_i18n.py) が
 正典として報告する本数であって、リポジトリの `.md` を数えた数ではない。**
 **数は、数えた範囲の広さしか持たない。**
 **何を見て、何を見ないか**は [`docs/usage.md`](docs/usage-ja.md) にある。

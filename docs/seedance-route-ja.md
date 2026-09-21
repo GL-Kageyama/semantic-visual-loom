@@ -94,7 +94,7 @@
 
 ## さらに読む
 
-- [`references/video-spec.md`](../references/video-spec.md)——§18 のスロットと、経路が共有しない時間の文法
+- [`references/formats/video-spec.md`](../references/formats/video-spec.md)——§18 のスロットと、経路が共有しない時間の文法
 - [`docs/h3-route.md`](h3-route.md)——2つ目の経路と、**実測の裏づけを持つ制約一覧の実例**
 - [`engine/ledger/README.md`](../engine/ledger/README.md)——`L30` と、それが残す穴
 - [`engine/ledger/specmap.py`](../engine/ledger/specmap.py)——`MODELS["SEEDANCE 2.5"]`、`MODEL_UNRECEIVED_SLOTS`、`ROUTE_LIMITS_KEY`

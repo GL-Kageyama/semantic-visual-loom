@@ -94,7 +94,7 @@ The vendor states that this route **does not accept reference images or referenc
 
 ## Where to read more
 
-- [`references/video-spec.md`](../references/video-spec.md) — the §18 slots, and the time grammar the routes do not share
+- [`references/formats/video-spec.md`](../references/formats/video-spec.md) — the §18 slots, and the time grammar the routes do not share
 - [`docs/h3-route.md`](h3-route.md) — the second route, and the worked example of a constraint list with measurements behind it
 - [`engine/ledger/README.md`](../engine/ledger/README.md) — `L30`, and the holes it leaves
 - [`engine/ledger/specmap.py`](../engine/ledger/specmap.py) — `MODELS["SEEDANCE 2.5"]`, `MODEL_UNRECEIVED_SLOTS`, and `ROUTE_LIMITS_KEY`
