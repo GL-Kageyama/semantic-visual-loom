@@ -18,7 +18,7 @@ These are **not §16 MUST / MUST NOT.** §16 is the shot's own requirements, and
 
 **1. A panel is a scene, not a frame of one take.** The board's panels are each their own scene, and they are joined to the next by natural animation. `Master`, `Camera` and `Motion` must not forbid that join — **forbid it and the generator answers by running two places together as one room.**
 
-**2. `one continuous take` is the `WAN 3.0` house style.** Do not carry it into a specification on this route. It is the first line of `references/formats/video-spec.md`, which describes the other route.
+**2. `one continuous take` is the `WAN 3.0` house style.** Do not carry it into a specification on this route. **`references/formats/video-spec.md` does not name it** — that card is the normal format all three routes fill, and **the phrase belongs to `WAN 3.0`, which this route is not.**
 
 **3. Do not write an unconditional `no cut`.** The only cut that may be forbidden is the cut to an unrelated location — `no cuts to unrelated locations` is the shape that holds. A blanket rule closes **the only lawful way for a panel to change place.**
 

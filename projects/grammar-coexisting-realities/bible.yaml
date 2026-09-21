@@ -1,0 +1,135 @@
+# 作品台帳 — 学習机（grammar-coexisting-realities）
+#
+# ⚠️ **この作品は、形式カード `coexisting-realities` を1度だけ実際に使うために在る。**
+#    7枚の文法カードは、2026-09-22 まで1枚も使われたことが無かった
+#    （どれも `## Examples` が `- —` である）。**使われない文法は、
+#    動くかどうか分からない文法である。**
+#    ⚠️ **この作品が確かめるのは、文法が効いたかどうかではない。**
+#       **文法を書いて仕様に落とせたかどうか、その1点である。**
+#       **効果は、著者が生成器へ投入して初めて分かる。**
+#
+# ⚠️ **⚠️ 7枚のうち、経路が効くのはこの1枚だけである。**
+#    カード自身が言う——「`WAN 3.0` では正面衝突である。連続テイク1本は
+#    二つの場所を持てない。**`MINIMAX H3` では衝突ではない**——
+#    絵コンテの各コマがそれ自体で1つのシーンであり、**1つのショットが
+#    複数の場所を正当に持つ。**」
+#    **ゆえに §18 の見出しは `MINIMAX H3` を名乗らねばならない**
+#    （`_model_of` が最初の §18 を読み、その名が経路を選ぶ）。
+#    ⚠️ **`WAN 3.0` 向けに書かれたこの文法は矛盾である。`H3` 向けに書かれたそれは、
+#       その経路の本来の場合である。**
+#
+# ⚠️ **⚠️ `L2` が鳴らないことは、`L2` が通ったことではない。**
+#    この経路では、`L2` は台帳の `place` 1つだけを読み、§10 も §18 も開かない——
+#    **だから見るものが無い。****何も見なかった層は、通った層とまったく同じに見える。**
+#    **仕様がこの荷を負う。****検査は負わない。**
+#
+# ⚠️ **走らせ方。** リポジトリの直下から
+#    `SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles` を張って走らせる。
+
+project: grammar-coexisting-realities
+
+bible:
+  # ⚠️ **様式は `impossible-medium` である。**
+  #    この作品は**一つの枠の中で二つの実在が並ぶ**ことを要求する——
+  #    様式は、**一つの枠を二つの法則が分け合い、両者が一致しない**ものを選ぶ。
+  #    ⚠️ **カードは自ら言う**——`coexisting-realities` と混同しないこと。
+  #       「あちらでは二つの*媒体*が一致しない。こちらでは描画が一様で、
+  #        *実在*が共存する。**あれは様式であり、これは形式である。**」
+  #    `L31` が §6 の `REF_STYLE` と突き合わせる。
+  style: impossible-medium
+
+  # ⚠️ **発話は無い（§14）。それでも宣言する。**
+  #    **空欄は中立ではない**——生成器は、指定されなければ自分の既定で喋る
+  #    （実測: 発話のある動画に**中国語の字幕が焼かれた**）。
+  #    ⚠️ **この作品では、より強く効く。** `H3` の絵コンテは**紙であり、
+  #       文字を持つ**（`docs/h3-route.md` の制約14）——**言語を名指さなければ、
+  #       紙の上の文字がどの言語かは決まらない。**
+  language: Japanese
+
+  world:
+    concept: >-
+      同じ学習机。**左に、小学1年の自分の机。右に、40歳の自分の机。**
+      **どちらも、いまである**——**古いほうが先ではない。**
+      机の上に、**消しゴムが1つだけ在る。****それは二度描かれない。**
+
+    rules:
+      - "**実在は並んで立ち、どれも先ではない。** 枠の中に置かれ、**そのまま変わらない。****何も通り過ぎず、どれも先に到着しない。**"
+      - "**これは `time-fold` ではない。** あちらでは1つの場所が保たれ、時間がそこを通り過ぎる。**ここでは何も通り過ぎず、枠がいくつもの実在を同時に持つ。**"
+      - "**担い手が二つ以上の実在に立つ。** ゆえに共存は**主張ではなく、見える**——**同一の人物が、両方に座っている。**"
+      - "**共有されるものが1つ在る。** 光、音、素材、運動——**それが枠を1つの枠として読ませる。**"
+      - "**⚠️ 消しゴムは1つだけである。** ほかのすべては二度ある。**共有されているのは、それ1つである。**"
+      - "**⚠️ 実在のあいだで切らない。** カットも、ディゾルブも、ワイプも無い。**分ける線も無い。**"
+      - "**⚠️ 実在を順序づけない。** 一つが他方の過去になった瞬間、この文法は死ぬ。"
+      - "**⚠️ 年代を名乗るものは無い。** キャプションも、日付印も、タイトル札も無い。**どちらがどちらかを、文字は言わない。**"
+      - "**⚠️ §15 が免除を許されるのは、枠自身の場所と時刻だけである。** 同一性・描画の法・光の法・音は、**この1本のあいだ保たれる。**"
+
+    visual_language:
+      # ⚠️ **英語である。****これは生成器へ渡る文字列である。**
+      art_direction: >-
+        One frame ruled by two media that do not agree. Everything in it is a flat two-ink
+        drawing — a hard pen contour and flat fills, with no named lineage — and **the light
+        alone is photographic**: real falloff, real shadow, real glare laid over the drawn
+        image. The two are not reconciled, not blended and not feathered. **The seam is at the
+        edge of every shadow**, where the law changes, and it stays legible for the whole shot.
+        **The drawing owns the contour; the photograph owns the light.**
+
+      # ⚠️ **時代が無い、のではなく、二つの時代が同時である。**
+      #    **どちらも、いまである。**
+      era: >-
+        Two eras at once, and neither is earlier: **昭和 and now stand in the same frame.**
+        ⚠️ **Nothing in the frame declares a year** — no date, no caption, no grade marking
+        one of them as the past. The older desk is the same desk, and it is present.
+
+  constants:
+    # ⚠️ **この4つは §1 と突き合わされる**（`L26`）。写しはずれる——だから家を1つに決める。
+    video:
+      aspect: "16:9"
+      resolution: "1920x1080"
+      frame_rate: "24fps"
+      orientation: "Landscape"
+
+    # ⚠️ **以下はこの作品の定数である。** §1–20 に欄が無い（`自前`）。
+    実在: "**小学1年の自分の机と、40歳の自分の机。** 同じ机が二度、並んで立つ。"
+    担い手: "**自分。** 同一の人物が、二つの実在の両方に座っている。"
+    共有: "**消しゴム1つ。** ほかのすべては二度ある。**これだけが一度しか描かれない。**"
+    配置: "**並ぶが、分ける線は無い。** 左の机が少し奥に、右の机が少し手前に、重なって置かれる。"
+
+  # ⚠️ **この作品は基盤の禁制（字幕・BGM）の床を免れない。**
+  #    `base_negatives_waived` は書かない——**床のあとに書かれた作品である。**
+  # ⚠️ **`L21` は §18 `Negative Prompt` がこの全部を覆っているかを見る**（覆うであって、等しいではない）。
+  # ⚠️ **⚠️ 経路の制約が、この一覧の書き方を決めている**（`docs/h3-route.md` の制約3）。
+  #    カードの `no cut` を**逐語で写さない**——**無条件の `no cut` は、
+  #    コマが場所を変える唯一の合法的な道を閉じる。****書いてよいのは
+  #    `no cuts to unrelated locations` の形だけである。**
+  negative_base:
+    - no watermark
+    - no on-screen subtitles
+    - no background music
+    # ---- 様式（様式カード `impossible-medium` の `## Negative` から）
+    - no blended media
+    - no averaged style
+    - no transition zone
+    - no gradient between media
+    - no single consistent medium
+    - no named existing style
+    # ---- 文法（形式カード `coexisting-realities` の `## Negative` から）
+    #      ⚠️ `no cut` は逐語で写していない（上の註を見よ）
+    - no cut between realities
+    - no dissolve between realities
+    - no wipe between realities
+    - no sequence
+    - no caption naming realities
+    - no date stamp
+    - no split screen with a dividing line
+    - no color grade separating the realities
+    - no reality declared earlier than another
+    - no cuts to unrelated locations
+    # ---- この1本の禁止（§16 MUST NOT）
+    - no age makeup
+    - no ghosting of either figure
+    - no acknowledgement between the two
+    - no sepia
+    - no cross-fade
+    - no morph
+    - no readable text
+    - no camera move

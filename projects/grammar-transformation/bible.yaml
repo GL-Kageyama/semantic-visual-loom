@@ -1,0 +1,103 @@
+# 作品台帳 — 角砂糖（grammar-transformation）
+#
+# ⚠️ **この作品は、形式カード `transformation` を1度だけ実際に使うために在る。**
+#    7枚の文法カードは、2026-09-22 まで**1枚も使われたことが無かった**
+#    （どれも `## Examples` が `- —` である）。**使われない文法は、
+#    動くかどうか分からない文法である。**
+#    ⚠️ **この作品が確かめるのは、文法が効いたかどうかではない。**
+#       **文法を書いて仕様に落とせたかどうか、その1点である。**
+#       **効果は、著者が生成器へ投入して初めて分かる。**
+#
+# ⚠️ **この作品の変化は1つだけである。**「角砂糖が、花の形を結ぶ。」
+#    それ以外のことは何も起こらない——人物も、話数も、場所の移動も無い。
+#
+# ⚠️ **走らせ方。** リポジトリの直下から
+#    `SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles` を張って走らせる。
+#    ⚠️ **形式の側を張らなければ `L32` が、様式の側を張らなければ `L20` が鳴る**——
+#       どちらも**このリポジトリの中に在るカード**が読まれなくなるためである。
+#       **これは作品の欠陥ではなく、置き場の性質である**（`docs/cards.md`）。
+
+project: grammar-transformation
+
+bible:
+  # ⚠️ **様式は `macro-photo` である。** 角砂糖は小さい——**主題が枠を埋めるには、
+  #    様式そのものが寄らねばならない。** `L31` が §6 の `REF_STYLE` と突き合わせる。
+  style: macro-photo
+
+  # ⚠️ **発話は無い（§14）。それでも宣言する。**
+  #    **空欄は中立ではない**——生成器は、指定されなければ自分の既定で喋る
+  #    （実測: 発話のある動画に**中国語の字幕が焼かれた**）。
+  language: Japanese
+
+  world:
+    concept: >-
+      熱い紅茶と、その中の角砂糖1つ。**時計は無い**——あるのは、角が立った
+      白い立方体が、白いまま花の形を結ぶまでの数秒だけである。
+
+    rules:
+      - "**変わるものは1つだけである。** 角砂糖が花になる。他の何も変わらない。"
+      - "**変化は切られない。** カットも、ディゾルブも、ワイプも無い——**切ることは、この文法が存在する理由そのものを消す。**"
+      - "**途中の段階は置かれない。** 花になる前の形が、説明のために保持されることはない。"
+      - "**白は保たれる。** 花は砂糖であり、砂糖は白い。**変わるのは形であって、素材ではない。**"
+      - "**戻らない。** 花はこの1本の中で崩れない——崩れるのは、この1本の外である。"
+      - "**この作品に、人物は居ない。** 手も、匙も、顔も、カップの縁も無い。"
+      - "**この作品に、読み取れる文字は無い。**"
+
+    visual_language:
+      art_direction: >-
+        Extreme macro photography. A single white sugar cube at the scale where it fills the
+        frame — its granular faces, the tiny facets catching light, the tea's amber behind it
+        dissolving into smooth rounded defocus. Near-monochrome: the white of the sugar against
+        the tea's single amber, and **no third hue anywhere in the frame.**
+
+      # ⚠️ **時代が無い。** 空欄ではなく宣言である——**枠の中の何も、これを年代に結びつけない。**
+      era: >-
+        None. Nothing in the frame dates it.
+
+  constants:
+    # ⚠️ **この4つは §1 と突き合わされる**（`L26`）。写しはずれる——だから家を1つに決める。
+    video:
+      aspect: "16:9"
+      resolution: "1920x1080"
+      frame_rate: "24fps"
+      orientation: "Landscape"
+
+    # ⚠️ **以下はこの作品の定数である。** §1–20 に欄が無い（`自前`）——
+    #    生成へは渡らない。**渡らないことは、落ちることではない。**
+    変化: "**1つだけである。** 角砂糖が花になる。他には何も起こらない。"
+    白: "**保たれる。** 花は砂糖であり、砂糖は白い。"
+    切らない: "**カットも、ディゾルブも、ワイプも無い。**"
+
+  # ⚠️ **この作品は基盤の禁制（字幕・BGM）の床を免れない。**
+  #    `base_negatives_waived` は書かない——**床のあとに書かれた作品である。**
+  # ⚠️ **`L21` は §18 `Negative Prompt` がこの全部を覆っているかを見る**（覆うであって、等しいではない）。
+  #    ⚠️ **相手は §18 であって §16 ではない。**
+  negative_base:
+    - no watermark
+    - no on-screen subtitles
+    - no background music
+    # ---- 様式（様式カード `macro-photo` の `## Negative` から）
+    - no wide shot
+    - no flat even lighting
+    - no CGI
+    - no illustration
+    - no painted texture
+    # ---- 文法（形式カード `transformation` の `## Negative` から）
+    - no cut
+    - no dissolve
+    - no wipe
+    - no stated process
+    - no intermediate stage held
+    - no caption naming the change
+    - no voice-over naming the change
+    - no second simultaneous transformation
+    # ---- この1本の禁止（§16 MUST NOT）
+    - no second subject changing
+    - no spoon
+    - no hand
+    - no cup rim
+    - no readable text
+    - no steam
+    - no bubble
+    - no foam
+    - no camera move for its own sake

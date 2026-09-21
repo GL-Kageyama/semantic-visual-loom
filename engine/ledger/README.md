@@ -700,7 +700,7 @@ transition. ⚠️ **`no cuts to unrelated locations` was already in that §18**
 
 | phrase | why it is not this route's |
 |---|---|
-| `one continuous take` | **The other route's house style** — the first line of `references/formats/video-spec.md` |
+| `one continuous take` | **The other route's house style** — `references/formats/video-spec.md` no longer names it; that card is the normal format all three routes fill |
 | `never by a cut` | **An unconditional `no cut`** closes the only lawful way for a panel to change place |
 | `one and the same man` | **Folds the protagonist into "the only person"** — the second person is erased or merged into him |
 
@@ -708,12 +708,15 @@ transition. ⚠️ **`no cuts to unrelated locations` was already in that §18**
 `Observed Problems` quotes the removed strings as the cause of the failure** — so **a layer that
 scanned the whole file would fire on the corrected specification.** (`L4` fell into this shape.)
 
-⚠️ **It is scoped by route, and that is the whole of its design.** This repository holds **118 video
-specifications — 114 on `WAN 3.0`, 3 on `MINIMAX H3`, 1 on `SEEDANCE 2.5`.** ⚠️ **`one continuous take` sits in §18 of 15
-of those 114, and there it is correct** — and those 15 are exactly the specifications a shot record
-points at, which is **the whole of what this layer can reach** (10 in `hitosara`, 5 in
-`promo-chinatsu`). **Unscoped, this layer would fire on all 15** — and a note that fires on correct
-work **is a note nobody reads.**
+⚠️ **It is scoped by route, and that is the whole of its design.** This repository holds **126 video
+specifications** — every Markdown file in it carrying a §18 route heading: **121 on `WAN 3.0`, 4 on
+`MINIMAX H3`, 1 on `SEEDANCE 2.5`.** ⚠️ **`one continuous take` sits in §18 of 22 of those 121, and
+there it is correct.** ⚠️ **The layer reaches 27 of the 126** — a specification comes into its reach
+when a shot record points at it (`spec:`), which is how `check.py` loads one — and **the 22 it reaches
+on `WAN 3.0` are exactly the 22 that hold the phrase.** ⚠️ **That is a set comparison and not two
+counts placed side by side**: the symmetric difference is empty (10 in `hitosara`, 5 in
+`habits-promo-chinatsu`, 1 in `ippitsu`, 1 each in six `grammar-*` works). **Unscoped, this layer
+would fire on all 22** — and a note that fires on correct work **is a note nobody reads.**
 
 ⚠️ **Four candidate phrases were rejected, and every one of them fires on the corrected
 specifications:**
@@ -864,18 +867,18 @@ pulls the card by it). **The two were never compared.**
 
 | Spelling | Shape | Measured (video specifications) |
 |---|---|---|
-| **A** | ``- REF_STYLE: `x` `` | **19** |
+| **A** | ``- REF_STYLE: `x` `` | **27** |
 | **B** | ``- `REF_STYLE` — `x` `` | **30** |
 | **C** | a `## REF_STYLE` subsection, ``- Source: `x` `` | **69** |
 
-**The vocabulary is the card name** (`soft-cel-anime`) **in 19**, and **a path**
+**The vocabulary is the card name** (`soft-cel-anime`) **in 27**, and **a path**
 (`references/styles/soft-cel-anime.md`) **in 99**. **The home always speaks a card name.**
 
 ⚠️ **This layer needs no cards.** Both sides are inside this repository — so unlike `L20`, **it
 works in a fresh clone** (no "cannot be confirmed"). The fold is **the basename with `.md`
-stripped**, and **it resolves 118/118** to one of exactly two styles, **both of which are real
+stripped**, and **it resolves 126/126** to one of exactly two styles, **both of which are real
 cards**. ⚠️ **The spellings do not overlap by accident**: the 69 C-form specifications are
-**exactly the ones whose work has no `bible.yaml`** — **the checkable set (49) uses two spellings,
+**exactly the ones whose work has no `bible.yaml`** — **the checkable set (57) uses two spellings,
 which is the `ASPECT_LINE` situation** (two spellings, one reader).
 
 ⚠️ **It does not decide which spelling or which vocabulary is canonical.** It folds them and

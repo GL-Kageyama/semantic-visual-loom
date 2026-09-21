@@ -1,0 +1,109 @@
+# 作品台帳 — 台所（grammar-meaning-responsive）
+#
+# ⚠️ **この作品は、形式カード `meaning-responsive` を1度だけ実際に使うために在る。**
+#    7枚の文法カードは、2026-09-22 まで1枚も使われたことが無かった
+#    （どれも `## Examples` が `- —` である）。**使われない文法は、
+#    動くかどうか分からない文法である。**
+#    ⚠️ **この作品が確かめるのは、文法が効いたかどうかではない。**
+#       **文法を書いて仕様に落とせたかどうか、その1点である。**
+#       **効果は、著者が生成器へ投入して初めて分かる。**
+#
+# ⚠️ **この作品の答えは1つである。**「**「大丈夫」の一拍後、
+#    窓ガラスにひびが一本だけ走る。****誰も動かない。**」
+#    **因果は枠の中に無い**——**物が入ってくるのでもなく、光が変わるのでもなく、
+#    誰かが動くのでもない。****意味そのものに、絵が答えている。**
+#
+# ⚠️ **⚠️ この作品だけが、声を持つ。**
+#    他の6本は発話を持たないが、この1本の**担い手は言葉そのもの**である——
+#    ゆえに `bible.language` が、ここでは**実際に効く。**
+#    **発話のある動画が中国語字幕になって戻ってきた実測**（`CLAUDE.md`）からすれば、
+#    **言語を宣言することが最も効く1本が、これである。**
+#
+# ⚠️ **走らせ方。** リポジトリの直下から
+#    `SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles` を張って走らせる。
+
+project: grammar-meaning-responsive
+
+bible:
+  # ⚠️ **様式は `oil-painting` である。** この文法は「**答えは世界に在り、
+  #    カメラには無い**」を要求する——様式は**光が動く**ものを選ぶ
+  #    （`Motion character`：「**光が動く者である。** 盛り上げた絵の具の上を渡っていく」）。
+  #    **カメラは重く、急がない**——**急ぐカメラはキアロスクーロを費やす。**
+  #    `L31` が §6 の `REF_STYLE` と突き合わせる。
+  style: oil-painting
+
+  # ⚠️ **この作品は声を持つ。** 担い手は言葉そのものである——
+  #    **ゆえにこの1本では、この宣言が実際に効く。**
+  #    ⚠️ **空欄は中立ではない**——生成器は、指定されなければ自分の既定で喋る
+  #    （実測: 発話のある動画に**中国語の字幕が焼かれた**）。
+  language: Japanese
+
+  world:
+    concept: >-
+      昼下がりの台所。**「大丈夫」という言葉が、一度だけ置かれる。**
+      一拍おいて、**窓ガラスにひびが一本だけ走る。**
+      **誰も動かない**——**そして、ひびはそこで止まる。**
+
+    rules:
+      - "**枠の中の何も、この答えを起こさない。** 物は入ってこず、光源は変わらず、誰も動かない。**絵は、意味そのものに答えている。**"
+      - "**担い手は名指され、そして行為しない。** 担い手は「**大丈夫**」という言葉である——**絵が答えているのは担い手であって、担い手が絵を答えさせているのではない。**"
+      - "**答えは世界に在り、カメラには無い。** カメラは、意味についての*陳述*である——**ゆえにカメラは動かない。**"
+      - "**遅れは構成される。** 意味と答えのあいだの間が、このショットの時間である——**即答はカットとして読まれ、終端の答えは露見として読まれる。**"
+      - "**限界が明記される。** 答えが届いてはならないものを書く——**すべてに届く答えは、濾過やグレーディングとして読まれる。**"
+      - "**誰も動かない。****主題は停まっている**——動くのは光であって、人ではない。"
+      - "**音楽の合図で意味を運ばない。** 世界が運ぶ。"
+      - "**読み取れる文字は無い。** 字幕も、意味を名指す説明も無い。"
+
+    visual_language:
+      art_direction: >-
+        An oil painting: thick impasto brushstrokes, raised pigment, canvas weave, chiaroscuro,
+        fine craquelure, translucent glaze layers, dry hardened strokes. **Strong light and dark
+        carry the composition**, and the palette is deepened through glazes.
+
+      # ⚠️ **時代が無い。** 空欄ではなく宣言である——**様式カード自身が `Era: —` である。**
+      era: >-
+        None. The style card declares no era, and **nothing in the frame dates it.**
+
+  constants:
+    # ⚠️ **この4つは §1 と突き合わされる**（`L26`）。写しはずれる——だから家を1つに決める。
+    video:
+      aspect: "16:9"
+      resolution: "1920x1080"
+      frame_rate: "24fps"
+      orientation: "Landscape"
+
+    # ⚠️ **以下はこの作品の定数である。** §1–20 に欄が無い（`自前`）。
+    担い手: "**「大丈夫」という言葉である。** 一度だけ置かれ、そして行為しない。"
+    答え: "**ひびが一本、走ることである。** 世界の側で起きる。"
+    遅れ: "**一拍である。** 即答せず、終端でもない。"
+    限界: "**一本で止まる。** 割れず、落ちず、二本目は来ない。"
+    動かない: "**誰も動かない。** 主題は停まっている。"
+
+  # ⚠️ **この作品は基盤の禁制（字幕・BGM）の床を免れない。**
+  #    `base_negatives_waived` は書かない——**床のあとに書かれた作品である。**
+  #    ⚠️ **この1本は声を持つので、`no on-screen subtitles` が実際に効く。**
+  # ⚠️ **`L21` は §18 `Negative Prompt` がこの全部を覆っているかを見る**（覆うであって、等しいではない）。
+  #    ⚠️ **相手は §18 であって §16 ではない。**
+  negative_base:
+    - no watermark
+    - no on-screen subtitles
+    - no background music
+    # ---- 様式（様式カード `oil-painting` の `## Negative` から）
+    - not digital
+    - no flat color
+    - no airbrush smoothness
+    # ---- 文法（形式カード `meaning-responsive` の `## Negative` から）
+    - no visible cause
+    - no camera move answering the meaning
+    - no cut
+    - no rack focus carrying the meaning
+    - no on-screen actor causing the change
+    - no blanket colour grade
+    - no caption naming the meaning
+    - no voice-over naming the meaning
+    # ---- この1本の禁止（§16 MUST NOT）
+    - no second crack
+    - no shattering
+    - no falling glass
+    - no musical cue
+    - no readable text

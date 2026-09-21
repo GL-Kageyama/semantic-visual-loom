@@ -1,0 +1,107 @@
+# 作品台帳 — 瞳の内側（grammar-impossible-camera）
+#
+# ⚠️ **この作品は、形式カード `impossible-camera` を1度だけ実際に使うために在る。**
+#    7枚の文法カードは、2026-09-22 まで1枚も使われたことが無かった
+#    （どれも `## Examples` が `- —` である）。**使われない文法は、
+#    動くかどうか分からない文法である。**
+#    ⚠️ **この作品が確かめるのは、文法が効いたかどうかではない。**
+#       **文法を書いて仕様に落とせたかどうか、その1点である。**
+#       **効果は、著者が生成器へ投入して初めて分かる。**
+#
+# ⚠️ **この作品の旅程は1つである。**「**瞳の中へ入り、視神経をさかのぼって、
+#    3歳の夏の光に着く。**」
+#    **これはカメラの移動ではない**——**「カメラがどこかに在る」という前提が捨てられ、
+#    構成されるのは視点の*存在*である。**
+#
+# ⚠️ **⚠️ この組は、2枚のカードが噛み合う唯一の場所である。**
+#    `watercolor` の `Motion character` は「**カメラは窓ではなく紙である**」と言い、
+#    **動くのは水であって筆ではない**と言う。`impossible-camera` は
+#    「**これはカメラの移動ではない**」と言う。**この2つは、同じことを言っている。**
+#    **ゆえにこの作品では、進むのは視点であり、画は動かない**——
+#    **洗いの前端が、視点の位置である。**
+#
+# ⚠️ **走らせ方。** リポジトリの直下から
+#    `SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles` を張って走らせる。
+
+project: grammar-impossible-camera
+
+bible:
+  # ⚠️ **様式は `watercolor` である。** この文法は「**在りえない視点**」を要求する——
+  #    様式は、**輪郭が手で保たれない**ものを選ぶ。**視点が進むにつれて世界が滲むのは、
+  #    この文法では欠陥ではなく物理である。**
+  #    `L31` が §6 の `REF_STYLE` と突き合わせる。
+  style: watercolor
+
+  # ⚠️ **発話は無い（§14）。それでも宣言する。**
+  #    **空欄は中立ではない**——生成器は、指定されなければ自分の既定で喋る
+  #    （実測: 発話のある動画に**中国語の字幕が焼かれた**）。
+  language: Japanese
+
+  world:
+    concept: >-
+      瞳の中へ入り、視神経をさかのぼり、3歳の夏の光に着く。
+      **これはカメラが動く話ではない**——**視点そのものが、そこに在る。**
+      画は紙であり、動かない。**進むのは洗いであり、その前端が視点である。**
+
+    rules:
+      - "**入り口を明示する。** どうやって中へ入ったかを、この1本は言う——**言わなければ、前のショットの継続の誤りとして読まれる。**"
+      - "**経路は自前の法を持つ。** 中に入れば、そこはその視点の世界である——**尺度も物理も、その世界のものである。**"
+      - "**経路の物理は途中で変わらない。** 都合で法則を替えない。"
+      - "**到着する。** 視点は、この1本の意味のある場所で終わる。**中に置き去りにすることは、旅程を費やして何も残さないことである。**"
+      - "**これはカメラの移動ではない。** 「カメラがどこかに在る」という前提が捨てられている——**ゆえに通常のカメラ位置は無い。**"
+      - "**魚眼は、在りえない視点の代用にならない。**"
+      - "**この作品に、顔は写らない。** 瞳は入り口であって、主題ではない。"
+      - "**この作品に、読み取れる文字は無い。**"
+
+    visual_language:
+      art_direction: >-
+        A watercolor painting: soft wet-on-wet washes, translucent layered pigment, **reserved
+        white paper**, dry-brush edges and delicate colour bleed, paper grain, gentle diffused
+        light. **Contours are pale colour edges, never hard ink lines.** The subject floats on
+        negative space, and the white is reserved boldly.
+
+      # ⚠️ **時代が無い。** 空欄ではなく宣言である——**様式カード自身が `Era: —` である。**
+      era: >-
+        None. The style card declares no era, and **nothing in the frame dates it.**
+
+  constants:
+    # ⚠️ **この4つは §1 と突き合わされる**（`L26`）。写しはずれる——だから家を1つに決める。
+    video:
+      aspect: "16:9"
+      resolution: "1920x1080"
+      frame_rate: "24fps"
+      orientation: "Landscape"
+
+    # ⚠️ **以下はこの作品の定数である。** §1–20 に欄が無い（`自前`）。
+    入り口: "**瞳である。** 入り方は、この1本が自分で言う。"
+    経路: "**視神経である。** さかのぼる——尺度も物理も、その世界のものである。"
+    到着: "**3歳の夏の光である。** 視点はそこで終わる。"
+    視点: "**洗いの前端である。** 画は動かない——**進むのは水である。**"
+
+  # ⚠️ **この作品は基盤の禁制（字幕・BGM）の床を免れない。**
+  #    `base_negatives_waived` は書かない——**床のあとに書かれた作品である。**
+  # ⚠️ **`L21` は §18 `Negative Prompt` がこの全部を覆っているかを見る**（覆うであって、等しいではない）。
+  #    ⚠️ **相手は §18 であって §16 ではない。**
+  negative_base:
+    - no watermark
+    - no on-screen subtitles
+    - no background music
+    # ---- 様式（様式カード `watercolor` の `## Negative` から）
+    - not photorealistic
+    - no oil
+    - no digital
+    - no hard outline
+    # ---- 文法（形式カード `impossible-camera` の `## Negative` から）
+    - no conventional camera position
+    - no unstated entry
+    - no cut
+    - no fisheye distortion standing in for an impossible viewpoint
+    - no path that changes its own physics
+    - no shot without an arrival
+    # ---- この1本の禁止（§16 MUST NOT）
+    - no face in the path
+    - no second eye
+    - no blood
+    - no medical illustration
+    - no readable text
+    - no lens flare

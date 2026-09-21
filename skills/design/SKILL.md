@@ -107,10 +107,12 @@ because `L3` and `L4` read the beat body, not only the field.**
    changes place, **the specification must say how it changes, because the source does not**: it
    never uses the word カット, so **cut-versus-continuous is the shot's own decision, and leaving
    it unwritten is how two places come back as a single room.**
-   ⚠️ **`one continuous take`** ([`references/formats/video-spec.md`](../../references/formats/video-spec.md)) **is
-   the `WAN 3.0` house style and does not carry to this route.** The routes do not share a
-   grammar of time, and **the string handed over must say what this route does, not what the other
-   one does** — the failure that produced this warning is recorded in `HISTORY.md`.
+   ⚠️ **`one continuous take` is the `WAN 3.0` house style and does not carry to this route.** The
+   routes do not share a grammar of time — **all three fill the normal format**
+   ([`references/formats/video-spec.md`](../../references/formats/video-spec.md)), and **the route's
+   own document** ([`docs/h3-route.md`](../../docs/h3-route.md)) **holds the constraints.** **The
+   string handed over must say what this route does, not what the other one does** — the failure
+   that produced this warning is recorded in `HISTORY.md`.
    ⚠️ **The full list of the constraints that hold on this route — the strings handed over and the
    paper alike — is [`docs/h3-route.md`](../../docs/h3-route.md).**
    ⚠️ **On the third route the gate is the slot, not the phrase.** **`SEEDANCE 2.5` does not

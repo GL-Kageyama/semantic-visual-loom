@@ -1,0 +1,110 @@
+# 作品台帳 — 一枚岩（grammar-time-fold）
+#
+# ⚠️ **この作品は、形式カード `time-fold` を1度だけ実際に使うために在る。**
+#    7枚の文法カードは、2026-09-22 まで1枚も使われたことが無かった
+#    （どれも `## Examples` が `- —` である）。**使われない文法は、
+#    動くかどうか分からない文法である。**
+#    ⚠️ **この作品が確かめるのは、文法が効いたかどうかではない。**
+#       **文法を書いて仕様に落とせたかどうか、その1点である。**
+#       **効果は、著者が生成器へ投入して初めて分かる。**
+#
+# ⚠️ **この作品の折り目は1つである。**「100年が、1つの枠を通り過ぎる。」
+#    切られない——**枠は動かない。時のほうが、この場所を通り抜ける。**
+#
+# ⚠️ **走らせ方。** リポジトリの直下から
+#    `SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles` を張って走らせる。
+#    ⚠️ **形式の側を張らなければ `L32` が、様式の側を張らなければ `L20` が鳴る**——
+#       どちらも**このリポジトリの中に在るカード**が読まれないためである。
+#       **これは作品の欠陥ではなく、置き場の性質である**（`docs/cards.md`）。
+
+project: grammar-time-fold
+
+bible:
+  # ⚠️ **様式は `landscape-photo` である。** 岩と海と空を、深い焦点で1つの面に置く——
+  #    **`time-fold` が「1つの枠」を要求するので、様式も1つの枠を要求するものを選ぶ。**
+  #    `L31` が §6 の `REF_STYLE` と突き合わせる。
+  style: landscape-photo
+
+  # ⚠️ **発話は無い（§14）。それでも宣言する。**
+  #    **空欄は中立ではない**——生成器は、指定されなければ自分の既定で喋る
+  #    （実測: 発話のある動画に**中国語の字幕が焼かれた**）。
+  language: Japanese
+
+  world:
+    concept: >-
+      海に突き出た一枚岩と、その前を通り過ぎていく100年。**カメラは動かない**——
+      動くのは時であり、時はこの枠を**通り抜ける**。岩はその間ずっと同じ場所に在り、
+      **最後に鳥が一羽、その上へ降りる。**
+
+    rules:
+      - "**切らない。** カメラは場所を離れない——**離れて戻ることは、2つ目のショットである。**"
+      - "**1つだけ残るものがある。** 岩そのものである。**ゆえに経過が、経過として読める。**"
+      - "**時は並べられない。積まれる。** 何年もが1つの枠の中を、順に通り過ぎる。"
+      - "**秒は均等に割らない。** この100年のどこに留まるかを、ショットが選ぶ。"
+      - "**日付を書かない。** 年号も、字幕も、タイトル札も無い。"
+      - "**老いの化粧をしない。** 「何年後」という告知も無い。"
+      - "**この作品に、人物は居ない。** 岩と、海と、空と、鳥1羽だけである。"
+      - "**この作品に、読み取れる文字は無い。**"
+
+    visual_language:
+      art_direction: >-
+        Large-format landscape photography. f/64 deep focus — the rock, the sea at its foot,
+        and the horizon all sharp at once. Full tonal range from deep shadow to bright highlight;
+        fine detail at every scale. The land and the sky are the subject. **No human figure, and
+        no intrusion of any kind.** Natural film color with a subtle cool cast.
+
+      # ⚠️ **時代が無い。** 空欄ではなく宣言である——**枠の中の何も、これを年代に結びつけない。**
+      #    ⚠️ **これは `time-fold` にとって特に効く。** **年代を名乗る物が1つでも入れは、
+      #       100年という幅が、その年代に固定される。**
+      era: >-
+        None. Nothing in the frame dates it — **which is what lets one frame hold a hundred years.**
+
+  constants:
+    # ⚠️ **この4つは §1 と突き合わされる**（`L26`）。写しはずれる——だから家を1つに決める。
+    video:
+      aspect: "16:9"
+      resolution: "1920x1080"
+      frame_rate: "24fps"
+      orientation: "Landscape"
+
+    # ⚠️ **以下はこの作品の定数である。** §1–20 に欄が無い（`自前`）——
+    #    生成へは渡らない。**渡らないことは、落ちることではない。**
+    折り目: "**100年が、1つの枠を通り抜ける。** カメラは動かない。"
+    生存: "**岩そのものである。** 周りのすべてが変わるあいだ、これだけが変わらない。"
+    切らない: "**カメラは場所を離れない。** ディゾルブも、時を飛ばすことも無い。"
+
+  # ⚠️ **この作品は基盤の禁制（字幕・BGM）の床を免れない。**
+  #    `base_negatives_waived` は書かない——**床のあとに書かれた作品である。**
+  # ⚠️ **`L21` は §18 `Negative Prompt` がこの全部を覆っているかを見る**（覆うであって、等しいではない）。
+  #    ⚠️ **相手は §18 であって §16 ではない。**
+  negative_base:
+    - no watermark
+    - no on-screen subtitles
+    - no background music
+    # ---- 様式（様式カード `landscape-photo` の `## Negative` から）
+    - no shallow depth of field
+    - no HDR oversaturation
+    - no people
+    - no CGI
+    - no illustration
+    # ---- 文法（形式カード `time-fold` の `## Negative` から）
+    - no cut
+    - no time-skip
+    - no date stamp
+    - no caption
+    - no title card carrying elapsed time
+    - no aging makeup
+    - no prosthetic
+    - no cross-dissolve
+    - no return to the place after leaving it
+    # ---- この1本の禁止（§16 MUST NOT）
+    - no camera move
+    - no zoom
+    - no pan
+    - no bird flock
+    - no second bird
+    - no storm
+    - no boat
+    - no building
+    - no readable text
+    - no lens flare

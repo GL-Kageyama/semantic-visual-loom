@@ -1,0 +1,111 @@
+# 作品台帳 — 神社（grammar-recognizing-world）
+#
+# ⚠️ **この作品は、形式カード `recognizing-world` を1度だけ実際に使うために在る。**
+#    7枚の文法カードは、2026-09-22 まで1枚も使われたことが無かった
+#    （どれも `## Examples` が `- —` である）。**使われない文法は、
+#    動くかどうか分からない文法である。**
+#    ⚠️ **この作品が確かめるのは、文法が効いたかどうかではない。**
+#       **文法を書いて仕様に落とせたかどうか、その1点である。**
+#       **効果は、著者が生成器へ投入して初めて分かる。**
+#
+# ⚠️ **この作品の認知は1つである。**「**真夜中の神社。踏む前に雪が解け、
+#    足跡が先にできる。****灯籠だけは点かない。**」
+#    **兆しは環境に在り、社交には無い**——**誰も振り向かず、誰も迎えない。**
+#    **応えるのは場所そのものである。**
+#
+# ⚠️ **⚠️ この場所には床がある。** 他のすべてが応えても、
+#    **灯籠だけは点かない**——**床の無い場所は、効果として読まれる。**
+#
+# ⚠️ **⚠️ この作品には、誰も写らない。** 足跡は、歩く者の姿なしに先にできる。
+#    ゆえに**この認知は、そこに居ない誰かに向けられている**——
+#    カードが「**しばしばこれがショットの眼目である**」と言う、その場合である。
+#
+# ⚠️ **走らせ方。** リポジトリの直下から
+#    `SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles` を張って走らせる。
+
+project: grammar-recognizing-world
+
+bible:
+  # ⚠️ **様式は `mokuhanga` である。** この文法は「**兆しが積み上がる**」を要求する——
+  #    様式は、**刷り重ねによって像が何度も着地する**ものを選ぶ
+  #    （`Motion character`：「**版が動く者であり、それは印象によって働く。**
+  #    枠は流れず、**刷り直される**」）。
+  #    **見当のずれが、そのまま運動である**——**主題の側がずれるのではない。**
+  #    `L31` が §6 の `REF_STYLE` と突き合わせる。
+  style: mokuhanga
+
+  # ⚠️ **発話は無い（§14）。それでも宣言する。**
+  #    **空欄は中立ではない**——生成器は、指定されなければ自分の既定で喋る
+  #    （実測: 発話のある動画に**中国語の字幕が焼かれた**）。
+  language: Japanese
+
+  world:
+    concept: >-
+      真夜中の神社。**誰も踏んでいない雪が、踏まれた形になり、
+      足跡が手前から奥へ先にできていく。** 足跡の先で雪が解け、道が開く。
+      **灯籠だけは、点かない。**
+
+    rules:
+      - "**兆しは環境に在り、社交には無い。** 誰かが振り向くことは、**場所が認知することではない。**"
+      - "**認知は積み上がる。****一度に切り替わらない**——兆しが重なり、**その重なりが時間である。**"
+      - "**この場所には床がある。**`REFUSAL`——**灯籠だけは点かない。** 他のすべてが応えても、ここで止まる。"
+      - "**床の無い場所は、効果として読まれる。** 何でもする場所は、場所ではなく演出である。"
+      - "**誰も写らない。** 足跡は、歩く者の姿なしに先にできる——**ゆえにこの認知は、そこに居ない誰かへ向けられている。**"
+      - "**切り替えのカットを持たない。** 「認知していない」から「認知した」への1カットは、別の文法である。"
+      - "**場所の音は、この場所のものである。** 誰かの足音ではない。"
+      - "**読み取れる文字は無い。** 場所が知っていることを告げる説明も、字幕も無い。"
+
+    visual_language:
+      art_direction: >-
+        A Japanese ukiyo-e woodblock print. Flat mineral-pigment colour planes in indigo, crimson
+        and ochre over broad black; hand-carved ink outlines with visible chisel marks; wood-grain
+        texture and print misregistration; bold Japanese composition with diagonal depth and
+        negative space. **Flat light without shadows.**
+
+      # ⚠️ **時代が無い、のではなく、様式の時代である。**
+      #    `Edo` ——それは様式が持ってくる。**枠の中の何も、これを特定の年に固定しない。**
+      era: >-
+        The style's own era (Edo, ukiyo-e), carried by the carving and the printing.
+        **Nothing in the frame fixes a particular year.**
+
+  constants:
+    # ⚠️ **この4つは §1 と突き合わされる**（`L26`）。写しはずれる——だから家を1つに決める。
+    video:
+      aspect: "16:9"
+      resolution: "1920x1080"
+      frame_rate: "24fps"
+      orientation: "Landscape"
+
+    # ⚠️ **以下はこの作品の定数である。** §1–20 に欄が無い（`自前`）。
+    兆し: "**雪の側に在る。** 踏まれる前に、踏まれた形になる。"
+    深さ: "**道が開くところまでである。** 足跡の先で雪が解ける。"
+    床: "**灯籠だけは点かない。** ここで認知が止まる。"
+    誰も写らない: "**この1本に人物は居ない。** 認知は、そこに居ない誰かへ向けられている。"
+
+  # ⚠️ **この作品は基盤の禁制（字幕・BGM）の床を免れない。**
+  #    `base_negatives_waived` は書かない——**床のあとに書かれた作品である。**
+  # ⚠️ **`L21` は §18 `Negative Prompt` がこの全部を覆っているかを見る**（覆うであって、等しいではない）。
+  negative_base:
+    - no watermark
+    - no on-screen subtitles
+    - no background music
+    # ---- 様式（様式カード `mokuhanga` の `## Negative` から）
+    - not photorealistic
+    - no digital gradient
+    - no 3D render
+    - no soft shading
+    # ---- 文法（形式カード `recognizing-world` の `## Negative` から）
+    - no character reacting in place of the setting
+    - no cut between unrecognised and recognised states
+    - no on-screen caption
+    - no voice-over announcing recognition
+    - no blanket mood change
+    - no setting without a floor
+    # ---- この1本の禁止（§16 MUST NOT）
+    - no person
+    - no figure
+    - no priest
+    - no animal
+    - no lantern lighting
+    - no wind
+    - no readable text

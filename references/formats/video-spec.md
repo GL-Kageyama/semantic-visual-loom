@@ -4,12 +4,12 @@
 
 # Video specification（video-spec）
 
-- **Purpose**: Narration (re-experience / attraction) ／ **Granularity×time**: whole arc × one continuous take ／ **Size & aspect**: cinematic 16:9, single clip of `DURATION`
-- **Summary**: The only format whose output **has time**. Folds an arc into one continuous generated take by spending duration unevenly, and carries the four axes a still image has no vocabulary for — time, motion, camera movement, sound.
+- **Purpose**: Narration (re-experience / attraction) ／ **Granularity×time**: whole arc × unfolding ／ **Size & aspect**: cinematic 16:9, one clip of `DURATION`
+- **Summary**: The only format whose output **has time**. Spends a clip's duration unevenly across the arc, and carries the four axes a still image has no vocabulary for — time, motion, camera movement, sound.
 
 ## The one thing that makes this format different
 
-Every other format in this engine folds time **away** — it lands on a still surface. This one folds time **in**. The compression target is not "the one point that speaks" but **the one continuous stretch that speaks**, and the selection question changes accordingly:
+Every other format in this engine folds time **away** — it lands on a still surface. This one folds time **in**. The compression target is not "the one point that speaks" but **the one stretch that speaks**, and the selection question changes accordingly:
 
 > Not *which instant*, but **which instants earn seconds, and which get one**.
 
@@ -33,7 +33,7 @@ A digest that gives every beat equal time is the video equivalent of cramming. *
 
 **Identity lock.** When an arc spans more than one generation, the continuity block (subject appearance, environment, lighting, palette) is **pasted whole into every instance** — not summarized, not referenced. Independent generations share no memory. Even for a single clip, write it: it is what the negative prompt defends.
 
-**End on the note, not after it.** The last second is where the viewer decides whether there is a next. Land the clip on the hook and cut — do not add a resolving beat after it.
+**End on the note, not after it.** The last second is where the viewer decides whether there is a next. Land the clip on the hook — do not add a resolving beat after it.
 
 ## do
 - Give beats **explicitly unequal** second ranges; state which is sparse and which is dense
@@ -104,19 +104,27 @@ floor** (`L30`). ⚠️ **The whole of that route's constraints is
 ⚠️ **One shot carries one `spec`**, so **a shot cannot hold more than one route** — shooting the
 same shot on two of them and comparing them is not possible yet.
 
-⚠️ **The routes do not share a grammar of time, and the line at the top of this document
-describes only one of them.** `Granularity×time: whole arc × one continuous take` is the
-**`WAN 3.0` house style**; on `MINIMAX H3` it does not hold. **There, each panel is its own scene,
-joined to the next by natural animation** — ⚠️ **so §18 must not forbid that join.** **`no cut` as
-a blanket rule closes the only lawful way for a panel to change place**, and the generator answers
-by running two places together as one room. **Forbid the cut to an unrelated location; do not
-forbid the transition** — and when a panel changes place, **the specification must say which it is**:
-the source never uses the word カット, so cut-versus-continuous is the shot's own decision.
-⚠️ **A reader who copies the top line into an `H3` specification has copied the other route's
-rule**; the failure that produced this warning is recorded in `HISTORY.md`.
-**This paragraph is read by `L28`** (the phrases and their reasons are in `specmap.MODEL_ROUTE`).
-⚠️ **The full list of the constraints that hold on this route — the strings handed over and the
-paper alike — is [`docs/h3-route.md`](../docs/h3-route.md).**
+⚠️ **This card is the normal format, and all three routes fill it.** It fixes no grammar of
+time of its own: what a clip's time is made of is decided by the route, and **each route
+carries its own account of it** — `WAN 3.0` reads one continuous take; `MINIMAX H3` builds
+the shot from independent frames joined by natural animation; `SEEDANCE 2.5` reads one long
+prompt, **which may carry its own clock** (`0-3s:` `3-6s:`) and whose `Negative Prompt` slot
+**is not received as a floor** (`L30`). ⚠️ **The whole of that route's constraints is
+[`docs/seedance-route.md`](../docs/seedance-route.md).**
+⚠️ **The route therefore decides what §18 must not say.** On `MINIMAX H3`, each panel is its
+own scene, joined to the next by natural animation — ⚠️ **so §18 must not forbid that join.**
+**`no cut` as a blanket rule closes the only lawful way for a panel to change place**, and
+the generator answers by running two places together as one room. **Forbid the cut to an
+unrelated location; do not forbid the transition** — and when a panel changes place, **the
+specification must say which it is**: the source never uses the word カット, so
+cut-versus-continuous is the shot's own decision. ⚠️ **The full list of the constraints that
+hold on this route — the strings handed over and the paper alike — is
+[`docs/h3-route.md`](../docs/h3-route.md).**
+⚠️ **One shot carries one `spec`**, so **a shot cannot hold more than one route** — shooting
+the same shot on two of them and comparing them is not possible yet.
+⚠️ **What `L28` reads is §18 of the specification, matched against `specmap.MODEL_ROUTE`** —
+it does not open this card. ⚠️ **Carrying one route's grammar into another route's
+specification is the trap** — the failure that produced this warning is recorded in `HISTORY.md`.
 
 ## §18 prompt slots
 
@@ -126,9 +134,9 @@ Seven prompts. The first six are drawn **mainly** from the sections named above.
 
 ```text
 Master Prompt   ← §1 + §7 + §8
-  A {DURATION} continuous cinematic take ({ASPECT}) of {SUBJECT}, one clip.
+  A {DURATION} cinematic take ({ASPECT}) of {SUBJECT}, one clip.
   Beats, deliberately uneven: {BEATS}. The core beat — {CORE} — holds the largest
-  share of the duration; the remaining beats pass quickly. Ends on {HOOK} and cuts.
+  share of the duration; the remaining beats pass quickly. Ends on {HOOK}.
 
 Visual Prompt   ← §2 Visual Language + §3 Appearance + §4 + §5 + §13
   (the look, held still: art direction, palette, rendering, subject appearance,
@@ -175,4 +183,4 @@ where the subject holds still, **how that style treats a still subject** is deci
 - 午前二時に、あなたは誰の時間を生きていますか (At Two in the Morning, Whose Time Are You Living?) ep.1 → a 30-second digest (gozen-niji-video-01, soft-cel-anime)
 
 ## Sources
-Wan 3.0 — Video Generation Specification (the target intermediate representation); `storyboard` (the nearest still-image ancestor — panels and shot types, but no movement, physics or sound)
+Written as a video generation specification with **Wan 3.0** as the intermediate representation, and since opened to the other two routes ([`docs/h3-route.md`](../docs/h3-route.md), [`docs/seedance-route.md`](../docs/seedance-route.md)) — the route the card came from is in `HISTORY.md`; `storyboard` (the nearest still-image ancestor — panels and shot types, but no movement, physics or sound)

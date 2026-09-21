@@ -1,0 +1,112 @@
+# 作品台帳 — 実家（grammar-remembered-world）
+#
+# ⚠️ **この作品は、形式カード `remembered-world` を1度だけ実際に使うために在る。**
+#    7枚の文法カードは、2026-09-22 まで1枚も使われたことが無かった
+#    （どれも `## Examples` が `- —` である）。**使われない文法は、
+#    動くかどうか分からない文法である。**
+#    ⚠️ **この作品が確かめるのは、文法が効いたかどうかではない。**
+#       **文法を書いて仕様に落とせたかどうか、その1点である。**
+#       **効果は、著者が生成器へ投入して初めて分かる。**
+#
+# ⚠️ **この作品の滑りは1つである。**「**すべてが少しずつ違うのに、
+#    冷蔵庫の子供の絵だけ寸分違わない。**」
+#    **時は過ぎない**——過ぎるのは世界のほうである。ゆえに `time-fold` ではない。
+#
+# ⚠️ **この文法は §15 CONTINUITY と衝突する。**
+#    継続の床は「隣り合う世界」を要求し、この文法は「**記憶の仕方で**隣り合う世界」を要求する。
+#    ゆえに**仕様は、どの要素が免除されるかを書かねばならない**——
+#    そして**すべてを免除してはならない。****何も正確でない枠は、記憶ではなく雑音である。**
+#
+# ⚠️ **走らせ方。** リポジトリの直下から
+#    `SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles` を張って走らせる。
+
+project: grammar-remembered-world
+
+bible:
+  # ⚠️ **様式は `instant-photo` である。** この文法は「**記憶であって記録ではない**」を要求する——
+  #    様式もまた「保たれた私的な記憶」を名乗るものを選ぶ。
+  #    **しかもこの様式は、動くものを画面の外に置く**（`Motion character`：
+  #    「動くのは乳剤であって、主題ではない」）——**主題の側が滑るこの文法と、層が食い違わない。**
+  #    `L31` が §6 の `REF_STYLE` と突き合わせる。
+  style: instant-photo
+
+  # ⚠️ **発話は無い（§14）。それでも宣言する。**
+  #    **空欄は中立ではない**——生成器は、指定されなければ自分の既定で喋る
+  #    （実測: 発話のある動画に**中国語の字幕が焼かれた**）。
+  language: Japanese
+
+  world:
+    concept: >-
+      夢で見た実家。**時は過ぎない**——この一瞬が保たれたまま、
+      **中の世界のほうが滑る。** 畳も、窓も、壁の傷も、少しずつ違う。
+      ただ**冷蔵庫に貼った子供の絵だけが、寸分違わない。**
+
+    rules:
+      - "**これは記録ではなく、記憶である。** 枠はその者の記憶であり、世界ではない。"
+      - "**時は過ぎない。** 過ぎるのは世界のほうである——**ゆえに `time-fold` ではない。**"
+      - "**滑るものは1つ、名指される。** 窓の外の庭の形である。**滑り、そして戻る。**"
+      - "**正確に保たれるものが1つある。** 冷蔵庫に貼った子供の絵である。**これが物差しである。**"
+      - "**滑りは意味を壊さない。** 庭は庭のままであり、部屋は部屋のままである。"
+      - "**滑りきって終わらない。** 戻らない滑りは、別の文法である。"
+      - "**§15 の免除を明記する。** 免除されるのは庭の形だけである——**部屋と絵は免除されない。**"
+      - "**この作品に、人物は居ない。** 見ている者の眼は枠の外に在る。"
+      - "**この作品に、読み取れる文字は無い。**"
+
+    visual_language:
+      art_direction: >-
+        An instant photograph: white instant-film border framing the image, on-camera flash direct
+        and slightly hard, faded vintage colour, slight softness and mild blur, subtle chemical
+        mottling in the emulsion. **A private moment, kept.** The frame is a casual snapshot, the
+        subject centred under the flash.
+
+      # ⚠️ **時代が無い、のではなく、時代が*記憶のもの*である。**
+      #    **1970年代〜90年代の色**——それは様式が持ってくる。
+      #    ⚠️ **枠の中の何も、これを特定の年に固定しない。**
+      era: >-
+        The style's own era (1970s–90s instant film), carried by the emulsion and the flash.
+        **Nothing in the frame fixes a particular year** — the room is any room that was lived in.
+
+  constants:
+    # ⚠️ **この4つは §1 と突き合わされる**（`L26`）。写しはずれる——だから家を1つに決める。
+    video:
+      aspect: "16:9"
+      resolution: "1920x1080"
+      frame_rate: "24fps"
+      orientation: "Landscape"
+
+    # ⚠️ **以下はこの作品の定数である。** §1–20 に欄が無い（`自前`）。
+    滑り: "**窓の外の庭の形である。** 滑り、そして戻る。"
+    正確: "**冷蔵庫に貼った子供の絵である。** これだけが寸分違わない。"
+    時: "**過ぎない。** 過ぎるのは世界のほうである。"
+    免除: "**庭の形だけである。** 部屋と絵は免除されない。"
+
+  # ⚠️ **この作品は基盤の禁制（字幕・BGM）の床を免れない。**
+  #    `base_negatives_waived` は書かない——**床のあとに書かれた作品である。**
+  # ⚠️ **`L21` は §18 `Negative Prompt` がこの全部を覆っているかを見る**（覆うであって、等しいではない）。
+  #    ⚠️ **相手は §18 であって §16 ではない。**
+  negative_base:
+    - no watermark
+    - no on-screen subtitles
+    - no background music
+    # ---- 様式（様式カード `instant-photo` の `## Negative` から）
+    - no studio lighting
+    - no professional color grading
+    - no crisp digital sharpness
+    - no CGI
+    - no illustration
+    # ---- 文法（形式カード `remembered-world` の `## Negative` から）
+    - no drift that destroys identity
+    - no illegible text
+    - no garbled characters
+    - no mojibake
+    - no melting or warping faces
+    - no slipped element that never returns
+    - no caption explaining that this is a memory
+    # ---- この1本の禁止（§16 MUST NOT）
+    - no people
+    - no figure
+    - no second room
+    - no door opening
+    - no camera travel
+    - no colour that stabilises
+    - no readable text
