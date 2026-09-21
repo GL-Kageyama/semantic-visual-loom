@@ -5,6 +5,92 @@
 
 ---
 
+## 0.37.2 — 2026-09-22 作り直しを**投入プロンプトまで**到達させた——`⚠️` がスロットの中に在った
+
+**著者の指示は「`grammar-〜` 系のサンプルを、投入プロンプトに到達するまで直して」であった。**
+⚠️ **`0.37.1` は §10 と §18 を書き直したが、直した先が投入プロンプトではなかった。**
+**投入されるのは §18 だけである**（`README`——「生成器へ投入するのは §18 だけである」）。
+**著者の裁定は2つ**——**到達点は §18 の7スロット全体＋`Negative` の経路**、
+**範囲は `grammar-*` の7本だけ**（`ippitsu`・`habits`・`hitosara` は触らない）。
+
+### ⚠️ 私が 0.37.1 で、スロットの中に `⚠️` を書いた
+
+**`0.37.1` の私の文は、`Camera Prompt` の中に `⚠️` を置いた**（6本、実測 0 → 1〜2）。
+**`⚠️` はこの側の印であって、生成器へ渡す文字列の一部ではない。**
+**「理由をスロットまで運ぶ」と言いながら、運んだ先に読者用の記号を混ぜていた。**
+⚠️ **画像の経路では、同じ過ちを先に一度やっている**——`HISTORY` の
+「**投入する文字列に `**` は入らない。**」（`Prompt` から markdown を落とした回）。
+
+**§18 の全スロットから `⚠️` を落とした——7本で25個。** うち**私が入れたのは7個**（すべて `Camera Prompt`）で、
+**残り18個は元から在った**（`Style Motion` が17、`coexisting-realities` の `Visual Prompt` が1）。
+⚠️ **`Style Motion` の `⚠️` は様式カード自身の印である**（カードの `## Motion character` が `⚠️` を使う）
+——**カードは読むだけで、書き換えない。落としたのはカードではなく、引用の綴りである。**
+**`§18` に `⚠️` は1つも無くなった。**
+
+### ⚠️ `Negative` の経路が、3本で塞がっていた
+
+**形式カードが自分で言っている**——「**The camera-stability prohibition is the known case: it is written
+in §10, and it reaches the model through the Negative slot.**」**`§16 MUST NOT` → `Negative Prompt` である。**
+`specmap.PROMPT_SLOT_SOURCE` も同じ行を持つ（`Negative Prompt` ← `§16` ＋ カードの `Negative`）。
+
+**3本で、`§16` が宣言したカメラの禁止が、`Negative` に乗っていなかった。**
+
+| 作品 | `§16` の宣言 | `Negative` の前 | 足したもの |
+|---|---|---|---|
+| `grammar-impossible-camera` | **The frame does not travel** | 無し | `no camera travel` |
+| `grammar-recognizing-world` | **The camera does not move** | 無し | `no camera move, no camera travel` |
+| `grammar-time-fold` | **no pan, no zoom, no drift, no rack** | `no camera move, no zoom, no pan` まで | `no drift, no rack` |
+
+⚠️ **禁止が届く路が1本も無ければ、それは「禁止した」と言えない。** 7本とも、いまは `Negative` に
+カメラの床を持つ。⚠️ **`L21` は「覆うであって等しいではない」**なので、足すことは検査を緩めない。
+
+### ⚠️ 仕様の話をしていた2文を、ショットの話に直した
+
+**スロットの中に、仕様自身について語る文が2つ残っていた**——投入される文字列ではない。
+
+- `grammar-impossible-camera` — 「the premise "the camera is somewhere" has been dropped, so there is
+  no position to move from, **and no move is being forbidden.**」→ **「the frame is a page, so there is
+  no position for it to move from.」**（理由は §10 に在る）
+- `grammar-time-fold` — 「**this shot asks for nothing beyond it** … and **this grammar's whole claim**
+  is that the place was never left.」→ **「A camera that left the place would make the return a second
+  shot, and the place is never left.」**
+
+### ⚠️ 残したもの——裁定を仰ぐ
+
+- **`**`（強調）は全作品の全スロットに在り、`0.37.1` 以前から在る。** 画像の経路では落とした前例が
+  あるので、**映像の側でも落とすかは著者の裁定に預ける**（この回は落としていない）。
+- **`(Source: the `Motion character` of the style card …)` の出所書き**も残した——**出所を名乗る行**であり、
+  消せば「どの語がカードから来たか」が読めなくなる。**これも裁定を仰ぐ。**
+- **様式カード由来の語**は、カードの語のまま残した（逐語であることが `L33` の照合の前提である）。
+
+### ⚠️ この回、私は3本のファイルを壊した——検査が捕まえた
+
+**編集の途中、`§18` の領域から取った位置をファイル全体に当ててしまい、3本（`impossible-camera`・
+`time-fold`・`recognizing-world`）の本文を壊した。** ⚠️ **`L11` が鳴った**——
+「**目録にある節が無い: 3. SUBJECTS／5. OBJECTS**」。**`HEAD` から戻して、やり直した。**
+**見つけたのは私の読み直しではなく、層である。** ⚠️ **壊れた3本は、`L11` が鳴るまで
+「違反0件」の側には居なかった**——**編集の後に層を回さなければ、そのまま commit していた。**
+
+### ⚠️ この回の一行——**投入プロンプトに到達したことは、絵に到達したことではない**
+
+**生成は1度も走っていない。** **`takes/` は7本とも空であり、`L25` は一度も走っていない。**
+**変わったのは、生成器へ渡る文字列だけである。**
+
+### 検証
+
+| | |
+|---|---|
+| `check.py --self-test` | **273 / 273** |
+| 7作品 | **違反 0 件**（註 21〜22） |
+| `L33` | **7本とも註**——比べる語を持たない5本を含む |
+| `§18` の `⚠️` | **0**（7本の全スロット。前は25） |
+| `Negative` のカメラの床 | **7本とも持つ**（前は4本） |
+| 差分の範囲 | **`§18` だけ**——`git diff -U0` のハンクは17、すべて `# 18.` と `# 19.` の間 |
+| `tools/check_i18n.py` | **違反 0 件** |
+| `claude plugin validate . --strict` | **Validation passed** |
+
+---
+
 ## 0.37.1 — 2026-09-22 7本の文法サンプルを演出の段で作り直した——**`L33` は静かになった。効いたかどうかは、まだ何も言えない**
 
 **著者の評は、7本を生成した後に出た**（`## 0.36.0`）。**指示は「`grammar-〜` 系のサンプルを同一モチーフ
