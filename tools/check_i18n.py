@@ -57,6 +57,7 @@ DOCS = (
     "CLAUDE.md",
     "README.md",
     "docs/h3-route.md",
+    "docs/seedance-route.md",
     "docs/usage.md",
     "engine/ledger/README.md",
     "engine/shot/README.md",

@@ -11,7 +11,7 @@
       "name": "semantic-visual-loom",
       "source": "./",
       "description": "Semantic Visual Loom — carries a story to film. The unit is the shot (one shot, one change; length is a dependent variable), and the state is placed outside the generation in one production ledger. Four skills walk the foundation's own body: breakdown (① cut a work into shots), design (② stage a shot and write its two specifications), ledger (③ fix what is fixed), and shot (④ the self-contained record and the sample that comes back). ⚠️ Assembly and acceptance are not among them — the adopted takes are not on the record side, and a skill that cannot be moved is worse than no skill.",
-      "version": "0.31.0",
+      "version": "0.32.0",
       "author": {
         "name": "GL-Kageyama"
       },

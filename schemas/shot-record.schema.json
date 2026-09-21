@@ -119,15 +119,15 @@
 
     "text_channel": {
       "type": "array",
-      "description": "文字チャンネル。画像生成器には描かせない（§2.6）。生成器へ渡る文字列は英語である。",
+      "description": "文字チャンネル。**「誰が描くか」を記録する欄である**——⚠️ **可読度は名乗らない。** `overlay`＝基盤が合成で焼く（画像生成器には描かせない、§2.6）。`voice`＝音声。`lettering`＝**生成器が作中の文字として描く**。⚠️ **`lettering` は「読ませる」ではない**——**読ませるかどうかは、その話の §18 `Negative Prompt` が決める。** 同じ作品の中に両方が在る（読ませる話と、読ませない話）。⚠️ **字幕と作中の文字は別物である**——字幕（不随意的な焼き込み）は `overlay` でも `lettering` でもなく、床 `no on-screen subtitles` が禁じる。⚠️ **種類ごとに行き先が違う**（`specmap.TEXT_CHANNEL_KINDS`、`L19` が閉じる）。生成器へ渡る文字列は英語である。",
       "items": {
         "type": "object",
         "required": ["t", "kind"],
         "additionalProperties": false,
         "properties": {
           "t": { "type": "string", "description": "時間の範囲（例 \"12.0-15.0\"）。" },
-          "kind": { "type": "string", "enum": ["overlay", "voice"], "description": "overlay（画面に焼く）か voice（音声）。" },
-          "content": { "type": "string", "description": "overlay のとき、画面に載る文字。解決済みの言語を保つ。" },
+          "kind": { "type": "string", "enum": ["overlay", "voice", "lettering"], "description": "overlay（基盤が画面に焼く）／ voice（音声）／ lettering（**生成器が作中の文字として描く**——⚠️ 可読度は名乗らない。§18 が決める）。" },
+          "content": { "type": "string", "description": "`overlay` のとき、画面に載る文字。`lettering` のとき、**生成器に描かせる作中の文字**——⚠️ **可読度はここではない**（§18 が決める）。ゆえに **`lettering` の `content` は、字そのものでも、字の記述でもよい**（「彫られた二字」「印刷された二字」）。解決済みの言語を保つ。⚠️ **`lettering` の `content` に行き先は1つである**（`prompt:Master Prompt`）——`overlay` の `edit:timeline` ではない。" },
           "speaker": { "type": "string", "description": "voice のとき、話者。" },
           "line": { "type": "string", "description": "voice のとき、台詞。解決済みの言語を保つ。" }
         }

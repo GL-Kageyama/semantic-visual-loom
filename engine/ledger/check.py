@@ -1314,6 +1314,21 @@ def self_test():
         ("L19 理由が書かれていない", real_schemas, True, "理由が書かれていない",
          {"DESTINATION_WHY": {k: v for k, v in specmap.DESTINATION_WHY.items()
                               if k != "sound"}}),
+        # ⚠️ **`text_channel` は欄ごとでは閉じない**（裁定 2026-09-21）——
+        #    **種類ごとに行き先が違う。** 3つの閉じ方を、それぞれ1つ落として鳴らす。
+        #    ① スキーマに在る種類の行き先が、表に無い。
+        ("L19 `kind` の行き先が表に無い", real_schemas, True, "行き先の無い種類",
+         {"TEXT_CHANNEL_KINDS": {k: v for k, v in specmap.TEXT_CHANNEL_KINDS.items()
+                                 if k != "lettering"}}),
+        #    ② 表が指す種類が、スキーマに無い（書けない種類に行き先は要らない）。
+        ("L19 表が指す `kind` がスキーマに無い", real_schemas, True, "書けない種類",
+         {"TEXT_CHANNEL_KINDS": {**specmap.TEXT_CHANNEL_KINDS, "caption": "edit:timeline"}}),
+        #    ③ 種類の行き先が、欄の行き先に含まれていない。
+        #       **引き渡しの層は欄の行き先しか読まない**——だから届かない。
+        ("L19 種類の行き先が欄の行き先に無い", real_schemas, True,
+         "欄が宣言していない行き先",
+         {"TEXT_CHANNEL_KINDS": {**specmap.TEXT_CHANNEL_KINDS,
+                                 "lettering": "handover:loom"}}),
     ]
     for label, sdir, want, fragment, patch in dest_cases:
         saved_patch = {}
@@ -1618,6 +1633,28 @@ def self_test():
          img_proj(video="# 18. WAN 3.0 PROMPT MAPPING\n\n## Master Prompt\n\n本文\n"),
          True, "`## Negative Prompt` の節が無い")
 
+    # ⚠️ **床から一行を外した日の `L21`**（裁定 2026-09-21、著者）。
+    #    `projects/habits` の `bible.negative_base` から `no legible name text` を外した——
+    #    **§18 の側は一字も変わっていない。** ゆえに**外す前も後も鳴らない。**
+    #    ⚠️ **しかし床が減ったことは、検査が鈍ったことではない。**
+    #    **作品の禁制を1節落とせば、今も鳴る**——それが下の2例である。
+    POST_RULING = ["no calling voice as a sound effect",
+                   "no face before the name is called",
+                   "no legible text on the delivery slips"]
+    POST_RULING_NEG = IMG_NEG_OK + ", " + ", ".join(POST_RULING)
+    run1("L21 床を外した後も、作品の禁制を覆っていれば鳴らない",
+         semantic.check_negative_coverage,
+         img_proj(negative=POST_RULING_NEG, base=POST_RULING,
+                  video=vid_spec(POST_RULING_NEG)), False, None)
+    run1("L21 床を外した後でも、作品の禁制を1節落とせば鳴る",
+         semantic.check_negative_coverage,
+         img_proj(negative=IMG_NEG_OK + ", no calling voice as a sound effect, "
+                                    "no face before the name is called",
+                  base=POST_RULING,
+                  video=vid_spec(IMG_NEG_OK + ", no calling voice as a sound effect, "
+                                 "no face before the name is called")),
+         True, "no legible text on the delivery slips")
+
     # ⚠️ **`repo_root` を偽のエンジンへ向ける。** 本物に依存させない。
     l22 = lambda p, eng=ENGINE_OK: semantic.check_image_vars(p, repo_root=eng)
 
@@ -1838,16 +1875,20 @@ def self_test():
 
     # ⚠️ **目録そのものが壊れているときは、本文を走査しない。**
     #    **空の語は、どの §18 にも当たる**——走査すれば**直した仕様の上で鳴る。**
+    #    ⚠️ **経路の数は `MODELS` から組む。** ここを手で書けば、経路が増えた日に
+    #       **閉包の欠陥が先に鳴り、見たい欠陥に届かない**（実測 2026-09-21、
+    #       `SEEDANCE 2.5` を足した日に2例が落ちた——**落ちたのは検査ではなく、この仕掛けである**）。
     saved_route = specmap.MODEL_ROUTE
+    _all_routes = {m: () for m, v in specmap.MODELS.items() if v["種別"] == "video"}
     try:
         specmap.MODEL_ROUTE = {"WAN 3.0": ()}
         run1("L28 目録に動画の経路が欠けている", semantic.check_model_route,
              kind_proj(route_spec("MINIMAX H3")), True, "鍵が")
-        specmap.MODEL_ROUTE = {"WAN 3.0": (), "MINIMAX H3": (("", "理由"),)}
+        specmap.MODEL_ROUTE = {**_all_routes, "MINIMAX H3": (("", "理由"),)}
         run1("L28 目録に空の語が在る（本文を読まない）", semantic.check_model_route,
              kind_proj(route_spec("MINIMAX H3", "One continuous take.")),
              True, "本文を1行も読んでいない")
-        specmap.MODEL_ROUTE = {"WAN 3.0": (), "MINIMAX H3": (("no cut", ""),)}
+        specmap.MODEL_ROUTE = {**_all_routes, "MINIMAX H3": (("no cut", ""),)}
         run1("L28 目録の語に理由が無い", semantic.check_model_route,
              kind_proj(route_spec("MINIMAX H3")), True, "理由が無い")
     finally:
@@ -1864,6 +1905,157 @@ def self_test():
         if not rp.is_dir():
             continue
         run1(f"L28 {label}", semantic.check_model_route, Project(rp), False, None, note=note)
+
+    # ⚠️ **経路ごとの文書を引くか。** かつて違反の文面は `docs/h3-route.md` を直書きしていた
+    #    ——`SEEDANCE 2.5` を登録した日に、**その一文が3つ目の経路について嘘になった**
+    #    （実測 2026-09-21）。**経路の名前を検査の本文に書かない**のが直しである。
+    run1("L28 違反の文面が、その経路の文書を引く（H3）", semantic.check_model_route,
+         kind_proj(route_spec("MINIMAX H3", "One continuous take.")),
+         True, "`docs/h3-route.md`")
+    saved_doc_route = specmap.MODEL_ROUTE
+    try:
+        specmap.MODEL_ROUTE = {**saved_doc_route,
+                               "SEEDANCE 2.5": (("one continuous take", "理由"),)}
+        # ⚠️ **3つ目の経路も、自分の文書を引く。** そして**註も経路ごとに分かれる**——
+        #    「3本突き合わせた」では、**どの経路を突き合わせたのかが消える。**
+        run1("L28 3つ目の経路も、自分の文書を引く", semantic.check_model_route,
+             kind_proj(route_spec("SEEDANCE 2.5", "One continuous take.")),
+             True, "`docs/seedance-route.md`")
+        # ⚠️ **註は、突き合わせた経路を名指しする。** 2経路を1つの数にまとめない。
+        run1("L28 註は経路ごとに分かれる", semantic.check_model_route,
+             kind_proj(route_spec("MINIMAX H3", "One continuous take.")),
+             True, "`one continuous take`", note="`MINIMAX H3` の §18 を 1 本")
+    finally:
+        specmap.MODEL_ROUTE = saved_doc_route
+    # ⚠️ **文書の表も閉じる。** 閉じなければ、経路を足した日に
+    #    **その経路の違反だけが文書を引かない**——そして**それは黙って起きる。**
+    saved_docs = specmap.MODEL_ROUTE_DOC
+    try:
+        specmap.MODEL_ROUTE_DOC = {k: v for k, v in saved_docs.items()
+                                   if k != "SEEDANCE 2.5"}
+        run1("L28 文書の表に経路が欠けている", semantic.check_model_route,
+             kind_proj(route_spec("MINIMAX H3")), True, "`MODEL_ROUTE_DOC` の鍵が")
+    finally:
+        specmap.MODEL_ROUTE_DOC = saved_docs
+
+    # ---- L30（§18 が、その経路が受け取れないスロットへ中身を書いていないか）
+    #     ⚠️ **要点は「鳴らない例」のほうである。** 門を足す変更も、外す変更も、
+    #        **鳴らない例が無ければ自己検査は緑のまま通る**（`L25` が踏んだ形の事故）。
+    #     ⚠️ **そして「相手が空」の例も要る。** 門を持つ経路の §18 を1本も持たない作品で
+    #        **黙る**なら、**沈黙が「正しい」に見える**——`L28` が掘った穴である。
+    print("\n=== 自己検査 — 経路の門（その経路が受け取れないスロット）\n")
+
+    def gate_proj(model, negative="no watermark", accepted=None):
+        """§18 の見出しと `Negative Prompt` を差し替えた動画の仕様。
+
+        ⚠️ **`negative=None` は「`Negative Prompt` の小節そのものが無い」である。**
+        """
+        body = "".join(f"# {t}\n\n本文\n" for t in ALL20[:17])
+        body += f"# 18. {model} PROMPT MAPPING\n\n## Visual Prompt\n\n本文\n\n"
+        if negative is not None:
+            body += f"## Negative Prompt\n\n{negative}\n\n"
+        body += "# 19. GENERATION INSTANCE\n\n本文\n# 20. ITERATION\n\n本文\n"
+        d = _P(tempfile.mkdtemp())
+        (d / "vid.md").write_text(body, encoding="utf-8")
+        sh = s("p-ch01-seg01", spec="vid.md")
+        p = _One(sh)
+        p.root = d
+        p.shots = {"p-ch01-seg01": sh}
+        p.bible = {"bible": {}}
+        if accepted is not None:
+            p.bible["bible"][specmap.ROUTE_LIMITS_KEY] = accepted
+        return p
+
+    # ⚠️ **鳴る例。** この経路が受け取らないと宣言している欄に、中身が在る。
+    run1("L30 Seedance の §18 に非空の `Negative Prompt`", semantic.check_unreceived_slots,
+         gate_proj("SEEDANCE 2.5"), True, "床として受け取らない")
+    # ⚠️ **鳴らない例（1）——空である。** **門は守られている。**
+    run1("L30 Negative が空なら鳴らない", semantic.check_unreceived_slots,
+         gate_proj("SEEDANCE 2.5", negative=""), False, None, note="中身が在ったのは 0 本である")
+    # ⚠️ **鳴らない例（2）——小節そのものが無い。** `L17` の欠陥であり、
+    #    **同じ欠陥を2つの層が別々の符号で報告しない。**
+    run1("L30 `Negative Prompt` の小節が無ければ鳴らない", semantic.check_unreceived_slots,
+         gate_proj("SEEDANCE 2.5", negative=None), False, None)
+    # ⚠️ **鳴らない例（3）——門を持たない経路。** `WAN 3.0` は空のタプルであり、
+    #    **§18 に何が書かれていても鳴らない。** これが「空のタプル＝門が無い」の実測である。
+    run1("L30 `WAN 3.0` の非空 Negative では鳴らない（門が無い）",
+         semantic.check_unreceived_slots,
+         gate_proj("WAN 3.0"), False, None, note="1本も持たない")
+    # ⚠️ **作品が引き受けた場合は註になる**（`specmap.ROUTE_LIMITS_KEY`）——
+    #    **違反は消えない。違反が、著者の宣言に変わる。**
+    run1("L30 作品が引き受ければ違反にならない", semantic.check_unreceived_slots,
+         gate_proj("SEEDANCE 2.5", accepted=["SEEDANCE 2.5: Negative Prompt"]),
+         False, "承知で使うと宣言している", note=None)
+    # ⚠️ **引き受けた文面が門と一致しなければ、違反のままである**——
+    #    **「何か書けば通る」にしてはいけない。**
+    run1("L30 引き受けの文面が門と違えば鳴る", semantic.check_unreceived_slots,
+         gate_proj("SEEDANCE 2.5", accepted=["SEEDANCE 2.5: Style Motion"]),
+         True, "床として受け取らない")
+    # ⚠️ **綴りが違えば、宣言は黙って無視される**（2026-09-21 に塞いだ穴）。
+    #    著者には**何も書かなかったときと同じ顔の違反**が返り、**機構が壊れて見える。**
+    #    ゆえに**宣言そのものも報告する**——そして**近い綴りを名指す。**
+    run1("L30 宣言の綴りが門と違えば、その宣言も鳴る", semantic.check_unreceived_slots,
+         gate_proj("SEEDANCE 2.5", accepted=["seedance 2.5: negative prompt"]),
+         True, "どの門にも当たっていない")
+    # ⚠️ **門は在るが、この作品はそこへ一度も来ていない。** これは**違反ではない**——
+    #    だが**黙ってもいない。** **効いていない宣言は、書かなかった宣言と同じである。**
+    run1("L30 宣言が、まだ当たっていない門を名指している",
+         semantic.check_unreceived_slots,
+         gate_proj("WAN 3.0", accepted=["SEEDANCE 2.5: Negative Prompt"]),
+         False, None, note="この宣言は、いま何もしていない")
+
+    # ⚠️ **目録そのものが壊れているときは、本文を走査しない。**
+    #    ⚠️ **経路の数は `MODELS` から組む**（`L28` と同じ理由——手で書けば、
+    #       4つ目の経路で**閉包の欠陥が先に鳴り、見たい欠陥に届かない**）。
+    saved_gate = specmap.MODEL_UNRECEIVED_SLOTS
+    _all_gates = {m: () for m, v in specmap.MODELS.items() if v["種別"] == "video"}
+    try:
+        specmap.MODEL_UNRECEIVED_SLOTS = {"WAN 3.0": ()}
+        run1("L30 目録に動画の経路が欠けている", semantic.check_unreceived_slots,
+             gate_proj("SEEDANCE 2.5"), True, "鍵が")
+        specmap.MODEL_UNRECEIVED_SLOTS = {**_all_gates,
+                                          "SEEDANCE 2.5": (("Style Motion", ""),)}
+        run1("L30 目録のスロットに理由が無い", semantic.check_unreceived_slots,
+             gate_proj("SEEDANCE 2.5", negative=None),
+             True, "理由の無い門")
+        specmap.MODEL_UNRECEIVED_SLOTS = {**_all_gates,
+                                          "SEEDANCE 2.5": (("Negative", "理由"),)}
+        run1("L30 目録のスロットが `PROMPT_SLOTS` に無い", semantic.check_unreceived_slots,
+             gate_proj("SEEDANCE 2.5", negative=None), True, "`PROMPT_SLOTS` に無い")
+        # ⚠️ **門を持つ経路の §18 を1本も持たない作品では、黙らない。**
+        #    **0 本を 0 本と言う**——**沈黙は「正しい」ではない。**
+        #    ⚠️ **門が1つも無ければ、言うことが無い**——それが下の対照である。
+        specmap.MODEL_UNRECEIVED_SLOTS = _all_gates
+        got = semantic.check_unreceived_slots(gate_proj("WAN 3.0"))
+        n += 1
+        bad += bool(got)
+        print(f"    {'L30 門が1つも無ければ、何も言わない':<50}"
+              f"{len(got):>10}  {'期待どおり' if not got else '⚠️ 期待と違う'}")
+        specmap.MODEL_UNRECEIVED_SLOTS = {
+            **_all_gates, "SEEDANCE 2.5": (("Negative Prompt", "理由"),)}
+        run1("L30 門を持つ経路の §18 を持たない作品では、0 本と言う",
+             semantic.check_unreceived_slots, gate_proj("WAN 3.0"),
+             False, None, note="1本も持たない")
+    finally:
+        specmap.MODEL_UNRECEIVED_SLOTS = saved_gate
+
+    # ⚠️ **実物で鳴らないこと。** `hitosara` は `SEEDANCE 2.5` の §18 を持たない——
+    #    **註（0 本）だけが出て、違反は出ない。**
+    run1("L30 実物 hitosara（Seedance の §18 は無い・註だけである）",
+         semantic.check_unreceived_slots, Project(REPO / "projects/hitosara"),
+         False, None, note="1本も持たない")
+
+    # ⚠️ **実物——著者が引き受けた。** habits は第二巻第七話の実例で `SEEDANCE 2.5` の
+    #    §18 を持ち、その `Negative Prompt` に中身が在る。**門は開いたままである。**
+    #    ⚠️ **著者が 2026-09-21 に、それを名指しで引き受けた**
+    #    （`bible.route_limits_accepted`）——**ゆえに違反ではなく註である。**
+    #    ⚠️ **註へ変わったことと、鳴らなくなったことは別である。** 註は経路の事実を
+    #    そのまま述べ、**そのうえで宣言を名指しする。**
+    #    ⚠️ **もし著者がこの宣言を外せば、この行は違反へ戻る**——そのときはここも直す。
+    #    （**検査を現物に合わせるのであって、現物を検査に合わせるのではない。**）
+    run1("L30 実物 habits（著者が経路の制限を引き受けた）",
+         semantic.check_unreceived_slots, Project(REPO / "projects/habits"),
+         False, None, note="承知で使うと宣言している")
 
     # ---- L29（この走りが読まない作品を名指しするか）
     #     ⚠️ **走査はディスクを見る。** 合成の辞書では代われない——
@@ -2059,10 +2251,26 @@ def self_test():
     run1("L24 still で §11 が空", semantic.check_mode_demands,
          img_proj(mode="still", video=video11(motion="\n")), True, "は §11 を要求する")
     run1("L24 composite で text_channel が空", semantic.check_mode_demands,
-         img_proj(mode="composite", video=video11()), True, "`text_channel` を要求する")
+         img_proj(mode="composite", video=video11()), True, "`overlay` の行を要求する")
     run1("L24 composite で text_channel 在り（鳴ってはならない）",
          semantic.check_mode_demands,
          img_proj(mode="composite", video=video11(), text_channel=TC), False, None)
+    # ⚠️ **`lettering` は焼かない。** 裁定（2026-09-21）——種類が主張するのは
+    #    **「生成器が描く」**の一点であり、**焼くのは `overlay` だけである。**
+    #    だから `lettering` だけを持つ合成のショットは、**何も焼かないのに非空である。**
+    #    ⚠️ **締める前は、この形が通っていた。**
+    run1("L24 composite で `lettering` だけなら鳴る", semantic.check_mode_demands,
+         img_proj(mode="composite", video=video11(),
+                  text_channel=[{"t": "0-4", "kind": "lettering",
+                                 "content": "two carved kanji"}]),
+         True, "`overlay` の行を要求する")
+    # ⚠️ **併存は許す。** `overlay` が1つでも在れば、焼くものは在る。
+    run1("L24 composite で `overlay` と `lettering` が併存すれば鳴らない",
+         semantic.check_mode_demands,
+         img_proj(mode="composite", video=video11(),
+                  text_channel=TC + [{"t": "0-4", "kind": "lettering",
+                                      "content": "two carved kanji"}]),
+         False, None)
     # ⚠️ **逆向きは成り立たない。** `motion` のショットも `text_channel` を持てる。
     run1("L24 motion は text_channel を要求しない（鳴ってはならない）",
          semantic.check_mode_demands,

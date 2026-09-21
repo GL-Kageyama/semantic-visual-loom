@@ -84,7 +84,7 @@ python3 tools/check_i18n.py                                # 文档的镜像
 （[`references/video-spec.md`](../references/video-spec-zh.md) §18）。
 ⚠️ **分开交出去。过去的只有 §18**——§19 与 §20 是我们自己的记录。
 
-⚠️ **§18 的标题自称模型，而视频的路径有两条。** `L18` 把这个标题与
+⚠️ **§18 的标题自称模型，而视频的路径有三条。** `L18` 把这个标题与
 登记簿（`specmap.MODELS`）对照——**`WAN 3.0` 取 `key_image`，`MINIMAX H3` 不取。**
 后者的附件是**分镜图像**，而**制作那张图像的纸是 `distill-essence-engine`**
 （格式 `storyboard`、样式 `luminous-anime`）。所以板式提示词也是这个基盘的文档，
@@ -93,8 +93,15 @@ python3 tools/check_i18n.py                                # 文档的镜像
 而**图像路径的底板禁止画面上的文字。** 所以 `key_image` 持不了它。
 **纸是拍摄之前的、整段视频的设计。** 生成器按顺序读它的格子，
 **把每一格当作它自己的一场戏，与下一格之间由自然的动画接起来。**
-⚠️ **两条路线不共享时间的文法。** 落在 `MINIMAX H3` 上的约束——**交给它的字符串、
-以及那张纸的文字，两者都在内**——在 [`docs/h3-route-zh.md`](h3-route-zh.md)。
+⚠️ **第三条路径 `SEEDANCE 2.5` 默认什么都不附。** 它读一条很长的提示词，
+**而那条提示词可以自带时钟**（`0-3s:` `3-6s:`）。⚠️ **而且它并不把 `Negative Prompt` 槽位
+当作地板来接收**——厂商当作否定处理的**只有字幕与音频**，
+**那个槽位剩下的部分会被当作散文来读。** **`L30` 响的就是这道门**——路径声明
+「自己不接收的槽位」（`specmap.MODEL_UNRECEIVED_SLOTS`），填了它的规格会被报告。
+**仍然要用这条路径的作品，就写 `bible.route_limits_accepted`**——**豁免由作品来写。**
+⚠️ **各路径不共享时间的文法。** 落在 `MINIMAX H3` 上的约束——**交给它的字符串、
+以及那张纸的文字，两者都在内**——在 [`docs/h3-route-zh.md`](h3-route-zh.md)，
+而落在 `SEEDANCE 2.5` 上的在 [`docs/seedance-route-zh.md`](seedance-route-zh.md)。
 ⚠️ **没有任何东西检查板子。** 镜头记录没有任何栏指向它，所以 **`check.py` 从不打开它**
 ——**这是一个洞，并且作为一个洞被报告**
 （见 [`engine/ledger/README.md`](../engine/ledger/README-zh.md) 的 `L18` 注）。
@@ -192,7 +199,7 @@ projects/<name>/
 
 ## 层
 
-检查由**30 层，`L0`–`L29`**，以及模式（schema）的形状验证构成。
+检查由**31 层，`L0`–`L30`**，以及模式（schema）的形状验证构成。
 **它不是单一判定**——每一层各自报警，并**连同它看到的数字**一起被报告。
 
 ⚠️ **什么也没看到的层会作为注被报告，而什么也没看到的层，看起来和通过的层一模一样。**
@@ -232,7 +239,7 @@ python3 tools/check_i18n.py               # 实物
 ⚠️ **不使用子文件夹方式（`ja/` `zh/`）**——为了让**正典与镜像的深度不发生变化**。
 ⚠️ **开发的工作语言保持日语**（提交信息、`HISTORY.md`、会话），
 而**文档的正典是英语。** 这两者是不同的东西——**做事所用的语言**，与**文档具有权威所用的语言**。
-**18 份文档 × 3 种语言已经齐备**（这是 `tools/check_i18n.py` 作为正典报告的本数），
+**19 份文档 × 3 种语言已经齐备**（这是 `tools/check_i18n.py` 作为正典报告的本数），
 规则在 [`CLAUDE.md`](../CLAUDE-zh.md) 里。
 
 ## 延伸阅读
@@ -242,6 +249,7 @@ python3 tools/check_i18n.py               # 实物
 | [`README.md`](../README-zh.md) | 这个基盘是什么，由什么构成 |
 | [`engine/ledger/README.md`](../engine/ledger/README-zh.md) | 制作台账、各层、以及每个检查不看什么 |
 | [`docs/h3-route.md`](h3-route-zh.md) | 落在 `MINIMAX H3` 这条路径上的约束——交出去的字符串，以及那张纸 |
+| [`docs/seedance-route.md`](seedance-route-zh.md) | 落在 `SEEDANCE 2.5` 这条路径上的约束——实测到的、它不接收的槽位、以及检查看不见的东西 |
 | [`engine/shot/README.md`](../engine/shot/README-zh.md) | 打印器导出什么，以及它留下的七个洞 |
 | [`schemas/README.md`](../schemas/README-zh.md) | 数据结构 |
 | [`projects/hitosara/README.md`](../projects/hitosara/README-zh.md) | 演示——10 个镜头，与 Ukebi 完全独立 |

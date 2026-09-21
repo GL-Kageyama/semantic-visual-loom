@@ -118,8 +118,11 @@ semantic-visual-loom/
 ⚠️ **これは動画が `WAN 3.0` を名乗る経路である。** 2つ目の動画の経路（`MINIMAX H3`）では
 **ショットは画像の経路をまったく持たない**——生成器は絵コンテの画像を受け取り、
 それを作る紙は `specs/board/` に住む（[`docs/usage.md`](docs/usage-ja.md)）。
-⚠️ **二つの経路は時間の文法を共有しない**——2つ目に掛かる制約は
+⚠️ **経路は時間の文法を共有しない**——2つ目に掛かる制約は
 [`docs/h3-route.md`](docs/h3-route-ja.md) にある。
+⚠️ **3つ目の動画の経路 `SEEDANCE 2.5` は、既定では何も添えない**——長い一つのプロンプトを読み、
+**そのプロンプトが自前の時計を持てる**——ただし**`Negative Prompt` の欄は床としては受け取られない。**
+**`L30` が鳴るのはその門である**——制約は [`docs/seedance-route.md`](docs/seedance-route-ja.md) にある。
 **残りは [`projects/hitosara/README.md`](projects/hitosara/README-ja.md) にある。**
 
 ## 予定であって、まだ無いもの
@@ -188,7 +191,7 @@ semantic-visual-loom/
 **開発は日本語で進め、文書の正典は英語である。**
 ミラーは接尾辞方式で**同じディレクトリ**に並ぶ——規則は [`CLAUDE.md`](CLAUDE-ja.md) にある。
 
-**18文書 × 3言語が揃っている**——⚠️ **これは [`tools/check_i18n.py`](tools/check_i18n.py) が
+**19文書 × 3言語が揃っている**——⚠️ **これは [`tools/check_i18n.py`](tools/check_i18n.py) が
 正典として報告する本数であって、リポジトリの `.md` を数えた数ではない。**
 **数は、数えた範囲の広さしか持たない。**
 **何を見て、何を見ないか**は [`docs/usage.md`](docs/usage-ja.md) にある。

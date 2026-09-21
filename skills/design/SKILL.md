@@ -93,7 +93,7 @@ because `L3` and `L4` read the beat body, not only the field.**
    ⚠️ **Pick a style whose card carries `Motion character`, or record why the slot is empty.**
    ⚠️ **§18's heading names the model, and the name decides the route** (`specmap.MODELS`).
    **`WAN 3.0` attaches a `key_image`; `MINIMAX H3` attaches a storyboard image and has no image
-   path at all.** On that second route **this stage also writes the board prompt** (the row in the
+   path at all; `SEEDANCE 2.5` attaches nothing by default.** On that second route **this stage also writes the board prompt** (the row in the
    table above) and points at it from §6's `REF_BOARD`. ⚠️ **The board is not a `key_image` and
    must not be written as one**——**its paper draws lettering** (panel numbers, captions, margin
    columns), and **the image path's floor forbids text on screen.** ⚠️ **Nothing checks the
@@ -108,11 +108,22 @@ because `L3` and `L4` read the beat body, not only the field.**
    never uses the word カット, so **cut-versus-continuous is the shot's own decision, and leaving
    it unwritten is how two places come back as a single room.**
    ⚠️ **`one continuous take`** ([`references/video-spec.md`](../../references/video-spec.md)) **is
-   the `WAN 3.0` house style and does not carry to this route.** The two routes do not share a
+   the `WAN 3.0` house style and does not carry to this route.** The routes do not share a
    grammar of time, and **the string handed over must say what this route does, not what the other
    one does** — the failure that produced this warning is recorded in `HISTORY.md`.
    ⚠️ **The full list of the constraints that hold on this route — the strings handed over and the
    paper alike — is [`docs/h3-route.md`](../../docs/h3-route.md).**
+   ⚠️ **On the third route the gate is the slot, not the phrase.** **`SEEDANCE 2.5` does not
+   receive `Negative Prompt` as a floor** — the vendor honours negation only for subtitles and
+   audio, and the rest of that slot is read as prose. **`L30` fires when a specification on that
+   route fills the declared slot** (`specmap.MODEL_UNRECEIVED_SLOTS`). **When you write one: put
+   the prohibitions in the slots that are read, in the affirmative** — `Master`, `Visual`,
+   `Camera`, `Motion`, `Audio`. ⚠️ **Do not empty the `Negative Prompt` slot to stop the
+   fire** — `L21` requires it to cover the floor, so emptying it fails a different check, and
+   **the record of what the work forbids is not the same thing as what the route can hear.** ⚠️ **The
+   fire stays until the work declares `bible.route_limits_accepted`** — **an exclusion is the
+   work's to write**, and writing it is a decision for the author, not for this stage. The route's
+   constraints are [`docs/seedance-route.md`](../../docs/seedance-route.md).
 9. **The image specification** — ⚠️ **not sections.** It is **named paragraphs inside one
    section**: `Prompt` first, `Negative` second, in that order. Write `key_image:` in the
    record to point at it. **Fires if wrong:** `L18` (the shape of the path).
@@ -126,9 +137,14 @@ because `L3` and `L4` read the beat body, not only the field.**
     `-<seconds>s-<take>` dropped. ⚠️ **Never from `Segment ID`** — the same range carries two
     spellings there, and deriving from it drops records.
     **Fires if wrong:** `L13`.
-11. **`text_channel`** — only `composite` requires it, and the two kinds go to two different
+11. **`text_channel`** — only `composite` requires it, and the three kinds go to three different
     places: `overlay` is burned by `timeline` (**the generator does not draw text**), `voice`
-    goes to §14 as the Audio Prompt. **Fires if wrong:** `L24`.
+    goes to §14 as the Audio Prompt, and **`lettering` is drawn by the generator inside the
+    picture** — its destination is §18's `Master Prompt`. **Fires if wrong:** `L24` (a `composite`
+    shot must carry at least one `overlay` — **`lettering` burns nothing, so it does not count**).
+    ⚠️ **`lettering` says who draws the text and nothing about whether it can be read.** **That is
+    the shot's own decision, written into §18's slots** — a work may need one shot that is legible
+    and another that is not, and **a kind that fixed legibility would be too narrow for both.**
 12. **Run it.**
 
 ```bash

@@ -4,9 +4,9 @@
 
 # The MINIMAX H3 route
 
-Video has two routes. **`WAN 3.0` attaches a `key_image`** — it generates from text and pulls the look toward that image. **`MINIMAX H3` attaches a storyboard image and has no image path at all**: the generator receives the board itself as the design of the whole clip, and draws every panel of it. The route is not chosen by a flag. It is read off the heading of §18, and the name in that heading is what picks it.
+Video has three routes. **`WAN 3.0` attaches a `key_image`** — it generates from text and pulls the look toward that image. **`MINIMAX H3` attaches a storyboard image and has no image path at all**: the generator receives the board itself as the design of the whole clip, and draws every panel of it. ⚠️ **This page is about that second route**; the third, `SEEDANCE 2.5`, has its own page ([`docs/seedance-route.md`](seedance-route.md)). The route is not chosen by a flag. It is read off the heading of §18, and the name in that heading is what picks it.
 
-The two routes **do not share a grammar of time.** On `WAN 3.0` the clip is one continuous take; on this route **each panel is its own scene, joined to the next by natural animation.** A rule copied from the other route does not read as a mistake — it reads as an instruction, and the generator obeys it.
+The routes **do not share a grammar of time.** On `WAN 3.0` the clip is one continuous take; on this route **each panel is its own scene, joined to the next by natural animation.** A rule copied from the other route does not read as a mistake — it reads as an instruction, and the generator obeys it.
 
 What follows is the set of constraints that hold **on this route only**: what the strings handed to the generator may say, and what the paper drawn by the first stage may show. They are not guesses. Each one is written down because a shot made on this route came back wrong in a specific way, and the wrongness could be traced to a word or to a drawn line.
 
@@ -60,7 +60,8 @@ These are **not §16 MUST / MUST NOT.** §16 is the shot's own requirements, and
 
 ## Where to read more
 
-- [`references/video-spec.md`](../references/video-spec.md) — the §18 slots, and the time grammar the two routes do not share
+- [`references/video-spec.md`](../references/video-spec.md) — the §18 slots, and the time grammar the routes do not share
+- [`docs/seedance-route.md`](seedance-route.md) — the third route
 - [`skills/design/SKILL.md`](../skills/design/SKILL.md) — where the design stage chooses the route and writes the board prompt
 - [`engine/ledger/README.md`](../engine/ledger/README.md) — `L28`, the layer that reads the strings on this route, and the holes it leaves
 - [`engine/ledger/specmap.py`](../engine/ledger/specmap.py) — `MODELS["MINIMAX H3"]`, and `MODEL_ROUTE`, which holds the forbidden phrases with their reasons

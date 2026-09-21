@@ -90,18 +90,26 @@ below.
 itself the point** ([`references/video-spec.md`](../references/video-spec.md) §18).
 ⚠️ **They are fed separately, and only §18 is fed**——§19 and §20 are our own record.
 
-⚠️ **§18's heading names the model, and there are two video routes.** `L18` reads that heading
+⚠️ **§18's heading names the model, and there are three video routes.** `L18` reads that heading
 against the registry (`specmap.MODELS`): **`WAN 3.0` takes a `key_image`, and `MINIMAX H3` does
 not**——its attachment is **a storyboard image**, and **the paper that makes that image is
 `distill-essence-engine`** (format `storyboard`, style `luminous-anime`). So the board prompt is a
 document of this foundation too, and it lives in `specs/board/`.
+⚠️ **The third route, `SEEDANCE 2.5`, attaches nothing by default.** It reads one long prompt, and
+**that prompt may carry its own clock** (`0-3s:` `3-6s:`). ⚠️ **And it does not receive the
+`Negative Prompt` slot as a floor**——the vendor honours negation only for subtitles and audio, and
+**everything else in that slot is read as prose.** That is the gate **`L30`** fires on: a route
+declares the slots it cannot receive (`specmap.MODEL_UNRECEIVED_SLOTS`), and a specification that
+fills one is reported. **A work that means to use the route anyway writes
+`bible.route_limits_accepted`**——**the exclusion is the work's to write.**
 ⚠️ **The storyboard is not the image path.** That route's paper **draws lettering**——panel numbers,
 captions and margin columns——and **the image path's floor forbids text on screen**, which is why
 `key_image` cannot hold it. **The paper is the design of the whole video, drawn before anything is
 shot**; the generator then reads its panels in order, **each panel as its own scene, joined to the
 next by natural animation**.
-⚠️ **The two routes do not share a grammar of time.** The constraints that hold on `MINIMAX H3`——for
-the strings handed over and for the paper——are in [`docs/h3-route.md`](h3-route.md).
+⚠️ **The routes do not share a grammar of time.** The constraints that hold on `MINIMAX H3`——for
+the strings handed over and for the paper——are in [`docs/h3-route.md`](h3-route.md), and the ones
+that hold on `SEEDANCE 2.5` are in [`docs/seedance-route.md`](seedance-route.md).
 ⚠️ **Nothing checks the board.** No field of a shot record points at it, so **`check.py` never opens
 it**——**a hole, and it is reported as one** (see the `L18` note in
 [`engine/ledger/README.md`](../engine/ledger/README.md)).
@@ -206,7 +214,7 @@ The counts behind that are in `HISTORY.md`.
 
 ## The layers
 
-The check is **30 layers, `L0`–`L29`**, plus schema-shape validation.
+The check is **31 layers, `L0`–`L30`**, plus schema-shape validation.
 **They are not one verdict**—each layer fires on its own and is reported with the
 number it saw.
 
@@ -250,7 +258,7 @@ and the mirrors does not change.**
 ⚠️ **The working language of development stays Japanese** (commit messages, `HISTORY.md`,
 conversation) **while the canonical of the documents is English.** These two are different
 things: one is the language the work is done in, the other the language the documents are
-authoritative in. **18 documents × 3 languages are in place** (the count
+authoritative in. **19 documents × 3 languages are in place** (the count
 `tools/check_i18n.py` reports as canonical), and the rules are in
 [`CLAUDE.md`](../CLAUDE.md).
 
@@ -261,6 +269,7 @@ authoritative in. **18 documents × 3 languages are in place** (the count
 | [`README.md`](../README.md) | what this foundation is, and what it is made of |
 | [`engine/ledger/README.md`](../engine/ledger/README.md) | the production ledger, the layers, and what each check does not see |
 | [`docs/h3-route.md`](h3-route.md) | the constraints that hold on the `MINIMAX H3` route—the strings handed over, and the paper |
+| [`docs/seedance-route.md`](seedance-route.md) | the constraints that hold on the `SEEDANCE 2.5` route—what is measured, the slot it does not receive, and what no check can see |
 | [`engine/shot/README.md`](../engine/shot/README.md) | what the printer derives, and the seven holes it leaves |
 | [`schemas/README.md`](../schemas/README.md) | the data structures |
 | [`projects/hitosara/README.md`](../projects/hitosara/README.md) | the demo—10 shots, independent of Ukebi |

@@ -63,7 +63,8 @@ characters:
       - "no face before the name is called"           # run-10【ルックとカメラ】
       - "no identifying clothing, hairstyle, or prop" # 方針 §5a
       # 以下は初稿 `habits-usui-chinatsu-.../prompt.md` の Negative から。**要承認**（方針 §2）。
-      - "no legible name on any in-world prop"  # 名札も転出欄の一行も判読不能
+      # ⚠️ **`no legible name on any in-world prop` は、2026-09-21 に外した**（`bible.negative_base` と同じ裁定）。
+      #    **可読度は、その話の §18 が負う**——`bible.yaml` の註を見る。
       - "no romaji in place of the Japanese name"
       - "no handwriting by the subject"
       - "no signature"
@@ -86,7 +87,8 @@ characters:
       - "no face before the name is called"
       - "no identifying clothing, hairstyle, or prop"
       # 初稿 `habits-kurebayashi-ao-.../prompt.md` の Negative から。**要承認**（方針 §2）。
-      - "no legible name on any in-world prop"
+      # ⚠️ **`no legible name on any in-world prop` は、2026-09-21 に外した**（`bible.negative_base` と同じ裁定）。
+      #    **可読度は、その話の §18 が負う**——`bible.yaml` の註を見る。
       - "no romaji in place of the Japanese name"
       - "no field for a name in the step chart"   # 段差の図に名の欄が無い
 
@@ -109,7 +111,9 @@ characters:
       - "no face before the name is called"
       - "no identifying clothing, hairstyle, or prop"
       # 初稿 `habits-wabita-sumire-.../prompt.md` の Negative から。**要承認**（方針 §2）。
-      - "no legible name on any in-world prop"    # 鉛筆の重なりは読め、名は読めない
+      # ⚠️ **`no legible name on any in-world prop` は、2026-09-21 に外した**（`bible.negative_base` と同じ裁定）。
+      #    ⚠️ **この一人の註は「鉛筆の重なりは読め、名は読めない」だった**——**鉛筆の重なりが読めることは、
+      #       この裁定で何も変わらない。** 変わったのは**規則の持ち主**である。
       - "no romaji in place of the Japanese name"
       - "no medical equipment"
       - "no hospital interior"
@@ -136,7 +140,8 @@ characters:
       #    「**設定画は通常、その不在を埋めるために顔を四度置く。この一枚は埋めない。**」
       - "no person, no figure, no character, no face, no body, no human silhouette, no portrait"
       - "no arm continuing past the wrist"
-      - "no legible name on any in-world prop"
+      # ⚠️ **`no legible name on any in-world prop` は、2026-09-21 に外した**（`bible.negative_base` と同じ裁定）。
+      #    **可読度は、その話の §18 が負う**——`bible.yaml` の註を見る。
       - "no romaji in place of the Japanese name"
       - "no cherry blossom, no petals, no pink"   # 名は「さくら」だが、花ではない
       - "no identifying clothing, hairstyle, or prop"
@@ -431,8 +436,11 @@ locations:
       habits-atena-hyo-ichigyo（置き配の箱の側面に貼られた宛名票。**端が浮き、浮いたところに埃が入っている。
       欄が四つ。**）⚠️ **まだ無い。意図であって資産ではない**（方針 §5c）。
       ⚠️ **いちばん上の行は、目に入るが、読めない。**
-      `暮林蒼.negatives` の `no legible name on any in-world prop` がそれを負う
+      **この話の三本の §18（`habits-ch02-seg01`–`seg03`）の `Negative Prompt` がそれを負う**——
+      `no legible name text` / `no legible name on any in-world prop` / `no legible text on the delivery slips`。
       ——**読めるなら、この話は別の話になる。**
+      ⚠️ **2026-09-21——負う相手が変わった。** 旧 `暮林蒼.negatives` の同じ語は外された（`bible.yaml` の註）。
+      **可読度は、話ごとに §18 が負う**——**それが正しい**（`02-07` は読ませず、`02-08` は読ませる）。
       ⚠️ **この話で開くのは、その一行だけである。**（場面表「動かさないもの」）
       **宛名票を剥がさない。箱を開けない。**——**一枚は、行を一つだけ見せる。**
     geography: >-
@@ -444,6 +452,67 @@ locations:
       **高さになるのは第11話である。**
       ⚠️ **`geography` が指すのは第1話の後半である。** 前半（朝の営業所）は
       **この鍵の外にある**——`place` が話に一つである以上、**地理の側が話に一つとは限らない。**
+    states: {}
+
+  表札と宛名票:
+    # 第二巻『重なった名』第7話「表札と宛名票」の記名の現場。
+    # **柱の表札（彫られた二字）と、箱の側面の宛名票（印刷された二字）。**
+    # 出所: 台帳 `series-bible.md`／話割り `habits-02/構想/話割り.md` 第7話の節
+    #       （**記名＝宛名票の名／現場・一拍＝届け先の玄関／表札と宛名票**）／
+    #       場面表 `habits-02/構想/各話/07_表札と宛名票.md`／
+    #       本文 `habits-02/草稿/draft_02-07_表札と宛名票.md` 第2場面——
+    #       「柱に、表札が、ある」「彫って、ある。へこんで、いる」「へこみに、色が、入って、いる」
+    #       「いちばん、上の、欄に、名が、ある」「紙の、字は、印刷である。黒い、インクである」
+    #       「持って、行って、表札の、ところへ、来る。来た、名が、そこに、無い。」
+    #       「重ならない、ところで、止まる。」
+    #
+    # ⚠️ **この鍵は「場所」ではない**（上の規則）。**地理は `geography` が持つ。**
+    #    ⚠️ **第1話の鍵（`宛名票の一行`）と混ぜてはならない。** あちらは**置き配の箱**の話であり、
+    #       **この話は対面の受け渡しである。** 同じ「宛名票」でも、**別の話の、別の現場である。**
+    #    ⚠️ **一話に一つである。** 第7話の三場面は、どれもこの鍵を `place` に持つ——
+    #       **第一場面（車の中の伝票）も含めてである**（`place` はその場面の小道具ではない）。
+    #
+    # ⚠️ **この鍵の名は、話割りの「一拍」の欄から来ている。**（2026-09-21 に記録。著者の裁定）
+    #    **上の二つの鍵とは、取っている欄が違う**——**揃っていないのは、意図である。**
+    #
+    #      一巻1話  記名＝`出席簿の転出欄の一行`   現場／一拍＝`職員室／転出欄の一行の手前`
+    #               → 鍵 `出席簿の転出欄`（**記名の欄から。末尾の「の一行」を落とした形**）
+    #      二巻1話  記名＝`宛名票の一行`           現場／一拍＝`足立区の路上／八十軒目`
+    #               → 鍵 `宛名票の一行`（**記名の欄から。そのまま**）
+    #      二巻7話  記名＝`宛名票の名`             現場／一拍＝`届け先の玄関／表札と宛名票`
+    #               → 鍵 `表札と宛名票`（**一拍の欄から**）
+    #
+    #    ⚠️ **なぜ記名の欄を取らなかったか——第7話の主題は、二つの字が合わないことである。**
+    #       `宛名票の名` と名づければ、**表札の側が台帳から消える。**
+    #       そしてこのショットの `reference_set` は**両方の字形を固定せねばならない**
+    #       （**彫りと印刷の別**）——**鍵は両方を名乗らねばならない。**
+    #       `表札と宛名票` は**話名そのものでもある。**
+    #       ⚠️ **ゆえにこの一行が要る。** 書かなければ、次の読者には**ずれに見える。**
+    base: >-
+      habits-fuda-to-atena-hyo（柱の表札と、箱の側面の宛名票。**表札は木で、字が彫ってあり、
+      へこみに黒が入っている。宛名票は紙で、字が印刷である。**）
+      ⚠️ **まだ無い。意図であって資産ではない**（方針 §5c）。
+      ⚠️ **二つの字は、どちらも読ませない。**（話割り「この話で名を目で読む者＝暮林蒼」／
+      場面表「動かさないもの——どちらの字が正しいかを、書かない」）
+      **その可読度を負うのは、この話の §18 である**——`specs/video/habits-ch02-seg07.md`。
+      ⚠️ **2026-09-21——この鍵は、可読度の裁定より後に立った。**
+      床（`bible.negative_base`）は**もう「読めない名」を要求しない**——
+      **話ごとに §18 が負う**（`宛名票の一行` の註、`bible.yaml` の裁定）。
+      **第8話は「橋本」を読ませる。第7話は読ませない。一本の床では、この二つを同時に表せない。**
+      ⚠️ **消してはならないものは、字種ではない**——**空白の面と偽の字である**
+      （`no nonsense glyphs` / `no pseudo-kanji` / `no invented characters`）。
+      **この話が要るのは「彫りと印刷の別が見える字形を、読ませずに置く」ことである**
+      ——**文字を描けないモデルでは、原理的に達成できない。**
+    geography: >-
+      東京都足立区綾瀬の、届け先の家の玄関の前。**柱があり、表札がかかっている。**
+      出所: 話割り 第7話の節「舞台＝足立区綾瀬」／場面表——
+      「**昼の二つの場所**……**時刻を書いていない。この話の三場面を、足立区綾瀬の一つの昼に置く**」／
+      本文 第2場面——「数歩で、足が、止まる」「玄関である」「戸の、横に、柱が、ある」
+      「踏み石は、四角い。角は、欠けて、いる」「戸は、半分で、止まる」。
+      ⚠️ **玄関の内側を書かない**（場面表「届け先の玄関の内側を、書かない」——
+      机・床・奥の灯りを削った。**戸口の外の景物だけである**。第9話と同じ扱い）。
+      ⚠️ **段差の高さを測らない**（`宛名票の一行` の同じ註）——**位置だけである。**
+      **高さになるのは第11話である。**
     states: {}
 
 # ✅ **地理について——決定（2026-09-15、著者）。この一枚で見つけ、この日に解いた。**
@@ -536,7 +605,8 @@ props:
     appearance: >-
       茶色の輪ゴムが二本、かけられた伝票の束。**端がそろっている。**
       ⚠️ **積み重ねの厚みが、残量である**——第3場面では薄くなっている。
-      ⚠️ **束の一枚一枚は読めない。**（`bible.negative_base` の `no legible name text`）
+      ⚠️ **束の一枚一枚は読めない。**（**この話の §18**——`no legible name text` /
+      `no legible text on the delivery slips`。⚠️ **2026-09-21——床から §18 へ移った**）
       **この話で読まれる紙は、宛名票のいちばん上の行だけである。**
     negative:
       - "no legible text on the delivery slips"
@@ -583,8 +653,10 @@ disclosure:
     #    ⚠️ **台帳の鍵と、ショット記録の鍵は、同じ字でなければならない**（`L7b` が突き合わせる）。
     宛名票の一行.いちばん上の行: present
     # **`covered` である**——§18 の Negative は動かない。
-    # ⚠️ **動かす必要が無いのは、基盤が既にその状態を持っているからである**——
-    #    `bible.negative_base` の `no legible name text` が常に付く。
+    # ⚠️ **動かす必要が無いのは、この話の §18 が既にその状態を持っているからである**——
+    #    `habits-ch02-seg01`–`seg03` の `Negative Prompt` に `no legible name text` が在る。
+    #    ⚠️ **2026-09-21——床（`bible.negative_base`）から §18 へ移った**（裁定、著者）。
+    #       **語は一字も変わっていない。変わったのは規則の持ち主である。**
     #    **ゆえに「見えるが読めない」は、Negative の側で既に成立している。**
     #    ⚠️ **§18 が生まれたので、ここは決められる**（この話の仕様は §18 を持つ）。
     #       ⚠️ **`habits-ch01-seg01` の側は、依然として決められない**——**あちらに §18 は無い。**

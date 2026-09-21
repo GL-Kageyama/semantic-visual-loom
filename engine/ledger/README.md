@@ -59,6 +59,7 @@ in order to fire on "`before` and `after` are the same" — but **JSON Schema ca
 | **L27** | **The work does not declare a language** — or the declared language does not reach §18 `Audio Prompt` | "Does the Work Say What Language It Speaks" below |
 | **L28** | **§18 carries a phrase that belongs to the other route** (`MINIMAX H3` only; the phrases and their reasons are in `specmap.MODEL_ROUTE`) | "Is §18 Written in This Route's Grammar" below |
 | **L29** | **This run does not read every work below it** — a work holding a work is a violation; a work held by a material directory is a note | "Does This Run Read Every Work Below It" below |
+| **L30** | **§18 fills a slot the route does not receive** (`SEEDANCE 2.5` only; the slots and their reasons are in `specmap.MODEL_UNRECEIVED_SLOTS`). **Waivable — by the work (`bible.route_limits_accepted`)** | "The Slots a Route Does Not Receive" below |
 
 **L2, L3 and L4 are transplants.** Applied to all 57 segments of Gozen-niji,
 a checker that scored **recall 2/2 and 0 false positives** went in just as it was.
@@ -214,6 +215,8 @@ So **layer F** looks at **the registry itself** — **whether the registration i
 | **§18's slots** | `specmap.PROMPT_SLOTS` | 7 (Master / Visual / Motion / Camera / Audio / Negative / **Style Motion**) | **L17** |
 | **models** | `specmap.MODELS` | name, kind (`video` / `image`), source. **Prices are not written** | **L18** |
 | **a route's own grammar** | `specmap.MODEL_ROUTE` | per video route, the phrases its §18 must not carry, **each with its reason**. `WAN 3.0`'s row is **empty** — that route has no forbidden phrase | **L28** |
+| **the slots a route does not receive** | `specmap.MODEL_UNRECEIVED_SLOTS` | per video route, the §18 slots its generator does not take as a **floor**, **each with its reason**. `WAN 3.0`'s and `MINIMAX H3`'s rows are **empty — they have not been measured**, which is not the same as "they are received" | **L30** |
+| **the exclusions a work accepts** | `bible.route_limits_accepted` | the work's own declaration, `<MODEL>: <slot>`. **The work writes the exclusion** | **L30** (downgrades it to a note) |
 | **specification kinds** | `specmap.SPEC_KINDS` | `video` (field `spec`, holds §1–20) / `image` (field `key_image`, holds neither) | **L18** (`L11`, `L21` and `L22` follow it) |
 | **field destinations** | `specmap.FIELD_DESTINATION` | 18 fields. **There is no `mode` dimension.** The vocabulary is `自前` (own) / `prompt:<slot>` / `params:<key>` / `handover:<base>` / `edit:timeline` | **L19** |
 | **what `mode` requires** | `specmap.MODE_DEMANDS` | `still` (§11), `composite` (§11 + `text_channel`), **`motion` (empty row)** | **L24** |
@@ -662,8 +665,8 @@ transition. ⚠️ **`no cuts to unrelated locations` was already in that §18**
 `Observed Problems` quotes the removed strings as the cause of the failure** — so **a layer that
 scanned the whole file would fire on the corrected specification.** (`L4` fell into this shape.)
 
-⚠️ **It is scoped by route, and that is the whole of its design.** This repository holds **117 video
-specifications — 114 on `WAN 3.0`, 3 on `MINIMAX H3`.** ⚠️ **`one continuous take` sits in §18 of 15
+⚠️ **It is scoped by route, and that is the whole of its design.** This repository holds **118 video
+specifications — 114 on `WAN 3.0`, 3 on `MINIMAX H3`, 1 on `SEEDANCE 2.5`.** ⚠️ **`one continuous take` sits in §18 of 15
 of those 114, and there it is correct** — and those 15 are exactly the specifications a shot record
 points at, which is **the whole of what this layer can reach** (10 in `hitosara`, 5 in
 `promo-chinatsu`). **Unscoped, this layer would fire on all 15** — and a note that fires on correct
@@ -733,6 +736,80 @@ rule is about**——a work inside a work.
 the disk, so **it names the works it found and does not read them.** **The note says "this run
 does not read them"——it does not say they are fine.** ⚠️ **A work that is not on disk is not
 named**, and **it is not read either**——which is the same silence, arrived at from the other side.
+
+### L30 — the slots a route does not receive
+
+⚠️ **The decision** (2026-09-21, author): **a route declares the §18 slots its generator does not
+take, and a specification that fills one is reported.** ⚠️ **The declaration is a measurement of the
+route, not a taste** — so this one is a **violation**, where its neighbours are notes.
+
+⚠️ **This is measured, not anticipated.** `SEEDANCE 2.5` has **no negative parameter.** What its
+vendor's documentation treats as negation is **subtitles and audio only** (`"No subtitles."` /
+`"No BGM"` / `"No audio."`); **everything else written into that slot is read as prose.**
+⚠️ **The slot is still called `Negative Prompt`, and it is still where the work's prohibitions are
+written** — so a specification on this route can fill it correctly and **hand a generator that reads
+it as description.** ⚠️ **A negation that did not work is indistinguishable from a negation that
+was never handed over** — and **that is the whole reason this fires.**
+
+**One slot fires, on one route:**
+
+| slot | why the route does not receive it |
+|---|---|
+| `Negative Prompt` | **No negative parameter.** Officially only subtitles and audio are treated as negation; **the rest is prose** — so **the floor becomes advice.** |
+
+⚠️ **It is the inverse of `L28`.** `L28` asks **whether the phrase belongs to that route**; this
+layer asks **whether the route holds that slot at all.** **Both keep the route-side fact as data**
+(`MODEL_ROUTE` / `MODEL_UNRECEIVED_SLOTS`), and **both close in both directions** — a video route
+missing from the registry fires, and so does a route in it that is not a registered video route.
+
+⚠️ **The work can take the limit on, and that is the only way out.** `bible.route_limits_accepted`
+is the one seat — a list of `<MODEL>: <slot>` strings. **A declared limit turns the violation into a
+note**, and the note says **the work knew.** ⚠️ **The exclusion is the work's to write**, for the
+same reason as `bible.base_negatives_waived`: **an engine that remembers which works are special
+has stopped being an engine.**
+
+⚠️ **Do not empty the slot to stop the fire.** `L21` requires that slot to cover
+`BASE_NEGATIVES ∪ bible.negative_base`, so **emptying it moves the violation rather than removing
+it** — and it throws away **the two clauses this route does hear** (`No subtitles.` / `No BGM.`),
+**which are the only two it is known to obey.** ⚠️ **What the work forbids is not the same thing as
+what the route can hear** — the way through is **to write the prohibitions in the affirmative, into
+the slots the route does read** (`Master` / `Visual` / `Camera` / `Motion` / `Audio`), and
+[`docs/seedance-route.md`](../../docs/seedance-route.md) is where that is worked out.
+
+⚠️ **The declarations are audited in both directions** (added 2026-09-21). `route_limits_accepted`
+is matched **exactly** — so a misspelt declaration is **silently ignored**, the author gets back
+**the same violation they would have got for writing nothing**, and **the mechanism looks broken.**
+⚠️ **This is the inverse of "an exclusion that is not reported looks like a check that passed"** —
+**a declaration that does not take effect is the same as no declaration.** So the layer reports:
+
+| what the work wrote | what the layer says |
+|---|---|
+| a string that matches **no gate at all** | **a violation** — "not one gate matches this." ⚠️ **It names the near miss when there is one** (case, spacing and full-width colons are folded **for naming only**), and otherwise **lists the gates that route actually holds** |
+| a string that **does** name a gate, but this work's §18 **never reached it** | **a note** — "this declaration is doing nothing right now." **It is not a violation** — the work may reach that route later. ⚠️ **But it is not silence either**, for the same reason |
+
+⚠️ **The spelling is not normalised through.** Folding is used **to name the near miss, never to
+accept it** — letting a fold through would **pass a declaration that names a genuinely different
+gate**, which is the rule `L21` already applies to `base_negatives_waived` (**only the foundation's
+clauses may be excluded**).
+
+⚠️ **What this layer cannot see, and the hole is recorded rather than papered over:** it reads
+**whether the slot has content**, not **whether the negation inside it was heard.** ⚠️ **A route
+with an empty row is unmeasured, not verified** — `WAN 3.0` and `MINIMAX H3` do take a negative
+parameter, and **neither has been measured clause by clause.** The empty row is **a claim about our
+measurements, not about the routes** (the same discipline as `MODEL_ROUTE`'s `WAN 3.0: ()`).
+
+⚠️ **And it cannot tell a work that took the limit on from one that merely obeyed `L21`.** `L21`
+requires five clauses in that slot, and **this layer fires on any content at all** — so **a work
+that writes the five mandatory clauses and nothing else fires exactly like a work that knowingly
+wrote eighty-five.** ⚠️ **Measured**: narrowing the specification to those five clauses **leaves the
+violation standing**; emptying the slot **moves it to `L21`**. **On a route with a gate, the
+declaration is therefore a toll rather than a judgement** — and the layer, as built, **cannot say
+which kind of work paid it.**
+
+⚠️ **It does not inherit `L28`'s silence.** Where a work holds **no §18 on a gated route**, this
+layer **says so** — "0 本", as a note — because **`L28` printing nothing and `L28` agreeing look
+the same, and they are not the same.** ⚠️ **When the registry itself is broken, it reads no bodies
+at all** and names the broken row — **the same shape as `L28`.**
 
 ### ⚠️ Firing Against a Running Artifact
 
@@ -912,7 +989,7 @@ What it can say is —
 | **Guarantees** | **The intent and the specification agree on duration.** | **L23** |
 | **Guarantees** | **A still shot is written as still** (§11 non-empty. `composite` also needs `text_channel`) | **L24** |
 | **Guarantees** | **What came back matches the shot, the style and the measurement.** | **L25** |
-| **Guarantees** | **It is not broken.** L0–L29 fire before generation, and everything that fired can be explained | all |
+| **Guarantees** | **It is not broken.** L0–L30 fire before generation, and everything that fired can be explained | all |
 | **Does not guarantee** | **That the generator draws the aim.** | —— |
 | **Does not guarantee** | **That a still shot's §11 really stops the subject.** | —— |
 | **Does not guarantee** | **That the file `take.file` names actually exists.** | —— |
@@ -964,6 +1041,15 @@ Write only `spec:` and not `key_image:`, and **the image side is never checked**
   specifications and is correct there** — deciding it means **matching meaning against the entities
   §18 places**, and **no ledger of those entities exists.** **Do not add the string: it would fire on
   the corrected text.**
+- ⚠️ **`L30` cannot see whether the negation was heard.** It reports **that a slot the route does
+  not receive has content in it** — **what the generator did with that content happens outside this
+  foundation**, and **nothing reads it back.** ⚠️ **A route with an empty row in
+  `MODEL_UNRECEIVED_SLOTS` is unmeasured, not verified** — so **the registry's silence and the
+  route's ability are two different things**, and the row records only the first.
+- ⚠️ **`L30`'s gate is one slot deep.** It knows **which slots a route does not receive**; it does
+  **not** know **which clauses inside a received slot survive** — a route that reads the Negative
+  as prose **reads the affirmative sentences in `Master` and `Visual` the same way**, and **this
+  layer has no measure of that.**
 - **The handover sheet.** A layer that assembles **what is passed from the record to the generator** (§18's 7 slots,
   `take.params`, the image prompt, the sound) **does not exist yet.** What `L19` looks at is
   **the declaration of the destination**, not **whether the assembled text actually carries that field.**

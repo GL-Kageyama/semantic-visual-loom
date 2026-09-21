@@ -1134,6 +1134,11 @@ def check_model_route(project):
     ⚠️ **`MINIMAX H3` の §18 を1本も持たない作品では、この層は1文字も出さない。**
     それは「確かめて正しい」ではなく**「相手が無い」**である——
     **この沈黙がこの層の最大の穴であり、`README.md` の穴の表に書く。**
+
+    ⚠️ **経路の名前を、この本文に書かない。** かつて違反の文面が
+    `docs/h3-route.md` を直書きしていた——**3つ目の経路を登録した日に、その文面は嘘になった**
+    （実測 2026-09-21）。**引く先は `specmap.MODEL_ROUTE_DOC` が経路ごとに持つ。**
+    経路が増えれば表が増え、**この関数は一字も変わらない。**
     """
     # ① **目録そのものを見る。** 壊れていれば本文を読まない。
     #    ⚠️ **動画の経路についてだけ閉じる。** 画像の経路（`CHATGPT IMAGE 2.5`）は
@@ -1147,6 +1152,15 @@ def check_model_route(project):
                         f"`MODEL_ROUTE`: {'／'.join(specmap.MODEL_ROUTE) or '（空）'}。"
                         "**語彙を持たない経路の行も要る**——"
                         "落とせば「禁じる語が無い」と「書き忘れた」の区別が消える。")]
+    # ⚠️ **文書の表も同じ範囲へ閉じる。** 閉じなければ、経路を足した日に
+    #    **その経路の違反だけが文書を引かない**——そして**それは黙って起きる。**
+    if set(specmap.MODEL_ROUTE_DOC) != routes:
+        return [finding("L28", "",
+                        "`MODEL_ROUTE_DOC` の鍵が、`MODELS` の**動画の経路**と一致しない。"
+                        f"動画の経路: {'／'.join(sorted(routes)) or '（無し）'} ／ "
+                        f"`MODEL_ROUTE_DOC`: {'／'.join(specmap.MODEL_ROUTE_DOC) or '（空）'}。"
+                        "**引く先を持たない経路の行も要る**（値 `None`）——"
+                        "落とせば「引く文書が無い」と「書き忘れた」の区別が消える。")]
     broken = [f"`{m}`: {why}" for m, r in specmap.MODEL_ROUTE.items()
               if (why := _route_phrase_ok(r))]
     if broken:
@@ -1158,7 +1172,7 @@ def check_model_route(project):
 
     out = []
     specs = _specs_of(project, "video")
-    routed = 0
+    routed = {}                 # 経路 → **その経路の禁じる語と突き合わせた本数**
     for s, p in specs:
         model = _model_of(p)
         if not model:
@@ -1167,25 +1181,247 @@ def check_model_route(project):
         if route is None:
             continue            # 目録に無いモデル——L18 が報告している
         if not route:
-            continue            # その経路に禁じる語は無い（`WAN 3.0`）
+            continue            # その経路に禁じる語は無い（`WAN 3.0`・`SEEDANCE 2.5`）
         body = _section_body(p, "18.")
         if not body:
             continue            # §18 が空——L11 が報告している
-        routed += 1
+        routed[model] = routed.get(model, 0) + 1
         low = body.lower()
+        # ⚠️ **引く文書は経路ごとである。** 直書きすれば、経路が増えた日に嘘になる。
+        doc = specmap.MODEL_ROUTE_DOC.get(model)
+        tail = (f"**この経路の文法ではない**——`{doc}`。" if doc
+                else "**この経路の文法ではない。**")
         for phrase, why in route:
             if phrase.lower() in low:
                 out.append(finding("L28", s,
-                                   f"§18（`{model}`）に `{phrase}` が在る。{why}"
-                                   "**この経路の文法ではない**——`docs/h3-route.md`。"))
+                                   f"§18（`{model}`）に `{phrase}` が在る。{why}{tail}"))
     if not routed:
         return out              # 相手が無い。**沈黙は「正しい」ではない**（穴である）
 
-    out.append(finding("L28", f"{routed}本",
-                       f"`MINIMAX H3` の §18 を {routed} 本、経路の禁じる語と突き合わせた。"
-                       "⚠️ **この層が見るのは「その語が別の経路のものか」だけである**——"
-                       "**平板な否定が欠陥かどうかは、意味の照合と実体の台帳が要る。**",
+    # ⚠️ **経路ごとに分けて報告する。** 1つにまとめれば、**どの経路を突き合わせたのかが消える**
+    #    ——そして経路が3つになった今、**「3本突き合わせた」は何も言っていない。**
+    out.append(finding("L28", "／".join(f"{m} {n}本" for m, n in routed.items()),
+                       "経路ごとに §18 を、その経路の禁じる語と突き合わせた——"
+                       + "／".join(f"`{m}` の §18 を {n} 本" for m, n in routed.items())
+                       + "。⚠️ **この層が見るのは「その語が別の経路のものか」だけである**——"
+                       "**平板な否定が欠陥かどうかは、意味の照合と実体の台帳が要る。**"
+                       "⚠️ **禁じる語を持たない経路は、ここに数えられない**"
+                       "——**突き合わせていないのではない。突き合わせる語が無いのである。**",
                        severity="note"))
+    return out
+
+
+def _slot_body(path, slot):
+    """§18 の小節 `slot` の本文。**`_prompt_slots` と同じ切り方である。**
+
+    ⚠️ **見出しの水準を問わない**（`specdoc.sections` が畳む）——`##` でも `###` でも、
+    **同じ名前で切れる。** 無ければ `""` を返す——⚠️ **「小節が無い」と「小節が空である」を
+    ここでは区別しない**（区別が要るのは `L17` である。**同じ欠陥を2つの層が
+    別々の符号で報告しない**）。
+    """
+    inside = False
+    for t, body in specdoc.sections(Path(path).read_text(encoding="utf-8")):
+        if TOP_SECTION.match(t):            # トップレベルの節見出し（`18. SEEDANCE 2.5 …`）
+            inside = t.startswith("18.")
+            continue
+        if inside and t == slot:
+            return body
+    return ""
+
+
+def check_unreceived_slots(project):
+    """L30 — **§18 が、その経路が受け取れないスロットへ中身を書いていないか。**
+
+    ⚠️ **なぜ要るか**（著者の裁定 2026-09-21）——経路は、能力が違う。
+    `SEEDANCE 2.5` は**否定を専用のパラメータで受け取らない**（公式に否定として
+    扱われるのは字幕と音声だけである）。**§18 に 90 節の禁制を書いても、
+    その 90 節は散文として読まれる**——**床にならない。**
+    ⚠️ **効かなかった否定は、渡さなかった否定と見分けがつかない。**
+    ゆえに**経路が「受け取れないスロット」を宣言し、中身が在れば鳴らす。**
+
+    ⚠️ **これは `L28` の裏返しである。** `L28` は「**その語が、その経路のものか**」を見る。
+    この層は「**その欄を、その経路が持っているか**」を見る。
+    **どちらも、経路の側の事実を data に持つ**（`MODEL_ROUTE` / `MODEL_UNRECEIVED_SLOTS`）。
+
+    ⚠️ **中身が在ること自体は欠陥ではない。** 欠陥は「**届かないと知らずに書くこと**」である。
+    だから**作品が引き受ける道を残す**（`specmap.ROUTE_LIMITS_KEY`）——
+    **違反を、著者が名指しで引き受けた註に変える。**
+    ⚠️ **報告しない除外は、通った検査に見える。**
+
+    ⚠️ **この層は「その否定が実際に効いたか」を見ない。** 生成はこの基盤の外で起きる
+    ——**見えるのは「経路が受け取らないと宣言している欄に、中身が在る」ことまでである。**
+    **穴である。穴のまま記録する。**
+
+    ⚠️ **相手が無くても黙らない。** `L28` は「その経路の §18 を1本も持たない作品では
+    1文字も出さない」という穴を持つ（**沈黙は「正しい」ではない**）。
+    **この層は、見た本数を必ず言う**——**0 本なら 0 本と言う。**
+
+    ⚠️ **そして、宣言そのものも突き合わせる**（2026-09-21 に足した）。
+    `bible.route_limits_accepted` は**完全一致**で照合される——綴りが違えば
+    **黙って無視される。** 著者は「承知で使う」と書いたつもりで同じ違反を受け取り、
+    **機構が効かないと読む。** ⚠️ **「報告しない除外は、通った検査に見える」の裏返しである**
+    ——**効かない宣言は、宣言しなかったことと同じである。**
+    ゆえに2方向から報告する: **どの門にも当たっていない宣言**（違反）と、
+    **まだ当たっていない宣言**（註——この作品はその経路の §18 を持たない）。
+
+    ⚠️ **綴りの揺れを吸収して通しはしない。** 吸収すれば、**本当に違う門を名指した宣言まで通る**
+    （`L21` の `stray` と同じ規律——**除外できるのは基盤の節だけである**）。
+    揺れは、**近い綴りを名指すことで**報せる。
+    """
+    # ① **目録そのものを見る。** 壊れていれば本文を読まない。
+    routes = {m for m, d in specmap.MODELS.items() if d.get("種別") == "video"}
+    if set(specmap.MODEL_UNRECEIVED_SLOTS) != routes:
+        return [finding("L30", "",
+                        "`MODEL_UNRECEIVED_SLOTS` の鍵が、`MODELS` の**動画の経路**と一致しない。"
+                        f"動画の経路: {'／'.join(sorted(routes)) or '（無し）'} ／ "
+                        f"`MODEL_UNRECEIVED_SLOTS`: "
+                        f"{'／'.join(specmap.MODEL_UNRECEIVED_SLOTS) or '（空）'}。"
+                        "**測っていない経路の行も要る**（空のタプル）——"
+                        "落とせば「受け取れないスロットが無い」と「書き忘れた」の区別が消える。")]
+    broken = []
+    for m, decl in specmap.MODEL_UNRECEIVED_SLOTS.items():
+        for pair in decl:
+            if not (isinstance(pair, tuple) and len(pair) == 2):
+                broken.append(f"`{m}`: 対になっていない項目 `{pair!r}`")
+                continue
+            slot, why = pair
+            if slot not in specmap.PROMPT_SLOTS:
+                broken.append(f"`{m}`: `{slot}` は `PROMPT_SLOTS` に無い"
+                              "——**目録に無いスロットは、どこにも行かない**")
+            elif not str(why).strip():
+                broken.append(f"`{m}`: `{slot}` に理由が無い"
+                              "——**理由の無い門は、次の者が開けてよいと読む**")
+    if broken:
+        return [finding("L30", "",
+                        "`MODEL_UNRECEIVED_SLOTS` が本文を走査してよい形になっていない——"
+                        + "／".join(broken)
+                        + "。ゆえにこの層は**本文を1行も読んでいない。**")]
+
+    bible = ((getattr(project, "bible", None) or {}).get("bible") or {})
+    accepted = {c.strip() for c in (bible.get(specmap.ROUTE_LIMITS_KEY) or [])
+                if isinstance(c, str)}
+
+    out, notes = [], []
+    examined, filled = {}, {}          # (経路, スロット) → 本数
+    seen_routes = set()                # **門を持つ経路のうち、§18 を1本でも持っていたもの**
+    checked = 0
+    for s, p in _specs_of(project, "video"):
+        model = _model_of(p)
+        if not model:
+            continue                   # §18 が無い／名乗らない——L18 が報告している
+        decl = specmap.MODEL_UNRECEIVED_SLOTS.get(model)
+        if decl is None:
+            continue                   # 目録に無いモデル——L18 が報告している
+        if not decl:
+            continue                   # **この経路は受け取れないスロットを持たない**
+        body = _section_body(p, "18.")
+        if not body:
+            continue                   # §18 が空——L11 が報告している
+        seen_routes.add(model)
+        checked += 1
+        for slot, why in decl:
+            key = (model, slot)
+            examined[key] = examined.get(key, 0) + 1
+            if not _slot_body(p, slot).strip():
+                continue               # 空である——**門は守られている**
+            filled[key] = filled.get(key, 0) + 1
+            label = f"{model}: {slot}"
+            if label in accepted:
+                notes.append(finding("L30", s,
+                                     f"§18 の `{slot}` に中身が在る。{why}"
+                                     f"⚠️ **この作品は、それを承知で使うと宣言している**"
+                                     f"（`bible.{specmap.ROUTE_LIMITS_KEY}` の `{label}`）——"
+                                     "**除外は作品の宣言であって、基盤の判断ではない。**",
+                                     severity="note"))
+            else:
+                out.append(finding("L30", s,
+                                   f"§18（`{model}`）の `{slot}` に中身が在る。{why}"
+                                   f"**この経路は `{slot}` を床として受け取らない。**"
+                                   f"⚠️ **承知で使うなら、作品がそれを書く**——"
+                                   f"`bible.{specmap.ROUTE_LIMITS_KEY}` に `{label}`。"))
+    out += notes
+
+    # ---- 宣言そのものを突き合わせる
+    #
+    # ⚠️ **除外は、届かなければ除外ではない。** `accepted` は完全一致で照合されるので、
+    #    綴りが違えば**黙って無視される**——そして著者には、**何も書かなかったときと
+    #    同じ顔の違反**が返る。**機構が壊れているように見える。**
+    #
+    # ⚠️ **正規化して通さない。** 畳んだ照合は、**近い綴りを名指すためにだけ**使う。
+    #    通してしまえば、**本当に別の門を名指した宣言まで通る**（`L21` の `stray`——
+    #    「除外できるのは基盤の節だけである」——と同じ規律である）。
+    all_labels = {f"{m}: {slot}"
+                  for m, d in specmap.MODEL_UNRECEIVED_SLOTS.items()
+                  for slot, _ in d}
+    used_labels = {f"{m}: {slot}" for m, slot in examined}
+
+    def _fold(text):
+        """照合のための畳み方。⚠️ **通すためではなく、近い綴りを名指すためである。**"""
+        return " ".join(str(text).replace("：", ":").replace("　", " ").split()).casefold()
+
+    folded = {_fold(lb): lb for lb in all_labels}
+    gated = [m for m in sorted(specmap.MODEL_UNRECEIVED_SLOTS)
+             if specmap.MODEL_UNRECEIVED_SLOTS[m]]
+    for label in sorted(accepted):
+        if label in all_labels:
+            # ⚠️ **門は在るが、この作品はそこへ一度も来ていない。**
+            #    **いま何もしていない**——黙って置けば、「効いている」と読まれる。
+            if label not in used_labels:
+                out.append(finding("L30", label,
+                                   f"`bible.{specmap.ROUTE_LIMITS_KEY}` の `{label}` は、"
+                                   "**この作品の §18 に一度も当たっていない。**"
+                                   "⚠️ **この宣言は、いま何もしていない**——"
+                                   "この作品がその経路の §18 を持てば、そのとき効く。"
+                                   "**沈黙は「正しい」ではない。**",
+                                   severity="note"))
+            continue
+        near = folded.get(_fold(label))
+        if near:
+            hint = f"⚠️ **`{near}` の綴り違いである可能性がある。**"
+        else:
+            head, _, _slot = label.partition(":")
+            gates = specmap.MODEL_UNRECEIVED_SLOTS.get(head.strip())
+            if gates:
+                hint = (f"⚠️ **`{head.strip()}` が受け取らないのは "
+                        + "／".join(f"`{g}`" for g, _ in gates) + " だけである。**")
+            elif gates is not None:
+                hint = f"⚠️ **`{head.strip()}` は、受け取れないスロットを1つも宣言していない。**"
+            else:
+                hint = ("⚠️ **門を持つ経路は "
+                        + ("／".join(f"`{m}`" for m in gated) or "（無し）")
+                        + " である。**")
+        out.append(finding("L30", label,
+                           f"`bible.{specmap.ROUTE_LIMITS_KEY}` の `{label}` が、"
+                           "**どの門にも当たっていない。**"
+                           "⚠️ **宣言は完全一致で照合される**——"
+                           "効かなかった宣言は、**宣言しなかったことと見分けがつかない**"
+                           "（`L30` はそのまま鳴りつづける）。" + hint))
+
+    # ⚠️ **見た本数を必ず言う。** **沈黙は「正しい」ではない**——
+    #    そして **0 本を 0 本と言わなければ、「確かめた」と区別がつかない。**
+    gates = [m for m, d in specmap.MODEL_UNRECEIVED_SLOTS.items() if d]
+    if not gates:
+        return out                     # 門を持つ経路が1つも無い——言うことが無い
+    if not checked:
+        out.append(finding("L30", "0本",
+                           "受け取れないスロットを持つ経路 "
+                           + "／".join(f"`{m}`" for m in gates)
+                           + " の §18 を、この作品は**1本も持たない。**"
+                           "⚠️ **この層は本文を1行も読んでいない**——"
+                           "**それは「確かめて正しい」ではない。**",
+                           severity="note"))
+        return out
+    for (model, slot), n in examined.items():
+        out.append(finding("L30", f"{model} {n}本",
+                           f"`{model}` の §18 を {n} 本、`{slot}` の小節と突き合わせた。"
+                           f"中身が在ったのは {filled.get((model, slot), 0)} 本である。"
+                           "⚠️ **この層が見るのは「経路が受け取らないと宣言している欄に、"
+                           "中身が在るか」だけである**——**その否定が実際に効いたかは、"
+                           "この層からは見えない。**"
+                           + (f"⚠️ **門を持つ経路のうち、この作品が使っているのは "
+                              f"{'／'.join(sorted(seen_routes))} である。**"
+                              if seen_routes else ""),
+                           severity="note"))
     return out
 
 
@@ -2283,6 +2519,23 @@ def _has_content(v):
     return True
 
 
+def _text_channel_kinds(shot):
+    """`text_channel` が持つ行を、`kind` で数える。**読めない行は数えない。**
+
+    ⚠️ **空の列も、`kind` の無い行も、ここでは数えない**——前者は「何も無い」、
+    後者は**形の層（スキーマ）の欠陥**である。**同じ欠陥を2つの層が
+    別々の符号で報告しない**（`S1` が `kind` を必須にしている）。
+    """
+    out = collections.Counter()
+    ch = shot.get("text_channel")
+    if not isinstance(ch, (list, tuple)):
+        return out
+    for row in ch:
+        if isinstance(row, dict) and isinstance(row.get("kind"), str):
+            out[row["kind"]] += 1
+    return out
+
+
 def check_mode_demands(project):
     """L24 — **`mode` が要求するもの。** `specmap.MODE_DEMANDS`。
 
@@ -2334,6 +2587,22 @@ def check_mode_demands(project):
                                        "`composite` は「画は層の合成である」を意味する"
                                        "——焼くものが無ければ、"
                                        "**そのショットは何も合成しない。**"))
+            elif kind == "channel":
+                # ⚠️ **`text_channel` が非空であることでは足りない**（裁定 2026-09-21）。
+                #    生成器が描く `lettering` は**焼かない**——だから `lettering` だけを
+                #    持つ合成のショットは、**何も焼かないのに非空である。**
+                kinds = _text_channel_kinds(shot)
+                if not kinds.get(target):
+                    out.append(finding("L24", s,
+                                       f"`mode: {mode}` は `text_channel` に "
+                                       f"`{target}` の行を要求するが、**1つも無い。**"
+                                       + ("**欄そのものが空である。**"
+                                          if not kinds else
+                                          f"在るのは {'／'.join(sorted(kinds))} だけである"
+                                          f"——**`{target}` は焼かない側である。**")
+                                       + "`composite` は「画は層の合成である」を意味する"
+                                       "——**焼くものが無ければ、"
+                                       "そのショットは何も合成しない。**"))
             elif kind == "section":
                 src = _spec_of(shot, "video")
                 if not src:
@@ -2519,16 +2788,55 @@ def check_field_destination(schema_dir):
     送る、`take.params` に無い鍵へ送る）も鳴らす——**送り先が無ければ、届かない。**
     そして **`SPEC_KINDS` が指す欄がスキーマに実在すること**も見る——
     **経路を足したのに欄を足していなければ、その経路はどこにも無い。**
+
+    ⚠️ **`text_channel` は欄ごとでは閉じない**（裁定 2026-09-21）。この欄は `kind` で
+    割れ、**種類ごとに行き先が違う**（`specmap.TEXT_CHANNEL_KINDS`）。
+    だから**スキーマの `enum` と、その表の鍵を両方向に閉じる**——
+    **片方だけ足せば、足した種類はどこにも行かないか、行き先の無い種類になる。**
+    そして**表の値は、欄の行き先に含まれていなければならない**——
+    **欄が宣言していない行き先へ、種類だけが行くことはできない。**
     """
     out = []
     path = Path(schema_dir) / "shot-record.schema.json"
     if not path.is_file():
         out.append(finding("L19", "", f"ショット記録のスキーマが読めない: {path}"))
         return out
-    fields = set(json.loads(path.read_text(encoding="utf-8")).get("properties", {}))
+    schema = json.loads(path.read_text(encoding="utf-8"))
+    fields = set(schema.get("properties", {}))
     if not fields:
         out.append(finding("L19", "", "スキーマに欄が1つも無い。**空のスキーマと検査している。**"))
         return out
+
+    # ⚠️ **`text_channel` の種類の閉包。** スキーマの `enum` と `TEXT_CHANNEL_KINDS`。
+    try:
+        enum = set(schema["properties"]["text_channel"]["items"]
+                   ["properties"]["kind"]["enum"])
+    except (KeyError, TypeError):
+        enum = set()
+        out.append(finding("L19", "text_channel",
+                           "スキーマの `text_channel[].kind` に `enum` が無い。"
+                           "**種類が自由文になれば、行き先を決められない**——"
+                           "**決められない行き先は、届かない。**"))
+    if enum or specmap.TEXT_CHANNEL_KINDS:
+        for k in sorted(enum - set(specmap.TEXT_CHANNEL_KINDS)):
+            out.append(finding("L19", "text_channel",
+                               f"スキーマの `kind` に `{k}` が在るが、"
+                               "`TEXT_CHANNEL_KINDS` に行き先が無い。"
+                               "**行き先の無い種類は、どこにも届かない**——しかも黙って。"))
+        for k in sorted(set(specmap.TEXT_CHANNEL_KINDS) - enum):
+            out.append(finding("L19", "text_channel",
+                               f"`TEXT_CHANNEL_KINDS` が `{k}` を指すが、"
+                               "スキーマの `enum` に無い。**書けない種類に、行き先は要らない。**"))
+        # ⚠️ **欄の行き先は、種類の行き先の上位集合でなければならない。**
+        field_dests = set(_dests(specmap.FIELD_DESTINATION.get("text_channel")))
+        for k in sorted(set(specmap.TEXT_CHANNEL_KINDS) & enum):
+            d = specmap.TEXT_CHANNEL_KINDS[k]
+            if d not in field_dests:
+                out.append(finding("L19", "text_channel",
+                                   f"種類 `{k}` の行き先 `{d}` が、欄の行き先 "
+                                   f"({'／'.join(sorted(field_dests)) or '（空）'}) に無い。"
+                                   "**欄が宣言していない行き先へ、種類だけが行くことはできない**"
+                                   "——引き渡しの層は欄の行き先しか読まない。"))
 
     # ⚠️ **`SPEC_KINDS` の閉包。** 経路の欄は、記録の欄でなければならない。
     for kind, spec in sorted(specmap.SPEC_KINDS.items()):
@@ -2757,6 +3065,7 @@ def run(project, schema_dir=None, repo_root=None):
     out += check_negative_coverage(project)
     out += check_work_language(project)
     out += check_model_route(project)
+    out += check_unreceived_slots(project)
     out += check_image_vars(project, repo_root=repo_root)
     out += check_duration(project)
     out += check_work_constants(project)

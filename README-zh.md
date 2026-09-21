@@ -117,8 +117,11 @@ semantic-visual-loom/
 ⚠️ **这是视频自称 `WAN 3.0` 的那条路径。** 在第二条视频路径（`MINIMAX H3`）上，
 **镜头根本没有图像路径**——生成器拿到的是分镜图像，
 而制作那张纸的提示词住在 `specs/board/`（[`docs/usage.md`](docs/usage-zh.md)）。
-⚠️ **两条路径不共享时间的文法**——落在第二条上的约束在
+⚠️ **各路径不共享时间的文法**——落在第二条上的约束在
 [`docs/h3-route.md`](docs/h3-route-zh.md) 里。
+⚠️ **第三条视频路径 `SEEDANCE 2.5` 默认什么都不附**——它读一条很长的提示词，
+**而那条提示词可以自带时钟**——但是**它的 `Negative Prompt` 槽位并不被当作地板来接收。**
+**`L30` 响的就是这道门**——约束在 [`docs/seedance-route.md`](docs/seedance-route-zh.md) 里。
 **其余在 [`projects/hitosara/README.md`](projects/hitosara/README-zh.md) 里。**
 
 ## 预定之中、但还没有的东西
@@ -185,7 +188,7 @@ semantic-visual-loom/
 **开发用日语推进，文档的正典是英语。**
 镜像用后缀方式并排在**同一个目录**里——规则在 [`CLAUDE.md`](CLAUDE-zh.md) 里。
 
-**18 份文档 × 3 种语言已经齐备**——⚠️ **这是 [`tools/check_i18n.py`](tools/check_i18n.py)
+**19 份文档 × 3 种语言已经齐备**——⚠️ **这是 [`tools/check_i18n.py`](tools/check_i18n.py)
 作为正典报告的本数，不是把仓库里的 `.md` 数了一遍的数。**
 **数，只拥有它所数范围那么宽。**
 **它看什么、不看什么**，写在 [`docs/usage.md`](docs/usage-zh.md) 里。

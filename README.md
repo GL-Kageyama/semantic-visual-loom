@@ -118,8 +118,12 @@ Ukebi V2 does not pass (8 of the 15 roles, all three `mode` values, `attached` o
 ⚠️ **This is the route where the video names `WAN 3.0`.** On the second video route (`MINIMAX H3`)
 **a shot has no image path at all**—the generator is handed a storyboard image instead, and the
 paper that makes it lives in `specs/board/` ([`docs/usage.md`](docs/usage.md)).
-⚠️ **The two routes do not share a grammar of time**, and the constraints that hold on the second
+⚠️ **The routes do not share a grammar of time**, and the constraints that hold on the second
 one are in [`docs/h3-route.md`](docs/h3-route.md).
+⚠️ **A third video route, `SEEDANCE 2.5`, attaches nothing by default**—it reads one long prompt,
+and **that prompt may carry its own clock**—but **its `Negative Prompt` slot is not received as a
+floor.** That gate is what `L30` fires on, and the route's constraints are in
+[`docs/seedance-route.md`](docs/seedance-route.md).
 **The rest is in [`projects/hitosara/README.md`](projects/hitosara/README.md).**
 
 ## Planned, But Not Yet There
@@ -190,7 +194,7 @@ is marked **invention (awaiting approval)**; running ② first would freeze an u
 Mirrors use the suffix scheme and sit in the **same directory**—the rules are in
 [`CLAUDE.md`](CLAUDE.md).
 
-**18 documents × 3 languages are in place**——**that is the count
+**19 documents × 3 languages are in place**——**that is the count
 [`tools/check_i18n.py`](tools/check_i18n.py) reports as the canonical set, not a count of every
 `.md` in the repository.** ⚠️ **A number is only as wide as what was counted.** What that check sees,
 and what it does not, is in [`docs/usage.md`](docs/usage.md).
