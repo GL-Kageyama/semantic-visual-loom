@@ -1452,6 +1452,66 @@ def self_test():
     print(f"    {'L20 様式の置き場を環境変数で指せる':<46}{'':>10}  "
           f"{'期待どおり' if ok else '⚠️ 期待と違う'}")
 
+    # ---- ⚠️ **指した先は、置き換えではなく重ねる**（決定 2026-09-21、著者）。
+    #     **動画側にカードを1枚足しただけで、隣の55枚が読めなくなってはならない。**
+    #     ⚠️ **この検査が要るのは、壊れ方が静かだからである**——隣が読めなくなっても、
+    #        `L20` は「カードが無い」としか言わず、**置き場が違うとは言わない。**
+    import tempfile as _tempfile
+    # ⚠️ **隣にしか無いカードを1枚、名前で選ぶ。** 選べなければ②は立てられない
+    #    ——**「重ねている」を、カード0枚の上で確かめたことにしない。**
+    neighbor = next((p.stem for p in sorted(cards.glob("*.md"))), None) if cards else None
+    with _tempfile.TemporaryDirectory() as _td:
+        own = Path(_td)
+        (own / "svl-only-style.md").write_text("# x\n", encoding="utf-8")
+
+        def _overlay_cases():
+            """`SVL_STYLES_DIR` を張ったときの4つの問い。**戻り値は (名前, 成否, 実測)。**"""
+            saved = _os.environ.get(semantic.STYLE_CARD_ENV)
+            _os.environ[semantic.STYLE_CARD_ENV] = str(own)
+            try:
+                dirs = semantic._cards_dirs(REPO, "style")
+                # ① **指した先**のカードが見つかる
+                a = semantic._card_path(REPO, "style", "svl-only-style")
+                # ② **隣にしか無い**カードが、まだ見つかる（＝置き換えていない）
+                b = semantic._card_path(REPO, "style", neighbor) if neighbor else None
+                # ③ 同じ場所を2度読まない（指した先＝隣、のときに効く）
+                c = len(dirs) == len(set(dirs))
+                # ④ 無いカードは、**探した範囲**を名乗る
+                d = semantic._cards_searched(REPO, "style", "no-such-style")
+                # ⑤ ⚠️ **指した先が、隣そのものである場合。**ここで畳まないと、
+                #    **同じカードを2度読み、「探した範囲」にも同じ道が2度並ぶ。**
+                _os.environ[semantic.STYLE_CARD_ENV] = str(cards)
+                same = semantic._cards_dirs(REPO, "style") if cards else None
+                return [
+                    ("指した先のカードが見つかる",
+                     a is not None and a.parent == own, str(a)),
+                    *([(f"隣のカード `{neighbor}` も、まだ見つかる",
+                        b is not None and b.parent != own, str(b))]
+                      if neighbor else []),
+                    ("同じ置き場を2度読まない", c, f"{len(dirs)} 箇所"),
+                    ("「無い」は探した範囲を並べる",
+                     d.count("no-such-style.md") == len(dirs) and len(dirs) >= 1, d),
+                    *([("指した先が隣それ自体なら、1箇所に畳まれる",
+                        len(same) == 1, f"{len(same)} 箇所")]
+                      if same is not None else []),
+                ]
+            finally:
+                if saved is None:
+                    _os.environ.pop(semantic.STYLE_CARD_ENV, None)
+                else:
+                    _os.environ[semantic.STYLE_CARD_ENV] = saved
+
+        if neighbor is None:
+            print(f"        ← 実測: 隣にカードが1枚も無いので、"
+                  f"「重ねている」の②は**立てていない**")
+        for _label, _ok, _got in _overlay_cases():
+            n += 1
+            bad += not _ok
+            print(f"    {'L20 重ねる: ' + _label:<46}{'':>10}  "
+                  f"{'期待どおり' if _ok else '⚠️ 期待と違う'}")
+            if not _ok:
+                print(f"        {_got[:88]}")
+
     def run1(label, fn, proj, want, fragment, note=None):
         """⚠️ **註も読む。** 註が出ないことも「違反0件」に見えるからである。"""
         nonlocal n, bad

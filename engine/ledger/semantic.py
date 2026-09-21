@@ -1571,7 +1571,7 @@ def _image_card_slots(specs, kind, repo_root):
     root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
     cards = {}
     for layer in ref_keys:
-        cards[layer] = _cards_dir(root, layer)
+        cards[layer] = _cards_dirs(root, layer)
 
     # 名乗りを1本ずつ読む。⚠️ **同じ名乗りが10本に在る**ので、報告は**層ごとに1件**に畳む。
     unreadable = {}
@@ -1597,15 +1597,15 @@ def _image_card_slots(specs, kind, repo_root):
             declared.setdefault(layer, {}).setdefault(name, []).append(s)
 
     for layer, names in declared.items():
-        d = cards.get(layer)
-        if d is None:
+        if not cards.get(layer):
             unreadable[layer] = True
             continue
         for name, shots in names.items():
-            card = d / f"{name}.md"
-            if not card.is_file():
+            card = _card_path(root, layer, name)
+            if card is None:
                 out.append(finding("L22", "／".join(shots[:3]) + ("…" if len(shots) > 3 else ""),
-                                   f"名乗られたカード `{name}` が無い（`{card}`）。"
+                                   f"名乗られたカード `{name}` が無い——**探した範囲**: "
+                                   f"{_cards_searched(root, layer, name)}。"
                                    f"**名乗りは在るが、そのカードが実在しない。**"))
                 continue
             got = _card_env_vars(card)
@@ -2968,27 +2968,74 @@ STYLE_CARD_ENV = "SVL_STYLES_DIR"
 CARD_DIRS = {"style": "styles", "format": "formats"}
 
 
-def _cards_dir(repo_root, layer):
-    """カードの置き場（層ごと）。⚠️ **指しても、そこに無ければ「読めない」。**
+def _cards_dirs(repo_root, layer):
+    """カードの置き場（層ごと）。⚠️ **返るのは1つではない——探す順の並びである。**
 
-    指した先を確かめずに返すと、**「カードが実在しない」と「置き場が違う」が
-    同じ符号で鳴る**——原因の違うものを同じ顔で報告しない。
+    ⚠️ **指しても、そこに無ければ「読めない」。** 指した先を確かめずに返すと、
+    **「カードが実在しない」と「置き場が違う」が同じ符号で鳴る**——原因の違うものを
+    同じ顔で報告しない。
+
+    ⚠️ **`SVL_STYLES_DIR` は、置き換えではなく重ねる**（決定 2026-09-21、著者）。
+    指した先を**先に**読み、**無ければ隣へ降りる**——ゆえに動画側にカードを1枚
+    足しても、**隣の55枚は読めなくならない。**
+    ⚠️ **これが要る理由。** このリポジトリは自前の様式カードを持てるが、
+    `bible.style` は**名前を1つ書く欄**であり、`L20` はその1つだけを引く。
+    置き換えであれば、**1枚足した作品は、隣の55枚を全部失う。**
+    ⚠️ **フォーマットは重ねない。** `SVL_STYLES_DIR` は**様式のための環境変数**である
+    ——様式を指したままフォーマットを読んだ顔をしないため、指し先が
+    `formats` を名乗るときだけ従う（従来どおり）。
     """
     import os
     sub = CARD_DIRS.get(layer)
     if not sub:
-        return None
-    env = os.environ.get(STYLE_CARD_ENV)
-    if env:
-        p = Path(env)
-        if layer == "style":
-            return p if p.is_dir() else None
-        # ⚠️ **`SVL_STYLES_DIR` は様式のための環境変数である。** フォーマットの
-        #    ために流用すれば、**様式を指したままフォーマットを読んだ顔をする。**
-        #    だからフォーマットは、指し先が `formats` を名乗るときだけ従う。
-        return p if (p.is_dir() and p.name == sub) else None
+        return []
     sib = Path(repo_root).parent / "distill-essence-engine" / "references" / sub
-    return sib if sib.is_dir() else None
+    sibling = [sib] if sib.is_dir() else []
+    env = os.environ.get(STYLE_CARD_ENV)
+    if not env:
+        return sibling
+    p = Path(env)
+    if layer != "style":
+        # ⚠️ **様式のための環境変数を、フォーマットへ流用しない。**
+        return [p] + sibling if (p.is_dir() and p.name == sub) else sibling
+    if not p.is_dir():
+        return sibling                   # 指した先が無い——**隣は生きている**
+    # ⚠️ **同じ場所を2度読まない。** 指し先が隣と同じなら、重ねるものは無い。
+    return [p] + [d for d in sibling if d != p]
+
+
+def _cards_dir(repo_root, layer):
+    """**先に読む**置き場。⚠️ **探す順の並びは `_cards_dirs` である**——あちらを見よ。
+
+    ここが返すのは1つだけである——**註や報告が「どこを読んだか」を書くため**と、
+    **`_cards_dirs` が空かどうか**を見るためである。
+    """
+    dirs = _cards_dirs(repo_root, layer)
+    return dirs[0] if dirs else None
+
+
+def _card_path(repo_root, layer, name):
+    """カード1枚の在り処。⚠️ **無ければ `None`——「探した範囲」は呼ぶ側が書く。**
+
+    置き場が2つありうるので、**「無い」と言う前に、両方を見る。**
+    """
+    for d in _cards_dirs(repo_root, layer):
+        p = d / f"{name}.md"
+        if p.is_file():
+            return p
+    return None
+
+
+def _cards_searched(repo_root, layer, name):
+    """「無い」と報告するときの文面——**どこを探したかを、場所の数だけ並べる。**
+
+    ⚠️ **「無い」と書く前に、探した範囲を書く。** 置き場が2つ在るのに一方だけを
+    名指せば、**読む者は隣を見ていないと読む。**
+    """
+    dirs = _cards_dirs(repo_root, layer)
+    if not dirs:
+        return "**置き場が1つも無い**"
+    return "／".join(f"`{d / (name + '.md')}`" for d in dirs)
 
 
 def _styles_dir(repo_root):
@@ -3027,8 +3074,7 @@ def check_style_motion(project, repo_root=None):
         return out                       # L17 が「目録にあるスロットが無い」で鳴らす
 
     root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
-    d = _styles_dir(root)
-    if d is None:
+    if not _cards_dirs(root, "style"):
         out.append(finding("L20", "",
                            f"様式 `{style}` のカードが**読めない**——"
                            f"`{STYLE_CARD_ENV}` を設定するか、"
@@ -3038,11 +3084,13 @@ def check_style_motion(project, repo_root=None):
                            "——**確かめていないことを、確かめた顔にしない。**",
                            severity="note"))
         return out
-    card = d / f"{style}.md"
-    if not card.is_file():
+    card = _card_path(root, "style", style)
+    if card is None:
         out.append(finding("L20", "",
-                           f"様式カード `{card}` が無い。**`bible.style` が指す様式が"
-                           "実在しない**——`Style Motion` は何も引けない。"))
+                           f"様式カード `{style}` が無い——**探した範囲**: "
+                           f"{_cards_searched(root, 'style', style)}。"
+                           "**`bible.style` が指す様式が実在しない**"
+                           "——`Style Motion` は何も引けない。"))
         return out
     if "## Motion character" not in card.read_text(encoding="utf-8"):
         out.append(finding("L20", "",
@@ -3052,7 +3100,8 @@ def check_style_motion(project, repo_root=None):
                            "**行き先を宣言したのに、運ぶものが無い。**"))
     else:
         out.append(finding("L20", "",
-                           f"様式 `{style}` は `Motion character` を持つ。"
+                           f"様式 `{style}` は `Motion character` を持つ"
+                           f"（`{card}`）。"
                            f"{with_slot} 本の `Style Motion` は中身を運ぶ。"
                            "⚠️ **引いた中身が正しいかは、まだ検査していない**——"
                            "カードは `distill-essence-engine` の持ち物である。",

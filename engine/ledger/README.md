@@ -86,7 +86,7 @@ reaches too far. **Recorded here, where it happens, as a hole.**
 And L7 **counts and reports the shots that hold no disclosure state** —
 without counting, you cannot tell whether "0 violations" means "0 after checking" or "not checked".
 
-`--self-test` holds **one example that fires and one that does not, for each check** (213 examples).
+`--self-test` holds **one example that fires and one that does not, for each check** (254 examples).
 ⚠️ **Read the notes too.** Because **a note that does not appear also looks like "0 violations"**
 — with no example that confirms the note, deleting the note leaves the self-test green.
 ⚠️ **Read the note's "count" too.** `L25`'s note says "read N takes (broken down by role)" —
@@ -384,10 +384,17 @@ not **whether that slot carries anything.** `Style Motion`'s source is the style
 `## Motion character`, and **in measurement only 2 of 55 cards hold it** —
 choose a style that does not, and `Style Motion` **exists but is empty. An empty check calls it OK.**
 
-⚠️ **The cards are outside this repository.** Look at `$SVL_STYLES_DIR`, and if there is none, at the neighboring
+⚠️ **The cards are outside this repository.** Look at `$SVL_STYLES_DIR`, and then at the neighboring
 `distill-essence-engine/references/styles`. **If it cannot be read, report "cannot be confirmed"**
 — **do not give what you have not confirmed the face of having confirmed** (the same shape as `L9` and `L14`).
 **It is correct that someone who cloned this does not have it.**
+
+⚠️ **The variable overlays; it does not replace.** The directory it points at is searched **first**,
+and the neighboring directory is searched **after it** — so **one card placed in this repository
+does not make the other 55 unreadable.** ⚠️ **This is the failure that is quiet:**
+when the neighbor can no longer be read, `L20` still only says **"there is no card"** —
+**it does not say that the place it looked was the wrong place.** When both point at the same
+directory, it is folded to one, and **the card is not read twice and the directory is not named twice.**
 
 ⚠️ **It only reads.** The cards are `distill-essence-engine`'s property and are
 **not rewritten** (`CLAUDE.md`). Whether what was pulled is correct **has not been checked yet** — the note says so.
@@ -521,6 +528,8 @@ what `L22` confirms is the latter, and **it does not look at the former (whether
 ⚠️ **`SVL_STYLES_DIR` always applies to `style` and does not apply to `format`**
 (it applies only when the destination it points at ends in `formats`) — **so as not to tell the lie of
 reading a style card as a format card while still pointing at styles.**
+⚠️ **On `style` it overlays; on `format` there is nothing to overlay onto** (this repository has no
+format cards of its own), **so there the variable is still the only place looked at.**
 
 ⚠️ **It does not look at whether the contents are correct.** Whether `SUBJECT`'s value is really the subject **cannot be read by this layer.**
 All it sees is **that it is non-empty** and **that the naming matches** — the note says so.
