@@ -94,6 +94,12 @@ but because there is nothing for time to pass through.** Before the stroke and a
   ⚠️ **ゆえに §6 の `REF_LOCATION` は、この動画にとって「画像の経路」ではなくなった。**
   **紙の見た目は、§4 と §5 の文が固定する。** ⚠️ **`紙.base` は台帳から消えない**——
   **画像の側の基準であり続ける**（`ledger.yaml` を見よ）。
+  ⚠️ **これは一筆だけの裁定である。**（**著者、2026-09-22**）
+  **基盤の規則は変わらない**——`schemas/shot-record.schema.json` と
+  `engine/ledger/specmap.py` は、**いまも「キー画像は動画へ添付して渡る」と言っており、
+  それは他の作品では正しい。**
+  ⚠️ **ゆえに基盤は動かしていない。****この例外は、この作品の記録の中にだけ在る。**
+  ⚠️ **スキーマを読むだけの人には、この例外は見えない。****穴として記録する**（`HISTORY.md` の `0.33.8`）。
 - REF_STYLE: `sumi-e` (HIGH)
 - REF_FORMAT: `video-spec` — this defines the seven §18 slots
 - REF_SOURCE: `projects/ippitsu/bible.yaml` (CRITICAL)
@@ -379,6 +385,10 @@ no color, no photorealistic, no hard outline, no second stroke, no retracing of 
 - ⚠️ **未解決のまま残ること**: §20 の3番目の risk（「a hand that lingers」）と §2/§16 の衝突、
   §4 と §8 の両立しないこと、§1 の `24fps`。
   **著者の裁定は、この3つに触れていない。****採否は、仕様の欠陥を消さない。**
+- ⚠️ **規則の側の裁定**（**著者、2026-09-22**）: **上の §6 の裁定は、一筆だけのものである。**
+  **基盤の規則——「キー画像は動画へ添付して渡る」——は変わらない。**
+  ⇒ **`schemas/shot-record.schema.json` と `engine/ledger/specmap.py` は動かしていない。**
+  ⚠️ **`reference_set` も動かしていない。****当時の意図として残る**（ショット記録を見よ）。
 
 ## Anticipated risks (to check in the first generation)
 
