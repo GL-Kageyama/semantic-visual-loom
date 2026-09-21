@@ -21,7 +21,7 @@ argument-hint: '（任意）项目名，或要演出的镜头。例: /semantic-v
 
 | | 什么 | 哪里 |
 |---|---|---|
-| **演出的记录** | `place`・`time`・`mode`・`motion`・`beats`・`duration`・`spec`・`key_image`・`text_channel` | `projects/<name>/shots/<id>.yaml` |
+| **演出的记录** | `place`・`time`・`mode`・`motion`・`beats`・`duration`・`spec`・`key_image`・`aim`・`text_channel` | `projects/<name>/shots/<id>.yaml` |
 | **影片规格** | 目録顺序的 §1–20、§18 的7个槽、§19 的自称 | `projects/<name>/specs/video/<id>.md` |
 | **图像规格** | 一个节之中、有名字的段落——`Prompt`・`Negative` | `projects/<name>/specs/image/<id>.md` |
 | **板式提示词** | ⚠️ **只在经由分镜的视频路径上**——那条路径的①：交给 `distill-essence-engine` 的分镜表（`storyboard` × `luminous-anime`） | `projects/<name>/specs/board/<id>-board.md` |

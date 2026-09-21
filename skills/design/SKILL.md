@@ -22,7 +22,7 @@ stage ② in this repository** — the only command that runs is the checker, an
 
 | | What | Where |
 |---|---|---|
-| **the staging record** | `place` · `time` · `mode` · `motion` · `beats` · `duration` · `spec` · `key_image` · `text_channel` | `projects/<name>/shots/<id>.yaml` |
+| **the staging record** | `place` · `time` · `mode` · `motion` · `beats` · `duration` · `spec` · `key_image` · `aim` · `text_channel` | `projects/<name>/shots/<id>.yaml` |
 | **the video specification** | §1–20 in the registry's order, §18's 7 slots, §19's self-name | `projects/<name>/specs/video/<id>.md` |
 | **the image specification** | named paragraphs inside one section — `Prompt`, `Negative` | `projects/<name>/specs/image/<id>.md` |
 | **the board prompt** | ⚠️ **only on the video route that goes through a storyboard** — the ① of that route: a storyboard sheet for `distill-essence-engine` (`storyboard` × `luminous-anime`) | `projects/<name>/specs/board/<id>-board.md` |

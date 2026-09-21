@@ -21,7 +21,7 @@ argument-hint: '（任意）プロジェクト名、または演出するショ�
 
 | | 何を | どこに |
 |---|---|---|
-| **演出の記録** | `place`・`time`・`mode`・`motion`・`beats`・`duration`・`spec`・`key_image`・`text_channel` | `projects/<name>/shots/<id>.yaml` |
+| **演出の記録** | `place`・`time`・`mode`・`motion`・`beats`・`duration`・`spec`・`key_image`・`aim`・`text_channel` | `projects/<name>/shots/<id>.yaml` |
 | **動画の仕様** | 目録の順の §1–20、§18 の7スロット、§19 の自称 | `projects/<name>/specs/video/<id>.md` |
 | **画像の仕様** | 1つの節の中の、名前を持った段落——`Prompt`・`Negative` | `projects/<name>/specs/image/<id>.md` |
 | **ボードのプロンプト** | ⚠️ **絵コンテを経由する動画の経路だけ**——その経路の①：`distill-essence-engine` へ渡す絵コンテ表（`storyboard` × `luminous-anime`） | `projects/<name>/specs/board/<id>-board.md` |

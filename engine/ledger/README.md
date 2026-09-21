@@ -219,7 +219,7 @@ So **layer F** looks at **the registry itself** — **whether the registration i
 | **the slots a route does not receive** | `specmap.MODEL_UNRECEIVED_SLOTS` | per video route, the §18 slots its generator does not take as a **floor**, **each with its reason**. `WAN 3.0`'s and `MINIMAX H3`'s rows are **empty — they have not been measured**, which is not the same as "they are received" | **L30** |
 | **the exclusions a work accepts** | `bible.route_limits_accepted` | the work's own declaration, `<MODEL>: <slot>`. **The work writes the exclusion** | **L30** (downgrades it to a note) |
 | **specification kinds** | `specmap.SPEC_KINDS` | `video` (field `spec`, holds §1–20) / `image` (field `key_image`, holds neither) | **L18** (`L11`, `L21` and `L22` follow it) |
-| **field destinations** | `specmap.FIELD_DESTINATION` | 18 fields. **There is no `mode` dimension.** The vocabulary is `自前` (own) / `prompt:<slot>` / `params:<key>` / `handover:<base>` / `edit:timeline` | **L19** |
+| **field destinations** | `specmap.FIELD_DESTINATION` | 19 fields. **There is no `mode` dimension.** The vocabulary is `自前` (own) / `prompt:<slot>` / `params:<key>` / `handover:<base>` / `edit:timeline` | **L19** |
 | **what `mode` requires** | `specmap.MODE_DEMANDS` | `still` (§11), `composite` (§11 + `text_channel`), **`motion` (empty row)** | **L24** |
 | **handover bases** | `specmap.HANDOVER` | `distill` (image prompts), `loom` (sound) | **L19** |
 
@@ -356,6 +356,14 @@ The count is reported as a **note**. **If the check becomes empty, the note says
 | `params:<key>` | `take.params` (`seed` / `duration` / `aspect` / `references`) |
 | `handover:<base>` | **Hand it to another base** — `distill` (image prompts), `loom` (sound) |
 | `edit:timeline` | **Not passed to generation; decided in editing** — the adopted duration and so on |
+
+⚠️ **There are two kinds of `自前`, and 8 fields sit in this row.**
+**One is "it cannot be passed"** — `role`, `unit`, `time`, `beats` and `effect` are Japanese, and the strings
+handed to generation are English. **The other is "it is not passed on purpose"** — `shot`, `spec` and
+**`aim`**. `aim` (the shot's aim — which of the 15 grammars it tests) **could be written in English**;
+**the choice is not to.** **Put the aim into the prompt, and the same string is read by two layers** —
+specification conformity and the aim — **which is the opposite of `L26`'s discipline.**
+⚠️ **The difference between "cannot" and "do not" is invisible in the destination alone** — so it is written here.
 
 ⚠️ **The destination does not depend on `mode`.** With two paths, **the same field always goes to the same place.**
 One field can go to two places (`duration` is both a generation parameter and decided in editing) —
@@ -1154,6 +1162,14 @@ Write only `spec:` and not `key_image:`, and **the image side is never checked**
 
   ⚠️ **`()` and `None` are different** (`rolemap.py`). Use the same symbol for "any" and "undecided" and
   **what is undecided wears the face of what is decided.**
+- ⚠️ **No check reads the shot's `aim`.** The field holds **which of the 15 grammars the shot is trying**
+  (decided 2026-09-21), and **`L12` and `L19` see it only as a field with a source and a destination.**
+  **Write it and nothing sounds.** ⚠️ **This is the same shape as `motion` being 0/30, and as
+  `ROLES[...]["既定モード"]` having no reader** — **the field exists, but no reader does.**
+  ⚠️ **And it is a hole of a different colour from those two.** `motion` is **empty** (0/30) and
+  `既定モード` is **unresolved.** `aim` is **neither** — it is a field that **works as declared and is
+  read by nobody.** **The 23 existing takes stay empty**, and **nothing backfills them**: an aim written
+  afterwards is **not an aim but an explanation.** **Record the hole as a hole.**
 - ⚠️ **A prohibition can be written only at the unit of a tool, while a disclosure can be written at the unit of a part.** What `known_keys`
   gives a tool is only `P.appearance` and `P.negative` — so
   `forbidden_set: [KAMADO]` forbids **the thing called the kiln, whole**.
