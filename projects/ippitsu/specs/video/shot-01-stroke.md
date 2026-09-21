@@ -80,7 +80,10 @@ but because there is nothing for time to pass through.** Before the stroke and a
 
 # 6. REFERENCES
 
-- REF_LOCATION: `紙.base` — **未作成**（`ledger.yaml` を見よ）(MEDIUM)
+- REF_LOCATION: `紙.base` — **作成済み**（`media/01_ChatGPT Image 2026年9月22日 00_10_37.png`。
+  `ledger.yaml` と `takes/ippitsu-s01-image-1.yaml` を見よ）(MEDIUM)
+  ⚠️ **在ることは、渡したことではない。** この1枚がこの動画へ実際に渡ったかどうかは、
+  **`takes/ippitsu-s01-video-1.yaml` の `params.references` が持つ**——**いまは空である。**
 - REF_STYLE: `sumi-e` (HIGH)
 - REF_FORMAT: `video-spec` — this defines the seven §18 slots
 - REF_SOURCE: `projects/ippitsu/bible.yaml` (CRITICAL)
@@ -239,13 +242,16 @@ no color, no photorealistic, no hard outline, no second stroke, no retracing of 
 
 - Instance ID: `ippitsu-s01-6s-01`
 - Segment ID: `01-1`
-- Specification Version: `0.1.0`
-- Generation Date: `—`
+- Specification Version: `0.1.1`
+- Generation Date: `2026-09-22`（⚠️ **根拠は戻ってきたファイルの時刻**——`00:18:11`。
+  **著者が名乗った日付ではない。**）
 
 ## Resolved Values
 
 - Duration: `6s`
-- References: `REF_LOCATION (紙.base, 未作成) ／ REF_STYLE (sumi-e, HIGH) ／ REF_SOURCE (bible.yaml, CRITICAL)`
+- References: `REF_LOCATION (紙.base, 作成済み) ／ REF_STYLE (sumi-e, HIGH) ／ REF_SOURCE (bible.yaml, CRITICAL)`
+  ⚠️ **この行は「仕様が名指した参照」であって、「実際に渡した参照」ではない。**
+  渡したものはテイクが持つ（`takes/ippitsu-s01-video-1.yaml` の `params.references`）。
 - Temporal Structure: `3 beats, NON_UNIFORM — 2s / 1s / 3s. The ink = BEAT 3 at 3s (50%)`
 - Camera Events: `none — the camera does not move. One continuous take`
 - Action Events: `ACT_ENTER → ACT_LAY → ACT_WICK`
@@ -256,18 +262,87 @@ no color, no photorealistic, no hard outline, no second stroke, no retracing of 
 
 ## Version
 
-`0.1.0` — **まだ生成していない。** 四つの手の①は著者のものである。
+`0.1.1` — **①（生成する）と ②（測る）が済んだ。** ③（型の同定）と ④（直す）は開いていない。
+   ⚠️ **② は、いまテイク2本について済んでいる**——**1本目（参照あり）と2本目（参照なし）。**
+
+⚠️ **この版で動いたのは §6・§19・§20 だけである。**
+   ⚠️ **`§1–18` は動いていない、ではない**——**§6 は動いた**（`REF_LOCATION` を「未作成」から「作成済み」へ）。
+   **動いていないのは `§18` であり、それは投入される唯一の節である。**
+   ゆえに **`§18` の投入文字列は `0.1.0` のときと同一である**
+   （「生成器へ投入するのは §18 だけである」——この仕様の冒頭）。
+   ⚠️ **だが版は上げる。** 版はファイルの状態を指すものであり、
+   **中身が動いたのに版が動かなければ、版は状態を指さなくなる**
+   ——`params.source_version` が凍結しているのは、まさにその状態である。
+   ⚠️ **`L25` はこれを見て「仕様が生成のあとに直っている」と註に書く。**
+   **その註の後半（「もう一度そのままでは再生成できない」）は、この場合は当たっていない**——
+   **投入される §18 は動いていないからである。****これは検査の側の穴である**（穴のまま記録する）。
 
 ## Observed Problems
 
-_(none yet)_
+⚠️ **測った値はここに写さない。** 写しは食い違う——**第2の正典を作らず、第1の正典を指す。**
+   **`takes/ippitsu-s01-video-1.yaml` と `takes/ippitsu-s01-video-2.yaml` を見よ。**
+   ここには**判定だけ**を書く。
+
+⚠️ **この節は、いまテイクを2本持つ。** 2本目は**著者が参照画像を外して生成したものである**
+   （`01(参照イメージ無し)_…`）。**ゆえに、下の判定は「どちらのテイクの話か」を言わなければならない。**
+   ⚠️ **1本目だけを読んだ判定が、いつまでも正しいとは限らない**——**実際、2本目で2つ変わった**（下の2項目）。
+
+- ⚠️ **想定していなかったものが1つ在った——手である。****§20 の下の7項目に「手」は無かった。**
+  実測で **14 フレーム（0.87–2.27s）**、枠の **1.45%** まで。**筆を握る指であり、左下から入る。**
+  ⚠️ **そして §20 の3番目の risk が、これを塞ぐどころか許していた**——
+  「**a hand that lingers**」と書いてある。**居座らない手は許される、と読める。**
+  **§2 と §16 は手を禁じている。仕様の内部で食い違っている。**⚠️ **どちらを直すかは著者が決める。**
+- ⚠️ **余白は使われた。だが §20 の4番目が名指した原因（靄・埃・光の筋）ではない。**
+  **紙は暗くならない**（四隅は全時刻で 231–236）——**墨そのものが余白を使ったのである。**
+  ⚠️ **これは §4（`The void stays empty for the whole shot`）と §8（墨は3秒広がる）が
+  両立しないことから来ている**——18% から始まる染みが3秒広がれば、比は必ず逆転する。
+- **フレームレートが食い違った**——§1 は `24fps`、戻りは `30fps`（`L25`）。
+  ⚠️ **これはこの作品の決定ではない**——経路の性質であり、`hitosara/takes/README.md` に既に記録がある。
+- **`params.references` が空である。****「渡していない」ではなく「記録が無い」。**
+  キー画像はこの動画より 7分24秒 早く在った——**ゆえに渡せた。**⚠️ **渡せたことは、渡したことではない。**
+  ⚠️ **これは1本目についての記述である。****この欄は著者が埋めた**（`takes/ippitsu-s01-video-1.yaml` を見よ）。
+  2本目は `references: []` である——**著者が名付けたからである。**
+
+### ⚠️ 2本目で変わったこと（2026-09-22、参照画像なしの1本）
+
+- ⚠️ **手は参照から来ていなかった。****§20 の3番目の risk の原因についての私の見当は外れた。**
+  **参照を外しても手は出た**——**むしろ増えた**（14 フレーム → **78**、1.40秒 → **2.57秒**）。
+  ⚠️ **ゆえに手の原因は、この仕様の側に在る**——§4/§5 の主体の無い筆と、§2/§16 の禁止の衝突である。
+  **2本目は、この穴が参照と無関係であることを示した。**⚠️ **n=1 対 n=1 である**（テイクを見よ）。
+- ⚠️ **§13 LIGHTING を、2本目は満たしていない。****1本目は満たしている。**
+  §13 は「Flat, even, frontal light… **No directional key**」と求める——
+  **2本目には勾配が在る**（最小二乗で **25.3 レベル**、最も明るい角は左上。1本目は 2.8 レベル）。
+- ⚠️ **§14 AUDIO を、2本目は満たしていない。****1本目は満たしている。**
+  §14 は「Almost none — …**for a fraction of a second**」と求める——
+  **2本目には 1.7秒・床から 35 dB の山が在る。**
+  ⚠️ **そして山の頂点は「stroke lands」の時刻ではない。**
+- ⚠️ **余白については、2本目のほうが残る**——**が、どちらも §16 の「larger part」は満たしていない。**
+- ⚠️ **判定は著者のものである。** 測って言えるのはここまでである。**`adopted` はどちらにも書いていない。**
+- ⚠️ **そして、この4項目は「この2つのファイル」の性質である**——
+  **「参照なしの経路は §13 を満たさない」とは言えない。****n=1 対 n=1 を超えない。**
 
 ## Anticipated risks (to check in the first generation)
 
 - **The ink may come back.** A soft wet edge that blooms and then shrinks reads as **breathing, not as ink** — and a diffusion model asked for "bleeding" will animate it both ways unless it is told not to. The one-way rule is front-loaded in §1, §2, §3, §8, §11, §16, §17 and §18; **verify frame by frame. This is the most likely failure of this shot.**
+  **→ ⚠️ 起きなかった**（2026-09-22 実測。**テイクを見よ**——89 の段のうち減ったのは2つだけである）。
 - **A second stroke may be added.** Models asked for a sumi-e stroke tend to complete the gesture — a second, balancing mark, or a retrace of the first.
+  **→ 起きなかった。** 繋がった墨は1つである（テイクを見よ）。
 - **The brush may stay in frame.** It must be gone before the third beat; a hand that lingers turns this into a shot about a hand.
+  **→ ⚠️ §20 の条件は1本目で満たされた**（筆は 2.27s に消え、第三拍より前）。**だが、この1文が手を許した**
+  ——**「居座る手」だけが悪いと読める。**⚠️ **そして、この項目の下に手が隠れていた。**
+  ⚠️ **2本目はこの条件さえ満たしていない**——**手は 3.53s まで在り、第三拍に入って 0.53秒 残る。**
+  **`Observed Problems` を見よ。**
 - **The void may be filled.** Haze, dust motes, or a light shaft across the paper would spend the negative space, which is the composition.
+  **→ 靄も埃も光の筋も無い。****だが余白は使われた**——**墨そのものによってである。**
+  **`Observed Problems` を見よ。**
 - **A seal may appear.** Ink-wash styles very often add a red seal; it is the most likely source of colour in the frame.
+  **→ 印は起きなかった**（署名も読み取れる文字も無い。**焼かれた字幕も無い**）。
+  ⚠️ **だが色は来た——手から来た。**
+  **「色の源になりそうなもの」の予想が外れていた**——§20 は落款を名指したが、
+  実際に彩度を持つ画素は**肌だけ**である（テイクを見よ）。
 - **The camera may drift.** A slow push is the default behaviour of the model and it is not wanted here.
+  **→ 起きなかった。****2つの方法が一致して (0,0) である**（位相相関／墨の無い紙片を追う方法）。
 - **The shot may come back as a time-lapse** — the ink spreading in compressed time rather than in six continuous seconds.
+  **→ 起きなかった。** 180 フレーム / 30fps の連続である。
+- ⚠️ **この目録は、この1本では足りなかった。** 上の `Observed Problems` を見よ——
+  **ここに無いものが1つ起きた。**
