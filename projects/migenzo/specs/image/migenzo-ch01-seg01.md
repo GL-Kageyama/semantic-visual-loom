@@ -60,7 +60,7 @@
 
 A scene board for the first development of the novel 『未現像』 ("Undeveloped") — the master staging of one scene, in 16:9. In the darkroom of the art board — the one windowless room whose only light is a dim red safelight and the warm amber glow of the developer tray, the rest of the room sunk into near-black — a wet silver-gelatin print is held just clear of the amber liquid by a hand that enters the frame at its near edge, the fingers pinching the corner, and in the print a face has come up: the outline first, then the eyes open and looking away to one side, then a mouth that closed on something it had started to say. Below the eye, on the image itself, one thumb's mark of grease is left and has not been wiped, and it catches the red light. The hand's owner stands at the tray with her face outside the frame, and she does not look at the eyes that have come up — the picture looks at them and she does not, and that difference is the whole surface of this board. The white of the paper is silver-white and not the white of paper: it stays silver-white and is not stained red or amber. The blocking, the camera and the light fixed as the standard every cut of this scene must match: the tray and the print as the subject, the one hand at its edge, the safelight as the only light, the room otherwise still. One scene, one staging. `[絹: woman, late fifties, thin, short black hair faintly streaked with grey gathered loosely at the back, a calm sunken-eyed face, a black apron over a black blouse, hands faintly stained from developing chemicals]` — the figure, whose identity is locked to the frozen setting sheet. The one face that has come up in the print is a woman's face turned away, an ordinary face at the moment of refusing something, and it is not the daughter. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, blown highlights on the white paper, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness. The palette is held to the red of the safelight, the amber of the developer and the silver-white of the paper, and the red and amber are kept to their sources and never stain the whole frame. The same place as the art board, the hand filling the space the art board left open. No typography anywhere in the frame.
 
-no watermark, no on-screen subtitles, no background music, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no glossy photo paper, no digital image on the paper, no glowing or emitting paper, no visible fingerprint ridges, no forensic texture, no legible handprint, no small hand pressing the lens, no youthful face for 絹, no clean unstained hands, no smiling expression, no second figure, no face in the frame, no open drawer, no second print, no hand touching the eyes in the image, no wiping of the mark, no portrait lighting, no glossy print surface, no bright evenly lit room
+no watermark, no on-screen subtitles, no background music, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no glossy photo paper, no digital image on the paper, no glowing or emitting paper, no visible fingerprint ridges, no forensic texture, no legible handprint, no small hand pressing the lens, no youthful face for 絹, no clean unstained hands, no smiling expression, no second figure, no face in the room, no face other than the one in the image on the paper, no open drawer, no second print, no hand touching the eyes in the image, no wiping of the mark, no portrait lighting, no glossy print surface, no bright evenly lit room
 
 ---
 
@@ -107,11 +107,35 @@ no watermark, no on-screen subtitles, no background music, no clock, no window, 
   ⚠️ **この1枚が切るのは 7-10s の瞬間である**——**`unit.after` そのものであり、このショットの見せ場である。**
   ⛔ **眼は、まだ横へ逸れている**（`draft_01-2`）。
 - `place` / `time` … `暗室` / 時刻を持たない
-- `attached`（見込み）… `暗室.base`・`暗室.geography`・`印画紙`・`脂痕`・`絹.identity`・`絹.negatives`
+- `attached`（見込み）… `暗室.base`・`暗室.geography`・`印画紙`・`脂痕`
   ⚠️ **`attached` の確定は ③ である。** ここに在るのは②の見込みである。
+  ⛔ **訂正（2026-09-23、著者裁定）——`絹.identity`・`絹.negatives` を、この見込みから外した。**
+  ⚠️ **根拠は `shots/migenzo-ch01-seg01.yaml` の申し送りである**——「⛔ **`絹` を入れない。**
+  この1本に絹の手は入るが、**主題は紙である**」。⛔ **そして裁定は「参照画像を付けるのは
+  13（アートボード）と 05（設定画）の2本だけ」である**（`PLAN.md` §4-c 問い11・問い14）。
+  **ゆえに、絹が自分の設定画を持つのは 05 の1本である。**
+  ⚠️ **禁制の側は失われない**——`絹.negatives` の3節は、**この1枚の `Negative` にも既に在る**（実測）。
 - ⚠️ **`no small hand pressing the lens` が、この1枚にも掛かる**——**01〜10 の10本が負う床である**
   （幹の逆転を明かさない。`PLAN.md` §2）。⛔ **11 で落ちる。**
 - ⚠️ **この1枚の像の顔は、娘ではない。** `PLAN.md` §0-b——**01 で浮かぶのは「拒んだ女」の像である**
   （`話割り.md` 1-2）。⛔ **ゆえに `no fully rendered face of the daughter` は、
   この1枚では「像の顔を空白にせよ」という指示ではない**——**否定形は空欄になり、生成器が衣装で埋める。**
   ⚠️ **肯定の側が「横へ逸れた女の顔」を名指している**（上の `Prompt`）。
+
+## ⛔ 訂正（2026-09-23、著者裁定）——`no face in the frame` を外した
+
+- ⛔ **この1枚は、自分の `Prompt` と衝突していた。** `Prompt` は
+  「**and in the print a face has come up**: the outline first, then the eyes open and looking away
+  to one side…」と「The one face that has come up in the print is a woman's face turned away…」を
+  要求し、**`Negative` が `no face in the frame` と言っていた**——
+  **ゆえに、この1枚は自分の主題を禁じうる1節を持っていた。**
+- ⚠️ **外したうえで、動画の §16 と同じ文面を置いた**——
+  **`no face in the room`**（部屋の側に顔を置くな）＋
+  **`no face other than the one in the image on the paper`**（浮かぶ顔は、この1本の内容である）。
+  ⛔ **肯定形が既に書いている**——「**The hand's owner stands at the tray with her face outside the
+  frame**」——**ゆえに、部屋の側の顔は、禁制でなく内容として落ちる**（否定形は空欄になり、
+  生成器が衣装で埋める）。
+- ⚠️ **同じ綴りは13枚のうち4枚に在る**（01・06-02・07・09。**実測**）——
+  ⛔ **だが食い違っているのは 01 だけである。** 06-02・07・09 の `Prompt` は
+  「Her body and her face are not in this frame and there is nobody else in the room.」と
+  **はっきり書いており、そこではこの節が正しい。** **ゆえに、この3枚は触っていない。**
