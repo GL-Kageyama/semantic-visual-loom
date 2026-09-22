@@ -43,25 +43,4 @@
 
 ## Camera Prompt
 
-Third-person, at the height of a person standing at the developing tray in the darkroom, the
-tray and its amber liquid surface held in the lower part of the frame, everything outside the red
-safelight's island left dark. The camera does not change position at any point in the fourteen
-seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake, no cut, no
-dissolve. [0-3s] holding on the liquid with the strip of unexposed film held just above it, its
-full width visible as a flat even strip, pinched at one end by fingertips, not touching, and no
-shadow of it on the surface because the liquid takes the light. [3-5s] still holding as the end of
-the film touches the liquid, and the film floats on the surface and stays there for a moment, and
-then the liquid climbs up it from the end, and the surface breaks once and closes. [5-12s] still
-holding on the same frame while the white inside the liquid thickens in its deepest part, the
-shadow taking on an outline, and the outline resolving into a back turned away and running, and
-an arm, and an open hand, and then at the edge of the image a small hand stopping the round black
-mouth of the lens, with one finger's width of gap left between the lens and the fingers, the
-brightest line in the image running through that gap. [12-14s] still holding as one drop of
-developer falls from the corner of the paper into the tray, and nothing else moves. The width of
-the film and the size of the hand are what this shot keeps, and both of them are sizes on screen:
-a camera that came closer would thicken the width and a camera that pulled away would thin it, and
-the change would stop reading as the same thing continuing and start reading as something else
-arriving. The change here happens inside the liquid, not inside the camera. The style permits the
-camera to move to keep the subject in frame; this shot spends none of it, and holding the frame
-still is what keeps the width the same from the first second to the last. One continuous take; no
-cut.
+Third-person, at the height of a person standing at the developing tray in the darkroom, the tray and its amber liquid surface held in the lower part of the frame, everything outside the red safelight's island left dark. The camera does not change position at any point in the fourteen seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake, no cut, no dissolve. [0-3s] holding on the liquid with the strip of unexposed film held just above it, its full width visible as a flat even strip, pinched at one end by fingertips, not touching, and no shadow of it on the surface because the liquid takes the light. [3-5s] still holding as the end of the film touches the liquid, and the film floats on the surface and stays there for a moment, and then the liquid climbs up it from the end, and the surface breaks once and closes. [5-12s] still holding on the same frame while the white inside the liquid thickens in its deepest part, the shadow taking on an outline, and the outline resolving into a back turned away and running, and an arm, and an open hand, and then at the edge of the image a small hand stopping the round black mouth of the lens, with one finger's width of gap left between the lens and the fingers, the brightest line in the image running through that gap. [12-14s] still holding as one drop of developer falls from the corner of the paper into the tray, and nothing else moves. The width of the film and the size of the hand are what this shot keeps, and both of them are sizes on screen: a camera that came closer would thicken the width and a camera that pulled away would thin it, and the change would stop reading as the same thing continuing and start reading as something else arriving. The change here happens inside the liquid, not inside the camera. The style permits the camera to move to keep the subject in frame; this shot spends none of it, and holding the frame still is what keeps the width the same from the first second to the last. One continuous take; no cut.

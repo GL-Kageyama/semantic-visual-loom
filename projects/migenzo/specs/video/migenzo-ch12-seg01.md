@@ -37,20 +37,4 @@
 
 ## Camera Prompt
 
-Third-person, at the height of a person standing in the darkroom, holding both the small island
-of red safelight — the tray with its amber liquid, now still — and the edge of that island where
-the red gives way to the darkness that has been settled along the walls for twenty years. Inside
-the island, one sheet of wet paper hangs in the air held by a pair of tongs that come in from
-outside the frame; no person is in this frame. The camera does not change position at any point in
-the nine seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake, no cut.
-[0-3s] holding on the sheet in the air with the last of the image still faintly on it, a small
-hand nearly gone, and water gathering at its lower corner. [3-6s] still holding as that hand
-thins and goes and the image returns to plain white, and two drops of water fall from the corner
-and then stop falling; the paper stays wet. [6-9s] still holding as a band of red light runs
-across the white and the white takes a little of it and stays white, exactly where it is. The edge
-of the light island has to stay in this frame, because that edge is what shows that the paper is
-no longer inside the liquid's world, and coming closer would push the edge out of the shot and
-leave only a close-up of a blank sheet. And this is the last frame of the work: a camera that
-started to move now would signal that something more is still coming, and nothing more is. The
-style permits the camera to move to keep the subject in frame; this shot spends none of it. One
-continuous take; no cut.
+Third-person, at the height of a person standing in the darkroom, holding both the small island of red safelight — the tray with its amber liquid, now still — and the edge of that island where the red gives way to the darkness that has been settled along the walls for twenty years. Inside the island, one sheet of wet paper hangs in the air held by a pair of tongs that come in from outside the frame; no person is in this frame. The camera does not change position at any point in the nine seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake, no cut. [0-3s] holding on the sheet in the air with the last of the image still faintly on it, a small hand nearly gone, and water gathering at its lower corner. [3-6s] still holding as that hand thins and goes and the image returns to plain white, and two drops of water fall from the corner and then stop falling; the paper stays wet. [6-9s] still holding as a band of red light runs across the white and the white takes a little of it and stays white, exactly where it is. The edge of the light island has to stay in this frame, because that edge is what shows that the paper is no longer inside the liquid's world, and coming closer would push the edge out of the shot and leave only a close-up of a blank sheet. And this is the last frame of the work: a camera that started to move now would signal that something more is still coming, and nothing more is. The style permits the camera to move to keep the subject in frame; this shot spends none of it. One continuous take; no cut.

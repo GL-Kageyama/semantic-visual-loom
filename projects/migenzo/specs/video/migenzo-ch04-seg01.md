@@ -27,16 +27,4 @@
 
 ## Camera Prompt
 
-Third-person, at the height of a person standing in front of the open drawer, the inside of the
-drawer held in the lower part of the frame — the wooden bottom and the inner board just under
-the handle. The camera does not change position at any point in the seven seconds: no push, no
-pull, no pan, no tilt, no rack focus, no handheld, no shake. [0-2s] holding on the empty dark
-interior. [2-4s] still holding as the edge of the red light comes in and the round depression in
-the wood becomes visible. [4-5s] still holding as the light moves up onto the inner board and the
-thumb whorl comes up in grains of silver. [5-7s] still holding as the light shifts and the whorl
-goes and comes back. The one thing that travels in this shot is the edge of the red light, and it
-has to be the only thing that travels — a camera that changed position would put a second mover
-in the frame and the light would stop reading as the thing that is doing the finding. The style
-permits the camera to move to keep the subject in frame; this shot spends none of it, because
-this shot is not about finding — it is about leaving the trace on screen. One continuous take;
-no cut.
+Third-person, at the height of a person standing in front of the open drawer, the inside of the drawer held in the lower part of the frame — the wooden bottom and the inner board just under the handle. The camera does not change position at any point in the seven seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake. [0-2s] holding on the empty dark interior. [2-4s] still holding as the edge of the red light comes in and the round depression in the wood becomes visible. [4-5s] still holding as the light moves up onto the inner board and the thumb whorl comes up in grains of silver. [5-7s] still holding as the light shifts and the whorl goes and comes back. The one thing that travels in this shot is the edge of the red light, and it has to be the only thing that travels — a camera that changed position would put a second mover in the frame and the light would stop reading as the thing that is doing the finding. The style permits the camera to move to keep the subject in frame; this shot spends none of it, because this shot is not about finding — it is about leaving the trace on screen. One continuous take; no cut.

@@ -33,19 +33,4 @@
 
 ## Camera Prompt
 
-Third-person, at the height of a person standing in the darkroom, the red safelight making one
-small island out of the developing tray and its amber liquid surface and the open empty drawer in
-the wall beside it, everything past that island left in darkness, and the hand held just above the
-liquid pinching a strip of unexposed film whose width is visible, not touching the surface. The
-camera does not change position at any point in the ten seconds: no push, no pull, no pan, no
-tilt, no rack focus, no handheld, no shake. [0-4s] holding on the island with the hand stopped
-above the liquid, and one thread-thin ripple running from rim to rim of the tray and going. [4-7s]
-still holding on the same frame as a second ripple runs and goes and one mote of dust drifts down
-through the red light, with the hand at exactly the same height as before. [7-10s] still holding
-as the surface comes to rest with its thin film still stretched on it and the dust still coming
-down, and the film has still not touched the liquid. The distance between the film and the surface
-is what this shot holds, and both have to sit in the frame at the same size: coming closer would
-make it a shot about a hand held in the air, and this shot is not about the hand — it is about the
-liquid waiting for it. The style permits the camera to move to keep the subject in frame; this
-shot spends none of it, because this frame keeps both the hand and the surface where they belong.
-One continuous take; no cut.
+Third-person, at the height of a person standing in the darkroom, the red safelight making one small island out of the developing tray and its amber liquid surface and the open empty drawer in the wall beside it, everything past that island left in darkness, and the hand held just above the liquid pinching a strip of unexposed film whose width is visible, not touching the surface. The camera does not change position at any point in the ten seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake. [0-4s] holding on the island with the hand stopped above the liquid, and one thread-thin ripple running from rim to rim of the tray and going. [4-7s] still holding on the same frame as a second ripple runs and goes and one mote of dust drifts down through the red light, with the hand at exactly the same height as before. [7-10s] still holding as the surface comes to rest with its thin film still stretched on it and the dust still coming down, and the film has still not touched the liquid. The distance between the film and the surface is what this shot holds, and both have to sit in the frame at the same size: coming closer would make it a shot about a hand held in the air, and this shot is not about the hand — it is about the liquid waiting for it. The style permits the camera to move to keep the subject in frame; this shot spends none of it, because this frame keeps both the hand and the surface where they belong. One continuous take; no cut.

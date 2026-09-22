@@ -35,15 +35,4 @@
 
 ## Camera Prompt
 
-Third-person, at the height of a person standing at the tray, the amber liquid surface filling
-the lower frame with the hand and the small strip of film held above it. The camera does not
-change position at any point in the ten seconds: no push, no pull, no pan, no tilt, no rack
-focus, no handheld, no shake, no cut. [0-2s] holding on the liquid and the hand above it with
-nothing started yet. [2-5s] still holding while the hand lowers the film into the liquid and the
-surface swings and settles; the camera does not go toward the action. [5-8s] still holding on the
-surface as the image begins to come up at the edge of the frame, unreadable in its middle.
-[8-10s] still holding as the mark bleeds out along that edge and the red light comes back off it.
-Nothing in the frame causes the answer that arrives at the end, and the camera must not stand in
-for it: a camera move here would be a statement about what the shot means, and this shot needs
-the world to make that statement instead. The style permits the camera to move to keep the
-subject in frame; this shot spends none of it. One continuous take; no cut.
+Third-person, at the height of a person standing at the tray, the amber liquid surface filling the lower frame with the hand and the small strip of film held above it. The camera does not change position at any point in the ten seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake, no cut. [0-2s] holding on the liquid and the hand above it with nothing started yet. [2-5s] still holding while the hand lowers the film into the liquid and the surface swings and settles; the camera does not go toward the action. [5-8s] still holding on the surface as the image begins to come up at the edge of the frame, unreadable in its middle. [8-10s] still holding as the mark bleeds out along that edge and the red light comes back off it. Nothing in the frame causes the answer that arrives at the end, and the camera must not stand in for it: a camera move here would be a statement about what the shot means, and this shot needs the world to make that statement instead. The style permits the camera to move to keep the subject in frame; this shot spends none of it. One continuous take; no cut.

@@ -27,14 +27,4 @@
 
 ## Camera Prompt
 
-Third-person, standing inside the darkroom at the height of a person's eyes, with her profile
-large in the near foreground and the open doorway and its dark held beyond her — the threshold
-inside the frame, not at its edge. The camera does not change position at any point in the nine
-seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake. [0-3s] holding
-on the open doorway and the dark in it, with nobody there yet. [3-6s] still holding as a figure
-walks up out of that dark and stops at the threshold, and the figure does not cross it. [6-9s]
-still holding as her eyes come back and stop on the two points of light; only her head turns,
-and that happens inside the frame. This shot is the one that is looked at, not the one that
-looks, and coming closer would make it a shot about staring instead. The style permits the camera
-to move to keep the subject in frame; this shot spends none of it, because the figure arrives
-inside the frame and stops there. One continuous take; no cut.
+Third-person, standing inside the darkroom at the height of a person's eyes, with her profile large in the near foreground and the open doorway and its dark held beyond her — the threshold inside the frame, not at its edge. The camera does not change position at any point in the nine seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake. [0-3s] holding on the open doorway and the dark in it, with nobody there yet. [3-6s] still holding as a figure walks up out of that dark and stops at the threshold, and the figure does not cross it. [6-9s] still holding as her eyes come back and stop on the two points of light; only her head turns, and that happens inside the frame. This shot is the one that is looked at, not the one that looks, and coming closer would make it a shot about staring instead. The style permits the camera to move to keep the subject in frame; this shot spends none of it, because the figure arrives inside the frame and stops there. One continuous take; no cut.

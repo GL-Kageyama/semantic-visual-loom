@@ -35,14 +35,4 @@
 
 ## Camera Prompt
 
-Third-person, at the height of a person standing in the room, the wall filling the upper part of
-the frame and the developer tray with its amber surface and the red safelight in the lower part.
-The camera is the anchor of the shot and does not change position at any point in the nine
-seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake. [0-9s] one
-continuous hold on the same wall, with the shadow on it going denser across the whole span and
-nothing else in the frame changing. The tray and the safelight are the things that do not change
-across this span, and they have to stay exactly as they are so that the shadow reads as time
-rather than as an effect — a camera that drifted would make a second thing that never changes,
-and the span would stop being legible as a span. The style permits the camera to move to keep
-the subject in frame; this shot spends none of it, and this shot's form makes the fixed frame
-the native case. One continuous take; no cut, no time-skip, no cross-dissolve.
+Third-person, at the height of a person standing in the room, the wall filling the upper part of the frame and the developer tray with its amber surface and the red safelight in the lower part. The camera is the anchor of the shot and does not change position at any point in the nine seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake. [0-9s] one continuous hold on the same wall, with the shadow on it going denser across the whole span and nothing else in the frame changing. The tray and the safelight are the things that do not change across this span, and they have to stay exactly as they are so that the shadow reads as time rather than as an effect — a camera that drifted would make a second thing that never changes, and the span would stop being legible as a span. The style permits the camera to move to keep the subject in frame; this shot spends none of it, and this shot's form makes the fixed frame the native case. One continuous take; no cut, no time-skip, no cross-dissolve.

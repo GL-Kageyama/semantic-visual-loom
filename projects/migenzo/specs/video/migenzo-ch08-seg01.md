@@ -31,17 +31,4 @@
 
 ## Camera Prompt
 
-Third-person, at the height of a person standing inside the darkroom, with the back of a woman
-large in the near foreground filling most of the frame, the red safelight catching only the right
-edge of her back, and the dark of an open doorway held beyond her with two small points of
-returned red light in it. Her face is not in the frame — the camera is behind her. The camera does
-not change position at any point in the eight seconds: no push, no pull, no pan, no tilt, no rack
-focus, no handheld, no shake. [0-3s] holding on the two points of light in the dark beyond her,
-with nothing beginning here — the speaking has already been going on. [3-6s] still holding on the
-same frame with no movement in it at all; the long middle of this shot is the shot. [6-8s] still
-holding as her shoulders come down once, a breath that has been held shallow for twenty years
-being set down, and her back stays straight and she holds there, and nobody else moves either.
-Coming closer would turn this into a shot that captures a decision, and this shot does not capture
-anything — it leaves the time in place, and the only thing that moves in it is one breath and the
-drift of the safelight. The style permits the camera to move to keep the subject in frame; this
-shot spends none of it. One continuous take; no cut.
+Third-person, at the height of a person standing inside the darkroom, with the back of a woman large in the near foreground filling most of the frame, the red safelight catching only the right edge of her back, and the dark of an open doorway held beyond her with two small points of returned red light in it. Her face is not in the frame — the camera is behind her. The camera does not change position at any point in the eight seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake. [0-3s] holding on the two points of light in the dark beyond her, with nothing beginning here — the speaking has already been going on. [3-6s] still holding on the same frame with no movement in it at all; the long middle of this shot is the shot. [6-8s] still holding as her shoulders come down once, a breath that has been held shallow for twenty years being set down, and her back stays straight and she holds there, and nobody else moves either. Coming closer would turn this into a shot that captures a decision, and this shot does not capture anything — it leaves the time in place, and the only thing that moves in it is one breath and the drift of the safelight. The style permits the camera to move to keep the subject in frame; this shot spends none of it. One continuous take; no cut.

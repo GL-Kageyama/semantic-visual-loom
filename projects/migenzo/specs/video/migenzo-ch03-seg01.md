@@ -28,13 +28,4 @@
 
 ## Camera Prompt
 
-Third-person, at the height of a person standing in the room, the dark back of the darkroom
-filling the frame with the closed wooden drawer readable as a shape inside that dark, its
-handle catching the last of the red light. The camera does not change position at any point in
-the eight seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake.
-[0-8s] one continuous hold on the dry wood, with only the safelight breathing across it. Nothing
-happens in this shot and nothing is announced: the drawer stays closed for the whole clip, and
-the camera staying where it is keeps it that way — coming closer would promise that something
-is about to happen, and the shot after this one is the one that opens. The style permits the
-camera to move to keep the subject in frame; this shot spends none of it. One continuous take;
-no cut.
+Third-person, at the height of a person standing in the room, the dark back of the darkroom filling the frame with the closed wooden drawer readable as a shape inside that dark, its handle catching the last of the red light. The camera does not change position at any point in the eight seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake. [0-8s] one continuous hold on the dry wood, with only the safelight breathing across it. Nothing happens in this shot and nothing is announced: the drawer stays closed for the whole clip, and the camera staying where it is keeps it that way — coming closer would promise that something is about to happen, and the shot after this one is the one that opens. The style permits the camera to move to keep the subject in frame; this shot spends none of it. One continuous take; no cut.

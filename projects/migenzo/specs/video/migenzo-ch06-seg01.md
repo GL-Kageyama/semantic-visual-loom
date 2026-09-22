@@ -30,13 +30,4 @@
 
 ## Camera Prompt
 
-Third-person, standing behind the drying line at the height of a person's eyes, so that the
-backs of the prints face the camera and the prints run past the edges of the frame on both
-sides. The camera does not change position at any point in the eight seconds: no push, no pull,
-no pan, no tilt, no rack focus, no handheld, no shake. [0-8s] one continuous hold on the line of
-hanging prints as they dry and their swinging gets smaller, with the paper kept larger than the
-frame from beginning to end. The subject here is deliberately bigger than the frame — the running
-past the edges is the quantity, and that is the point of the shot, so there is nothing to keep
-whole and nothing to pull back for. The style permits the camera to move to keep the subject in
-frame; this shot spends none of it, because the frame is smaller than its subject on purpose. One
-continuous take; no cut.
+Third-person, standing behind the drying line at the height of a person's eyes, so that the backs of the prints face the camera and the prints run past the edges of the frame on both sides. The camera does not change position at any point in the eight seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake. [0-8s] one continuous hold on the line of hanging prints as they dry and their swinging gets smaller, with the paper kept larger than the frame from beginning to end. The subject here is deliberately bigger than the frame — the running past the edges is the quantity, and that is the point of the shot, so there is nothing to keep whole and nothing to pull back for. The style permits the camera to move to keep the subject in frame; this shot spends none of it, because the frame is smaller than its subject on purpose. One continuous take; no cut.

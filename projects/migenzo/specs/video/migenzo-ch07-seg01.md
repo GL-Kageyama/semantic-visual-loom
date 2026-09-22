@@ -29,18 +29,4 @@
 
 ## Camera Prompt
 
-Third-person, at the height of a person standing in front of the open drawer, the inside of the
-drawer filling the frame — the wooden bottom and the small film canister lying on it, with the
-red safelight reaching only the near edge. The camera does not change position at any point in the
-nine seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake. [0-3s]
-holding on the wooden bottom and the canister, with no hand in the frame yet. [3-6s] still holding
-as a hand comes in from outside the frame, extends, and stops short of the canister; the palm
-opens a little and lifts to weigh something, the fingers do not close, and at the end of these
-three seconds the fingertips tremble once and stop. [6-9s] still holding as the hand withdraws at
-the same speed it came in and leaves the frame, and the canister has not moved at all. The
-distance between the fingertips and the canister is the subject of this shot, and it has to sit in
-the frame at the same size as every other distance: going closer would make the stopped finger the
-point, and this shot is not about the finger stopping — it is about that distance being the same
-one it has been for twenty years, and the canister is in exactly the same place at the end as at
-the beginning. The style permits the camera to move to keep the subject in frame; this shot spends
-none of it. One continuous take; no cut.
+Third-person, at the height of a person standing in front of the open drawer, the inside of the drawer filling the frame — the wooden bottom and the small film canister lying on it, with the red safelight reaching only the near edge. The camera does not change position at any point in the nine seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake. [0-3s] holding on the wooden bottom and the canister, with no hand in the frame yet. [3-6s] still holding as a hand comes in from outside the frame, extends, and stops short of the canister; the palm opens a little and lifts to weigh something, the fingers do not close, and at the end of these three seconds the fingertips tremble once and stop. [6-9s] still holding as the hand withdraws at the same speed it came in and leaves the frame, and the canister has not moved at all. The distance between the fingertips and the canister is the subject of this shot, and it has to sit in the frame at the same size as every other distance: going closer would make the stopped finger the point, and this shot is not about the finger stopping — it is about that distance being the same one it has been for twenty years, and the canister is in exactly the same place at the end as at the beginning. The style permits the camera to move to keep the subject in frame; this shot spends none of it. One continuous take; no cut.

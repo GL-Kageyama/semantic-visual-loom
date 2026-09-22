@@ -33,14 +33,4 @@
 
 ## Camera Prompt
 
-Third-person, standing at the tray at the height of a person's eyes, the tray and the liquid
-surface held in the lower part of the frame with the space above the tray in the same frame.
-The camera does not change position at any point in the ten seconds: no push, no pull, no pan,
-no tilt, no rack focus, no handheld, no shake. [0-3s] holding on the still liquid and the blank
-sheet under it, with nothing on the white yet. [3-7s] still holding as the contour comes up out
-of the white and then the eye — the camera does not go toward the emerging image. [7-10s] still
-holding as the mouth closes and the sheet is lifted clear of the liquid; the lift happens inside
-the frame, which is why nothing has to follow it. The style permits the camera to move to keep
-the subject in frame; this shot spends none of it, because the frame already holds where the
-sheet is going, and going closer would turn the shot into one about finding the mark on the
-print instead of one about the white going. One continuous take; no cut.
+Third-person, standing at the tray at the height of a person's eyes, the tray and the liquid surface held in the lower part of the frame with the space above the tray in the same frame. The camera does not change position at any point in the ten seconds: no push, no pull, no pan, no tilt, no rack focus, no handheld, no shake. [0-3s] holding on the still liquid and the blank sheet under it, with nothing on the white yet. [3-7s] still holding as the contour comes up out of the white and then the eye — the camera does not go toward the emerging image. [7-10s] still holding as the mouth closes and the sheet is lifted clear of the liquid; the lift happens inside the frame, which is why nothing has to follow it. The style permits the camera to move to keep the subject in frame; this shot spends none of it, because the frame already holds where the sheet is going, and going closer would turn the shot into one about finding the mark on the print instead of one about the white going. One continuous take; no cut.
