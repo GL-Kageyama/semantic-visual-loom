@@ -36,7 +36,10 @@
 5＋5＝10 ではなく、**和は7**である。
 
 - `SCENE`: the white — a sheet pulled out of the liquid with nothing on it, and the room's red light crossing it
-- `CHARACTERS`: no figure in frame — ⛔ **この作品で唯一、人物の居ない1枚である**（13本のうち12本に人物が居る）
+- `CHARACTERS`: no figure in frame — ⛔ **この枠に、人は居ない。**
+  ⚠️ **ただし「唯一」ではない**——**人物の居ない1枚は、13本のうち5本である**
+  （02・03・04・06-1・この1本。**実測**: 13本の画像仕様の `CHARACTERS` を数えた。2026-09-23）。
+  ⛔ **訂正（同日）**——**初稿は「この作品で唯一、人物の居ない1枚」「13本のうち12本に人物が居る」と書いていた。どちらも誤りである。**
 - `SUBJECT`: one wet silver-gelatin sheet hanging in the air above the tray, silver-white and blank, a pair of tongs pinching its corner, and a band of red light lying across it
 - `ACTION`: the sheet held still in the air, its last water already fallen, the light crossing the white and the white taking a little of it and staying white
 - `LOCATION`: the darkroom of the art board — the light island: the tray with its amber liquid at the center, its surface still at last, and everything outside the red light's reach sunk in the darkness that has been along those walls for twenty years
@@ -123,7 +126,10 @@ no watermark, no on-screen subtitles, no background music, no clock, no window, 
   ⛔ **トングは台帳に鍵を作らない**（`ledger.props` の註）。**この道具は状態を持たない。**
 - `place` / `time` … `最後の暗室` / 時刻を持たない
 - `attached`（見込み）… `最後の暗室.base`・`最後の暗室.geography`・`印画紙`
-  ⛔ **人物の鍵をひとつも引かない**——**この作品で唯一の1本である。**
+  ⛔ **人物の鍵をひとつも引かない。** ⚠️ **ただし、これも「唯一」ではない**——
+  **人物の鍵を引かない画像仕様は、13本のうち6本である**（02・03・04・06-1・07・この1本。
+  **実測**: 13本の `attached`（見込み）を数えた。2026-09-23）。
+  ⛔ **訂正（同日）**——**初稿は「この作品で唯一の1本である」と書いていた。誤りである。**
   ⚠️ **`attached` の確定は ③ である。** ここに在るのは②の見込みである。
 - ⛔ **この1枚の `Negative` は、動画の §18 の写しではない。** 同じ床を、
   **効く場所（画像の経路の否定パラメータ）へ置いたものである**——
