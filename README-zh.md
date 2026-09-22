@@ -19,6 +19,16 @@
 放在其中心的单位是**镜头**——⚠️ **一个镜头为一个变化而存在。**
 **长度是从属变量。**
 
+⚠️ **影片就在这个仓库里。** `*.mp4`、`*.m4a`、`*.png` 经由 **Git LFS** 存入
+（[`.gitattributes`](.gitattributes)）——提交的只是**一个很小的文本指针**，
+**画面本身存放在 GitHub 上、本仓库的 LFS 存储里**——**不是另一个仓库。**
+⚠️ **没有 `git-lfs` 的 clone 取回的是指针，不是影片**：clone 前先安装，
+或在 clone 之后运行 `git lfs pull`。
+⚠️ **LFS 与仓库分开计量，且计在所有者账户上**——
+免费额度为**存储 10 GiB、每月传输 10 GiB**
+（[billing docs](https://docs.github.com/en/billing/concepts/product-billing/git-lfs)）。
+**本仓库实际占用的量在 [`HISTORY.md`](HISTORY.md)。**
+
 ## 与既有 AI 影像工具的不同
 
 | | 常见的样子 | 这个基盘 |

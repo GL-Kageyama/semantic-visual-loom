@@ -19,6 +19,16 @@ holding continuity and disclosure together.
 The unit placed at its center is the **shot**——⚠️ **one shot exists for one change**,
 and **length is a dependent variable.**
 
+⚠️ **The films are in this repository.** `*.mp4`, `*.m4a` and `*.png` are stored through
+**Git LFS** ([`.gitattributes`](.gitattributes)): what is committed is a **small text pointer**,
+and the picture itself lives in **this repository's LFS storage on GitHub**——**there is no second
+repository.** ⚠️ **A clone without `git-lfs` brings down pointers instead of video**: install it
+before cloning, or run `git lfs pull` afterwards.
+⚠️ **LFS is metered apart from the repository, and it counts against the owner's account**——
+GitHub's included allowance is **10 GiB of storage and 10 GiB of transfer a month** on Free
+([billing docs](https://docs.github.com/en/billing/concepts/product-billing/git-lfs)).
+**What this repository actually holds is in [`HISTORY.md`](HISTORY.md).**
+
 ## Differences from Existing AI Film Tools
 
 | | The common shape | This foundation |
