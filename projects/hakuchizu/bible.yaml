@@ -1,0 +1,144 @@
+# 作品台帳 — 『白地図』第1章「暖簾」（hakuchizu）
+#
+# **出典は二つある。どちらも配布物であり、このリポジトリの外にある。**
+#   ① 草稿 `soul-voice-teller/examples/hakuchizu/草稿/draft_01-1_暖簾.md`
+#      ——第1章「暖簾」の本文（27行）。**この作品が映像化する対象そのものである。**
+#   ② 構想 `soul-voice-teller/examples/hakuchizu/構想/world.md`・`characters.md`・`話割り.md`
+#      ——世界の法・人物・全12章48話の割り。
+#   ③ 既存の絵の基準 `distill-essence-engine/examples/hakuchizu/`
+#      ——`hakuchizu-imageboard/01-1`・`hakuchizu-art-board`・`hakuchizu-akari-character-sheet`。
+#      ⚠️ **①と②は読む対象、③は写す対象である。** 両者を混ぜない。
+#
+# ⚠️ **値はすべて写しか、移し替えである。** 欄ごとに `出所:` を付ける。
+#    ⚠️ **写しは黙ってずれる**——鳴らす者が要る。
+# ⚠️ **食い違ったら、出典が勝つ。**
+# ⚠️ **出典に無い欄は、空のまま置く。** 空は空白ではない。
+#
+# ⚠️ **`world` は、まだ誰も読んでいない。** 今日この一枚を機械で読む者は
+#    `bible.constants.video` と `bible.style` と `bible.language` と `bible.negative_base` だけである。
+#    **家に読者がいて初めて、家は家である**——`world` の読者は、まだ居ない。
+
+project: hakuchizu
+
+bible:
+  # 作品の様式。**様式カードの名前である。**
+  # 出所: `distill-essence-engine/references/styles/gouache-abstract.md`（このリポジトリの
+  #       `references/styles/gouache-abstract.md` が先に読まれる——`SVL_STYLES_DIR` を張る）。
+  #       ⚠️ **この選択の根拠は、著者の既存の制作物そのものである。**
+  #          `hakuchizu-imageboard/01-1/prompt.md` は style を「手彩色の古地図（荒い紙・手書き抽象）」
+  #          と名乗る——**その括弧の中が、このカードの種（`荒い紙に書かれた手書き抽象.txt`）である。**
+  #       ⚠️ **様式カードを新しく1枚も作っていない。** 四色（朱・群青・黄土・金彩）と
+  #          純白の地は**作品のものであって様式のものではない**——ゆえに下の `visual_language` が持つ。
+  #          **様式は言語、配色は作品である。**
+  #       ⚠️ **この欄が §18 の7つ目のスロット `Style Motion` の出所である**（`specmap.PROMPT_SLOTS`）。
+  #          カードの中身はここに置かない。ここに置くのは**名前だけ**である。
+  #          ⚠️ **`L20` がカードの `Motion character` を読みに行く**——このカードはそれを持つ。
+  style: gouache-abstract
+
+  # 作品が話す言語。**値は英語で書く**（生成に渡る文字列は英語である——訳してはならない）。
+  # 出所: 裁定（2026-09-18、著者）「**言語指定で触っているなら、必ずその言語を話す。**」
+  #       ⚠️ **空欄は中立ではない。** 実測: 発話を検出した動画に**中国語の字幕が焼かれた**。
+  #          だから**症状を禁じるのではなく、言語を名指す**（`L27`）。
+  #       ⚠️ **この作品は発話を持たないが、それでも宣言する。** `text_channel` は全ショット空である
+  #          （下の註）。**話さないことと、言語を持たないことは違う。**
+  language: Japanese
+
+  world:
+    # 出所: `構想/world.md`——世界の法。**一字も変えない。**
+    concept: >-
+      場所は、覚えている者の解像度でしか存在しない。覚えている者がいなくなれば、
+      町は白紙に戻る。**零和である**——覚える者が覚えられたものを得るぶん、
+      覚えていた側からは何かが引かれる。**記録は助けない。写真も、数字も、名簿も。**
+
+    # 出所: `構想/world.md` および草稿の本文。**草稿が実際に書いている法だけを置く。**
+    rules:
+      - "**戻りかけの色ほど早く消える。** 濃く塗った朱や群青ほど、夜までかかって薄くなる。"
+      - "**白は音を持たない。** 白のなかに音は無い——音が戻るのは、色が戻ったところからである。"
+      - "**白の下には、人がいた気配が透けている。** 水の跡、自転車の形、洗濯物の形。**人はいない。形だけが白い。**"
+      - "**思い出したぶんだけ、白のなかから色が立ち上がる。** 色が白を喰い戻す。"
+      - "**覚えることは、払うことである。** 戻す代わりに、耳の奥でいちばん薄くなっていたものを渡す。"
+      - "**数は町を戻さない。** 空き家を数えても、数字を覚えても、暖簾の朱は戻らない。"
+      - "**置いた色は、もう白に戻らない。** 灯が指で触れた朱は、灯が持っていかない。"
+
+    # ⚠️ **この欄だけ英語である。** ——**生成に渡す文字列は英語**であり、訳してはならない
+    #    （`CLAUDE.md`「Things That Must Not Be Broken」）。
+    #    ✅ **ゆえにこの欄は「写し」である**（habits の同名欄のような「移し替え」ではない）——
+    #       **出典が既に英語を持っている。** `hakuchizu-imageboard/01-1/prompt.md` の
+    #       「Style, all panels:」の段落が、著者自身の英語である。**そこから採る。**
+    visual_language:
+      # 出所: `hakuchizu-imageboard/01-1/prompt.md`（Style, all panels）——
+      #       パターンA/B/C の三本に一字一句同じ形で入っている段落。
+      #       ⚠️ **この段落は、三つのパターンの共通部である**——ゆえに作品の様式であって、
+      #          どれか一つのパターンのものではない。
+      art_direction: >-
+        Hand-colored old map — rough slightly-textured white paper, soft gouache washes
+        over visible thin pencil line art. The story's four colors — vermilion, ultramarine,
+        ochre, and a faint glimmer of gold gilt — with vermilion and ultramarine foremost
+        and ochre and gold only as small accents. No overall yellow cast; the white ground
+        kept pure white (not cream or ivory). Natural variation in pigment density,
+        dry-brush marks, exposed paper, wet ink edges, large quiet negative space.
+        Flat and paper-based, no directional light, no spatial illusion.
+        Minimal, tactile, poetic, slightly melancholic.
+      # 出所: 草稿 L1・L7——「町は白紙に戻っている」「もう十年も空いている」。
+      #       ⚠️ **年号は出典に無い。** ゆえに**書かない**（書けば、書いた数が実測として読まれる）。
+      era: >-
+        A downtown of empty houses, ten years on — and one morning before dawn.
+        No date is given, and none is written here.
+
+  constants:
+    # 出所: 草稿 L15・L21・L23・L25。**この四つは全ショットに掛かる。**
+    色: "**白は無地である。** 色は、覚えている者がいる場所にだけ戻る。戻った色は、置いた者から引かれる。"
+    支払い: "**戻すことは、払うことである。** 払うものは、耳の奥でいちばん薄くなっていたものである。灯はそれを数えない。"
+    顔: "**灯の顔は描かない。** 背中・輪郭・白くなる手で示す。⚠️ **店主の顔も名も無い**——それは省略ではなく、この作品の人物の定義である（灯が覚えているのは手触りであって顔ではない）。"
+    町: "**数は町を戻さない。** 空き家の数も、消える自治体の数も、暖簾の朱をひとつも戻さない。"
+
+    # §1 の作品定数。**ショットに依らない4つである。**
+    # 出所: `hakuchizu-imageboard/01-1/prompt.md` のヘッダ「16:9」および
+    #       `distill-essence-engine` の当該ボード群。⚠️ **解像度とフレームレートは
+    #       出典に無い**——**この2つは基盤の既定である**（`WAN 3.0` の経路が要求する）。
+    #       **初稿の側から採った値ではないので、要承認である**（`方針 §5a`）。
+    #    ⚠️ **`duration` はここに無い。** 尺はショットごとに違う——**従属変数であり、
+    #       家は `shot.duration`、読む者は `L23`、導出は `engine/shot/print_spec.py` である。**
+    #    ⚠️ **値を変えるときは `specs/` の §1 を全部とも直すこと。** `L26` が食い違いを鳴らす。
+    video:
+      aspect: "16:9"
+      resolution: "1920x1080"
+      frame_rate: "24fps"
+      orientation: "Landscape"
+
+  # 全ショットに必ず付く禁制。**英語不変部——訳してはならない。**
+  #
+  # ⚠️ **ここに置くのは「作品の床」だけである。** 様式カードの Negative
+  #    （`no photorealism, no digital polish, ...`）は §18 が自動で足す——
+  #    **重複させない**（床を厚くするのは `bible` の仕事だが、写しは食い違う）。
+  # ⚠️ **ショット限りの禁止は、ここに置かない。** それは各ショットの §16 MUST NOT と
+  #    §18 `Negative Prompt` が負う（裁定 2026-09-21 の『可読度は §18 が負う』と同じ形）。
+  #    例: `no fully-painted flat vermilion cloth` は **S08 より前のショットにだけ**掛かる。
+  # ⚠️ **1行＝1節である。** `L21` は Negative を**読点で割った列**として読み、
+  #    否定詞を落とした語幹で突き合わせる（`_stem`）。**ゆえに、ここに読点を書かない**
+  #    ——読点を書けば1行が2節になり、**片方だけが覆われていても気づけない。**
+  # ⚠️ **この一覧の全行が、動画の §18 `Negative Prompt` と画像の `Negative` の両方に要る。**
+  #    ゆえに**ショット限りの禁止は、ここに置かない**——それは各ショットの §16 / §18 が負う。
+  negative_base:
+    # ── 基盤の床（`specmap.BASE_NEGATIVES`）。**作品が外していない——`L21` が両経路で要求する。**
+    - "no watermark"
+    - "no on-screen subtitles"
+    - "no background music"
+    # ── 作品の床。**この話のどのショットでも、一度も消えない禁止だけを置く。**
+    # 出所: `hakuchizu-imageboard/01-1/prompt.md` の共通ネガティブ、および
+    #       `hakuchizu-akari-character-sheet/prompt.md`（顔は描かない）。
+    # ⚠️ **人名はローマ字にしない**（著者の決定）。プロンプトの中の「灯」は日本語の字のまま置く。
+    #    ゆえにこの一覧は「**読める名**」を禁じるのであって、**字種を禁じない**——
+    #    `no Japanese kanji or kana` は**使わない。使えば、灯そのものが消える。**
+    - "no fully rendered face for 灯"
+    - "no fully rendered face for 暖簾の店の主"
+    - "no fully rendered person other than 灯"
+    - "no featureless blank face"
+    - "no photorealistic square"
+    - "no photographic insert"
+    - "no typography"
+    - "no lettering"
+    - "no legible signage"
+    - "no saturated or vivid color"
+    - "no yellow cast"
+    - "no cream or ivory paper tone on the white ground"
