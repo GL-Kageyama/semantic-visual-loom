@@ -291,7 +291,12 @@
 
 # 8. TEMPORAL STRUCTURE
 
-- Timing Policy: `STRUCTURED`
+- Timing Policy: `STRUCTURED` / `UNIFORM`
+  ⛔ **この1本の3拍は、等尺である**（3秒ずつ）。⚠️ **`references/formats/video-spec-ja.md` の §8 は
+  「不均等な秒範囲のビート表」と `NON_UNIFORM` を求める**——⛔ **この1本は、それを満たしていない。**
+  ⚠️ **申し送りとして書く。** **記録の `beats` が3秒ずつであり、② は記録を切り直さない**
+  （`shots/migenzo-ch05-seg01.yaml`——**均等なのは、この1本の設計である**）。
+  ⚠️ **不均等は、密度の側にある**（`held` / `transition` / `held`。下の `Temporal Density`）。
 - Temporal Sequence:
   - BEAT 1 `0-3s` — density: `held` — 開いた戸口。**暗さ。** 赤い安全光は内側だけを照らしている。
     絹の横顔が手前にあり、**その眼は横へ逸れている。**
