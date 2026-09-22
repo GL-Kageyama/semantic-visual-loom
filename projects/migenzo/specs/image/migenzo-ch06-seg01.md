@@ -90,10 +90,18 @@ no watermark, no on-screen subtitles, no background music, no clock, no window, 
 - ✅ **設計は保たれた**——**紙は裏側で、表の像は無い。** **白は銀塩の白で、発光していない。**
   **紙は乾いており、不透明で、互いのうしろに並んでいる。** **量は多く、線の端は見えない。**
 - ⛔ **だが、赤い安全光の灯そのものが、枠の左上に入っている。**
-  ⛔ **13枚の画像仕様のうち、`Negative` にそれを含むのは2枚だけである**（実測、2026-09-23、
-  段落ごとに数えた）——**02 は `no lamp, no bulb, no bare light source` を持ち、
-  11 は `no safelight lamp in frame` を持つ。** ⚠️ **05・08 の `no lamp beyond the door` は
-  扉の外の光を禁じる節であり、枠の内の光源を禁じていない。** ⛔ **残る9枚は、光源について何も言わない。**
+  ⛔ **13枚の画像仕様のうち、枠の内の光源そのものを名指して禁じる節を持つのは2枚だけである**
+  （実測、2026-09-23——**基準は「光源そのものを名指して禁じる節の有無」である**。② が明記した）——
+  **`ch02-seg01` は `no lamp` / `no bulb` / `no bare light source` を持ち、`ch11-seg01` は
+  `no light source visible in frame` / `no safelight lamp in frame` を持つ**
+  （⚠️ **ファイル名の番号である。ショット番号では 03 と 12**）。
+  ⚠️ **この基準に数えない節が、ほかの11枚に在る**——
+  `no bright evenly lit room`（**13枚すべて**——**明るさの状態であり、光源を名指していない**）／
+  `no lamp beyond the door`（`ch05`・`ch08`——**扉の外の光であり、枠の内の光源ではない**）／
+  `no dramatic spotlight into the drawer`（`ch04`）と `no spotlight`（`ch07`）——**当てかたの節である**／
+  `no lit wall`・`no lit back wall`（`ch09`）——**照らされた面の節である**／
+  `no paper lit from inside`（**この1枚**）と `no body lit from the front`（`ch08`）——**向きの節である**。
+  ⛔ **ゆえに「残る9枚は、光源について何も言わない」は成り立たない**——**初稿の書きぶりである。**
   ⛔ **この1本の画像仕様は、それを持っていなかった**（下の `Negative` を見よ）。
   ⚠️ **動画の仕様（`specs/video/migenzo-ch06-seg01.md` §16・§18）は、それを足した**——
   **「光は、方向ではなく状態である」**（`bible.constants.光`）**からの帰結として。**

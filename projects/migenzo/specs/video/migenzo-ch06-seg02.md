@@ -24,8 +24,9 @@
 #   it** — a camera move is a *statement about* the meaning, and this grammar wants the world to make it.」
 
 # ⛔ **申し送り——この1本には顔が無い。だが、人物の鍵を1つ引く。**
-#   ⚠️ **引く鍵の見込みは4つである**——`暗室.base`・`暗室.geography`・**`脂痕`**・**`絹.identity`**。
-#   ⛔ **4つとも台帳に在る**——**04 の `引き出し` のような欠けは、この1本には無い**（§6）。
+#   ⚠️ **引く鍵の見込みは5つである**——`暗室.base`・`暗室.geography`・**`脂痕`**・**`絹.identity`**・
+#   **`印画紙`**（トレイの液面——⚠️ **2026-09-23 の著者裁定で、紙はこの枠に在る**。§20 の食い違い(4)）。
+#   ⛔ **5つとも台帳に在る**——**04 の `引き出し` のような欠けは、この1本には無い**（§6）。
 #   ⚠️ **そして `絹.identity` を引く以上、③ は「この1本に顔が無い」ことを負う**——
 #   **設定画は顔・体格・エプロンを持ち、手だけを引く経路は、この基盤には無い**（記録の申し送り(2)）。
 #   ⛔ **② はここに判断を書かない。** **② が申し送るのは、記録と同じ一行である**——
@@ -70,11 +71,19 @@
 #   ⛔ **② は台帳を勝手に直さない**（**判断は問い18 に置いた**）。
 
 # ⛔ **食い違い（3）——この1本の画像仕様は、光源を枠から締め出す節を持っていない**（実測、§20）。
-#   ⛔ **13枚の画像仕様のうち、`Negative` にそれを持つのは2枚だけである**（実測、2026-09-23、
-#   段落ごとに数えた）——**02 は `no lamp, no bulb, no bare light source` を持ち、
-#   11 は `no safelight lamp in frame` を持つ。**
-#   ⚠️ **05・08 の `no lamp beyond the door` は扉の外の光の話であり、枠の内の光源を禁じていない。**
-#   ⛔ **残る9枚（01・03・04・06-01・06-02・07・09・10・12）は、光源について何も言わない。**
+#   ⛔ **13枚の画像仕様のうち、枠の内の光源そのものを名指して禁じる節を持つのは2枚だけである**
+#   （実測、2026-09-23——**基準は「光源そのものを名指して禁じる節の有無」である**。② が明記した）——
+#   **`ch02-seg01` は `no lamp` / `no bulb` / `no bare light source` を持ち、`ch11-seg01` は
+#   `no light source visible in frame` / `no safelight lamp in frame` を持つ**
+#   （⚠️ **ファイル名の番号である。ショット番号では 03 と 12**）。
+#   ⚠️ **この基準に数えない節が、ほかの11枚に在る**——
+#   `no bright evenly lit room`（**13枚すべて**——**明るさの状態であり、光源を名指していない**）／
+#   `no lamp beyond the door`（`ch05`・`ch08`——**扉の外の光であり、枠の内の光源ではない**）／
+#   `no dramatic spotlight into the drawer`（`ch04`）と `no spotlight`（`ch07`）——**当てかたの節である**／
+#   `no lit wall`・`no lit back wall`（`ch09`）——**照らされた面の節である**／
+#   `no paper lit from inside`（`ch06-01`）と `no body lit from the front`（`ch08`）——**向きの節である**。
+#   ⛔ **ゆえに「残る9枚（01・03・04・06-01・06-02・07・09・10・12）は、光源について何も言わない」は
+#   成り立たない**——**初稿の書きぶりである。**
 #   ⛔ **そして 06-01 の実測が、その欠けの帰結を1つ報告している**——**焼かれた1枚に、
 #   安全光の灯そのものが写った**（`specs/image/migenzo-ch06-seg01.md`）。
 #   ⚠️ **動画の §16・§18 は、この1本にもそれを足す**——**「光は、方向ではなく状態である」
@@ -290,11 +299,16 @@
 - 小さなフィルム — **沈む。** ⚠️ **像が、縁から浮く**（§3）。⛔ **読めない。**
 - 脂痕 — **`8-10s`、遅れて滲む。** ⚠️ **像の縁に**（§3）。
 - 赤い安全光 — **状態である。** ⛔ **物として、枠に入らない**（§16）。
-- ⛔ **印画紙・トング・瓶・フィルム筒・リール・拡大機・吊り線・引き出し・戸口・時計・窓** —
+- 印画紙（トレイの液面）— **在る。** ⚠️ **`暗室.base` が中央のトレイに置いた、何も浮かんでいない
+  銀塩印画紙が一枚である**（`migenzo-art-board` が同じ状態を固定する）。
+  ⛔ **この1本では、白のままである**——**ここで現像されるのは、紙ではなく、フィルムである**（§3）。
+  ⚠️ **そして、この1枚は「起きない」**——**0秒からそこに在り、1ミリも動かない。**
+  ⛔ **文法が「枠の何も、この答えを起こさない」と定めている**（`meaning-responsive`）——
+  **紙は、答えの原因ではない。** ⚠️ **在るのは、場所の状態である**（脂痕も、紙も、置かれない）。
+  ⚠️ **2026-09-23 の著者裁定で、ここに決まった**（**10 と同じ型である**。§20 の食い違い(4)）。
+- ⛔ **トング・瓶・フィルム筒・リール・拡大機・吊り線・引き出し・戸口・時計・窓** —
   **どれも、この1本には無い。**
   ⚠️ **無いことは、まだ書いていないことであると同時に、この1本に出さないことである**（§16）。
-  ⛔ **そして、印画紙が無いことは、この1本では特に強い**——**ここで現像されるのは、
-  紙ではなく、フィルムである**（`no paper in the tray` / `no print in the tray`）。
 
 # 6. REFERENCES
 
@@ -321,7 +335,8 @@
   ⛔ **② は鍵を作らない**（`L8`）。**ゆえに、この仕様は台帳に在る鍵だけを `attached` に書く**（§19）。
 - REF_SOURCE: `projects/migenzo/bible.yaml` (CRITICAL)
 - REF_LEDGER: `projects/migenzo/ledger.yaml` (CRITICAL — ⚠️ **この1本は開示の変化点を持つ**)
-  ⚠️ **この1本が引く鍵の見込みは4つである**——`暗室.base` / `暗室.geography` / `脂痕` / `絹.identity`。
+  ⚠️ **この1本が引く鍵の見込みは5つである**——`暗室.base` / `暗室.geography` / `脂痕` / `絹.identity` /
+  **`印画紙`**（トレイの液面——⚠️ **2026-09-23 の著者裁定で、紙はこの枠に在る**）。
   ⛔ **鍵の側に、食い違いは無い**——⚠️ **4つとも台帳に在る**
   （04 の `引き出し` のような欠けは、この1本には無い）。
   ⚠️ **そして、この1本は台帳の `disclosure` の行を1つ持つ**——`絹.能動: 本人起点になった`。
@@ -558,7 +573,12 @@
   （**3つ目の型である**）。
 - ⛔ **光源そのものは、枠に入らない**——**灯も、電球も、光る面も写さない**（§3・§16）。
   ⚠️ **実測**: **この1本の画像仕様は、光源を枠から締め出す節を持っていない**（§20）——
-  ⛔ **13枚のうち、それを持つのは2枚だけである**（**02 と 11**）。
+  ⛔ **13枚のうち、それを名指して禁じるのは2枚だけである**——**`ch02-seg01` と `ch11-seg01`**
+  （**ファイル名の番号。ショット番号では 03 と 12**。実測、2026-09-23——**基準は「枠の内の光源そのものを
+  名指す節の有無」である**）。
+  ⚠️ **数えない節がある**——**明るさの状態**（`no bright evenly lit room`）・**扉の外**（`ch05`・`ch08`）・
+  **当てかた**（`ch04`・`ch07`）・**照らされた面**（`ch09`）・**向き**（`ch06-01`）。
+  ⛔ **節ごとの理由は、§20 の註に列挙した。**
   **動画の §16・§18 は、それを足す。**
 
 # 14. AUDIO
@@ -606,7 +626,7 @@ The palette fixed: the red of the safelight, the amber of the developer, the whi
 ## MUST NOT
 
 - **No readable image on the film. No legible face rising in the liquid. No portrait in the tray.
-  No photograph in the tray. No print in the tray. No paper in the tray.**
+  No photograph in the tray. No print in the tray.**
   ⛔ **像は浮く——だが、読めない**（§7）——**中身を作り込めば、そこに顔が生まれる**
   （`PLAN.md` §0-g。**そして、この作品で最も重い禁制に触れる**）。
   ⚠️ **この1本の解き方は「切る」ではなく「読ませない」である**——**5-10s、像は在る。**
@@ -661,6 +681,9 @@ The palette fixed: the red of the safelight, the amber of the developer, the whi
 ## MUST
 
 - **10秒、ひとつの連続したテイクである。** ⛔ **切らない。**
+- **トレイの液のなかに、何も浮かんでいない銀塩印画紙が一枚、伏せて在る。**
+  ⛔ **`0-2s` から、そこに在る**（**枠に入ってくる物ではない**）——**そして、白のままである。**
+  ⚠️ **光らない。浮かばない。動かない。** **現像されるのは、フィルムである**（§3・§5）。
 - **沈めるのは、1回だけである。** ⛔ **二度目を置かない。取り出さない。**
 - **急がない。** ⚠️ **この3秒は、この1本の唯一の動作である**——
   **急げば、それは「作業」になる**（§17-4）。
@@ -706,8 +729,12 @@ The palette fixed: the red of the safelight, the amber of the developer, the whi
 7. **小さな手を出さない。** ⛔ **幹の答えを、4本前に漏らさない**（§16・`PLAN.md` §2）。
 8. **手をきれいにしない。** ⛔ **この手は、二十年、薬品のなかにある**（§16）——
    ⚠️ **`no clean unstained hands` が効いているかを確かめる。**
-9. **印画紙を出さない。** ⛔ **ここで現像されるのは、フィルムである**（§5）——
-   **紙と、その白が入れば、この1本は 01 や 06-01 になる。**
+9. **紙の白を、主題にしない。** ⛔ **ここで現像されるのは、フィルムである**（§3・§5）——
+   ⚠️ **白が主題になれば、この1本は 01 や 06-01 になる。**
+   ⛔ **ゆえに、紙は液のなかに伏せて在り、白のまま、動かない**——
+   ⚠️ **`no luminous white` / `no glowing or emitting paper` が効いているかを確かめる。**
+   ⛔ **初稿は「紙を出さない」と書いていた**——**2026-09-23 の著者裁定で、そこが直った**
+   （**`暗室.base` が紙を置いている**。§20 の食い違い(4)）。
 10. **液を跳ねさせない。泡を立てない。** ⛔ **この1本の液の運動は2つだけである**（§11）。
 11. **`LIMIT` を守る。** ⛔ **答えは像の縁で止まる**——**液も、光も、部屋も変わらない**
     （**広がれば、代償ではなく色被りになる**——カードの `avoid`）。
@@ -720,11 +747,11 @@ The palette fixed: the red of the safelight, the amber of the developer, the whi
 
 ## Master Prompt
 
-A 10-second continuous cinematic take (16:9), one clip, with no cut anywhere in it. The darkroom of the art board: one windowless room whose only light is a dim red safelight and the warm amber glow of the developer tray, with no time of day and no direction, and no lamp and no bulb anywhere in the frame. The developing tray fills the lower part of the frame, its amber liquid taking the light rather than reflecting the room, so that nothing put into it casts a shadow on the surface. Into this frame come one hand and its forearm and nothing else of her: a woman's hand, thin, the fingers and the skin around the nails faintly stained from years of developing chemicals, with no watch and no ring on it, holding one small dry strip of unexposed film with nothing on it at all. Beats: [0-2s] held — the hand holds the strip above the liquid and nothing has started, and the strip is not shown off; [2-5s] dense — the hand lets the strip down into the liquid, unhurried, in one motion, and the surface swings once and settles, and this is the only action in the clip and it is not a task; [5-8s] transition — the surface stills and an image begins to come up on the strip under the liquid, seen only at the edge of the frame and unreadable in its middle, and something leaves her that never appears on screen; [8-10s] held — later than the eye expects, a grease mark bleeds out along that same edge and the room's red light begins to come back off the mark alone, and the liquid does not change and the light does not change and the room does not change. Nothing in the frame causes that mark: no finger touches the image, nothing moves into the frame, no light source changes, and the mark is not placed on the picture — it bleeds out of it. Her body and her face are not in this frame, there is no paper and no print in the tray, and there is nobody else in the room. Ends on the mark bleeding at the edge, without a resolving beat.
+A 10-second continuous cinematic take (16:9), one clip, with no cut anywhere in it. The darkroom of the art board: one windowless room whose only light is a dim red safelight and the warm amber glow of the developer tray, with no time of day and no direction, and no lamp and no bulb anywhere in the frame. The developing tray fills the lower part of the frame, its amber liquid taking the light rather than reflecting the room, so that nothing put into it casts a shadow on the surface. Into this frame come one hand and its forearm and nothing else of her: a woman's hand, thin, the fingers and the skin around the nails faintly stained from years of developing chemicals, with no watch and no ring on it, holding one small dry strip of unexposed film with nothing on it at all. Beats: [0-2s] held — the hand holds the strip above the liquid and nothing has started, and the strip is not shown off; [2-5s] dense — the hand lets the strip down into the liquid, unhurried, in one motion, and the surface swings once and settles, and this is the only action in the clip and it is not a task; [5-8s] transition — the surface stills and an image begins to come up on the strip under the liquid, seen only at the edge of the frame and unreadable in its middle, and something leaves her that never appears on screen; [8-10s] held — later than the eye expects, a grease mark bleeds out along that same edge and the room's red light begins to come back off the mark alone, and the liquid does not change and the light does not change and the room does not change. Nothing in the frame causes that mark: no finger touches the image, nothing moves into the frame, no light source changes, and the mark is not placed on the picture — it bleeds out of it. Her body and her face are not in this frame, and lying flat in the liquid of the tray is one blank white silver-gelatin sheet with nothing floating up in it and no image on it and it stays blank and still and does not move, and there is no print and no photograph in the tray, and there is nobody else in the room. Ends on the mark bleeding at the edge, without a resolving beat.
 
 ## Visual Prompt
 
-The palette fixed: the red of the safelight, the amber of the developer, the white of the unexposed paper, and the near-black of the surrounding room, the red and amber kept to their sources and never staining the whole frame. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, blown highlights on the white paper, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness. A single light source, and no time of day. The dim red safelight and the warm amber glow of the developer tray are not a direction and not an hour — they are the room's constant state. No window, no clock, no daylight, no directional light, and no lamp, no bulb and no bare light source visible in the frame — the light is the state of the room and never an object standing in it. The darkroom of the art board, seen at the tray: the developing tray fills the lower part of the frame and its amber liquid takes the light rather than reflecting the room, so that the surface is warm and dim and nothing put into it casts a shadow. One hand and its forearm come into the frame from above and nothing else of her: a woman's hand, thin, the fingers and the skin around the nails faintly stained from years of developing chemicals, no watch, no ring, no bracelet, no polished or manicured nails, holding between the fingers one small dry flat strip of unexposed film that has nothing on it at all — no image, no frame, no exposure. She is letting it down into the liquid without hurry, and at the start the strip is still dry and untouched; as it goes under, the surface swings once and settles, and then an image begins to come up on the strip under the liquid, and it is seen only at the edge of the frame and stays unreadable in its middle, with no face and no portrait legible in it anywhere. At the end a grease mark bleeds out along that same edge — a soft stain in the emulsion, without ridges, without a print, without a readable handprint — and the room's red light comes back off that mark alone, while the liquid, the light and the room are otherwise unchanged. No paper, no print and no photograph in the tray or in the liquid, no sheet, no second strip, no tongs, no bottles, no jars, no enlarger, no reel. Her body and her face are not in this frame, there is no second hand, and the room is empty besides her hand. No typography anywhere in the frame, and no readable text.
+The palette fixed: the red of the safelight, the amber of the developer, the white of the unexposed paper, and the near-black of the surrounding room, the red and amber kept to their sources and never staining the whole frame. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, blown highlights on the white paper, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness. A single light source, and no time of day. The dim red safelight and the warm amber glow of the developer tray are not a direction and not an hour — they are the room's constant state. No window, no clock, no daylight, no directional light, and no lamp, no bulb and no bare light source visible in the frame — the light is the state of the room and never an object standing in it. The darkroom of the art board, seen at the tray: the developing tray fills the lower part of the frame and its amber liquid takes the light rather than reflecting the room, so that the surface is warm and dim and nothing put into it casts a shadow. One hand and its forearm come into the frame from above and nothing else of her: a woman's hand, thin, the fingers and the skin around the nails faintly stained from years of developing chemicals, no watch, no ring, no bracelet, no polished or manicured nails, holding between the fingers one small dry flat strip of unexposed film that has nothing on it at all — no image, no frame, no exposure. She is letting it down into the liquid without hurry, and at the start the strip is still dry and untouched; as it goes under, the surface swings once and settles, and then an image begins to come up on the strip under the liquid, and it is seen only at the edge of the frame and stays unreadable in its middle, with no face and no portrait legible in it anywhere. At the end a grease mark bleeds out along that same edge — a soft stain in the emulsion, without ridges, without a print, without a readable handprint — and the room's red light comes back off that mark alone, while the liquid, the light and the room are otherwise unchanged. Lying flat in that liquid, already there from the first second and never moving, is one blank white silver-gelatin sheet with nothing floating up in it and no image on it, and it stays blank; and there is no print and no photograph in the tray or in the liquid, no second sheet, no second strip, no tongs, no bottles, no jars, no enlarger, no reel. Her body and her face are not in this frame, there is no second hand, and the room is empty besides her hand. No typography anywhere in the frame, and no readable text.
 
 ## Motion Prompt
 
@@ -740,7 +767,7 @@ No dialogue and no voice of any kind. No sound effects: no liquid, no film, no t
 
 ## Negative Prompt
 
-no visible cause, no camera move answering the meaning, no cut, no rack focus carrying the meaning, no on-screen actor causing the change, no blanket colour grade, no caption naming the meaning, no voice-over naming the meaning, no watermark, no on-screen subtitles, no background music, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no youthful face for 絹, no clean unstained hands, no smiling expression, no visible fingerprint ridges, no forensic texture, no legible handprint, no readable image on the film, no legible face rising in the liquid, no portrait in the tray, no photograph in the tray, no print in the tray, no paper in the tray, no film strip with visible frames, no second strip, no child's hand of any kind, no small hand pressing the lens, no finger touching the image, no hand wiping the mark, no hand placing the mark, no thumb mark with a palm, no full handprint, no ink, no stamp pad, no magnifying glass, no evidence marker, no forensic ruler, no body, no figure, no face, no head, no shoulder, no apron, no sleeve with a cuff, no second hand, no left hand, no person, no reflection of a face in the liquid, no manicured hand, no long fingernails, no nail polish, no glove, no watch on the wrist, no ring, no bracelet, no product photography of a hand, no dramatic hand modelling, no splash, no droplets, no bubbles, no foam, no ripples beyond the one break, no overflow, no pouring, no stream of liquid, no spill on the table, no tongs, no second tray, no dry tray, no empty tray, no bottles or jars, no enlarger, no reel or spool, no film canister, no luminous white, no light of its own from the liquid, no glowing liquid, no glowing or emitting paper, no god rays, no lens flare, no reflection of the room in the liquid, no visible light source in frame, no safelight lamp in frame, no lamp, no bulb, no bare light source, no bright evenly lit room, no portrait lighting, no studio backlight, no second camera position, no push-in, no pull-back, no pan, no tilt, no handheld camera, no shake, no zoom, no wider reframing, no close-up on the mark, no cut-in, no slow motion, no speed ramp, no clock face, no timer, no date stamp, no numbers, no counter, no title card, no on-screen text, no posed studio lighting, no dramatic color grading, no CGI
+no visible cause, no camera move answering the meaning, no cut, no rack focus carrying the meaning, no on-screen actor causing the change, no blanket colour grade, no caption naming the meaning, no voice-over naming the meaning, no watermark, no on-screen subtitles, no background music, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no youthful face for 絹, no clean unstained hands, no smiling expression, no visible fingerprint ridges, no forensic texture, no legible handprint, no readable image on the film, no legible face rising in the liquid, no portrait in the tray, no photograph in the tray, no print in the tray, no film strip with visible frames, no second strip, no child's hand of any kind, no small hand pressing the lens, no finger touching the image, no hand wiping the mark, no hand placing the mark, no thumb mark with a palm, no full handprint, no ink, no stamp pad, no magnifying glass, no evidence marker, no forensic ruler, no body, no figure, no face, no head, no shoulder, no apron, no sleeve with a cuff, no second hand, no left hand, no person, no reflection of a face in the liquid, no manicured hand, no long fingernails, no nail polish, no glove, no watch on the wrist, no ring, no bracelet, no product photography of a hand, no dramatic hand modelling, no splash, no droplets, no bubbles, no foam, no ripples beyond the one break, no overflow, no pouring, no stream of liquid, no spill on the table, no tongs, no second tray, no dry tray, no empty tray, no bottles or jars, no enlarger, no reel or spool, no film canister, no luminous white, no light of its own from the liquid, no glowing liquid, no glowing or emitting paper, no god rays, no lens flare, no reflection of the room in the liquid, no visible light source in frame, no safelight lamp in frame, no lamp, no bulb, no bare light source, no bright evenly lit room, no portrait lighting, no studio backlight, no second camera position, no push-in, no pull-back, no pan, no tilt, no handheld camera, no shake, no zoom, no wider reframing, no close-up on the mark, no cut-in, no slow motion, no speed ramp, no clock face, no timer, no date stamp, no numbers, no counter, no title card, no on-screen text, no posed studio lighting, no dramatic color grading, no CGI
 
 ## Style Motion
 
@@ -762,8 +789,9 @@ Full animation, not limited — and the form's native state is available to it, 
 - Duration: `10s`
 - References: `REF_LOCATION (暗室, HIGH) ／ REF_GEOGRAPHY (暗室.geography, HIGH) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (meaning-responsive, HIGH) ／ REF_CHARACTER (絹, HIGH — 手だけである) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
 - Attached: ⛔ **まだ確定していない——③ が決める。** ② の見込みは
-  `暗室.base`・`暗室.geography`・**`脂痕`**・**`絹.identity`**（**手だけである**）。
-  ⚠️ **4つとも台帳に在る**——**04 の `引き出し` のような欠けは、この1本には無い**（§6）。
+  `暗室.base`・`暗室.geography`・**`脂痕`**・**`絹.identity`**（**手だけである**）・
+  **`印画紙`**（トレイの液面——⚠️ **2026-09-23 の著者裁定で、紙はこの枠に在る**。§20 の食い違い(4)）。
+  ⚠️ **5つとも台帳に在る**——**04 の `引き出し` のような欠けは、この1本には無い**（§6）。
   ⛔ **そして、`絹.identity` を引く以上、③ は「この1本に顔が無い」ことを負う**（§6 の申し送り(2)）。
 - Format Variables: `BEARER = 絹の手 ／ ANSWER = 像の縁に滲む脂痕 ／ DELAY = 遅れ ／ LIMIT = 絹の顔には届かない ／ DURATION = 10s`
   ⚠️ **この1本は技法カードを名乗る**（素の `video-spec` ではない）——
@@ -802,15 +830,54 @@ Full animation, not limited — and the form's native state is available to it, 
   ⛔ **だが、台帳自身の註は、この位置を「集合が動く6箇所」の1つに数えている**——
   **06-02→07**。⚠️ **ゆえに、これは台帳の内部の食い違いでもある。**
   **（3）この1本の画像仕様は、光源を枠から締め出す節を持っていない**（§13）——
-  ⛔ **13枚のうち、`Negative` にそれを持つのは2枚だけである**（実測、2026-09-23、段落ごとに数えた）——
-  **02 は `no lamp, no bulb, no bare light source` を持ち、11 は `no safelight lamp in frame` を持つ。**
-  ⚠️ **05・08 の `no lamp beyond the door` は扉の外の光を禁じる節であり、枠の内の光源を禁じていない。**
-  ⛔ **残る9枚（01・03・04・06-01・06-02・07・09・10・12）は、光源について何も言わない。**
+  ⛔ **13枚の画像仕様のうち、枠の内の光源そのものを名指して禁じる節を持つのは2枚だけである**
+  （実測、2026-09-23——**基準は「光源そのものを名指して禁じる節の有無」である**。② が明記した）——
+  **`ch02-seg01` は `no lamp` / `no bulb` / `no bare light source` を持ち、`ch11-seg01` は
+  `no light source visible in frame` / `no safelight lamp in frame` を持つ**
+  （⚠️ **ファイル名の番号である。ショット番号では 03 と 12**）。
+  ⚠️ **この基準に数えない節が、ほかの11枚に在る**——
+  `no bright evenly lit room`（**13枚すべて**——**明るさの状態であり、光源を名指していない**）／
+  `no lamp beyond the door`（`ch05`・`ch08`——**扉の外の光であり、枠の内の光源ではない**）／
+  `no dramatic spotlight into the drawer`（`ch04`）と `no spotlight`（`ch07`）——**当てかたの節である**／
+  `no lit wall`・`no lit back wall`（`ch09`）——**照らされた面の節である**／
+  `no paper lit from inside`（`ch06-01`）と `no body lit from the front`（`ch08`）——**向きの節である**。
+  ⛔ **ゆえに「残る9枚（01・03・04・06-01・06-02・07・09・10・12）は、光源について何も言わない」は
+  成り立たない**——**初稿の書きぶりである。**
   ⛔ **動画の §16・§18 は、それを足す**——**「光は、方向ではなく状態である」**（`bible.constants.光`）
   **からの帰結として。** ⛔ **規則そのものは出典に無い**（`PLAN.md` §4-c の「20.」）。
   ⚠️ **そして 06-01 の実測が、その欠けの帰結を報告している**——
   **焼かれた1枚に、安全光の灯そのものが写った**（`specs/image/migenzo-ch06-seg01.md`、n=1）。
   ⛔ **焼き直すか、採用するかは、著者が決める。** **これは欠陥の指摘ではない。**
+  **（4）この1本は、トレイに紙を置いていなかった**（実測、2026-09-23）——
+  ⛔ **初稿の §5 は、印画紙を「この1本には無い」の一覧に入れていた**——
+  **そして、画像仕様の `Negative` と、この仕様の §16・§18 が `no paper in the tray` を持っていた。**
+  ⚠️ **記録の側は、そう書いていない**——`ledger.locations.暗室.base` は
+  「**中央の現像トレイに、何も浮かんでいない銀塩印画紙が一枚。**」と書き、
+  `migenzo-art-board` が同じ状態を固定し、**台帳の `props.印画紙` の一覧は、この位置（S07）を含む**
+  （実測、2026-09-23）。
+  ⛔ **ゆえに、これは初稿の側の誤りである。2026-09-23 の著者裁定で、直した**——
+  **紙は、液のなかに伏せて在り、`0-2s` からそこに在り、白のまま、動かない**（§5・§16・§18）。
+  ⛔ **落としたのは `no paper in the tray` である**——⚠️ **在る物を禁じる節は、読み手と生成器を
+  迷わせる**（**10 と同じ型である**。`migenzo-ch09-seg01.md` §20 の食い違い(4)）。
+  ⚠️ **`no print in the tray` / `no photograph in the tray` は残した**——
+  **禁じるのは「紙が在ること」ではなく、「像が在ること」である。**
+  ⛔ **そして §17-9 の「印画紙を出さない」も、直した**——
+  **初稿の理由（紙と白が入れば 01 や 06-01 になる）は、② の読みであって、出典を持たない**——
+  ⚠️ **ゆえに、規則の側を「白を主題にしない」へ写した**（**紙は在る。白が主題にならない**）。
+  ⚠️ **この直しで、参照の見込みは4つから5つになった**（§6・§19——**`印画紙`（トレイの液面）**）。
+  ⛔ **註（申し送り）——記録の側（`shots/migenzo-ch06-seg02.yaml` の ③ への申し送り）は、
+  4つのままである**（実測、2026-09-23）。⚠️ **② は記録を書き換えない**——
+  **この直しの裁定は、動画仕様・画像仕様・§20 の記録に限られている**（**著者の裁定の文面**）。
+  ⛔ **ゆえに、③ がこの1本で `印画紙` を引くなら、根拠は台帳の `props.印画紙` の一覧（S07 を含む）と、
+  この仕様の見込みである**——**記録の側は、まだ名指していない。**
+  ⚠️ **実測（2026-09-23、同一条件）**——**画像仕様の `Negative` は 76節 → 75節**
+  （**落ちたのは `no paper in the tray` の1節である**）。**この仕様の §18 `Negative Prompt` は
+  136節 → 135節**（**同じ1節である**）。
+  ⛔ **そして、検査は 違反 73件 → 73件、註 40件 → 40件である**——
+  **1件も動かなかった。** ⚠️ **落とした節は、`bible.negative_base` の26節の
+  どれでもない**（実測）——**ゆえに、どの `L` もこれを要求していない。**
+  ⛔ **この欠陥の型は、検査ではなく、読み取りが見つけた**（**10 と同じである**）。
+  ⚠️ **10 の側の同じ誤りは、同日に閉じている**（`migenzo-ch09-seg01.md` §20 の食い違い(4)）。
 - ⚠️ **申し送り（06-01 について、この1本を書くあいだに気づいたこと）**——
   **01〜10 の10本が負う床**（`ledger` の註）のうち、
   ⚠️ **02・03・04・05 は §16 と §18 の両方に持ち**（**§16 に2回・§18 に1回**）、
@@ -838,8 +905,10 @@ Full animation, not limited — and the form's native state is available to it, 
 - **⚠️ 体と顔が入る。** ⛔ **入れば、この1本は人物の1本になる**（§3）。
 - **⚠️ 小さな手が出る。** ⛔ **幹の答えが漏れる**（§17-7）——
   ⚠️ **`no small hand pressing the lens` / `no child's hand of any kind` を確かめる。**
-- **⚠️ 印画紙が出る。** ⛔ **紙と、その白が入れば、この1本は 01 や 06-01 になる**（§17-9）——
-  ⚠️ **`no paper in the tray` / `no print in the tray` を確かめる。**
+- **⚠️ 紙の白が、主題になる。** ⛔ **白が主題になれば、この1本は 01 や 06-01 になる**（§17-9）——
+  ⚠️ **`no luminous white` / `no glowing or emitting paper` / `no developed image` を確かめる。**
+  ⛔ **紙は在る**（§5——**`暗室.base` が置いている**）——
+  **禁じるのは「紙が在ること」ではなく、「白が主題になること」である。**
 - **⚠️ 液が跳ねる。泡立つ。** ⛔ **この1本の液の運動は2つだけである**（§11・§17-10）。
 - **⚠️ カメラが寄る。** ⛔ **文法が名指しで禁じている**（§10・§17-5）——
   ⚠️ **寄れば、「見つけた」という演技になる。**
