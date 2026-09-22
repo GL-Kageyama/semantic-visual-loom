@@ -11,7 +11,7 @@
 #   ⚠️ **`time-fold` では、置かれた枠が本来の形である**——
 #   「**The camera is the anchor**……**A fixed frame is the native case**」。
 #
-#   ⛔ **この1本は、この作品で唯一 `video-spec` 以外を名乗る1本である**（`PLAN.md` §0-b）——
+#   ⛔ **この1本は、`video-spec` 以外を名乗る4本のうちの1本である**（`PLAN.md` §0-b——**01・02・07・11 の4本**）——
 #   ⚠️ **ゆえに §18 の禁制の集合は、01 とも 03 とも違う。**
 #   実測（2026-09-23）——**`time-fold` の `Negative` は9節、`impossible-camera` は6節で、
 #   両者は1節も共通しない**（4枚の技法カードは、互いに `no cut` の1節だけを共有する）。
@@ -177,7 +177,7 @@
 - REF_LOCATION: `暗室` (HIGH — `migenzo-art-board` が基準である)
 - REF_GEOGRAPHY: `暗室.geography` (MEDIUM — 位置関係は4点。**この1本は「壁」と「トレイ」の2点を使う**)
 - REF_STYLE: `documentary-photo` (HIGH)
-- REF_FORMAT: `time-fold` (HIGH — **この1本の文法である**。⛔ **この作品で唯一、`video-spec` 以外を名乗る1本**)
+- REF_FORMAT: `time-fold` (HIGH — **この1本の文法である**。⛔ **`video-spec` 以外を名乗る4本のひとつ**（`PLAN.md` §0-b——**01・02・07・11**）)
   - ⚠️ **カードの形式変数は5つである**（`references/formats/time-fold.md`）——
     `PLACE`＝**暗室**／`PASSES`＝**二十年**／`SURVIVOR`＝**この部屋の状態（現像トレイと赤い安全光）**／
     `RANGE`＝**二十年**／`DURATION`＝**9s**。
