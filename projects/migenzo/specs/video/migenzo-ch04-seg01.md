@@ -420,7 +420,7 @@
 - Base Lighting: **赤い安全光と、奥の現像液の灯。** ⛔ **方向を持たない、時刻を持たない**——
   「A single light source, and no time of day. …… they are the room's constant state.
   No window, no clock, no daylight, no directional light.」（`bible.world.visual_language.light`）
-  ⚠️ **光は状態であって、動きではない**（`bible.constants.光`）。
+  ⚠️ **光は、方向ではなく状態である**（`bible.constants.光`）——**ゆえに、この一本で動くのは光源ではなく、光の当たりかたである。**
   ⚠️ **そして、この1本では、光の縁が当たる場所を変える**——
   **底（2-4s）→ 内側の板（4-5s）→ 少しずれる（5-7s）。**
 - Lighting Events: ⚠️ **1つ在る**——**`0-7s`、赤い安全光の縁が、引き出しの底を渡り、

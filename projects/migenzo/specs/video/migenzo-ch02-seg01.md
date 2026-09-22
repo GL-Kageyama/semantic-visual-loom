@@ -132,7 +132,7 @@
 
 - Reference: `暗室.base`。
 - Appearance: **上の光源。** 赤い。⚠️ **壁の影を落としているのは、この光である。**
-- Behavior: **動かない。** ⚠️ **光は状態であって、運動ではない**（`bible.constants.光`）。
+- Behavior: **動かない。** ⚠️ **光は、方向ではなく状態である**（`bible.constants.光`）——**動かないのは、それが状態だからである。**
 - Continuity Requirements: ⛔ **これが survivor の2つ目である。**
   ⛔ **そして、光源そのものは枠に入らない**（§16）——**在るのは、光が届いている面である。**
 
@@ -326,7 +326,7 @@
 - Base Lighting: **赤い安全光と、琥珀の現像液の灯。** ⛔ **方向を持たない、時刻を持たない**——
   「A single light source, and no time of day. …… they are the room's constant state.
   No window, no clock, no daylight, no directional light.」（`bible.world.visual_language.light`）
-  ⚠️ **光は状態であって、動きではない**（`bible.constants.光`）。
+  ⚠️ **光は、方向ではなく状態である**（`bible.constants.光`）——**ゆえに `Lighting Events` は無しである。**
   ⚠️ **そして、この1本では、その光が影を落としている**——**壁の影は、赤い安全光の産物である。**
 - Lighting Events: **無し。** ⛔ **この9秒で、光は一度も動かない。**
   ⚠️ **影が濃くなることは、光の変化ではない**——**光は同じままで、積もっている。**

@@ -40,9 +40,13 @@
 
 # ⚠️ **画像の側は、既に1枚焼かれている**——`06_01_ChatGPT Image 2026年9月23日 03_20_37.png`。
 #   ⛔ **そして、この1枚には実測が1つある**——**赤い安全光の灯そのものが、枠の左上に入っている。**
-#   ⚠️ **この作品の画像仕様は、02・03・04・05・11 が `no lamp, no bulb, no bare light source in frame`
-#   を持つ**——⛔ **この1本の画像仕様は、それを持っていなかった**（**ゆえに出た、と読める**）。
-#   ⚠️ **動画の §16・§18 は、それを足す**（**光は状態であって、物ではない**——`bible.constants.光`）。
+#   ⛔ **13枚の画像仕様のうち、`Negative` にそれを含むのは2枚だけである**（実測、2026-09-23、
+#   段落ごとに数えた）——**02 は `no lamp, no bulb, no bare light source` を持ち、11 は
+#   `no safelight lamp in frame` を持つ。** ⚠️ **05・08 の `no lamp beyond the door` は扉の外の光を
+#   禁じる節であり、枠の内の光源を禁じていない。** ⛔ **この1本の画像仕様は、それを持っていなかった**
+#   （**ゆえに出た、と読める**）。
+#   ⚠️ **動画の §16・§18 は、それを足す**——**「光は、方向ではなく状態である」**（`bible.constants.光`）
+#   **からの帰結として。** ⛔ **規則そのものは出典に無い**（`PLAN.md` §4-c の「20.」）。
 #   ⛔ **添付される参照画像に灯が写っている以上、これは生成の危険である**（§20 の予告）。
 #   ⚠️ **採用するか、焼き直すかは、著者が決める**（§20。**見えたままを書く。欠陥の指摘ではない**）。
 
@@ -439,7 +443,7 @@
 - Base Lighting: **赤い安全光と、奥の現像液の灯。** ⛔ **方向を持たない、時刻を持たない**——
   「A single light source, and no time of day. …… they are the room's constant state.
   No window, no clock, no daylight, no directional light.」（`bible.world.visual_language.light`）
-  ⚠️ **光は状態であって、動きではない**（`bible.constants.光`）。
+  ⚠️ **光は、方向ではなく状態である**（`bible.constants.光`）——**ゆえに、この一本で動くのは光源ではなく、光の当たりかたである。**
   ⚠️ **そして、この1本では、光が紙を抜ける**——**抜けた光は、紙の白を染めるのではなく、
   紙の内側をうっすらと明るくする**（⛔ **白は銀塩の白のままである**——§16）。
 - Lighting Events: ⚠️ **1つ在る**——**`3-5s`、光の通りかたが、白の内側から表面へ移る。**
@@ -523,8 +527,9 @@ The palette fixed: the red of the safelight, the amber of the developer, the whi
 - **No luminous white. No light of its own from the paper. No god rays. No lens flare.
   No visible light source in frame. No safelight lamp in frame. No lamp. No bulb.
   No bare light source.**
-  ⛔ **光は状態であって、物ではない**（`bible.constants.光`）——
-  **灯を写せば、光は画面のなかの物になる**（§3・§13）。
+  ⚠️ **光は、方向ではなく状態である**（`bible.constants.光`）——
+  **ゆえに、灯を写せば、光は画面のなかの物になる**（§3・§13）。
+  ⛔ **この規則そのものは、出典に無い**——**この作業で立てた法である**（`PLAN.md` §4-c の「20.」）。
   ⚠️ **そして、これは台帳の `no glowing or emitting paper` と同じ法の、別の面である**——
   **自ら光ることの禁止であって、光が通ることの禁止ではない**（下の `ALLOW` を見よ）。
   ⚠️ **実測が、この危険を裏づけている**（§20——**焼かれた1枚に灯が写っている**）。
@@ -666,8 +671,10 @@ Full animation, not limited — and the form's native state is available to it. 
   ⚠️ **`L10` が、この位置で鳴っている**——**それがいま正しい。**
 - ⚠️ **だが、画像の側に実測が1つ在る**（`specs/image/migenzo-ch06-seg01.md`。**n=1**）——
   ⛔ **赤い安全光の灯そのものが、枠の左上に入っている。**
-  ⚠️ **この作品の画像仕様は、02・03・04・05・11 が `no lamp, no bulb, no bare light source in frame`
-  を持つ**——⛔ **この1本の画像仕様は、それを持っていなかった。**
+  ⛔ **13枚の画像仕様のうち、`Negative` にそれを含むのは2枚だけである**（実測、2026-09-23、
+  段落ごとに数えた）——**02 は `no lamp, no bulb, no bare light source` を持ち、11 は
+  `no safelight lamp in frame` を持つ。** ⚠️ **05・08 の `no lamp beyond the door` は扉の外の光を
+  禁じる節であり、枠の内の光源を禁じていない。** ⛔ **この1本の画像仕様は、それを持っていなかった。**
   ⛔ **そして、動画はそれを禁じる**（§16）——**ゆえに、この1本の参照画像と §16 は、いま食い違っている。**
   ⚠️ **採用するか、焼き直すかは、著者が決める**（**これは欠陥の指摘ではなく、見えたままである**）。
 - ⚠️ **同じ1枚について、他に2つ見えている**（**どちらも判断は著者**）——

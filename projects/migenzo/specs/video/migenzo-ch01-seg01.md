@@ -146,7 +146,7 @@
 - Environment Elements: 現像トレイと液面、赤い安全光、光の届かない面。
   ⛔ **窓も、時計も、引き出しも、瓶も、道具も無い**（§16）。
 - Environmental Behavior: **何も動かない。** 液面は静止し、安全光は動かない——
-  ⚠️ **光は状態であって、運動ではない**（`bible.constants.光`）。
+  ⚠️ **光は、方向ではなく状態である**（`bible.constants.光`）——**ゆえに、安全光は動かない。**
 - ⚠️ **この部屋の地理は `ledger.locations.暗室.geography` が持つ**——
   **中央にトレイ（液面）、上に赤い安全光、一方の壁に引き出し、そして戸口。**
   ⛔ **この1本の枠に入るのは、そのうちトレイと液面だけである。**
@@ -289,7 +289,7 @@
 
 ## Environmental Motion
 
-**液面は、静止している。** ⚠️ **安全光は、動かない**——**光は状態であって、運動ではない**。
+**液面は、静止している。** ⚠️ **安全光は、動かない**——**光は、方向ではなく状態である**（`bible.constants.光`）。
 埃も、湯気も、恐れも無い。
 
 ## Physical Characteristics
@@ -315,7 +315,7 @@
 - Base Lighting: **赤い安全光と、琥珀の現像液の灯。** ⛔ **方向を持たない、時刻を持たない**——
   「A single light source, and no time of day. …… they are the room's constant state.
   No window, no clock, no daylight, no directional light.」（`bible.world.visual_language.light`）
-  ⚠️ **光は状態であって、動きではない**（`bible.constants.光`）。
+  ⚠️ **光は、方向ではなく状態である**（`bible.constants.光`）——**ゆえに `Lighting Events` は無しである。**
 - Lighting Events: **無し。** ⛔ **この10秒で、光は一度も動かない。**
   ⚠️ **像のなかの赤い線は、部屋の光ではない**——**像は光を放たない**（`no glowing or emitting paper`）。
   **白は、光を受けているのであって、光っているのではない。**
