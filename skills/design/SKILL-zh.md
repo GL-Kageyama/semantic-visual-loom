@@ -4,7 +4,7 @@ description: 'semantic-visual-loom 的②设计——给镜头做演出，并把
 argument-hint: '（任意）项目名，或要演出的镜头。例: /semantic-visual-loom:design hitosara'
 ---
 
-<!-- i18n-version: 1.0.0 | canonical: skills/design/SKILL.md | translated: 2026-09-14 -->
+<!-- i18n-version: 1.1.0 | canonical: skills/design/SKILL.md | translated: 2026-09-23 -->
 
 **Language:** [English](SKILL.md) | [日本語](SKILL-ja.md) | [中文](SKILL-zh.md)
 
@@ -22,7 +22,7 @@ argument-hint: '（任意）项目名，或要演出的镜头。例: /semantic-v
 | | 什么 | 哪里 |
 |---|---|---|
 | **演出的记录** | `place`・`time`・`mode`・`motion`・`beats`・`duration`・`spec`・`key_image`・`aim`・`text_channel` | `projects/<name>/shots/<id>.yaml` |
-| **影片规格** | 目録顺序的 §1–20、§18 的7个槽、§19 的自称 | `projects/<name>/specs/video/<id>.md` |
+| **影片规格** | 目録顺序的 §1–20、§18 的7个槽、§19 的自称，**以及打开开头的演出摘要** | `projects/<name>/specs/video/<id>.md` |
 | **图像规格** | 一个节之中、有名字的段落——`Prompt`・`Negative` | `projects/<name>/specs/image/<id>.md` |
 | **板式提示词** | ⚠️ **只在经由分镜的视频路径上**——那条路径的①：交给 `distill-essence-engine` 的分镜表（`storyboard` × `luminous-anime`） | `projects/<name>/specs/board/<id>-board.md` |
 
@@ -97,7 +97,21 @@ argument-hint: '（任意）项目名，或要演出的镜头。例: /semantic-v
    **弄错了会响:** `L11`。⚠️ **两种失败是两回事，住在不同的层里。**
    「没有 §1」是 `L11`，「§1 在但没有 `Duration:` 行」**只有 `L23` 会响，别人都不响。**
    **对不上的要求，就是没有被对上。**
-9. **§18 的7个槽**——`Master Prompt`・`Visual Prompt`・`Motion Prompt`・`Camera Prompt`・
+9. **演出摘要——打开影片规格开头的那条注释带。**
+   ⚠️ **它不是栏位，是一条带。** `check.py` 不读它，**其中没有一个字符串会到达生成器**——
+   ⚠️ **交出去的只有 §18，而带子不在其中。** **因此可以用日文写**——
+   §1–17 是底稿，§19–20 是我们的记录，所以**为人写的一行，不会成为交给模型的一行。**
+   ⚠️ **两到三行，每行一句，写在 `═` 框线之内**，放在规格自己的标题（`# Wan 3.0 …`）之上——
+   ⚠️ **那个标题不要丢掉。带子是用来打开它的。**
+   **① 画面里发生什么**（`unit.before` / `unit.after` 换一种说法）·
+   **② 怎么拍**（`motion` 与 `duration`）·
+   **③ 什么不发生**（`motion.law`・§16 的 `MUST NOT`——**这一条的法**）。
+   ⚠️ **不写栏位名、不写 § 编号、不写台帐的键**——**读这条带的人不懂这部作品的词汇。**
+   ⚠️ **它是读法，不是源头。带与规格不一致时，规格为准。**
+   ⚠️ **不写规格里没有的数字**——**写在这里的数字会被当作实测来读。**
+   ⚠️ **要写在 §1–20 之后**——**带子是这份文书的脸，而它要总结的文书必须先存在。**
+
+10. **§18 的7个槽**——`Master Prompt`・`Visual Prompt`・`Motion Prompt`・`Camera Prompt`・
    `Audio Prompt`・`Negative Prompt`・`Style Motion`。**弄错了会响:** `L17`。
    ⚠️ **槽可以在，却什么都不运。** `Style Motion` 的出处是样式卡的
    `Motion character`，而**大多数样式卡没有它**——选了没有的卡，槽就在却是空的，
@@ -135,18 +149,18 @@ argument-hint: '（任意）项目名，或要演出的镜头。例: /semantic-v
    ⚠️ **响声会一直持续到作品声明 `bible.route_limits_accepted`**——**豁免由作品来写，
    而写它属于作者的裁定，不属于这一段。** 这条路径的约束在
    [`docs/seedance-route-zh.md`](../../docs/seedance-route-zh.md)。**
-10. **图像规格**——⚠️ **不是节。** 它是**一个节之中、有名字的段落**——
+11. **图像规格**——⚠️ **不是节。** 它是**一个节之中、有名字的段落**——
    `Prompt` 是第1段，`Negative` 是第2段，按这个顺序。记录的 `key_image:` 指向它。
    **弄错了会响:** `L18`（路径的形状）。
    ⚠️ **为什么是段落而不是节**——因为作者**一次拾起**，
    中间若有见出，选择就会把它卷进去。**配方在 `specmap.SPEC_KINDS` 里。不要自己再推一遍。**
    **弄错了会响:** `L21`（Negative 没有覆盖 `bible.negative_base`——**是覆盖，不是等号**）・
    `L22`（7个栏位里有一个是空的，或者它点名的卡没有宣言那个栏位）。
-11. **§19 的 `Instance ID`**——⚠️ **同一性从规格那一侧取，不从记录那一侧取。**
+12. **§19 的 `Instance ID`**——⚠️ **同一性从规格那一侧取，不从记录那一侧取。**
     镜头的 `shot` 是那个字符串去掉末尾 `-<秒>s-<镜次>` 之后的东西。
     ⚠️ **不从 `Segment ID` 取**——同一个区段里有两个拼写，照直导出会掉记录。
     **弄错了会响:** `L13`。
-12. **`text_channel`**——只有 `composite` 要求它，而三种种类去三个不同的地方。
+13. **`text_channel`**——只有 `composite` 要求它，而三种种类去三个不同的地方。
     `overlay` 由 `timeline` 烧（**生成器不画文字**），`voice` 作为 Audio Prompt 去 §14，
     而 **`lettering` 由生成器在画面之内画**——去向是 §18 的 `Master Prompt`。
     **弄错了会响:** `L24`（`composite` 的镜头必须至少带一个 `overlay`——
@@ -154,7 +168,7 @@ argument-hint: '（任意）项目名，或要演出的镜头。例: /semantic-v
     ⚠️ **`lettering` 只说自己由谁画，不说能不能读出来。**
     **那是那个镜头自己的决定，写进 §18 的槽位里**——**有的作品需要一个让人读的镜头，
     也需要一个不让人读的镜头；把可读性烧进种类里，对两者都太窄。**
-13. **跑它。**
+14. **跑它。**
 
 ```bash
 python3 engine/ledger/check.py projects/<name>   # 违规与註都要读
@@ -224,6 +238,16 @@ python3 engine/ledger/check.py --self-test       # 确认检查器会响
 - **服装的解决读不进机器。** `states.<名>.wardrobe` 的哪一个适用，由 `place` × `time` 解决，
   而从散文导出会出伪阳性（夜里的教室・夜里学园祭的后院・黎明的房间）。
   **条件从成品那一侧确认。记下读法，不要写规则。**
+- ⚠️ **没有人读演出摘要——而它正是为此而存在。** 它是影片规格开头的一条注释带，
+  所以**形之层、台帐之层、生成器，一个字节都看不到它**——
+  **交出去的只有 §18，而带子不在其中。** ⚠️ **不要给它读者。**
+  ⚠️ **没有带子的规格不是缺陷**——**在带子存在之前写下的规格，并不与任何东西不一致。**
+  这与 `aim`、`key_image` 同样处理，**也是不在这里加检查的理由。**
+  ⚠️ **加了检查，就会在比带子更旧的每一条规格上响**——**那量的是日历，不是作品。**
+  ⚠️ **实测 2026-09-23：磁盘上的 38 条影片规格，全部在 §1 之前带有日文前言（11〜84 行）**
+  ——**所以带子不是新的层。它是铺在本来就有的层下面的一层地板。**
+  ⚠️ **变的是那段前言里有没有两到三行的摘要：38 条里有 15 条有**
+  （hakuchizu 是 11 条里有 10 条）。
 
 ## ⚠️ 这里检查器不决定的事
 

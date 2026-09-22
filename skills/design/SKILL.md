@@ -4,7 +4,7 @@ description: 'Stage ② of semantic-visual-loom — stage a shot, and specify it
 argument-hint: '(optional) the project name, or the shot to stage. e.g. /semantic-visual-loom:design hitosara'
 ---
 
-<!-- i18n-version: 1.0.0 | canonical: skills/design/SKILL.md | translated: 2026-09-14 -->
+<!-- i18n-version: 1.1.0 | canonical: skills/design/SKILL.md | translated: 2026-09-23 -->
 
 **Language:** [English](SKILL.md) | [日本語](SKILL-ja.md) | [中文](SKILL-zh.md)
 
@@ -23,7 +23,7 @@ stage ② in this repository** — the only command that runs is the checker, an
 | | What | Where |
 |---|---|---|
 | **the staging record** | `place` · `time` · `mode` · `motion` · `beats` · `duration` · `spec` · `key_image` · `aim` · `text_channel` | `projects/<name>/shots/<id>.yaml` |
-| **the video specification** | §1–20 in the registry's order, §18's 7 slots, §19's self-name | `projects/<name>/specs/video/<id>.md` |
+| **the video specification** | §1–20 in the registry's order, §18's 7 slots, §19's self-name, **and the staging summary that opens the file** | `projects/<name>/specs/video/<id>.md` |
 | **the image specification** | named paragraphs inside one section — `Prompt`, `Negative` | `projects/<name>/specs/image/<id>.md` |
 | **the board prompt** | ⚠️ **only on the video route that goes through a storyboard** — the ① of that route: a storyboard sheet for `distill-essence-engine` (`storyboard` × `luminous-anime`) | `projects/<name>/specs/board/<id>-board.md` |
 
@@ -104,7 +104,24 @@ because `L3` and `L4` read the beat body, not only the field.**
    ⚠️ **Two failures are different and live in different layers.** "§1 is missing" is `L11`;
    "§1 is there but has no `Duration:` line" is **`L23` and nobody else.** A requirement that
    cannot be matched up **is not being matched up.**
-9. **§18's 7 slots** — `Master Prompt` · `Visual Prompt` · `Motion Prompt` · `Camera Prompt` ·
+9. **The staging summary — the band of comments that opens the video specification.**
+   ⚠️ **It is a band, not a field.** `check.py` never reads it and **no string in it reaches a
+   generator** — ⚠️ **only §18 is handed over**, and the band is not in it. **Which is why it may
+   be written in Japanese**: §1–17 are the underlay and §19–20 are our record, so **a line written
+   for a person is not a line handed to a model.**
+   ⚠️ **Two or three lines, each one sentence, inside a `═` rule**, placed above the
+   specification's own title (`# Wan 3.0 …`) — ⚠️ **do not drop that title; the band opens it.**
+   **① what happens on screen** (`unit.before` / `unit.after`, said another way) ·
+   **② how it is shot** (`motion` and `duration`) ·
+   **③ what does not happen** (`motion.law`, §16's `MUST NOT` — **this shot's law**).
+   ⚠️ **Name no field, no section number and no ledger key** — **whoever reads the band does not
+   know this work's vocabulary.** ⚠️ **It is a reading, not a source: if the band and the
+   specification disagree, the specification wins.** ⚠️ **Write no number the specification does
+   not carry** — **a number written here is read as a measurement.**
+   ⚠️ **Write it after §1–20** — **the band is the document's face, and it summarizes a document
+   that has to exist first.**
+
+10. **§18's 7 slots** — `Master Prompt` · `Visual Prompt` · `Motion Prompt` · `Camera Prompt` ·
    `Audio Prompt` · `Negative Prompt` · `Style Motion`. **Fires if wrong:** `L17`.
    ⚠️ **A slot may exist and carry nothing.** `Style Motion`'s source is the style card's
    `Motion character`, and **most style cards do not have one** — a card without it makes the
@@ -145,7 +162,7 @@ because `L3` and `L4` read the beat body, not only the field.**
    fire stays until the work declares `bible.route_limits_accepted`** — **an exclusion is the
    work's to write**, and writing it is a decision for the author, not for this stage. The route's
    constraints are [`docs/seedance-route.md`](../../docs/seedance-route.md).
-10. **The image specification** — ⚠️ **not sections.** It is **named paragraphs inside one
+11. **The image specification** — ⚠️ **not sections.** It is **named paragraphs inside one
    section**: `Prompt` first, `Negative` second, in that order. Write `key_image:` in the
    record to point at it. **Fires if wrong:** `L18` (the shape of the path).
    ⚠️ **Why paragraphs and not sections**: the author selects the whole thing **in one
@@ -153,12 +170,12 @@ because `L3` and `L4` read the beat body, not only the field.**
    in `specmap.SPEC_KINDS`; do not re-derive it.**
    **Fires if wrong:** `L21` (the Negative does not cover `bible.negative_base` — **cover, not
    equal**) · `L22` (one of the 7 fields is empty, or the card it names does not declare it).
-11. **§19's `Instance ID`** — ⚠️ **the identity is taken from the specification side, not from
+12. **§19's `Instance ID`** — ⚠️ **the identity is taken from the specification side, not from
     the record side.** The shot's `shot` id is that string with the trailing
     `-<seconds>s-<take>` dropped. ⚠️ **Never from `Segment ID`** — the same range carries two
     spellings there, and deriving from it drops records.
     **Fires if wrong:** `L13`.
-12. **`text_channel`** — only `composite` requires it, and the three kinds go to three different
+13. **`text_channel`** — only `composite` requires it, and the three kinds go to three different
     places: `overlay` is burned by `timeline` (**the generator does not draw text**), `voice`
     goes to §14 as the Audio Prompt, and **`lettering` is drawn by the generator inside the
     picture** — its destination is §18's `Master Prompt`. **Fires if wrong:** `L24` (a `composite`
@@ -166,7 +183,7 @@ because `L3` and `L4` read the beat body, not only the field.**
     ⚠️ **`lettering` says who draws the text and nothing about whether it can be read.** **That is
     the shot's own decision, written into §18's slots** — a work may need one shot that is legible
     and another that is not, and **a kind that fixed legibility would be too narrow for both.**
-13. **Run it.**
+14. **Run it.**
 
 ```bash
 python3 engine/ledger/check.py projects/<name>   # read the violations AND the notes
@@ -243,6 +260,17 @@ not to delete the prohibition, it is to carry §10's reason into the slot**
   resolved from `place` × `time`, and deriving that from prose produces false positives (a
   classroom at night, a school-festival yard at night, a room at dawn). **The conditions are
   confirmed against the artifact side. Record the reading; do not write a rule.**
+- ⚠️ **Nothing reads the staging summary — and that is what it is for.** It is a band of comments
+  at the head of the video specification, so **the form layer, the ledger layers and the generator
+  are all blind to it** — **only §18 is handed over, and the band is not in it.**
+  ⚠️ **Do not give it a reader.** ⚠️ **A specification without the band is not a defect**: **one
+  written before the band existed is not a specification that disagrees with anything** — the same
+  handling as `aim` and `key_image`, and **the reason no check is added here.** ⚠️ **A check would
+  fire on every specification older than the band** — **it would be measuring the calendar, not
+  the work.** ⚠️ **Measured 2026-09-23: all 38 video specifications on disk already open with a
+  Japanese preamble before §1, 11 to 84 lines long** — so **the band is not a new layer. It is a
+  floor put under a layer that was already there.** ⚠️ **What varied was whether that preamble
+  held a two-or-three-line summary: 15 of the 38 did** (10 of hakuchizu's 11).
 
 ## ⚠️ What the checker does not decide here
 

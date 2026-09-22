@@ -4,7 +4,7 @@ description: 'semantic-visual-loom の①分解——作品をショットへ割
 argument-hint: '（任意）プロジェクト名、または割る対象。例: /semantic-visual-loom:breakdown hitosara'
 ---
 
-<!-- i18n-version: 1.0.0 | canonical: skills/breakdown/SKILL.md | translated: 2026-09-14 -->
+<!-- i18n-version: 1.1.0 | canonical: skills/breakdown/SKILL.md | translated: 2026-09-23 -->
 
 **Language:** [English](SKILL.md) | [日本語](SKILL-ja.md) | [中文](SKILL-zh.md)
 
@@ -27,6 +27,9 @@ argument-hint: '（任意）プロジェクト名、または割る対象。例:
 
 **持たないもの**——`place` / `time` / `mode` / `motion` / `beats` / `duration` と2つの仕様書（**② `design`**）、
 および `reference_set` / `forbidden_set` / `attached` / `disclosure_state`（**③ `ledger`**）。
+⚠️ **演出要約も書かない**——動画仕様の冒頭の、コメントの帯である。**演出の要約であり、
+演出はここで決まらない**——⚠️ **そもそも動画仕様をここでは書かない**ので、
+**この段が帯へ移せるものは無い**（[`skills/design/SKILL.md`](../design/SKILL.md) の第9段）。
 
 ⚠️ **2つの台帳は1本のファイルである。** 連続性と開示は一緒に持つ
 （`CLAUDE.md`「The production ledger is one」）。**2つに割らない。**

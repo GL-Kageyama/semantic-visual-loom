@@ -4,7 +4,7 @@ description: 'semantic-visual-loom 的①分解——把作品切成镜头。在
 argument-hint: '（任意）项目名，或要切开的对象。例: /semantic-visual-loom:breakdown hitosara'
 ---
 
-<!-- i18n-version: 1.0.0 | canonical: skills/breakdown/SKILL.md | translated: 2026-09-14 -->
+<!-- i18n-version: 1.1.0 | canonical: skills/breakdown/SKILL.md | translated: 2026-09-23 -->
 
 **Language:** [English](SKILL.md) | [日本語](SKILL-ja.md) | [中文](SKILL-zh.md)
 
@@ -27,6 +27,9 @@ argument-hint: '（任意）项目名，或要切开的对象。例: /semantic-v
 
 **不持有的**——`place` / `time` / `mode` / `motion` / `beats` / `duration` 与两份规格书（**② `design`**），
 以及 `reference_set` / `forbidden_set` / `attached` / `disclosure_state`（**③ `ledger`**）。
+⚠️ **演出摘要也不写**——那是影片规格开头的一条注释带。**它是演出的摘要，而演出不在这里决定**
+——⚠️ **何况影片规格本来就不在这里写**，所以**这一段没有能移进带里的东西**
+（[`skills/design/SKILL.md`](../design/SKILL.md) 第 9 段）。
 
 ⚠️ **两本台账是一个文件。** 连续性与开示放在一起持
 （`CLAUDE.md` 的「The production ledger is one」）。**不要切成两个。**

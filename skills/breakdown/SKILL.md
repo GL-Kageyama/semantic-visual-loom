@@ -4,7 +4,7 @@ description: 'Stage ① of semantic-visual-loom — cut a work into shots. Use w
 argument-hint: '(optional) the project name, or the work to break down. e.g. /semantic-visual-loom:breakdown hitosara'
 ---
 
-<!-- i18n-version: 1.0.0 | canonical: skills/breakdown/SKILL.md | translated: 2026-09-14 -->
+<!-- i18n-version: 1.1.0 | canonical: skills/breakdown/SKILL.md | translated: 2026-09-23 -->
 
 **Language:** [English](SKILL.md) | [日本語](SKILL-ja.md) | [中文](SKILL-zh.md)
 
@@ -30,6 +30,11 @@ stage ① in this repository** — the only command that runs is the checker, an
 **It does not own** `place` / `time` / `mode` / `motion` / `beats` / `duration` or either
 specification document (those are **② `design`**), and it does not own `reference_set` /
 `forbidden_set` / `attached` / `disclosure_state` (those are **③ `ledger`**).
+⚠️ **Nor does it write the staging summary** — the band of comments at the head of the video
+specification, written in two or three lines of plain prose. ⚠️ **It is the summary of the staging,
+and the staging is not decided here** — ⚠️ **the video specification is not written here either**,
+so **this stage has nothing it could move into the band**
+([`skills/design/SKILL.md`](../design/SKILL.md), step 9).
 
 ⚠️ **The two ledgers are one file.** Continuity and disclosure are held together
 (`CLAUDE.md`, "The production ledger is one"). **Do not split it in two.**
