@@ -37,8 +37,8 @@
 - `CHARACTERS`: no figure in frame — ⚠️ **この1本に人物は入らない。** **吊るした者は、もうこの枠に居ない**
 - `SUBJECT`: a line strung across the darkroom with many silver-white prints hanging from it by small clips, seen from behind, dry and opaque, standing one behind another further than the frame goes
 - `ACTION`: the light no longer passing through the paper — it now lies on the surface — while the sheets sway a little, less and less as they dry
-- `LOCATION`: the darkroom of the art board — one windowless room, the line crossing it, the developer tray and its amber liquid in the same island of light
-- `LIGHT`: the room's constant state — one dim red safelight and the warm amber glow of the developer tray; ⛔ **この1本の光は、紙を抜けない。紙の表面に在る**（乾いたからである）
+- `LOCATION`: the darkroom of the art board — one windowless room, the line crossing it, the developer tray and its amber liquid standing back in the same island of light, behind the paper and out of focus
+- `LIGHT`: the room's constant state — the dim red light of a safelight that stands outside the frame, and the warm amber glow of the developer tray; ⛔ **枠が持つのは光そのものであって、灯ではない**; ⛔ **この1本の光は、紙を抜けない。紙の表面に在る**（乾いたからである）
 - `ASPECT`: 16:9, landscape
 
 ⛔ **この1枚が切る瞬間は `unit.after` である**——「**乾いた。光はもう通らない。白い紙が、何枚も、
@@ -50,9 +50,9 @@
 
 ## 投入する1本の文字列（英語・1段落目が `Prompt`、2段落目が `Negative`）
 
-A scene board for the line of drying prints in the novel 『未現像』 ("Undeveloped") — the master staging of one scene, in 16:9. The darkroom of the art board: one windowless room whose only light is a dim red safelight, with the developer tray and its amber liquid in the same small island of light. A line is strung across the room, and a great many silver-white photographic prints hang from it, each one held by a small clip at its top edge, and we are looking at their backs: the paper side, not the picture side, so that nothing on them is legible as a photograph. They are dry now — the light no longer passes through them, and instead of glowing from inside they are simply pale opaque sheets, one standing behind another, further back than the frame goes, so that at the front the sheets can still be picked out and past the first several they cannot be counted at all, and the row continues out of the frame on both sides. A few of them are still moving a very little, and the movement is getting smaller as they dry. Nothing is being hung up and nothing is being taken down; no one is in this frame. `[no figure in frame]` — the line and the paper, and the light lying on the surface of the paper. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness. The palette is held to the red of the safelight, the amber of the developer and the silver-white of the paper, and the red and amber are kept to their sources and never stain the whole frame. The same place as the art board. No typography anywhere in the frame.
+A scene board for the line of drying prints in the novel 『未現像』 ("Undeveloped") — the master staging of one scene, in 16:9. The darkroom of the art board: one windowless room lit by a safelight that stands outside the frame — what is in the frame is the red light it makes, and not the fixture that makes it — with the developer tray and its amber liquid standing back in the same small island of light, behind the paper and out of focus so that its surface is not a face in this frame. A line is strung across the room, and a great many silver-white photographic prints hang from it, each one held by a small clip at its top edge, and we are looking at their backs: the paper side, not the picture side, so that nothing on them is legible as a photograph. They are dry now — the light no longer passes through them, and instead of glowing from inside they are simply pale opaque sheets, one standing behind another, further back than the frame goes, so that at the front the sheets can still be picked out and past the first several they cannot be counted at all, and the row continues out of the frame on both sides. A few of them are still moving a very little, and the movement is getting smaller as they dry. Nothing is being hung up and nothing is being taken down; no one is in this frame. `[no figure in frame]` — the line and the paper, and the light lying on the surface of the paper. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness. The palette is held to the red of the safelight, the amber of the developer and the silver-white of the paper, and the red and amber are kept to their sources and never stain the whole frame. The same place as the art board. No typography anywhere in the frame.
 
-no watermark, no on-screen subtitles, no background music, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no small hand pressing the lens, no person, no figure, no body, no hand, no fingers, no arm, no face, no readable photograph on the paper, no face on the paper, no portrait on the paper, no image visible on the facing side, no picture side of the paper turned toward us, no developed image, no image on the film, no glowing paper, no paper lit from inside, no self-luminous paper, no light passing through the paper, no translucent sheet, no digital image on the paper, no glossy photo paper, no inkjet print, no ink, no bubble jet texture, no digital noise on the paper, no torn sheet, no creased sheet, no fallen sheet on the floor, no peg or clothespin in a hand, no printing line or rope of laundry, no clothing on the line, no towel, no bedsheet, no counting of the sheets made easy, no neat row of evenly spaced identical sheets, no symmetrical grid, no evenly measured spacing, no small number of sheets, no single sheet, no two sheets, no visible end of the line, no reel or spool, no tongs, no tray with paper in it, no bottles or jars, no enlarger, no bright evenly lit room, no studio backdrop, no product photograph of hanging prints, no gallery wall, no frames, no pegs on a wall
+no watermark, no on-screen subtitles, no background music, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no small hand pressing the lens, no person, no figure, no body, no hand, no fingers, no arm, no face, no readable photograph on the paper, no face on the paper, no portrait on the paper, no image visible on the facing side, no picture side of the paper turned toward us, no developed image, no image on the film, no glowing paper, no paper lit from inside, no self-luminous paper, no light passing through the paper, no translucent sheet, no digital image on the paper, no glossy photo paper, no inkjet print, no ink, no bubble jet texture, no digital noise on the paper, no torn sheet, no creased sheet, no fallen sheet on the floor, no peg or clothespin in a hand, no printing line or rope of laundry, no clothing on the line, no towel, no bedsheet, no counting of the sheets made easy, no neat row of evenly spaced identical sheets, no symmetrical grid, no evenly measured spacing, no small number of sheets, no single sheet, no two sheets, no visible end of the line, no reel or spool, no tongs, no tray with paper in it, no bottles or jars, no enlarger, no light source visible in frame, no safelight lamp in frame, no lamp, no bulb, no bare light source, no bright evenly lit room, no studio backdrop, no product photograph of hanging prints, no gallery wall, no frames, no pegs on a wall
 
 ---
 
@@ -105,14 +105,20 @@ no watermark, no on-screen subtitles, no background music, no clock, no window, 
   ⛔ **この1本の画像仕様は、それを持っていなかった**（下の `Negative` を見よ）。
   ⚠️ **動画の仕様（`specs/video/migenzo-ch06-seg01.md` §16・§18）は、それを足した**——
   **「光は、方向ではなく状態である」**（`bible.constants.光`）**からの帰結として。**
-  ⛔ **ゆえに、この1枚を参照画像として添付するなら、§16 と参照画像が食い違う**——
-  ⚠️ **採用するか、焼き直すかは、著者が決める。**
-- ⚠️ **他に2つ見えている**（**どちらも判断は著者**）——
-  **現像トレイが手前に入り、液面の読める面になっている**——
-  ⚠️ **この画像仕様の `LOCATION` は「同じ島の光のなか」と書くだけで、遠ざけてもいない**
-  （**動画の仕様は §4・§16 で「奥に、面にしない」と書く**）／
-  **紙が、右半分ではほぼ同じ大きさで、ほぼ等間隔に並んでいる**（下の
-  `no neat row of evenly spaced identical sheets` が禁じている）。
+  ⛔ **ゆえに、この1枚を参照画像として添付するなら、§16 と参照画像が食い違う。**
+- ⛔ **裁定（2026-09-23、著者——「推奨で進めよ」）: 焼き直す。** **直したのは3点である。**
+  ⚠️ **（1）灯**——**肯定の側を直した。** **灯は枠の外に立ち、枠が持つのはそれが作る赤い光である。**
+  ⛔ **そして `Negative` に、動画の仕様と同じ5節を足した**
+  （`no light source visible in frame` / `no safelight lamp in frame` / `no lamp` / `no bulb` /
+  `no bare light source`）。
+  ⚠️ **02 と違い、この1本は否定の側を最初から持っていなかった**——
+  **02 は「禁じていたのに描かれた」、この1本は「禁じていなかった」。** **同型の欠陥である。**
+  ⛔ **（2）トレイ**——**著者へ渡した表では触れていない1点である**（**約束より1つ多い**）。
+  **`LOCATION` とプロンプトに「奥に立ち、面にしない」を足した**——
+  ⚠️ **動画の仕様 §4・§16 はそれを要求しており、この画像仕様は書いていなかった。**
+  ⚠️ **（3）等間隔**——**これは仕様ではなく生成の側の外れである。**
+  **`no neat row of evenly spaced identical sheets` は既に在る。****ゆえに1節も足していない。**
+- ⚠️ **この1本に、他の食い違いは見えていない。**
 
 ## 記録との対応
 

@@ -35,10 +35,10 @@
 
 - `SCENE`: a hand that can move, arriving, measuring the weight of something without taking it, and going back
 - `CHARACTERS`: `[絹: only her hand and forearm enter the frame — woman, late fifties, thin, hands faintly stained from developing chemicals]` — ⛔ **彼女の体も、顔も、この枠に入らない**
-- `SUBJECT`: the inside of an open wooden drawer with a small film canister lying on its bottom, and a hand come in from outside the frame, stopped short of the canister, the palm opened a little
+- `SUBJECT`: the inside of an open wooden drawer with a small film canister lying on its side, its length running across the drawer's bottom and its round lid turned to the left, and a hand come in from outside the frame, stopped short of the canister, the palm opened a little and the fingers loosely together and not spread
 - `ACTION`: the hand having extended and stopped, the fingertips not closing, held at the same distance it has been held at for twenty years
-- `LOCATION`: the darkroom of the art board — the inside of the open drawer taking the whole frame, the red safelight reaching only its near edge
-- `LIGHT`: the room's constant state — one dim red safelight that reaches no further than the near edge of the drawer, and the warm amber glow of the developer tray further off; no time of day and no directional light
+- `LOCATION`: the darkroom of the art board — the inside of the open drawer taking the whole frame, the red light reaching only its near edge
+- `LIGHT`: the room's constant state — the dim red light of a safelight that stands outside the frame and reaches no further than the near edge of the drawer, and the warm amber glow of the developer tray further off; ⛔ **枠が持つのは光そのものであって、灯ではない**; no time of day and no directional light
 - `ASPECT`: 16:9, landscape
 
 ⛔ **この1枚が切る瞬間は 3-6s のなかである**——**手が止まり、掌がすこし開いているところである。**
@@ -52,9 +52,9 @@
 
 ## 投入する1本の文字列（英語・1段落目が `Prompt`、2段落目が `Negative`）
 
-A scene board for the hand that stops short in the novel 『未現像』 ("Undeveloped") — the master staging of one scene, in 16:9. The inside of an open wooden drawer fills the frame: the wooden bottom of it, dry and pale, and lying on that bottom one small film canister, a plain closed cylinder that has been in exactly this place for twenty years. The red safelight of the darkroom reaches no further than the near edge of the drawer, so the back of the inside stays dark and the canister sits half in it. Into the frame from outside comes one hand and its forearm — a woman's hand, in her late fifties, thin, the fingers and the skin around the nails faintly stained from years of developing chemicals — and it has extended toward the canister and stopped a little short of it. The palm has opened a little and lifted, the way a hand does when it is weighing something, and the fingers are not closed: they are held open at that same small distance from the canister, the distance they have been held at for twenty years. The canister has not moved and is not going to move. Her body and her face are not in this frame and there is nobody else in the room. `[絹: only her hand and forearm — woman, late fifties, thin, hands faintly stained from developing chemicals]`. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness. The palette is held to the red of the safelight, the amber of the developer and the silver-white of the paper, and the red and amber are kept to their sources and never stain the whole frame. The same place as the art board. No typography anywhere in the frame.
+A scene board for the hand that stops short in the novel 『未現像』 ("Undeveloped") — the master staging of one scene, in 16:9. The inside of an open wooden drawer fills the frame: the wooden bottom of it, dry and pale, and lying on that bottom one small film canister laid on its side — a plain closed cylinder lying flat along the wood, its round lid turned to the left, its length running across the drawer's bottom, and it has been in exactly this place for twenty years. The red light of the darkroom, which comes from a safelight standing outside the frame, reaches no further than the near edge of the drawer, so the back of the inside stays dark and the canister sits half in it. Into the frame from outside comes one hand and its forearm — a woman's hand, in her late fifties, thin, the fingers and the skin around the nails faintly stained from years of developing chemicals — and it has extended toward the canister and stopped a little short of it. The palm has opened a little and lifted, the way a hand does when it is weighing something, and the fingers are neither closed nor spread: they stay loosely together, held open at that same small distance from the canister, the distance they have been held at for twenty years. The canister has not moved and is not going to move. Her body and her face are not in this frame and there is nobody else in the room. `[絹: only her hand and forearm — woman, late fifties, thin, hands faintly stained from developing chemicals]`. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness. The palette is held to the red of the safelight, the amber of the developer and the silver-white of the paper, and the red and amber are kept to their sources and never stain the whole frame. The same place as the art board. No typography anywhere in the frame.
 
-no watermark, no on-screen subtitles, no background music, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no small hand pressing the lens, no person, no figure, no body, no face, no second hand, no face in the frame, no image on the canister, no canister opened, no lid off, no open canister, no film taken out, no developed image, no image on the film, no frames on the film, no negative, no photograph, no paper, no print, no tongs, no grease mark, no thumb mark, no dust, no cobweb, no mouse, no second canister, no reel or spool, no bottles or jars, no enlarger, no second drawer, no chest of drawers, no watch on the wrist, no ring, no bracelet, no nail polish, no long fingernails, no youthful hand, no clean unstained hand, no manicured hand, no glove, no dramatic lighting into the drawer, no spotlight, no glow from inside the drawer, no shallow depth of field used to isolate the fingertips, no extreme close-up of two fingertips, no product photography of a hand, no bright evenly lit room, no polished wood, no varnish shine, no open drawer with anything else in it
+no watermark, no on-screen subtitles, no background music, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no small hand pressing the lens, no person, no figure, no body, no face, no second hand, no face in the frame, no image on the canister, no canister opened, no lid off, no open canister, no film taken out, no developed image, no image on the film, no frames on the film, no negative, no photograph, no paper, no print, no tongs, no grease mark, no thumb mark, no dust, no cobweb, no mouse, no second canister, no reel or spool, no bottles or jars, no enlarger, no second drawer, no chest of drawers, no watch on the wrist, no ring, no bracelet, no nail polish, no long fingernails, no youthful hand, no clean unstained hand, no manicured hand, no glove, no dramatic lighting into the drawer, no spotlight, no glow from inside the drawer, no shallow depth of field used to isolate the fingertips, no extreme close-up of two fingertips, no splayed fingers, no fingers spread wide, no hand spread flat, no product photography of a hand, no light source visible in frame, no safelight lamp in frame, no lamp, no bulb, no bare light source, no bright evenly lit room, no polished wood, no varnish shine, no open drawer with anything else in it
 
 ---
 
@@ -94,6 +94,24 @@ no watermark, no on-screen subtitles, no background music, no clock, no window, 
 ## ⚠️ `Not photorealistic` と `available natural light` を、ここに写さない
 
 - ⛔ **どちらも写さない**——**根拠は `migenzo-ch01-seg01.md` の該当2節である。**
+
+## ⛔ 実測（2026-09-23、n=1）と、焼き直しの3点（著者裁定）
+
+- ⚠️ **焼かれた1枚**——`07_01_*`。**見えたままを書く。**
+- ⛔ **芯は在る**——**開いた引き出しの内側に筒が在り、手が入り、止まっている。**
+- ⛔ **だが、2つ外れている。**
+  **（1）筒が、直立している**——**この1本は「横たわっている」筒である。**
+  **（2）指が、広く開いている**——**仕様は「掌がすこし開く」であって、「指を広げる」ではない。**
+- ⛔ **（1）の原因は、英語の曖昧さである**——**初稿の `SUBJECT` は `lying on its bottom` と書いていた。**
+  ⚠️ **これは「底面で立っている」と読める。** **日本語の註は「横たわっている」と言っている**
+  （下の `unit` の `before`）。**ゆえに、英語の側が意味を1つに定めていなかった。**
+  ⛔ **直した: `lying on its side`——長さは引き出しの底を横切り、丸い蓋は左を向く。**
+- ⛔ **（2）は、肯定の側の語が足りなかった。** **`the palm opened a little` だけでは、
+  生成器は指まで開く。** ⚠️ **ゆえに「loosely together, neither closed nor spread」を足し、
+  `Negative` に `no splayed fingers` / `no fingers spread wide` / `no hand spread flat` を足した。**
+- ⚠️ **そして灯を枠の外へ出した**（**02・06-1・06-2 と同じ欠陥である**——
+  **動画の §16・§18 は禁じている**）。**この1枚は筒の内側なので、灯は元から入りにくい。**
+- ⛔ **距離の設計（`held at that same small distance`）は、1字も変えていない。**
 
 ## 記録との対応
 
