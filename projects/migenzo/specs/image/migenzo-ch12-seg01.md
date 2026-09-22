@@ -21,6 +21,10 @@
   同じ暗室の既存ボードは同 `migenzo-scene-board/prompt.md`
   （⚠️ **`_backup_20260905/` は参照しない**——依頼の指定である）
   ⛔ **人物の設定画は、この1枚には要らない**——**この枠に人物が居ないからである。**
+- ⛔ **添付する参照画像（著者裁定、2026-09-23）**:
+  `distill-essence-engine/examples/migenzo/migenzo-art-board/ChatGPT Image 2026年9月5日 06_33_13.png`
+  ——**人物なし・文字なしの16:9の1コマ**であり、**この作品と同じ様式を名乗っている**。
+  ⚠️ **13本のうち、参照画像を持つのはこの1枚だけである**（`PLAN.md` §4-c 問い11）。
 - 投入する文: **下の節の1段落目が `Prompt`、2段落目が `Negative`**
 - ⚠️ **1段落＝1行である**（折り返さない）。**空行1つが、そのまま `Negative` を繋ぐ空行である。**
 - ⚠️ **この1枚は、このショットの動画へ添付（参照画像）として渡る**——最初のコマではない。
@@ -59,7 +63,7 @@
 
 A scene board for the last white of the novel 『未現像』 ("Undeveloped") — the master staging of one scene, in 16:9. In the darkroom of the art board, the light island: a developing tray with amber liquid at its center, the surface now still, and beyond the reach of the red safelight the room's unlit faces sunk in the darkness that has been settled along those walls for twenty years — and the edge where the red gives way to that darkness is held inside this frame. Above the tray, one wet silver-gelatin sheet hangs in the air, held at its corner by a pair of tongs that come in from outside the frame, and no hand is on them in this frame. The sheet is blank: nothing has come up on it, no outline, no trace, no mark at all — just the white of silver gelatin, and that white is not flat, because the sheet is still wet and the wet surface holds a faint sheen that catches the light. A band of red light lies across the white, and the white takes a little of it and stays white, exactly where it is. The paper the white is on is the heaviest thing in the room. `[no figure in frame]` — this is the one frame of the work in which nobody stands: no hand at the tray, no person holding the tongs. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness. The palette is held to the red of the safelight, the amber of the developer and the silver-white of the paper, and the red and amber are kept to their sources and never stain the whole frame. The same place as the art board, the tray filling the space the art board left open. No typography anywhere in the frame.
 
-no watermark, no on-screen subtitles, no background music, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no glossy photo paper, no digital image on the paper, no glowing or emitting paper, no visible fingerprint ridges, no forensic texture, no legible handprint, no person, no figure, no hand, no fingers, no arm, no face, no silhouette, no child's hand, no image on the print, no faint trace of an image, no residue of an image, no ghost of a face, no outline on the paper, no mark on the paper, no stain on the paper, no yellowed or aged paper, no torn or creased sheet, no flat featureless rectangle of pure white, no blown-out white with no texture, no water drops falling, no splash, no ripple on the surface, no tongs held by a visible hand, no second sheet, no second tray, no open drawer, no bottles or jars, no enlarger, no print hanging on a line, no bright evenly lit room, no portrait lighting, no smiling, no sad expression anywhere
+no watermark, no on-screen subtitles, no background music, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no glossy photo paper, no digital image on the paper, no glowing or emitting paper, no visible fingerprint ridges, no forensic texture, no legible handprint, no person, no figure, no hand, no fingers, no arm, no face, no silhouette, no child's hand, no image on the print, no faint trace of an image, no residue of an image, no ghost of a face, no outline on the paper, no mark on the paper, no stain on the paper, no yellowed or aged paper, no torn or creased sheet, no flat featureless rectangle of pure white, no blown-out white with no texture, no water drops falling, no splash, no ripple on the surface, no tongs held by a visible hand, no second sheet, no second tray, no open drawer, no enlarger, no print hanging on a line, no bright evenly lit room, no portrait lighting, no smiling, no sad expression anywhere
 
 ---
 
@@ -107,6 +111,27 @@ no watermark, no on-screen subtitles, no background music, no clock, no window, 
   **裁定（2026-09-23、著者）「入れない（推奨）」。** ⚠️ **根拠は `migenzo-ch01-seg01.md` の同じ節である。**
 - ⛔ **様式カードの `available natural light` も写さない**——**赤い安全光は到着しない。
   時刻を持たない、その場所の恒常の状態である。**
+
+## ⛔ この1枚だけが、参照画像を持つ（著者裁定、2026-09-23）
+
+- ⛔ **著者が、この1枚にアートボードを付けると裁定した**（`PLAN.md` §4-c 問い11）。
+  ⚠️ **11（山）は参照なしである**——**あの紙は、トレイのなかの紙が白いまま写っている。**
+  **山は「像が浮かんだ」1枚なので、白を保つ参照は、この主題を引き戻す。**
+- ⛔ **ゆえに、この1枚の `Negative` から `no bottles or jars` を外した**——
+  **アートボードは瓶を持つ。参照と禁制が喧嘩する状態を作らない。**
+  ⚠️ **外したのは1節だけである。** ⛔ **`no shelf` は、この1枚には元から無い**
+  （裁定の文面は2節を挙げたが、**この1枚が持っていたのは1節である**）。
+  ⚠️ **代わりに、光の島の外は闇であるという肯定形に任せる**（上の `LOCATION`）。
+  ⛔ **`no second tray` / `no open drawer` / `no enlarger` / `no print hanging on a line` は残る**
+  ——**アートボードは、それらを持たないからである。**
+- ⚠️ **申告——参照と、この枠が食い違う点が1つある。**
+  **アートボードの白い紙は、トレイのなかに在る。** **この1枚の紙は、宙に吊られている。**
+  ⛔ **ゆえに、もし焼き上がりが「紙がトレイに沈んでいる」なら、原因はこれである。**
+  ⚠️ **そのときの道は2つ**——**参照なしで焼き直すか、参照を「島とトレイ」に限るか。**
+- ⚠️ **そして、瓶と棚が写り込む余地は、外したぶんだけ残る**——
+  **島のなかに瓶が並べば、「トレイと引き出しだけ」という 09 の法から離れる。**
+  ⛔ **禁制で押さえず、肯定形に任せる——これが裁定の文面である。**
+  **焼いて見て、離れていれば戻す。**
 
 ## 記録との対応
 
