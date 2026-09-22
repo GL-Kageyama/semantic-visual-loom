@@ -1,0 +1,242 @@
+# 作品台帳 — 『未現像』（migenzo）／摘要版・全13ショット
+#
+# **出典は三つある。どれも配布物であり、このリポジトリの外にある。**
+#   ① 構想 `soul-voice-teller/examples/migenzo/構想/`
+#      ——`world.md`（世界法則）・`characters.md`（絹／娘／盗人／群像）・
+#        `章立て.md`（全12章と、各章の「何が変わる」）・`foreshadowing.md`・`narration-design.md`。
+#   ② 草稿 `soul-voice-teller/examples/migenzo/草稿/draft_*.md`（全48話）。
+#   ③ 既存の絵の基準 `distill-essence-engine/examples/migenzo/`
+#      ——`migenzo-art-board`（暗室）・`migenzo-scene-board`（第9章）・
+#        `migenzo-kinu-character-sheet`・`migenzo-nusubito-character-sheet`・
+#        `migenzo-musume-character-sheet`（⚠️ `_backup_20260905/` を除く）。
+#      ⚠️ **①②は読む対象、③は写す対象である。** 両者を混ぜない。
+#
+# ⚠️ **値はすべて写しか、移し替えである。** 欄ごとに `出所:` を付ける。
+#    ⚠️ **写しは黙ってずれる**——鳴らす者が要る。
+# ⚠️ **食い違ったら、出典が勝つ。**
+# ⚠️ **出典に無い欄は、空のまま置く。** 空は空白ではない。
+#
+# ⛔ **この作品は摘要版である。** 原作の48話を、**変化の単位で13本に切った**（`PLAN.md` §1）。
+#    **切ったのは変化であって、話数でも尺でもない。**
+#    ⚠️ **この台帳は、その13本に要る語彙だけを持つ。**
+#       撮らない章の人物も、撮らない場所も、ここには無い——
+#       **無いことは「まだ書いていない」であると同時に「この摘要版に出さない」である。**
+#
+# ⚠️ **`world` は、まだ誰も読んでいない。** 今日この一枚を機械で読む者は
+#    `bible.constants.video` と `bible.style` と `bible.language` と `bible.negative_base` だけである。
+#    **家に読者がいて初めて、家は家である**——`world` の読者は、まだ居ない。
+
+project: migenzo
+
+bible:
+  # 作品の様式。**様式カードの名前である。**
+  # 出所: `references/styles/documentary-photo.md`（このリポジトリの側。⚠️ **`SVL_STYLES_DIR` を
+  #       張らなければ、既定の探索先に在る同名カードが読まれる**——そちらは
+  #       `## Motion character` を持たず、**`Style Motion` が空になり `L20` が鳴る**）。
+  #       ⚠️ **選んだ理由は `PLAN.md` §0-c。** 一言でいえば、
+  #       **カードの `Motion character` の第一と第二が、この作品の法そのものである**——
+  #       「The moment is unstaged, so time is whatever the subject does while unaware.」
+  #       「**What moves is ordinary and small — a hand**, a turn of the head.」
+  #       ⚠️ **この作品の結末は「手」であり**（`characters.md` 身体化——関係の全てが一つの像に閉じる）、
+  #       **最後に置かれるのは、何も浮かばない印画紙である**（＝Stillness is fully available）。
+  #       ⛔ **様式カードを新しく1枚も作っていない。** 赤・琥珀・銀塩の白、フィルム粒、
+  #       ブロウンハイライト、Portra 400 / Superia の褪せた暖色は**作品のものである**——
+  #       ゆえに下の `visual_language` が持つ。**様式は言語、配色は作品である。**
+  #       ⚠️ **この欄が §18 の7つ目のスロット `Style Motion` の出所である**（`specmap.PROMPT_SLOTS`）。
+  #       カードの中身はここに置かない。ここに置くのは**名前だけ**である。
+  style: documentary-photo
+
+  # 作品が話す言語。**値は英語で書く**（生成に渡る文字列は英語である——訳してはならない）。
+  # 出所: 裁定（2026-09-18、著者）「言語指定で触っているなら、必ずその言語を話す。」
+  #       ⚠️ **空欄は中立ではない。** 実測: 発話を検出した動画に**中国語の字幕が焼かれた**。
+  #          だから**症状を禁じるのではなく、言語を名指す**（`L27`）。
+  #       ⚠️ **この摘要版は一行も喋らないが、それでも宣言する。**
+  #          `text_channel` は13本とも空である（`PLAN.md` §0-f）。
+  #          **話さないことと、言語を持たないことは違う。**
+  language: Japanese
+
+  world:
+    # 出所: `構想/world.md`「世界の核」。**一字も変えない。**
+    concept: >-
+      撮られなかった瞬間は、あらゆる可能な像を無限に含む重ね合わせとして保存される。
+      現像とは、その無限を一つの像へ崩壊させる喪失の行為である。
+      見ることは可能態を殺し、見ないことは可能態を無限に生かしつつ永久に留置する。
+
+    # 出所: `構想/world.md`「世界の核」（三則＋第四則・限界・脂痕・暗室）および
+    #       「内部一貫性」。**この摘要版の13本が画面で負う法だけを置く。**
+    rules:
+      - "**遮光は、シャッターを降ろすことと等価である。** ゆえに、手でレンズを内側から押さえられた瞬間も現像できる——未露光のフィルムが現像できるのは、この等価のためである。"
+      - "**像は、ネガの重ね合わせとして待機する。** 浮かぶ瞬間だけが、正像へ反転する。"
+      - "**現像のたび、現像者は自身の可能態を一つ崩壊させる**（＝記憶を一つ失う）。"
+      - "**落とせるのは、直前に色を持っていた具体的な何かだけである。** 抽象的な記憶は落とせない——娘の声・鼻歌・手という具体だけが、代償として落ちる。"
+      - "**現像とは崩壊である。** これは規則ではなく、この世界の自己記述である（第四則）。"
+      - "**一度も重ね合わせでなかったものは、現像できない。** 娘の顔がそれである。**何も浮かばない印画紙は、この世界で最も重い像である。**"
+      - "**脂痕——現像の代償が、レンズの指紋・手の脂として像に残る。** 暴力の道具である撮影者の痕跡が、唯一の生身の証拠になる。"
+      - "**暗室は、内と外を区別していない場所である。** 単一光源。現像トレイの液面は、スクリーン内スクリーン。"
+      - "**奇跡は、一度も起こらない。** あらゆる現像に、必ず代償が伴う。"
+      - "**説明しない。** 三則は、各章の「現像の行為」そのもので示す——暗室の景観（赤い安全光・薬液・単一光源）は、描写で滲ませる。"
+
+    # ⚠️ **この欄だけ英語である。** ——**生成に渡す文字列は英語**であり、訳してはならない
+    #    （`CLAUDE.md`「Things That Must Not Be Broken」）。
+    #    ✅ **ゆえにこの欄は「写し」である**（habits の同名欄のような「移し替え」ではない）——
+    #       **出典が既に英語を持っている。** 著者自身が書いた `migenzo-art-board/prompt.md` の
+    #       `Merged` から採る。⚠️ **私が訳した文ではない。**
+    visual_language:
+      # 出所: `migenzo-art-board/prompt.md` の `Merged`——パレットの文と、質感の文。
+      #       ⚠️ **この2文は、同じ1本のプロンプトの別々の位置から来ている**
+      #          （パレットは「The palette fixed:」、質感は「Heavy film grain,」）。
+      #          **写すにあたって、この欄のために並べ直した**——語は一字も変えていない。
+      art_direction: >-
+        The palette fixed: the red of the safelight, the amber of the developer,
+        the white of the unexposed paper, and the near-black of the surrounding room,
+        the red and amber kept to their sources and never staining the whole frame.
+        Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus,
+        blown highlights on the white paper, low contrast, faded warm Kodak Portra 400 and
+        Fujifilm Superia color tones, 35mm documentary snapshot feel,
+        nostalgic family-photo warmth against an unsettling stillness.
+
+      # 出所: `migenzo-art-board/prompt.md` の `Merged`——「lit only by a dim red safelight and
+      #       the warm amber glow of the developer tray, with no time of day and no directional light
+      #       — the "state" this board fixes is the light itself.」
+      #       ⚠️ **この一行が、様式カードとの衝突を解いている**（`PLAN.md` §0-c）——
+      #          カードの忠実の錨は `Available natural light, no artificial setup` と言い、
+      #          「人工の光源が**到着すること**は別の様式である」と註する。
+      #          ⛔ **赤い安全光は到着しない。時刻を持たない、その場所の恒常の状態である。**
+      #          根拠は出典自身のこの一行であり、私の読みではない。
+      light: >-
+        A single light source, and no time of day. The dim red safelight and the warm amber
+        glow of the developer tray are not a direction and not an hour — they are the room's
+        constant state. No window, no clock, no daylight, no directional light.
+
+      # ⚠️ **解像度とフレームレートは出典に無い**——**この2つは基盤の既定である**
+      #    （`WAN 3.0` の経路が要求する）。**ゆえに `constants.video` の註を見よ。**
+      # 出所: `migenzo-art-board/prompt.md`「16:9の背景プレート一枚」。
+      aspect: "16:9"
+
+  constants:
+    # 出所: `構想/world.md`・`構想/characters.md`・`migenzo-art-board/prompt.md` の ⑧ガード。
+    #    **この四つは全13本に掛かる。**
+    光: "**光は、方向ではなく状態である。** 赤い安全光と琥珀の現像液の灯。時刻を置かない。ゆえに画に時計も窓も無い。"
+    現像: "**現像は、崩壊である。** 白から像が浮かぶことは、無限が一つに殺されることである。そしてその代償は、必ず像に残る。"
+    代償: "**脂痕。** 消えた記憶が、指の脂として像の縁に残る。加害の証拠が、唯一の生身の証になる。"
+    顔: "**娘の顔は、決して現れない。** これは省略ではなく、この作品の定義である——一度も重ね合わせでなかったものは、現像できない。⚠️ **絹の顔は出す**（`migenzo-scene-board` が「穏やかだが窪んだ目」を与える）。"
+    白: "**白は、三つの読みに重なったままである**（読者の顔／娘の無限／判決の不在）。⚠️ **どの読みにも収束させない。** ゆえに結末のショットは、白を**決めない**。"
+
+    # 様式カードが要求する変数の一覧。⚠️ **機械が読む欄ではない**（`engine/shot/README.md`
+    #   「機械可読にする方法は未決定である」）——**人が読むための覚えである。**
+    # 出所: `references/styles/documentary-photo.md`（5欄）と `scene-board` の形式カード（5欄）。
+    #   ⚠️ **重なるのは `ACTION` と `SCENE` の2つである**——ゆえに画像仕様の穴は7つになる
+    #      （`PLAN.md` §0-d）。⚠️ **`ACTION`／`LOCATION` が重なる、と書かない**——
+    #      **それは `specmap` の註が別のカード組について言っていることであり、この組では偽である。**
+    様式変数: "style `documentary-photo`: SUBJECT／ACTION／SCENE／LIGHT／ASPECT。format `scene-board`: SCENE／CHARACTERS／ACTION／LOCATION／LIGHT。重なりは ACTION と SCENE。"
+
+    # §1 の作品定数。**ショットに依らない4つである。**
+    # 出所: `migenzo-art-board/prompt.md` の「16:9の背景プレート一枚」。
+    #       ⚠️ **解像度とフレームレートは出典に無い**——**この2つは基盤の既定である**
+    #       （`WAN 3.0` の経路が要求する）。**初稿の側から採った値ではないので、要承認である**
+    #       （`方針 §5a`。hakuchizu の同名の欄が同じ形で「要承認」と書いている）。
+    #    ⚠️ **`duration` はここに無い。** 尺はショットごとに違う（この摘要版は7s〜14s）——
+    #       **従属変数であり、家は `shot.duration`、読む者は `L23`、導出は `engine/shot/print_spec.py` である。**
+    #    ⚠️ **値を変えるときは `specs/` の §1 を全部とも直すこと。** `L26` が食い違いを鳴らす。
+    video:
+      aspect: "16:9"
+      resolution: "1920x1080"
+      frame_rate: "24fps"
+      orientation: "Landscape"
+
+  # 全ショットに必ず付く禁制。**英語不変部——訳してはならない。**
+  #
+  # ⚠️ **ここに置くのは「作品の床」だけである。** 様式カードの Negative
+  #    （`no posed studio lighting, no dramatic color grading, no CGI, no illustration`）は
+  #    §18 が自動で足す——**重複させない**（写しは食い違う）。
+  # ⚠️ **ショット限りの禁止は、ここに置かない。** それは各ショットの §16 MUST NOT と
+  #    §18 `Negative Prompt` が負う。
+  #    例: `no small hand pressing the lens` は **S11 より前の10本にだけ**掛かる
+  #    （既存の全ボードの ⑧ガード「第10章の逆転を明かさない」）。
+  # ⚠️ **1行＝1節である。** `L21` は Negative を**読点で割った列**として読み、
+  #    否定詞を落とした語幹で突き合わせる。**ゆえに、ここに読点を書かない。**
+  # ⚠️ **この一覧の全行が、動画の §18 `Negative Prompt` と画像の `Negative` の両方に要る。**
+  #
+  # ⚠️ **人名はローマ字にしない**（著者の決定）。ゆえにこの一覧は「**読める名**」を禁じるので
+  #    あって、**字種を禁じない**——`no Japanese kanji or kana` は**使わない。**
+  negative_base:
+    # ── 基盤の床（`specmap.BASE_NEGATIVES`）。**作品が外していない——`L21` が両経路で要求する。**
+    #    ⚠️ **`no background music` は、床であって、作品の音の話ではない。**
+    #       裁定（2026-09-23、著者）——**出力のクリップの音声は全て捨て、BGM は著者が最後に被せる**
+    #       （`PLAN.md` §0-f）。⛔ **ゆえに免除（`base_negatives_waived`）は書かない。**
+    #       `engine/ledger/README.md`——「**免除は『その作品がそれを欲しがっている』という主張ではない。**
+    #       `no background music` の免除は『生成器がそれを出しても禁じられない』という意味であって、
+    #       **音楽を求めたのではない。**」**求められたのはポストであって、生成ではない。**
+    - "no watermark"
+    - "no on-screen subtitles"
+    - "no background music"
+
+    # ── 世界と光。**この作品の部屋には、時計も窓も、方向を持つ光も無い。**
+    # 出所: `migenzo-art-board/prompt.md` の `Merged` 末尾のネガティブ列
+    #       （`no clock, no window`、`no studio lighting, no bright daylight, no on-camera flash`）、
+    #       および ③翻訳「時刻や方向性の光は置かない」。
+    - "no clock"
+    - "no window"
+    - "no time of day"
+    - "no directional light"
+    - "no studio lighting"
+    - "no bright daylight"
+    - "no on-camera flash"
+
+    # ── 様式。**依頼の「基本的に実写風格」を守る床である。**
+    # 出所: 裁定（2026-09-23、著者）——**既存ボードの `Not photorealistic` は、床に入れない。**
+    #       ⚠️ **実測**: 様式カード `documentary-photo` の Negative は
+    #          `no posed studio lighting, no dramatic color grading, no CGI, no illustration` の4節で、
+    #          **`not photorealistic` を持たない。** 人物設定画
+    #          （`migenzo-kinu-character-sheet`・`migenzo-musume-character-sheet`）は
+    #          **`Photorealistic rendering, no anime style, no cel shading` を肯定の先頭に置く。**
+    #          ⛔ **ゆえに `Not photorealistic` は、基盤の床でもカードの床でもない**——
+    #          **ボードに貼られた句である。** そしてその句は、同じ1本のプロンプトの
+    #          「documentary **photograph**」「35mm documentary snapshot feel」と**自己矛盾する。**
+    #       ⚠️ **採った読み**: あの句の隣は `no studio lighting`・`no perfect focus`・
+    #          `no smooth CGI`・`no digital polish` である——**ゆえに意図は「CG の滑らかさ」であり、
+    #          実写ではない。** **床では、CG の滑らかさだけを禁じる。**
+    #       ⛔ **この食い違いの本当の在り処は distill 側のボードであり、私は触れない**
+    #          （読み取りのみ）。**申し送りとして `PLAN.md` §4-b に記録した。**
+    - "no anime"
+    - "no cel shading"
+    - "no illustration"
+    - "no 2D drawing"
+    - "no smooth CGI"
+    - "no 3D render"
+    - "no digital polish"
+    - "no perfect focus"
+
+    # ── 発光の法。
+    # 出所: `migenzo-art-board/prompt.md` の ⑧ガード「赤・琥珀に寄せすぎない——赤は安全光、
+    #       琥珀は現像液の色であって、画面を赤一色・琥珀一色に染めない（銀塩の白・黒を残す）」、
+    #       および `Merged` の「the red and amber kept to their sources and never staining the whole frame」。
+    - "no red wash over the whole frame"
+    - "no amber wash over the whole frame"
+    # ⚠️ **この行は、肯定の句である。** それでも床に置く——**`PLAN.md` §2 がこう書いた**
+    #    （承認された文面は約束である）。⚠️ **この形は、この家の先例に在る**——
+    #    `migenzo-kinu-character-sheet` の Negative は
+    #    `Photorealistic rendering, no anime style, no cel shading` と、**肯定の句から開く。**
+    # ⚠️ **読点が2つ在るので、`L21` はこれを2節として読む**
+    #    （「the white stays silver-white」／「not stained red or amber」）。
+    #    **ゆえにこの一覧の節数は、行数より2つ多い**——数えるときは行でなく節で数える。
+    - "the white stays silver-white, not stained red or amber"
+
+    # ── 核。**この作品の定義である。**
+    # 出所: `構想/characters.md`「娘——一度も「重ね合わせ」を崩壊させられたことがないため、
+    #       現像不能の白として残る。**顔も名も、決して現れない。**」／
+    #       `migenzo-musume-character-sheet`（顔の位置は空白の白のまま）／
+    #       `migenzo-scene-board/prompt.md` の ⑧ガード「娘の顔を出さない」。
+    # ⚠️ **句は `PLAN.md` §2・§0-g の文面のままである**（`the daughter`）。
+    #    ⚠️ **人名はローマ字にしない**という決定とは衝突しない——**これは名ではなく記述である**
+    #       （この作品は娘に名を与えない）。**絹と盗人は、名である——ゆえに字種は出典どおり。**
+    - "no fully rendered face of the daughter"
+    - "no name for the daughter"
+
+    # ── 白。
+    # 出所: `migenzo-art-board/prompt.md` の `Merged`——「the developer tray in the center holding
+    #       a sheet of blank white silver-gelatin paper」、および `no image on the film`
+    #       （`migenzo-scene-board/prompt.md` の ⑧ガード「未露光フィルムには何も浮かばない」）。
+    - "no image on the unexposed film"
+    - "no lettering in frame"
+    - "no readable text"
