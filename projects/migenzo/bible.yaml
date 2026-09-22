@@ -125,10 +125,17 @@ bible:
     # 様式カードが要求する変数の一覧。⚠️ **機械が読む欄ではない**（`engine/shot/README.md`
     #   「機械可読にする方法は未決定である」）——**人が読むための覚えである。**
     # 出所: `references/styles/documentary-photo.md`（5欄）と `scene-board` の形式カード（5欄）。
-    #   ⚠️ **重なるのは `ACTION` と `SCENE` の2つである**——ゆえに画像仕様の穴は7つになる
-    #      （`PLAN.md` §0-d）。⚠️ **`ACTION`／`LOCATION` が重なる、と書かない**——
+    #   ⛔ **重なるのは `SCENE`・`ACTION`・`LIGHT` の3つである**——**5＋5−3＝7**。
+    #      ゆえに画像仕様の穴は7つになる（`PLAN.md` §0-d）。
+    #      ⚠️ **訂正（2026-09-23）。この註は初稿で「重なるのは `ACTION` と `SCENE` の2つ」と
+    #      書いていた。** ⛔ **2つなら 5＋5−2＝8 であり、書いた算数は 7 を出さない。**
+    #      **結論（7欄）は正しく、理由が1つ足りなかった。落ちていたのは `LIGHT` である**——
+    #      **この作品の光の法が住む欄である**（`constants.光`）。
+    #      ⚠️ **`ACTION`／`LOCATION` が重なる、と書かない**——
     #      **それは `specmap` の註が別のカード組について言っていることであり、この組では偽である。**
-    様式変数: "style `documentary-photo`: SUBJECT／ACTION／SCENE／LIGHT／ASPECT。format `scene-board`: SCENE／CHARACTERS／ACTION／LOCATION／LIGHT。重なりは ACTION と SCENE。"
+    #      ⛔ **そして `ACCENT` を7欄に数えない**——**あれはアニメ一族の欄である**
+    #      （`PLAN.md` §4-d-2 の F1 が実測している）。
+    様式変数: "style `documentary-photo`: SUBJECT／ACTION／SCENE／LIGHT／ASPECT。format `scene-board`: SCENE／CHARACTERS／ACTION／LOCATION／LIGHT。重なりは SCENE／ACTION／LIGHT の3つ。ゆえに画像仕様の7欄は SCENE／CHARACTERS／SUBJECT／ACTION／LOCATION／LIGHT／ASPECT である。"
 
     # §1 の作品定数。**ショットに依らない4つである。**
     # 出所: `migenzo-art-board/prompt.md` の「16:9の背景プレート一枚」。
