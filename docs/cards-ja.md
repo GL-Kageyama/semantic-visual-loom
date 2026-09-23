@@ -124,7 +124,7 @@ SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles \
 
 | 節 | format | style | |
 |---|---|---|---|
-| `## Environment variables` | 必須 | 必須 | カードが埋める穴。2層の和が、画像プロンプトの7つの欄である |
+| `## Environment variables` | 必須 | 必須 | カードが埋める穴。**仕様が名乗ったカードの和が、その仕様が持つべき欄である**（相手は作品ごとに決まる） |
 | `## Negative` | 必須 | 必須 | このカードが足す除外 |
 | `## Motion character` | —— | 任意 | この様式が動くとき、何をするか |
 

@@ -1963,6 +1963,16 @@ def _self_test():
     # ⚠️ **本物の `illustration` カードと同じ形**（`SUBJECT`・`MOOD` の2つだけ）。
     #    これが「名乗ったカードが、その欄を宣言していない」の実物である。
     ENGINE_WRONG = fake_engine(("SUBJECT", "MOOD"), L22_FOUR)
+    # ⚠️ **実写系の様式カードの形**（実測 2026-09-24——`documentary-photo` は
+    #    `SCENE`／`LIGHT`／`ASPECT` を宣言し、`ACCENT` を持たない）。
+    #    基盤の表（アニメ系の4欄）と突き合わせていた頃は、**この形が構造的に赤だった**
+    #    ——仕様は名乗りどおりに正しいのに、「カードが宣言しているのに、画像の仕様に
+    #    無い欄がある」と鳴っていた（`F1`）。**表ではなく名乗りを読む**ようになったので、
+    #    ここは**鳴ってはならない**——**これがその回帰である。**
+    L22_PHOTO_STYLE = ("SUBJECT", "ACTION", "SCENE", "LIGHT", "ASPECT")
+    ENGINE_PHOTO = fake_engine(L22_FIVE, L22_PHOTO_STYLE, style_name="documentary-photo")
+    PHOTO_VARS = IMG_VARS.replace("- `ACCENT`: warm gold light",
+                                  "- `ASPECT`: 3:2, grain visible")
 
     def img_spec(negative=IMG_NEG_OK, vars_body=IMG_VARS, ref_format="scene-board",
                  ref_style="luminous-anime"):
@@ -2056,6 +2066,30 @@ def _self_test():
          img_proj(negative="no readable text, no watermark, not photorealistic, no steam"),
          True, "2 節が無い: no on-screen subtitles")
 
+    # ⚠️ **コンマを含む禁制の行**（実測 2026-09-24、`F4`）。
+    #    **仕様の側は節に割って読まれる**（`specdoc.clausify` はコンマで割る）のに、
+    #    作品の行は**行のまま**突き合わされていた——ゆえに**コンマを1つ含む行は
+    #    永久に一致しない。** 実測: migenzo の
+    #    `the white stays silver-white, not stained red or amber` が
+    #    **13本 × 2経路ぶん**「26 節のうち 1 節が無い」を鳴らしていた。
+    #    ⛔ **禁制そのものは生成器へ届いていた。届いていなかったのは検査のほうである。**
+    COMMA_BASE = ("the white stays silver-white, not stained red or amber",)
+    COMMA_NEG = "the white stays silver-white, not stained red or amber, no steam"
+    run1("L21 コンマを含む禁制の行（鳴ってはならない）", semantic.check_negative_coverage,
+         img_proj(negative=IMG_NEG_OK + ", " + COMMA_NEG, base=COMMA_BASE), False, None)
+    # ⚠️ **逆向き。** 割った節が本当に無ければ鳴る——**「鳴らない側」だけを置けば、
+    #    割って比べるのをやめただけでも通る。**
+    run1("L21 コンマで割った節が無ければ鳴る", semantic.check_negative_coverage,
+         img_proj(negative=IMG_NEG_OK, base=COMMA_BASE), True,
+         "2 節が無い: the white stays silver-white／not stained red or amber")
+    # ⚠️ **行数と節数は違う。** 報告の数が実測として読まれる以上、
+    #    **割った後の数を書かねばならない**——「重複を除いて」の一言も、
+    #    重複を実際に除いていなければ嘘になる。
+    run1("L21 重複した節は要求に二度入らない", semantic.check_negative_coverage,
+         img_proj(negative=IMG_NEG_OK + ", no fog",
+                  base=("no steam", "no steam, no fog")),
+         False, None, note="作品の 2 行＝3 節（重複を除いて 5 節）")
+
     # ⚠️ **祖父条項**（決定 2026-09-18、著者——「hitosara は対象外にする」）。
     #    基盤の禁制は増える。**規則より前に書かれた作品**は、書いていなかったことを
     #    理由に赤が立つ——**規則は遡らない。** ゆえに作品が除外を宣言する。
@@ -2114,10 +2148,10 @@ def _self_test():
 
     run1("L22 7欄とも非空（鳴ってはならない）", l22,
          img_proj(), False, None,
-         note="7 欄を確かめた")
+         note="要求はその穴の和（7 欄）")
     run1("L22 欄が1つ無い", l22,
          img_proj(vars_body=IMG_VARS.replace("- `ACCENT`: warm gold light\n", "")),
-         True, "無い欄がある: ACCENT")
+         True, "が埋まっていない: ACCENT（style `luminous-anime`）")
     run1("L22 欄は在るが空", l22,
          img_proj(vars_body=IMG_VARS.replace("`ACCENT`: warm gold light", "`ACCENT`: ")),
          True, "欄が空である: ACCENT")
@@ -2132,15 +2166,41 @@ def _self_test():
          img_proj(ref_format=None), True, "`REF_FORMAT` を名乗っていない")
     run1("L22 様式を名乗っていない", l22,
          img_proj(ref_style=None), True, "`REF_STYLE` を名乗っていない")
-    run1("L22 カードがその欄を宣言していない", lambda p: semantic.check_image_vars(
-             p, repo_root=ENGINE_WRONG),
-         img_proj(), True, "が宣言していない欄を")
+    run1("L22 カードがその欄を宣言していない",
+         lambda p: semantic.check_image_vars(p, repo_root=ENGINE_WRONG),
+         img_proj(), True, "どれも宣言していない欄を")
+    # ⚠️ **実写系の様式カード（`ASPECT` を宣言し、`ACCENT` を持たない）で、鳴ってはならない。**
+    #    これが `F1`・`F2` の回帰である——**突き合わせる相手は、名乗ったカードの穴の和**であり、
+    #    **基盤の表ではない。**
+    run1("L22 実写系の様式でも、和が合えば鳴らない",
+         lambda p: semantic.check_image_vars(p, repo_root=ENGINE_PHOTO),
+         img_proj(vars_body=PHOTO_VARS, ref_style="documentary-photo"), False, None,
+         note="要求はその穴の和（7 欄）")
+    # ⚠️ **逆向きも見る。** 実写系の様式カードの穴（`ASPECT`）が埋まっていなければ鳴る
+    #    ——**「鳴らない」側だけを置けば、検査を止めただけでも通る。**
+    run1("L22 実写系の様式の穴が埋まっていない",
+         lambda p: semantic.check_image_vars(p, repo_root=ENGINE_PHOTO),
+         img_proj(ref_style="documentary-photo"), True,
+         "が埋まっていない: ASPECT（style `documentary-photo`）")
     run1("L22 名乗られたカードが無い", l22,
          img_proj(ref_format="no-such-card"), True, "が無い")
     # ⚠️ **読めないことと、食い違っていることは別である。** 読めなければ註を出す。
     run1("L22 カードが読めない（註・鳴ってはならない）",
          lambda p: semantic.check_image_vars(p, repo_root=_P("/nonexistent/repo")),
          img_proj(), False, None, note="確かめられない")
+    # ⚠️ **読めないときに何も言わなければ、「確かめた」と「確かめられなかった」が同じ顔になる。**
+    #    だから**控えの表で見た結果を書く**——ただし⛔ **その表を相手の穴と呼ばない。**
+    run1("L22 読めないときは、控えの表で見たことと断りを書く",
+         lambda p: semantic.check_image_vars(p, repo_root=_P("/nonexistent/repo")),
+         img_proj(), False, None,
+         note="⛔ **この表はアニメ系のカードから実測したもので、名乗ったカードの穴ではない**")
+    # ⚠️ **控えの表と食い違っても、違反にはしない。** その食い違いは
+    #    **表のほうの欠陥**かもしれない（`documentary-photo` は `ACCENT` を持たない）
+    #    ——**確かめられないことを違反にすれば、clone した人が最初に消すのは検査である。**
+    run1("L22 読めないときの食い違いは註である（鳴ってはならない）",
+         lambda p: semantic.check_image_vars(p, repo_root=_P("/nonexistent/repo")),
+         img_proj(vars_body=PHOTO_VARS, ref_style="documentary-photo"),
+         False, None, note="表に在って仕様に無い欄が ACCENT")
 
     run1("L23 尺が一致する（鳴ってはならない）", semantic.check_duration,
          img_proj(video=video1("6s"), duration="6s"), False, None, note="1 本が一致")

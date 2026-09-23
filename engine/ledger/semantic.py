@@ -894,6 +894,22 @@ def _stem(clause):
     return re.sub(r"\s+", " ", c).strip()
 
 
+def _dedupe(clauses):
+    """**語幹で重複を落とす**（先に来たものを残す）。`L21` の要求を組むために使う。
+
+    ⚠️ **順を保つのは、報告を読む者のためである。** 集合にすれば `sorted` の順になり、
+    **作品が書いた順**（＝書いた人が考えた順）が消える。
+    """
+    out, seen = [], set()
+    for c in clauses:
+        k = _stem(c)
+        if k in seen:
+            continue
+        seen.add(k)
+        out.append(c)
+    return out
+
+
 def _specs_of(project, kind):
     """その経路の仕様を `[(ショットID, パス)]` で返す。**読めないものは数えない。**
 
@@ -997,8 +1013,19 @@ def check_negative_coverage(project):
     dropped = [c for c in loom if _stem(c) in waived_stems]
     stray = [c for c in waived if _stem(c) not in loom_stems]
     loom = [c for c in loom if _stem(c) not in waived_stems]
-    extra = [c for c in work if _stem(c) not in {_stem(x) for x in specmap.BASE_NEGATIVES}]
-    required = loom + extra
+    # ⚠️ **作品の行も節に割る。** 仕様の側は**節**として読まれる——`specdoc.clausify` は
+    #    コンマで割る。**行のまま突き合わせれば、コンマを1つ含む行は永久に一致しない。**
+    #    実測（2026-09-24）: `the white stays silver-white, not stained red or amber`
+    #    が migenzo の 13本 × 2経路ぶん「26 節のうち 1 節が無い」を鳴らしていた。
+    #    ⛔ **禁制そのものは生成器へ届いていた。届いていなかったのは検査のほうである**
+    #    ——**割り方が違うだけの2つを、食い違いと呼んではならない。**
+    work_clauses = []
+    for c in work:
+        if isinstance(c, str):
+            work_clauses.extend(specdoc.clausify(c))
+    floor = {_stem(x) for x in specmap.BASE_NEGATIVES}
+    extra = _dedupe([c for c in work_clauses if _stem(c) not in floor])
+    required = _dedupe(loom + extra)
 
     paths = [(kind, _specs_of(project, kind)) for kind in ("video", "image")]
     if not any(specs for _, specs in paths):
@@ -1047,8 +1074,14 @@ def check_negative_coverage(project):
                                    "——禁制が届かなければ、描かれてから分かる。"))
         loom_label = (f"基盤の {len(loom)} 節"
                       + (f"（祖父条項で {len(dropped)} 節を外した）" if dropped else ""))
+        # ⚠️ **行数と節数は違う。** 作品の行はコンマで割られるので、**同じ数とは限らない**
+        #    ——違うときだけ両方を書く。**片方だけ書けば、数が実測として読まれる**
+        #    （`L21` の突き合わせは節で行うので、効いているのは節数のほうである）。
+        work_label = f"作品の {len(work)} 行"
+        if len(work_clauses) != len(work):
+            work_label += f"＝{len(work_clauses)} 節"
         out.append(finding("L21", f"{len(specs)}本",
-                           f"{label} を、{loom_label} ＋ 作品の {len(work)} 節"
+                           f"{label} を、{loom_label} ＋ {work_label}"
                            f"（重複を除いて {len(required)} 節）と突き合わせた。"
                            f"覆っているのは {len(specs) - caught}/{len(specs)} 本である。",
                            severity="note"))
@@ -1494,39 +1527,62 @@ def check_image_vars(project, repo_root=None):
         return out                        # 相手が無い。L18 が報告済みである。
 
     want = tuple(kind["vars"])
+    ref_keys = kind.get("ref_keys") or {}
     seen = 0
+    fields_of = {}                        # ショット → {欄: 値}（節が無ければ `None`）
+    names_of = {}                         # ショット → {層: 名乗りの値}
     for s, p in specs:
         text = p.read_text(encoding="utf-8")
         body = specdoc.section(text, kind["vars_section"])
         if body is None:
+            fields_of[s] = None
             out.append(finding("L22", s,
                                f"画像の仕様に `## {kind['vars_section']}` の節が無い。"
                                f"**{len(want)} 欄（{'／'.join(want)}）を"
                                "1つも確かめられない。**"))
+        else:
+            seen += 1
+            got = {m.group(1).strip(): m.group(2).strip() for m in
+                   (re.match(r"^-\s*`([^`]+)`\s*:\s*(.*)$", ln.strip())
+                    for ln in body.splitlines()) if m}
+            # ⚠️ **名乗りの行は欄ではない。** `REF_FORMAT`／`REF_STYLE` も
+            #    `## 主題` の中に置ける（**置き場を読み手が制限してはならない**）——
+            #    だから**欄として数える前に外す。**
+            fields_of[s] = {k: v for k, v in got.items() if not k.startswith("REF_")}
+        found = {m.group(1): m.group(2).strip() for m in REF_CARD.finditer(text)}
+        names_of[s] = {layer: found.get(key) for layer, key in ref_keys.items()}
+
+    # ---- 名乗りの側。⚠️ **欄が7つ在ることは、7つが正しい穴であることではない。**
+    #      ⚠️ **突き合わせる相手は、この仕様が名乗ったカードの穴の和である。**
+    declared, holes_of = _image_card_slots(names_of, fields_of, kind, repo_root)
+    out.extend(declared)
+
+    # ---- 空でないことの側。⚠️ **欄が在ることは、書いたことではない。**
+    #      ⚠️ **仕様が自分で置いた欄をすべて見る。** 「名乗ったカードの穴かどうか」は
+    #      名乗りの側の仕事であり、**空欄は名乗りが読めなくても読める欠陥である**
+    #      （カードが隣に無い者にも、この欠陥だけは見える）。
+    for s, _p in specs:
+        fields = fields_of.get(s)
+        if not fields:
             continue
-        seen += 1
-        got = {m.group(1).strip(): m.group(2).strip() for m in
-               (re.match(r"^-\s*`([^`]+)`\s*:\s*(.*)$", ln.strip())
-                for ln in body.splitlines()) if m}
-        absent = [v for v in want if v not in got]
-        empty = [v for v in want if got.get(v) == ""]
-        if absent:
-            out.append(finding("L22", s,
-                               f"画像の仕様に無い欄がある: {'／'.join(absent)}。"
-                               f"**`{kind['vars_section']}` は "
-                               f"{len(want)} 欄で1組である**——"
-                               "1つ欠ければ、その変数は空のまま生成へ渡る。"))
+        empty = sorted(k for k, v in fields.items() if v == "")
         if empty:
             out.append(finding("L22", s,
                                f"欄が空である: {'／'.join(empty)}。"
                                "**欄を置いたことは、書いたことではない。**"))
 
-    # ---- 名乗りの側。⚠️ **欄が7つ在ることは、7つが正しい穴であることではない。**
-    out.extend(_image_card_slots(specs, kind, repo_root))
-
+    # ⚠️ **突き合わせた相手を、報告に書く。** 読む者は「7 欄」という数から
+    #    **どのカードの穴か**を推測できない——**和は作品ごとに決まる。**
+    sizes = sorted({len(v) for v in holes_of.values()})
     out.append(finding("L22", f"{seen}本",
-                       f"画像の仕様の {len(want)} 欄を確かめた（{seen}/{len(specs)} 本）。"
-                       "⚠️ **確かめたのは空でないことまでである**——"
+                       f"画像の仕様の欄を確かめた（{seen}/{len(specs)} 本）。"
+                       + (f"⚠️ **名乗ったカードが読めた {len(holes_of)} 本では、"
+                          f"要求はその穴の和（{'／'.join(str(n) for n in sizes)} 欄）"
+                          "である**——**基盤の表ではない。**"
+                          if holes_of else
+                          "⚠️ **名乗ったカードが1枚も読めていないので、"
+                          f"欄の過不足は基盤の表（{len(want)} 欄）でしか見ていない。**")
+                       + "⚠️ **確かめたのは空でないことまでである**——"
                        "**引いた値が正しいかは、この層には読めない。**",
                        severity="note"))
     return out
@@ -1550,8 +1606,19 @@ def _card_name(value):
     return (m.group(1) or m.group(2)) if m else None
 
 
-def _image_card_slots(specs, kind, repo_root):
-    """**名乗ったカードが、その欄を実際に宣言しているか。**
+def _image_card_slots(names_of, fields_of, kind, repo_root):
+    """**名乗ったカードが、その欄を実際に宣言しているか。** → `(報告, {ショット: 穴の集合})`
+
+    ⚠️ **突き合わせる相手は、この仕様の欄そのものである。**
+    かつてここは `SPEC_KINDS['image']['vars_from']` の**固定の表**とカードを比べていた。
+    その表は**アニメ系のカードから実測した4欄**（`SUBJECT`／`ACTION`／`LOCATION`／`ACCENT`）
+    である——**実写系の様式カード（`ASPECT` を宣言する）とは、最初から食い違う。**
+    実測（2026-09-24、`F1`・`F2`）: 写真の作品は**構造的に赤**であり、
+    「カードが宣言しているのに、画像の仕様に無い欄がある」という文は
+    **その仕様を一度も読まずに**書かれていた——
+    **鳴っている文と、鳴らしている計算が、別のことを言っていた。**
+    いまは**この仕様が名乗ったカードの穴の和**と、**この仕様の欄**を突き合わせる。
+    **相手は作品ごとに決まる**——だから表ではなく名乗りを読む。
 
     ⚠️ **動画の仕様にはこれが無い。** 動画仕様の `REF_FORMAT: video-spec` は
     `# 6. REFERENCES` に**人向けに**書かれているだけで、**機械は読んでいない。**
@@ -1560,84 +1627,138 @@ def _image_card_slots(specs, kind, repo_root):
 
     ⚠️ **名乗りが書かれていなければ、その仕様は何も名乗っていない。** これは
     **違反である**——`L19` が欄の行き先を両方向に閉じるのと同じ理屈で、
-    **7つの穴がどこから来たかが書かれていなければ、その7つは検算できない。**
+    **穴がどこから来たかが書かれていなければ、その穴は検算できない。**
     """
     out = []
     ref_keys = kind.get("ref_keys") or {}
     vars_from = kind.get("vars_from") or {}
     if not ref_keys or not vars_from:
-        return out                        # `SPEC_KINDS` が名乗りを持たない
+        return out, {}                    # `SPEC_KINDS` が名乗りを持たない
 
     root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
     cards = {}
     for layer in ref_keys:
         cards[layer] = _cards_dirs(root, layer)
 
-    # 名乗りを1本ずつ読む。⚠️ **同じ名乗りが10本に在る**ので、報告は**層ごとに1件**に畳む。
+    # 名乗りを1本ずつ読む。⚠️ **同じ名乗りが10本に在る**ので、報告は**カードごとに1件**に畳む。
     unreadable = {}
-    declared = {}
-    for s, p in specs:
-        found = {m.group(1): m.group(2).strip() for m in
-                 REF_CARD.finditer(p.read_text(encoding="utf-8"))}
+    by_card = {}                          # (層, カード名) → [ショット]
+    names = {}                            # ショット → {層: カード名}
+    for s in sorted(names_of):
         for layer, key in ref_keys.items():
-            name = found.get(key)
-            if not name:
+            value = names_of[s].get(layer)
+            if not value:
                 out.append(finding("L22", s,
                                    f"画像の仕様が `{key}` を名乗っていない。"
                                    f"**{len(vars_from.get(layer, ()))} 欄が"
                                    "どのカードの穴なのか、書かれていない**——"
                                    "書かれていなければ、検算できない。"))
                 continue
-            name = _card_name(name)
+            name = _card_name(value)
             if not name:
                 out.append(finding("L22", s,
-                                   f"`{key}` の値からカード名が読めない: `{found.get(key)}`。"
+                                   f"`{key}` の値からカード名が読めない: `{value}`。"
                                    "**名乗りが書いてあることと、名乗りが読めることは別である。**"))
                 continue
-            declared.setdefault(layer, {}).setdefault(name, []).append(s)
+            by_card.setdefault((layer, name), []).append(s)
+            names.setdefault(s, {})[layer] = name
 
-    for layer, names in declared.items():
+    def _label(shots):
+        return "／".join(shots[:3]) + ("…" if len(shots) > 3 else "")
+
+    holes = {}                            # (層, カード名) → 穴の集合
+    for (layer, name), shots in by_card.items():
         if not cards.get(layer):
             unreadable[layer] = True
             continue
-        for name, shots in names.items():
-            card = _card_path(root, layer, name)
-            if card is None:
-                out.append(finding("L22", "／".join(shots[:3]) + ("…" if len(shots) > 3 else ""),
-                                   f"名乗られたカード `{name}` が無い——**探した範囲**: "
-                                   f"{_cards_searched(root, layer, name)}。"
-                                   f"**名乗りは在るが、そのカードが実在しない。**"))
-                continue
-            got = _card_env_vars(card)
-            if got is None:
-                out.append(finding("L22", name,
-                                   f"カード `{name}` に `## Environment variables` が無い。"
-                                   "**穴を宣言していないカードは、穴を埋められない。**"))
-                continue
-            wanted = set(vars_from.get(layer, ()))
-            missing = sorted(wanted - got)
-            extra = sorted(got - wanted)
-            if missing:
-                # ⚠️ **これが、実測で見つかった欠陥そのものである。**
-                #    様式カードだけを名乗っていれば、`SCENE`／`CHARACTERS`／`LIGHT` が
-                #    ここに並ぶ——**構図がどのカードからも来ていないことが見える。**
-                out.append(finding("L22", "／".join(shots[:3]) + ("…" if len(shots) > 3 else ""),
-                                   f"{layer} カード `{name}` が宣言していない欄を、"
-                                   f"画像の仕様が持っている: {'／'.join(missing)}。"
-                                   "**その値はどのカードの穴でもない**——"
-                                   "生成へは渡るが、**カードの文法を通っていない。**"))
-            if extra:
-                out.append(finding("L22", "／".join(shots[:3]) + ("…" if len(shots) > 3 else ""),
-                                   f"{layer} カード `{name}` が宣言しているのに、"
-                                   f"画像の仕様に無い欄がある: {'／'.join(extra)}。"
-                                   "**カードの穴が埋まっていない**——"
-                                   "その変数は空のまま生成へ渡る。"))
+        card = _card_path(root, layer, name)
+        if card is None:
+            out.append(finding("L22", _label(shots),
+                               f"名乗られたカード `{name}` が無い——**探した範囲**: "
+                               f"{_cards_searched(root, layer, name)}。"
+                               f"**名乗りは在るが、そのカードが実在しない。**"))
+            continue
+        got = _card_env_vars(card)
+        if got is None:
+            out.append(finding("L22", name,
+                               f"カード `{name}` に `## Environment variables` が無い。"
+                               "**穴を宣言していないカードは、穴を埋められない。**"))
+            continue
+        holes[(layer, name)] = set(got)
+
+    # ---- 仕様ごとに、**その仕様が名乗ったカードの穴の和**と突き合わせる。
+    resolved = {}                         # ショット → 穴の和
+    stray_by = {}                         # どの穴でもない欄 → [ショット]
+    unfilled_by = {}                      # 埋まっていない穴（出所つき） → [ショット]
+    for s in sorted(names):
+        fields = fields_of.get(s)
+        if fields is None:
+            continue                      # 節が無い。呼び手が報告済みである
+        pairs = list(names[s].items())    # [(層, カード名)]
+        known = [holes[p] for p in pairs if p in holes]
+        if not known:
+            continue                      # 1枚も読めていない。下の註が言う
+        union = set().union(*known)
+        resolved[s] = union
+        # ⚠️ **「どの穴でもない」と言えるのは、名乗ったカードが全部読めたときだけである。**
+        #    片方が読めなければ、その欄は**読めていないカードの穴**かもしれない
+        #    ——**言えないことを、言える形で鳴らしてはならない。**
+        if len(known) == len(pairs):
+            stray = tuple(sorted(v for v in fields if v not in union))
+            if stray:
+                stray_by.setdefault(stray, []).append(s)
+        # ⚠️ **空のまま生成へ渡る変数を名指す。** どのカードの穴かまで書く——
+        #    **直す者が見るのは、カードのほうである。**
+        unfilled = sorted(v for v in union if v not in fields)
+        if unfilled:
+            detail = []
+            for v in unfilled:
+                owners = sorted(f"{ly} `{nm}`" for (ly, nm) in names[s].items()
+                                if (ly, nm) in holes and v in holes[(ly, nm)])
+                detail.append(f"{v}（{'・'.join(owners)}）")
+            unfilled_by.setdefault(tuple(detail), []).append(s)
+
+    for stray, shots in stray_by.items():
+        out.append(finding("L22", _label(shots),
+                           "名乗ったカードのどれも宣言していない欄を、"
+                           f"画像の仕様が持っている: {'／'.join(stray)}。"
+                           "**その値はどのカードの穴でもない**——"
+                           "生成へは渡るが、**カードの文法を通っていない。**"))
+    for detail, shots in unfilled_by.items():
+        out.append(finding("L22", _label(shots),
+                           "名乗ったカードが宣言している穴が埋まっていない: "
+                           f"{'／'.join(detail)}。"
+                           "**その変数は空のまま生成へ渡る**——"
+                           "**カードの穴は、仕様がその欄を置いて初めて埋まる。**"))
 
     if unreadable:
         # ⚠️ **層ごとの変数を名指す。** 様式の名を形式へ流用すれば、**直す者が
         #    張るべきでない変数を張る**——`_cards_dirs` が層で分かれているのと同じ理由である。
         read = "／".join(f"`{CARD_ENVS.get(layer, STYLE_CARD_ENV)}`"
                          f"（{layer}）" for layer in sorted(unreadable))
+        # ⚠️ **読めないことを理由に何も言わなければ、「確かめた」と
+        #    「確かめられなかった」が同じ顔になる。** だから**控えの表で見た結果を書く**
+        #    ——ただし⛔ **その表は名乗ったカードの穴ではない。**
+        want = tuple(kind.get("vars") or ())
+        fallback = {}
+        for s in sorted(names):
+            if s in resolved or not fields_of.get(s):
+                continue
+            fallback.setdefault(tuple(v for v in want if v not in fields_of[s]),
+                                []).append(s)
+        fallback_label = ""
+        if fallback:
+            bits = []
+            for gap, shots in sorted(fallback.items()):
+                bits.append(f"{_label(shots)} は"
+                            + (f"表に在って仕様に無い欄が {'／'.join(gap)}" if gap
+                               else "表と一致した"))
+            fallback_label = (
+                f"⚠️ **欄の過不足は、基盤の表（{len(want)} 欄——"
+                f"{'／'.join(want)}）と突き合わせた**: {'。'.join(bits)}。"
+                "⛔ **この表はアニメ系のカードから実測したもので、"
+                "名乗ったカードの穴ではない**——"
+                "**食い違いは作品の欠陥とは限らない。**")
         out.append(finding("L22", "",
                            f"カードが**読めない**（{'／'.join(sorted(unreadable))}）——"
                            f"{read} を設定するか、"
@@ -1645,16 +1766,27 @@ def _image_card_slots(specs, kind, repo_root):
                            "**このリポジトリを clone した人には無い。**"
                            "だから**名乗ったカードがその欄を宣言しているかは"
                            "確かめられない**——**確かめていないことを、"
-                           "確かめた顔にしない。**",
+                           "確かめた顔にしない。**" + fallback_label,
                            severity="note"))
-    elif declared:
-        layers = "／".join(f"{k} {len(v)}枚" for k, v in sorted(declared.items()))
+    elif by_card:
+        layers = "／".join(f"{k} {n}枚" for k, n in
+                           sorted(_layer_counts(by_card).items()))
+        sizes = "／".join(str(n) for n in sorted({len(v) for v in resolved.values()}))
         out.append(finding("L22", "",
                            f"画像の仕様が名乗ったカード（{layers}）を読み、"
-                           f"{len(kind.get('vars') or ())} 欄がその穴の和であることを"
-                           "確かめた。⚠️ **カードの中身が正しいかは、この層には"
+                           f"{len(resolved)} 本で、仕様の欄をその穴の和"
+                           f"（{sizes} 欄）と突き合わせた。"
+                           "⚠️ **カードの中身が正しいかは、この層には"
                            "読めない**——**見ているのは、名乗りと欄の和が合うことまでである。**",
                            severity="note"))
+    return out, resolved
+
+
+def _layer_counts(by_card):
+    """`(層, カード名)` の並び → `{層: カードの枚数}`。**報告の1行のためだけにある。**"""
+    out = {}
+    for layer, _name in by_card:
+        out[layer] = out.get(layer, 0) + 1
     return out
 
 

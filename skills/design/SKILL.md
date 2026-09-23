@@ -169,7 +169,8 @@ because `L3` and `L4` read the beat body, not only the field.**
    gesture**, and a heading between them would be swept into the selection. **The recipe lives
    in `specmap.SPEC_KINDS`; do not re-derive it.**
    **Fires if wrong:** `L21` (the Negative does not cover `bible.negative_base` — **cover, not
-   equal**) · `L22` (one of the 7 fields is empty, or the card it names does not declare it).
+   equal**) · `L22` (a field the specification placed is empty, a hole of a card it names is unfilled, or a
+   field it holds is no named card's hole).
 12. **§19's `Instance ID`** — ⚠️ **the identity is taken from the specification side, not from
     the record side.** The shot's `shot` id is that string with the trailing
     `-<seconds>s-<take>` dropped. ⚠️ **Never from `Segment ID`** — the same range carries two

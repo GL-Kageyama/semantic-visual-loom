@@ -115,7 +115,7 @@ SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles \
 
 | 节 | format | style | |
 |---|---|---|---|
-| `## Environment variables` | 必需 | 必需 | 卡片填的洞。两个层的并集，就是图像提示词的那 7 个栏位 |
+| `## Environment variables` | 必需 | 必需 | 卡片填的洞。**规格自称的卡片的并集，就是该规格应当持有的字段**（对方按作品而定） |
 | `## Negative` | 必需 | 必需 | 这张卡片追加的排除 |
 | `## Motion character` | —— | 可选 | 这种样式动起来的时候做什么 |
 

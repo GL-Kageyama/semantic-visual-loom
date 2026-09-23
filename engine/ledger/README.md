@@ -51,7 +51,7 @@ in order to fire on "`before` and `after` are the same" — but **JSON Schema ca
 | **L19** | **A record field has no declared destination** — the dual of `L12` | "That the Aim Arrives" below |
 | **L20** | **`Style Motion`'s destination is empty** — the style card has no `Motion character` | "That the Aim Arrives" below |
 | **L21** | **The Negative does not cover what is required** — the foundation's floor (`specmap.BASE_NEGATIVES`) **plus** the work's own (`bible.negative_base`). **Both paths** (§18 `Negative Prompt`, image `Negative`). Waivable: the foundation's clauses only — **and only by the work (`bible.base_negatives_waived`)** | "Does the Negative Cover the Work's Prohibitions" below |
-| **L22** | **The image specification's 7 fields are empty** — or **the card it names does not declare that field** | "Are the Image Specification's 7 Fields Non-Empty" below |
+| **L22** | **A field the image specification placed is empty** — or **a card it names does not declare one of its holes**. ⚠️ **What is required is the union of the holes of the cards it names, not a constant** | "Are the Image Specification's Fields Filled" below |
 | **L23** | **`shot.duration` contradicts `Duration:` in video specification §1** | "Do the Intent and the Specification Agree on Duration" below |
 | **L24** | **What `mode` requires is missing** — §11 for `still` / `composite`, `text_channel` for `composite` | "What `mode` Requires" below |
 | **L25** | **The take does not match the shot, the style or the real thing** — 11 types | "Does the Take Match the Real Thing" below |
@@ -88,7 +88,7 @@ reaches too far. **Recorded here, where it happens, as a hole.**
 And L7 **counts and reports the shots that hold no disclosure state** —
 without counting, you cannot tell whether "0 violations" means "0 after checking" or "not checked".
 
-`--self-test` holds **one example that fires and one that does not, for each check** (273 examples).
+`--self-test` holds **one example that fires and one that does not, for each check** (280 examples).
 ⚠️ **Read the notes too.** Because **a note that does not appear also looks like "0 violations"**
 — with no example that confirms the note, deleting the note leaves the self-test green.
 ⚠️ **Read the note's "count" too.** `L25`'s note says "read N takes (broken down by role)" —
@@ -99,10 +99,16 @@ The self-test holds an example that reads that (without it, a miscounted note **
 do not fire when placed in `key_image:` and do fire when placed in `spec:`. **Place only one of them,
 and deleting the narrowing leaves the self-test green** — with no firing side, you cannot notice that you killed the check.
 ⚠️ **In particular** — **`L21` holds an example that does not fire with `no photorealistic` (ledger) and `not photorealistic` (spec)**
-(that very false positive found in measurement), **`L23` holds one that does not fire on a specification whose durations agree**,
+(that very false positive found in measurement), **an example that does not fire on a work prohibition
+that contains a comma** (also a false positive found in measurement — the specification is read as
+clauses and the work's lines were not), **`L23` holds one that does not fire on a specification whose durations agree**,
 and **`L24` holds one that does not fire on `motion`.**
-**`L22` holds four examples** — all 7 fields filled and the naming matching (does not fire), a field empty (fires),
-**a named card that does not declare that field** (fires), **a named card that cannot be read** (does not fire; a note).
+**`L22` holds eight examples** — every hole of the named cards filled and the union matching (does not fire),
+**a photo-family style card (`ASPECT`, no `ACCENT`) with the union matching** (does not fire — **this was
+structurally red while the check compared against the foundation's table**), a field empty (fires),
+**a card's hole left unfilled** (fires), **a named card that does not declare that field** (fires),
+**a named card that cannot be read** (does not fire; a note), **a note that says what the fallback table said
+and disclaims it** (does not fire), and **a fallback mismatch that stays a note** (does not fire).
 ⚠️ **`L32` holds an example for each of its three outcomes** — a readable card carrying `## Negative` (does not fire),
 **a card that is not there** (fires), **a card with no `## Negative`** (fires), **no card directory at all** (a note, not a violation).
 **It also holds a card that spells the heading `## Negative Prompt`** — without that example,
@@ -452,6 +458,16 @@ required = loom + extra
   extra = bible.negative_base        the work's own prohibitions
 ```
 
+⚠️ **Both sides are read as clauses.** The specification's Negative is **split on commas**
+(`specdoc.clausify`) — and so is **each line of `bible.negative_base`**.
+⚠️ **A work writes one prohibition per line, and a line may hold more than one clause**,
+so the two sides have to be divided the same way. ⚠️ **Compare a list of lines against a list
+of clauses and a line that contains a comma can never match** — the report names a prohibition
+as missing that **did reach the generator.** **The defect is then in the checker, not in the
+Negative.** ⚠️ **Duplicates are dropped by stem** before the sum is taken, so the count the
+report prints ("excluding duplicates, N clauses") is the number of clauses actually matched,
+and the report names the work's **lines** and their **clauses** separately when the two differ.
+
 ⚠️ **The foundation has a floor.** `specmap.BASE_NEGATIVES` holds **3 clauses** —
 `no watermark` · `no on-screen subtitles` · `no background music` — required of **every work**,
 whether or not the work wrote them down. **A prohibition the work forgot to declare is a prohibition
@@ -529,30 +545,41 @@ So it drops `no` / `not` / `never` / `without` before comparing —
 ⚠️ **A shot with no image specification does not come here.** That "there is no record" is folded into one item by `L18`
 — **two layers do not report the same defect under separate codes.**
 
-### L22 — are the image specification's 7 fields non-empty, and does the card it names hold that field
+### L22 — are the image specification's fields filled, and do the cards it names declare them
 
 **The image edition of `L20`, and more than that.** The image specification **holds no sections** (`L18`).
-But **it is not without structure** — it is made by filling the **holes in 2 cards** of `distill-essence-engine`.
+But **it is not without structure** — it is made by filling the **holes of the cards** it names
+in `distill-essence-engine`.
 
-⚠️ **There are 2.** This image passes through **both** the `format` (`scene-board`) and the `style` (`luminous-anime`).
-So the holes are for 2 cards as well —
+⚠️ **There are 2.** This image passes through **both** the `format` and the `style`.
+So the holes are for 2 cards as well — and **the specification holds the union of their holes**:
 
 | Card | Holes |
 |---|---|
 | `format` (`scene-board`) | `SCENE` / `CHARACTERS` / `ACTION` / `LOCATION` / `LIGHT` |
 | `style` (`luminous-anime`) | `SUBJECT` / `ACTION` / `LOCATION` / `ACCENT` |
 
-⚠️ **The sum is 7, not 9.** `ACTION` and `LOCATION` **exist under the same names in both cards**
-— so **the same value goes into both holes.** This was confirmed by measurement (`grep` read the
-`## Environment variables` of the 2 cards and counted the duplicates). **One of them alone cannot make this one frame.**
+⚠️ **Where a name exists in both cards, the same value goes into both holes** — `ACTION` and
+`LOCATION` above. **One of the two cards alone cannot make this one frame.**
 
-⚠️ **And the main body of this check is the naming side.** The specification names
-**which card's hole** it is via `REF_FORMAT` and `REF_STYLE`. `L22` resolves that name and looks at **whether the card actually declares that field.**
+⚠️ **The union is not a constant, so the check does not use a constant.**
+The pair in the table is **one pair**: the engine also carries **photo-family style cards** that
+declare `SCENE` / `LIGHT` / `ASPECT` and no `ACCENT`, and a specification naming one of those
+holds **8 fields, not 7**. ⚠️ **`L22` therefore reads which cards the specification names**
+(`REF_FORMAT` / `REF_STYLE`) **and builds the requirement out of those cards.**
 
-- **The specification holds a field the card does not declare** → it fires.
-  **That value is no card's hole** — it reaches generation, but **it has not passed through the card's grammar.**
-- **The card declares a field the specification does not hold** → it fires.
-  **The card's hole is unfilled** — that variable reaches generation **still empty**.
+- **A hole of a named card is not in the specification** → it fires.
+  **That variable reaches generation still empty** — **a card's hole is filled only when the
+  specification puts the field there.**
+- **The specification holds a field that no named card declares** → it fires.
+  **That value is no card's hole** — it reaches generation, but **it has not passed through the
+  card's grammar.** ⚠️ **This one is said only when every named card could be read** — a field
+  may be the hole of a card that was not read, and **a thing that cannot be said must not be
+  fired in the shape of a thing that can.**
+
+⚠️ **The main body of this check is the naming side, and that is why it reads the naming.**
+`REF_FORMAT` and `REF_STYLE` are how the specification says **whose hole** each field is;
+`L22` resolves that name and looks at **whether the card actually declares that field.**
 
 ⚠️ **Why this is needed.** Measurement — **of the 44 `format` cards, not one declares all 4 style variables.**
 So the version where the image specification held only the 4 fields `SUBJECT` through `ACCENT`
@@ -563,6 +590,12 @@ what `L22` confirms is the latter, and **it does not look at the former (whether
 
 ⚠️ **If the card cannot be read, it does not fire. It is a note.** `distill-essence-engine` is
 **a separate repository**, and someone who cloned this does not have it — **do not make the absence of the other side a violation.**
+⚠️ **But a note that says nothing is the same face as a check that passed.** So when a card cannot
+be read, the note **compares the specification against the foundation's table anyway**
+(`SPEC_KINDS['image']['vars']` — **7 fields measured from anime-family cards**) and **says that it
+did.** ⛔ **That table is not the named cards' holes**, so **a specification that differs from it is
+not thereby defective** — **the gap is reported, and nothing is fired on the strength of it.**
+**Reading a fallback as the truth is the defect this check was rebuilt to remove.**
 ⚠️ **Each layer reads its own variable** — `SVL_STYLES_DIR` for `style`, `SVL_FORMATS_DIR` for
 `format` — **so as not to tell the lie of reading a style card as a format card while still
 pointing at styles.** ⚠️ **One older spelling survives**: `SVL_STYLES_DIR` is still read for
@@ -576,7 +609,10 @@ searched until the variable points at it**, which is why the default run reports
 as a hole rather than passing it.
 
 ⚠️ **It does not look at whether the contents are correct.** Whether `SUBJECT`'s value is really the subject **cannot be read by this layer.**
-All it sees is **that it is non-empty** and **that the naming matches** — the note says so.
+All it sees is **that every hole the named cards declare is filled, that the specification holds no
+field outside them, and that the naming matches** — the note says so. ⚠️ **The fields it counts are
+the ones the named cards declare** — so the note names **the cards it read and the size of the union**,
+because **a reader who is told "7 fields" cannot tell whose holes those were.**
 
 ### L23 — do the intent and the specification agree on duration
 
@@ -1218,7 +1254,7 @@ What it can say is —
 | **Guarantees** | **It arrives.** Every field of the record has a declared destination (both directions) | **L19** |
 | **Guarantees** | **It arrives at the right place.** The shape of the path (`spec:` / `key_image:`) and the model §18 names | **L18** |
 | **Guarantees** | **The destination is not empty.** `Style Motion`'s pull-target actually exists | **L20** |
-| **Guarantees** | **The image path's contents are not empty.** The Negative covers the work's prohibitions, **the 7 fields are filled, and the card it names holds those fields** | **L21**, **L22** |
+| **Guarantees** | **The image path's contents are not empty.** The Negative covers the work's prohibitions, **the holes of the cards it names are filled, and it holds no field outside them** | **L21**, **L22** |
 | **Guarantees** | **The intent and the specification agree on duration.** | **L23** |
 | **Guarantees** | **A still shot is written as still** (§11 non-empty. `composite` also needs `text_channel`) | **L24** |
 | **Guarantees** | **What came back matches the shot, the style and the measurement.** | **L25** |

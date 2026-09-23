@@ -125,7 +125,7 @@ name would have to lie about the other route.**
 
 | section | format | style | |
 |---|---|---|---|
-| `## Environment variables` | required | required | the holes the card fills; the union of the two layers is the image prompt's seven fields |
+| `## Environment variables` | required | required | the holes the card fills; **the union of the cards a specification names is the set of fields that specification must hold** |
 | `## Negative` | required | required | the exclusions this card adds |
 | `## Motion character` | — | optional | what this style does when it moves |
 
