@@ -369,6 +369,10 @@ The palette fixed: the red of the safelight, the amber of the developer, the whi
   ⛔ **脂痕は指紋ではない。**
 - **No youthful face for 絹. No clean unstained hands. No smiling expression.**（`ledger.characters.絹.negatives`）
 - **No portrait lighting, no bright evenly lit room.** ⛔ **光は、状態であって照明ではない。**
+- **No lamp. No bulb. No bare light source. No light source visible in frame. No safelight lamp in frame.**
+  ⛔ **枠が持つのは光そのものであって、灯ではない**——**器具は、枠の外に立つ。**
+  ⚠️ **この節は、動画仕様13本のうち、この1本だけが持っていなかった**（**実測**、2026-09-24——
+  他の12本は2節以上を持つ）。**著者裁定（2026-09-24）で足した。**
 - **No open drawer, no second print, no film, no lens, no tongs, no bottles or jars.**
   ⚠️ **この1本の画面に在ってよいものは、液面と、沈んでいる紙と、浮かぶ像と、縁の手である。**
 - **No bubbles, no foam.** ⛔ **液面に在るのは、雫の輪ひとつだけである。**
@@ -420,7 +424,7 @@ A 10-second continuous cinematic take (16:9) of the first development, one clip.
 
 ## Visual Prompt
 
-The palette fixed: the red of the safelight, the amber of the developer, the white of the unexposed paper, and the near-black of the surrounding room, the red and amber kept to their sources and never staining the whole frame. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, blown highlights on the white paper, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness. A single light source, and no time of day: the dim red safelight and the warm amber glow of the developer tray are not a direction and not an hour, and there is no window, no clock, no daylight and no directional light. The darkroom of the art board: one windowless room with the developing tray at its centre, everything past the red light's reach sunk in near-black. In the tray, a wet silver-gelatin print lying flat in the amber liquid with its full width in the frame, and in it an image: a woman's face, the outline first, the eyes open and turned away to one side, a mouth closed on something it had started to say — an ordinary face at the moment of refusing something, and not the daughter. Below the eye, on the image itself, one thumb's mark of grease, not wiped. At the near edge of the sheet, a hand's fingers pinching the corner: a woman's hand, late fifties, thin, faintly stained from developing chemicals. The white of the paper is silver-white and not the white of paper, and it stays silver-white and is not stained red or amber. The room is otherwise still, and the liquid surface is not a mirror. No typography anywhere in the frame. No second figure in the room and no body in the room; no face in the room other than the one in the image on the paper; no fingerprint ridges in the mark; no bubbles in the liquid; no film, no lens, no tongs, no bottles or jars and no drawer in the frame.
+The palette fixed: the red of the safelight, the amber of the developer, the white of the unexposed paper, and the near-black of the surrounding room, the red and amber kept to their sources and never staining the whole frame. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, blown highlights on the white paper, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness. A single light source, and no time of day: the red light of a safelight standing outside the frame and coming as far as the tray, and the warm amber glow of the developer, are not a direction and not an hour, and there is no window, no clock, no daylight and no directional light. There is no lamp and no bulb and no bare light source anywhere in the frame: the frame holds the light itself and not the fixture that makes it. The darkroom of the art board: one windowless room with the developing tray at its centre, everything past the red light's reach sunk in near-black. In the tray, a wet silver-gelatin print lying flat in the amber liquid with its full width in the frame, and in it an image: a woman's face, the outline first, the eyes open and turned away to one side, a mouth closed on something it had started to say — an ordinary face at the moment of refusing something, and not the daughter. Below the eye, on the image itself, one thumb's mark of grease, not wiped. At the near edge of the sheet, a hand's fingers pinching the corner: a woman's hand, late fifties, thin, faintly stained from developing chemicals. The white of the paper is silver-white and not the white of paper, and it stays silver-white and is not stained red or amber. The room is otherwise still, and the liquid surface is not a mirror. No typography anywhere in the frame. No second figure in the room and no body in the room; no face in the room other than the one in the image on the paper; no fingerprint ridges in the mark; no bubbles in the liquid; no film, no lens, no tongs, no bottles or jars and no drawer in the frame.
 
 ## Motion Prompt
 
@@ -436,7 +440,7 @@ No dialogue and no voice of any kind. No sound effects: nothing in this shot mak
 
 ## Negative Prompt
 
-no watermark, no on-screen subtitles, no background music, no uniform pacing, no equal-length beats, no static slideshow of stills, no floaty weightless motion, no scene cuts to unrelated locations, no morphing or drifting facial identity, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no second figure, no body in the room, no figure other than the one hand and forearm at the edge of the sheet, no face in the room, no face other than the one in the image on the paper, no wiping of the mark, no hand touching the eyes in the image, no small hand pressing the lens, no child's hand of any kind, no unusual camera angle, no tilt, no roll, no low angle, no high angle, no dutch angle, no fisheye distortion of any kind, no lens distortion, no glowing or emitting paper, no digital image on the paper, no glossy photo paper, no visible fingerprint ridges, no forensic texture, no legible handprint, no youthful face for 絹, no clean unstained hands, no smiling expression, no portrait lighting, no bright evenly lit room, no open drawer, no second print, no film, no lens, no tongs, no bottles or jars, no numbers of any kind, no bubbles, no foam, no reflection of the room in the liquid, no conventional camera position, no unstated entry, no cut, no fisheye distortion standing in for an impossible viewpoint, no path that changes its own physics, no shot without an arrival, no posed studio lighting, no dramatic color grading, no CGI
+no watermark, no on-screen subtitles, no background music, no uniform pacing, no equal-length beats, no static slideshow of stills, no floaty weightless motion, no scene cuts to unrelated locations, no morphing or drifting facial identity, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no second figure, no body in the room, no figure other than the one hand and forearm at the edge of the sheet, no face in the room, no face other than the one in the image on the paper, no wiping of the mark, no hand touching the eyes in the image, no small hand pressing the lens, no child's hand of any kind, no unusual camera angle, no tilt, no roll, no low angle, no high angle, no dutch angle, no fisheye distortion of any kind, no lens distortion, no glowing or emitting paper, no digital image on the paper, no glossy photo paper, no visible fingerprint ridges, no forensic texture, no legible handprint, no youthful face for 絹, no clean unstained hands, no smiling expression, no portrait lighting, no bright evenly lit room, no lamp, no bulb, no bare light source, no light source visible in frame, no safelight lamp in frame, no open drawer, no second print, no film, no lens, no tongs, no bottles or jars, no numbers of any kind, no bubbles, no foam, no reflection of the room in the liquid, no conventional camera position, no unstated entry, no cut, no fisheye distortion standing in for an impossible viewpoint, no path that changes its own physics, no shot without an arrival, no posed studio lighting, no dramatic color grading, no CGI
 
 ## Style Motion
 
@@ -473,7 +477,8 @@ Full animation, not limited — and the form's native state is available to it. 
 ## Version
 
 `0.1.0` — **この動画は、まだ一度も生成していない。** これは設計であって、記録ではない。
-⚠️ **画像の側は別である**（`specs/image/migenzo-ch01-seg01.md`——**この1本の画像は、まだ1枚も無い**）。
+⚠️ **画像の側は別である**（`specs/image/migenzo-ch01-seg01.md`——**第一世代の1枚が在り、
+焼き直しと裁定された**。2026-09-24、著者）。
 
 ## Observed Problems
 
@@ -494,6 +499,12 @@ Full animation, not limited — and the form's native state is available to it. 
 - **⚠️ 脂痕が指紋になる。** **隆線を描けば、この1本は鑑識の1本になる**（§17-3）。
 - **⚠️ 光が方向を持つ。** **窓・時計・影を作れば、この部屋は部屋でなくなる**（`bible.constants.光`）。
   ⛔ **そして、この部屋の赤い安全光は「到着」しない**——**状態である。**
+- **⚠️ 枠に灯が写る。** **器具を描けば、この部屋は「照明のある部屋」になり、光は状態でなくなる**（§13）。
+  ⚠️ **肯定の側が器具を名指していないか**を確かめる——**§18 の `Visual` は
+  「枠の外に立つ」と書いている**（`bible.world.visual_language.light`——**光は、方向ではなく状態である**）。
+  ⛔ **実測（2026-09-24）**: この節を持たない仕様で焼かれた画像（01・05・12）は、
+  **3本とも器具を写した。** 仕様を直した6本（02・06-1・06-2・07・08・09）の焼き直しは、
+  **6本とも写さなかった。**
 - **⚠️ 絹の手が主題になる。** **手が動けば、この1本は「手の1本」である**——
   ⚠️ **手が動くのは、最後の一度だけである**（`motion.quality`）。
 - **⚠️ 文字が入る。** **印画紙は、日付や番号を持ちたがる。**

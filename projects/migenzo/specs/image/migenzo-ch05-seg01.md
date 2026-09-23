@@ -52,6 +52,28 @@
   ⚠️ **採用するか、焼き直すかは、著者が決める**（**この記録は欠陥の指摘ではなく、見えたままである**）。
 
 
+## ⛔ 実測（2026-09-24）と、焼き直し（著者裁定）
+
+- ⛔ **灯が、枠に写っている**——**左上に器具の頭（傘と、赤く光る口）。**
+  ⚠️ **光源が枠に入れば、この部屋は「照明のある部屋」になり、光は状態でなくなる**
+  （`bible.world.visual_language.light`——**光は、方向ではなく状態である**）。
+- ⛔ **原因は肯定の側である**——`LIGHT` と `Prompt` が、器具を名指す既定の1文
+  （`one windowless room whose only light is a dim red safelight`）を持っていた。
+  ⚠️ **その1文は `migenzo-art-board` のものである**（**実測**——あのボードの `Merged` に同じ1文が在る）。
+- ⛔ **ゆえに、この1枚は焼き直しと裁定された**（2026-09-24、著者）。
+  ⚠️ **肯定の側を書き換えた**——**器具は枠の外に立ち、枠が持つのは光そのものである。**
+  ⛔ **`Negative` に2節を足した**（`no light source visible in frame` / `no safelight lamp in frame`）。
+  ⚠️ **この2節は、この1枚には初めから1つも無かった**（**実測**: 0）。
+- ⚠️ **実測（2026-09-24）**: 仕様を直した6本（02・06-1・06-2・07・08・09）の焼き直しは、
+  **6本とも器具を写さなかった。** 逆に、この節を持たない仕様で焼かれた 01・05・12 は、
+  **3本とも写した。** ⛔ **否定形だけでは止まらない**——02 は `no lamp` / `no bulb` /
+  `no bare light source` を持ち、それでも描かれた。
+- ⚠️ **`SUBJECT` が読めないことは、焼き直しでも見る**——
+  **絹は横顔で、眼は影の側にある**（2026-09-23 の節）。⛔ **この1本の主題は、
+  首が回ったことと、眼が止まったことだけである。**
+- ⛔ **設定画を添付する1本であることに変わりはない**（著者裁定、2026-09-23）——
+  **この13本で、絹の設定画が付くのは、この1枚だけである。**
+
 ## 主題（英語・2枚のカードの穴・7欄）
 
 - `REF_FORMAT`: `scene-board` —— `SCENE`／`CHARACTERS`／`ACTION`／`LOCATION`／`LIGHT`
@@ -63,7 +85,7 @@
 - `SUBJECT`: 絹's face in the near foreground with her eyes come back and resting forward, and beyond her, in the open doorway, a figure stopped at the threshold with two points of red light where its eyes are
 - `ACTION`: her eyes no longer going aside — they stop, and that is all that happens
 - `LOCATION`: the doorway of the darkroom of the art board — the door standing open, and the outside giving no light at all
-- `LIGHT`: the room's constant state — one dim red safelight that reaches only the inside, and the warm amber glow of the developer tray; the two points beyond the threshold are the safelight coming back off the eyes, not a light of their own
+- `LIGHT`: the room's constant state — the dim red light of a safelight that stands outside the frame and reaches only the inside, and the warm amber glow of the developer; ⛔ **枠が持つのは光そのものであって、灯ではない**; the two points beyond the threshold are that red light coming back off the eyes, not a light of their own
 - `ASPECT`: 16:9, landscape
 
 ⛔ **この1枚が切る瞬間は `unit.after` である**——**絹の眼が、戻っているところである。**
@@ -74,9 +96,9 @@
 
 ## 投入する1本の文字列（英語・1段落目が `Prompt`、2段落目が `Negative`）
 
-A scene board for the moment the looking changes direction in the novel 『未現像』 ("Undeveloped") — the master staging of one scene, in 16:9. The doorway of the darkroom of the art board: one windowless room whose only light is a dim red safelight, the door standing open, and outside the door nothing at all — no corridor, no street, no light. In the near part of the frame, close to the camera, the face of a woman in her late fifties: thin, short black hair faintly streaked with grey gathered loosely at the back, a calm sunken-eyed face, a black apron over a black blouse. Her head has turned and her eyes have come back from the side they always went to; they are resting now, forward, on the doorway, and she is not moving. Beyond her, out in the open doorway, a grown figure has walked up and stopped exactly at the threshold and does not cross it: the darkness does not describe it, there is no face to read, no clothing to read, no body to read — the only thing that comes out of that darkness is the eyes, two points where the red safelight returns off them, and they are a child's eyes. Nothing else in the frame moves; this is two people holding still, one looking and one being looked at. `[絹: woman, late fifties, thin, short black hair faintly streaked with grey gathered loosely at the back, a calm sunken-eyed face, a black apron over a black blouse]` — the figure whose identity is locked to the frozen setting sheet. `[盗人: a grown figure at the threshold, undescribed by the darkness; only the eyes read, and they are a child's eyes]`. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness. The palette is held to the red of the safelight, the amber of the developer and the silver-white of the paper, and the red and amber are kept to their sources and never stain the whole frame. The same place as the art board. No typography anywhere in the frame.
+A scene board for the moment the looking changes direction in the novel 『未現像』 ("Undeveloped") — the master staging of one scene, in 16:9. The doorway of the darkroom of the art board: one windowless room whose only light is the red light of a safelight standing outside the frame and reaching as far as the doorway, the door standing open, and outside the door nothing at all — no corridor, no street, no light. In the near part of the frame, close to the camera, the face of a woman in her late fifties: thin, short black hair faintly streaked with grey gathered loosely at the back, a calm sunken-eyed face, a black apron over a black blouse. Her head has turned and her eyes have come back from the side they always went to; they are resting now, forward, on the doorway, and she is not moving. Beyond her, out in the open doorway, a grown figure has walked up and stopped exactly at the threshold and does not cross it: the darkness does not describe it, there is no face to read, no clothing to read, no body to read — the only thing that comes out of that darkness is the eyes, two points where the red safelight returns off them, and they are a child's eyes. Nothing else in the frame moves; this is two people holding still, one looking and one being looked at. `[絹: woman, late fifties, thin, short black hair faintly streaked with grey gathered loosely at the back, a calm sunken-eyed face, a black apron over a black blouse]` — the figure whose identity is locked to the frozen setting sheet. `[盗人: a grown figure at the threshold, undescribed by the darkness; only the eyes read, and they are a child's eyes]`. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness. The palette is held to the red of the safelight, the amber of the developer and the silver-white of the paper, and the red and amber are kept to their sources and never stain the whole frame. The same place as the art board. No typography anywhere in the frame.
 
-no watermark, no on-screen subtitles, no background music, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no small hand pressing the lens, no readable face on the figure at the threshold, no facial features on the figure, no eyes other than the two points, no glowing eyes, no luminous or emitting eyes, no light of their own, no sunglasses, no goggles, no mask, no hood over the face in view, no child's body, no child in frame, no small stature, no youthful build, no second face, no third person, no silhouette of a third person, no open door with daylight behind it, no corridor, no street, no room beyond the door, no lamp beyond the door, no doorway light spill, no light from outside, no window light, no torch, no bright evenly lit room, no dramatic tension lighting, no low angle, no confrontation staging, no standoff composition, no mirrored symmetry, no dramatic shadow on the wall, no raised hand, no reaching hand, no weapon, no bag, no coat collar turned up, no hat, no smile, no angry expression, no expression staged for the camera
+no watermark, no on-screen subtitles, no background music, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no small hand pressing the lens, no readable face on the figure at the threshold, no facial features on the figure, no eyes other than the two points, no glowing eyes, no luminous or emitting eyes, no light of their own, no sunglasses, no goggles, no mask, no hood over the face in view, no child's body, no child in frame, no small stature, no youthful build, no second face, no third person, no silhouette of a third person, no open door with daylight behind it, no corridor, no street, no room beyond the door, no lamp beyond the door, no doorway light spill, no light from outside, no window light, no torch, no light source visible in frame, no safelight lamp in frame, no bright evenly lit room, no dramatic tension lighting, no low angle, no confrontation staging, no standoff composition, no mirrored symmetry, no dramatic shadow on the wall, no raised hand, no reaching hand, no weapon, no bag, no coat collar turned up, no hat, no smile, no angry expression, no expression staged for the camera
 
 ---
 

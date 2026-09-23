@@ -52,7 +52,7 @@
 - `SUBJECT`: one wet silver-gelatin sheet hanging in the air above the tray, silver-white and blank, a pair of tongs pinching its corner, and a band of red light lying across it
 - `ACTION`: the sheet held still in the air, its last water already fallen, the light crossing the white and the white taking a little of it and staying white
 - `LOCATION`: the darkroom of the art board — the light island: the tray with its amber liquid at the center, its surface still at last, and everything outside the red light's reach sunk in the darkness that has been along those walls for twenty years
-- `LIGHT`: the room's constant state — one dim red safelight and the warm amber glow of the developer tray, the paper catching both and staying silver-white; no time of day and no directional light. ⛔ **光の島の縁は、この枠に入る**——**赤から闇への変わり目が、この1本の境界である**
+- `LIGHT`: the room's constant state — the dim red light of a safelight that stands outside the frame and comes as far as the tray, and the warm amber glow of the developer, the paper catching both and staying silver-white; ⛔ **枠が持つのは光そのものであって、灯ではない**; no time of day and no directional light. ⛔ **光の島の縁は、この枠に入る**——**赤から闇への変わり目が、この1本の境界である**
 - `ASPECT`: 16:9, landscape
 
 ⛔ **この1枚が切る瞬間は `unit.after` である**——**白が、決まらないまま、決まったところである。**
@@ -66,9 +66,9 @@
 
 ## 投入する1本の文字列（英語・1段落目が `Prompt`、2段落目が `Negative`）
 
-A scene board for the last white of the novel 『未現像』 ("Undeveloped") — the master staging of one scene, in 16:9. In the darkroom of the art board, the light island: a developing tray with amber liquid at its center, the surface now still, and beyond the reach of the red safelight the room's unlit faces sunk in the darkness that has been settled along those walls for twenty years — and the edge where the red gives way to that darkness is held inside this frame. Above the tray, one wet silver-gelatin sheet hangs in the air, held at its corner by a pair of tongs that come in from outside the frame, and no hand is on them in this frame. The sheet is blank: nothing has come up on it, no outline, no trace, no mark at all — just the white of silver gelatin, and that white is not flat, because the sheet is still wet and the wet surface holds a faint sheen that catches the light. A band of red light lies across the white, and the white takes a little of it and stays white, exactly where it is. The paper the white is on is the heaviest thing in the room. `[no figure in frame]` — this is the one frame of the work in which nobody stands: no hand at the tray, no person holding the tongs. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness. The palette is held to the red of the safelight, the amber of the developer and the silver-white of the paper, and the red and amber are kept to their sources and never stain the whole frame. The same place as the art board, the tray filling the space the art board left open. No typography anywhere in the frame.
+A scene board for the last white of the novel 『未現像』 ("Undeveloped") — the master staging of one scene, in 16:9. In the darkroom of the art board, the light island: a developing tray with amber liquid at its center, the surface now still, the only light in the room the red light of a safelight standing outside the frame and coming as far as the tray, and beyond its reach the room's unlit faces sunk in the darkness that has been settled along those walls for twenty years — and the edge where the red gives way to that darkness is held inside this frame. Above the tray, one wet silver-gelatin sheet hangs in the air, held at its corner by a pair of tongs that come in from outside the frame, and no hand is on them in this frame. The sheet is blank: nothing has come up on it, no outline, no trace, no mark at all — just the white of silver gelatin, and that white is not flat, because the sheet is still wet and the wet surface holds a faint sheen that catches the light. A band of red light lies across the white, and the white takes a little of it and stays white, exactly where it is. The paper the white is on is the heaviest thing in the room. `[no figure in frame]` — this is the one frame of the work in which nobody stands: no hand at the tray, no person holding the tongs. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness. The palette is held to the red of the safelight, the amber of the developer and the silver-white of the paper, and the red and amber are kept to their sources and never stain the whole frame. The same place as the art board, the tray filling the space the art board left open. No typography anywhere in the frame.
 
-no watermark, no on-screen subtitles, no background music, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no glossy photo paper, no digital image on the paper, no glowing or emitting paper, no visible fingerprint ridges, no forensic texture, no legible handprint, no person, no figure, no hand, no fingers, no arm, no face, no silhouette, no child's hand, no image on the print, no faint trace of an image, no residue of an image, no ghost of a face, no outline on the paper, no mark on the paper, no stain on the paper, no yellowed or aged paper, no torn or creased sheet, no flat featureless rectangle of pure white, no blown-out white with no texture, no water drops falling, no splash, no ripple on the surface, no tongs held by a visible hand, no second sheet, no second tray, no open drawer, no enlarger, no print hanging on a line, no bright evenly lit room, no portrait lighting, no smiling, no sad expression anywhere
+no watermark, no on-screen subtitles, no background music, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no glossy photo paper, no digital image on the paper, no glowing or emitting paper, no visible fingerprint ridges, no forensic texture, no legible handprint, no person, no figure, no hand, no fingers, no arm, no face, no silhouette, no child's hand, no image on the print, no faint trace of an image, no residue of an image, no ghost of a face, no outline on the paper, no mark on the paper, no stain on the paper, no yellowed or aged paper, no torn or creased sheet, no flat featureless rectangle of pure white, no blown-out white with no texture, no water drops falling, no splash, no ripple on the surface, no tongs held by a visible hand, no second sheet, no second tray, no open drawer, no enlarger, no print hanging on a line, no light source visible in frame, no safelight lamp in frame, no bright evenly lit room, no portrait lighting, no smiling, no sad expression anywhere
 
 ---
 
@@ -137,6 +137,34 @@ no watermark, no on-screen subtitles, no background music, no clock, no window, 
   **島のなかに瓶が並べば、「トレイと引き出しだけ」という 09 の法から離れる。**
   ⛔ **禁制で押さえず、肯定形に任せる——これが裁定の文面である。**
   **焼いて見て、離れていれば戻す。**
+
+## ⛔ 実測（2026-09-23、n=1）と、焼き直し（著者裁定 2026-09-24）
+
+- ⚠️ **焼かれた1枚**——`12_01_*`。**見えたままを書く。**
+- ⛔ **芯は在る**——**白は白いままである**（銀白で、赤にも琥珀にも染まっていない）。
+  **トングが紙の角を挟み、手は枠に無い。** **赤い帯が白を横切っている。**
+  ⚠️ **濡れた紙が宙にあり、下に琥珀のトレイがある**——**この1本の骨格は、出ている。**
+- ⛔ **だが、1つ外れている**——**灯が、枠に写っている。**
+  **左上〜中央に、器具の頭（傘と、赤く光る口）と、その腕。**
+  ⚠️ **そして、光の島の外が近黒に沈んでいない**——**右上にファン、棚に瓶が5〜6本、
+  右に吊られたトングが読める。**
+- ⚠️ **ファン・瓶・トングは、この1枚の欠陥ではない**——**この部屋の持ち物である**
+  （**実測**: `migenzo-art-board/prompt.md` に
+  「the tray, the bottles, the fan, the shelf all resolving at a glance」と在る）。
+  ⛔ **欠陥は、灯だけである。**
+- ⚠️ **そして、部屋が読めることの原因のひとつは、器具そのものである**——
+  **光源が枠に在れば、島の外にも光が届く。** ⛔ **ゆえに、器具が消えれば、
+  島の外は暗くなる見込みである**（**見込みであって、実測ではない**）。
+- ⛔ **原因は肯定の側である**——`LIGHT` と `Prompt` が、器具を名指す既定の1文
+  （`one dim red safelight`）を持っていた。⚠️ **それは `migenzo-art-board` の文である**（**実測**）。
+  ⚠️ **ゆえに肯定の側を書き換え、`Negative` に2節を足した**
+  （`no light source visible in frame` / `no safelight lamp in frame`）。
+  ⛔ **この2節は、この1枚には初めから1つも無かった**（**実測**: 0）。
+- ⚠️ **実測（2026-09-24）**: 仕様を直した6本（02・06-1・06-2・07・08・09）の焼き直しは、
+  **6本とも器具を写さなかった。** 逆に、この節を持たない仕様で焼かれた 01・05・12 は、
+  **3本とも写した。** ⛔ **否定形だけでは止まらない。**
+- ⛔ **この1本は「最初に焼く2枚」の1枚である**（`PLAN.md` §4-c 問い10——**11（山）と 13（白）**）。
+  ⚠️ **ゆえに、焼き直しでも、白そのものがこの画面を決める。**
 
 ## 記録との対応
 
