@@ -548,7 +548,8 @@ Full animation, not limited — and the form's native state is available to it. 
 ## Version
 
 `0.1.0` — **この動画は、まだ一度も生成していない。** これは設計であって、記録ではない。
-⚠️ **画像の側も同じである**（`specs/image/migenzo-ch03-seg01.md`——**この1本の画像は、まだ1枚も無い**）。
+⚠️ **画像の側の採用の記録は、画像仕様に在る**——`specs/image/migenzo-ch03-seg01.md`（**13本とも採用済み**、
+`PLAN.md` §4-f）。⛔ **この動画仕様は、画像の世代を写さない**（**写した分は古びる**）。
 
 ## Observed Problems
 

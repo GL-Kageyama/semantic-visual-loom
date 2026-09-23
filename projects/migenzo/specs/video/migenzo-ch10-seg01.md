@@ -986,8 +986,9 @@ Full animation, not limited — and this shot's change is the time itself, held 
 ## Version
 
 `0.1.0` — **この動画は、まだ一度も生成していない。** これは設計であって、記録ではない。
-⚠️ **画像の側は、1枚焼かれている**（`specs/image/migenzo-ch10-seg01.md`、`10_01_*`）——
-⛔ **それは候補であって採用ではない。** **この1本は、まだ1本も生成していない。**
+⚠️ **画像の側の採用の記録は、画像仕様に在る**——`specs/image/migenzo-ch10-seg01.md`（**13本とも採用済み**、
+`PLAN.md` §4-f）。⛔ **この動画仕様は、画像の世代を写さない**（**写した分は古びる**）。
+**この1本の動画は、まだ1本も生成していない。**
 
 ## Observed Problems
 

@@ -649,9 +649,8 @@ Full animation, not limited — and the form's native state is available to it. 
 ## Version
 
 `0.1.0` — **この動画は、まだ一度も生成していない。** これは設計であって、記録ではない。
-⚠️ **画像の側は、2枚焼かれ、第二世代が採用された**（**著者裁定、2026-09-24**——
-`specs/image/05_01_ChatGPT Image 2026年9月24日 01_23_50.png`）。
-⛔ **第一世代は、もう作業ディレクトリに無い**（実測、2026-09-24）。
+⚠️ **画像の側の採用の記録は、画像仕様に在る**——`specs/image/migenzo-ch05-seg01.md`（**13本とも採用済み**、
+`PLAN.md` §4-f）。⛔ **この動画仕様は、画像の世代を写さない**（**写した分は古びる**）。
 
 ## Observed Problems
 
