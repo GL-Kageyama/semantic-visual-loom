@@ -532,9 +532,12 @@ Full animation, not limited — and the form's native state is available to it. 
 
 - Duration: `8s`
 - References: `REF_LOCATION (暗室, HIGH) ／ REF_GEOGRAPHY (暗室.geography, MEDIUM) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (video-spec, HIGH) ／ REF_CHARACTER (無し) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
-- Attached: ⛔ **まだ確定していない——③ が決める。** ② の見込みは `暗室.base`・`暗室.geography`。
-  ⛔ **`引き出し` を、ここに置かない**——**その鍵は台帳に無い**（§6。`L8` が鳴る）。
-  ⛔ **人物の鍵を、ここに置かない。** ⚠️ **`L6` が「記録が無い」と鳴るのが、いまは正しい。**
+- Attached: ✅ **③ が決めた（2026-09-24）。** `暗室.base`・`暗室.geography`。
+  ⚠️ **宣言であって、記録ではない**（`skills/ledger/SKILL.md` 手順8）。
+  ⛔ **この欄は `shots/migenzo-ch03-seg01.yaml` の `reference_set` と同じものを並べる**（`L6`）。
+  ⛔ **`引き出し` を置かない**——**その鍵は台帳に無い**（`known_keys()`。引けば `L8` が鳴る）。
+  ⚠️ **引き出しは `暗室.geography` が運ぶ**——地理は「この部屋のどこに何が在るか」である。
+  ⛔ **人物の鍵を置かない**——**この枠に人物は居ない**（§18 `no person` / `no figure`）。
 - Format Variables: ⛔ **無し。** ⚠️ **この1本は技法カードを名乗らない**（素の `video-spec` である）——
   **ゆえに、`time-fold` の5つの変数のような欄が、この1本には無い。**
 - Temporal Structure: `3 beats, NON_UNIFORM — held 3s / sparse 3s / held 2s. No span is folded and no time is spent: the unevenness here is density, not the landing of a folded span`

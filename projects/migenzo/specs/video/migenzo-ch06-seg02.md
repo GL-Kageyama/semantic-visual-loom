@@ -38,6 +38,8 @@
 #   ⚠️ **原文のその像は、三人の「撮るな」という顔である**（`draft_06-4`）。
 #   ⛔ **その顔に鍵は無い**（`PLAN.md` §0-g）。**そして `bible.negative_base` が禁じているのは、
 #   娘の顔だけである。** ⚠️ **「像の上の顔」をどう扱うかは ③ が決める**（**05 と同じ形の申し送り**）。
+#   ✅ **③ の裁定（2026-09-24）——その顔に鍵を引かない**（**引く鍵が、台帳に無い**）。
+#   ⚠️ **ゆえに §19 の `Attached` に、この顔のための欄は無い**（`PLAN.md` §0-g。§19 を見よ）。
 #   ⚠️ **② の側の解き方は §7・§10・§16 に在る**——**枠が持つのは像の縁であり、中身は読めない。**
 
 # ⛔ **食い違い（1）——画像仕様の `Negative` のうち9節は、この動画には持ち込めない。**
@@ -337,6 +339,8 @@
 - REF_LEDGER: `projects/migenzo/ledger.yaml` (CRITICAL — ⚠️ **この1本は開示の変化点を持つ**)
   ⚠️ **この1本が引く鍵の見込みは5つである**——`暗室.base` / `暗室.geography` / `脂痕` / `絹.identity` /
   **`印画紙`**（トレイの液面——⚠️ **2026-09-23 の著者裁定で、紙はこの枠に在る**）。
+  ✅ **③ の裁定（2026-09-24）——確定した集合は6つである。** ⚠️ **③ が足したのは `未露光のフィルム`**
+  （**§18 の肯定文が、枠に置いている**）。⚠️ **確定は §19 の `Attached` である。**
   ⛔ **鍵の側に、食い違いは無い**——⚠️ **4つとも台帳に在る**
   （04 の `引き出し` のような欠けは、この1本には無い）。
   ⚠️ **そして、この1本は台帳の `disclosure` の行を1つ持つ**——`絹.能動: 本人起点になった`。
@@ -788,11 +792,18 @@ Full animation, not limited — and the form's native state is available to it, 
 
 - Duration: `10s`
 - References: `REF_LOCATION (暗室, HIGH) ／ REF_GEOGRAPHY (暗室.geography, HIGH) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (meaning-responsive, HIGH) ／ REF_CHARACTER (絹, HIGH — 手だけである) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
-- Attached: ⛔ **まだ確定していない——③ が決める。** ② の見込みは
-  `暗室.base`・`暗室.geography`・**`脂痕`**・**`絹.identity`**（**手だけである**）・
-  **`印画紙`**（トレイの液面——⚠️ **2026-09-23 の著者裁定で、紙はこの枠に在る**。§20 の食い違い(4)）。
-  ⚠️ **5つとも台帳に在る**——**04 の `引き出し` のような欠けは、この1本には無い**（§6）。
-  ⛔ **そして、`絹.identity` を引く以上、③ は「この1本に顔が無い」ことを負う**（§6 の申し送り(2)）。
+- Attached: ✅ **③ が決めた（2026-09-24）。** `暗室.base`・`暗室.geography`・`印画紙`・`脂痕`・
+  `未露光のフィルム`・`絹.identity`。
+  ⚠️ **宣言であって、記録ではない**（`skills/ledger/SKILL.md` 手順8）。
+  ⛔ **この欄は `shots/migenzo-ch06-seg02.yaml` の `reference_set` と同じものを並べる**（`L6`）。
+  ⚠️ **6つとも台帳に在る**——**04 の `引き出し` のような欠けは、この1本には無い**。
+  ⚠️ **③ が足したのは `未露光のフィルム` である**——**§18 の肯定文が、枠に置いている**
+  （`holding between the fingers one small dry flat strip of unexposed film`）。
+  ⛔ **フィルムの幅は、この作品で唯一測られる寸法である**——**この1本と `ch09-seg01`・
+  `ch10-seg01` の3本で、幅が読める**（09 の申し送り(2)。⚠️ 07 に在るのは缶であって、幅は読めない）。
+  ⛔ **`絹.identity` を引く以上、③ は「この1本に顔が無い」ことを負う**（② の申し送り(2)）——
+  ⚠️ **§18 の肯定形が既に支払っている**（`Her body and her face are not in this frame,
+  there is no second hand`）。**`絹.negatives` の3節も §18 に在る。**
 - Format Variables: `BEARER = 絹の手 ／ ANSWER = 像の縁に滲む脂痕 ／ DELAY = 遅れ ／ LIMIT = 絹の顔には届かない ／ DURATION = 10s`
   ⚠️ **この1本は技法カードを名乗る**（素の `video-spec` ではない）——
   **ゆえに、カードの5つの環境変数が、この欄に在る。**
@@ -889,6 +900,8 @@ Full animation, not limited — and the form's native state is available to it, 
 - ⚠️ **そして、この1本には申し送りが1つ在る**（§6）——
   **浮く像の顔に鍵が無い**（§0-g）。⛔ **`bible.negative_base` が禁じているのは、娘の顔だけである。**
   **「像の上の顔」をどう扱うかは ③ が決める**（**05 と同じ形の申し送り**）。
+  ✅ **③ の裁定（2026-09-24）——その顔に鍵を引かない**（**引く鍵が、台帳に無い**。
+  ⚠️ **ゆえに §19 の `Attached` は、絹の手だけを引く**——`絹.identity`）。
 
 ## Anticipated risks (to check in the first generation)
 

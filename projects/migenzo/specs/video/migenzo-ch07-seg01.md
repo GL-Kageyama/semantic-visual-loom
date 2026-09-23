@@ -311,6 +311,9 @@
   - ⛔ **技法カードを名乗らないので、環境変数は無い**（§19 の `Format Variables`）。
 - REF_CHARACTER: `絹` (HIGH)——
   ⛔ **ただし、錨は手だけである**（記録の申し送り。**手だけを引く経路は、この基盤には無い**）。
+  ✅ **③ の裁定（2026-09-24）——`絹.identity` を引かない。** ⚠️ **決め手は ② のショット記録の申し送りである**——
+  「⛔ **人物の鍵を、ここに置かない。** **設定画は顔を持つ**——**「手だけ」を引く経路は、この基盤には無い**」。
+  ⚠️ **この1本の §19 の `Attached` を見よ**（**同じ条件が 06-2・10・11 にも在り、そこでは引いている**）。
   ⚠️ **ゆえに §16・§18 は、絹の鍵の3節を運ぶ**（`no youthful face for 絹` /
   `no clean unstained hands` / `no smiling expression`）。
   ⛔ **娘の鍵と盗人の鍵は引かない**——**この1本に、あの二人は居ない**（§3）。
@@ -319,6 +322,8 @@
 - REF_LEDGER: `projects/migenzo/ledger.yaml` (CRITICAL — ⚠️ **この1本は開示の変化点を持つ**)
   ⚠️ **この1本が引く鍵の見込みは4つである**——`暗室.base` / `暗室.geography` /
   **`未露光のフィルム`** / **`絹.identity`**。
+  ✅ **③ の裁定（2026-09-24）——確定した集合は3つである。** ⛔ **`絹.identity` を引かない**
+  （**「手だけ」を引く経路がこの基盤に無い**。§6 の註）。⚠️ **確定は §19 の `Attached` である。**
   ⛔ **鍵の側の欠けは、`引き出し` の1つだけである**——
   ⚠️ **記録が③へ申し送り、画像仕様も③へ申し送り、この仕様も書かない**（**4文書が同じ欠けを指す**）。
   ⚠️ **そして、この1本は台帳の `disclosure` の行を1つ持つ**——`絹.信念: 亀裂`。
@@ -811,15 +816,23 @@ Full animation, not limited — and the form's native state is available to it, 
 ## Resolved Values
 
 - Duration: `9s`
-- References: `REF_LOCATION (暗室, HIGH) ／ REF_GEOGRAPHY (暗室.geography, HIGH) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (video-spec, HIGH — 素の video-spec である) ／ REF_CHARACTER (絹, HIGH — 手だけである) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
-- Attached: ⛔ **まだ確定していない——③ が決める。** ② の見込みは
-  `暗室.base`・`暗室.geography`・**`未露光のフィルム`**・**`絹.identity`**（**手だけである**）。
-  ⛔ **`引き出し` を、ここに置かない**——**その鍵は台帳に無い**（§6。`L8` が鳴る）。
+- References: `REF_LOCATION (暗室, HIGH) ／ REF_GEOGRAPHY (暗室.geography, HIGH) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (video-spec, HIGH — 素の video-spec である) ／ REF_CHARACTER (⛔ 無し——✅ **③ の裁定（2026-09-24）: `絹.identity` を引かない**。「手だけ」を引く経路がこの基盤に無い) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
+- Attached: ✅ **③ が決めた（2026-09-24）。** `暗室.base`・`暗室.geography`・`未露光のフィルム`。
+  ⚠️ **宣言であって、記録ではない**（`skills/ledger/SKILL.md` 手順8）。
+  ⛔ **この欄は `shots/migenzo-ch07-seg01.yaml` の `reference_set` と同じものを並べる**（`L6`）。
+  ⛔ **`引き出し` を置かない**——**その鍵は台帳に無い**（引けば `L8` が鳴る）。
   ⚠️ **台帳の語彙では、この物は `暗室.geography` の4点のひとつである**——
   **ゆえに、この1本は地理の鍵を1つ引くだけで足りる。**
-  ⛔ **そして、`絹.identity` を引く以上、③ は「この1本に顔が無い」ことを負う**（§6 の申し送り(1)）。
+  ⛔ **② の2つの文書が食い違っていた1点——`絹.identity`（手だけ）を引かない。**
+  ⚠️ **③ はショット記録の申し送りを採った**——**「手だけ」を引く経路がこの基盤に無い。**
+  ⚠️ **そして、この1本の §18 は顔を禁じている**（実測——`no face` / `no body` / `no figure`）——
+  **設定画の錨は顔であるから、引けばこの1本自身の否定と綱を引く。**
+  ⚠️ **ただし、この条件は 06-2・10・11 にも同じく在る**（実測）——**あの3本では ③ が設定画を引き、
+  §18 の側が「顔は枠に無い」ことを支払っている**。⛔ **ゆえに、この1本の決め手は §18 ではなく、
+  ② の申し送りである**（**§18 は、どちらに転んでも同じものを運ぶ**）。
   ⛔ **`未露光のフィルム` を引く以上、③ は「S04 と この1本のあいだに返却の画が無い」ことを負う**
-  （§6 の申し送り(2)）。
+  （② の申し送り(2)）。⚠️ **③ は、これを矛盾として扱わない**——**台帳が状態を持ち、
+  画面が持たないだけである**（台帳の側は `娘.一枚: 失われた` を持つ）。
 - Format Variables: ⛔ **無し。** ⚠️ **この1本は技法カードを名乗らない**（素の `video-spec` である）——
   **ゆえに、カードの環境変数は、この欄に無い。**
 - Temporal Structure: `3 beats, STRUCTURED / UNIFORM — held 3s / dense 3s / held 3s. The spans are equal and the densities are not: the middle three seconds hold the only action, and the two three-second spans around it are a room before anything has been attempted and a room after the hand has gone`

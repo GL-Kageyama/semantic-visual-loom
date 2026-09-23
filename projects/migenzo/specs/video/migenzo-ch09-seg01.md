@@ -385,6 +385,9 @@
   - ⛔ **技法カードを名乗らないので、環境変数は無い**（§19 の `Format Variables`）。
 - REF_CHARACTER: `絹` (HIGH)——
   ⛔ **ただし、錨は手と前腕だけである**（記録の申し送り。**手だけを引く欄は、この基盤には無い**）。
+  ✅ **③ の裁定（2026-09-24）——`絹.identity` を引かない。** ⚠️ **決め手は ② の申し送りである**——
+  **② の見込みが人物の鍵を挙げず、記録も「この枠に在るのは手と前腕だけである」と書く**（**01・07 と同じ形**）。
+  ⚠️ **この1本の §19 の `Attached` を見よ。**
   ⚠️ **ゆえに §16・§18 は、絹の鍵の3節を運ぶ**（`no youthful face for 絹` /
   `no clean unstained hands` / `no smiling expression`）。
   ⚠️ **そして、画像仕様は肯定の側で手を名指している**——
@@ -395,6 +398,8 @@
 - REF_LEDGER: `projects/migenzo/ledger.yaml` (CRITICAL)
   ⚠️ **この1本が引く鍵の見込みは5つである**——`最後の暗室.base` / `最後の暗室.geography` /
   **`印画紙`** / **`未露光のフィルム`** / **`絹.identity`**（**手と前腕だけである**）。
+  ✅ **③ の裁定（2026-09-24）——確定した集合は4つである。** ⛔ **`絹.identity` を引かない**
+  （**② の見込みが人物の鍵を挙げていない**——**01・07 と同じ形**）。⚠️ **確定は §19 の `Attached` である。**
   ⚠️ **`印画紙` を引く**——**部屋の `base` が、液のなかに置いている一枚である**（§5）。
   ⛔ **この読みは 2026-09-23 の著者裁定による**（**初稿は「枠に紙が無い」と読んでいた**）。
   ⛔ **`娘.identity` を引かない**——**娘は、まだ、何も持たない**（記録の申し送り(3)）。
@@ -909,16 +914,22 @@ Full animation, not limited — and the form's native state is available to it, 
 ## Resolved Values
 
 - Duration: `10s`
-- References: `REF_LOCATION (最後の暗室, HIGH) ／ REF_GEOGRAPHY (最後の暗室.geography, HIGH) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (video-spec, HIGH — 素の video-spec である) ／ REF_CHARACTER (絹, HIGH — 手と前腕だけである) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
-- Attached: ⛔ **まだ確定していない——③ が決める。** ② の見込みは
-  `最後の暗室.base`・`最後の暗室.geography`・**`印画紙`**・**`未露光のフィルム`**・
-  **`絹.identity`**（**手と前腕だけである**）。
-  ⛔ **`娘.identity` を、ここに置かない**——**娘は、まだ、何も持たない**（§6）。
-  ⚠️ **`印画紙` を、ここに置く**——**部屋の `base` が、液のなかに置いている一枚である**
-  （§5。**2026-09-23 の著者裁定で、この読みに決まった**——§20 の食い違い(4)）。
-  ⛔ **そして、この1枚は、11 の像の担体である**——**③ は、この2本で同じ白を引く。**
-  ⛔ **そして、`絹.identity` を引く以上、③ は「この1本に顔も体も無い」ことを負う**（§6 の申し送り(1)）。
-  ⛔ **`未露光のフィルム` を引く以上、③ はその幅を S11 と揃える**（§6 の申し送り(2)）。
+- References: `REF_LOCATION (最後の暗室, HIGH) ／ REF_GEOGRAPHY (最後の暗室.geography, HIGH) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (video-spec, HIGH — 素の video-spec である) ／ REF_CHARACTER (⛔ 無し——✅ **③ の裁定（2026-09-24）: `絹.identity` を引かない**。② の見込みが人物の鍵を挙げていない) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
+- Attached: ✅ **③ が決めた（2026-09-24）。** `最後の暗室.base`・`最後の暗室.geography`・
+  `未露光のフィルム`・`印画紙`。
+  ⚠️ **宣言であって、記録ではない**（`skills/ledger/SKILL.md` 手順8）。
+  ⛔ **この欄は `shots/migenzo-ch09-seg01.yaml` の `reference_set` と同じものを並べる**（`L6`）。
+  ⛔ **`娘.identity` を置かない**——**娘は、まだ、何も持たない**（② の申し送り(3)）。
+  ⛔ **② の2つの文書が食い違っていた1点——`絹.identity`（手と前腕だけ）を引かない。**
+  ⚠️ **③ はショット記録の申し送りを採った。** **そして、この1本の §18 は人を禁じている**
+  （実測——`no person` / `no figure` / `no second figure in the room`）——
+  **設定画の錨は顔であるから、引けばこの1本自身の否定と綱を引く。**
+  ⚠️ **`印画紙` を置く**——**部屋の `base` が液のなかに置いている一枚である**
+  （**2026-09-23 の著者裁定で、この読みに決まった**）。
+  ⛔ **そして、この1枚は 11 の像の担体である**——**③ は、この2本で同じ白を引く。**
+  ⛔ **`未露光のフィルム` を引く以上、③ はその幅を `ch10-seg01` と揃える**（② の申し送り(2)）。
+  ⚠️ **09 の記録が「S10・S11」と書くのは、この2本のことである**（**S10＝この1本**、
+  **S11＝`ch10-seg01`**）。
 - Format Variables: ⛔ **無し。** ⚠️ **この1本は技法カードを名乗らない**（素の `video-spec` である）——
   **ゆえに、カードの環境変数は、この欄に無い。**
 - Temporal Structure: `3 beats, STRUCTURED / UNIFORM — held 4s / transition 3s / held 3s. The spans are four, three and three seconds; the densities are not equal even where the spans are: nothing happens in the first four seconds, and nothing happens in the last three`

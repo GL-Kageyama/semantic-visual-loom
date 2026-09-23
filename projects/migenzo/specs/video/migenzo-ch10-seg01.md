@@ -965,12 +965,18 @@ Full animation, not limited — and this shot's change is the time itself, held 
 
 - Duration: `14s`
 - References: `REF_LOCATION (最後の暗室, HIGH) ／ REF_GEOGRAPHY (最後の暗室.geography, HIGH) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (transformation, HIGH — 技法カードである) ／ REF_CHARACTER (絹, HIGH ／ 娘, HIGH) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
-- Attached: ⛔ **まだ確定していない——③ が決める。** ② の見込みは
-  `最後の暗室.base`・`最後の暗室.geography`・**`未露光のフィルム`**・**`印画紙`**・
-  **`絹.identity`**（**手と前腕だけである**）・**`娘.identity`**（**この1本で初めて立つ**）。
-  ⛔ **`脂痕` を、ここに置かない**——**この1本に、代償の痕は無い**（§2）。
-  ⛔ **そして、`絹.identity` と `娘.identity` を引く以上、③ は「顔を持たない」ことを負う**（§6 の申し送り(1)(2)）。
-  ⛔ **`未露光のフィルム` と `印画紙` を引く以上、③ は幅を揃える**（§6 の申し送り(3)）。
+- Attached: ✅ **③ が決めた（2026-09-24）。** `最後の暗室.base`・`最後の暗室.geography`・
+  `未露光のフィルム`・`印画紙`・`絹.identity`・`娘.identity`。
+  ⚠️ **宣言であって、記録ではない**（`skills/ledger/SKILL.md` 手順8）。
+  ⛔ **この欄は `shots/migenzo-ch10-seg01.yaml` の `reference_set` と同じものを並べる**（`L6`）。
+  ⛔ **`脂痕` を置かない**——**この1本に、代償の痕は無い**。
+  ⛔ **`絹.identity` と `娘.identity` を引く以上、③ は「顔を持たない」ことを負う**（② の申し送り(1)(2)）。
+  ⛔ **そして、`娘.identity` を引く以上、③ は設定画の3つの宣言を写さないことも負う**（② の申し送り(3)）——
+  `no heavy film grain` / `no shallow depth of field` / `no yellow cast`。**写さない**
+  （**暗室の逆である。動画側の指定が勝つ**。実測——§18 の `Negative Prompt` にこの3節は無い）。
+  ⛔ **`no image on the unexposed film` を、この1本の禁制集合に置かない**（② の申し送り(4)）——
+  **置けば、この1本は自分の答えを禁じる**（**5秒目から、像は浮いている**）。
+  ⛔ **`未露光のフィルム` と `印画紙` を引く以上、③ は幅を揃える**（② の申し送り(3)）。
 - Format Variables: `FROM = 液面の上にかざされた未露光のフィルム ／ TO = レンズを内側から押さえる小さな手を載せた印画紙 ／ TRIGGER = 沈めること ／ KEEP = フィルムの幅と、手の大きさ ／ DURATION = 14s`
   ⚠️ **この1本は技法カードを名乗る**（素の `video-spec` ではない）——
   **ゆえに、カードの5つの環境変数が、この欄に在る**（`references/formats/transformation.md`）。

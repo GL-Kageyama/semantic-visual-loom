@@ -104,7 +104,7 @@
 
 ## 白い印画紙（the sheet）
 
-- Reference: `印画紙`（`ledger.props`。⚠️ **画像は添付しない**——③ が決める）
+- Reference: `印画紙`（`ledger.props`。⚠️ **画像は添付しない**——✅ **③ の裁定（2026-09-24）——`印画紙` を引く。引くのは台帳の定義であって、画像ではない**）
 - Appearance: **銀塩の白。** 液に沈み、**何も浮かんでいない。** 光をうっすら返すが、光ってはいない。
 - Behavior: **白が、段を踏んで減る。** 減った場所に、像が在る。
 - Continuity Requirements: **白は銀塩の白のままである**——赤にも琥珀にも染まらない
@@ -133,6 +133,8 @@
 
 - Reference: `絹.identity`（`migenzo-kinu-character-sheet`）——
   ⚠️ **添付するかは ③ が決める**（§6 の註、`PLAN.md` §4-c 問い14）。
+  ✅ **③ の裁定（2026-09-24）——引かない。** ⛔ **この1本に `絹.identity` は入らない**——
+  **主題は紙であり、手は縁にあるだけである**（§6 の註の `shots/` 側が正である。§19 `Attached`）。
 - Appearance: **紙の縁をつまむ、右手と前腕だけ。** 六十代後半の女の手。細い。
   現像液で、うっすら染まっている。
 - Behavior: **10秒のあいだ、ほとんど動かない。** 動くのは、最後に紙を引き上げるときだけである。
@@ -174,6 +176,7 @@
   **主題は紙である**」と書き、`specs/image/migenzo-ch01-seg01.md` は `attached`（見込み）に
   `絹.identity`・`絹.negatives` を置く。
   ⚠️ **どちらが正かは ③ が決める**（`PLAN.md` §4-c 問い14）。**この仕様は、片方を黙って採らない。**
+  ✅ **③ の裁定（2026-09-24）——`shots/migenzo-ch01-seg01.yaml` の側が正である。`絹.identity` を引かない**（§19 `Attached`）。
 
 # 7. NARRATIVE
 
@@ -460,12 +463,18 @@ Full animation, not limited — and the form's native state is available to it. 
 ## Resolved Values
 
 - Duration: `10s`
-- References: `REF_LOCATION (暗室, HIGH) ／ REF_GEOGRAPHY (暗室.geography, MEDIUM) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (impossible-camera, HIGH) ／ REF_CHARACTER (絹.identity, MEDIUM) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
-- Attached: ⛔ **まだ確定していない——③ が決める。** ⚠️ **② の2つの文書が、ここで食い違っている**
-  （§6 の註、`PLAN.md` §4-c 問い14）。② の見込みは `暗室.base`・`暗室.geography`・`印画紙`・`脂痕`
-  （`shots/migenzo-ch01-seg01.yaml`）と、`絹.identity`・`絹.negatives`
-  （`specs/image/migenzo-ch01-seg01.md`）。⛔ **この仕様は、片方を黙って採らない**——
-  **`L6` が「記録が無い」と鳴るのが、いまは正しい。**
+- References: `REF_LOCATION (暗室, HIGH) ／ REF_GEOGRAPHY (暗室.geography, MEDIUM) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (impossible-camera, HIGH) ／ REF_CHARACTER (⛔ 無し——✅ **③ の裁定（2026-09-24）: `絹.identity` を引かない**。**主題は紙である**) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
+- Attached: ✅ **③ が決めた（2026-09-24）。** `暗室.base`・`暗室.geography`・`印画紙`・`脂痕`。
+  ⚠️ **宣言であって、記録ではない**（`skills/ledger/SKILL.md` 手順8）——
+  **実際に何が付いたかは、テイクの側に在る。**
+  ⛔ **この欄は `shots/migenzo-ch01-seg01.yaml` の `reference_set` と同じものを並べる**（`L6` が突き合わせる）。
+  ⛔ **② の2つの文書が食い違っていた1点（問い14）の裁定——`絹.identity`・`絹.negatives` を引かない。**
+  ⚠️ **理由3つ**——① この1本の主題は紙であって絹ではない（`role: 質感`）。
+  ② **§18 の肯定文が、既に手を名指している**（`a woman's hand, late fifties, thin…`）——
+  **引き算の相手が無い。** ③ **設定画の錨は顔である**——**この枠には既に顔が在る**（紙の上の像）——
+  引けば**この1本が実測した「肖像への漂流」**へ寄る。
+  ⚠️ **画像仕様の側も、同じ裁定を既に持っている**（`specs/image/migenzo-ch01-seg01.md`、2026-09-23 著者裁定）。
+  ⛔ **禁制は失われない**——`絹.negatives` の3節は、この1本の §18 `Negative Prompt` に既に在る（実測）。
 - Temporal Structure: `4 beats, NON_UNIFORM — held 3s / sparse 2s / held 2s / dense 3s. The core = BEAT 4 at 7-10s (30%)`
 - Camera Events: `0 events. One continuous take; the viewpoint is not a place, and it does not change position`
 - Action Events: `ACT_HOLD → ACT_RISE → ACT_LIFT`

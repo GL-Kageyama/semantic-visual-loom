@@ -647,10 +647,13 @@ Full animation, not limited — and the form's native state is available to it. 
 
 - Duration: `8s`
 - References: `REF_LOCATION (暗室, HIGH) ／ REF_GEOGRAPHY (暗室.geography, MEDIUM) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (video-spec, HIGH) ／ REF_CHARACTER (無し) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
-- Attached: ⛔ **まだ確定していない——③ が決める。** ② の見込みは
-  `暗室.base`・`暗室.geography`・`印画紙`。
-  ⚠️ **3つとも台帳に在る**——**04 の `引き出し` のような欠けは、この1本には無い**（§6）。
-  ⚠️ **そして、`印画紙` の4節のうち1節は `bible.negative_base` と同じ字である**（§18 で1度だけ書いた）。
+- Attached: ✅ **③ が決めた（2026-09-24）。** `暗室.base`・`暗室.geography`・`印画紙`。
+  ⚠️ **宣言であって、記録ではない**（`skills/ledger/SKILL.md` 手順8）。
+  ⛔ **この欄は `shots/migenzo-ch06-seg01.yaml` の `reference_set` と同じものを並べる**（`L6`）。
+  ⚠️ **3つとも台帳に在る**——**04 の `引き出し` のような欠けは、この1本には無い**。
+  ⛔ **`未露光のフィルム` を置かない**（② の申し送り）——**`no developed image` をこの1本へ引けば、
+  現像済みの紙を撮るこの1本と衝突する。** ⚠️ **そして §18 に、この物を禁じる節が無い**（③ は発明しない）。
+  ⚠️ **`印画紙` の4節のうち1節は `bible.negative_base` と同じ字である**（§18 で1度だけ書いた）。
 - Format Variables: ⛔ **無し。** ⚠️ **この1本は技法カードを名乗らない**（素の `video-spec` である）——
   **ゆえに、`time-fold` の5つの変数のような欄が、この1本には無い。**
 - Temporal Structure: `3 beats, STRUCTURED / NON_UNIFORM — held 3s / transition 2s / held 3s. The spans are unequal and the densities are not uniform: the first beat is a quantity that can still be counted, and the third is the same quantity, uncountable`

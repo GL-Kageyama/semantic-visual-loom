@@ -887,12 +887,16 @@ Full animation, not limited — and the form's native state is available to it, 
 
 - Duration: `9s`
 - References: `REF_LOCATION (最後の暗室, HIGH) ／ REF_GEOGRAPHY (最後の暗室.geography, HIGH) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (video-spec, HIGH — 素の video-spec である) ／ REF_CHARACTER (⛔ 無し——人物の鍵をひとつも引かない) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
-- Attached: ⛔ **まだ確定していない——③ が決める。** ② の見込みは
-  `最後の暗室.base`・`最後の暗室.geography`・**`印画紙`**。
-  ⛔ **人物の鍵を、ここに置かない**——**③ は、これを欠落として扱わない**（§6 の申し送り(1)）。
-  ⛔ **`脂痕` を、ここに置かない**——**この1本に、代償の痕は無い**（§6）。
-  ⛔ **`未露光のフィルム` を、ここに置かない**——**11 で沈み、12 で白へ戻った**（§5）。
-  ⛔ **`印画紙` を引く以上、③ はこの白を 10・11・12 と同じ一枚として引く**（§6 の申し送り(2)）。
+- Attached: ✅ **③ が決めた（2026-09-24）。** `最後の暗室.base`・`最後の暗室.geography`・`印画紙`。
+  ⚠️ **宣言であって、記録ではない**（`skills/ledger/SKILL.md` 手順8）。
+  ⛔ **この欄は `shots/migenzo-ch12-seg01.yaml` の `reference_set` と同じものを並べる**（`L6`）。
+  ⛔ **人物の鍵を置かない**——**③ は、これを欠落として扱わない**（② の申し送り(1)）。
+  ⚠️ **13本のうち12本に人物が居る作品の、最後の1本が無人である。**
+  ⛔ **`脂痕` を置かない**——**この1本に、代償の痕は無い。**
+  ⛔ **`未露光のフィルム` を置かない**——**11 で沈み、12 で白へ戻った**。
+  ⛔ **`印画紙` を引く以上、③ はこの白を 10・11・12 と同じ一枚として引く**（② の申し送り(2)）——
+  ⚠️ **そして、この1本だけが `bible.negative_base` の「白」の節を、禁制としてでなく
+  内容として使う**（② の申し送り(3)。**§18 の肯定文が `nothing has come up on it` と名指している**）。
 - Format Variables: ⛔ **無し。** ⚠️ **この1本は技法カードを名乗らない**（素の `video-spec` である）——
   **ゆえに、カードの環境変数は、この欄に無い。**
   ⛔ **そして、この1本は `coexisting-realities` を名乗らない**（`PLAN.md` §0-h）——

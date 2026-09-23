@@ -824,11 +824,16 @@ Full animation, not limited — and the form's native state is available to it, 
 
 - Duration: `8s`
 - References: `REF_LOCATION (暗室, HIGH) ／ REF_GEOGRAPHY (暗室.geography, HIGH) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (video-spec, HIGH — 素の video-spec である) ／ REF_CHARACTER (絹, HIGH — 背だけである) ／ REF_CHARACTER (盗人, HIGH — 眼だけである) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
-- Attached: ⛔ **まだ確定していない——③ が決める。** ② の見込みは
-  `暗室.base`・`暗室.geography`・**`絹.identity`**（**背だけである**）・**`盗人.identity`**（**眼だけである**）。
-  ⛔ **`未露光のフィルム` を、ここに置かない**——**この枠に筒が無いからである**（§5）。
-  ⛔ **そして、`絹.identity` を引く以上、③ は「この1本に顔が無い」ことを負う**（§6 の申し送り(1)）。
-  ⛔ **`盗人.identity` を引く以上、③ は「眼だけが錨である」ことを負う**（§6 の申し送り(2)）。
+- Attached: ✅ **③ が決めた（2026-09-24）。** `暗室.base`・`暗室.geography`・`絹.identity`・`盗人.identity`。
+  ⚠️ **宣言であって、記録ではない**（`skills/ledger/SKILL.md` 手順8）。
+  ⛔ **この欄は `shots/migenzo-ch08-seg01.yaml` の `reference_set` と同じものを並べる**（`L6`）。
+  ⛔ **`未露光のフィルム` を置かない**——**この枠に筒が無いからである**。
+  ⛔ **`絹.identity` を引く以上、③ は「背中だけである」ことを負う**（② の申し送り(1)）——
+  ⚠️ **§18 の肯定形が既に支払っている**（実測——`the back of a woman in her late fifties fills
+  the near part of the frame… and nothing of her front`）。**否定形で書かれていない。**
+  ⛔ **`盗人.identity` を引く以上、③ は「眼だけが錨である」ことを、もう一度負う**（② の申し送り(2)）。
+  ⚠️ **§18 が支払っている**——`no readable face on the figure at the threshold` /
+  `no facial features on the figure` / `no child in frame`。
 - Format Variables: ⛔ **無し。** ⚠️ **この1本は技法カードを名乗らない**（素の `video-spec` である）——
   **ゆえに、カードの環境変数は、この欄に無い。**
 - Temporal Structure: `3 beats, STRUCTURED / UNIFORM — held 3s / transition 3s / held 2s. The spans are nearly equal and the densities are not: the middle three seconds carry no event at all and are the shot's body, and the last two carry the only action in the clip`

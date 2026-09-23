@@ -631,11 +631,20 @@ Full animation, not limited — and the form's native state is available to it. 
 
 - Duration: `9s`
 - References: `REF_LOCATION (暗室, HIGH) ／ REF_GEOGRAPHY (暗室.geography, MEDIUM) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (video-spec, HIGH) ／ REF_CHARACTER (絹.identity, MEDIUM ／ 盗人.identity, MEDIUM) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
-- Attached: ⛔ **まだ確定していない——③ が決める。** ② の見込みは
-  `暗室.base`・`暗室.geography`・`絹.identity`・`盗人.identity`。
-  ⚠️ **4つとも台帳に在る**——**04 の `引き出し` のような欠けは、この1本には無い**（§6）。
-  ⚠️ **そして、2つの人物の鍵は、それぞれ3節ずつの否定を連れてくる**（§6）——
-  **この1本は、その6節すべてが要る唯一の1本である。**
+- Attached: ✅ **③ が決めた（2026-09-24）。** `暗室.base`・`暗室.geography`・`絹.identity`・`盗人.identity`。
+  ⚠️ **宣言であって、記録ではない**（`skills/ledger/SKILL.md` 手順8）。
+  ⛔ **この欄は `shots/migenzo-ch05-seg01.yaml` の `reference_set` と同じものを並べる**（`L6`）。
+  ⚠️ **4つとも台帳に在る**——**04 の `引き出し` のような欠けは、この1本には無い**。
+  ⚠️ **② の2つの文書は、ここで食い違っていた**——**ショット記録の申し送りは `盗人.identity` だけを
+  挙げ、この仕様は `絹.identity` も挙げている。⛔ ③ はこの仕様の側を採った**——
+  **この1本で、絹の顔が初めて読めるからである**（§18 実測）。**画像仕様も同じ1本に設定画を置いている。**
+  ⛔ **2つの人物の鍵は、それぞれ3節ずつの否定を連れてくる**——**6節すべてが要る唯一の1本である。**
+  ⛔ **そして ③ は「眼だけが錨である」ことを負う**（② の申し送り）——**§18 が既に支払っている**
+  （`no facial features on the figure at the threshold` / `no child in frame` / `no child's body`）。
+  ⛔ **この1本の `forbidden_set` は空である。** ⚠️ **「禁制が無い」ではない**——
+  **娘の手と胴は禁制だが（§18 実測）、`娘` と書けば、この枠に持っている娘の眼まで禁じることになる。**
+  ⚠️ **この欄は「丸ごと」しか書けない**（`skills/ledger/SKILL.md` が名指す穴）。
+  **穴は `PLAN.md` §4-g に記録した。**
 - Format Variables: ⛔ **無し。** ⚠️ **この1本は技法カードを名乗らない**（素の `video-spec` である）——
   **ゆえに、`time-fold` の5つの変数のような欄が、この1本には無い。**
 - Temporal Structure: `3 beats, STRUCTURED — held 3s / transition 3s / held 3s. The spans are equal and the densities are not: the first beat is twenty years of not being looked at, and the third is the look arriving`

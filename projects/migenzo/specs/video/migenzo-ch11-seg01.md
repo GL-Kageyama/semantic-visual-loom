@@ -86,6 +86,8 @@
 #   ⛔ **記録は「どちらでも成立する。② は決めない」と書く。** ⚠️ **② は、その判断を動かさない。**
 #   ⛔ **だが、どちらに転んでも、この1本の §18 の側は同じである**——
 #   **小さな手は、像のなかのものとして、言葉で書かれている**（§3・§18）。
+#   ✅ **③ の裁定（2026-09-24）——引かない。** ⚠️ **理由は ③ が §19 に三つ書いた**——
+#   **① 主題は白であって手ではない。② この枠の娘は部屋に居ない。③ 設定画は顔を持つ**（下の §19 `Attached`）。
 
 # ⛔ **食い違い（3）——この1本の画像仕様は、光源を枠から締め出す節を持つ2枚のうちの1枚である。**
 #   ⚠️ **実測（2026-09-23）——13枚のうち、枠の内の光源そのものを名指して禁じる節を持つのは2枚だけである**
@@ -274,6 +276,8 @@
 
 - Reference: ⚠️ **`娘.identity` を引くかは ③ が決める**（記録の申し送り(1)）。
   ⛔ **② は決めない。** ⚠️ **どちらでも、この1本の §18 の側は同じである**（§6 の食い違い(2)）。
+  ✅ **③ の裁定（2026-09-24）——引かない**（理由3つは §19 `Attached`）。⚠️ **ゆえに、この欄は上の
+  `REF_CHARACTER` にも `娘` を置かない。**
 - Appearance: ⚠️ **小さな手である。** **レンズの丸いくちに、手のひらを平らに当てている。**
   ⛔ **開いた手のひらである。** **指を広げたままである。** **握らない。つかまない。爪を立てない。**
   ⚠️ **そして、レンズと指のあいだのいちばん広いすきまから、赤い光がひとすじ漏れている**——
@@ -349,11 +353,12 @@
   - ⛔ **ゆえに、§19 の `Format Variables` は空である**（§19）。
   - ⚠️ **1本前（`migenzo-ch10-seg01`）は `transformation` を名乗り、1本後
     （`migenzo-ch12-seg01`）は、また素の `video-spec` に戻る。**
-- REF_CHARACTER: `絹` (HIGH) ／ `娘` (⚠️ **③ が決める**)
+- REF_CHARACTER: `絹` (HIGH) ／ `娘` (✅ **③ の裁定（2026-09-24）——引かない**)
   - ⛔ **絹は、錨が4本の指だけである**（記録の申し送り。**手だけを引く欄は、この基盤には無い**）。
     ⚠️ **ゆえに §16・§18 は、絹の鍵の3節を運ぶ**（`no youthful face for 絹` /
     `no clean unstained hands` / `no smiling expression`）。
-  - ⛔ **娘は、この1本では、像のなかの小さな手だけである。** ⚠️ **引くかどうかは ③ が決める**（食い違い(2)）。
+  - ⛔ **娘は、この1本では、像のなかの小さな手だけである。** ✅ **③ の裁定（2026-09-24）——引かない**
+    （食い違い(2)。理由3つは §19 `Attached`。**手は言葉で書ける**——画像仕様が実測である）。
     ⛔ **そして、あの設定画の3節を写さない**（`no heavy film grain` / `no shallow depth of field` /
     `no yellow cast`）——**暗室の逆である**（下の申し送り(3)）。
   - ⛔ **盗人の鍵は引かない**——**この1本に、あの男は居ない。**
@@ -361,7 +366,8 @@
 - REF_LEDGER: `projects/migenzo/ledger.yaml` (CRITICAL — ⚠️ **この1本は変化弧の完結点を持つ**)
   ⚠️ **この1本が引く鍵の見込みは4つである**——`最後の暗室.base` / `最後の暗室.geography` /
   **`印画紙`** / **`絹.identity`**（**4本の指だけである**）。
-  ⚠️ **そして、`娘.identity` が加わるかは ③ が決める**（食い違い(2)）。
+  ⚠️ **そして、`娘.identity` が加わるかは ③ が決める**（食い違い(2)）——
+  ✅ **③ の裁定（2026-09-24）——加わらない。この1本が引く鍵は、この4つで確定である。**
   ⛔ **`脂痕` を引かない**——**この1本に、代償の痕は無い**（§2）。
   ⛔ **そして、この1本には `disclosure` の行がある**——`絹.変化弧: 完結` ＋ `negative: changed`。
 - ⛔ **食い違い（1）——画像仕様と、この §18 は、同じ集合ではない**（実測、2026-09-23）——
@@ -376,6 +382,8 @@
 - ⛔ **食い違い（2）——記録の申し送り(1)は、`娘.identity` を ③ に委ねている**（上の REF_CHARACTER）。
   ⛔ **② は決めない。** ⚠️ **どちらに転んでも、§18 の側は同じである**（小さな手は、像のなかのものとして、
   言葉で書かれている）。
+  ✅ **③ の裁定（2026-09-24）——引かない。** ⚠️ **ゆえに、§18 の側が同じであることは、
+  この裁定の理由ではない**（理由は §19 `Attached` の3つである）。
 - ⛔ **食い違い（3）——この1本の画像仕様は、光源を枠から締め出す節を持つ2枚のうちの1枚である**
   （実測、2026-09-23）。
   ⚠️ **基準は「光源そのものを名指して禁じる節の有無」である**——
@@ -696,7 +704,8 @@
 The palette fixed: the red of the safelight, the amber of the developer, the white of the unexposed paper, and the near-black of the surrounding room, the red and amber kept to their sources and never staining the whole frame. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, blown highlights on the white paper, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness.
 
 - Identity: ⚠️ **この1本の錨は、2つである**——**絹の4本の指**（`絹.identity`。**指だけである**）、
-  **そして、像のなかの小さな手**（`娘.identity`。**引くかは ③ が決める**。§6 の食い違い(2)）。
+  **そして、像のなかの小さな手**（`娘.identity`。✅ **③ の裁定（2026-09-24）——引かない**。§6 の食い違い(2)）。
+  ⚠️ **ゆえに、この1本で画像として引く錨は、絹の指だけである**（**小さな手は、言葉で書く**）。
   ⛔ **そして、この1本には絹の顔も体も無い。** **ゆえに、同一性を顔から読ませない**——
   ⚠️ **代わりに読ませるのは、指の年代と、薬品の染みである**（§3）。
   ⛔ **さらに、この1本では、2つの手の大きさが、そのまま同一性の証拠である**——
@@ -930,14 +939,25 @@ Full animation, not limited — and the form's native state is available to it, 
 ## Resolved Values
 
 - Duration: `8s`
-- References: `REF_LOCATION (最後の暗室, HIGH) ／ REF_GEOGRAPHY (最後の暗室.geography, HIGH) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (video-spec, HIGH — 素の video-spec である) ／ REF_CHARACTER (絹, HIGH — 4本の指だけである ／ 娘は ③ が決める) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
-- Attached: ⛔ **まだ確定していない——③ が決める。** ② の見込みは
-  `最後の暗室.base`・`最後の暗室.geography`・**`印画紙`**・**`絹.identity`**（**4本の指だけである**）。
-  ⚠️ **`娘.identity` を、ここに置くかは ③ が決める**（§6 の食い違い(2)）——**② は決めない。**
-  ⛔ **`脂痕` を、ここに置かない**——**この1本に、代償の痕は無い**（§2）。
-  ⛔ **`未露光のフィルム` を、ここに置かない**——**沈んだフィルムは、11 で像になった**（§5）。
-  ⛔ **そして、`絹.identity` を引く以上、③ は「この1本に顔も体も無い」ことを負う**（§6 の申し送り(1)）。
-  ⛔ **`印画紙` を引く以上、③ はこの白を 10・11 と同じ一枚として引く**（§6 の申し送り(3)）。
+- References: `REF_LOCATION (最後の暗室, HIGH) ／ REF_GEOGRAPHY (最後の暗室.geography, HIGH) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (video-spec, HIGH — 素の video-spec である) ／ REF_CHARACTER (絹, HIGH — 4本の指だけである ／ ✅ **③ の裁定（2026-09-24）: 娘は引かない**) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
+- Attached: ✅ **③ が決めた（2026-09-24）。** `最後の暗室.base`・`最後の暗室.geography`・
+  `印画紙`・`絹.identity`。
+  ⚠️ **宣言であって、記録ではない**（`skills/ledger/SKILL.md` 手順8）。
+  ⛔ **この欄は `shots/migenzo-ch11-seg01.yaml` の `reference_set` と同じものを並べる**（`L6`）。
+  ⛔ **② が ③ に委ねた1点（食い違い(2)）の裁定——`娘.identity` を引かない。**
+  ⚠️ **理由3つ**——① この1本の主題は白であって、手ではない。② **この枠に在る娘は
+  「紙の上の像のなかの手」であり、この部屋に居ない**（`identity` は部屋に立つ人を固定する欄である）。
+  ③ **設定画は顔を持ち、この1本の主題は「顔が出ないこと」である**（光が横切って、何も残さない）。
+  ⚠️ **実測がこれを支える**——**画像仕様は、この1枚の入力に娘の設定画を置かず、
+  それでも「像のなかの小さな手」を満たした**（`specs/image/migenzo-ch11-seg01.md`）。**手は言葉で書ける。**
+  ⛔ **`脂痕` を置かない**——**この1本に、代償の痕は無い。**
+  ⛔ **`未露光のフィルム` を置かない**——**沈んだフィルムは、10 で像になった**（§18 実測——
+  `no film canister` / `no roll of film` / `no film strip`）。
+  ⛔ **`絹.identity` を引く以上、③ は「この1本に顔も体も無い」ことを負う**（② の申し送り(1)）——
+  ⚠️ **§18 が支払っている**（`no face` / `no body` / `no person`）。
+  ⛔ **そして §18 は「紙の角の4本の指」と「像のなかの小さな手」を別々のものとして書いている**（② の申し送り(2)）。
+  ⛔ **`no fully rendered face of the daughter` は、この1本でも §18 に残る**（② の申し送り(3)。実測）。
+  ⛔ **`印画紙` を引く以上、③ はこの白を 10・11 と同じ一枚として引く**（② の申し送り(3)）。
 - Format Variables: ⛔ **無し。** ⚠️ **この1本は技法カードを名乗らない**（素の `video-spec` である）——
   **ゆえに、カードの環境変数は、この欄に無い。**
 - Temporal Structure: `3 beats, STRUCTURED / NON_UNIFORM — held 3s / transition 4s / held 1s. The spans are three, four and one seconds; the densities are not equal even where the spans are: nothing has started in the first three seconds, the crossing takes four, and the last second is the answer`

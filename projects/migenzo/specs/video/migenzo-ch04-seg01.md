@@ -258,6 +258,9 @@
 - REF_LEDGER: `projects/migenzo/ledger.yaml` (CRITICAL — ⚠️ **この1本は開示の変化点を持つ**)
   ⚠️ **そして、この1本が引く鍵の見込みは4つである**——
   `暗室.base` / `暗室.geography` / `脂痕` / **`引き出し`**。
+  ✅ **③ の裁定（2026-09-24）——確定した集合は3つである。** ⛔ **`引き出し` は引けない**
+  （**台帳に無い**——下の食い違い(1)。**ゆえに、この1本は地理の鍵を1つ引くだけで足りる**）。
+  ⚠️ **確定は §19 の `Attached` である**（**この「見込み」の行は ② の見込みであって、確定ではない**）。
 - ⛔ **食い違い（1）——申し送りの鍵 `引き出し` は、台帳に無い**（`PLAN.md` §4-c 問い17）。
   ⚠️ **実測（2026-09-23）**: `ledger.props` の鍵は3つである——`印画紙`・`未露光のフィルム`・`脂痕`。
   **`引き出し` は、そのどれでもない。** **台帳の語彙では、この物は `暗室.geography` の4点のひとつである。**
@@ -600,12 +603,15 @@ Full animation, not limited — and the form's native state is available to it. 
 
 - Duration: `7s`
 - References: `REF_LOCATION (暗室, HIGH) ／ REF_GEOGRAPHY (暗室.geography, MEDIUM) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (video-spec, HIGH) ／ REF_CHARACTER (無し) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
-- Attached: ⛔ **まだ確定していない——③ が決める。** ② の見込みは
-  `暗室.base`・`暗室.geography`・**`脂痕`**。
-  ⛔ **`引き出し` を、ここに置かない**——**その鍵は台帳に無い**（§6。`L8` が鳴る）。
-  ⚠️ **`脂痕` は置ける**——**その鍵は台帳に在る**（`props.脂痕`。
-  ⚠️ **S01 の画像が、この物の1度目を焼いている**——③ が同じ物として添付するかは、③ が決める）。
-  ⛔ **人物の鍵を、ここに置かない。** ⚠️ **`L6` が「記録が無い」と鳴るのが、いまは正しい。**
+- Attached: ✅ **③ が決めた（2026-09-24）。** `暗室.base`・`暗室.geography`・`脂痕`。
+  ⚠️ **宣言であって、記録ではない**（`skills/ledger/SKILL.md` 手順8）。
+  ⛔ **この欄は `shots/migenzo-ch04-seg01.yaml` の `reference_set` と同じものを並べる**（`L6`）。
+  ⛔ **`引き出し` を置かない**——**その鍵は台帳に無い**（引けば `L8` が鳴る）。
+  ⚠️ **`脂痕` を置く。② の問いへの ③ の答えは「S01 と同じ物である」**——
+  **根拠は台帳の側に在る**（`props.脂痕` の註が「**同じ物が、二箇所に現れる**（像の上と、
+  引き出しの内側）」と書き、**使う3本を S01・S04・S07 と名指している**）。
+  ⚠️ **S07＝`ch06-seg02` である**——**ゆえに、この1本は 脂痕 の2度目である。**
+  ⛔ **人物の鍵を置かない**——**この枠に人物は居ない**（§18 `no person` / `no figure`）。
 - Format Variables: ⛔ **無し。** ⚠️ **この1本は技法カードを名乗らない**（素の `video-spec` である）——
   **ゆえに、`time-fold` の5つの変数のような欄が、この1本には無い。**
 - Temporal Structure: `4 beats, NON_UNIFORM — held 2s / transition 2s / sparse 1s / held 2s. No span is folded and no time is spent: the unevenness here is density, and the shortest beat is the core`

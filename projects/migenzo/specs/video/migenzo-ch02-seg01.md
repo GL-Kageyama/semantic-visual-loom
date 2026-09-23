@@ -493,9 +493,12 @@ Full animation, not limited — and the form's native state is available to it. 
 
 - Duration: `9s`
 - References: `REF_LOCATION (暗室, HIGH) ／ REF_GEOGRAPHY (暗室.geography, MEDIUM) ／ REF_STYLE (documentary-photo, HIGH) ／ REF_FORMAT (time-fold, HIGH) ／ REF_CHARACTER (無し) ／ REF_SOURCE (bible.yaml, CRITICAL) ／ REF_LEDGER (ledger.yaml, CRITICAL)`
-- Attached: ⛔ **まだ確定していない——③ が決める。** ② の見込みは `暗室.base`・`暗室.geography`
-  （`shots/migenzo-ch02-seg01.yaml` と `specs/image/migenzo-ch02-seg01.md` が一致している）。
-  ⛔ **人物の鍵を、ここに置かない。** ⚠️ **`L6` が「記録が無い」と鳴るのが、いまは正しい。**
+- Attached: ✅ **③ が決めた（2026-09-24）。** `暗室.base`・`暗室.geography`。
+  ⚠️ **宣言であって、記録ではない**（`skills/ledger/SKILL.md` 手順8）。
+  ⛔ **この欄は `shots/migenzo-ch02-seg01.yaml` の `reference_set` と同じものを並べる**（`L6`）。
+  ⚠️ **② の2つの文書が一致していた1本である**（ショット記録と画像仕様が、同じ2つを挙げている）。
+  ⛔ **人物の鍵を置かない**——**この枠に在るのは影だけである**（**影は設定画では固定できない**）。
+  ⚠️ **そして `絹` を禁制にも置かない**——**影は彼女である**（禁制に置けば、自分の内容を禁じる）。
 - Format Variables: `PLACE = 暗室 ／ PASSES = 二十年 ／ SURVIVOR = この部屋の状態（現像トレイと赤い安全光） ／ RANGE = 二十年 ／ DURATION = 9s`
 - Temporal Structure: `3 beats, NON_UNIFORM — held 3s / transition 3s / held 3s. The span (twenty years) is spent unevenly: it lands in 3-6s`
 - Camera Events: `0 events. One continuous take; the frame is a place the camera is put, and it does not change position`
