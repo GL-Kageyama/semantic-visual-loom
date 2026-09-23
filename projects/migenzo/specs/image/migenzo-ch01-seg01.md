@@ -42,6 +42,10 @@
   ⚠️ **第一世代が在る**——`01_01_ChatGPT Image 2026年9月23日 03_02_10.png`（2026-09-23、著者が投入）。
   ⛔ **これは候補であって、採用ではない**（`CLAUDE.md`「**生成はサンプルである。**」）。**選ぶのは著者である。**
   ⛔ **そして、この1枚は焼き直しと裁定された**（2026-09-24、著者）——**下の実測の節を読む。**
+  ⚠️ **第二世代が在る**——`01_01_ChatGPT Image 2026年9月24日 01_16_51.png`（2026-09-24、著者が投入）。
+  **同じく候補であって、採用ではない。** ⛔ **そして、これも焼き直しと裁定された**（2026-09-24、著者）。
+  ⚠️ **第一世代は、もう作業ディレクトリに無い**（**実測**、2026-09-24——`git status` が `D` を出す）。
+  ⛔ **この削除は、この稿では触っていない**（ステージしていない）。
 
 ## 主題（英語・2枚のカードの穴・7欄）
 
@@ -61,9 +65,9 @@
 
 ## 投入する1本の文字列（英語・1段落目が `Prompt`、2段落目が `Negative`）
 
-A scene board for the first development of the novel 『未現像』 ("Undeveloped") — the master staging of one scene, in 16:9. In the darkroom of the art board — one windowless room, sunk into near-black except where the light reaches, whose only light is the red light of a safelight standing outside the frame and coming as far as the tray, and the warm amber glow of the developer — a wet silver-gelatin print is held just clear of the amber liquid by a hand that enters the frame at its near edge, the fingers pinching the corner, and in the print a face has come up: the outline first, then the eyes open and looking away to one side, then a mouth that closed on something it had started to say. Below the eye, on the image itself, one thumb's mark of grease is left and has not been wiped: a dull matte smudge lying darker than the silver around it, its surface unreadable, holding no light of its own. The hand's owner stands at the tray with her face outside the frame, and she does not look at the eyes that have come up — the picture looks at them and she does not, and that difference is the whole surface of this board. The white of the paper is silver-white and not the white of paper: it stays silver-white and is not stained red or amber. The blocking, the camera and the light fixed as the standard every cut of this scene must match: the tray and the print as the subject, the one hand at its edge, the safelight as the only light, the room otherwise still. One scene, one staging. `[絹: woman, late fifties, thin, short black hair faintly streaked with grey gathered loosely at the back, a calm sunken-eyed face, a black apron over a black blouse, hands faintly stained from developing chemicals]` — the figure, whose identity is locked to the frozen setting sheet. The one face that has come up in the print is a woman's face turned away, caught in the moment of a refusal: the head half-turned, the eyes already gone to one side, the mouth closed on the word it had started, and the same heavy grain lying over the skin as over everything else in the print. It is not the daughter. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, blown highlights on the white paper, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness. The palette is held to the red of the safelight, the amber of the developer and the silver-white of the paper, and the red and amber are kept to their sources and never stain the whole frame. The same place as the art board, the hand filling the space the art board left open. No typography anywhere in the frame.
+A scene board for the first development of the novel 『未現像』 ("Undeveloped") — the master staging of one scene, in 16:9. In the darkroom of the art board — one windowless room, sunk into near-black except where the light reaches, whose only light is the red light of a safelight standing outside the frame and coming as far as the tray, and the warm amber glow of the developer — a wet silver-gelatin print is held up out of the amber liquid by a hand that enters the frame at its near edge, the fingers pinching the corner — a woman's hand, late fifties, thin, a narrow wrist, long fingers, the nails pared short, the fingertips faintly stained from the developer, the tendons of the back of the hand lying quiet — the sheet lifted clear of the surface and dripping, the liquid in the tray below it still and unbroken, and in the print a face has come up: the outline first, then the eyes open and looking away to one side, then a mouth that closed on something it had started to say. Below the eye, on the image itself, one thumb's mark of grease is left and has not been wiped — the same thumb that holds the corner put it there — a dull matte smudge the width of a thumb's pad lying darker than the silver around it, its surface unreadable, holding no light of its own and catching none, and it is the only mark on the image. The hand's owner stands at the tray with her face outside the frame, and she does not look at the eyes that have come up — the picture looks at them and she does not, and that difference is the whole surface of this board. The white of the paper is silver-white and not the white of paper: it stays silver-white and is not stained red or amber, and the image stands in it without an edge of its own — the silver washing out into the white where the image stops, no even margin and no frame around it, a sheet still coming up and not a finished photograph. The blocking, the camera and the light fixed as the standard every cut of this scene must match: the tray and the print as the subject, the one hand at its edge, the safelight as the only light, the room otherwise still. One scene, one staging. `[絹: woman, late fifties, thin, short black hair faintly streaked with grey gathered loosely at the back, a calm sunken-eyed face, a black apron over a black blouse, hands faintly stained from developing chemicals]` — the figure, whose identity is locked to the frozen setting sheet. The one face that has come up in the print is the face of a woman who would not be photographed, caught in the instant of that refusal — and what the print holds is that instant and not a portrait: the neck turned away and the line of the shoulder standing out strong where it turned, a little of the room's red light pooled in the hollow between the neck and the shoulder, a single loose strand of hair hanging behind the ear and taking the light and going a little white, the eyes open and not on us, gone aside as if escaping something, and the mouth shut on what it had started to say, the lips just parted before they closed and the gap between them gone dark; the only light on the face is the room's red light, crossing it the way it crosses the tray, and the same heavy grain lies over the skin as over everything else in the print, so that the face is no cleaner than the paper around it. It is not the daughter. Heavy film grain, shallow depth of field, slight motion blur, imperfect handheld focus, blown highlights on the white paper, low contrast, faded warm Kodak Portra 400 and Fujifilm Superia color tones, 35mm documentary snapshot feel, nostalgic family-photo warmth against an unsettling stillness. The palette is held to the red of the safelight, the amber of the developer and the silver-white of the paper, and the red and amber are kept to their sources and never stain the whole frame. The same place as the art board, the hand filling the space the art board left open. No typography anywhere in the frame.
 
-no watermark, no on-screen subtitles, no background music, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no glossy photo paper, no digital image on the paper, no glowing or emitting paper, no visible fingerprint ridges, no forensic texture, no legible handprint, no small hand pressing the lens, no youthful face for 絹, no clean unstained hands, no smiling expression, no second figure, no face in the room, no face other than the one in the image on the paper, no open drawer, no second print, no hand touching the eyes in the image, no wiping of the mark, no light source visible in frame, no safelight lamp in frame, no portrait lighting, no glossy print surface, no bright evenly lit room
+no watermark, no on-screen subtitles, no background music, no clock, no window, no time of day, no directional light, no studio lighting, no bright daylight, no on-camera flash, no anime, no cel shading, no illustration, no 2D drawing, no smooth CGI, no 3D render, no digital polish, no perfect focus, no red wash over the whole frame, no amber wash over the whole frame, the white stays silver-white, not stained red or amber, no fully rendered face of the daughter, no name for the daughter, no image on the unexposed film, no lettering in frame, no readable text, no glossy photo paper, no digital image on the paper, no glowing or emitting paper, no visible fingerprint ridges, no forensic texture, no legible handprint, no small hand pressing the lens, no youthful face for 絹, no clean unstained hands, no smiling expression, no second figure, no face in the room, no face other than the one in the image on the paper, no open drawer, no second print, no hand touching the eyes in the image, no wiping of the mark, no light source visible in frame, no safelight lamp in frame, no portrait lighting, no beauty light on the face, no soft flattering light on the face, no retouched or smoothed skin, no bokeh, no blurred background inside the image, no soft-focus shoulder, no finished photograph, no frame around the image, no border around the image, no even margin around the image, no broad heavy hand, no sinewy or veined hand, no masculine hand, no sheet lying under the liquid, no liquid over the image, no glossy print surface, no bright evenly lit room
 
 ---
 
@@ -137,6 +141,44 @@ no watermark, no on-screen subtitles, no background music, no clock, no window, 
 - ⚠️ **この1枚の動画仕様は、灯の節を1つも持たない**（**実測**——動画仕様13本で、
   この綴りが0なのは 01 だけである）。**動画側へ足すかは、著者の裁定に預ける**——
   ⛔ **画像の仕様を直したことは、動画の仕様を直したことではない。**
+
+## ⛔ 実測（2026-09-24、第二世代 n=1）——灯は消え、肖像は残った
+
+- ⚠️ **焼かれた1枚**——`01_01_ChatGPT Image 2026年9月24日 01_16_51.png`。**見えたままを書く。**
+- ⛔ **（1）灯は、消えた。** **器具は枠のどこにも無い**（左上・上辺・右奥を拡大して確認）。
+  ⚠️ **そして部屋の奥が、今度は近黒である**——第一世代は棚が読めた。**`LOCATION` の `near-black` が守られた。**
+  ⛔ **赤は「光そのもの」として出ている**（トレイの縁に落ちる赤、液の左下にたまる赤）。
+  ⚠️ **実測**: 肯定の側を書き換えた焼き直しは、これで **7本とも器具を写していない**（6本＋この1枚）。
+- ⛔ **（2）像の女は、まだ肖像である。** ただし第一世代とは**外れかたが違う**——
+  ⚠️ **粒と口は、今回は仕様の側に在る**（**訂正**）。増感し脱色して拡大すると、
+  **肌の上に、像の他の面と同じ粗い粒が乗っている**（第一世代の「粒が乗っていない」は、今回は当たらない）。
+  そして**口は閉じている**（「弛んだ口」という読みは、赤い光と艶が作っていた）。
+  ⛔ **残るのは、光の宛がいと、面の解像である**——
+  **頬に整った光の勾配が乗っており**（`no portrait lighting` が在るのに、である）、
+  **像の面では顔だけが解像し、他はぼけている**。**ソースは逆を書いている**——
+  `draft_01-2_拒んだ女.md`「避けた先に、**肩の線が強く出ている**」。
+  ⚠️ **ゆえに肯定の側へ、ソースの語をそのまま戻した**——**首は避け、肩の線が強く立ち、
+  首と肩のあいだのくぼみに赤い光がたまり、耳のうしろの後れ毛が光をうけて、すこし白い。**
+- ⛔ **（3）紙が、仕上がった写真として出た**——**均一な白い縁が、像のまわりに在る**（実測、第二世代）。
+  ⚠️ **これは 10 の予備の「白い縁」と同じ族である**（11 は禁じ、10 は禁じていない）。
+  ⛔ **ゆえに、この1枚にも節を足した**（`no border around the image` / `no even margin around the image` /
+  `no frame around the image`）——⚠️ **11 の禁止族と同じ語である。****保留中の裁定に、実例が1つ増えた。**
+  そして**肯定の側も書き換えた**——**像は白へ溶け、自分の縁を持たない。**
+- ⛔ **（4）手が、絹の手でない。** **腱と血管が立ち、爪は短く四角く、幅がある**——
+  **男の手として読める**（実測、第二世代）。仕様は「thin、late fifties、現像液で薄く染まった手」。
+  ⚠️ **肯定の側に、絹の手の形を書いた**（細い手首・長い指・短い爪・指先の染み・**静かな甲の腱**）。
+- ⛔ **（5）紙が、まだ液から上がっていない**（実測、第二世代）——
+  **液面が紙の左側を横切っている。** 仕様の `ACTION` は「**just lifted it clear of the liquid**」。
+  ⚠️ **肯定の側を「液の上へ持ち上げられ、雫を垂らしており、下の液面は静かで破れていない」へ直した。**
+- ⛔ **（6）脂痕が、読めない。** 眼の下・像の上を、**拡大と増感の両方**で見た——
+  **鈍いよごれは、見つからない。**
+  ⚠️ **ただし、これは仕様どおりとも読める**——この痕は（2026-09-24 の裁定で）
+  「**鈍い無光沢のよごれ、面は読めない、自らは光を持たない**」と書かれており、**空欄に近い**。
+  ⛔ **そしてソースは逆を書いている**——`draft_01-3_脂痕.md`「**近づけば、模様の一本一本が
+  数えられるほどはっきりしている**」。⚠️ **この1点は、著者の裁定に預ける**——
+  **機構の欠陥ではなく、設計の分岐である**（痕を読ませるか、消すか）。
+  ⚠️ **この稿で足したのは、位置と大きさだけである**（**親指の腹ひとつ分、像の上に一つだけ、同じ親指が置いた**）。
+- ⚠️ **`no small hand pressing the lens` は、この焼き直しでも掛かる**（**実測**: レンズを押す手は、この1枚にも無い）。
 
 ## 記録との対応
 
