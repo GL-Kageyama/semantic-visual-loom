@@ -67,6 +67,7 @@ DOCS = (
     "projects/hitosara/media/README.md",
     "projects/hitosara/renders/README.md",
     "projects/habits-promo-chinatsu/renders/README.md",
+    "projects/migenzo/media/README.md",
     "projects/hitosara/takes/README.md",
     "projects/hitosara/timeline/README.md",
     "references/formats/video-spec.md",

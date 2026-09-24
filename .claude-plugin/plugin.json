@@ -1,6 +1,6 @@
 {
   "name": "semantic-visual-loom",
-  "version": "0.38.2",
+  "version": "0.38.3",
   "description": "A foundation that carries a story all the way to film. Footage is not generated — it is edited. State is placed outside the generation, in one production ledger holding continuity and disclosure together, and the reference set and the forbidden set are derived from that single point. Pre-flight verification fires the breakdowns in the design without running a single generation. The unit is the shot: one shot exists for one change, and length is a dependent variable.",
   "author": {
     "name": "GL-Kageyama"
