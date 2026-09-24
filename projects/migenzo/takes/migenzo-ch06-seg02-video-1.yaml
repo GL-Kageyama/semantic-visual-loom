@@ -1,0 +1,60 @@
+# migenzo-ch06-seg02 / 動画 / 1 — 10s / 30fps / 300 フレーム
+#
+# ⚠️ **測ったのは映像トラックである。** `measured.duration` は**映像**の尺であって、
+#    フォーマット全体の duration ではない——**音声が在ると、そちらに引っ張られる。**
+#    （この13本はどれも音声トラックを持ち、容器の尺は**映像より +0.025〜+0.035s 長い**。
+#      ⚠️ そして**映像の尺は13本とも、仕様 §1 が頼んだ尺と小数第3位まで一致した**。）
+# ⚠️ **`provider.model` は宣言であって実測ではない。** `PLAN.md` の著者の宣言が `WAN 3.0` だから
+#    そう書いてある。**このリポジトリは、それをファイルから確かめていない。**
+# ⚠️ **フレームレートは一致しなかった。** 仕様 §19 の `Output:` は13本とも
+#    `1920×1080, 24fps, 16:9 landscape, single clip` と言い、`bible.constants.video.frame_rate` も
+#    同じことを言うが、**戻ってきたのは13本とも 30fps である**（フレーム数÷尺で割り直した）。
+#    **幅・高さ・尺は合っている。外れたのはこの欄だけである。**
+# ⛔ **音声トラックが在る。しかも §18 の `Audio Prompt` は13本とも `Music: none` と言っている。**
+#    ⚠️ **測った限り、それは音楽ではない**——13本とも狭帯域の峰が0本で、低域に重い連続ノイズである
+#    （部屋の暗騒音の側）。**だが「無音を頼んで無音が返らなかった」ことは事実である。**
+# ⚠️ **参照画像を渡したか／プロンプトをそのまま投入したか／何回で出たか／seed**——
+#    **この記録は持っていない。記録が無いのである。**
+# ⛔ **採用は書いていない。** `adopted` は著者の欄であり、**著者はこの13本についてまだ裁定していない**——
+#    **`false` と書けば「却下」を意味する。書かないことが記録である。**
+#
+# ⛔ **この1本について見たこと——3つ同時に外れている。この13本で最も重い。**
+#   * ⛔ **カメラが寄る。** 仕様の `Camera Prompt` は
+#     「**The camera does not change position at any point in the ten seconds: no push, no pull,
+#     no pan, no tilt, no rack focus, no handheld, no shake, no cut.**」と書き、さらに
+#     「**a camera move here would be a statement about what the shot means**」と、
+#     **動かさないことがこの1本の意味そのもの**だと明言する。
+#     ⚠️ ところが返ってきた画は、広いトレイから痕の大写しまで寄っている。
+#   * ⛔ **[5-8s] の「像が現れはじめる」が出ていない。** 仕様は
+#     「**[5-8s] still holding on the surface as the image begins to come up at the edge of the frame**」
+#     と言うが、**最後のフレームでも、出ているのは濡れた滲みだけである。**
+#   * ⛔ **`Negative Prompt` の名指しを同時に踏んでいる**——**`no droplets`**・**`no bubbles`**・
+#     **`no foam`**・**`no splash`**、そして **`no close-up on the mark`**。
+#     最後の画はまさに痕の大写しで、雫と細かい泡が写っている。
+#   * ⚠️ **手が男性に読める**（仕様は絹の手を求める）。
+#   ⚠️ **位相相関の数値（最大歩幅 23.0px・累積 120.0px）は報告に使っていない**——
+#   **自己相似な内容では偽の 0.0px が出た。フレームの帯を見たほうが確かである。**
+#
+# ⛔ **絵を見る検査が、この基盤には無い。** 上の「見たこと」は 2026-09-25 に
+#    全解像のフレームを見て私（Claude）が書いたものであり、**機械の判定ではない。**
+take:
+  shot: migenzo-ch06-seg02
+  kind: video
+  index: 1
+  provider:
+    model: WAN 3.0
+  params:
+    source: specs/video/migenzo-ch06-seg02.md
+    source_version: "0.1.0"
+    duration: 10
+    aspect: "16:9"
+  file: "06_02_f5e777ce-c890-4834-966b-b8f448eb0489.mp4"
+  verdict:
+    machine:
+      measured:
+        width: 1920
+        height: 1080
+        frame_rate: 30
+        frames: 300
+        duration: 10.0
+        audio: true
