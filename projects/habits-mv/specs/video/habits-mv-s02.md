@@ -66,7 +66,7 @@
 
 ## 碓氷千夏の目
 
-- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/ChatGPT Image 2026年9月18日 20_29_36.png` ＋ `.../ChatGPT Image 2026年9月17日 21_56_32.png` （表情シート）. **Both are the source of this work's 碓氷千夏; the face is theirs and is not re-derived here.**
+- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/ChatGPT Image 2026年9月18日 20_29_36.png` ＋ `.../ChatGPT Image 2026年9月17日 21_56_32.png` （表情シート）＋ `.../碓氷千夏_キービジュアル.png`（註の無い一枚）。⚠️ **この三枚目は、凍結した二枚を組み直したものではない**（2026-09-28 著者作成）——**註の字を持たない一枚である。この作品の画面は字が読めてはならない。** **All three are the source of this work's 碓氷千夏; the face is theirs and is not re-derived here.**
 - Appearance: **外見の記述は出典に一行も無い**（方針 §5a）。**凍結した二枚が外見である。** ⚠️ **この1本が置くのは目の側だけである** — 眉、まぶた、睫毛、眼球の動き、そして行の上の光。**顔の残りは、この1本では主題ではない。**
 - Behavior: **視線が字を追い、行末で止まる。** ⚠️ **眉も口も動かさない** — **動くのは目だけである。** まばたきが一度だけ、行末のあとに来る。
 - Continuity Requirements: **Must preserve** — 凍結した二枚の顔。**May change** — 何も変えない。⚠️ **`s03` の口と `s04` の停止は、この同じ顔の続きである。**
@@ -90,7 +90,7 @@
 
 # 6. REFERENCES
 
-- REF_CHARACTER: 碓氷千夏 — `distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/ChatGPT Image 2026年9月18日 20_29_36.png` ＋ `distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/ChatGPT Image 2026年9月17日 21_56_32.png` (CRITICAL). **この1本は `identity` を添付する** — 目を置く1本である。⚠️ ただし**顔の全部ではない**：凍結した二枚のうち、**目の側がこの1本の主題である。**
+- REF_CHARACTER: 碓氷千夏 — `distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/ChatGPT Image 2026年9月18日 20_29_36.png` ＋ `distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/ChatGPT Image 2026年9月17日 21_56_32.png` ＋ `distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/碓氷千夏_キービジュアル.png` (CRITICAL). **この1本は `identity` を添付する** — 目を置く1本である。⚠️ ただし**顔の全部ではない**：凍結した二枚のうち、**目の側がこの1本の主題である。** ⚠️ **三枚目を加えた**（2026-09-28）——**凍結した二枚は改訂の箱と引き出し線の註を持ち、この作品の画面は字が読めてはならない**（`no legible text on any surface`）。**註の字を持たない一枚を、参照の側に置く。**
 - REF_FORMAT: `video-spec` — this defines the seven §18 slots
 - REF_STYLE: `luminous-anime` (HIGH)
 - REF_SOURCE: `projects/habits-mv/bible.yaml` and `projects/habits-mv/ledger.yaml` (CRITICAL)
@@ -287,11 +287,12 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 
 - Instance ID: `habits-mv-s02-9.015s-01`
 - Segment ID: `pre-chorus-1-1`
-- Specification Version: `0.2.0`
+- Specification Version: `0.3.0`
+- ⚠️ **`0.2.0` → `0.3.0` は、参照の側の変更である**（2026-09-28）——**運動の層は動いていない。** **三枚目（`碓氷千夏_キービジュアル.png`）を、この1本が渡す参照に加えた。** ⛔ **ゆえに次の投入は、テイク1と2つの点で違う**——**運動の層の差だけを見るなら、参照を持たない `s01` が対照である。**
 - Generation Date: `2026-09-28`
 - ⚠️ **版が `0.1.0` から動いた**（2026-09-28、運動の層の作り直し）。⛔ **`media/` に在る `02_…mp4` は `0.1.0` から出ている**
   （`takes/habits-mv-s02-video-1.yaml` の `params.source_version`）——**ゆえに `L25` の版の照合が
-  「投入 `0.1.0` → 現在 `0.2.0`」を言う。** **それが正しい。この1本は、いまの仕様の生成物ではない。**
+  「投入 `0.1.0` → 現在 `0.3.0`」を言う。** **それが正しい。この1本は、いまの仕様の生成物ではない。**
 - ⚠️ **日付の出所**: `media/` に置かれたファイルの mtime（2026-09-28 05:13）である——
   **投入した時刻そのものではない。** ⛔ **世代の記録は `takes/habits-mv-s02-video-1.yaml` に在る**——
   **この仕様は世代を写さない**（写した分は古びる）。
@@ -299,7 +300,7 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 ## Resolved Values
 
 - Duration: `9.015s`
-- References: `REF_CHARACTER (碓氷千夏 — 設定画＋表情シート, CRITICAL) ／ REF_FORMAT (video-spec) ／ REF_STYLE (luminous-anime, HIGH) ／ REF_SOURCE (bible.yaml ＋ ledger.yaml, CRITICAL)`
+- References: `REF_CHARACTER (碓氷千夏 — 設定画＋表情シート＋キービジュアル, CRITICAL) ／ REF_FORMAT (video-spec) ／ REF_STYLE (luminous-anime, HIGH) ／ REF_SOURCE (bible.yaml ＋ ledger.yaml, CRITICAL)`
 - Temporal Structure: `2 movements, NON_UNIFORM — 0-2.2s / 2.2-9.015s`. The held movement = `none`
 - Camera Events: `1 event as listed in §10`
 - Action Events: `ACT_READ → ACT_STOP`
@@ -310,9 +311,20 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 
 ## Version
 
-`0.2.0` — **運動の層を作り直した**（2026-09-28）。**生成はまだ `0.1.0` の1本だけである。**
+`0.3.0` — **運動の層を作り直した**（2026-09-28）。⚠️ **`0.2.0` → `0.3.0` で、渡す参照が二枚から三枚になった**（運動の層は動いていない）。**生成はまだ `0.1.0` の1本だけである。**
 **採用は、まだ選ばれていない**——**選ぶのは著者である**（`CLAUDE.md`「**生成はサンプルである。**」）。
 ⛔ **この節は仕様の側であって、世代の記録ではない**——**記録は `takes/habits-mv-s02-video-1.yaml` に在る。**
+
+### `0.2.0` → `0.3.0`（2026-09-28）——三枚目の参照
+
+**渡す参照を二枚から三枚にした。** 変わったのは §3 の `Reference`・§6 の `REF_CHARACTER`・§19 である。
+- **`碓氷千夏_キービジュアル.png` を加えた**（著者作成）——**`ledger.yaml` の `碓氷千夏.identity` が名乗る三枚目である。**
+- ⛔ **動機は衝突である。** **凍結した設定画は `転 出` の見出しと行数字を持つ**（設定画 ⑨ を実測、2026-09-28）
+  ——**`s03` のテイクでは、その印刷が読める日本語として戻った。参照集合が、この作品の禁制集合
+  （`no legible text on any surface`）とぶつかっている。**
+  **註の字を持たない一枚を参照の側に置くことは、この衝突を薄める**——⚠️ **これは私の判断であって、実測ではない。**
+- ⚠️ **凍結した二枚は動かしていない。** 三枚目は、その二枚と併せて渡す一枚である。
+- ⚠️ **`s01` はこの変更を受けていない**——**参照を1枚も持たない1本であり、次の投入で運動の層だけを見るための対照である。**
 
 ### `0.1.0` → `0.2.0`（2026-09-28）——運動の層
 

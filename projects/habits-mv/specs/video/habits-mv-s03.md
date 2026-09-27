@@ -67,7 +67,7 @@
 
 ## 碓氷千夏の口
 
-- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/ChatGPT Image 2026年9月18日 20_29_36.png` ＋ `.../ChatGPT Image 2026年9月17日 21_56_32.png` （表情シート）.
+- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/ChatGPT Image 2026年9月18日 20_29_36.png` ＋ `.../ChatGPT Image 2026年9月17日 21_56_32.png` （表情シート）＋ `.../碓氷千夏_キービジュアル.png`（註の無い一枚）。⚠️ **この三枚目は、凍結した二枚を組み直したものではない**（2026-09-28 著者作成）——**註の字を持たない一枚である。この作品の画面は字が読めてはならない。**
 - Appearance: **凍結した二枚が外見である。** ⚠️ **この1本が置くのは口の側だけである** — 上唇と下唇、口角、顎の下の影、そして唇の内側の暗さ。**息は出るが、声帯は動かない。**
 - Behavior: **字の形が、唇に一度ずつ現れては消える。** ⚠️ **途中で止まり、また始まる** — 全部を続けてなぞらない。**一度も音にならない。**
 - Continuity Requirements: **Must preserve** — 凍結した二枚の顔、`s02` の目と同じ人物であること。**May change** — 何も変えない。⚠️ **この口は `s04` で止まる。その止まり方が `s04` の主題である。**
@@ -91,7 +91,7 @@
 
 # 6. REFERENCES
 
-- REF_CHARACTER: 碓氷千夏 — `distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/ChatGPT Image 2026年9月18日 20_29_36.png` ＋ `distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/ChatGPT Image 2026年9月17日 21_56_32.png` (CRITICAL). **この1本は `identity` を添付する** — 口を置く1本である。⚠️ **表情シートを添付する意味が、この1本で最も大きい**：口は表情の側にある。
+- REF_CHARACTER: 碓氷千夏 — `distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/ChatGPT Image 2026年9月18日 20_29_36.png` ＋ `distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/ChatGPT Image 2026年9月17日 21_56_32.png` ＋ `distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/碓氷千夏_キービジュアル.png` (CRITICAL). **この1本は `identity` を添付する** — 口を置く1本である。⚠️ **表情シートを添付する意味が、この1本で最も大きい**：口は表情の側にある。 ⚠️ **三枚目を加えた**（2026-09-28）——**凍結した二枚は改訂の箱と引き出し線の註を持ち、この作品の画面は字が読めてはならない**（`no legible text on any surface`）。**註の字を持たない一枚を、参照の側に置く。**
 - REF_FORMAT: `video-spec` — this defines the seven §18 slots
 - REF_STYLE: `luminous-anime` (HIGH)
 - REF_SOURCE: `projects/habits-mv/bible.yaml` and `projects/habits-mv/ledger.yaml` (CRITICAL)
@@ -288,11 +288,12 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 
 - Instance ID: `habits-mv-s03-10.000s-01`
 - Segment ID: `pre-chorus-1-2`
-- Specification Version: `0.2.0`
+- Specification Version: `0.3.0`
+- ⚠️ **`0.2.0` → `0.3.0` は、参照の側の変更である**（2026-09-28）——**運動の層は動いていない。** **三枚目（`碓氷千夏_キービジュアル.png`）を、この1本が渡す参照に加えた。** ⛔ **ゆえに次の投入は、テイク1と2つの点で違う**——**運動の層の差だけを見るなら、参照を持たない `s01` が対照である。**
 - Generation Date: `2026-09-28`
 - ⚠️ **版が `0.1.0` から動いた**（2026-09-28、運動の層の作り直し）。⛔ **`media/` に在る `03_…mp4` は `0.1.0` から出ている**
   （`takes/habits-mv-s03-video-1.yaml` の `params.source_version`）——**ゆえに `L25` の版の照合が
-  「投入 `0.1.0` → 現在 `0.2.0`」を言う。** **それが正しい。この1本は、いまの仕様の生成物ではない。**
+  「投入 `0.1.0` → 現在 `0.3.0`」を言う。** **それが正しい。この1本は、いまの仕様の生成物ではない。**
 - ⚠️ **日付の出所**: `media/` に置かれたファイルの mtime（2026-09-28 05:20）である——
   **投入した時刻そのものではない。** ⛔ **世代の記録は `takes/habits-mv-s03-video-1.yaml` に在る**——
   **この仕様は世代を写さない**（写した分は古びる）。
@@ -300,7 +301,7 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 ## Resolved Values
 
 - Duration: `10.000s`
-- References: `REF_CHARACTER (碓氷千夏 — 設定画＋表情シート, CRITICAL) ／ REF_FORMAT (video-spec) ／ REF_STYLE (luminous-anime, HIGH) ／ REF_SOURCE (bible.yaml ＋ ledger.yaml, CRITICAL)`
+- References: `REF_CHARACTER (碓氷千夏 — 設定画＋表情シート＋キービジュアル, CRITICAL) ／ REF_FORMAT (video-spec) ／ REF_STYLE (luminous-anime, HIGH) ／ REF_SOURCE (bible.yaml ＋ ledger.yaml, CRITICAL)`
 - Temporal Structure: `2 movements, NON_UNIFORM — 0-1.8s / 1.8-10.000s`. The held movement = `none`
 - Camera Events: `1 event as listed in §10`
 - Action Events: `ACT_SHAPE → ACT_SILENCE`
@@ -311,9 +312,20 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 
 ## Version
 
-`0.2.0` — **運動の層を作り直した**（2026-09-28）。**生成はまだ `0.1.0` の1本だけである。**
+`0.3.0` — **運動の層を作り直した**（2026-09-28）。⚠️ **`0.2.0` → `0.3.0` で、渡す参照が二枚から三枚になった**（運動の層は動いていない）。**生成はまだ `0.1.0` の1本だけである。**
 **採用は、まだ選ばれていない**——**選ぶのは著者である**（`CLAUDE.md`「**生成はサンプルである。**」）。
 ⛔ **この節は仕様の側であって、世代の記録ではない**——**記録は `takes/habits-mv-s03-video-1.yaml` に在る。**
+
+### `0.2.0` → `0.3.0`（2026-09-28）——三枚目の参照
+
+**渡す参照を二枚から三枚にした。** 変わったのは §3 の `Reference`・§6 の `REF_CHARACTER`・§19 である。
+- **`碓氷千夏_キービジュアル.png` を加えた**（著者作成）——**`ledger.yaml` の `碓氷千夏.identity` が名乗る三枚目である。**
+- ⛔ **動機は衝突である。** **凍結した設定画は `転 出` の見出しと行数字を持つ**（設定画 ⑨ を実測、2026-09-28）
+  ——**`s03` のテイクでは、その印刷が読める日本語として戻った。参照集合が、この作品の禁制集合
+  （`no legible text on any surface`）とぶつかっている。**
+  **註の字を持たない一枚を参照の側に置くことは、この衝突を薄める**——⚠️ **これは私の判断であって、実測ではない。**
+- ⚠️ **凍結した二枚は動かしていない。** 三枚目は、その二枚と併せて渡す一枚である。
+- ⚠️ **`s01` はこの変更を受けていない**——**参照を1枚も持たない1本であり、次の投入で運動の層だけを見るための対照である。**
 
 ### `0.1.0` → `0.2.0`（2026-09-28）——運動の層
 
