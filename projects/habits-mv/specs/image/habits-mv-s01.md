@@ -29,6 +29,9 @@
 - 入力（`content`）: `bible.yaml` ＋ `ledger.yaml` ＋ `shots/habits-mv-s01.yaml` ＋
   **既存の出力**——`distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/prompt.md`
   （凍結した設定画の読み）と、同じ作品の既存の生成物（`media/` の3本の動画）
+- 添付する参照: **無い。** ⛔ **`specs/image/生成時参照イラスト/` に `s01` のフォルダは無い**
+  ——**この1本の `reference_set` は `碓氷千夏.negatives` だけを挙げ、`identity` を挙げないからである。**
+  ⚠️ **不在は、置き忘れではない。** 動画の側も同じである（`specs/video/生成時参照イラスト/` にも `s01` は無い）。
 - 投入する文: **下の節の1段落目が `Prompt`、2段落目が `Negative` である。**
   `chatgpt-image-2.5` へ投入する正典は、**この2段落そのものである。**
   ⛔ **但し、この2段落は `distill-essence-engine` の出力ではない**——**この稿で、2枚のカードの穴と
