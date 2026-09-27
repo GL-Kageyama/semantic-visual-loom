@@ -142,11 +142,18 @@ def resolve(value):
     受け火 V2 の6本が `運動（停止）` である。素の `運動` だけを登録すると、
     **この6本が綴りの違いだけで違反になる。** それは検出ではなく、
     目録の側の遅れである。**だからパターンを引いて確かめる。**
+
+    ⚠️ **文字列かどうかを、目録を引く前に見る。** `ROLES` は `dict` なので、
+    `value in ROLES` は**引ける側を先に要求する**——`role` がリストのとき、
+    この1行が `TypeError: unhashable type: 'list'` を投げ、**走り全体がそこで死ぬ。**
+    ⚠️ **`role` は形の層では文字列である**（`shot-record.schema.json`）——ゆえに
+    リストが来るのは**形の違反であって、この層の判断ではない。**
+    **形が報告し、この層は引けないと言う。走りは死なない。**
     """
-    if value in ROLES:
-        return value, None, None
     if not isinstance(value, str):
         return None, None, f"`role` が文字列でない（{type(value).__name__}）。"
+    if value in ROLES:
+        return value, None, None
     m = QUALIFIED.match(value)
     if not m:
         return None, None, (f"`{value}` は目録に無い。"

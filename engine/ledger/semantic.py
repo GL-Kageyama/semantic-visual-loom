@@ -3848,6 +3848,421 @@ def check_format_reference(project, repo_root=None):
     return out
 
 
+# ---------------------------------------------------------------- 曲が時間の主であるとき
+
+#: `bible.time_source` の語彙。**語彙を持つのは、それを読む者である**——
+#: `enum` にしない理由は `check_song_length` を見よ。
+TIME_SOURCES = ("story", "song")
+
+
+def _seconds(value):
+    """尺の値を秒に直す。**読めなければ `None`。**
+
+    ⚠️ **`None` は 0 ではない。** 読めない尺を 0 として足せば、**合計が静かに縮み、
+    足りない作品が緑になる。** 読めないことは、読めないと言う呼び手が要る。
+
+    ⚠️ **緩い検出器をそのまま使う**（`_num`）。`shot.duration` の書き方は
+    `8s` / `8.0` / `8` / `2.5s` と既に揺れており（実測）、**この層が増やす語彙は無い。**
+    厳しくすれば、**揺れの側を落とすのではなく、正しい作品を落とす。**
+    """
+    return _num(value)
+
+
+def _song_of(project):
+    """`bible` の内側と、`song` を返す。**門はここ1箇所である。**"""
+    bib = (getattr(project, "bible", None) or {}).get("bible") or {}
+    song = bib.get("song")
+    return bib, (song if isinstance(song, dict) else {})
+
+
+def _fps_of(project):
+    """作品定数の `frame_rate`（`24fps`）から fps を引く。**引けなければ `None`。**
+
+    ⚠️ **引けなければ秒で測る。** 規律は `L25` と同じである——
+    **1フレームは鳴ってはならない。**
+    """
+    bib, _ = _song_of(project)
+    video = ((bib.get("constants") or {}).get("video") or {})
+    return _num(video.get("frame_rate"))
+
+
+def _off(want, got, project):
+    """差を、フレーム数（引ければ）か秒で返す。`(差, 許容, 単位)`。"""
+    fps = _fps_of(project)
+    if fps:
+        return round(abs(want - got) * fps, 6), 1.0, "フレーム"
+    return round(abs(want - got), 6), 0.05, "秒"
+
+
+def _coverage_entries(project):
+    """`ledger.song_coverage` を、読めた対応の列として返す。`(対応の列, 読めなかった数)`。
+
+    ⚠️ **形の層と二重に報告しない。** 読めない対応はここでは黙って落とし、
+    **数だけを返す**——呼び手が「何件を数えていないか」を註に書く。
+    **報告しない範囲は、通った範囲と同じに見える。**
+    """
+    raw = (getattr(project, "ledger", None) or {}).get("song_coverage")
+    entries, unread = [], 0
+    if not isinstance(raw, list):
+        return entries, unread
+    for e in raw:
+        if not isinstance(e, dict):
+            unread += 1
+            continue
+        line = e.get("line")
+        section = e.get("section")
+        if not isinstance(line, str) and not isinstance(section, str):
+            unread += 1
+            continue
+        shots = e.get("shots")
+        shots = ([s for s in shots if isinstance(s, str)]
+                 if isinstance(shots, list) else [])
+        entries.append({"line": line if isinstance(line, str) else None,
+                        "section": section if isinstance(section, str) else None,
+                        "shots": shots})
+    return entries, unread
+
+
+def _song_index(song, entries):
+    """曲と対応から、**両方の層が読む索引**を作る。
+
+    ⚠️ **覆いの意味を、1箇所で決める。** `L34` と `L36` が別々に数えれば、
+    **同じ記録について2つの層が違う答えを出す**——片方が「覆われている」と言い、
+    もう片方が「覆われていない」と言う。**それは、どちらかが誤りである以上に、
+    読者にどちらを信じるかを決めさせない。**
+
+    | 鍵 | 何 |
+    |---|---|
+    | `lines` | 行ID → 行（`section` を持つ） |
+    | `sections` | 節ID → 節 |
+    | `by_line` | 行ID → その行を名指した対応 |
+    | `by_section` | 節ID → **節を名指した**対応（行からは引かない） |
+    | `by_sec_all` | 節ID → 節に属する対応**すべて**（節の名指しと、その節の行への対応の和） |
+    | `empty` | ショットを1本も持たない対応 |
+
+    ⚠️ **`by_section` と `by_sec_all` は別である。** 前者は「**節ごと受けた**」という
+    宣言であり、後者は「その節に属するショット」である。**畳むと、行ごとに受けた節と、
+    節ごとに受けた節が同じ顔になり、`L36` の規則（行が覆われている ∨ 節ごとの対応が在る）が
+    読めなくなる。**
+    """
+    lines, sections = {}, {}
+    for ln in (song.get("lines") or []):
+        if isinstance(ln, dict) and isinstance(ln.get("id"), str):
+            lines[ln["id"]] = ln
+    for sc in (song.get("sections") or []):
+        if isinstance(sc, dict) and isinstance(sc.get("id"), str):
+            sections[sc["id"]] = sc
+
+    by_line, by_section, by_sec_all, empty = {}, {}, {}, []
+    for e in entries:
+        if not e["shots"]:
+            empty.append(e)
+        if e["line"] is not None:
+            by_line.setdefault(e["line"], []).append(e)
+            sec = (lines.get(e["line"]) or {}).get("section")
+            if isinstance(sec, str):
+                by_sec_all.setdefault(sec, []).append(e)
+        if e["section"] is not None:
+            by_section.setdefault(e["section"], []).append(e)
+            by_sec_all.setdefault(e["section"], []).append(e)
+    return lines, sections, by_line, by_section, by_sec_all, empty
+
+
+def check_song_length(project):
+    """L34 — **尺の合計が、曲と一致するか。**
+
+    ```
+    Σ(sections[].until - sections[].at)  ==  song.duration      (± フレーム)
+    Σ(節の中のショットの duration)          ==  節の尺            (± フレーム)
+    ```
+
+    ⚠️ **`bible.time_source: song` の作品にだけ掛かる。** 既定（`story`）の作品は
+    この検査を受けない——**既存の作品のショットの尺の合計が、何かと一致する必要は無い。**
+
+    ⚠️ **語彙を持つのは、それを読む者である。** `time_source` を `enum` にしない——
+    形の層が「知らない語だ」と鳴らすと、**この層の門も同じ欠陥でもう一度鳴る。**
+    そしてもっと悪い形がある——**門が静かに閉じる場合である**:
+    `enum` を外したうえでここが黙れば、**知らない語を書いた作品は、検査を1つも受けずに
+    緑に見える。** だから語彙はここが持ち、**知らない語は違反として鳴らす。**
+
+    ⚠️ **空なら落とす。** `duration` が無い・0以下・`sections` が空——どれでも緑にならない。
+    `0 == 0` は通ってしまう（memory: 「検算器は『相手が空なら落ちる』を入れる。
+    `0==0` で通った実例あり」）。
+
+    ⚠️ **この層が確かめないこと**（穴である）——**`song.duration` が、`song.master` の
+    実物の尺であること。** この層は**書いてある数を読むだけ**である。実物を開く層は
+    まだ無い。ゆえに**「曲は179.320秒である」と作品が書けば、この層はそれを信じる。**
+    """
+    out = []
+    bib, song = _song_of(project)
+    src = str(bib.get("time_source") or "story").strip()
+
+    if src not in TIME_SOURCES:
+        out.append(finding("L34", src,
+                           f"`bible.time_source` が `{src}` である——**知らない語である。**"
+                           f"既定は `story`、曲が尺を持つのは `song` のときだけである。"
+                           "⚠️ **知らない語を、黙って既定として読まない**——"
+                           "**読み違えた門は、閉じているのと同じである。**"))
+        return out
+
+    if src != "song":
+        # ⚠️ **曲を書いているのに、時間の主として名指していない作品を、黙って通さない。**
+        #    名指さなければこの層も `L36` も動かない——**動かないことは、見えない。**
+        #    註にするのは、これが欠陥ではなく**まだ決めていないこと**でありうるからである。
+        if song:
+            out.append(finding("L34", "story",
+                               "`bible.song` を書いているのに、`bible.time_source` が "
+                               "`song` でない——**ゆえに、この走りは曲の尺を1つも見ていない。**"
+                               "⚠️ **既定は `story` である。** 名指さなければ、"
+                               "曲は**註のために在るだけ**になる。",
+                               severity="note"))
+        return out
+
+    if not song:
+        out.append(finding("L34", "song",
+                           "`bible.time_source: song` と言っているのに、`bible.song` が無い。"
+                           "**時間の主を名指した者が、主を持って来ていない**——"
+                           "この層は、突き合わせる相手を1つも持たない。"))
+        return out
+
+    dur = _seconds(song.get("duration"))
+    if dur is None or dur <= 0:
+        out.append(finding("L34", "song.duration",
+                           "`bible.song.duration` が無いか、0以下である"
+                           f"（読んだ値: `{song.get('duration')!r}`）。"
+                           "**曲の尺が無ければ Σ は 0 になり、0 == 0 で緑になる**——"
+                           "ゆえにここで落とす。**「曲が何秒か分からない」は、"
+                           "「合っている」ではない。**"))
+        return out
+
+    secs = song.get("sections")
+    if not isinstance(secs, list) or not secs:
+        out.append(finding("L34", "song.sections",
+                           f"`bible.song.sections` が無いか、空である。"
+                           f"**曲は {dur:g} 秒在ると言っているのに、区切りが1つも無い**——"
+                           "Σ は 0 になり、0 == 0 で緑になる。ゆえにここで落とす。"))
+        return out
+
+    # ---- 節の尺の合計。
+    total, unreadable = 0.0, 0
+    for sec in secs:
+        a = _seconds(sec.get("at")) if isinstance(sec, dict) else None
+        b = _seconds(sec.get("until")) if isinstance(sec, dict) else None
+        if a is None or b is None or not isinstance(sec.get("id"), str):
+            unreadable += 1
+            continue
+        total += b - a
+
+    if unreadable:
+        # ⚠️ **読めない節を 0 秒として足さない。** 足せば合計が静かに縮み、
+        #    **足りない作品が緑になる。** ゆえに合計そのものを言わない。
+        #    （形の層が、必須の欄として報告している——**二重に報告しない。**）
+        out.append(finding("L34", f"{unreadable}節",
+                           f"`id` / `at` / `until` が読めない節が {unreadable} 本ある——"
+                           "**ゆえに、この走りは合計を1つも突き合わせていない。**"
+                           "⚠️ **読めない節を 0 秒として足さない**——"
+                           "足せば、合計が静かに縮み、足りない作品が緑になる。"
+                           "（形の層が報告している。）",
+                           severity="note"))
+        return out
+
+    off, tol, unit = _off(total, dur, project)
+    if off > tol:
+        out.append(finding("L34", f"{len(secs)}節",
+                           f"節の尺の合計が `song.duration` と食い違っている——"
+                           f"節の合計は {total:g} 秒、曲は {dur:g} 秒である"
+                           f"（差は {off:g}{unit}、許容は1{unit}）。"
+                           "⚠️ **曲を切らない**（設計 §1.1）——"
+                           "**合わないのは、たいてい区切りのほうである。**"))
+    else:
+        out.append(finding("L34", f"{len(secs)}節",
+                           f"節の尺の合計 {total:g} 秒を `song.duration` {dur:g} 秒と"
+                           f"突き合わせた（差は {off:g}{unit}、許容は1{unit}）。",
+                           severity="note"))
+
+    # ---- 節の中のショットの尺。
+    entries, _ = _coverage_entries(project)
+    lines, sections, by_line, by_section, by_sec_all, empty = _song_index(song, entries)
+
+    shot_secs = {}
+    for sid, ents in by_sec_all.items():
+        for e in ents:
+            for s in e["shots"]:
+                shot_secs.setdefault(s, set()).add(sid)
+    crossed = {s for s, ss in shot_secs.items() if len(ss) > 1}
+
+    compared, skipped = 0, []
+    for sec in secs:
+        sid = sec["id"]
+        a, b = _seconds(sec.get("at")), _seconds(sec.get("until"))
+        shots = sorted({s for e in (by_sec_all.get(sid) or []) for s in e["shots"]})
+        if not shots:
+            skipped.append(f"`{sid}`:覆いが無い")
+            continue
+        if any(s in crossed for s in shots):
+            # ⚠️ **節を跨いだショットは、どちらの尺にも数えてしまう。**
+            #    ゆえに突き合わせない——**跨っていることを言い、数を言わない。**
+            skipped.append(f"`{sid}`:ショットが節を跨いでいる")
+            continue
+        tot, bad = 0.0, []
+        for s in shots:
+            d = _seconds((project.shots.get(s) or {}).get("duration"))
+            if d is None:
+                bad.append(s)
+                continue
+            tot += d
+        if bad:
+            skipped.append(f"`{sid}`:尺が読めないショットが {len(bad)} 本")
+            continue
+        compared += 1
+        o, t, u = _off(tot, b - a, project)
+        if o > t:
+            out.append(finding("L34", f"`{sid}`",
+                               f"節の尺と、その中のショットの尺の合計が食い違っている——"
+                               f"ショットは {tot:g} 秒、節は {b - a:g} 秒である"
+                               f"（差は {o:g}{u}、許容は1{u}）。"
+                               f"数えたショット: {', '.join(shots)}。"
+                               "⚠️ **曲は既に在る。削れるのはショットのほうである。**"))
+
+    if compared:
+        out.append(finding("L34", f"{compared}節",
+                           f"{compared} 本の節で、中のショットの尺の合計を節の尺と"
+                           f"突き合わせた（許容は1{unit}）。",
+                           severity="note"))
+    if skipped:
+        out.append(finding("L34", f"{len(skipped)}節",
+                           f"{len(skipped)} 本の節は、ショットの尺を突き合わせていない——"
+                           + "／".join(skipped)
+                           + "。⚠️ **突き合わせていないことを、突き合わせた顔にしない。**"
+                           "（覆いの穴は `L36` が報告する。）",
+                           severity="note"))
+    return out
+
+
+def check_song_coverage(project):
+    """L36 — **歌詞行が覆われているか。**
+
+    ```
+    ∀ line ∈ song.lines       : ∃ cov (cov.line == line.id)
+                                ∨ ∃ cov (cov.section == line.section)
+    ∀ section ∈ song.sections : その節の行がすべて覆われている
+                                ∨ ∃ cov (cov.section == section.id)
+    ```
+
+    ⚠️ **この層が鳴らすもの**: 覆われていない行（**歌われているのに映っていない行**）、
+    存在しない行・節・ショットを指す対応、**対応が在るのにショットが1本も無い**もの、
+    歌詞を持たない区間（イントロ・間奏・アウトロ）を誰も受けていないこと。
+
+    ⚠️ **同じ行を2回覆うのは、落とさない。註にする。** サビの反復を**別のショットで
+    受ける**のは正しい——**ゆえにこれは誤りではない**（`L18` の `key_image` と同じ扱い）。
+
+    ⚠️ **この層が鳴らさないもの**: **歌詞と画面が同じことを言っているか（＝説明しているか）。**
+    これが MV で最も多い失敗であり、**機械では測れない。**
+    ⚠️ **そして、この層が見るのは「対応が在るか」だけである**——**対応が在ることは、
+    そのショットが良いということではない。**
+
+    ⚠️ **「対応が在るのにショットが1本も無い」を、形の層に任せない。**
+    `shots` は形も `required` で見る——**だが、空の配列は形では鳴らない。**
+    そして**空の配列は、覆った顔をしている。** ゆえにここも鳴らす。
+    （`L23` が、形も必須で見ている `shot.duration` を鳴らすのと同じ規律である。）
+    """
+    out = []
+    bib, song = _song_of(project)
+    entries, unread = _coverage_entries(project)
+
+    if not song and not entries and not unread:
+        return out                      # 曲を持たない作品。この層の相手ではない。
+
+    if not entries:
+        out.append(finding("L36", "song_coverage",
+                           "曲を持っているのに、`ledger.song_coverage` が無いか空である。"
+                           "**歌詞は、歌われている間ずっと観客へ何かを渡している**——"
+                           "**画面がそれを1行も受けないなら、歌と画面は別の作品である。**"))
+        return out
+
+    lines, sections, by_line, by_section, by_sec_all, empty = _song_index(song, entries)
+    known = set(project.order())
+
+    # ---- 対応が指す先。
+    for e in entries:
+        where = e["line"] or e["section"] or ""
+        if e["line"] is not None and e["line"] not in lines:
+            out.append(finding("L36", e["line"],
+                               f"`song_coverage` が行 `{e['line']}` を指しているが、"
+                               "`bible.song.lines` にその `id` が無い。"
+                               "**存在しない行を覆った対応は、何も覆っていない。**"))
+        if e["section"] is not None and e["section"] not in sections:
+            out.append(finding("L36", e["section"],
+                               f"`song_coverage` が節 `{e['section']}` を指しているが、"
+                               "`bible.song.sections` にその `id` が無い。"
+                               "**存在しない節を覆った対応は、何も覆っていない。**"))
+        if not e["shots"]:
+            out.append(finding("L36", where,
+                               f"対応 `{where}` が在るのに、ショットが1本も無い。"
+                               "**覆った顔をした空である**——"
+                               "**対応が在ることは、覆ったことではない。**"))
+        for s in e["shots"]:
+            if s not in known:
+                out.append(finding("L36", s,
+                                   f"`song_coverage` がショット `{s}` を名指しているが、"
+                                   "`shots/` にそのショットが無い。"
+                                   "**名指された先が無ければ、その時間は誰も負っていない。**"))
+
+    # ---- 覆われていない行。
+    for lid, ln in lines.items():
+        cov = by_line.get(lid) or []
+        if len(cov) > 1:
+            out.append(finding("L36", lid,
+                               f"行 `{lid}` を {len(cov)} 本の対応が覆っている。"
+                               "⚠️ **これは誤りではない**——サビの反復を**別のショットで受ける**のは"
+                               "正しい。註にするのは、**同じ行が2箇所で別々に扱われていることが、"
+                               "記録のどこからも見えないからである。**",
+                               severity="note"))
+            continue
+        if cov:
+            continue
+        sec = ln.get("section")
+        if isinstance(sec, str) and by_section.get(sec):
+            continue                    # 節ごとに受けた対応が、この行を覆っている
+        out.append(finding("L36", lid,
+                           f"行 `{lid}` を覆う対応が無い——**歌われているのに、映っていない。**"
+                           + (f"（節 `{sec}` にも節ごとの対応が無い。）"
+                              if isinstance(sec, str) else "")))
+
+    # ---- 歌を持たない区間。
+    for sid in sections:
+        if by_section.get(sid):
+            continue
+        if any(ln.get("section") == sid for ln in lines.values()):
+            continue                    # 行の側が受けている。穴は行の層が鳴らす
+        out.append(finding("L36", sid,
+                           f"節 `{sid}` に歌詞行が無く、節ごとの対応も無い——"
+                           "**歌が何も言わない区間である**（イントロ・間奏・アウトロ）。"
+                           "**ここは画面が全部を負う**——覆われていないと数えない。"))
+
+    # ---- まとめ。**宛先は「確かめた本数」である**（`L27` と同じ位置）。
+    n_cov = sum(1 for lid, ln in lines.items()
+                if by_line.get(lid) or by_section.get(ln.get("section")))
+    head = (f"歌詞行 {len(lines)} 行・節 {len(sections)} 節・対応 {len(entries)} 件を読んだ。"
+            f"覆われている行は {n_cov}/{len(lines)} である。"
+            "⚠️ **この層が見るのは「対応が在るか」までである**——"
+            "**歌詞と画面が同じことを言っているかは、機械では測れない。**")
+    if not lines:
+        head += ("⚠️ **歌詞行が1行も無い**——ゆえにこの走りは、節ごとの対応だけで"
+                 "数えている。**空の行を並べる形にしないこと**（設計 §2-1）。")
+    if unread:
+        head += (f"⚠️ **読めなかった対応が {unread} 件ある**——"
+                 "**形の層が報告する。この層は1件も数えていない。**")
+    stray = sorted(s for s in known
+                   if not any(s in e["shots"] for e in entries))
+    if stray:
+        head += (f"⚠️ **どの対応からも名指されていないショットが {len(stray)} 本ある**"
+                 f"（{', '.join(stray[:4])}{' ほか' if len(stray) > 4 else ''}）——"
+                 "**曲の時間の外に在るショットである。**")
+    out.append(finding("L36", f"{len(entries)}件", head, severity="note"))
+    return out
+
+
 # ---------------------------------------------------------------- まとめ
 
 CHECKS_SHOT = (check_unit, check_one_place, check_one_time, check_move,
@@ -3892,6 +4307,12 @@ def run(project, schema_dir=None, repo_root=None):
     #    `REF_FORMAT`）。**`L20` と `L31` を離すなと書いたのと同じ理由である。**
     out += check_format_reference(project, repo_root=repo_root)
     out += check_mode_demands(project)
+    # ⚠️ **曲を読む2層は隣に置く。** 同じ `bible.song` と `ledger.song_coverage` を読み、
+    #    相手だけが違う——あちらは尺、こちらは覆い。**離すと、片方だけが直される。**
+    # ⚠️ **`CHECKS_SHOT` には入れない。** あれは**ショットごと**であり、
+    #    **曲は作品ごとである**——1本のショットに曲の尺を負わせる形は無い。
+    out += check_song_length(project)
+    out += check_song_coverage(project)
     if schema_dir:
         out += check_field_source(schema_dir)
         out += check_field_destination(schema_dir)

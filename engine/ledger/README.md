@@ -63,6 +63,8 @@ in order to fire on "`before` and `after` are the same" — but **JSON Schema ca
 | **L31** | **The home and §6 do not name the same style** — `bible.style` against the video specification's §6 `REFERENCES`. ⚠️ **Needs no cards; both sides are in this repository.** 3 spellings, 2 vocabularies, **folded to one name before comparing** | "Do the Home and §6 Name the Same Style" below |
 | **L32** | **The format card §6 names cannot be read, or declares no `## Negative`** — the video specification's §6 `REF_FORMAT`. ⚠️ **Three outcomes: no card directory is a note; a missing card is a violation; a card missing its section is a violation.** ⚠️ **Here it fires by default — the neighbour holds no `video-spec` card; one environment variable clears it** | "Can the Format Card Be Read, and Does It Declare a `Negative`" below |
 | **L33** | **§18's `Camera Prompt` forbids a gesture the style card offers** — the style card's `## Motion character`, against a slot the generator actually receives. ⚠️ **The comparison words are quoted from the card** (`skills/staging/cards.yaml`); **a quote that no longer matches the card is a note, not a firing** | "Does §18's `Camera Prompt` Forbid a Gesture the Card Offers" below |
+| **L34** | **The song's length does not add up** — the sections' sum against `song.duration`, and each section's shots against that section. ⚠️ **`bible.time_source` decides whether this layer reads at all** — a work whose time is the story's may carry a `song` and is told *this layer saw none of its length* | "Does the Song's Length Add Up" below |
+| **L36** | **A sung line is covered by no shot** — and its converse: a coverage entry that names nothing, names no shot, or names a shot that is not there. ⚠️ **A section the lyric never enters must be covered too**, or the picture has an ownerless stretch | "Is Every Sung Line Covered" below |
 
 **L2, L3 and L4 are transplants.** Applied to all 57 segments of Gozen-niji,
 a checker that scored **recall 2/2 and 0 false positives** went in just as it was.
@@ -1072,6 +1074,90 @@ rack; this shot spends neither*), and then the slot holds an occurrence that is 
 `SVL_FORMATS_DIR` for the sibling layers). **Without them this repository's own cards are not read**,
 and this layer falls to the "cannot be confirmed" note **that `L20` also reports**.
 
+### L34 — does the song's length add up
+
+⚠️ **In an MV the song is the work, and the picture answers to it.** So **the song is not cut, and
+nothing is faded out** — and then **something has to add the picture up against it.**
+`L23` compares **one shot's** `duration` against §1's `Duration:` — **per shot.** A work can be right
+shot by shot and still **end eight seconds before the music does**, and **no layer compared a sum
+against the song.**
+
+**It reads two things** — `bible.song` (given) and `ledger.song_coverage` (decided).
+⚠️ **The song alone does not license it to fire.** `bible.time_source` is the door:
+
+| `bible.time_source` | A `song` is present | What happens |
+|---|---|---|
+| **a word this layer does not know** | either way | **a violation.** ⚠️ **The vocabulary is the reader's** — an unknown word is a word **nobody reads**, and **a door that is closed and a door spelled wrong look the same from outside** |
+| **`story`** (the default) | **yes** | **a note** — *this run saw none of the song's length.* **A work may hold a song and still take its time from the story**, and then it is not wrong — **it was not read** |
+| **`story`** | no | **silent.** There is nothing to read and nothing to say |
+| **`song`** | **no** | **a violation.** **The work named the music as its timekeeper and then brought no music** |
+
+**Then, in this order** — and **each gate is here because without it the next one passes on nothing:**
+
+| Gate | Fires when | Because |
+|---|---|---|
+| **The length is readable** | `song.duration` is absent, or ≤ 0 | ⚠️ **A missing duration is not zero.** Read it as 0 and the sum below becomes 0, and **0 == 0 passes** — the layer goes green on a song it never measured |
+| **There are sections** | `sections` is absent or empty | The sum of nothing is also 0. **Two doors, because one of them will be opened later** |
+| **The sections are readable** | an `id`, `at` or `until` cannot be read | ⚠️ **It reports a note and stops.** **An unreadable section is never added as 0 s** — that would turn *I could not read this* into *this section is empty*, **which is a statement about the song** |
+| **The sections sum to the song** | Σ(`until` − `at`) differs from `duration` by more than one frame | The song is one thing. **A table that does not reach its end is missing a stretch of the song** |
+| **Each section's shots sum to the section** | the shots a section covers differ from that section's length by more than one frame | **A section is a length.** If its shots are shorter, **the picture stops before the music does** |
+
+⚠️ **The last gate has holes, and it names them.** Shots shared across two sections, sections nobody
+covers, and shots whose own `duration` cannot be read are **skipped** — and **one note reports how
+many sections were compared and how many were skipped**, because **a layer that compared three of
+eight sections and said nothing looks exactly like a layer that compared eight.**
+
+⚠️ **A shot's length is counted once.** A chorus sung four times may be carried by **one long take**,
+and **a shot named by two sections is not two shots.**
+
+⚠️ **It never opens `song.master`.** The file's name sits in the record and **no layer reads it** — so
+**`duration` is never checked against the real thing.** ⚠️ **And which of the delivered files
+`duration` is taken from is not ruled**: one delivery came back as four files whose lengths differ
+(`.wav`/`.m4a` 179.320, `.mp3` 179.352, `.mp4` 179.200). ⚠️ **And the spread crosses the tolerance.**
+`.m4a` against `.mp3` is **0.768 frames** — inside the 1-frame gate; `.m4a` against `.mp4` is
+**2.880 frames**, and `.mp3` against `.mp4` is **3.648** — outside it. ⚠️ **So the choice of file can
+move the verdict, and the record does not say which one was used.**
+
+⚠️ **The lyric track does not carry the intro.** Suno's timed lyric cues begin at the **first sung
+word**, not at the first sound — measured on one take, the first marker is `[Pre-Chorus]` at
+**8.059 s**, so **a section table transcribed from the markers is 8.059 s short of a 179.320 s song,
+and this gate fires.** ⚠️ **That is not a false positive.** **The table must begin where the sound
+begins, not where the words begin** — and the intro is a section the picture has to fill.
+
+### L36 — is every sung line covered
+
+`L34` adds the time up. **Nothing asked whether the song was answered.** A line can sit in
+`bible.song.lines` and be carried by no shot at all, and **the record would not say so.**
+
+**It is silent only when there is nothing to be silent about** — no `song`, no coverage, and nothing
+unreadable. **A song with an empty `song_coverage` fires once**: *the lyric is handing the audience
+something the whole time it is sung, and if the picture takes none of it, **the song and the picture
+are two different works.***
+
+⚠️ **Empty is not covered.** An entry that names no shot **fires** — **it is an emptiness wearing a
+covered face** — even though the shape layer also requires `shots`. (The same discipline as `L23`,
+which fires on a `shot.duration` the shape layer also requires: **the empty array does not ring in the
+shape layer, and an empty array is exactly what looks covered.**)
+
+**It fires when** — a coverage entry names a line or a section that is not in `bible.song`; an entry
+names no shot; an entry names a shot that is not in `shots/` (**the picture is not there, so nobody
+is carrying that time**); **a sung line is covered by nothing** — excused when that line's own section
+carries a `section:` entry; a section that holds no lyric line and has no `section:` entry either
+(**the intro, the break, the outro** — *the song says nothing here, so the picture carries all of it,
+and nobody wrote who does*).
+
+**It reports a note instead when** — **the same line is covered more than once.**
+⚠️ **That is not an error**: carrying a repeated chorus with **different shots** is right. The note
+exists because **the same line being handled in two places is invisible from anywhere else in the
+record.** The closing note also gives **the counts** (lines, sections, entries, `n_cov/lines`), warns
+when **there are no lyric lines at all**, carries **the number of entries this layer could not read**,
+and names **shots no entry ever points at** — *shots outside the song's time.*
+
+⚠️ **What it cannot see: whether the picture says the same thing as the lyric.** That is the most
+common failure in an MV and **it is not machine-measurable** — which is why `lines[].text` has no
+reader. ⚠️ **And what it does see is only that a mapping exists** — **a mapping existing is not the
+shot being good.** ⚠️ **Do not put an uncheckable rule in a checkable field.**
+
 ### ⚠️ Firing Against a Running Artifact
 
 | Check | Ukebi V2 (30 takes) | What it is saying |
@@ -1091,6 +1177,8 @@ and this layer falls to the "cannot be confirmed" note **that `L20` also reports
 | L31 | **0** (1 note) | the home and §6 fold to the same name in all 30. ⚠️ **Ukebi V2 is the work that names the style by path** — the note says so (30 specifications, spelling `A/B`, vocabulary = a path). **Both vocabularies are real, and one work writes each.** |
 | L32 | **1** (1 note) | **all 30 specifications name the format card `video-spec`, and the neighbor holds no such card.** ⚠️ **This is `a-2`, not `a-1`** — the place was found, the card was not — and the note distinguishes them: "30 specifications, 30 naming, 1 card, **0 of them readable**." ⚠️ **The naming side is where the hole is declared, and this is the first layer to read it.** |
 | L33 | **0** (1 note) | ⚠️ **The style is not in the comparison table** — `soft-cel-anime` is not one of this repository's 16 cards, so **the note says the camera was not compared.** **Nothing fired** — and **a quiet layer here is not the same as a satisfied one.** |
+| L34 | **0** | **No work declares `bible.time_source: song`**, so there is nothing to add up — **not even a note.** ⚠️ **This check has fired only inside the self-test.** ⚠️ **A layer whose counterpart does not exist is silent, and silence looks exactly like passing** — which is why the door is at `time_source` and not at `song`. |
+| L36 | **0** | Same — **no work carries a song, so this layer has no lyric to ask about.** ⚠️ **Its silence here is the very shape it exists to break**: *a sung line nobody answers* is what it is for, and **here there is no line.** ⚠️ **The one thing that would look green and be wrong — an empty `song_coverage` on a work that has a song — cannot arise while no work has a song.** |
 
 ⚠️ **`L31` reads only the home and the specification** — **`L20` and `L22` need the style cards,
 and the cards are not in this repository.** So **two green rows here can mean different things**:
@@ -1261,7 +1349,10 @@ What it can say is —
 | **Guarantees** | **The home and the specification name the same style.** | **L31** |
 | **Guarantees** | **The format card §6 names can be read, and declares a `Negative`** — so `Negative Prompt`'s second term is not empty | **L32** |
 | **Guarantees** | **§18's `Camera Prompt` does not forbid a gesture the style card offers** — unless the same slot writes the decline as a decline | **L33** |
-| **Guarantees** | **It is not broken.** L0–L33 fire before generation, and everything that fired can be explained | all |
+| **Guarantees** | **The song's length adds up** — the sections reach `song.duration`, and each section's shots reach that section. ⚠️ **Only for a work naming the song as its time source** (`bible.time_source: song`) | **L34** |
+| **Guarantees** | **Every sung line is answered by a shot, and every stretch where the song says nothing has an owner** — ⚠️ **among the shots the record lists.** Whether the picture says the same thing as the lyric is not measured | **L36** |
+| **Guarantees** | **It is not broken.** L0–L36 fire before generation, and everything that fired can be explained. ⚠️ **`L35` is reserved and unwritten** — **36 layers, and `L34`/`L36` speak only where a song exists** | all |
+| **Does not guarantee** | **That `song.duration` is the real length of the file `song.master` names** — no layer opens the audio | —— |
 | **Does not guarantee** | **That the generator draws the aim.** | —— |
 | **Does not guarantee** | **That a still shot's §11 really stops the subject.** | —— |
 | **Does not guarantee** | **That the file `take.file` names actually exists.** | —— |
@@ -1331,6 +1422,27 @@ Write only `spec:` and not `key_image:`, and **the image side is never checked**
   **not** know **which clauses inside a received slot survive** — a route that reads the Negative
   as prose **reads the affirmative sentences in `Master` and `Visual` the same way**, and **this
   layer has no measure of that.**
+- ⚠️ **`L35` is reserved and is not written.** It is the layer that would ask **whether the editing
+  regime matches the music** — `L34` adds the lengths up, **and nothing yet asks whether the beat
+  sections land on the beat.** ⚠️ **Two things are missing, and both are absent from the
+  environment:** **Suno writes no BPM or key into the delivered files** (measured: none of the four
+  in the metadata), and **no beat detector exists here.** ⚠️ **So the number is not in the record and
+  cannot be derived from it** — **and a layer that guessed would be measuring its own guess.**
+  ⚠️ **The code is reserved so the gap is visible**: `bible.song.sections[].regime` and
+  `[].bpm` are already in the schema, **and no layer reads them.**
+  ⚠️ **Where a reader is absent, the shape holds the vocabulary** — which is why `regime` is the one
+  `enum` in the song and `time_source` is not.
+- ⚠️ **`L34` never opens `song.master`.** It reads **the number that is written down** — so **a work
+  that writes "the song is 179.320 seconds" is believed.** ⚠️ **And `duration` is a single number for
+  four delivered files whose lengths differ** (`.wav`/`.m4a` 179.320, `.mp3` 179.352, `.mp4` 179.200).
+  **Which one it is taken from is not ruled** — ⚠️ **and the spread crosses the 1-frame gate**
+  (`.m4a`→`.mp3` 0.768 frames, inside; `.mp4`→`.mp3` 3.648, outside), **so the choice can move the
+  verdict today**; **the record does not say which one was used.**
+- ⚠️ **`L36` cannot see whether the picture explains the lyric.** This is the most common failure in
+  an MV and **it is not machine-measurable** — **so `bible.song.lines[].text` has no reader**, and
+  **that is deliberate.** ⚠️ **Nor can it see whether one line carried by three shots bears one
+  change or three** — the design says **one change, seen at three distances**, and **that condition
+  is unmeasurable**, so it goes in `note`, which nothing reads. **That is also deliberate.**
 - **The handover sheet.** A layer that assembles **what is passed from the record to the generator** (§18's 7 slots,
   `take.params`, the image prompt, the sound) **does not exist yet.** What `L19` looks at is
   **the declaration of the destination**, not **whether the assembled text actually carries that field.**

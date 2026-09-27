@@ -981,6 +981,12 @@ def _self_test():
         ("L15 運動の層に無いパターン", ["運動（跳躍）"], True, "は運動の層の目録に無い"),
         # ⚠️ **限定をつけられるのは運動だけである。**
         ("L15 運動以外に限定をつける", ["開示（遅延）"], True, "限定をつけられるのは"),
+        # ⚠️ **文字列でない値で、走りが死んではならない。** `ROLES` は `dict` なので、
+        #    `value in ROLES` は**引ける側を先に要求する**——`role: [情景]` は
+        #    `TypeError: unhashable type: 'list'` を投げ、**走り全体がそこで死ぬ。**
+        #    ⚠️ **形の層が報告する**（`role` は `shot-record.schema.json` で文字列）。
+        #    この層は**引けないと言う。違反であって、停止ではない。**
+        ("L15 種別が文字列でない（走りを止めない）", [["情景"]], True, "が文字列でない"),
     ]
     for label, roles, want, fragment in role_cases:
         got = [f for f in semantic.check_role_registered(role_proj(roles))
@@ -2817,6 +2823,149 @@ def _self_test():
              img_proj(), True, "が画像の仕様の欄を宣言していない")
     finally:
         specmap.SPEC_KINDS = {**specmap.SPEC_KINDS, "image": saved_img}
+
+    # ---- L34 / L36（曲が時間の主であるとき）
+    #     ⚠️ **この2層は、このリポジトリのどの作品でも鳴らない。** `time_source: song` を
+    #        書いた作品がまだ1本も無いからである——そして**鳴らない層は、通った層と
+    #        まったく同じに見える。** ゆえに自己検査が、いまのところ唯一の場所である。
+    #     ⚠️ **門の外に鳴る例を1つ置く**（`story` の作品、曲を持たない作品）——
+    #        **門は、外側で静かに閉じる形がいちばん危ない。**
+    print("\n=== 自己検査 — 曲が時間の主であるとき\n")
+
+    _KEEP = object()
+
+    class _Song:
+        """⚠️ **`bible` と `ledger` を直に持つ。ファイルを書かない**——この2層が読むのは
+        この2つだけであり、**読まないものを検査に持ち込まない。**"""
+
+        def __init__(self, bible, coverage, shots):
+            self.root = Path(tempfile.mkdtemp())
+            self.bible = bible
+            self.ledger = {"characters": {}, "locations": {}, "disclosure": []}
+            if coverage is not None:
+                self.ledger["song_coverage"] = coverage
+            self.disclosure = []
+            self.shots = {sid: {"shot": sid, "duration": d} for sid, d in shots.items()}
+
+        def order(self):
+            return sorted(self.shots, key=_natural)
+
+        def known_keys(self):
+            return set()
+
+    def song_proj(song=_KEEP, time_source="song", coverage=_KEEP, shots=None, fps="24fps"):
+        """⚠️ **既定が緑である。** 節の合計もショットの合計も一致し、行は覆われ、
+        歌の無い区間は節ごとに受けている——**そこから1つずつ壊して鳴らす。**"""
+        if song is _KEEP:
+            song = {"duration": 100.0,
+                    "sections": [{"id": "intro", "at": 0.0, "until": 40.0},
+                                 {"id": "chorus-1", "at": 40.0, "until": 100.0}],
+                    "lines": [{"id": "l01", "at": 40.0, "section": "chorus-1",
+                               "text": "……"}]}
+        if coverage is _KEEP:
+            coverage = [{"line": "l01", "shots": ["mv-s02"]},
+                        {"section": "intro", "shots": ["mv-s01"]}]
+        b = {"world": {}, "constants": {"video": {"frame_rate": fps}}}
+        if time_source is not None:
+            b["time_source"] = time_source
+        if song is not None:
+            b["song"] = song
+        return _Song({"bible": b}, coverage, shots or {"mv-s01": "40s", "mv-s02": "60s"})
+
+    SEC2 = [{"id": "intro", "at": 0.0, "until": 40.0},
+            {"id": "chorus-1", "at": 40.0, "until": 100.0}]
+    LIN1 = [{"id": "l01", "at": 40.0, "section": "chorus-1", "text": "……"}]
+
+    run1("L34 曲が時間の主である（鳴ってはならない）", semantic.check_song_length,
+         song_proj(), False, None, note="節の尺の合計 100 秒")
+    run1("L34 節の合計が曲に届かない", semantic.check_song_length,
+         song_proj(song={"duration": 120.0, "sections": SEC2, "lines": LIN1}),
+         True, "節の尺の合計が")
+    run1("L34 節の中のショットの合計が違う", semantic.check_song_length,
+         song_proj(shots={"mv-s01": "40s", "mv-s02": "55s"}),
+         True, "その中のショットの尺の合計が食い違っている")
+    # ⚠️ **これが `0 == 0` の罠である。** 尺が無ければ Σ は 0 になり、0 == 0 で通る。
+    run1("L34 尺が無い（0==0 で通さない）", semantic.check_song_length,
+         song_proj(song={"sections": SEC2, "lines": LIN1}),
+         True, "0 == 0 で緑になる")
+    run1("L34 尺が0である", semantic.check_song_length,
+         song_proj(song={"duration": 0, "sections": SEC2, "lines": LIN1}),
+         True, "0以下である")
+    run1("L34 節が1つも無い（0==0 で通さない）", semantic.check_song_length,
+         song_proj(song={"duration": 100.0, "sections": [], "lines": LIN1}),
+         True, "区切りが1つも無い")
+    run1("L34 曲を名指していない（註）", semantic.check_song_length,
+         song_proj(time_source="story"), False, None,
+         note="曲の尺を1つも見ていない")
+    run1("L34 知らない語を、既定として読まない", semantic.check_song_length,
+         song_proj(time_source="suno"), True, "知らない語である")
+    run1("L34 覆いが無ければ突き合わせない", semantic.check_song_length,
+         song_proj(coverage=[{"line": "l01", "shots": ["mv-s02"]}]), False, None,
+         note="突き合わせていない")
+    # ⚠️ **読めない節を 0 秒として足さない。** 足せば合計が静かに縮む。
+    run1("L34 読めない節を0秒として足さない", semantic.check_song_length,
+         song_proj(song={"duration": 100.0,
+                         "sections": [{"id": "intro", "at": 0.0, "until": "?"},
+                                      {"id": "chorus-1", "at": 40.0, "until": 100.0}],
+                         "lines": LIN1}),
+         False, None, note="0 秒として足さない")
+    run1("L34 曲も節も無ければ黙る（門の外）", semantic.check_song_length,
+         song_proj(song=None, time_source=None, coverage=None), False, None)
+
+    run1("L36 覆われている（鳴ってはならない）", semantic.check_song_coverage,
+         song_proj(), False, None, note="覆われている行は 1/1")
+    run1("L36 歌われているのに映っていない行", semantic.check_song_coverage,
+         song_proj(coverage=[{"section": "intro", "shots": ["mv-s01"]}]),
+         True, "歌われているのに、映っていない")
+    run1("L36 対応が空（0==0 で通さない）", semantic.check_song_coverage,
+         song_proj(coverage=[]), True, "画面がそれを1行も受けない")
+    run1("L36 存在しない行を指している", semantic.check_song_coverage,
+         song_proj(coverage=[{"line": "l99", "shots": ["mv-s02"]},
+                             {"section": "intro", "shots": ["mv-s01"]}]),
+         True, "`id` が無い")
+    run1("L36 存在しないショットを名指している", semantic.check_song_coverage,
+         song_proj(coverage=[{"line": "l01", "shots": ["mv-s99"]},
+                             {"section": "intro", "shots": ["mv-s01"]}]),
+         True, "`shots/` にそのショットが無い")
+    # ⚠️ **空の配列は、形では鳴らない。そして覆った顔をしている。**
+    run1("L36 対応が在るのにショットが0本", semantic.check_song_coverage,
+         song_proj(coverage=[{"line": "l01", "shots": []},
+                             {"section": "intro", "shots": ["mv-s01"]}]),
+         True, "覆った顔をした空である")
+    # ⚠️ **サビの反復を別のショットで受けるのは正しい。** ゆえに落とさず、註にする。
+    run1("L36 同じ行を2回覆う（註であって違反ではない）", semantic.check_song_coverage,
+         song_proj(coverage=[{"line": "l01", "shots": ["mv-s02"]},
+                             {"line": "l01", "shots": ["mv-s01"]},
+                             {"section": "intro", "shots": ["mv-s01"]}]),
+         False, None, note="2 本の対応が覆っている")
+    # ⚠️ **節ごとに受けた対応は、その節の行を覆う。** `L34` と同じ索引を読む。
+    run1("L36 節ごとの対応が、その節の行を覆う", semantic.check_song_coverage,
+         song_proj(coverage=[{"section": "chorus-1", "shots": ["mv-s02"]},
+                             {"section": "intro", "shots": ["mv-s01"]}]),
+         False, None, note="覆われている行は 1/1")
+    run1("L36 歌の無い区間を誰も受けていない", semantic.check_song_coverage,
+         song_proj(coverage=[{"line": "l01", "shots": ["mv-s02"]}]),
+         True, "歌が何も言わない区間である")
+    run1("L36 どの対応からも名指されていないショット（註）",
+         semantic.check_song_coverage,
+         song_proj(shots={"mv-s01": "40s", "mv-s02": "60s", "mv-s03": "5s"}),
+         False, None, note="曲の時間の外に在るショットである")
+    # ⚠️ **`line` と `section` の両方を書いた対応は、読める。** 落とすと、
+    #    **それが覆っていた行が「覆われていない」と鳴る**——1つの書き方の誤りが、
+    #    2つの層で別の顔になる。ゆえにここは**両方を覆ったものとして読む**
+    #    （形の層が `oneOf` で報告する）。
+    run1("L36 行と節の両方を書いた対応は、両方を覆う",
+         semantic.check_song_coverage,
+         song_proj(coverage=[{"line": "l01", "section": "chorus-1", "shots": ["mv-s02"]},
+                             {"section": "intro", "shots": ["mv-s01"]}]),
+         False, None, note="覆われている行は 1/1")
+    run1("L36 読めなかった対応を、数えた顔にしない", semantic.check_song_coverage,
+         song_proj(coverage=[{"line": "l01", "shots": ["mv-s02"]},
+                             {"section": "intro", "shots": ["mv-s01"]},
+                             {"note": "行も節も指していない"}]),
+         False, None, note="読めなかった対応が 1 件ある")
+    run1("L36 曲を持たなければ黙る（門の外）", semantic.check_song_coverage,
+         song_proj(song=None, time_source=None, coverage=None), False, None)
 
     print("\n=== 自己検査 — 形（スキーマ）が鳴るか\n")
     class _Shape:
