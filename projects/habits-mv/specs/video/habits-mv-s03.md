@@ -273,7 +273,10 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 - Instance ID: `habits-mv-s03-10.000s-01`
 - Segment ID: `pre-chorus-1-2`
 - Specification Version: `0.1.0`
-- Generation Date: `—`
+- Generation Date: `2026-09-28`
+- ⚠️ **日付の出所**: `media/` に置かれたファイルの mtime（2026-09-28 05:20）である——
+  **投入した時刻そのものではない。** ⛔ **世代の記録は `takes/habits-mv-s03-video-1.yaml` に在る**——
+  **この仕様は世代を写さない**（写した分は古びる）。
 
 ## Resolved Values
 
@@ -289,19 +292,29 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 
 ## Version
 
-`0.1.0` — **not yet generated.**
+`0.1.0` — **一度だけ生成した**（2026-09-28）。**採用は、まだ選ばれていない**——
+**選ぶのは著者である**（`CLAUDE.md`「**生成はサンプルである。**」）。
+⛔ **この節は仕様の側であって、世代の記録ではない**——**記録は `takes/habits-mv-s03-video-1.yaml` に在る。**
 
 ## Observed Problems
 
-- _(this shot has not been generated, so there are no observations of it.)_ ⚠️ **But this is not `_(none yet)_` either: the shot has not been sent, and the reason is not the shot.**
+- ⛔ **この1本の §20 の1番目が、そのまま起きた** — 「**The writing may be rendered legible.** ⚠️ **The first risk of this shot, and on this route the one the `Negative Prompt` cannot stop.**」 **実測が、それを裏づけた。**
+- ⛔ **左の頁の手書きが、ラテン文字の草書として戻った** — 日本語の字ではない。§18 は `no real-world alphabet` を**既に持っていた**——**この経路では散文として読まれた**（`L30`）。
+- ⛔ **右の頁の印刷が、読める日本語で戻った** — `転` `出` の見出しと、`1`〜`10` の行数字。§18 は `no legible text on any surface` / `no legible name text` を持っていた。⚠️ **そして、この作品の凍結した設定画にも、同じ印刷の見出しと行数字が在る**（設定画 ⑨ を実測、2026-09-28）——**参照集合と禁制集合が、ここで衝突している。** ⛔ **どちらを正とするかは著者の裁定である**（私の判断で直していない）。
+- ⛔ **解像度が食い違った** — §1 は `1920x1080`、戻ってきたのは `1280x720` である（**`L25` が鳴る。鳴るのが正しい**）。
+- ✅ **衣装は凍結した設定画と一致した** — 白いシャツ、襟のV、紺の紐が二本。⚠️ **私は一度これを「紺のセーラー襟」と読み違え、2倍に切って読み直した。**
+- ⛔ **上の「見たこと」は3コマから書いた**（2026-09-28）——**全コマを見ていない。** **絵を見る検査は、この基盤に無い。**
 - ⚠️ **`L30` がこの仕様の上で鳴る** — §18 `Negative Prompt` に中身が在り、**この経路はその欄を床として受け取らない。**
   **§1–17 を直しても消えない。** この作品は**承知で使うと宣言している**
   （`bible.route_limits_accepted` の `SEEDANCE 2.5: Negative Prompt`）——**ゆえに `L30` は違反ではなく、名指された註になる。**
   ⚠️ **除外は作品の宣言であって、基盤の判断ではない。** **そして、宣言が言えるのはそこまでである**
   ——**その否定が実際に効いたかは、生成の外では見えない。**
-- ⚠️ **この27本は、まだ1本も生成器へ送られていない**（実測 2026-09-28——`media/` に曲は在るが、
-  `takes/` は無く、機体へ届いたバイトは0である）。**`L6` が27本ぶん鳴りつづけるのは、それが理由である。**
-  **欠陥ではない。** **送った日に、`attached` を書く。**
+- ⚠️ **この作品の27本のうち、3本（`s01`〜`s03`）が 2026-09-28 に生成器へ送られた**——
+  **`takes/` に3本のテイクが在る。** ⚠️ **残る24本は、まだ1本も送られていない。**
+  **`L6` が27本ぶん鳴りつづけるのは、それが理由である**——欄が無い場合は `no_record` として鳴る
+  （`L6` は「**記録が無い**」と「**食い違い**」を混同しない）。
+  ⛔ **`attached` は書いていない。** `attached` は「**実際に何が付いたか**」の欄であり、
+  **著者が何を添付したかを、私は見ていない**——**推測で書けば、記録が測定になる。**
 
 ## Anticipated risks (to check in the first generation)
 
