@@ -58,7 +58,12 @@ Therefore, **do not** link from this repository's documents to the design notes 
 
 ## Tests
 
-**⚠️ There is nothing yet.**
+**There is no test suite.** ⚠️ **What exists is the checker's self-test** —
+`engine/ledger/check.py --self-test` holds **one example that fires and one that does not, for each check**,
+and `tools/check_i18n.py --self-test` does the same for the i18n check.
+⚠️ **Nothing runs them automatically** — a run is a thing a person does.
+⚠️ **How many examples run depends on what the check can find** — without the sibling
+`distill-essence-engine`, **seven do not run** (the output says so).
 
 ## Things That Must Not Be Broken
 

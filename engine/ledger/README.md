@@ -91,7 +91,11 @@ reaches too far. **Recorded here, where it happens, as a hole.**
 And L7 **counts and reports the shots that hold no disclosure state** —
 without counting, you cannot tell whether "0 violations" means "0 after checking" or "not checked".
 
-`--self-test` holds **one example that fires and one that does not, for each check** (280 examples).
+`--self-test` holds **one example that fires and one that does not, for each check** (320 examples).
+⚠️ **Nothing compares that number against the run.** The self-test **prints how many examples it ran
+and how many came out as expected** — so **read the number off the run, not off this line.**
+⚠️ **How many examples run depends on what the check can find** — without the sibling
+`distill-essence-engine`, **seven do not run** (the output says so).
 ⚠️ **Read the notes too.** Because **a note that does not appear also looks like "0 violations"**
 — with no example that confirms the note, deleting the note leaves the self-test green.
 ⚠️ **Read the note's "count" too.** `L25`'s note says "read N takes (broken down by role)" —
