@@ -215,10 +215,12 @@ The counts behind that are in `HISTORY.md`.
 
 ## The layers
 
-The check is **36 layers, `L0`–`L36`**, plus schema-shape validation.
-⚠️ **`L35` is reserved and unwritten**, so **the codes skip a number** — `L0`–`L36` is 37 codes and
-**36 layers.** ⚠️ **`L34` and `L36` read the song**, and a work that does not name the song as its
+The check is **37 layers, `L0`–`L37`**, plus schema-shape validation.
+⚠️ **`L35` is reserved and unwritten**, so **the codes skip a number** — `L0`–`L37` is 38 codes and
+**37 layers.** ⚠️ **`L34` and `L36` read the song**, and a work that does not name the song as its
 time source **is told they saw nothing** — **they are not silent about it.**
+⚠️ **`L37` reads the inside of a shot** — whether its beats tile its `duration` — and **it reads
+every work, whether or not a song exists.**
 **They are not one verdict**—each layer fires on its own and is reported with the
 number it saw.
 

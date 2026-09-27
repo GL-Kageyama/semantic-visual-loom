@@ -2938,11 +2938,25 @@ def _self_test():
                              {"line": "l01", "shots": ["mv-s01"]},
                              {"section": "intro", "shots": ["mv-s01"]}]),
          False, None, note="2 本の対応が覆っている")
-    # ⚠️ **節ごとに受けた対応は、その節の行を覆う。** `L34` と同じ索引を読む。
-    run1("L36 節ごとの対応が、その節の行を覆う", semantic.check_song_coverage,
+    # ⛔ **かつてここは「節ごとの対応が、その節の行を覆う」として緑を期待していた。**
+    #    **誤りである。** 設計 §4 の第1節に `∨` は無い——**節ごとの対応は、行を覆わない。**
+    #    サビの行を節の対応1つで緑にする形は、**覆った顔をした空である。**
+    # ⚠️ **註の断片で、まとめの数え方も同時に縛る。** 数え方が違反の出し方とずれれば、
+    #    本文が「覆う対応が無い」と言いながら、まとめが「1/1 覆われている」と言う
+    #    ——**1つの報告が、同じ記録について2つの答えを出す。**
+    run1("L36 節ごとの対応は、その節の行を覆わない", semantic.check_song_coverage,
          song_proj(coverage=[{"section": "chorus-1", "shots": ["mv-s02"]},
                              {"section": "intro", "shots": ["mv-s01"]}]),
-         False, None, note="覆われている行は 1/1")
+         True, "歌われているのに、映っていない",
+         note="行ごとに覆われている行は 0/1")
+    # ⚠️ **歌詞を持つ節を節ごとに受けること自体は、落とさない。** 第2節は節の側の
+    #    規則であり、`section` の形そのものは認められている。**だが黙りもしない**——
+    #    **黙れば、その対応が行を覆った顔のまま残る。**
+    run1("L36 歌詞を持つ節を節ごとに受けたら、註にする", semantic.check_song_coverage,
+         song_proj(coverage=[{"line": "l01", "shots": ["mv-s02"]},
+                             {"section": "chorus-1", "shots": ["mv-s02"]},
+                             {"section": "intro", "shots": ["mv-s01"]}]),
+         False, None, note="この節には歌詞行が 1 行ある")
     run1("L36 歌の無い区間を誰も受けていない", semantic.check_song_coverage,
          song_proj(coverage=[{"line": "l01", "shots": ["mv-s02"]}]),
          True, "歌が何も言わない区間である")
@@ -2966,6 +2980,96 @@ def _self_test():
          False, None, note="読めなかった対応が 1 件ある")
     run1("L36 曲を持たなければ黙る（門の外）", semantic.check_song_coverage,
          song_proj(song=None, time_source=None, coverage=None), False, None)
+
+    # ---- L37（ビートがショットの尺を敷き詰めているか）
+    #     ⚠️ **`CHECKS_SHOT` の形（`fn(shot)`）では呼べない**——作品の `frame_rate` を要る。
+    #        ゆえに専用の小さな作品を作る。
+    class _Beat:
+        def __init__(self, shots, fps="24fps"):
+            self.shots = shots
+            self.bible = {"bible": {"world": {},
+                                    "constants": {"video": {"frame_rate": fps}}}}
+            self.ledger = {}
+            self.disclosure = []
+
+        def order(self):
+            return sorted(self.shots, key=_natural)
+
+        def known_keys(self):
+            return set()
+
+    def beat_proj(beats, duration="12s", fps="24fps", sid="mv-s01"):
+        return _Beat({sid: {"shot": sid, "duration": duration, "beats": beats}})
+
+    #: **実測の表記そのまま**（2026-09-28: `0-3s` が 166、`0:00-0:08` が 91）。
+    TILE_S = [{"range": "0-4s", "what": "a"}, {"range": "4-8s", "what": "b"},
+              {"range": "8-12s", "what": "c"}]
+    TILE_C = [{"range": "0:00-0:04", "what": "a"}, {"range": "0:04-0:08", "what": "b"},
+              {"range": "0:08-0:12", "what": "c"}]
+
+    run1("L37 敷き詰めている — 秒の表記（鳴ってはならない）",
+         semantic.check_beat_tiling, beat_proj(TILE_S), False, None,
+         note="ビート 3 本の敷き詰めを確かめた")
+    run1("L37 敷き詰めている — コロンの表記（鳴ってはならない）",
+         semantic.check_beat_tiling, beat_proj(TILE_C), False, None,
+         note="ビート 3 本の敷き詰めを確かめた")
+    # ⚠️ **`0:08` を `0` と読めば、3本目が 0–0 になって敷き詰めが崩れる。**
+    #    ここが `_num` を使わない理由である——**読み手の誤りが、作品の誤りに見える。**
+    run1("L37 コロンの表記を、最初の数として読まない",
+         semantic.check_beat_tiling,
+         beat_proj([{"range": "0:00-0:04", "what": "a"},
+                    {"range": "0:04-0:12", "what": "b"}]),
+         False, None, note="ビート 2 本の敷き詰めを確かめた")
+    run1("L37 先頭に刻まれていない区間が在る", semantic.check_beat_tiling,
+         beat_proj([{"range": "1-4s", "what": "a"}, {"range": "4-12s", "what": "b"}]),
+         True, "0 秒から始まっていない")
+    run1("L37 末尾に刻まれていない区間が在る", semantic.check_beat_tiling,
+         beat_proj([{"range": "0-4s", "what": "a"}, {"range": "4-9s", "what": "b"}]),
+         True, "ショットの尺 12 秒と一致しない")
+    run1("L37 ビートに隙間が在る", semantic.check_beat_tiling,
+         beat_proj([{"range": "0-4s", "what": "a"}, {"range": "5-12s", "what": "b"}]),
+         True, "隙間が在る")
+    run1("L37 ビートが重なっている", semantic.check_beat_tiling,
+         beat_proj([{"range": "0-6s", "what": "a"}, {"range": "4-12s", "what": "b"}]),
+         True, "重なっている")
+    # ⚠️ **1フレームは鳴ってはならない。** 許容は `_off` がフレームで言う。
+    # ⚠️ **境界は「1フレームちょうど」である**（`off > tol` であり `off >= tol` ではない）。
+    #    ゆえに**この値を上から踏んではならない**——`4.041667` は 1/24 秒より
+    #    **3.3e-7 秒上**であり、**1.000008 フレーム**になって鳴る。
+    #    **門の誤りではない**（1フレームを超えている）。**検査データの誤りである。**
+    #    下から切った値を書く（`4.041666` = **0.99998 フレーム**）。
+    run1("L37 1フレーム以内のずれは鳴らない", semantic.check_beat_tiling,
+         beat_proj([{"range": "0-4s", "what": "a"},
+                    {"range": "4.041666-12s", "what": "b"}]),
+         False, None, note="ビート 2 本の敷き詰めを確かめた")
+    run1("L37 終わりが始まりより後ろでない刻み", semantic.check_beat_tiling,
+         beat_proj([{"range": "0-12s", "what": "a"}, {"range": "12-12s", "what": "b"}]),
+         True, "尺を持たない刻みである")
+    # ⚠️ **読めない `range` を 0 として足さない。** 足せば穴が敷き詰めに見える。
+    run1("L37 読めない range を、敷き詰めた数にしない",
+         semantic.check_beat_tiling,
+         beat_proj([{"range": "0-4s", "what": "a"}, {"range": "?", "what": "b"},
+                    {"range": "8-12s", "what": "c"}]),
+         False, None, note="このショットの敷き詰めは確かめていない")
+    run1("L37 読めない range が在れば、敷き詰めを確かめたと言わない",
+         semantic.check_beat_tiling,
+         beat_proj([{"range": "0-4s", "what": "a"}, {"range": "?", "what": "b"},
+                    {"range": "8-12s", "what": "c"}]),
+         False, None, note="敷き詰めを確かめられなかったショット 1 本")
+    # ⚠️ **`beats` は形の層も必須にしていない。** ゆえに落とさない——**だが黙らない。**
+    run1("L37 beats を持たないショット（註であって違反ではない）",
+         semantic.check_beat_tiling, beat_proj([]), False, None,
+         note="内側の刻みを読む者が1人も居ない")
+    # ⚠️ **尺が読めなければ、敷き詰め先が無い。** 形の層と `L23` が報告している
+    #    ——**二重に報告しない。**
+    run1("L37 尺が読めなければ、敷き詰めを確かめない", semantic.check_beat_tiling,
+         beat_proj(TILE_S, duration="?"), False, None,
+         note="尺が読めないショット 1 本")
+    # ⛔ **`0 == 0` の罠。** ビートを持つショットが1本も無ければ、まとめは
+    #    「確かめた」と言ってしまう——**空を敷き詰めた顔にしない。**
+    run1("L37 ショットが1本も無ければ、確かめたと言わない",
+         semantic.check_beat_tiling, _Beat({}), False, None,
+         note="敷き詰めを1つも確かめていない")
 
     print("\n=== 自己検査 — 形（スキーマ）が鳴るか\n")
     class _Shape:

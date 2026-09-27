@@ -3942,8 +3942,8 @@ def _song_index(song, entries):
 
     ⚠️ **`by_section` と `by_sec_all` は別である。** 前者は「**節ごと受けた**」という
     宣言であり、後者は「その節に属するショット」である。**畳むと、行ごとに受けた節と、
-    節ごとに受けた節が同じ顔になり、`L36` の規則（行が覆われている ∨ 節ごとの対応が在る）が
-    読めなくなる。**
+    節ごとに受けた節が同じ顔になり、`L36` の2つの節（**行は行の対応で覆われる**／
+    **節は、その行がすべて覆われている ∨ 節ごとの対応が在る**）が読めなくなる。**
     """
     lines, sections = {}, {}
     for ln in (song.get("lines") or []):
@@ -4143,11 +4143,18 @@ def check_song_coverage(project):
     """L36 — **歌詞行が覆われているか。**
 
     ```
-    ∀ line ∈ song.lines       : ∃ cov (cov.line == line.id)
-                                ∨ ∃ cov (cov.section == line.section)
-    ∀ section ∈ song.sections : その節の行がすべて覆われている
-                                ∨ ∃ cov (cov.section == section.id)
+    ∀ line ∈ bible.song.lines     : ∃ cov ∈ ledger.song_coverage (line == cov.line)  … ちょうど1つ
+    ∀ section ∈ bible.song.sections
+        : そのセクションの行が全て覆われている  ∨  ∃ cov (section == cov.section)
     ```
+
+    ⚠️ **第1節に `∨` は無い。** **節ごとの対応は、行を覆わない。** これは意図である——
+    `section` の形が要るのは**歌詞を持たない区間**（イントロ・間奏・アウトロ）のためであり、
+    **そこでは画面が全部を負う。** ゆえに節ごとの対応が在ることは、**その節の行が
+    映っていることを1行も意味しない。**
+    ⛔ **かつてここに `∨ ∃ cov (cov.section == line.section)` が在った。** それは
+    **サビの4行を、節の対応1つで緑にしていた**——**覆った顔をした空である。**
+    第2節（節の側の規則）と取り違えたのであり、**層の目的そのものを消していた。**
 
     ⚠️ **この層が鳴らすもの**: 覆われていない行（**歌われているのに映っていない行**）、
     存在しない行・節・ショットを指す対応、**対応が在るのにショットが1本も無い**もの、
@@ -4196,6 +4203,22 @@ def check_song_coverage(project):
                                f"`song_coverage` が節 `{e['section']}` を指しているが、"
                                "`bible.song.sections` にその `id` が無い。"
                                "**存在しない節を覆った対応は、何も覆っていない。**"))
+        if e["section"] is not None and e["section"] in sections:
+            n_ln = sum(1 for ln in lines.values() if ln.get("section") == e["section"])
+            if n_ln:
+                # ⚠️ **落とさない。註にする。** 節ごとの対応そのものは第2節が認めている。
+                #    だが**この節には行が在る**——`section` の形が要るのは、歌詞を持たない
+                #    区間のためである（設計 §2-1）。**行は行の対応で覆われる。**
+                #    ここで黙れば、**この対応が行を覆った顔のまま残る。**
+                out.append(finding("L36", e["section"],
+                                   f"`song_coverage` が節 `{e['section']}` を節ごとに受けているが、"
+                                   f"**この節には歌詞行が {n_ln} 行ある。**"
+                                   "⚠️ **節ごとの対応は、行を覆わない**——"
+                                   "**行は行の対応で覆われる**（第1節）。"
+                                   "**この節の行は、行ごとに受けること。**"
+                                   "（`section` の形が要るのは、"
+                                   "歌詞を持たない区間である。）",
+                                   severity="note"))
         if not e["shots"]:
             out.append(finding("L36", where,
                                f"対応 `{where}` が在るのに、ショットが1本も無い。"
@@ -4222,12 +4245,19 @@ def check_song_coverage(project):
         if cov:
             continue
         sec = ln.get("section")
-        if isinstance(sec, str) and by_section.get(sec):
-            continue                    # 節ごとに受けた対応が、この行を覆っている
+        # ⛔ **ここに `if by_section.get(sec): continue` が在った。** **誤りである。**
+        #    第1節に `∨` は無い——**節ごとの対応は、行を覆わない。**
+        #    （第2節の `∨` は**節の側**の規則であって、行の側の免除ではない。）
+        if not isinstance(sec, str):
+            tail = ""
+        elif by_section.get(sec):
+            tail = (f"（節 `{sec}` は節ごとに受けている——"
+                    "**だが、節ごとの対応は行を覆わない。**）")
+        else:
+            tail = f"（節 `{sec}` にも節ごとの対応が無い。）"
         out.append(finding("L36", lid,
                            f"行 `{lid}` を覆う対応が無い——**歌われているのに、映っていない。**"
-                           + (f"（節 `{sec}` にも節ごとの対応が無い。）"
-                              if isinstance(sec, str) else "")))
+                           + tail))
 
     # ---- 歌を持たない区間。
     for sid in sections:
@@ -4241,10 +4271,13 @@ def check_song_coverage(project):
                            "**ここは画面が全部を負う**——覆われていないと数えない。"))
 
     # ---- まとめ。**宛先は「確かめた本数」である**（`L27` と同じ位置）。
-    n_cov = sum(1 for lid, ln in lines.items()
-                if by_line.get(lid) or by_section.get(ln.get("section")))
+    # ⚠️ **数え方を、違反の出し方と揃える。** ここで `by_section` を混ぜれば、
+    #    本文が「行 `l01` を覆う対応が無い」と言いながら、まとめが「1/1 覆われている」と
+    #    言う——**同じ記録について、1つの報告が2つの答えを出す。**
+    n_cov = sum(1 for lid in lines if by_line.get(lid))
     head = (f"歌詞行 {len(lines)} 行・節 {len(sections)} 節・対応 {len(entries)} 件を読んだ。"
-            f"覆われている行は {n_cov}/{len(lines)} である。"
+            f"**行ごとに覆われている行は {n_cov}/{len(lines)} である**"
+            "（節ごとの対応は、行を覆わない）。"
             "⚠️ **この層が見るのは「対応が在るか」までである**——"
             "**歌詞と画面が同じことを言っているかは、機械では測れない。**")
     if not lines:
@@ -4260,6 +4293,193 @@ def check_song_coverage(project):
                  f"（{', '.join(stray[:4])}{' ほか' if len(stray) > 4 else ''}）——"
                  "**曲の時間の外に在るショットである。**")
     out.append(finding("L36", f"{len(entries)}件", head, severity="note"))
+    return out
+
+
+#: ビートの `range` を読む。**実測された表記だけを受ける。**
+#: 実測（2026-09-28、82本・257ビート）: 区切りは `-` が **257/257**、表記は
+#: `0-3s`（166）と `0:00-0:08`（91）の2種のみ。⚠️ **測っていない区切りを受けない**
+#: ——受ければ「読めない」を報告しない門が1つ増え、**測った範囲と主張した範囲がずれる。**
+_BEAT_RANGE = re.compile(r"^\s*(\S+?)\s*-\s*(\S+?)\s*$")
+
+
+def _clock(text):
+    """`0:08` / `1:02:03` / `3` / `3s` / `3.5s` を秒に。**読めなければ `None`。**
+
+    ⚠️ **`_num` を使わない。** あれは**最初の数**を取るので、`0:08` を **0** と読む
+    ——**8秒のビートが0秒になり、敷き詰めが崩れて見える。**
+    `shot.duration` の揺れ（`8s`／`8.0`／`8`）を吸うには `_num` でよいが、
+    **`range` はコロンを含む。** ゆえにここは専用の読み手を持つ。
+
+    ⚠️ **`None` は 0 ではない**（`_seconds` と同じ規律）。
+    """
+    if not isinstance(text, str):
+        return None
+    t = text.strip().lower()
+    if t.endswith("s"):
+        t = t[:-1].strip()
+    if not t:
+        return None
+    if ":" in t:
+        parts = t.split(":")
+        if len(parts) > 3:
+            return None
+        total = 0.0
+        for p in parts:
+            if not re.fullmatch(r"\d+(?:\.\d+)?", p.strip()):
+                return None
+            total = total * 60 + float(p.strip())
+        return total
+    if re.fullmatch(r"\d+(?:\.\d+)?", t):
+        return float(t)
+    return None
+
+
+def check_beat_tiling(project):
+    """L37 — **ビートが、ショットの尺を敷き詰めているか。**
+
+    ```
+    ∀ shot (beats が在るなら):
+        先頭のビートは 0 から始まる
+        最後のビートは shot.duration で終わる
+        隣り合うビートは接している（隙間 0・重なり 0）   … ± フレーム
+        ∀ beat : until > at
+    ```
+
+    ⚠️ **なぜこれが層になるか。** `beats` は**仕様の核**である——`range` は
+    「そのショットの中で、いつ何が起きるか」を刻む。**そして、この層が今日まで無かった。**
+    実測（2026-09-28、`projects/` の全走り）: **82本のショットが 257 本のビートを持ち、
+    この5条件を 82/82 で満たしていた。**
+    ⛔ **だが、それを読む者は1人も居なかった。** **満たしていることと、
+    確かめられていることは違う**——そして**確かめられていない不変条件は、次の作品で破れる。**
+    （これは `L34` と同じ形の穴である。あちらは曲の尺が、こちらはショットの内側が相手である。）
+
+    ⚠️ **読めない `range` を 0 として足さない。** 足せば刻みが静かに縮み、
+    **穴が敷き詰めに見える。** 読めないことは註にする——**足りない合計を言わない**
+    （`L34` の「読めない節を0秒として足さない」と同じ規律）。
+
+    ⚠️ **`beats` が無いことは、違反ではない。** 形の層は `beats` を必須にしていない
+    （`shots/*.yaml` の `required` に無い）。**ゆえにここも落とさない**——
+    **だが黙りもしない。** 註にする。**書かなければ、このショットの内側を読む者が
+    1人も居ない**——**「読まなかった」と「読んで緑だった」は、同じ顔をする。**
+
+    ⚠️ **この層が鳴らさないもの**: **ビートの割り方が良いか。** 不均等に配分することは
+    設計の要請である（`beats` の説明）——**それが適切かは機械では測れない。**
+    ここが見るのは**敷き詰めているか**だけである。
+
+    ⚠️ **`CHECKS_SHOT` に入れない。** あれは `fn(shot)` で呼ばれるが、
+    **この層は作品の `frame_rate` を要る**——**許容をフレームで言うためである**
+    （1フレーム = 1/24 秒。`_off` を見よ）。**ショットの記録に fps を混ぜれば、
+    記録に無い欄を読む層になる。**
+    """
+    out = []
+    beat_shots = n_beats = n_missing = n_undur = n_unread = 0
+    for sid in project.order():
+        shot = project.shots[sid]
+        beats = shot.get("beats")
+        if not isinstance(beats, list) or not beats:
+            n_missing += 1
+            out.append(finding("L37", sid,
+                               "`beats` が無いか、空である。"
+                               "⚠️ **形の層は `beats` を必須にしていない**——ゆえに落とさない。"
+                               "**だが、このショットの内側の刻みを読む者が1人も居ない。**",
+                               severity="note"))
+            continue
+        dur = _seconds(shot.get("duration"))
+        if dur is None or dur <= 0:
+            # 敷き詰め先が無い。**形の層（`shots[].duration` は必須）と `L23` が
+            # 報告している**——二重に報告しない。
+            n_undur += 1
+            continue
+
+        spans, unreadable, reversed_ = [], [], []
+        for b in beats:
+            r = b.get("range") if isinstance(b, dict) else b
+            m = _BEAT_RANGE.match(r) if isinstance(r, str) else None
+            a = _clock(m.group(1)) if m else None
+            z = _clock(m.group(2)) if m else None
+            if a is None or z is None:
+                unreadable.append(repr(r))
+                continue
+            if z <= a:
+                reversed_.append((a, z))
+                continue
+            spans.append((a, z))
+
+        if unreadable:
+            n_unread += 1
+            out.append(finding("L37", sid,
+                               f"`range` を {len(unreadable)} 本読めなかった"
+                               f"（{', '.join(unreadable[:3])}"
+                               f"{' ほか' if len(unreadable) > 3 else ''}）——"
+                               "**ゆえに、このショットの敷き詰めは確かめていない。**"
+                               "⚠️ **読めないビートを 0 として足せば、穴が敷き詰めに見える。**",
+                               severity="note"))
+            continue
+
+        if reversed_:
+            n_unread += 1
+            out.append(finding("L37", sid,
+                               "ビートの終わりが始まりより後ろでないものが "
+                               f"{len(reversed_)} 本ある（"
+                               + "、".join(f"{a:g}–{z:g}" for a, z in reversed_[:3])
+                               + "）。**尺を持たない刻みである**——"
+                               "**ゆえに、このショットの敷き詰めは確かめていない。**"))
+            continue
+
+        beat_shots += 1
+        n_beats += len(spans)
+        spans.sort()
+
+        off, tol, unit = _off(0.0, spans[0][0], project)
+        if off > tol:
+            out.append(finding("L37", sid,
+                               f"先頭のビートが {spans[0][0]:g} 秒から始まっている——"
+                               f"**0 秒から始まっていない**（{off:g}{unit}、許容は 1{unit}）。"
+                               "**このショットの尺の先頭に、刻まれていない区間が在る。**"))
+
+        last = spans[-1][1]
+        off, tol, unit = _off(dur, last, project)
+        if off > tol:
+            out.append(finding("L37", sid,
+                               f"ビートの末尾が {last:g} 秒である——"
+                               f"**ショットの尺 {dur:g} 秒と一致しない**"
+                               f"（{off:g}{unit}、許容は 1{unit}）。"
+                               "**このショットの尺の末尾に、刻まれていない区間が在る。**"))
+
+        for (a1, z1), (a2, z2) in zip(spans, spans[1:]):
+            off, tol, unit = _off(z1, a2, project)
+            if off <= tol:
+                continue
+            what = "重なっている" if a2 < z1 else "隙間が在る"
+            out.append(finding("L37", sid,
+                               f"ビート {a1:g}–{z1:g} と {a2:g}–{z2:g} が{what}"
+                               f"（{off:g}{unit}、許容は 1{unit}）。"
+                               "**接していない刻みは、どちらかのビートに負わせた変化が、"
+                               "その尺の中で起きないということである。**"))
+
+    # ---- まとめ。**宛先は「確かめた本数」である**（`L34`／`L36` と同じ位置）。
+    # ⚠️ **0本を「確かめた」と言わない。** ショットが1本も無ければ、
+    #    この層は**敷き詰めを1つも確かめていない**——そして `0 == 0` は通ってしまう
+    #    （memory: 「検算器は『相手が空なら落ちる』を入れる。`0==0` で通った実例あり」）。
+    if beat_shots:
+        head = (f"ビートを持つショット {beat_shots} 本・ビート {n_beats} 本の敷き詰めを"
+                "確かめた。")
+    else:
+        head = ("**ビートを持つショットが1本も無い**——"
+                "ゆえに、この走りは敷き詰めを1つも確かめていない。"
+                "⚠️ **確かめていないことは、緑ではない。**")
+    missed = []
+    if n_missing:
+        missed.append(f"`beats` を持たないショット {n_missing} 本")
+    if n_unread:
+        missed.append(f"敷き詰めを確かめられなかったショット {n_unread} 本")
+    if n_undur:
+        missed.append(f"尺が読めないショット {n_undur} 本")
+    if missed:
+        head += ("⚠️ **確かめていない**: " + "／".join(missed)
+                 + "。**確かめていないことを、確かめた顔にしない。**")
+    out.append(finding("L37", f"{beat_shots}本", head, severity="note"))
     return out
 
 
@@ -4313,6 +4533,10 @@ def run(project, schema_dir=None, repo_root=None):
     #    **曲は作品ごとである**——1本のショットに曲の尺を負わせる形は無い。
     out += check_song_length(project)
     out += check_song_coverage(project)
+    # ⚠️ **`CHECKS_SHOT` には入れない。** 相手はショットの内側（`beats`）だが、
+    #    **作品の `frame_rate` を要る**——**許容をフレームで言うためである。**
+    #    `fn(shot)` の形に合わせるには、記録に無い fps をショットへ混ぜることになる。
+    out += check_beat_tiling(project)
     if schema_dir:
         out += check_field_source(schema_dir)
         out += check_field_destination(schema_dir)

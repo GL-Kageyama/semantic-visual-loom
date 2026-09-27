@@ -64,7 +64,8 @@ in order to fire on "`before` and `after` are the same" — but **JSON Schema ca
 | **L32** | **The format card §6 names cannot be read, or declares no `## Negative`** — the video specification's §6 `REF_FORMAT`. ⚠️ **Three outcomes: no card directory is a note; a missing card is a violation; a card missing its section is a violation.** ⚠️ **Here it fires by default — the neighbour holds no `video-spec` card; one environment variable clears it** | "Can the Format Card Be Read, and Does It Declare a `Negative`" below |
 | **L33** | **§18's `Camera Prompt` forbids a gesture the style card offers** — the style card's `## Motion character`, against a slot the generator actually receives. ⚠️ **The comparison words are quoted from the card** (`skills/staging/cards.yaml`); **a quote that no longer matches the card is a note, not a firing** | "Does §18's `Camera Prompt` Forbid a Gesture the Card Offers" below |
 | **L34** | **The song's length does not add up** — the sections' sum against `song.duration`, and each section's shots against that section. ⚠️ **`bible.time_source` decides whether this layer reads at all** — a work whose time is the story's may carry a `song` and is told *this layer saw none of its length* | "Does the Song's Length Add Up" below |
-| **L36** | **A sung line is covered by no shot** — and its converse: a coverage entry that names nothing, names no shot, or names a shot that is not there. ⚠️ **A section the lyric never enters must be covered too**, or the picture has an ownerless stretch | "Is Every Sung Line Covered" below |
+| **L36** | **A sung line is covered by no shot** — and its converse: a coverage entry that names nothing, names no shot, or names a shot that is not there. ⚠️ **A section the lyric never enters must be covered too**, or the picture has an ownerless stretch. ⚠️ **A `section:` entry does not cover that section's lines** — it is the form for the stretches the lyric never enters | "Is Every Sung Line Covered" below |
+| **L37** | **The beats do not tile the shot's `duration`** — the first does not start at 0, the last does not end at the shot's end, or two neighbours leave a gap or an overlap. ⚠️ **It reads every work, song or no song** — the shot's inside is the shot's own | "Do the Beats Tile the Shot" below |
 
 **L2, L3 and L4 are transplants.** Applied to all 57 segments of Gozen-niji,
 a checker that scored **recall 2/2 and 0 false positives** went in just as it was.
@@ -1141,10 +1142,20 @@ shape layer, and an empty array is exactly what looks covered.**)
 
 **It fires when** — a coverage entry names a line or a section that is not in `bible.song`; an entry
 names no shot; an entry names a shot that is not in `shots/` (**the picture is not there, so nobody
-is carrying that time**); **a sung line is covered by nothing** — excused when that line's own section
-carries a `section:` entry; a section that holds no lyric line and has no `section:` entry either
-(**the intro, the break, the outro** — *the song says nothing here, so the picture carries all of it,
-and nobody wrote who does*).
+is carrying that time**); **a sung line is covered by nothing**; a section that holds no lyric line
+and has no `section:` entry either (**the intro, the break, the outro** — *the song says nothing
+here, so the picture carries all of it, and nobody wrote who does*).
+
+⛔ **A `section:` entry does not cover that section's lines.** **A line is covered by a line entry.**
+The `section:` form exists **for the stretches the lyric never enters**, where the picture carries
+everything — so an entry naming a section is **never a statement about that section's lines.**
+⚠️ **An earlier version of this layer let one `section:` entry excuse every line of its section**,
+which turned four chorus lines into a green row **wearing a covered face.** That is the second clause
+(the section's own rule) read as an exemption for lines. ⚠️ **The closing count reads the same way** —
+it counts lines covered **by a line entry**, so the summary and the firings cannot disagree.
+⚠️ **A `section:` entry naming a section that does hold lines is reported as a note.** It is not an
+error — the section's own rule permits the form — but **silence would leave that entry looking like
+it covered them.**
 
 **It reports a note instead when** — **the same line is covered more than once.**
 ⚠️ **That is not an error**: carrying a repeated chorus with **different shots** is right. The note
@@ -1157,6 +1168,47 @@ and names **shots no entry ever points at** — *shots outside the song's time.*
 common failure in an MV and **it is not machine-measurable** — which is why `lines[].text` has no
 reader. ⚠️ **And what it does see is only that a mapping exists** — **a mapping existing is not the
 shot being good.** ⚠️ **Do not put an uncheckable rule in a checkable field.**
+
+### L37 — do the beats tile the shot
+
+**`beats` is the core of the video specification** — `range` cuts **when, inside the shot, each change
+happens.** ⛔ **Nothing read it.** Measured across every work in this repository (2026-09-28):
+**82 shots, 257 beats, and the four conditions below held 82/82.**
+**Holding them and being checked are different things** — **an invariant nobody reads is an invariant
+the next work breaks.**
+
+```
+the first beat starts at 0
+the last beat ends at the shot's `duration`
+neighbours touch (no gap, no overlap)        … ± 1 frame
+every beat has `until > at`
+```
+
+**It reads both spellings the record uses** — `0-3s` and `0:00-0:08` (measured: 257/257 use `-`, and
+those are the only two forms). ⚠️ **It does not use `_num`.** That helper takes **the first number**,
+so it reads `0:08` as **0** — *an eight-second beat becomes a zero-second beat, and a tiled shot looks
+broken.* **`_num` is right for `shot.duration`** (whose spellings wobble: `8s` / `8.0` / `8`) **and
+wrong here**, because a range carries a colon. ⚠️ **Measuring the offset in frames needs the work's
+`frame_rate`** — which is why this layer is not in `CHECKS_SHOT`: that tuple is called as `fn(shot)`,
+and **folding fps into the shot record would be reading a field the record does not have.**
+
+⚠️ **A `range` it cannot read is a note, and it is never added as 0.** Adding it would shrink the
+tiling silently and **a hole would look tiled** — the same discipline as `L34` not adding an unreadable
+section as 0 seconds. **For the same reason the closing note reports the shots it did not tile**,
+and says **"no shot holds beats"** rather than *"tiled"* when there are none: **`0 == 0` is how an
+empty check passes.**
+
+⚠️ **A shot with no `beats` is not a violation** — the shape layer does not require the field. **But
+this layer does not go quiet either**: it says **nothing here reads this shot's inside** — because
+**"did not read" and "read and was green" wear the same face.**
+
+⚠️ **What it cannot see: whether the beats are well placed.** Spreading them unevenly is what the
+design asks for, and **whether the spread is right is not machine-measurable.** It sees **that they
+tile**, and nothing more.
+
+⚠️ **This is not `L35`.** `L35` would ask **whether the cuts land on the music** — and it is unwritten,
+because the number is not in the record. `L37` asks **whether the beats tile the shot itself**, which
+needs nothing but the shot.
 
 ### ⚠️ Firing Against a Running Artifact
 
@@ -1179,6 +1231,7 @@ shot being good.** ⚠️ **Do not put an uncheckable rule in a checkable field.
 | L33 | **0** (1 note) | ⚠️ **The style is not in the comparison table** — `soft-cel-anime` is not one of this repository's 16 cards, so **the note says the camera was not compared.** **Nothing fired** — and **a quiet layer here is not the same as a satisfied one.** |
 | L34 | **0** | **No work declares `bible.time_source: song`**, so there is nothing to add up — **not even a note.** ⚠️ **This check has fired only inside the self-test.** ⚠️ **A layer whose counterpart does not exist is silent, and silence looks exactly like passing** — which is why the door is at `time_source` and not at `song`. |
 | L36 | **0** | Same — **no work carries a song, so this layer has no lyric to ask about.** ⚠️ **Its silence here is the very shape it exists to break**: *a sung line nobody answers* is what it is for, and **here there is no line.** ⚠️ **The one thing that would look green and be wrong — an empty `song_coverage` on a work that has a song — cannot arise while no work has a song.** |
+| L37 | **0** (1 note) | **All 30 tile their `duration`** — 91 beats across 30 shots. ⚠️ **This is the first layer to read the inside of a shot**, and **the only one of these rows that reads a work with no song in it.** ⚠️ **No work in this repository has a song** — so `L34` and `L36` above are still unfed, and **the MV will be the first work they read.** |
 
 ⚠️ **`L31` reads only the home and the specification** — **`L20` and `L22` need the style cards,
 and the cards are not in this repository.** So **two green rows here can mean different things**:
@@ -1351,7 +1404,8 @@ What it can say is —
 | **Guarantees** | **§18's `Camera Prompt` does not forbid a gesture the style card offers** — unless the same slot writes the decline as a decline | **L33** |
 | **Guarantees** | **The song's length adds up** — the sections reach `song.duration`, and each section's shots reach that section. ⚠️ **Only for a work naming the song as its time source** (`bible.time_source: song`) | **L34** |
 | **Guarantees** | **Every sung line is answered by a shot, and every stretch where the song says nothing has an owner** — ⚠️ **among the shots the record lists.** Whether the picture says the same thing as the lyric is not measured | **L36** |
-| **Guarantees** | **It is not broken.** L0–L36 fire before generation, and everything that fired can be explained. ⚠️ **`L35` is reserved and unwritten** — **36 layers, and `L34`/`L36` speak only where a song exists** | all |
+| **Guarantees** | **The beats tile the shot's `duration`** — from 0 to the end, with no gap and no overlap. ⚠️ **Whether the beats are well placed is not measured** | **L37** |
+| **Guarantees** | **It is not broken.** L0–L37 fire before generation, and everything that fired can be explained. ⚠️ **`L35` is reserved and unwritten** — **37 layers, and `L34`/`L36` speak only where a song exists** | all |
 | **Does not guarantee** | **That `song.duration` is the real length of the file `song.master` names** — no layer opens the audio | —— |
 | **Does not guarantee** | **That the generator draws the aim.** | —— |
 | **Does not guarantee** | **That a still shot's §11 really stops the subject.** | —— |
@@ -1424,7 +1478,9 @@ Write only `spec:` and not `key_image:`, and **the image side is never checked**
   layer has no measure of that.**
 - ⚠️ **`L35` is reserved and is not written.** It is the layer that would ask **whether the editing
   regime matches the music** — `L34` adds the lengths up, **and nothing yet asks whether the beat
-  sections land on the beat.** ⚠️ **Two things are missing, and both are absent from the
+  sections land on the beat.** ⚠️ **`L37` does not close this**: it asks whether the beats tile
+  **the shot itself**, which needs nothing but the shot — *the music never enters it.* ⚠️ **Two
+  things are missing, and both are absent from the
   environment:** **Suno writes no BPM or key into the delivered files** (measured: none of the four
   in the metadata), and **no beat detector exists here.** ⚠️ **So the number is not in the record and
   cannot be derived from it** — **and a layer that guessed would be measuring its own guess.**
