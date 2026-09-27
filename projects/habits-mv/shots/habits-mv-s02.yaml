@@ -41,6 +41,12 @@ duration: "9.015s"
 # 動画の仕様（§1–20）。
 spec: specs/video/habits-mv-s02.md
 
+# 画像の仕様（**§1–20 を持たない**。§18 も `Negative Prompt` も `Style Motion` も無い）。
+# ⚠️ **この欄は、この稿で足した**（実測 2026-09-28）。⚠️ **この1本は `identity` を添付する側である**
+#    ——**画像の側の `content` も、凍結した二枚を渡す。** 記録側の `reference_set` と同じ側に立つ。
+#    **送った日に `attached` を書く。**
+key_image: specs/image/habits-mv-s02.md
+
 # **狙い。** このショットが何を試すのか。
 # ⚠️ **この欄を読む検査は、まだ1つも無い**（`shot-record.schema.json` の `aim`）。
 aim: >-
