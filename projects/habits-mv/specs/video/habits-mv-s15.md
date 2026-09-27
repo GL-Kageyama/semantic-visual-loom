@@ -49,14 +49,14 @@
 
 ## 長田美穂の右手
 
-- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/10_長田美穂/ChatGPT Image 2026年9月21日 11_20_00.png` （人のかたちの一枚, `character-sheet × luminous-anime`）.
+- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/09_長田美穂/ChatGPT Image 2026年9月21日 00_48_28.png` （人のかたちの一枚, `character-sheet × luminous-anime`）.
 - Appearance: **外見の記述は出典に一行も無い**（方針 §5a）。**この一枚が外見である。** 置くのは**右手だけ**である。⚠️ **顔は置かない。**
 - Behavior: **紙をめくる。** ⚠️ **速い。** **めくり終わる前に、二度目が始まる。**
 - Continuity Requirements: **Must preserve** — 凍結した一枚。**May change** — 何も変えない。
 
 ## 斎藤悦子の右手
 
-- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/11_斎藤悦子/ChatGPT Image 2026年9月21日 11_35_00.png` （人のかたちの一枚）.
+- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/19_斎藤悦子/ChatGPT Image 2026年9月21日 01_08_33.png` （人のかたちの一枚）.
 - Appearance: **外見の記述は出典に一行も無い。** 置くのは**右手だけ**である。
 - Behavior: **一度目と同じめくり方を、別の紙で行う。** ⚠️ **同じ位置で起きる** — **それでも、どちらが先かは画面が決める。**
 - Continuity Requirements: **Must preserve** — 凍結した一枚。⚠️ **二人のめくり方は、同じ運動であること。**

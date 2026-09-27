@@ -50,7 +50,7 @@
 
 ## 大森徹の右手
 
-- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/07_大森徹/ChatGPT Image 2026年9月21日 10_20_00.png` （人のかたちの一枚, `character-sheet × luminous-anime`）.
+- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/06_大森徹/ChatGPT Image 2026年9月21日 00_46_20.png` （人のかたちの一枚, `character-sheet × luminous-anime`）.
 - Appearance: **外見の記述は出典に一行も無い**（方針 §5a）。**この一枚が外見である。** 置くのは**右手だけ**である。⚠️ **顔は置かない。**
 - Behavior: **返る動きが一つ。** 指が開き、そのまま止まる。⚠️ **手首で起き、腕は動かない。**
 - Continuity Requirements: **Must preserve** — 凍結した一枚。**May change** — 何も変えない。⚠️ **`s05` の手が「滑る」、この手が「返る」である**——**同じ場所で、別の所作である。**

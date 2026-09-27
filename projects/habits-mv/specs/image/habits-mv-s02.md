@@ -70,7 +70,7 @@
 置かれる人が居る。** ⚠️ **ただし註は「名指す」だけで、外見を書き起こさない。** 理由は下の節に書く。
 
 - `SCENE`: the second step — an eye crosses one line of writing on the opened page from left to right and stops at the end of it; nothing is understood
-- `CHARACTERS`: `[碓氷千夏: a girl in her teens, a student — **the face is the frozen setting sheet's and is not re-derived in words here**]` — **only the eye and the side of the brow are in the frame**, above the line; **the rest of the face is not detailed**, the head does not tilt, and no hand is in the frame
+- `CHARACTERS`: `[碓氷千夏: **the frozen setting sheet holds her face** — the name is here only so the right sheet is taken, and no appearance is re-derived in words]` — **only the eye and the side of the brow are in the frame**, above the line; **the rest of the face is not detailed**, the head does not tilt, and no hand is in the frame
 - `SUBJECT`: the one eye at rest above a single ruled line it has just crossed, and the line itself
 - `ACTION`: having crossed the line and stopped at its end — the eye still, the brow and the mouth held, **one blink placed after the stop**
 - `LOCATION`: the opened page of the attendance register on the desk at the end of a working day, 2026 — **almost the whole frame is paper**, with the desk's worn edge in the near foreground
@@ -121,6 +121,31 @@ no watermark, no on-screen subtitles, no captions, no subtitles in any language,
   この1本では**その仕事を、添付された凍結の二枚が負う**——
   **ゆえに註は名指すだけである。** ⚠️ **これは `do` の後半（appearance）からの意図的な逸脱である**
   ——**黙ってやらず、ここに書く。** `L22` は穴の名だけを見るので、**この逸脱では鳴らない。**
+- ⛔ **註から、年齢と職業を外した。** 外す前は「`a girl in her teens, a student`」と書いてあった
+  ——**出典に無い。** ⚠️ **出典が与えるのは「女33・会計年度任用職員（事務）」である**
+  （`distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/prompt.md` の「出典の語」）。
+  **書いてあったのは、その逆であった。**
+  ⚠️ **ゆえに註は、名と「凍結した二枚」の指し先だけを持つ。**
+  ⛔ **ここに、私が一度書いた誤った実測を訂正して残す。** 私は当初
+  「**この作品の動画の仕様27本は、年齢も職業も1字も持たない**」と書いた——**誤りである。**
+  実測（2026-09-28、走査し直した。計器は `[0-9]+歳` と職業語の `grep`）：
+  **年齢の語を持つ動画仕様は 2/27 本**（`s06`・`s07`——`52歳`・`45歳`）、
+  **職業の語を持つものも 2/27 本**（**同じ2本**——`運転士`・`部門`）。
+  ⚠️ **どちらも `Reference:` の行の「出典の語は…である」という引用の中にある。**
+  ⚠️ **私は「10代」の語を数えて、「年齢と職業が無い」と主張した**——
+  **測った範囲と、主張した範囲が違っていた。**
+  ⛔ **そして、この訂正そのものが、二度目に誤った。** 私は一度ここに
+  **「年齢 3/27 本（`s01`・`s06`・`s07`）、職業 4/27 本」**と書いた——**これも誤りである。**
+  ⚠️ **外れの一語ずつに、別の理由がある。**
+  **`s01` が数えられたのは、`女33` の語によってである——それは、私が同じ日（2026-09-28）に
+  `s01` の `Observed Problems` へ書き足した行である**（**自分が今足した語を検索語にすると
+  必ず当たる**）。⚠️ **そして `職員` は、`区立小学校の職員室` の `職員室` を数えていた**
+  ——**部屋は職業ではない**（`s05` にも `職員室・教室・昇降口` として現れる）。
+  ⛔ **数を書くときは、計器をその場に書く。**
+  ⛔ **それでも、註に置かないという結論は変わらない。理由が違う。**
+  **`CHARACTERS` は註ではなく、生成器へ渡る文字列である**——**書けば描かれる。**
+  動画の仕様が年齢を書くのは**出典についての日本語の散文**であり、
+  **同じ欄が画像では英語の入力になる。** ⚠️ **同じことを書いても、行き先が違う。**
 
 ## ⚠️ `identity` を添付する側である——この1枚が、その一枚である
 

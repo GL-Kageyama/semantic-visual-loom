@@ -44,6 +44,8 @@ duration: "7.155s"
 # 動画の仕様（§1–20）。
 spec: specs/video/habits-mv-s04.md
 
+key_image: specs/image/habits-mv-s04.md
+
 # **狙い。** このショットが何を試すのか。
 # ⚠️ **この欄を読む検査は、まだ1つも無い**（`shot-record.schema.json` の `aim`）。
 aim: >-

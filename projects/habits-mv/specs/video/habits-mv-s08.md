@@ -51,14 +51,14 @@
 
 ## 片山大翔の右手
 
-- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/04_片山大翔/ChatGPT Image 2026年9月21日 00_52_04.png` （人のかたちの一枚, `character-sheet × luminous-anime`）.
+- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/04_片山大翔/ChatGPT Image 2026年9月18日 05_08_30.png` （人のかたちの一枚, `character-sheet × luminous-anime`）.
 - Appearance: **外見の記述は出典に一行も無い**（方針 §5a）。**この一枚が外見である。** 置くのは**右手だけ**である。⚠️ **顔は置かない。**
 - Behavior: **紙を押さえ、そのまま指が滑る。** ⚠️ **二つの所作が続けて起き、間が無い。**
 - Continuity Requirements: **Must preserve** — 凍結した一枚。**May change** — 何も変えない。
 
 ## 石川久美子の右手
 
-- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/05_石川久美子/ChatGPT Image 2026年9月21日 01_12_00.png` （人のかたちの一枚）.
+- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/23_石川久美子/ChatGPT Image 2026年9月18日 05_11_14.png` （人のかたちの一枚）.
 - Appearance: **外見の記述は出典に一行も無い。** 置くのは**右手だけ**である。
 - Behavior: **一度目の押さえ方と同じ押さえ方を、別の紙で行う。** ⚠️ **同じ姿勢で止まる** — **それがこの1本の変化である。**
 - Continuity Requirements: **Must preserve** — 凍結した一枚。⚠️ **二人の手は、この作品の他の手と同じ様式で描かれる。**

@@ -52,7 +52,7 @@
 
 ## 暮林蒼（手と、顔）
 
-- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/メイン/02_暮林蒼/ChatGPT Image 2026年9月18日 20_29_36.png` （キャラクター設定画）＋ `.../ChatGPT Image 2026年9月17日 21_56_32.png` （表情シート）. ⚠️ **表情シートを添付する意味が、この作品で最初に要る1本である。**
+- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/メイン/02_暮林蒼/ChatGPT Image 2026年9月20日 03_29_35.png` （キャラクター設定画）＋ `.../ChatGPT Image 2026年9月20日 03_49_14.png` （表情シート）. ⚠️ **表情シートを添付する意味が、この作品で最初に要る1本である。**
 - Appearance: **外見の記述は出典に一行も無い**（方針 §5a）。**凍結した二枚が外見である。** ⚠️ **この1本は、この作品で最初に顔を置く**——**ゆえにこの一枚が、以後のすべての顔の基準になる。**
 - Behavior: **手が先に止まり、そのあと顔が起きる。** ⚠️ **順序を入れ替えない。** **振り向きは、髪と首で起きる** — 動きの量は小さい。**顔は、呼び声の側を見る。**
 - Continuity Requirements: **Must preserve** — 凍結した二枚。**May change** — 何も変えない。⚠️ **この1本の顔が、以後の顔（`s26`・`s27` を含む）の基準である。**

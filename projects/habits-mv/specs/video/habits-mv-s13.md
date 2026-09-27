@@ -50,7 +50,7 @@
 
 ## 川上桜の指
 
-- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/08_川上桜/ChatGPT Image 2026年9月21日 10_35_00.png` （人のかたちの一枚, `character-sheet × luminous-anime`）.
+- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/07_川上桜/ChatGPT Image 2026年9月18日 05_16_15.png` （人のかたちの一枚, `character-sheet × luminous-anime`）.
 - Appearance: **外見の記述は出典に一行も無い**（方針 §5a）。**この一枚が外見である。** 置くのは**指だけ**である。⚠️ **顔は置かない。手の甲も置かない** — **この1本は指先の1本である。**
 - Behavior: **端を押さえ、少し持ち上げる。** ⚠️ **動きが一つだけ。** 持ち上げたあと、**指は動かない。**
 - Continuity Requirements: **Must preserve** — 凍結した一枚。**May change** — 何も変えない。⚠️ **`s06` がプラスチックの縁を起こし、この1本が紙の端を起こす**——**同じ所作が、別の素材で。**

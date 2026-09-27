@@ -51,14 +51,14 @@
 
 ## 根本湊の右手
 
-- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/12_根本湊/ChatGPT Image 2026年9月21日 11_50_00.png` （人のかたちの一枚, `character-sheet × luminous-anime`）.
+- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/10_根本湊/ChatGPT Image 2026年9月20日 19_56_46.png` （人のかたちの一枚, `character-sheet × luminous-anime`）.
 - Appearance: **外見の記述は出典に一行も無い**（方針 §5a）。**この一枚が外見である。** 置くのは**右手だけ**である。⚠️ **顔は置かない。**
 - Behavior: **紙を押さえ、そのまま止まる。** ⚠️ **止まり方が、二度で同じである。**
 - Continuity Requirements: **Must preserve** — 凍結した一枚。**May change** — 何も変えない。
 
 ## 関口浩一の右手
 
-- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/13_関口浩一/ChatGPT Image 2026年9月21日 12_05_00.png` （人のかたちの一枚）.
+- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/20_関口浩一/ChatGPT Image 2026年9月21日 01_11_22.png` （人のかたちの一枚）.
 - Appearance: **外見の記述は出典に一行も無い。** 置くのは**右手だけ**である。
 - Behavior: **同じ押さえ方を、別の紙で行う。** ⚠️ **二つの手が同時に止まる** — **それがこの1本の変化である。**
 - Continuity Requirements: **Must preserve** — 凍結した一枚。⚠️ **二人の押さえ方は、同じ運動であること。**

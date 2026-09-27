@@ -51,7 +51,7 @@
 
 ## 侘田すみれの右手
 
-- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/メイン/03_侘田すみれ/ChatGPT Image 2026年9月18日 20_29_36.png` （キャラクター設定画）＋ `.../ChatGPT Image 2026年9月17日 21_56_32.png` （表情シート）.
+- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/メイン/03_侘田すみれ/ChatGPT Image 2026年9月21日 05_48_10.png` （キャラクター設定画）＋ `.../ChatGPT Image 2026年9月21日 05_54_22.png` （表情シート）.
 - Appearance: **凍結した二枚が外見である。** 置くのは**右手だけ**である。⚠️ **顔は置かない。**
 - Behavior: **鍵を起こす。** ⚠️ **ゆっくり。** **札が揺れ、止まる。** **宛先の欄を、指でなぞらない。**
 - Continuity Requirements: **Must preserve** — 凍結した二枚。**May change** — 何も変えない。⚠️ **この手は `s18` の手と同じ人物である。**

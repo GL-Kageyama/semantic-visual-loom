@@ -54,7 +54,7 @@
 
 ## 侘田すみれの手
 
-- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/メイン/03_侘田すみれ/ChatGPT Image 2026年9月18日 20_29_36.png` （キャラクター設定画）＋ `.../ChatGPT Image 2026年9月17日 21_56_32.png` （表情シート）.
+- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/メイン/03_侘田すみれ/ChatGPT Image 2026年9月21日 05_48_10.png` （キャラクター設定画）＋ `.../ChatGPT Image 2026年9月21日 05_54_22.png` （表情シート）.
 - Appearance: **凍結した二枚が外見である。** 置くのは**手だけ**である。**手は、画面から出る。** ⚠️ **顔は置かない。**
 - Behavior: **切り離す動きが一度だけ。** ⚠️ **端から一直線に進む** — **この作品で唯一、動きが直線である所作である。** **そのあと、手は画面から出る。**
 - Continuity Requirements: **Must preserve** — 凍結した二枚、**および `s17` の手と同じ人物であること。** **May change** — 何も変えない。⚠️ **この1本の手は、この作品で唯一、画面から退場する。**

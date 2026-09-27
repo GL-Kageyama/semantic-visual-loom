@@ -50,7 +50,7 @@
 
 ## 篠原麻衣
 
-- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/06_篠原麻衣/ChatGPT Image 2026年9月21日 10_05_00.png` （人のかたちの一枚, `character-sheet × luminous-anime`）.
+- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/05_篠原麻衣/ChatGPT Image 2026年9月21日 00_44_21.png` （人のかたちの一枚, `character-sheet × luminous-anime`）.
 - Appearance: **外見の記述は出典に一行も無い**（方針 §5a）。**この一枚が外見である。** ⚠️ **`s02`〜`s04` は、手・目・口を三本に分けていた**——**この1本は、その三つを一人で、一本の中で行う。** ⚠️ **初め「三つを一人で持つ唯一の1本」と書いていた**——**`s10`・`s24`・`s25` も、一人の中に手と顔を持つ**（顔は目と口を含む）。**「唯一」は、数えられない限り書かない。**
 - Behavior: **手が一枚を取り、目が其処へ落ち、口が動く。** ⚠️ **一つずつは短い。間を置かない。** **口は一度だけ動き、音を出さない。**
 - Continuity Requirements: **Must preserve** — 凍結した一枚、および `s02`〜`s04` の運動の質。**May change** — 何も変えない。⚠️ **`s02`・`s03`・`s04` は三人の別々のショットであるが、この1本は一人で同じ三つを行う**——**ゆえに運動の形が一致していることが、この1本の成立条件である。**

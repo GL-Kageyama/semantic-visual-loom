@@ -35,6 +35,14 @@ duration: "5.345s"
 # 動画の仕様（§1–20）。
 spec: specs/video/habits-mv-s22.md
 
+# 画像の仕様（**§1–20 を持たない**。§18 も `Negative Prompt` も `Style Motion` も無い）。
+# ⚠️ **この欄は、この稿で足した**（実測 2026-09-28——27本のどれも持っていなかった）。
+#    ⚠️ **この1本は二つの場所を1枚に置く**（`s08` に次いで二度目）——**切れ目も、
+#    場所を区別する光も置かない。** ⚠️ **この1枚は、`reference_set` の `negatives` 2点と
+#    同じ側に立つ**（`content` が二人ぶんの凍結した一枚を渡す）。
+#    **送った日に `attached` を書く。**
+key_image: specs/image/habits-mv-s22.md
+
 # **狙い。** このショットが何を試すのか。
 # ⚠️ **この欄を読む検査は、まだ1つも無い**（`shot-record.schema.json` の `aim`）。
 aim: >-

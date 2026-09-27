@@ -50,7 +50,7 @@
 
 ## 関翔太の右手
 
-- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/09_関翔太/ChatGPT Image 2026年9月21日 11_05_00.png` （人のかたちの一枚, `character-sheet × luminous-anime`）.
+- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/サブ/08_関翔太/ChatGPT Image 2026年9月20日 19_53_47.png` （人のかたちの一枚, `character-sheet × luminous-anime`）.
 - Appearance: **外見の記述は出典に一行も無い**（方針 §5a）。**この一枚が外見である。** 置くのは**右手だけ**である。⚠️ **顔は置かない。**
 - Behavior: **閉じる動きが一つ。** ⚠️ **掴むものが無いので、指が掌に当たる。** **そのあと、開かない。**
 - Continuity Requirements: **Must preserve** — 凍結した一枚。**May change** — 何も変えない。⚠️ **`s12` の手が「開いて止まる」、この手が「閉じて止まる」である**——**二本は対である。**

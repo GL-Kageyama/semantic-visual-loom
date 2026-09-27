@@ -51,7 +51,7 @@
 
 ## 暮林蒼の右手
 
-- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/メイン/02_暮林蒼/ChatGPT Image 2026年9月18日 20_29_36.png` （キャラクター設定画）＋ `.../ChatGPT Image 2026年9月17日 21_56_32.png` （表情シート）.
+- Reference: the frozen setting sheet — `distill-essence-engine/examples/habits/character/メイン/02_暮林蒼/ChatGPT Image 2026年9月20日 03_29_35.png` （キャラクター設定画）＋ `.../ChatGPT Image 2026年9月20日 03_49_14.png` （表情シート）.
 - Appearance: **凍結した二枚が外見である。** 置くのは**右手だけ**である。⚠️ **この1本に顔は置かない** — 顔は `s10` で、**呼ばれた後に**置かれる。
 - Behavior: **四枚を、下から順に一度ずつ押さえる。** ⚠️ **剥がさない。押さえるだけである。** **一つずつの所作が短く、間が無い。**
 - Continuity Requirements: **Must preserve** — 凍結した二枚。**May change** — 何も変えない。⚠️ **この手は `s10` で同じ人物の顔と対になる。**
