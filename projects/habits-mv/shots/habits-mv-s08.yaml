@@ -1,0 +1,113 @@
+# chorus-1 / beat / motion —— まだ、呼ばれていない。
+#
+# **「まだ、呼ばれていない。」**（`l07`·41.649秒）——`bible.song.lines` l07。
+#
+# ⚠️ **この8.218秒は、サビの中で飛び抜けて長い。** 前の3行は 2.473秒である。
+#    **ゆえにこの1本だけは「明かせる」長さを持つ。**
+#    ⚠️ **それでも明かさない。** ——**この1本が持つ行は「まだ、呼ばれていない。」である。**
+#    **顔を置けば、その行が偽になる。** 呼ばれていない者が、なぜ顔を持つのか。
+#    ⚠️ **長さは、明かす許可ではない。** **行が、明かすかどうかを決める。**
+#
+# ⚠️ **二人である。** `mode: motion` のまま**二つの場所を1本に置く**——
+#    これは `role: モンタージュ` である（`rolemap.ROLES`）。
+#    ⚠️ **`place` は単数でなければならない**（`shot-record.schema.json` の `place`）。
+#    ゆえに二つは**同じ現場の、別の机である**——**名札の現場は、学校中に在る。**
+#
+# ⚠️ **片山大翔（第一巻第4話）と石川久美子（第一巻第6話）。** どちらも第一巻である。
+#    ⚠️ **二人を並べることは、話を並べることではない**——**この作品に話は無い。**
+shot: habits-mv-s08
+
+unit:
+  before: "二つの手が、**それぞれ別の紙の上にある。**"
+  after: "二つの手が、**同じ姿勢で止まっている。**"
+
+# **種別（主役）**——`rolemap.ROLES` の15種から。**検収の基準を決める。**
+role: "モンタージュ"
+
+# ⚠️ **この作品の `place` は「話の記名の現場」ではない。**（`ledger.yaml` の `locations` の註）
+#    **曲の1行が立つ現場である。** 六つしかない——**27本が6つを巡る。**
+place: "名札"
+
+# ⚠️ **一時刻である。** この作品は**日付を固定しない**——`bible.world.era` は
+#    「2026, Japan. The setting does not move across all four volumes.」であり、
+#    **一日の内のどの時刻かだけが要る。** 二つの値しか使わない。
+time: "勤務日の日中"
+
+mode: "motion"
+
+# ⚠️ **従属変数である。** この作品では**さらに曲に従属する**——
+#    出所は `bible.song.lines[].at` の差であり、**この作品が決めた数ではない。**
+#    ⚠️ **「4秒より短いから伸ばす」をしない**（`docs/seedance-route.md` の明示の規則）。
+duration: "8.218s"
+
+# 動画の仕様（§1–20）。
+spec: specs/video/habits-mv-s08.md
+
+# **狙い。** このショットが何を試すのか。
+# ⚠️ **この欄を読む検査は、まだ1つも無い**（`shot-record.schema.json` の `aim`）。
+aim: >-
+  **サビの4行目だけが 8.218秒である。** この長さに、**明かさないまま耐えられるか。**
+
+motion:
+  subject: "片山大翔の手と、石川久美子の手。**二人は別の場所にいる。**"
+  quality: "速い所作を二度、**間に何も置かない。**一度目の止まりと二度目の始まりの間に、**切れ目を置かない。**"
+  law: >-
+    `luminous-anime` の運動である。**二つの場所は、繋がらない**——カメラは跨がず、**同じ位置で二度目を迎える。**
+
+# **ビート。不均等に配分する。**（`shot-record.schema.json` の `beats`）
+# ⚠️ **`L37` が敷き詰めを検算する**——0 から始まり、`duration` で終わり、隣が接していること。
+beats:
+  - range: "0-1.2s"
+    density: dense
+    what: "片山大翔の手。**紙を押さえる。**"
+  - range: "1.2-2.4s"
+    density: dense
+    what: "押さえたまま、**指が滑る。**"
+  - range: "2.4-3.6s"
+    density: dense
+    what: "石川久美子の手。**同じ押さえ方が、別の紙で。**"
+  - range: "3.6-5.4s"
+    density: held
+    what: "二つの手が、**同じ姿勢で止まる。**"
+  - range: "5.4-8.218s"
+    density: held
+    what: "**動かない。**紙の上に、光だけが動く。"
+
+reference_set:
+  - "片山大翔.identity"
+  - "片山大翔.negatives"
+  - "石川久美子.identity"
+  - "石川久美子.negatives"
+  - "名札"
+  - "名札.appearance"
+
+# ⚠️ **27本すべてで同一である。** 出所は三つ——
+#    `bible.negative_base` の5行／`ledger.yaml` の `characters.*.negatives` の共通の床
+#    （`no identifying clothing, hairstyle, or prop`）／`props.*.negative` の2行。
+#    ⚠️ **`no face before the name is called` は、顔を置くショットにも掛かる。**
+#    **この作品の顔は、すべて手の後に来る**——ゆえにこの一行は、
+#    **どのショットの内容とも衝突しない。**
+forbidden_set:
+  - "no calling voice as a sound effect"
+  - "no face before the name is called"
+  - "no watermark"
+  - "no on-screen subtitles"
+  - "no background music"
+  - "no identifying clothing, hairstyle, or prop"
+  - "no legible name text"
+  - "no legible text on any surface"
+
+# ⚠️ **`attached` を書かない。** この作品は**まだ1本も生成していない**——
+#    書けば「意図にあるのに添付が無い」と27本ぶん鳴る（`L6` の註）。
+#    **書かなければ「記録が無い」と言う**——**それが今の事実である。**
+#    ✅ **生成したら、この欄を足す。**
+
+# **このショットが実際に持つ開示状態。**（台帳の `disclosure` は「意図」、こちらが「実際」）
+# ⚠️ **27本すべてが4つの属性を持つ。** 持たないショットは開示の検査を受けない（`L7` の `bare`）。
+# ⚠️ **`unknown` は「観客がまだ知らない」である。** 台帳の3つの変化点（`s10`・`s17`・`s18`）で
+#    値が動く。**`出席簿の転出欄.一行` は動かない**——`s01` が**出発点**だからである（`L9` の註）。
+disclosure_state:
+  出席簿の転出欄.一行: present
+  宛名票の一行.いちばん古い一枚: unknown
+  鍵に付いた預かり札.宛先: unknown
+  名札の予備.着けられた: unknown

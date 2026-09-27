@@ -1,0 +1,128 @@
+# bridge / long-take / motion —— 束から、一枚が、切り離される。
+#
+# **「束から、一枚が、切り離される。」**（`l22`·106.037秒）＋
+# **「使われないまま、名札がある。」**（`l23`·110.984秒）。
+# **2行を1本で受ける。そして、その後 4.840秒の間奏が続く**（120.984–125.824）。
+#
+# ⚠️ **この1本の尺 14.840秒は、行の合計 14.947秒ではない。**
+#    行は 106.037 から 120.984 まで。**その後 4.840秒に歌詞が無い。**
+#    **ゆえに `s18` がそれを吸う**——`s04` が 2.527秒を吸ったのと同じ規律である。
+#    ⚠️ **歌の無い時間は、画面の側が持つ。**
+#
+# ✅ **ここが `さくら` の席である。** ——**この作品で唯一。**
+#    方針 §5a「**顔と固有の声を与えない。**」／`ledger.yaml` の `さくら.negatives` の一行目——
+#    「**設定画は通常、その不在を埋めるために顔を四度置く。この一枚は埋めない。**」
+#    ✅ **2026-09-28 実測——`メイン/04_さくら/` には `prompt.md` しか無く、PNG が1枚も無い。**
+#       **二十七名には在り、この一名には無い。**
+#    ⚠️ **ゆえに `reference_set` に `さくら.identity` を入れない。**
+#       **入れるのは `さくら.negatives` だけである**——**人物を描かないことが、
+#       この一名の identity だからである。**
+#
+# ⚠️ **禁制集合に、彼女の一行目をそのまま持ち込まない。**
+#    `no person, no figure, no character, no face, no body, no human silhouette, no portrait`
+#    ——**この1本には侘田すみれの手が在る。** そのまま掛ければ、**その手ごと消える。**
+#    ✅ **不在は「人物を描かない」では作らない。** **「名札は在り、着ける者が居ない」で作る。**
+#    ゆえにこの1本だけ `no second person, no additional figure, no additional face` を敷く——
+#    **一人は居てよい。二人目が、居ない。**
+#    ⚠️ **この判断は、`ledger.yaml` の `さくら.negatives` の註と食い違わない**——
+#    台帳が言うのは**参照集合に `identity` を入れないこと**であり、**それは守っている。**
+#
+# ⚠️ **`disclosure`: 名札の予備.着けられた が `absent` になる変化点である。**
+#    台帳の `disclosure` の3点のうちの3つ目であり、**最後の変化点である。**
+shot: habits-mv-s18
+
+unit:
+  before: "名札が、**束の中に、着けられないまま在る。**"
+  after: "一枚が切り離され、**着けられる者のいないまま、机の上に残る。**"
+
+# **種別（主役）**——`rolemap.ROLES` の15種から。**検収の基準を決める。**
+role: "開示"
+
+# ⚠️ **この作品の `place` は「話の記名の現場」ではない。**（`ledger.yaml` の `locations` の註）
+#    **曲の1行が立つ現場である。** 六つしかない——**27本が6つを巡る。**
+place: "名札の予備"
+
+# ⚠️ **一時刻である。** この作品は**日付を固定しない**——`bible.world.era` は
+#    「2026, Japan. The setting does not move across all four volumes.」であり、
+#    **一日の内のどの時刻かだけが要る。** 二つの値しか使わない。
+time: "勤務日の夕方"
+
+mode: "motion"
+
+# ⚠️ **従属変数である。** この作品では**さらに曲に従属する**——
+#    出所は `bible.song.lines[].at` の差であり、**この作品が決めた数ではない。**
+#    ⚠️ **「4秒より短いから伸ばす」をしない**（`docs/seedance-route.md` の明示の規則）。
+duration: "14.840s"
+
+# 動画の仕様（§1–20）。
+spec: specs/video/habits-mv-s18.md
+
+# **狙い。** このショットが何を試すのか。
+# ⚠️ **この欄を読む検査は、まだ1つも無い**（`shot-record.schema.json` の `aim`）。
+aim: >-
+  **この作品で最も長い1本である。** そして**画面に、着ける者が居ない。** **不在を、14.840秒の一変化として立てられるか。**
+
+motion:
+  subject: "侘田すみれの手と、切り離される一枚。**着ける者は、動かない。**"
+  quality: "ゆっくり。**切り離す動きが一度だけ。**そのあと、**手は画面から出る。**——**残るのは、一枚だけである。**"
+  law: >-
+    `luminous-anime` の運動である。**切り離しは、端から一直線に進む**——**この作品で唯一、動きが直線である所作である。**
+
+# **ビート。不均等に配分する。**（`shot-record.schema.json` の `beats`）
+# ⚠️ **`L37` が敷き詰めを検算する**——0 から始まり、`duration` で終わり、隣が接していること。
+beats:
+  - range: "0-4.947s"
+    density: dense
+    what: "手が束を持ち、**端から切り離し始める。**"
+  - range: "4.947-8.2s"
+    density: transition
+    what: "**一枚が、離れる。**"
+  - range: "8.2-10.984s"
+    density: sparse
+    what: "**手が、画面から出る。**"
+  - range: "10.984-14.840s"
+    density: held
+    what: "一枚だけが、机の上にある。**誰も、着けない。**"
+
+reference_set:
+  - "侘田すみれ.identity"
+  - "侘田すみれ.negatives"
+  - "さくら.negatives"
+  - "名札"
+  - "名札.negative"
+  - "束"
+  - "名札の予備"
+
+# ⚠️ **27本すべてで同一である。** 出所は三つ——
+#    `bible.negative_base` の5行／`ledger.yaml` の `characters.*.negatives` の共通の床
+#    （`no identifying clothing, hairstyle, or prop`）／`props.*.negative` の2行。
+#    ⚠️ **`no face before the name is called` は、顔を置くショットにも掛かる。**
+#    **この作品の顔は、すべて手の後に来る**——ゆえにこの一行は、
+#    **どのショットの内容とも衝突しない。**
+forbidden_set:
+  - "no calling voice as a sound effect"
+  - "no face before the name is called"
+  - "no watermark"
+  - "no on-screen subtitles"
+  - "no background music"
+  - "no identifying clothing, hairstyle, or prop"
+  - "no legible name text"
+  - "no legible text on any surface"
+  - "no second person, no additional figure, no additional face"
+  - "no romaji in place of the Japanese name"
+  - "no cherry blossom, no petals, no pink"
+
+# ⚠️ **`attached` を書かない。** この作品は**まだ1本も生成していない**——
+#    書けば「意図にあるのに添付が無い」と27本ぶん鳴る（`L6` の註）。
+#    **書かなければ「記録が無い」と言う**——**それが今の事実である。**
+#    ✅ **生成したら、この欄を足す。**
+
+# **このショットが実際に持つ開示状態。**（台帳の `disclosure` は「意図」、こちらが「実際」）
+# ⚠️ **27本すべてが4つの属性を持つ。** 持たないショットは開示の検査を受けない（`L7` の `bare`）。
+# ⚠️ **`unknown` は「観客がまだ知らない」である。** 台帳の3つの変化点（`s10`・`s17`・`s18`）で
+#    値が動く。**`出席簿の転出欄.一行` は動かない**——`s01` が**出発点**だからである（`L9` の註）。
+disclosure_state:
+  出席簿の転出欄.一行: present
+  宛名票の一行.いちばん古い一枚: present
+  鍵に付いた預かり札.宛先: absent
+  名札の予備.着けられた: absent

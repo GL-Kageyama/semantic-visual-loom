@@ -1,0 +1,102 @@
+# final-chorus / beat / motion —— その名は、誰の名。
+#
+# **「その名は、誰の名。」**（`l25`·128.298秒）——`bible.song.lines` l25。
+#
+# ⚠️ **この2.393秒は、この曲で最も短い1本である。**
+#    Seedance 2.5 の尺の下限は **4秒** である（`docs/seedance-route.md`）。
+#    ⚠️ **下限より短い。** ——**それでもこの1本を伸ばさない。**
+#       `docs/seedance-route.md` の明示の規則——
+#       「**the duration ceiling is not a reason to lengthen a shot**」
+#       （**上限は、ショットを伸ばす理由ではない**）。下限についても同じである。
+#    ⚠️ **§19 に記録する**——**生成は経路の下限を要求し、
+#       この作品の中でのこのショットの長さは、曲が与えたものである。**
+#    **両方を書く。** 片方だけを書けば、どちらかが嘘になる。
+#
+# ⚠️ **山田健太（第三巻第4話・主役回。記名＝名のない鍵の札／run-09）。**
+#    ⚠️ **この一人の記名には、名が無い。** ——`s07` の高橋由美（名の欄が無い）と対である。
+#    **サビは、名の無い記名を二人持っている。**
+shot: habits-mv-s20
+
+unit:
+  before: "指が、**何も掴んでいない。**"
+  after: "指が名札の角をつまみ、**少し持ち上げている。**"
+
+# **種別（主役）**——`rolemap.ROLES` の15種から。**検収の基準を決める。**
+role: "所作"
+
+# ⚠️ **この作品の `place` は「話の記名の現場」ではない。**（`ledger.yaml` の `locations` の註）
+#    **曲の1行が立つ現場である。** 六つしかない——**27本が6つを巡る。**
+place: "名札"
+
+# ⚠️ **一時刻である。** この作品は**日付を固定しない**——`bible.world.era` は
+#    「2026, Japan. The setting does not move across all four volumes.」であり、
+#    **一日の内のどの時刻かだけが要る。** 二つの値しか使わない。
+time: "勤務日の日中"
+
+mode: "motion"
+
+# ⚠️ **従属変数である。** この作品では**さらに曲に従属する**——
+#    出所は `bible.song.lines[].at` の差であり、**この作品が決めた数ではない。**
+#    ⚠️ **「4秒より短いから伸ばす」をしない**（`docs/seedance-route.md` の明示の規則）。
+duration: "2.393s"
+
+# 動画の仕様（§1–20）。
+spec: specs/video/habits-mv-s20.md
+
+# **狙い。** このショットが何を試すのか。
+# ⚠️ **この欄を読む検査は、まだ1つも無い**（`shot-record.schema.json` の `aim`）。
+aim: >-
+  **この曲で最も短い1本（2.393秒）。** それでも一変化を立てられるか。
+
+motion:
+  subject: "山田健太の指と、名札の角。"
+  quality: "速い。**つまむ動きが一つ。**ほとんど持ち上がらない。"
+  law: >-
+    `luminous-anime` の運動である。**この1本の動きの量は、この作品で最小である**——**2.393秒に収まる量しか置かない。**
+
+# **ビート。不均等に配分する。**（`shot-record.schema.json` の `beats`）
+# ⚠️ **`L37` が敷き詰めを検算する**——0 から始まり、`duration` で終わり、隣が接していること。
+beats:
+  - range: "0-1.0s"
+    density: dense
+    what: "指が角へ行く。"
+  - range: "1.0-2.393s"
+    density: held
+    what: "**つまみ、少し浮く。**止まる。"
+
+reference_set:
+  - "山田健太.identity"
+  - "山田健太.negatives"
+  - "名札"
+  - "名札.appearance"
+
+# ⚠️ **27本すべてで同一である。** 出所は三つ——
+#    `bible.negative_base` の5行／`ledger.yaml` の `characters.*.negatives` の共通の床
+#    （`no identifying clothing, hairstyle, or prop`）／`props.*.negative` の2行。
+#    ⚠️ **`no face before the name is called` は、顔を置くショットにも掛かる。**
+#    **この作品の顔は、すべて手の後に来る**——ゆえにこの一行は、
+#    **どのショットの内容とも衝突しない。**
+forbidden_set:
+  - "no calling voice as a sound effect"
+  - "no face before the name is called"
+  - "no watermark"
+  - "no on-screen subtitles"
+  - "no background music"
+  - "no identifying clothing, hairstyle, or prop"
+  - "no legible name text"
+  - "no legible text on any surface"
+
+# ⚠️ **`attached` を書かない。** この作品は**まだ1本も生成していない**——
+#    書けば「意図にあるのに添付が無い」と27本ぶん鳴る（`L6` の註）。
+#    **書かなければ「記録が無い」と言う**——**それが今の事実である。**
+#    ✅ **生成したら、この欄を足す。**
+
+# **このショットが実際に持つ開示状態。**（台帳の `disclosure` は「意図」、こちらが「実際」）
+# ⚠️ **27本すべてが4つの属性を持つ。** 持たないショットは開示の検査を受けない（`L7` の `bare`）。
+# ⚠️ **`unknown` は「観客がまだ知らない」である。** 台帳の3つの変化点（`s10`・`s17`・`s18`）で
+#    値が動く。**`出席簿の転出欄.一行` は動かない**——`s01` が**出発点**だからである（`L9` の註）。
+disclosure_state:
+  出席簿の転出欄.一行: present
+  宛名票の一行.いちばん古い一枚: present
+  鍵に付いた預かり札.宛先: absent
+  名札の予備.着けられた: absent

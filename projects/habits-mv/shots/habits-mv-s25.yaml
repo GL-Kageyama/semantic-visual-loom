@@ -1,0 +1,108 @@
+# final-chorus / beat / motion —— 誰の名。（最後）
+#
+# **「誰の名。」**（`l30`·150.319秒）——`bible.song.lines` l30。
+# **この曲で最後に歌われるサビの一行である。**
+#
+# ⚠️ **この1本のあと、サビは終わる**（節末 155.505）。**残るのは Outro の23.815秒である。**
+#
+# ⚠️ **清水拓也（第二巻第9話・主役回。記名＝送り状の控え／run-09）と
+#    林沙織（第四巻第5話・第四巻第13話）。**
+#    **`s25` は第二巻と第四巻を並べる**——`s24` は第一巻と第二巻であった。
+#    ⚠️ **最終サビの7本は、四巻すべてを混ぜて終わる。**
+#
+# ⚠️ **この1本で、顔を置くことが終わる。** 残る2本（`s26`・`s27`）は
+#    **どちらも `mode: still` であり、主題が止まる。**
+#    **`s26` には手が在り、`s27` ではその手が退く。**
+shot: habits-mv-s25
+
+unit:
+  before: "二つの手が、**それぞれ別の紙を押さえている。**"
+  after: "**二つの顔が起き、最後の一行が終わる。**"
+
+# **種別（主役）**——`rolemap.ROLES` の15種から。**検収の基準を決める。**
+role: "開示"
+
+# ⚠️ **この作品の `place` は「話の記名の現場」ではない。**（`ledger.yaml` の `locations` の註）
+#    **曲の1行が立つ現場である。** 六つしかない——**27本が6つを巡る。**
+place: "束"
+
+# ⚠️ **一時刻である。** この作品は**日付を固定しない**——`bible.world.era` は
+#    「2026, Japan. The setting does not move across all four volumes.」であり、
+#    **一日の内のどの時刻かだけが要る。** 二つの値しか使わない。
+time: "勤務日の日中"
+
+mode: "motion"
+
+# ⚠️ **従属変数である。** この作品では**さらに曲に従属する**——
+#    出所は `bible.song.lines[].at` の差であり、**この作品が決めた数ではない。**
+#    ⚠️ **「4秒より短いから伸ばす」をしない**（`docs/seedance-route.md` の明示の規則）。
+duration: "5.186s"
+
+# 動画の仕様（§1–20）。
+spec: specs/video/habits-mv-s25.md
+
+# **狙い。** このショットが何を試すのか。
+# ⚠️ **この欄を読む検査は、まだ1つも無い**（`shot-record.schema.json` の `aim`）。
+aim: >-
+  **この曲で最後に歌われるサビの一行を受ける。** 顔を置くのは、この作品でここが最後である。
+
+motion:
+  subject: "清水拓也の手と顔、林沙織の手と顔。"
+  quality: "速い所作のあと、**二つの顔が順に起きる。**`s24` と同じ運動である——**反復であり、同じ1本ではない。**"
+  law: >-
+    `luminous-anime` の運動である。**`s24` と同じ法である**——**この2本が対であることを、運動の側が持つ。**
+
+# **ビート。不均等に配分する。**（`shot-record.schema.json` の `beats`）
+# ⚠️ **`L37` が敷き詰めを検算する**——0 から始まり、`duration` で終わり、隣が接していること。
+beats:
+  - range: "0-1.1s"
+    density: dense
+    what: "清水拓也の手。**紙を押さえる。**"
+  - range: "1.1-3.0s"
+    density: held
+    what: "**顔が起きる。**"
+  - range: "3.0-3.7s"
+    density: transition
+    what: "林沙織の手。**同じ押さえ方。**"
+  - range: "3.7-5.186s"
+    density: held
+    what: "**顔が起きる。**止まる。"
+
+reference_set:
+  - "清水拓也.identity"
+  - "清水拓也.negatives"
+  - "林沙織.identity"
+  - "林沙織.negatives"
+  - "束"
+  - "束.appearance"
+
+# ⚠️ **27本すべてで同一である。** 出所は三つ——
+#    `bible.negative_base` の5行／`ledger.yaml` の `characters.*.negatives` の共通の床
+#    （`no identifying clothing, hairstyle, or prop`）／`props.*.negative` の2行。
+#    ⚠️ **`no face before the name is called` は、顔を置くショットにも掛かる。**
+#    **この作品の顔は、すべて手の後に来る**——ゆえにこの一行は、
+#    **どのショットの内容とも衝突しない。**
+forbidden_set:
+  - "no calling voice as a sound effect"
+  - "no face before the name is called"
+  - "no watermark"
+  - "no on-screen subtitles"
+  - "no background music"
+  - "no identifying clothing, hairstyle, or prop"
+  - "no legible name text"
+  - "no legible text on any surface"
+
+# ⚠️ **`attached` を書かない。** この作品は**まだ1本も生成していない**——
+#    書けば「意図にあるのに添付が無い」と27本ぶん鳴る（`L6` の註）。
+#    **書かなければ「記録が無い」と言う**——**それが今の事実である。**
+#    ✅ **生成したら、この欄を足す。**
+
+# **このショットが実際に持つ開示状態。**（台帳の `disclosure` は「意図」、こちらが「実際」）
+# ⚠️ **27本すべてが4つの属性を持つ。** 持たないショットは開示の検査を受けない（`L7` の `bare`）。
+# ⚠️ **`unknown` は「観客がまだ知らない」である。** 台帳の3つの変化点（`s10`・`s17`・`s18`）で
+#    値が動く。**`出席簿の転出欄.一行` は動かない**——`s01` が**出発点**だからである（`L9` の註）。
+disclosure_state:
+  出席簿の転出欄.一行: present
+  宛名票の一行.いちばん古い一枚: present
+  鍵に付いた預かり札.宛先: absent
+  名札の予備.着けられた: absent

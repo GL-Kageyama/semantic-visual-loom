@@ -1,0 +1,104 @@
+# final-chorus / beat / motion —— まだ、呼ばれていない。（最後）
+#
+# **「まだ、呼ばれていない。」**（`l28`·138.590秒）——`bible.song.lines` l28。
+#
+# ⚠️ **橋本悠斗の床は、1行厚い。**（`ledger.yaml` の `橋本悠斗` の註）
+#    第二巻第8話は、**名が読まれる話である**——ゆえにこの一人の手が持つ紙は、
+#    **この作品で唯一、読める字を持ちうる。**
+#    ⚠️ **それでもこの作品は読ませない。** ——**この1本が持つ行は
+#    「まだ、呼ばれていない。」である。** **読める字を置けば、
+#    呼ばれていないことの方が偽になる。**
+#    ⚠️ **`no legible text on any surface` は27本すべてに在る**（`props.*.negative`）。
+#    **この1本だけは、その一行が「床だから」ではなく「この行のため」に効いている。**
+#
+# ⚠️ **宮下遥（第四巻第4話・第四巻第15話）。** `s23` は第四巻を二人並べる。
+shot: habits-mv-s23
+
+unit:
+  before: "二つの手が、**それぞれ別の紙の上にある。**"
+  after: "二つの手が止まり、**紙の上の字は、読めないままである。**"
+
+# **種別（主役）**——`rolemap.ROLES` の15種から。**検収の基準を決める。**
+role: "モンタージュ"
+
+# ⚠️ **この作品の `place` は「話の記名の現場」ではない。**（`ledger.yaml` の `locations` の註）
+#    **曲の1行が立つ現場である。** 六つしかない——**27本が6つを巡る。**
+place: "名札"
+
+# ⚠️ **一時刻である。** この作品は**日付を固定しない**——`bible.world.era` は
+#    「2026, Japan. The setting does not move across all four volumes.」であり、
+#    **一日の内のどの時刻かだけが要る。** 二つの値しか使わない。
+time: "勤務日の日中"
+
+mode: "motion"
+
+# ⚠️ **従属変数である。** この作品では**さらに曲に従属する**——
+#    出所は `bible.song.lines[].at` の差であり、**この作品が決めた数ではない。**
+#    ⚠️ **「4秒より短いから伸ばす」をしない**（`docs/seedance-route.md` の明示の規則）。
+duration: "6.703s"
+
+# 動画の仕様（§1–20）。
+spec: specs/video/habits-mv-s23.md
+
+# **狙い。** このショットが何を試すのか。
+# ⚠️ **この欄を読む検査は、まだ1つも無い**（`shot-record.schema.json` の `aim`）。
+aim: >-
+  **「呼ばれていない」の最後の1本。** そして**この作品で最も厚い床を持つ1本**——読める字を、この一人だけが持ちうる。
+
+motion:
+  subject: "宮下遥の手と、橋本悠斗の手。"
+  quality: "速い所作を二度。**そのあと、長く止まる。**"
+  law: >-
+    `luminous-anime` の運動である。**止まったあと、紙は一度もしなない**——**この作品の最後のサビの、最後の静止である。**
+
+# **ビート。不均等に配分する。**（`shot-record.schema.json` の `beats`）
+# ⚠️ **`L37` が敷き詰めを検算する**——0 から始まり、`duration` で終わり、隣が接していること。
+beats:
+  - range: "0-1.5s"
+    density: dense
+    what: "宮下遥の手。**紙を押さえる。**"
+  - range: "1.5-3.4s"
+    density: held
+    what: "止まる。"
+  - range: "3.4-6.703s"
+    density: held
+    what: "橋本悠斗の手が、**同じ姿勢を取る。**"
+
+reference_set:
+  - "宮下遥.identity"
+  - "宮下遥.negatives"
+  - "橋本悠斗.identity"
+  - "橋本悠斗.negatives"
+  - "名札"
+  - "名札.appearance"
+
+# ⚠️ **27本すべてで同一である。** 出所は三つ——
+#    `bible.negative_base` の5行／`ledger.yaml` の `characters.*.negatives` の共通の床
+#    （`no identifying clothing, hairstyle, or prop`）／`props.*.negative` の2行。
+#    ⚠️ **`no face before the name is called` は、顔を置くショットにも掛かる。**
+#    **この作品の顔は、すべて手の後に来る**——ゆえにこの一行は、
+#    **どのショットの内容とも衝突しない。**
+forbidden_set:
+  - "no calling voice as a sound effect"
+  - "no face before the name is called"
+  - "no watermark"
+  - "no on-screen subtitles"
+  - "no background music"
+  - "no identifying clothing, hairstyle, or prop"
+  - "no legible name text"
+  - "no legible text on any surface"
+
+# ⚠️ **`attached` を書かない。** この作品は**まだ1本も生成していない**——
+#    書けば「意図にあるのに添付が無い」と27本ぶん鳴る（`L6` の註）。
+#    **書かなければ「記録が無い」と言う**——**それが今の事実である。**
+#    ✅ **生成したら、この欄を足す。**
+
+# **このショットが実際に持つ開示状態。**（台帳の `disclosure` は「意図」、こちらが「実際」）
+# ⚠️ **27本すべてが4つの属性を持つ。** 持たないショットは開示の検査を受けない（`L7` の `bare`）。
+# ⚠️ **`unknown` は「観客がまだ知らない」である。** 台帳の3つの変化点（`s10`・`s17`・`s18`）で
+#    値が動く。**`出席簿の転出欄.一行` は動かない**——`s01` が**出発点**だからである（`L9` の註）。
+disclosure_state:
+  出席簿の転出欄.一行: present
+  宛名票の一行.いちばん古い一枚: present
+  鍵に付いた預かり札.宛先: absent
+  名札の予備.着けられた: absent

@@ -1,0 +1,112 @@
+# outro / long-take / still —— 光が、紙の上に落ちている。
+#
+# **「光が、紙の上に落ちている。」**（`l31`·155.505秒）——`bible.song.lines` l31。
+#
+# ⚠️ **この1本と `s27` が、`l31` の2本である。**（`ledger.song_coverage` の最後の対応）
+#    9.506秒 ＋ 14.309秒 = 23.815秒 = `outro` の尺。
+#    ⚠️ **「1行 → 複数ショット」の唯一の実例である**——
+#    **行が9.506秒を1人で持ち、その後 14.309秒の後奏が続く。**
+#    ⚠️ **後奏を節の対応（`section: outro`）で受ければ、
+#    `l31` の対応が2つになり `L36` ①が空になる。**
+#
+# ✅ **この1本が、この作品で最初の `mode: still` である。**
+#    `mode` の意味は「**主題が動くか**」——
+#    **`still` は主題が止まる**（`shot-record.schema.json` の `mode` の註）。
+#    ⚠️ **動かないのは、碓氷千夏の手である。**
+#    光は動く。**ゆえに `still` は「静止画」ではない。**
+#
+# ⚠️ **`s01` と同じ場所へ戻る。** ——曲は「光が、紙の上に落ちている。」と言い、
+#    この作品は**最初に開いた頁を、まだ開いたまま置いている。**
+#    **運搬は、一度も完了していない。**（`bible.world.rules` の四番）
+#
+# ⚠️ **参照集合に `碓氷千夏.identity` を入れない**（`s01` と同じ理由）——
+#    **この1本が写すのは、手と頁と光である。**
+shot: habits-mv-s26
+
+unit:
+  before: "手が、**開いた頁の上にある。**まだ動いている。"
+  after: "手が止まり、**画面の中に残っている。**光だけが動き続けている。"
+
+# **種別（主役）**——`rolemap.ROLES` の15種から。**検収の基準を決める。**
+role: "余白"
+
+# ⚠️ **この作品の `place` は「話の記名の現場」ではない。**（`ledger.yaml` の `locations` の註）
+#    **曲の1行が立つ現場である。** 六つしかない——**27本が6つを巡る。**
+place: "出席簿の転出欄"
+
+# ⚠️ **一時刻である。** この作品は**日付を固定しない**——`bible.world.era` は
+#    「2026, Japan. The setting does not move across all four volumes.」であり、
+#    **一日の内のどの時刻かだけが要る。** 二つの値しか使わない。
+time: "勤務日の夕方"
+
+mode: "still"
+
+# ⚠️ **従属変数である。** この作品では**さらに曲に従属する**——
+#    出所は `bible.song.lines[].at` の差であり、**この作品が決めた数ではない。**
+#    ⚠️ **「4秒より短いから伸ばす」をしない**（`docs/seedance-route.md` の明示の規則）。
+duration: "9.506s"
+
+# 動画の仕様（§1–20）。
+spec: specs/video/habits-mv-s26.md
+
+# **狙い。** このショットが何を試すのか。
+# ⚠️ **この欄を読む検査は、まだ1つも無い**（`shot-record.schema.json` の `aim`）。
+aim: >-
+  **この作品で最初の `mode: still`。** 主題が止まり、光だけが動く——`s01` と同じ場所へ戻り、**開いた頁が閉じられない**ことを置く。
+
+motion:
+  subject: "止まった手と、頁の上を動く光。**主題は動かない。**"
+  quality: "止まっている。**手は動かない。**動くのは、蛍光灯の下で頁を渡る光の縁だけである。"
+  law: >-
+    `luminous-anime` の運動である。**止まるのは主題であって、画面ではない**（`shot-record.schema.json` の `mode` の註）——**光と埃は動き続ける。****この作品の物理は、止まった画面でも止まらない。**
+
+# **ビート。不均等に配分する。**（`shot-record.schema.json` の `beats`）
+# ⚠️ **`L37` が敷き詰めを検算する**——0 から始まり、`duration` で終わり、隣が接していること。
+beats:
+  - range: "0-3.0s"
+    density: held
+    what: "開いた頁と、その上の手。"
+  - range: "3.0-6.5s"
+    density: sparse
+    what: "**光の縁が、頁を渡る。**"
+  - range: "6.5-9.506s"
+    density: held
+    what: "光が行き、**頁だけが残る。**"
+
+reference_set:
+  - "碓氷千夏.negatives"
+  - "出席簿"
+  - "出席簿.negative"
+  - "出席簿の転出欄"
+  - "出席簿の転出欄.geography"
+
+# ⚠️ **27本すべてで同一である。** 出所は三つ——
+#    `bible.negative_base` の5行／`ledger.yaml` の `characters.*.negatives` の共通の床
+#    （`no identifying clothing, hairstyle, or prop`）／`props.*.negative` の2行。
+#    ⚠️ **`no face before the name is called` は、顔を置くショットにも掛かる。**
+#    **この作品の顔は、すべて手の後に来る**——ゆえにこの一行は、
+#    **どのショットの内容とも衝突しない。**
+forbidden_set:
+  - "no calling voice as a sound effect"
+  - "no face before the name is called"
+  - "no watermark"
+  - "no on-screen subtitles"
+  - "no background music"
+  - "no identifying clothing, hairstyle, or prop"
+  - "no legible name text"
+  - "no legible text on any surface"
+
+# ⚠️ **`attached` を書かない。** この作品は**まだ1本も生成していない**——
+#    書けば「意図にあるのに添付が無い」と27本ぶん鳴る（`L6` の註）。
+#    **書かなければ「記録が無い」と言う**——**それが今の事実である。**
+#    ✅ **生成したら、この欄を足す。**
+
+# **このショットが実際に持つ開示状態。**（台帳の `disclosure` は「意図」、こちらが「実際」）
+# ⚠️ **27本すべてが4つの属性を持つ。** 持たないショットは開示の検査を受けない（`L7` の `bare`）。
+# ⚠️ **`unknown` は「観客がまだ知らない」である。** 台帳の3つの変化点（`s10`・`s17`・`s18`）で
+#    値が動く。**`出席簿の転出欄.一行` は動かない**——`s01` が**出発点**だからである（`L9` の註）。
+disclosure_state:
+  出席簿の転出欄.一行: present
+  宛名票の一行.いちばん古い一枚: present
+  鍵に付いた預かり札.宛先: absent
+  名札の予備.着けられた: absent

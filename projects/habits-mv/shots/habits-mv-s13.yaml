@@ -1,0 +1,98 @@
+# chorus-2 / beat / motion —— その名は、誰の名。
+#
+# **「その名は、誰の名。」**（`l16`·78.750秒）——`bible.song.lines` l16。
+#
+# ⚠️ **川上桜の記名は、アレルギー表の名である**（サブ 7/24・第一巻第9話・主役回／run-09）。
+#    **この一人の紙は、名簿ではない。** ゆえにこの1本の紙は、
+#    **名簿の形をしていない**——**表である。**
+#    ⚠️ **しかし画面はそれを言わない。** 表も名簿も、**この作品では同じ「紙」である。**
+#    **四巻の違いは、この作品では違いではない。**
+#
+# ⚠️ **影。** `bible.world.visual_language.art_direction` は
+#    「Fluorescent light. One close shot of a hand per episode.」と書く——
+#    **蛍光灯の下では、影が硬い。** **この作品の影は、どこでも同じ硬さである。**
+shot: habits-mv-s13
+
+unit:
+  before: "指が、**紙の端を押さえている。**"
+  after: "紙が持ち上がり、**端が影を作っている。**"
+
+# **種別（主役）**——`rolemap.ROLES` の15種から。**検収の基準を決める。**
+role: "所作"
+
+# ⚠️ **この作品の `place` は「話の記名の現場」ではない。**（`ledger.yaml` の `locations` の註）
+#    **曲の1行が立つ現場である。** 六つしかない——**27本が6つを巡る。**
+place: "名札"
+
+# ⚠️ **一時刻である。** この作品は**日付を固定しない**——`bible.world.era` は
+#    「2026, Japan. The setting does not move across all four volumes.」であり、
+#    **一日の内のどの時刻かだけが要る。** 二つの値しか使わない。
+time: "勤務日の日中"
+
+mode: "motion"
+
+# ⚠️ **従属変数である。** この作品では**さらに曲に従属する**——
+#    出所は `bible.song.lines[].at` の差であり、**この作品が決めた数ではない。**
+#    ⚠️ **「4秒より短いから伸ばす」をしない**（`docs/seedance-route.md` の明示の規則）。
+duration: "2.473s"
+
+# 動画の仕様（§1–20）。
+spec: specs/video/habits-mv-s13.md
+
+# **狙い。** このショットが何を試すのか。
+# ⚠️ **この欄を読む検査は、まだ1つも無い**（`shot-record.schema.json` の `aim`）。
+aim: >-
+  **問いの2本目。** `s06` が名札の縁を起こしたのに対し、**ここは紙の端である**——同じ問いを、別の物で。
+
+motion:
+  subject: "川上桜の指と、紙の端。"
+  quality: "速い。**持ち上がる動きが一つ。**紙が一度だけ返る。"
+  law: >-
+    `luminous-anime` の運動である。**紙の端が起きれば、下に影ができる**——**この作品の影は、常に紙の作る影である。**
+
+# **ビート。不均等に配分する。**（`shot-record.schema.json` の `beats`）
+# ⚠️ **`L37` が敷き詰めを検算する**——0 から始まり、`duration` で終わり、隣が接していること。
+beats:
+  - range: "0-1.0s"
+    density: dense
+    what: "指が端を押さえる。"
+  - range: "1.0-2.473s"
+    density: held
+    what: "**端が起き、影ができる。**止まる。"
+
+reference_set:
+  - "川上桜.identity"
+  - "川上桜.negatives"
+  - "名札"
+  - "名札.appearance"
+
+# ⚠️ **27本すべてで同一である。** 出所は三つ——
+#    `bible.negative_base` の5行／`ledger.yaml` の `characters.*.negatives` の共通の床
+#    （`no identifying clothing, hairstyle, or prop`）／`props.*.negative` の2行。
+#    ⚠️ **`no face before the name is called` は、顔を置くショットにも掛かる。**
+#    **この作品の顔は、すべて手の後に来る**——ゆえにこの一行は、
+#    **どのショットの内容とも衝突しない。**
+forbidden_set:
+  - "no calling voice as a sound effect"
+  - "no face before the name is called"
+  - "no watermark"
+  - "no on-screen subtitles"
+  - "no background music"
+  - "no identifying clothing, hairstyle, or prop"
+  - "no legible name text"
+  - "no legible text on any surface"
+
+# ⚠️ **`attached` を書かない。** この作品は**まだ1本も生成していない**——
+#    書けば「意図にあるのに添付が無い」と27本ぶん鳴る（`L6` の註）。
+#    **書かなければ「記録が無い」と言う**——**それが今の事実である。**
+#    ✅ **生成したら、この欄を足す。**
+
+# **このショットが実際に持つ開示状態。**（台帳の `disclosure` は「意図」、こちらが「実際」）
+# ⚠️ **27本すべてが4つの属性を持つ。** 持たないショットは開示の検査を受けない（`L7` の `bare`）。
+# ⚠️ **`unknown` は「観客がまだ知らない」である。** 台帳の3つの変化点（`s10`・`s17`・`s18`）で
+#    値が動く。**`出席簿の転出欄.一行` は動かない**——`s01` が**出発点**だからである（`L9` の註）。
+disclosure_state:
+  出席簿の転出欄.一行: present
+  宛名票の一行.いちばん古い一枚: present
+  鍵に付いた預かり札.宛先: unknown
+  名札の予備.着けられた: unknown

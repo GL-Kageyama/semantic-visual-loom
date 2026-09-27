@@ -1,0 +1,110 @@
+# chorus-2 / beat / motion —— まだ、呼ばれていない。（2度目）
+#
+# **「まだ、呼ばれていない。」**（`l19`·88.564秒）——`bible.song.lines` l19。
+#
+# ⚠️ **根本湊の記名は、伝票の端である**（サブ 10/24・第二巻第4話・主役回／run-09。
+#    記名＝**伝票の端（一致）**）。**この一人の紙は、切られている。**
+#    ⚠️ **この1本は、それを言わない。** ——**切られた端を持つ紙は、
+#    `s18` で初めて本題になる**（曲 `l22`「束から、一枚が、切り離される。」）。
+#    **同じ物を、2本のショットが別々に持つことは、重複ではない**
+#    ——**曲が、離れた2箇所で、同じ物を指している。**
+#
+# ⚠️ **関口浩一（第四巻第6話・第四巻第12話）。** `s16` は第二巻と第四巻を並べる。
+#
+# ⚠️ **この8.457秒が、サビの中で最も長い。** サビ全体は 20.744秒であり、
+#    **この1本がその 41% を占める。**
+#    ⚠️ **不均等に配分することが、ビートの要件である**（`beats` の説明）——
+#    **均等に割れば、敷き詰めは正しいまま、ビートが死ぬ。**
+shot: habits-mv-s16
+
+unit:
+  before: "二つの手が、**それぞれ別の紙の上にある。**"
+  after: "二つの手が止まり、**机の上には紙だけがある。**"
+
+# **種別（主役）**——`rolemap.ROLES` の15種から。**検収の基準を決める。**
+role: "モンタージュ"
+
+# ⚠️ **この作品の `place` は「話の記名の現場」ではない。**（`ledger.yaml` の `locations` の註）
+#    **曲の1行が立つ現場である。** 六つしかない——**27本が6つを巡る。**
+place: "名札"
+
+# ⚠️ **一時刻である。** この作品は**日付を固定しない**——`bible.world.era` は
+#    「2026, Japan. The setting does not move across all four volumes.」であり、
+#    **一日の内のどの時刻かだけが要る。** 二つの値しか使わない。
+time: "勤務日の日中"
+
+mode: "motion"
+
+# ⚠️ **従属変数である。** この作品では**さらに曲に従属する**——
+#    出所は `bible.song.lines[].at` の差であり、**この作品が決めた数ではない。**
+#    ⚠️ **「4秒より短いから伸ばす」をしない**（`docs/seedance-route.md` の明示の規則）。
+duration: "8.457s"
+
+# 動画の仕様（§1–20）。
+spec: specs/video/habits-mv-s16.md
+
+# **狙い。** このショットが何を試すのか。
+# ⚠️ **この欄を読む検査は、まだ1つも無い**（`shot-record.schema.json` の `aim`）。
+aim: >-
+  **サビで最も長い1本。** 8.457秒を、**明かさずに持たせられるか。**
+
+motion:
+  subject: "根本湊の手と、関口浩一の手。"
+  quality: "速い所作を二度、**そのあと長く止まる。**止まっている間、**紙は動かない。**"
+  law: >-
+    `luminous-anime` の運動である。**長く止まることは、この作品では普通である**——**動きの量が少ないことが、この作品の運動の質である。**
+
+# **ビート。不均等に配分する。**（`shot-record.schema.json` の `beats`）
+# ⚠️ **`L37` が敷き詰めを検算する**——0 から始まり、`duration` で終わり、隣が接していること。
+beats:
+  - range: "0-1.3s"
+    density: dense
+    what: "根本湊の手。**紙を押さえる。**"
+  - range: "1.3-3.6s"
+    density: dense
+    what: "関口浩一の手。**同じ押さえ方を、別の紙で。**"
+  - range: "3.6-5.2s"
+    density: transition
+    what: "二つの手が、**同時に止まる。**"
+  - range: "5.2-8.457s"
+    density: held
+    what: "**動かない。**光だけが動く。"
+
+reference_set:
+  - "根本湊.identity"
+  - "根本湊.negatives"
+  - "関口浩一.identity"
+  - "関口浩一.negatives"
+  - "名札"
+  - "名札.appearance"
+
+# ⚠️ **27本すべてで同一である。** 出所は三つ——
+#    `bible.negative_base` の5行／`ledger.yaml` の `characters.*.negatives` の共通の床
+#    （`no identifying clothing, hairstyle, or prop`）／`props.*.negative` の2行。
+#    ⚠️ **`no face before the name is called` は、顔を置くショットにも掛かる。**
+#    **この作品の顔は、すべて手の後に来る**——ゆえにこの一行は、
+#    **どのショットの内容とも衝突しない。**
+forbidden_set:
+  - "no calling voice as a sound effect"
+  - "no face before the name is called"
+  - "no watermark"
+  - "no on-screen subtitles"
+  - "no background music"
+  - "no identifying clothing, hairstyle, or prop"
+  - "no legible name text"
+  - "no legible text on any surface"
+
+# ⚠️ **`attached` を書かない。** この作品は**まだ1本も生成していない**——
+#    書けば「意図にあるのに添付が無い」と27本ぶん鳴る（`L6` の註）。
+#    **書かなければ「記録が無い」と言う**——**それが今の事実である。**
+#    ✅ **生成したら、この欄を足す。**
+
+# **このショットが実際に持つ開示状態。**（台帳の `disclosure` は「意図」、こちらが「実際」）
+# ⚠️ **27本すべてが4つの属性を持つ。** 持たないショットは開示の検査を受けない（`L7` の `bare`）。
+# ⚠️ **`unknown` は「観客がまだ知らない」である。** 台帳の3つの変化点（`s10`・`s17`・`s18`）で
+#    値が動く。**`出席簿の転出欄.一行` は動かない**——`s01` が**出発点**だからである（`L9` の註）。
+disclosure_state:
+  出席簿の転出欄.一行: present
+  宛名票の一行.いちばん古い一枚: present
+  鍵に付いた預かり札.宛先: unknown
+  名札の予備.着けられた: unknown

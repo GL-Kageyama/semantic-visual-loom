@@ -1,0 +1,106 @@
+# pre-chorus-1 / long-take / motion —— 音は、出ない。
+#
+# **「音は、出ない。」**——`bible.song.lines` l03。
+#
+# ⚠️ **この1本の尺は 7.155秒であり、行そのものは 4.628秒である。**
+#    行は 29.601 から節末 34.229 まで。**この1本は 27.074 から始まる**——
+#    **`l02` が終わった直後である。**
+#    ⚠️ **その 2.527秒に歌詞が無い。** **ゆえに `s04` がそれを吸う。**
+#    ⚠️ **誰も吸わなければ、間は節の外へ落ち、`L34` の節の合計が合わなくなる。**
+#    **歌の無い時間は、画面の側が持つ。**
+#
+# ⚠️ **この吸収は、`s04` の内容とも一致する。** この1本は
+#    **「音が無い」ことを内容とする**——**歌が無い2.527秒を、音が無い2.527秒が受ける。**
+#
+# ⚠️ **`bible.constants.音` が、この1本の法である。**
+#    「**呼び声ではなく、紙と手の音。** 効果音としての呼び声は要らない。
+#    呼び声が聞こえるのは、呼ばれた本人の側だけである。」
+#    **このショットに、呼び声は無い**——ゆえに `bible.negative_base` の一行目が、ここでも効く。
+shot: habits-mv-s04
+
+unit:
+  before: "口が、まだ動いている。"
+  after: "口が止まり、**音が無いことだけが残る。**"
+
+# **種別（主役）**——`rolemap.ROLES` の15種から。**検収の基準を決める。**
+role: "反応"
+
+# ⚠️ **この作品の `place` は「話の記名の現場」ではない。**（`ledger.yaml` の `locations` の註）
+#    **曲の1行が立つ現場である。** 六つしかない——**27本が6つを巡る。**
+place: "出席簿の転出欄"
+
+# ⚠️ **一時刻である。** この作品は**日付を固定しない**——`bible.world.era` は
+#    「2026, Japan. The setting does not move across all four volumes.」であり、
+#    **一日の内のどの時刻かだけが要る。** 二つの値しか使わない。
+time: "勤務日の夕方"
+
+mode: "motion"
+
+# ⚠️ **従属変数である。** この作品では**さらに曲に従属する**——
+#    出所は `bible.song.lines[].at` の差であり、**この作品が決めた数ではない。**
+#    ⚠️ **「4秒より短いから伸ばす」をしない**（`docs/seedance-route.md` の明示の規則）。
+duration: "7.155s"
+
+# 動画の仕様（§1–20）。
+spec: specs/video/habits-mv-s04.md
+
+# **狙い。** このショットが何を試すのか。
+# ⚠️ **この欄を読む検査は、まだ1つも無い**（`shot-record.schema.json` の `aim`）。
+aim: >-
+  **止まることを一変化として立てられるか。** この7.155秒は、行そのもの（4.628秒）ではなく、**歌の無い2.527秒を含んでいる。**
+
+motion:
+  subject: "碓氷千夏の口と、止まったあとの頁。"
+  quality: "減速する。**動きが、切れるのではなく痩せていく。**最後の1秒は、紙の上の光だけが動く。"
+  law: >-
+    `luminous-anime` の運動である。**止まるのは主題であって、画面ではない**（`shot-record.schema.json` の `mode` の註）——**光と、空気の中の埃は動き続ける。**
+
+# **ビート。不均等に配分する。**（`shot-record.schema.json` の `beats`）
+# ⚠️ **`L37` が敷き詰めを検算する**——0 から始まり、`duration` で終わり、隣が接していること。
+beats:
+  - range: "0-1.9s"
+    density: sparse
+    what: "口の動きの残り。**もう字はなぞっていない。**"
+  - range: "1.9-3.2s"
+    density: transition
+    what: "**動きが痩せていく。**"
+  - range: "3.2-7.155s"
+    density: held
+    what: "止まる。**紙と手の音だけが残る。**"
+
+reference_set:
+  - "碓氷千夏.identity"
+  - "碓氷千夏.negatives"
+  - "出席簿"
+  - "出席簿の転出欄"
+
+# ⚠️ **27本すべてで同一である。** 出所は三つ——
+#    `bible.negative_base` の5行／`ledger.yaml` の `characters.*.negatives` の共通の床
+#    （`no identifying clothing, hairstyle, or prop`）／`props.*.negative` の2行。
+#    ⚠️ **`no face before the name is called` は、顔を置くショットにも掛かる。**
+#    **この作品の顔は、すべて手の後に来る**——ゆえにこの一行は、
+#    **どのショットの内容とも衝突しない。**
+forbidden_set:
+  - "no calling voice as a sound effect"
+  - "no face before the name is called"
+  - "no watermark"
+  - "no on-screen subtitles"
+  - "no background music"
+  - "no identifying clothing, hairstyle, or prop"
+  - "no legible name text"
+  - "no legible text on any surface"
+
+# ⚠️ **`attached` を書かない。** この作品は**まだ1本も生成していない**——
+#    書けば「意図にあるのに添付が無い」と27本ぶん鳴る（`L6` の註）。
+#    **書かなければ「記録が無い」と言う**——**それが今の事実である。**
+#    ✅ **生成したら、この欄を足す。**
+
+# **このショットが実際に持つ開示状態。**（台帳の `disclosure` は「意図」、こちらが「実際」）
+# ⚠️ **27本すべてが4つの属性を持つ。** 持たないショットは開示の検査を受けない（`L7` の `bare`）。
+# ⚠️ **`unknown` は「観客がまだ知らない」である。** 台帳の3つの変化点（`s10`・`s17`・`s18`）で
+#    値が動く。**`出席簿の転出欄.一行` は動かない**——`s01` が**出発点**だからである（`L9` の註）。
+disclosure_state:
+  出席簿の転出欄.一行: present
+  宛名票の一行.いちばん古い一枚: unknown
+  鍵に付いた預かり札.宛先: unknown
+  名札の予備.着けられた: unknown
