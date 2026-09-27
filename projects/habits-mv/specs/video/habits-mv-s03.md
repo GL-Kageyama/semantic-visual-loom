@@ -10,6 +10,22 @@
 
 ---
 
+⛔ **この仕様は 2026-09-28 に運動の層を作り直した（`0.1.0` → `0.2.0`）。**
+**規則——「変化は、切れ目で終わる。」** ⚠️ **この1本の切れ目（27.074）は、行の頭ではない**——
+**実測で、26の切れ目のうち行の頭でないのは2つだけであり、これがその一つである。**
+これは `l02` が**終わる**点であり、**そのあと 2.527秒、歌が無い。**
+⛔ **それでも切れ目は曲の事象である**——*息が切れる点*であり、**置いたのはこの作品ではない。**
+⛔ **前の版は、そこへ 3.9秒の静止で入っていた。**
+`held` 3.4 → `dense` 2.7 → `held` 3.9。**唇の動きは 23.174秒に終わり、切れ目は 27.074秒。**
+**27本のうち、末尾の `held` がこれより長いのは `s27`（7.309秒）だけである。**
+⚠️ **いまは、最後の字の形が切れ目のコマで閉じきる。**
+⚠️ **土台は動いていない。** `shot-record.schema.json` の `motion` の註——
+**「止まるのは主題であって、画面ではない。光と粉塵は動く。」**——を、前の版は
+「音が出ないことは、画面が止まること」と読んでいた。**そこだけを直した。**
+⚠️ **`§18` の `Negative Prompt` と `Style Motion` は1字も動かしていない**（`L10`）。
+
+---
+
 # 1. VIDEO
 
 - Duration: `10.000s`
@@ -17,7 +33,7 @@
 - Resolution: `1920x1080`
 - Frame Rate: `24fps`
 - Orientation: `Landscape`
-- Generation Intent: One continuous take of one change — **a mouth moves through the shapes of characters and stops without making a sound.** ⚠️ **The shot is about a mouth that is forming a name and not reaching a voice**, and the sound of the shot is the sound of the room, not of the mouth.
+- Generation Intent: One continuous take of one change — **a mouth moves through the shapes of characters and closes without making a sound.** ⚠️ **The shot is about a mouth that is forming a name and not reaching a voice**, and the sound of the shot is the sound of the room, not of the mouth. ⚠️ **The last shape closes on the last frame of the take** — the mouth is still moving when the cut arrives — and **the frame is never still under it**: the page is finishing its settle, dust crosses the lit page, and the camera is descending from the first frame to the last.
 
 # 2. WORLD
 
@@ -90,20 +106,19 @@
 
 # 7. NARRATIVE
 
-- Core Event: **A mouth moves through the shapes of characters and stops without making a sound.**
-- Beginning: The mouth is closed, the page is lit, and nothing in the frame is moving.
+- Core Event: **A mouth moves through the shapes of characters and closes without making a sound.**
+- Beginning: The mouth is shut and the page below it is lit — and the page is still moving: it is finishing the settle it began in `s01`, dust is crossing it, and the camera is still coming down.
 - Turn: **The shapes begin** — one character at a time appearing on the lips and going.
-- Peak: **It stops part-way and starts again** — the mouth does not carry the whole name through.
+- Peak: **It stops part-way and starts again** — the mouth does not carry the whole name through, **and it does not finish early either: the last shape is still being closed when the take ends.**
 - Pull: ⚠️ **The lips close and nothing has been said.** The shot ends on the absence of a voice.
 
 # 8. TEMPORAL STRUCTURE
 
 - Timing Policy: `STRUCTURED` / `NON_UNIFORM`
 - Temporal Sequence:
-  - MOVEMENT 1 `0-3.4s` — density: `held` — the closed mouth and the light on the page below it. ⚠️ **The mouth is shut** — this movement belongs to the paper.
-  - MOVEMENT 2 `3.4-6.1s` — density: `dense` — **the shapes of characters appear on the lips, one at a time**, and go. **The breath is audible as air, not as a voice.** The sequence stops part-way and starts again.
-  - MOVEMENT 3 `6.1-10.000s` — density: `held` — **the lips close.** ⚠️ **The absence of a voice becomes a shape** — the shot ends with a mouth that has finished moving and has said nothing.
-- Temporal Density: **The dense movement is the middle one; the two held movements around it are longer than it is.** ⚠️ **Ten seconds, and the movement occupies less than three of them** — because what the shot is about is the silence on either side of it.
+  - MOVEMENT 1 `0-1.8s` — density: `sparse` — the closed mouth and the light on the page below it. **The mouth is shut** — this movement belongs to the paper, **and the paper is moving**: the page is finishing its settle, dust crosses the lit surface, and the camera's descent continues. Nothing of the mouth has changed.
+  - MOVEMENT 2 `1.8-10.000s` — density: `dense` — **the shapes of characters appear on the lips, one after another, without a gap**, and go. **The breath is audible as air, not as a voice.** The sequence stops part-way and starts again, **and it is still running when the take ends: the last shape closes on the final frame.** ⚠️ **The lips do not stop before the cut** — the page settles beneath them, the dust goes on crossing, and the camera never finishes its descent.
+- Temporal Density: **The take is one long movement of the lips that does not stop before the cut.** ⚠️ **The previous version of this section put the movement in the middle and the silence on both sides of it** — `held` 3.4s, `dense` 2.7s, `held` 3.9s. ⛔ **The second silence was the defect**: the lips finished at 23.174s and the cut was at 27.074s, so **3.9 seconds of stopped picture held under a song that had stopped singing.** ⚠️ **Silence in the mouth is not stillness in the frame.** There is no `held` movement in this shot.
 
 # 9. ACTION
 
@@ -113,40 +128,40 @@
 # 10. CAMERA
 
 - Camera Language: Third person, **close**, at the lower half of the face — **the same desk placement as the two shots before it, held a little higher so that the mouth and the page are in one frame.**
-- Camera Events: One event only. `0-10.000s` — a very slow, weighted settle of a few centimetres. **Nothing is revealed by it.**
-- Camera Behavior: No handheld, no whip, no shake. **No cut to the mouth and no push-in on it** — the mouth is read from the same frame the page is read from. **The frame keeps its composition for the whole take.**
+- Camera Events: One event only. `0-10.000s` — **the descent begun in `s01` continues**: the lens keeps coming down and slightly right, at a rate that does not change, and **it is still descending on the last frame of this take.**
+- Camera Behavior: No handheld, no whip, no shake. **No cut to the mouth and no push-in on it** — the mouth is read from the same frame the page is read from. ⚠️ **But the camera is not parked**: the page and the mouth both grow slowly as the lens comes down, and **the camera arrives with the last shape.** ⚠️ **The camera does not stop before the cut.** It never becomes a close-up of the mouth alone.
 
 # 11. MOTION
 
 ## Subject Motion
 
-**A mouth moving through the shapes of characters, stopping, and starting again.** ⚠️ **The jaw moves very little; the work is done by the lips.** The eyes are not the subject of this shot and do not lead it. **The last movement is the lips closing.**
+**A mouth moving through the shapes of characters without a gap, stopping part-way, starting again, and closing on the last frame of the take.** ⚠️ **It is the change this shot carries, and it is one change.** The jaw moves very little; the work is done by the lips. The eyes are not the subject of this shot and do not lead it. **The last movement is the lips closing — and it is not finished before the take is.**
 
 ## Object Motion
 
-⚠️ **None.** The page does not move, the light on it does not move.
+**The page finishes settling** — the fore-edge lifts once and comes down and stays, early in movement 1. The writing does not change. ⚠️ **What moves across the page for the rest of the take is light**, and it moves as the lens comes down.
 
 ## Environmental Motion
 
-Dust moves over the page and catches the tube. **It keeps moving after the lips have closed.**
+Dust moves over the page and catches the tube, crossing the lit surface throughout. ⚠️ **None of it stops when the lips close** — the dust is still crossing on the last frame. ⚠️ **And the breath is visible**: air leaving the lips moves the dust immediately in front of the mouth, faintly and continuously, for the whole of movement 2.
 
 ## Physical Characteristics
 
-- **Weight**: **None.** ⚠️ **The shot's physical law is that the breath carries nothing** — air passes the lips and no voice is made of it.
-- **Inertia**: The shapes start and stop **without ease** — the lips are not winding up to a word and not recovering from one.
-- **Acceleration**: **None.** Each shape takes the same time as the one before it.
-- **Fluidity**: Continuous; the shapes are drawn, not posed. ⚠️ **No shape is held for the camera** — each appears and goes.
+- **Weight**: **None in the mouth.** ⚠️ **The shot's physical law is that the breath carries nothing** — air passes the lips and no voice is made of it. ⚠️ **What weight there is belongs to the page**, which is coming to rest under its own.
+- **Inertia**: The shapes start and stop **without ease** — the lips are not winding up to a word and not recovering from one. ⚠️ **The one exception is the last shape**, which is closing when the take ends and therefore has no settle to show.
+- **Acceleration**: **Each shape takes the same time as the one before it** — the rhythm is even **and the rhythm is not a beat**: the shapes do not line up with anything. ⚠️ **The page's rate does change**: the fore-edge rocks down and slows as it comes to rest.
+- **Fluidity**: Continuous; the shapes are drawn, not posed. ⚠️ **No shape is held for the camera** — each appears and goes. ⚠️ **And there is no gap between them**: the mouth is in motion for the whole of movement 2.
 - **Impact**: **None.** Nothing in this shot touches anything.
 
 # 12. EMOTION
 
-- Emotional Arc: **The whole distance between forming a name and saying it** — held open for ten seconds and then closed on the near side.
-- Emotional Events: **The restart.** ⚠️ **The shot's event is that the mouth begins again after stopping** — **not that it succeeds.** The emotion is in the repetition, and the shot does not comment on it.
+- Emotional Arc: **The whole distance between forming a name and saying it** — kept in motion for ten seconds and cut off on the near side.
+- Emotional Events: **The restart.** ⚠️ **The shot's event is that the mouth begins again after stopping** — **not that it succeeds.** The emotion is in the repetition, and the shot does not comment on it. ⚠️ **The take ends on the closing shape rather than after it**, so the shot does not show the mouth at rest either.
 
 # 13. LIGHTING
 
 - Base Lighting: Fluorescent over a working desk at the end of the working day, with the style's bloom on the pale surfaces. The tube is above and behind the camera and the room's own light has not been switched off yet; outside there is nothing left to see. The paper is the brightest thing in the frame and the rest of the staff room has gone to deep cyan.
-- Lighting Events: **None.** ⚠️ **A change of light here would be read as a change of resolve.**
+- Lighting Events: **None** — no lamp is switched and the tube does not strike or fail. ⚠️ **A change of light as an event would be read as a change of resolve.** ⚠️ **But the light in the frame moves throughout**: the mouth's own shadow shifts on the page beneath it as the lips form each shape, dust crosses the beam, and the lit edge of the ruling slides right as the lens comes down.
 
 # 14. AUDIO
 
@@ -161,8 +176,8 @@ Dust moves over the page and catches the tube. **It keeps moving after the lips 
 - Spatial: The page stays square to the frame and the mouth stays above it. ⚠️ **Nothing is moved for the camera.**
 - Temporal: The same working day, after `s02`. **Nothing in frame supplies a date.**
 - Visual: The same fluorescent key, the same palette, the same dust as all twenty-seven shots.
-- Motion: Full animation, not limited. **The atmosphere is the primary mover**; the mouth is the subject.
-- Sound: Air, paper, no voice, no music. **No calling voice as a sound effect.**
+- Motion: Full animation, not limited. **The atmosphere is the primary mover**; the mouth is the change. ⚠️ **The atmosphere does not stop when the lips do** — the page settles, the dust crosses, and the camera descends through to the cut.
+- Sound: Air, paper, no voice, no music. **No calling voice as a sound effect.** ⚠️ **No sound is not no motion** — the breath is visible in the dust in front of the mouth, and the mouth never stops moving inside this take.
 - ⚠️ **この27本は、すべて同じ経路である**（`SEEDANCE 2.5`）。**本編の三本（`MINIMAX H3`）とは別である。**⚠️ **ずれてはならないのは、人物と、パレットと、光である**——**プロンプトの字面ではない。**
 
 # 16. CONSTRAINTS
@@ -190,9 +205,10 @@ Dust moves over the page and catches the tube. **It keeps moving after the lips 
 
 ## MUST
 
-- **The shapes of characters cross the lips one at a time, stop, and start again.**
+- **The shapes of characters cross the lips without a gap, stop, and start again.**
 - **No sound is produced by the mouth** — the breath is air and nothing more.
-- **The shot ends with the lips closed and nothing said.**
+- **The last shape closes on the last frame of the take** — the mouth is still moving when the cut arrives.
+- ⚠️ **There is no still frame in this take.** The page, the dust, the light on the ruling and the camera move in every one of its 240 frames.
 
 ## PREFER
 
@@ -206,10 +222,11 @@ Dust moves over the page and catches the tube. **It keeps moving after the lips 
 
 1. **The mouth moves and there is no voice** — either half failing loses the shot. ⚠️ **This is the shot the work's whole sound design rests on.**
 2. **The shapes stop part-way and begin again** — a mouth that carries the whole name through in one pass is a different shot.
-3. **The lips close at the end**, and the closing is the change.
+3. **The lips close on the last frame**, and the closing is the change. ⚠️ **A mouth that has finished and is waiting hands the cut a stopped picture** — which is what the previous version of this shot did for 3.9 seconds.
 4. **No expression** — a smile or a tightened mouth makes this a reaction.
-5. **Japanese is what this work speaks** — named in §18, even though this shot holds no words.
-6. Everything else.
+5. ⚠️ **No sound is not no motion** — the page settles, the dust crosses, the light on the ruling slides and the camera descends for all ten seconds.
+6. **Japanese is what this work speaks** — named in §18, even though this shot holds no words.
+7. Everything else.
 
 ---
 
@@ -234,9 +251,8 @@ Dust moves over the page and catches the tube. **It keeps moving after the lips 
 
 A 10-second cinematic piece (16:9), luminous realist anime, on the lower half of a face above an opened register page at the end of a working day, 2026. One continuous take, one change: **a mouth moves through the shapes of characters, stops part-way, begins again, and closes without making a sound.**
 
-0-3.4s: the closed mouth and the light lying on the page below it. **The lips are shut and the frame is still** — only the dust in the air under the fluorescent tube moves.
-3.4-6.1s: **the shapes of characters appear on the lips, one at a time, and go.** The breath passes as air and **no voice is made of it**; the jaw moves very little and the work is done by the lips. The sequence **stops part-way and begins again.**
-6.1-10.000s: **the lips close and stay closed.** Nothing has been said. The page below is unchanged, **and the characters on it still cannot be made out.**
+0-1.8s: the closed mouth and the light lying on the page below it. **The lips are shut, and the page below is not** — it is finishing a settle of its own, its fore-edge lifting once and coming down; dust crosses the lit surface from left to right, and **the camera is already descending toward it.**
+1.8-10.000s: **the shapes of characters appear on the lips, one after another without a gap, and go.** The breath passes as air and **no voice is made of it** — and it is visible: it moves the dust immediately in front of the mouth. The jaw moves very little and the work is done by the lips. The sequence **stops part-way and begins again**, and **the last shape closes on the final frame of the take** — the mouth is still moving when the shot ends. The page below is unchanged, **and the characters on it still cannot be made out.**
 **The mouth moves and no sound comes out of it: no voice, no whisper, no breath that becomes a word, and no line is spoken in this shot.** **No expression is placed on the mouth and no hand enters the frame.** **The writing on the page is present and cannot be made out — the characters are Japanese characters, set in the Japanese script, and they are not legible.** **This is a Japanese work.** No subtitles. No BGM.
 (One continuous take, one change: the mouth closes and nothing has been said.)
 
@@ -246,11 +262,11 @@ Luminous realist anime, translated into the lower half of a face above a page at
 
 ## Motion Prompt
 
-Full animation, not limited — the atmosphere is the primary mover. **A mouth forming the shapes of characters one at a time, stopping part-way, beginning again, and closing.** The jaw moves very little and the lips do the work; **no sound is produced and the breath is air only.** The shapes are drawn and not posed — **no shape is held for the camera.** The eyes do not lead and the head does not tilt. Dust moves over the page and catches the light, and **it keeps moving after the lips have closed.** **No acceleration anywhere in this shot.** No impact, no motion blur smears, no stutter, no held frames.
+Full animation, not limited — the atmosphere does not idle. **A mouth forming the shapes of characters without a gap, stopping part-way, beginning again, and closing on the final frame of the take.** The jaw moves very little and the lips do the work; **no sound is produced and the breath is air only** — and the breath is visible, moving the dust in front of the mouth. The shapes are drawn and not posed — **no shape is held for the camera**, and there is no gap between them: **the mouth is in motion for the whole of the shot.** The eyes do not lead and the head does not tilt. ⚠️ **The page, the light on the ruling, the dust and the camera move throughout**, and none of them stops when the lips do: the fore-edge of the page rocks down and comes to rest early, dust crosses the lit surface, **and the camera is still descending on the last frame.** ⚠️ **No held frames and no still frames anywhere in this take.** No impact, no motion blur smears, no stutter.
 
 ## Camera Prompt
 
-Third person, close, at desk height looking slightly down — the same placement as the two shots before, held so that the mouth and the page are in one frame. One camera event only: a very slow, weighted settle of a few centimetres, revealing nothing. ⚠️ **Do not push in on the mouth and do not cut to it** — the mouth is read from the same frame the page is read from. No handheld, no whip, no shake, no sudden zoom, no unnatural rotation. **Keep the composition for the whole take.**
+Third person, close, at desk height looking slightly down — the same placement as the two shots before, held so that the mouth and the page are in one frame. One camera event only: **the slow descent begun two shots earlier continues toward the page and slightly to the right, at a rate that does not change, and it is still running on the last frame of the take.** ⚠️ **Do not stop the move before the cut**, and **do not push in on the mouth and do not cut to it** — the mouth is read from the same frame the page is read from. ⚠️ **The page and the mouth may grow in the frame as the lens comes down, but it never becomes a close-up of the mouth alone.** No handheld, no whip, no shake, no sudden zoom, no unnatural rotation.
 
 ## Audio Prompt
 
@@ -272,8 +288,11 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 
 - Instance ID: `habits-mv-s03-10.000s-01`
 - Segment ID: `pre-chorus-1-2`
-- Specification Version: `0.1.0`
+- Specification Version: `0.2.0`
 - Generation Date: `2026-09-28`
+- ⚠️ **版が `0.1.0` から動いた**（2026-09-28、運動の層の作り直し）。⛔ **`media/` に在る `03_…mp4` は `0.1.0` から出ている**
+  （`takes/habits-mv-s03-video-1.yaml` の `params.source_version`）——**ゆえに `L25` の版の照合が
+  「投入 `0.1.0` → 現在 `0.2.0`」を言う。** **それが正しい。この1本は、いまの仕様の生成物ではない。**
 - ⚠️ **日付の出所**: `media/` に置かれたファイルの mtime（2026-09-28 05:20）である——
   **投入した時刻そのものではない。** ⛔ **世代の記録は `takes/habits-mv-s03-video-1.yaml` に在る**——
   **この仕様は世代を写さない**（写した分は古びる）。
@@ -282,7 +301,7 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 
 - Duration: `10.000s`
 - References: `REF_CHARACTER (碓氷千夏 — 設定画＋表情シート, CRITICAL) ／ REF_FORMAT (video-spec) ／ REF_STYLE (luminous-anime, HIGH) ／ REF_SOURCE (bible.yaml ＋ ledger.yaml, CRITICAL)`
-- Temporal Structure: `3 movements, NON_UNIFORM — 0-3.4s / 3.4-6.1s / 6.1-10.000s`. The held movement = `MOVEMENT 3`
+- Temporal Structure: `2 movements, NON_UNIFORM — 0-1.8s / 1.8-10.000s`. The held movement = `none`
 - Camera Events: `1 event as listed in §10`
 - Action Events: `ACT_SHAPE → ACT_SILENCE`
 - Audio Events: `no dialogue ／ air ＋ paper ＋ one placed absence ／ no music`
@@ -292,9 +311,22 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 
 ## Version
 
-`0.1.0` — **一度だけ生成した**（2026-09-28）。**採用は、まだ選ばれていない**——
-**選ぶのは著者である**（`CLAUDE.md`「**生成はサンプルである。**」）。
+`0.2.0` — **運動の層を作り直した**（2026-09-28）。**生成はまだ `0.1.0` の1本だけである。**
+**採用は、まだ選ばれていない**——**選ぶのは著者である**（`CLAUDE.md`「**生成はサンプルである。**」）。
 ⛔ **この節は仕様の側であって、世代の記録ではない**——**記録は `takes/habits-mv-s03-video-1.yaml` に在る。**
+
+### `0.1.0` → `0.2.0`（2026-09-28）——運動の層
+
+**規則「変化は、切れ目で終わる」を入れた。** 変わったのは §1・§7・§8・§10・§11・§12・§13・§15・§16・§17・§18 の三つのプロンプト・§19。
+⛔ **変わった中身**:
+- **末尾の `held`（`6.1-10.000s`）を消した。** 最後の字の形が、切れ目のコマで閉じきる。
+- **頭の `held`（`0-3.4s`）を `sparse` に置き換えた。** 頁はまだ沈んでいる。
+- **「形は一つずつ」を「隙間なく」に直した。** 前の版は形と形のあいだに間が在り、
+  **その間が静止として読まれる**——**音が無いことは、唇が止まることではない。**
+- **息を、見えるようにした。** 唇の前の埃が動く。`bible.constants.音` の「紙と手の音」を、ここで視覚の側から負う。
+- **§11 の「Object Motion: None」を撤回した。** 頁は沈み、光は滑る。
+- **§10 のカメラを、`s01` から続く止まらない降下にした。**
+- ⚠️ **§18 の `Negative Prompt` と `Style Motion` は1字も動かしていない**（`L10`）。
 
 ## Observed Problems
 
@@ -322,6 +354,9 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 - **The writing may become legible**, and then the shot becomes a shot about reading aloud.
 - **The mouth may smile or tighten** — an expression turns the shot into a reaction, and the work does not react here.
 - **The shapes may run straight through** without stopping, which loses the restart — and the restart is the shot's event.
+- ⛔ **The mouth may finish early and wait.** ⚠️ **This is the failure the restructure was written against.** The take is 10.000s and the last shape has to be closing at 10.000s — **a mouth that closes at 6s and holds hands the cut a stopped picture**, which is what the previous version of this shot did for 3.9 seconds.
+- **The page may come back as a still.** Movement 1 is `sparse`, not `held`: the fore-edge has to still be settling, dust has to be crossing, and the camera has to be visibly descending. ⛔ **A frozen opening is the same defect as a frozen ending.**
+- **The camera may be parked.** ⚠️ The descent has to still be running at 10.000s.
 - **The eyes may take over.** ⚠️ **This shot is the mouth's**; an eye leading the frame makes it a duplicate of `s02`.
 - **A hand may enter the frame** and make this a gesture instead of a silence.
 - **Music may be placed anyway**, which would give the mouth a voice by the back door.

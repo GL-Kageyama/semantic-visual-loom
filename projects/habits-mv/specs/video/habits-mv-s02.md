@@ -8,6 +8,23 @@
 
 ---
 
+⛔ **この仕様は 2026-09-28 に運動の層を作り直した（`0.1.0` → `0.2.0`）。**
+**規則——「変化は、切れ目で終わる。」** この作品の切れ目は曲が置いたものであり、
+実測で **26の切れ目のうち24が歌詞の行の頭と 20ms 以内で一致する**——
+**この1本の切れ目は 17.074秒、`l02`「口は、動く。」の頭である。**
+⛔ **前の版は、いちばん酷かった。** `held` 3.0 → `dense` 3.2 → `held` 2.815。
+**目の横断は 14.259秒に終わり、切れ目は 17.074秒**——**2.815秒のあいだ、
+画面は止まったまま、歌が「口は、動く。」と言っていた。**
+⚠️ **「行末で止まる」という変化は正しい。間違っていたのは、止まる場所である。**
+**いまは、目が行末に着くのが切れ目のコマである。**
+⚠️ **そのため、まばたきをこの1本から外した**——**止まったあとが無くなり、切れ目がその位置を占める。**
+⚠️ **土台は動いていない。** `shot-record.schema.json` の `motion` の註——
+**「止まるのは主題であって、画面ではない。光と粉塵は動く。」**——を、前の版は
+「動くのは目だけ」と読んでいた。**そこだけを直した。**
+⚠️ **`§18` の `Negative Prompt` と `Style Motion` は1字も動かしていない**（`L10`）。
+
+---
+
 # 1. VIDEO
 
 - Duration: `9.015s`
@@ -15,7 +32,7 @@
 - Resolution: `1920x1080`
 - Frame Rate: `24fps`
 - Orientation: `Landscape`
-- Generation Intent: One continuous take of one change — **an eye crosses a single line of writing from left to right and stops at the end of it.** ⚠️ **Only the eye moves**: the brow, the mouth and the head are held, so that the work's second step is still not a face but a part of one.
+- Generation Intent: One continuous take of one change — **an eye crosses a single line of writing from left to right and comes to rest on the last character of it.** ⚠️ **The eye is the only thing that changes**: the brow, the mouth and the head are held, so that the work's second step is still not a face but a part of one. ⚠️ **The crossing ends on the last frame of the take** — the stop and the cut are the same instant — and **the frame under the eye is never still**: the page is still settling from the shot before, dust crosses it, the lit edge of the ruling slides, and the camera is descending from the first frame to the last.
 
 # 2. WORLD
 
@@ -91,17 +108,16 @@
 - Core Event: **An eye crosses one line of writing and stops at the end of it.**
 - Beginning: The page is open, the light is on it, and **the eye is not yet in the frame.**
 - Turn: **The eye enters and takes the line** — left to right, once, without slowing.
-- Peak: **It reaches the end of the line and stops there** — and what it has read is still not readable.
-- Pull: ⚠️ **It stops, and nothing is done about what it stopped on.** The shot ends on a held eye.
+- Peak: **It reaches the end of the line and comes to rest on the last character** — and what it has read is still not readable.
+- Pull: ⚠️ **It stops, and nothing is done about what it stopped on.** **The take ends on that instant** — the stop is not a movement that finishes early and waits; **it is the last thing that happens.**
 
 # 8. TEMPORAL STRUCTURE
 
 - Timing Policy: `STRUCTURED` / `NON_UNIFORM`
 - Temporal Sequence:
-  - MOVEMENT 1 `0-3.0s` — density: `held` — the opened page and the light on it. **The eye is not in the frame yet** — this movement belongs to the paper.
-  - MOVEMENT 2 `3.0-6.2s` — density: `dense` — **the eye enters and crosses the line** from left to right. One pass, uninterrupted, at a rate that does not change.
-  - MOVEMENT 3 `6.2-9.015s` — density: `held` — **it stops at the end of the line and stays there.** ⚠️ **The writing it has just crossed cannot be read**, and the shot does not resolve that.
-- Temporal Density: **The dense movement is the middle one and it is the shortest in what it shows.** ⚠️ **The work's weight is in the two held movements around it** — the page before the eye arrives, and the eye after it stops.
+  - MOVEMENT 1 `0-2.2s` — density: `sparse` — the opened page, still settling from the shot before. **The eye is not in the frame yet.** ⚠️ **This movement belongs to the paper, and the paper is moving**: the fore-edge is still breathing off the block, dust crosses left to right and against it, and the lit edge of the ruling slides as the camera comes down. Nothing of the eye has changed.
+  - MOVEMENT 2 `2.2-9.015s` — density: `dense` — **the eye enters and crosses the line** from left to right. One pass, uninterrupted, at a rate that does not change — **and it arrives on the last character of the line on the last frame of the take.** ⚠️ **The stop is not a movement inside this shot; it is where the shot ends.** The page goes on settling throughout, the dust crosses against the eye's direction, the lit edge slides right, and **the camera never finishes its descent.**
+- Temporal Density: **The take is one long movement that does not slow before the cut.** ⚠️ **The previous version of this section put the work's weight in two held movements around a short one** — the page before the eye arrived, and the eye after it stopped. ⛔ **The second of those was the defect**: the eye stopped at 14.259s and the cut was at 17.074s, so **2.815 seconds of stopped picture received the song's next line.** ⚠️ **There is no `held` movement in this shot** — stillness of the *frame* is not this work's stillness, and the subject's own stillness is now placed where the song puts its accent.
 
 # 9. ACTION
 
@@ -111,40 +127,40 @@
 # 10. CAMERA
 
 - Camera Language: Third person, **close**, at the page — the same placement as the shot before, at desk height, looking slightly down. **The camera is at the desk; the eye is above the page.**
-- Camera Events: One event only. `0-9.015s` — a very slow, weighted settle of a few centimetres. **Nothing is revealed by it, and it does not follow the eye.**
-- Camera Behavior: ⚠️ **No rack focus onto the writing, and no cut to a legible insert.** The camera does not do with the lens what the eye is doing. **No push-in on the line.** The frame keeps its composition for the whole take.
+- Camera Events: One event only. `0-9.015s` — **the descent begun in `s01` continues**: the lens keeps coming down toward the page and slightly right, at a rate that does not change, and **it is still descending on the last frame of this take.** ⚠️ **No cut stops it.**
+- Camera Behavior: ⚠️ **No rack focus onto the writing, and no cut to a legible insert.** The camera does not do with the lens what the eye is doing. **No push-in on the line.** ⚠️ **But the camera is not parked**: the page grows slowly in the frame as the lens comes down, and the ruled columns cross the frame edge at the end as they did not at the start. **It never becomes a close-up of a single character.** ⚠️ **The camera does not stop before the cut** — it arrives with the eye.
 
 # 11. MOTION
 
 ## Subject Motion
 
-**An eye crossing a line and stopping.** ⚠️ **It is the only motion the figure has** — the brow does not move, the mouth does not move, the head does not tilt, and the shoulders are not in the frame. **One blink, after the stop.**
+**An eye crossing a line and coming to rest on its last character — with the arrival placed on the last frame of the take.** ⚠️ **It is the change this shot carries, and it is one change** — the brow does not move, the mouth does not move, the head does not tilt, and the shoulders are not in the frame. ⛔ **The blink the previous version placed after the stop is gone**: there is no longer an after-the-stop for it to sit in.
 
 ## Object Motion
 
-⚠️ **None.** The page does not move, the light on it does not move, and the writing does not change. **Everything the eye is looking at is still** — which is why the eye has to be the thing that moves.
+**The page is still settling from the shot before** — its fore-edge lifts and falls a few times and comes to rest early in movement 1. The writing does not change, and the ruled columns do not move in themselves; **what moves across them is light.** ⚠️ **This is a small motion and it is not nothing** — it is the difference between a page lying on a desk and a photograph of one.
 
 ## Environmental Motion
 
-Dust moves over the page and catches the tube. **It keeps moving after the eye has stopped.**
+Dust moves over the page and catches the tube, **crossing against the direction the eye is travelling**, so that the frame has two movements in it at once and only one of them is the eye. ⚠️ **None of it stops when the eye does** — the dust is still crossing on the last frame.
 
 ## Physical Characteristics
 
-- **Weight**: **None in the frame.** The page lies flat and the eye has no weight. ⚠️ **This shot has no weight in it at all**, and that is deliberate — the work's weight is in the register, not in the reading of it.
-- **Inertia**: The eye arrives at the end of the line and **stops without overshoot and without ease** — it is not decelerating, it simply is not going on.
-- **Acceleration**: **None.** ⚠️ **The rate in movement 2 is the rate in movement 3, which is zero.**
+- **Weight**: **The eye has none; the page has a little.** The page lies flat and is settling; the light crossing it has none. ⚠️ **This shot carries less weight than the shot before it** — the register's mass belongs to `s01`, and what is left here is a page coming to rest.
+- **Inertia**: The eye arrives at the end of the line and **stops without overshoot and without ease** — it is not decelerating, it simply is not going on. ⚠️ **Because the arrival is the last frame, there is no settle to see**: the take ends on the instant of the stop.
+- **Acceleration**: **The eye's rate does not change from the start of the line to the end of it** — the crossing is one speed and then zero. ⚠️ **The page's rate does change**: the fore-edge rocks down and slows as it comes to rest.
 - **Fluidity**: Continuous; the saccade is not a snap and not a stutter. ⚠️ **There are no small jumps** — the eye crosses the line as one movement.
 - **Impact**: **None.** Nothing in this shot touches anything.
 
 # 12. EMOTION
 
-- Emotional Arc: **The interval between reading a name and knowing it** — held, and then left held.
-- Emotional Events: **The stop.** ⚠️ **The shot's event is that nothing follows the reading** — no recognition, no reaction, no turn. **The emotion is in the restraint, and the restraint is the shot.**
+- Emotional Arc: **The interval between reading a name and knowing it** — crossed once, and then cut off at the instant of arrival.
+- Emotional Events: **The stop.** ⚠️ **The shot's event is that nothing follows the reading** — no recognition, no reaction, no turn. ⚠️ **And now nothing can follow it inside this shot**: the stop is the last frame, and whatever the face would have done is left to the shot after it. **The emotion is in the restraint, and the restraint is the cut.**
 
 # 13. LIGHTING
 
 - Base Lighting: Fluorescent over a working desk at the end of the working day, with the style's bloom on the pale surfaces. The tube is above and behind the camera and the room's own light has not been switched off yet; outside there is nothing left to see. The paper is the brightest thing in the frame and the rest of the staff room has gone to deep cyan.
-- Lighting Events: **None.** ⚠️ **A change of light here would be read as a change of understanding**, and this shot has none.
+- Lighting Events: **None** — no lamp is switched and the tube does not strike or fail. ⚠️ **A change of light as an event would be read as a change of understanding**, and this shot has none. ⚠️ **But the light in the frame moves the whole time**, and it moves because the page and the camera move: the lit edge of the ruling slides right as the lens comes down, dust crosses the beam and takes its own shadows with it, and the eye's own socket shadows the page beneath it as it travels.
 
 # 14. AUDIO
 
@@ -159,7 +175,7 @@ Dust moves over the page and catches the tube. **It keeps moving after the eye h
 - Spatial: The page is square to the frame and stays square; **the eye is above it throughout.** ⚠️ **Nothing is moved for the camera.**
 - Temporal: The same working day, minutes after `s01`. **Nothing in frame supplies a date.**
 - Visual: The fluorescent key, the palette and the dust are the same as `s01` and as all twenty-seven shots. **This is the second of the four evening shots.**
-- Motion: Full animation, not limited. **The atmosphere is the primary mover**; the eye is the subject.
+- Motion: Full animation, not limited. **The atmosphere is the primary mover**; the eye is the change. ⚠️ **The atmosphere does not stop when the eye does** — the page settles, the dust crosses, and the camera descends through to the cut.
 - Sound: Paper, one breath, and no music. **No calling voice as a sound effect.**
 - ⚠️ **この27本は、すべて同じ経路である**（`SEEDANCE 2.5`）。**本編の三本（`MINIMAX H3`）とは別である。**⚠️ **ずれてはならないのは、人物と、パレットと、光である**——**プロンプトの字面ではない。**
 
@@ -188,9 +204,11 @@ Dust moves over the page and catches the tube. **It keeps moving after the eye h
 
 ## MUST
 
-- **An eye crosses one line from left to right and stops at the end of it.**
-- **It is the only thing that moves in the frame.**
+- **An eye crosses one line from left to right and comes to rest on the last character.**
+- **It is the only thing in the frame that changes.**
 - **The line it has crossed cannot be read.**
+- ⚠️ **The arrival is on the last frame of the take** — the cut and the stop are the same instant.
+- ⚠️ **There is no still frame in this take.** The page, the dust, the lit edge of the ruling and the camera move in every one of its 216 frames.
 
 ## PREFER
 
@@ -202,7 +220,7 @@ Dust moves over the page and catches the tube. **It keeps moving after the eye h
 
 # 17. GENERATION PRIORITIES
 
-1. **Only the eye moves** — a brow, a mouth or a head moving turns this into a face, and the work is not there yet.
+1. **The eye is the only thing that changes** — a brow, a mouth or a head moving turns this into a face, and the work is not there yet. ⚠️ **It is not the only thing that moves**: the page, the dust, the lit edge and the camera run underneath it, and they are what keeps the frame from being a still.
 2. **The line is crossed once and the speed does not change.**
 3. **The writing stays unreadable** — the shot's whole subject is that the eye has been over it.
 4. **Nothing follows the stop** — no recognition, no reaction, no turn.
@@ -232,10 +250,9 @@ Dust moves over the page and catches the tube. **It keeps moving after the eye h
 
 A 9-second cinematic piece (16:9), luminous realist anime, over the opened page of an attendance register at the end of a working day, 2026. One continuous take, one change: **an eye crosses a single line of writing from left to right and stops at the end of it.**
 
-0-3.0s: the opened page and the light lying along its ruled columns. **The eye is not in the frame yet.** The columns are printed thin lines of uneven width, and the characters inside them were written in ink by more than one hand — **present and not readable.**
-3.0-6.2s: **an eye enters and crosses one line from left to right.** One pass, uninterrupted; **the rate does not change from the start of the line to the end of it.** The brow and the mouth are held and do not move.
-6.2-9.015s: **the eye stops at the end of the line and stays there.** The characters it has just crossed cannot be made out. **Nothing follows the stop** — no recognition, no reaction. **One blink**, after the stop, and it is the shot's only other movement.
-**Only the eye moves: the head does not tilt, the mouth does not move, and no finger tracks the line.** **The writing on the page is present and cannot be made out — the characters are Japanese characters, set in the Japanese script, and they are not legible.** **This is a Japanese work.** No subtitles. No BGM.
+0-2.2s: the opened page and the light lying along its ruled columns. **The eye is not in the frame yet.** The columns are printed thin lines of uneven width, and the characters inside them were written in ink by more than one hand — **present and not readable.** **The page is still settling from the shot before** — its fore-edge lifts and falls and comes to rest — dust crosses the columns from left to right, the lit edge of the ruling slides as the camera comes down, and **the descent does not stop.**
+2.2-9.015s: **an eye enters and crosses one line from left to right.** One pass, uninterrupted; **the rate does not change from the start of the line to the end of it.** The brow and the mouth are held and do not move. Dust keeps crossing, against the eye's direction; the page is at rest now and the light on it is not. **The eye reaches the last character of the line on the final frame of the take** — the stop and the cut are the same instant. **Nothing follows the stop** — no recognition, no reaction, no blink.
+**Only the eye changes: the head does not tilt, the mouth does not move, and no finger tracks the line.** **The writing on the page is present and cannot be made out — the characters are Japanese characters, set in the Japanese script, and they are not legible.** **This is a Japanese work.** No subtitles. No BGM.
 (One continuous take, one change: an eye crosses the line and stops at the end of it.)
 
 ## Visual Prompt
@@ -244,11 +261,11 @@ Luminous realist anime, translated into the opened page of a register at the end
 
 ## Motion Prompt
 
-Full animation, not limited — the atmosphere is the primary mover. **One eye crossing a line from left to right, once, at a rate that does not change; and then stopping; and then one blink.** Nothing else moves: the brow is held, the mouth is held, the head does not tilt, and there is no hand in the frame. **The stop has no overshoot and no ease** — the eye is not decelerating, it simply is not going on. Dust moves over the page and catches the light, and **it keeps moving after the eye has stopped.** **No acceleration anywhere in this shot.** No impact, no motion blur smears, no stutter, no held frames.
+Full animation, not limited — the atmosphere is the primary mover. **One eye crossing a line from left to right, once, at a rate that does not change, reaching the last character on the final frame.** The brow is held, the mouth is held, the head does not tilt, and there is no hand in the frame. **The stop has no overshoot, no ease and no settle** — the eye is not decelerating, it simply is not going on, and **the take ends on that frame.** ⚠️ **The page, the dust, the lit edge of the ruling and the camera move throughout the shot**, and none of them stops when the eye does — the fore-edge of the page rocks down and comes to rest early, dust crosses against the eye's direction, **and the camera is still descending on the last frame.** ⚠️ **No held frames and no still frames anywhere in this take.** No impact, no motion blur smears, no stutter.
 
 ## Camera Prompt
 
-Third person, close, at desk height looking slightly down — the same placement as the shot before. One camera event only: a very slow, weighted settle of a few centimetres over the whole take, revealing nothing. ⚠️ **Do not rack focus onto the writing and do not cut to an insert of it** — **the camera does not do with the lens what the eye is doing.** No handheld, no whip, no shake, no push-in on the line, no sudden zoom, no unnatural rotation. **Keep the composition for the whole take.**
+Third person, close, at desk height looking slightly down — the same placement as the shot before. One camera event only: **the slow descent begun in the previous shot continues toward the page and slightly to the right, at a rate that does not change, and it is still running on the last frame of the take.** ⚠️ **Do not stop the move before the cut**, and **do not rack focus onto the writing and do not cut to an insert of it** — the camera does not do with the lens what the eye is doing. ⚠️ **The page may grow in the frame as the lens comes down, but it never becomes a close-up of a single character.** No handheld, no whip, no shake, no push-in on the line, no sudden zoom, no unnatural rotation.
 
 ## Audio Prompt
 
@@ -270,8 +287,11 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 
 - Instance ID: `habits-mv-s02-9.015s-01`
 - Segment ID: `pre-chorus-1-1`
-- Specification Version: `0.1.0`
+- Specification Version: `0.2.0`
 - Generation Date: `2026-09-28`
+- ⚠️ **版が `0.1.0` から動いた**（2026-09-28、運動の層の作り直し）。⛔ **`media/` に在る `02_…mp4` は `0.1.0` から出ている**
+  （`takes/habits-mv-s02-video-1.yaml` の `params.source_version`）——**ゆえに `L25` の版の照合が
+  「投入 `0.1.0` → 現在 `0.2.0`」を言う。** **それが正しい。この1本は、いまの仕様の生成物ではない。**
 - ⚠️ **日付の出所**: `media/` に置かれたファイルの mtime（2026-09-28 05:13）である——
   **投入した時刻そのものではない。** ⛔ **世代の記録は `takes/habits-mv-s02-video-1.yaml` に在る**——
   **この仕様は世代を写さない**（写した分は古びる）。
@@ -280,7 +300,7 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 
 - Duration: `9.015s`
 - References: `REF_CHARACTER (碓氷千夏 — 設定画＋表情シート, CRITICAL) ／ REF_FORMAT (video-spec) ／ REF_STYLE (luminous-anime, HIGH) ／ REF_SOURCE (bible.yaml ＋ ledger.yaml, CRITICAL)`
-- Temporal Structure: `3 movements, NON_UNIFORM — 0-3.0s / 3.0-6.2s / 6.2-9.015s`. The held movement = `MOVEMENT 3`
+- Temporal Structure: `2 movements, NON_UNIFORM — 0-2.2s / 2.2-9.015s`. The held movement = `none`
 - Camera Events: `1 event as listed in §10`
 - Action Events: `ACT_READ → ACT_STOP`
 - Audio Events: `no dialogue ／ paper ＋ one breath ＋ one placed absence ／ no music`
@@ -290,9 +310,22 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 
 ## Version
 
-`0.1.0` — **一度だけ生成した**（2026-09-28）。**採用は、まだ選ばれていない**——
-**選ぶのは著者である**（`CLAUDE.md`「**生成はサンプルである。**」）。
+`0.2.0` — **運動の層を作り直した**（2026-09-28）。**生成はまだ `0.1.0` の1本だけである。**
+**採用は、まだ選ばれていない**——**選ぶのは著者である**（`CLAUDE.md`「**生成はサンプルである。**」）。
 ⛔ **この節は仕様の側であって、世代の記録ではない**——**記録は `takes/habits-mv-s02-video-1.yaml` に在る。**
+
+### `0.1.0` → `0.2.0`（2026-09-28）——運動の層
+
+**規則「変化は、切れ目で終わる」を入れた。** 変わったのは §1・§7・§8・§10・§11・§12・§13・§15・§16・§17・§18 の三つのプロンプト・§19。
+⛔ **変わった中身**:
+- **末尾の `held`（`6.2-9.015s`）を消し、横断を切れ目のコマで終わらせた。**
+  **止まることと切れることが、同じ瞬間になった。**
+- **頭の `held`（`0-3.0s`）を `sparse` に置き換えた。** 頁は前の1本からまだ沈んでいる。
+- **まばたきを外した。** 止まったあとが無くなったので、置き場所が消えた。
+- **§11 の「Everything the eye is looking at is still」を撤回した。** 頁は沈み、埃は渡り、光の縁は滑る。
+- **§10 のカメラを、`s01` から続く止まらない降下にした。** 前の版は「数センチの重い沈み」で、
+  **「何も明かさず」「構図を最後まで保つ」**と言っていた。
+- ⚠️ **§18 の `Negative Prompt` と `Style Motion` は1字も動かしていない**（`L10`）。
 
 ## Observed Problems
 
@@ -321,5 +354,7 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 - **The head may bend closer.** The distance between the eye and the page is the shot's composition; closing it changes the shot's meaning.
 - **A finger may enter and track the line** — a reading gesture the work has not asked for.
 - **An insert of the writing may be cut in.** ⚠️ **That shows the audience what the eye saw**, and the shot exists because they are not shown it.
-- **The blink may arrive early.** The blink is the shot's only ending; one in movement 2 ends it twice.
+- ⛔ **The eye may stop before the last frame.** ⚠️ **This is the failure the restructure was written against.** The take is 9.015s and the eye has to be arriving at 9.015s — **an eye that reaches the end of the line at 6s and waits hands the song a stopped picture**, which is what the previous version of this shot did for 2.815 seconds.
+- **The page may come back as a still.** Movement 1 is `sparse`, not `held`: the fore-edge has to still be settling from `s01`, dust has to be crossing, and the camera has to be visibly descending to the page. ⛔ **A frozen opening is the same defect as a frozen ending.**
+- **The camera may be parked.** ⚠️ The descent has to still be running at 9.015s. A lens that settles in the first two seconds makes this shot a photograph of a page with an eye moving over it.
 - **Music may be placed anyway.** ⚠️ **On this route `No BGM` is one of the few negations actually received**, so a bed arriving is a violation of §16, not a matter of taste.

@@ -11,6 +11,19 @@
 
 ---
 
+⛔ **この仕様は 2026-09-28 に運動の層を作り直した（`0.1.0` → `0.2.0`）。**
+**規則——「変化は、切れ目で終わる。」** この作品の切れ目は曲が置いたものであり、
+実測で **26の切れ目のうち24が歌詞の行の頭と 20ms 以内で一致する。**
+⛔ **前の版は、そのアクセントに静止で入っていた。** この1本では**変化が切れ目の 1.5秒前に終わっていた**
+（テイクを 0.25秒窓で測ると、6.00秒で山を打ち、以後 1.5秒を山の 1.3〜4.0% で過ごしている）。
+**いまは、頁が沈みきる瞬間に切れ目が来る。**
+⚠️ **土台は動いていない。** `shot-record.schema.json` の `motion` の註——
+**「止まるのは主題であって、画面ではない。光と粉塵は動く。」**——を、前の版は
+「主題が止まるなら画面も止まる」と読んでいた。**そこだけを直した。**
+⚠️ **`§18` の `Negative Prompt` と `Style Motion` は1字も動かしていない**（`L10`）。
+
+---
+
 # 1. VIDEO
 
 - Duration: `8.059s`
@@ -18,7 +31,7 @@
 - Resolution: `1920x1080`
 - Frame Rate: `24fps`
 - Orientation: `Landscape`
-- Generation Intent: One continuous take of one change — **a closed register on a desk is opened by a hand, and the transfer column comes up.** ⚠️ **The first movement this work ever shows is a hand**, and **no face is in this shot at all**: the order the work is built on is not yet two steps old.
+- Generation Intent: One continuous take of one change — **a closed register on a desk is opened by a hand, and the transfer column comes up.** ⚠️ **The first movement this work ever shows is a hand**, and **no face is in this shot at all**: the order the work is built on is not yet two steps old. ⚠️ **The change completes on the last frame of the take** — the page is still settling when the cut arrives, and **the frame is never still in the meantime**: dust crosses, the tube's light breathes, and the camera is descending from the first frame to the last.
 
 # 2. WORLD
 
@@ -94,19 +107,19 @@
 # 7. NARRATIVE
 
 - Core Event: **A closed register is opened by a hand, and the transfer column comes up.**
-- Beginning: The register is shut, the desk is empty of hands, and nothing in the frame is moving.
+- Beginning: **The register is shut and the desk is empty of hands** — the tube's light is on the cover and already changing, dust is already crossing the desk, and the camera is already descending.
 - Turn: **The hand arrives from below the frame.** It is the first movement of the work, and it is not a face.
-- Peak: **The cover rises and the page stands up on its own edge**, and the transfer column is on it.
+- Peak: **The cover rises, the leaves fan and fall, and the page comes up under the hand** — and it is still being pressed flat when the take ends.
 - Pull: ⚠️ **The column is up and nobody has read it.** The shot ends there — **the first step of the carrying, stopped.**
 
 # 8. TEMPORAL STRUCTURE
 
 - Timing Policy: `STRUCTURED` / `NON_UNIFORM`
 - Temporal Sequence:
-  - MOVEMENT 1 `0-2.5s` — density: `held` — the closed register and the light lying on the cover. **Nothing moves** — this is the longest held opening in the work, and it is 2.5 seconds of a desk.
-  - MOVEMENT 2 `2.5-5.0s` — density: `transition` — **the hand enters from the bottom of the frame** and the pads of the fingers come down on the cover. One arrival, no hesitation.
-  - MOVEMENT 3 `5.0-8.059s` — density: `sparse` — **the cover lifts and the page stands**, and the transfer column is on it. The page is not turned — it is opened once.
-- Temporal Density: **The held movement is the first one and it is the longest.** ⚠️ **Eight seconds without a song, and the shot spends its first two and a half of them on nothing moving** — because the movement that follows has to arrive into stillness, or it is not an arrival.
+  - MOVEMENT 1 `0-1.6s` — density: `transition` — the closed register and the light on the cover: **the tube's light breathes once, dust crosses the desk, and the camera is already descending.** Nothing of the register has changed yet, and **the frame is not still** — this movement establishes the motion the whole take runs on.
+  - MOVEMENT 2 `1.6-3.8s` — density: `sparse` — **the hand enters from the bottom of the frame** and the pads of the fingers find the cover's edge. One arrival, no hesitation; **the register has not opened yet.**
+  - MOVEMENT 3 `3.8-8.059s` — density: `dense` — **the register opens.** The cover swings up, the leaves fan and fall one after another, the fore-edge rocks and settles, and **the page carrying the transfer column rises under the hand and is pressed flat — and is still settling on the last frame of the take.** ⚠️ **The cut arrives on that frame.** The page is not turned past the column.
+- Temporal Density: **The weight of the take is at its end, in one long movement that does not stop before the cut.** ⚠️ **Eight seconds without a song, and the picture runs the whole way** — because the song's first line lands on the cut at 8.059s, and **a picture that has already stopped cannot receive it.** ⚠️ **There is no `held` movement in this shot.** Stillness here would be stillness of the *frame*, and this work's floor does not have one: **the subject holds or moves, and the light and the dust move either way.**
 
 # 9. ACTION
 
@@ -116,40 +129,40 @@
 # 10. CAMERA
 
 - Camera Language: Third person, **close**, placed at the desk — **this work puts the camera at one of three sites** (run-10【ルックとカメラ】: 「カメラは、机上の手、左袖の名札、めくられる名簿の三箇所に置かれる」). This is the first of the three, and it is the work's first frame: the lens sits at desk height, looking slightly down at the cover.
-- Camera Events: One event only. `0-8.059s` — a very slow, weighted settle of a few centimetres, the camera placed rather than travelling. **Nothing is revealed by it, and it does not follow the hand.**
-- Camera Behavior: No handheld, no whip, no shake. **No push-in on the page and no cut to the column.** The camera does not move to where the meaning is — **the meaning arrives inside a frame that stayed where it was.** **The frame keeps its composition for the whole take.**
+- Camera Events: One event only. `0-8.059s` — **a slow, continuous descent**: the lens comes down toward the desk and slightly to the right, at a rate that does not change, and **it is still descending when the take ends.** ⚠️ **This is the descent the whole reading section runs on** — it begins here and no cut stops it, so `s02` and `s03` pick it up already in progress.
+- Camera Behavior: No handheld, no whip, no shake. **No push-in on the page and no cut to the column.** ⚠️ **The camera does not stop before the cut** — the frame arrives at the register at the same moment the song arrives at its first line. No sudden zoom, no unnatural rotation. ⚠️ **The composition is allowed to change: the desk enters and the register grows in the frame as the lens comes down.** It never becomes a close-up of the column.
 
 # 11. MOTION
 
 ## Subject Motion
 
-**A right hand entering the frame from below, pressing the cover, and lifting one page.** ⚠️ **It is the only motion the figure has**, and it is the only motion in the shot. The wrist does not rotate; the movement is in the fingers and in the page.
+**A right hand entering the frame from below, pressing the cover, and opening the register.** ⚠️ **It is the change this shot carries, and it is one change.** The wrist does not rotate; the movement is in the fingers and in the paper under them.
 
 ## Object Motion
 
-**The cover, once** — it rises and stays. **The page, once** — it stands on its edge and does not turn. ⚠️ **Nothing is carried anywhere.**
+**The cover, once** — it swings up. **The leaves, in sequence** — they fan and fall one after another, and the block rocks at the fore-edge until it settles. **The page, once** — it rises under the hand and is pressed flat, and **it is still settling on the last frame.** ⚠️ **Nothing is carried anywhere.**
 
 ## Environmental Motion
 
-Dust moves in the air under the tube and catches the light. **It keeps moving after the hand has stopped** — that is what keeps this from being a still.
+Dust moves in the air under the tube and catches the light. ⚠️ **Nothing about it stops when the hand does** — the dust goes on crossing, and the fore-edge of the page goes on breathing, through to the cut. ⚠️ **This is the layer the shot runs on**, not a decoration on a still.
 
 ## Physical Characteristics
 
-- **Weight**: **Paper has none, and this work's paper is light** — the cover rises without resistance and the page does not fall back. ⚠️ **The only weight in the frame is the hand's, and it is not shown pressing.**
-- **Inertia**: **None.** The hand arrives and stops; the page rises and stops. **No overshoot and no settle.**
-- **Acceleration**: **None.** ⚠️ **This is the shot's physical law: the palm arrives at the same rate it travelled at.**
-- **Fluidity**: Continuous; no snap, no held cel, no stutter. ⚠️ **Stillness at the start is not a held frame** — the dust and the light go on moving through all 2.5 seconds of it.
-- **Impact**: **One, and it is soft**: the pads meeting the cover. **Nothing else touches anything.**
+- **Weight**: **Paper has little, and this work's paper is light** — the cover rises without resistance. ⚠️ **But light is not weightless: the pages have mass enough to fall and to rock the block, and the settle at the end of the take is that mass coming to rest.**
+- **Inertia**: **The paper overshoots and settles.** ⚠️ **This reverses the previous version of this shot, which said `No overshoot and no settle`.** The leaves fall past their resting angle, the fore-edge rocks, and the hand presses the page back down — **and the take ends before that settles.**
+- **Acceleration**: **The hand arrives at the rate it travelled at**; the paper does not — it falls faster than it is released and slows as it lands. ⚠️ **Two rates, one change.**
+- **Fluidity**: Continuous; no snap, no held cel, no stutter. ⚠️ **There is no held frame anywhere in this take** — the opening 1.6 seconds are a movement of light and dust, not a still.
+- **Impact**: **Two, and both soft**: the pads meeting the cover, and the block meeting the desk as the register opens. **Nothing else touches anything.**
 
 # 12. EMOTION
 
-- Emotional Arc: **The interval before the first movement** — held open until the frame has earned the right to move.
-- Emotional Events: ⚠️ **The event of this shot is not an expression.** It is the arrival itself — **the first time this work shows a hand** — and the shot does not celebrate it. **The emotion is in the wait that preceded it, not in the hand.**
+- Emotional Arc: **The interval before the first movement** — the frame runs on dust and light until the hand arrives, and then does not stop for it.
+- Emotional Events: ⚠️ **The event of this shot is not an expression.** It is the arrival itself — **the first time this work shows a hand** — and the shot does not celebrate it. **The emotion is in the flatness of the treatment: a first movement, given no more room than any other.**
 
 # 13. LIGHTING
 
 - Base Lighting: Fluorescent over a working desk at the end of the working day, with the style's bloom on the pale surfaces. The tube is above and behind the camera and the room's own light has not been switched off yet; outside there is nothing left to see. The paper is the brightest thing in the frame and the rest of the staff room has gone to deep cyan.
-- Lighting Events: **None.** ⚠️ **The light does not change once in this shot** — it must not, because the shot's only motion is the hand, and a change of light would be read as a change of meaning.
+- Lighting Events: **None** — no lamp is switched, no shade moves, and the tube does not strike or fail. ⚠️ **But the light in the frame changes continuously**, and it changes because the subject moves: the cover carries a shadow off the desk as it rises, the fanned leaves pass the tube's light through themselves and throw moving edges across the page, and the hand's shadow arrives before the hand does. ⚠️ **This is not a lighting event; it is the consequence of the shot's one change**, and the previous version of this section called it "the light does not change once" — which was true only of a shot in which nothing moved.
 
 # 14. AUDIO
 
@@ -195,8 +208,10 @@ Dust moves in the air under the tube and catches the light. **It keeps moving af
 
 - **A closed register is opened by a hand, and the transfer column comes up.**
 - **The hand arrives from below the frame and the arm is never followed to its source.**
-- **The cover and the page each move exactly once.**
+- **The cover, the leaves and the page each move exactly once.**
 - **The column is on screen and cannot be read.**
+- ⚠️ **The change is still in progress on the last frame** — the page is settling when the take ends.
+- ⚠️ **There is no still frame in this take.** Light and dust move in every one of its 193 frames; a frame in which the picture is frozen is a failure of this section.
 
 ## PREFER
 
@@ -210,8 +225,8 @@ Dust moves in the air under the tube and catches the light. **It keeps moving af
 
 1. **A hand, before any face** — this shot is where the work's order is established. ⚠️ **If a face appears here, the order is broken for the whole work.**
 2. **The register is openable and its writing is not readable** — both halves at once.
-3. **The first 2.5 seconds are still** — the arrival has to land in stillness.
-4. **One page, one lift, one hand** — nothing else happens.
+3. **The change is still happening on the last frame** — the page is still settling when the cut arrives. ⚠️ **A take that has finished moving before its cut hands the song a stopped picture.**
+4. **One page, one lift, one hand** — nothing else happens. ⚠️ **One change is not one movement**: the dust, the light through the leaves, the rocking fore-edge and the descending camera are all moving underneath it, and they are what keeps this from being a still.
 5. **Japanese is what this work speaks** — named in §18, even though this shot holds no words.
 6. Everything else.
 
@@ -238,9 +253,9 @@ Dust moves in the air under the tube and catches the light. **It keeps moving af
 
 An 8-second cinematic piece (16:9), luminous realist anime, at a desk in a school staff room at the end of a working day, 2026. One continuous take, one change: **a closed attendance register lying on the desk is opened by a hand, and the page carrying the transfer column comes up.** **No face is in this shot — the frame holds a desk, a closed book, and one hand.**
 
-0-2.5s: the desk and the closed register. The cover is cloth over board, the thickness of a register's left sleeve; the page edge is layered cream at the fore-edge. **Nothing moves** — only the dust in the air under the fluorescent tube above.
-2.5-5.0s: **a right hand enters from the bottom of the frame** and the pads of the fingers come down on the cover, near its outer edge. The hand does not hurry and does not feel for the corner; it has done this before.
-5.0-8.059s: **the cover lifts and the page stands up on its own edge.** The transfer column is on the opened page — **characters written in ink by more than one hand, present on screen and not readable.** The page does not turn further.
+0-1.6s: the desk and the closed register. The cover is cloth over board, the thickness of a register's left sleeve; the page edge is layered cream at the fore-edge. **The register is not moving yet, and the frame is not still** — the fluorescent tube above breathes once, dust crosses the desk from left to right, and **the camera is already descending toward the desk.**
+1.6-3.8s: **a right hand enters from the bottom of the frame** and the pads of the fingers find the cover's outer edge. The hand does not hurry and does not feel for the corner; it has done this before. **The register is still closed.** Dust lifts behind the wrist.
+3.8-8.059s: **the register opens.** The cover swings up, the leaves fan and fall one after another, the fore-edge rocks and settles, and **the page carrying the transfer column rises under the hand** — **characters written in ink by more than one hand, present on screen and not readable.** The hand presses the page flat, **and the page is still settling on the last frame of the take.** The page is not turned further.
 **The hand is a hand only: no head enters the frame, no shoulder, no standing figure, no second object on the desk.** **The writing on the page is present and cannot be made out — the characters are Japanese characters, set in the Japanese script, and they are not legible.** **This is a Japanese work.** No subtitles. No BGM.
 (One continuous take, one change: the register is opened and the transfer column comes up.)
 
@@ -250,11 +265,11 @@ Luminous realist anime, translated into a desk in a staff room at the end of the
 
 ## Motion Prompt
 
-Full animation, not limited — the atmosphere is the primary mover. **A hand entering the frame from below, coming down on the cover, and lifting one page; the cover rising and staying; the page standing on its edge and not turning.** Nothing else in the figure moves, because there is nothing else of the figure in the frame. **No overshoot, no ease, no settle** — the hand arrives at the rate it travelled at. Dust moves in the air under the tube and catches the light, and **it keeps moving after the hand has stopped.** **No acceleration anywhere in this shot.** No impact beyond one soft contact, no motion blur smears, no stutter, no held frames.
+Full animation, not limited — the atmosphere does not idle. **A hand entering the frame from below and opening the register; the cover swinging up; the leaves fanning and falling one after another; the fore-edge rocking; the page rising under the hand and being pressed flat — and still settling at the end of the take.** ⚠️ **The pages have mass: they fall past their resting angle and rock to a stop, and the take ends before the stop is complete.** The hand's own rate does not change; the paper's does. Dust crosses the desk throughout and **the fore-edge of the page goes on breathing through to the last frame.** ⚠️ **No held frames, and no frame anywhere in the take in which the picture is still** — the opening seconds are a movement of light and dust, not a still. No motion blur smears, no stutter, no floaty weightless motion.
 
 ## Camera Prompt
 
-Third person, close, placed at the desk — **at desk height, looking slightly down, so that the register is seen the way a person sitting at the desk would see it.** One camera event only: a very slow, weighted settle of a few centimetres over the whole take, revealing nothing. ⚠️ **Do not follow the hand** and do not push in on the page — **the meaning arrives inside a frame that stayed where it was.** No handheld, no whip, no shake, no sudden zoom, no unnatural rotation, no cut to an insert of the column. **Keep the composition for the whole take.**
+Third person, close, placed at the desk — **at desk height, looking slightly down, so that the register is seen the way a person sitting at the desk would see it.** One camera event only: **a slow, continuous descent toward the desk and slightly to the right, at a rate that does not change, still running on the last frame of the take.** ⚠️ **The composition is allowed to change** — the desk enters the frame and the register grows in it. ⚠️ **Do not stop the move before the cut.** No push-in onto the column, no cut to an insert of it, no rack focus. No handheld, no whip, no shake, no sudden zoom, no unnatural rotation.
 
 ## Audio Prompt
 
@@ -276,8 +291,12 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 
 - Instance ID: `habits-mv-s01-8.059s-01`
 - Segment ID: `intro-1`
-- Specification Version: `0.1.0`
+- Specification Version: `0.2.0`
 - Generation Date: `2026-09-28`
+- ⚠️ **版が `0.1.0` から動いた**（2026-09-28、運動の層の作り直し）。⛔ **`media/` に在る `01_…mp4` は `0.1.0` から出ている**
+  （`takes/habits-mv-s01-video-1.yaml` の `params.source_version`）——**ゆえに `L25` の版の照合が、
+  この1本と `s02`・`s03` で「投入 `0.1.0` → 現在 `0.2.0`」を言う。** **それが正しい。**
+  **この3本は、いまの仕様の生成物ではない。**
 - ⚠️ **日付の出所**: `media/` に置かれたファイルの mtime（2026-09-28 05:10）である——
   **投入した時刻そのものではない。** ⛔ **世代の記録は `takes/habits-mv-s01-video-1.yaml` に在る**——
   **この仕様は世代を写さない**（写した分は古びる）。
@@ -286,7 +305,7 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 
 - Duration: `8.059s`
 - References: `REF_CHARACTER (碓氷千夏 — **この1本には添付しない**) ／ REF_FORMAT (video-spec) ／ REF_STYLE (luminous-anime, HIGH) ／ REF_SOURCE (bible.yaml ＋ ledger.yaml, CRITICAL)`
-- Temporal Structure: `3 movements, NON_UNIFORM — 0-2.5s / 2.5-5.0s / 5.0-8.059s`. The held movement = `MOVEMENT 1`
+- Temporal Structure: `3 movements, NON_UNIFORM — 0-1.6s / 1.6-3.8s / 3.8-8.059s`. The held movement = `none`
 - Camera Events: `1 event as listed in §10`
 - Action Events: `ACT_ARRIVE → ACT_OPEN`
 - Audio Events: `no dialogue ／ paper ＋ cloth ＋ one soft contact ＋ one placed absence ／ no music`
@@ -296,9 +315,23 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 
 ## Version
 
-`0.1.0` — **一度だけ生成した**（2026-09-28）。**採用は、まだ選ばれていない**——
-**選ぶのは著者である**（`CLAUDE.md`「**生成はサンプルである。**」）。
+`0.2.0` — **運動の層を作り直した**（2026-09-28）。**生成はまだ `0.1.0` の1本だけである。**
+**採用は、まだ選ばれていない**——**選ぶのは著者である**（`CLAUDE.md`「**生成はサンプルである。**」）。
 ⛔ **この節は仕様の側であって、世代の記録ではない**——**記録は `takes/habits-mv-s01-video-1.yaml` に在る。**
+
+### `0.1.0` → `0.2.0`（2026-09-28）——運動の層
+
+**規則「変化は、切れ目で終わる」を入れた。** 変わったのは §1・§7・§8・§10・§11・§12・§13・§17・§18 の五つのプロンプト・§19。
+⛔ **変わった中身**:
+- **末尾の `held`（`5.0-8.059s`）を `dense` に置き換えた。** 変化は切れ目のコマで終わる——
+  **頁は、沈みきる瞬間に切れる。**
+- **頭の `held`（`0-2.5s`）を `transition` に置き換えた。** 動かない2.5秒を、光と埃の1.6秒にした。
+- **§10 のカメラを、止まらない降下にした。** 前の版は「数センチの重い沈み」で、
+  **「何も明かさず、手を追わない」「構図を最後まで保つ」**と言っていた。
+- **§11 の物理を直した。** 前の版は `No overshoot and no settle` / `Acceleration: None` だった——
+  **紙が軽いことは、紙が止まることではない。**
+- **§13 の「この1本で光は一度も変わらない」を撤回した。** 主題が動けば光は変わる。
+- ⚠️ **§18 の `Negative Prompt` と `Style Motion` は1字も動かしていない**（`L10`）。
 
 ## Observed Problems
 
@@ -326,4 +359,5 @@ Full animation, not limited — the opposite of the held-frame idiom. The atmosp
 - **The page may not read as paper** — a plastic-looking page loses the work's physical law, which is that paper is light.
 - **The hand may read as a stranger's** — a hand drawn without the sheet's joints and nails will not match the same person's eyes and mouth in `s02`–`s04`.
 - **A second object may be added to the desk.** A mug, a pen cup or a terminal makes this shot about a workplace instead of about a register.
-- **The first 2.5 seconds may be filled.** ⚠️ **The stillness is the shot's first half** — a camera move, a light change or an early hand turns the arrival into a continuation.
+- **The opening 1.6 seconds may come back as a still.** ⚠️ **This is the failure the restructure was written against.** The beat is now `transition`, not `held`: the tube's light has to breathe, the dust has to be crossing, and **the camera has to be visibly descending.** ⛔ **A frozen opening is the same defect as a frozen ending** — it hands the cut a picture that is not moving.
+- **The take may finish moving before its cut.** ⚠️ **The page has to still be settling at 8.059s.** If the register has come to rest and the hand has stopped, the song's first line lands on a stopped frame, and the shot is the shot it was before this version.
