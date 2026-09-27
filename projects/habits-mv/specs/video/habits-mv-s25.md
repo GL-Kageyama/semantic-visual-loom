@@ -245,10 +245,10 @@ Dust moves over both desks and catches the tube. **It keeps moving after both fa
 
 A 5-second cinematic piece (16:9), luminous realist anime, at two desks with bundles of paper in a school in the middle of a working day, 2026. One continuous take, one change: **two hands press paper in two places and two faces rise, one after the other, as the last sung line ends.**
 
-0-1.1s: **清水拓也の手が紙を押さえる** — fast, flat, one movement.
-1.1-3.0s: **顔が起きる。** ⚠️ **Small: the turn happens in the hair and the neck.** **No smile, no startle, no widening of the eyes.**
-3.0-3.7s: **林沙織の手が、同じ押さえ方をする。** ⚠️ **The frame does not cut.**
-3.7-5.186s: **顔が起きる。止まる。** ⚠️ **Not at the same moment as the first** — and **nothing in the frame marks the end of the sung section.**
+0-1.1s: **a hand presses paper down** — fast, flat, one movement.
+1.1-3.0s: **a face rises.** ⚠️ **Small: the turn happens in the hair and the neck.** **No smile, no startle, no widening of the eyes.**
+3.0-3.7s: **a second hand makes the same press in another place.** ⚠️ **The frame does not cut.**
+3.7-5.186s: **a second face rises and stops.** ⚠️ **Not at the same moment as the first** — and **nothing in the frame marks the end of the sung section.**
 **The two faces do not rise at the same time; no caller is shown and no voice is heard; neither face performs.** **No cut and no camera crossing between the two places, and nothing inside the shot marks the end of the song.** **The writing on the paper is present and cannot be made out: the characters are Japanese characters, set in the Japanese script, and they are not legible.** **This is a Japanese work.** No subtitles. No BGM.
 (One continuous take, one change: hand, face, hand, face — and the song finishes.)
 

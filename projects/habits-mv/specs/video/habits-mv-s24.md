@@ -251,10 +251,10 @@ Dust moves over both desks and catches the tube. **It keeps moving after both fa
 
 A 5-second cinematic piece (16:9), luminous realist anime, at two desks with bundles of paper in a school in the middle of a working day, 2026. One continuous take, one change: **two hands press paper in two places and two faces rise, one after the other.**
 
-0-1.2s: **秋山誠の手が紙を押さえる** — fast, flat, one movement.
-1.2-2.9s: **顔が起きる。** ⚠️ **Small: the turn happens in the hair and the neck, and the shoulders move very little.** **No smile, no startle, no widening of the eyes.**
-2.9-3.6s: **前田亮太の手が、同じ押さえ方をする。** ⚠️ **The frame does not cut.**
-3.6-5.026s: **顔が起きる。止まる。** ⚠️ **Not at the same moment as the first** — **one at a time, hand first and face after, twice.**
+0-1.2s: **a hand presses paper down** — fast, flat, one movement.
+1.2-2.9s: **a face rises.** ⚠️ **Small: the turn happens in the hair and the neck, and the shoulders move very little.** **No smile, no startle, no widening of the eyes.**
+2.9-3.6s: **a second hand makes the same press in another place.** ⚠️ **The frame does not cut.**
+3.6-5.026s: **a second face rises and stops.** ⚠️ **Not at the same moment as the first** — **one at a time, hand first and face after, twice.**
 **The two faces do not rise at the same time; no caller is shown and no voice is heard; neither face performs — no smile, no startle, no widening of the eyes.** **No cut and no camera crossing between the two places.** **The writing on the paper is present and cannot be made out: the characters are Japanese characters, set in the Japanese script, and they are not legible.** **This is a Japanese work.** No subtitles. No BGM.
 (One continuous take, one change: hand, face, hand, face.)
 
