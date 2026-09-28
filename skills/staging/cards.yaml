@@ -24,11 +24,11 @@ cards:
     clause: "**The camera moves with a real rig's weight** — dolly, crane, Steadicam — or holds. But a hold here is a decision a camera makes, not a photograph's stillness."
     offers:
       - term: dolly
-        quote: "The camera moves with a real rig's weight — dolly, crane, Steadicam — or holds."
+        quote: "**The camera moves with a real rig's weight** — dolly, crane, Steadicam — or holds."
       - term: crane
-        quote: "The camera moves with a real rig's weight — dolly, crane, Steadicam — or holds."
+        quote: "**The camera moves with a real rig's weight** — dolly, crane, Steadicam — or holds."
       - term: steadicam
-        quote: "The camera moves with a real rig's weight — dolly, crane, Steadicam — or holds."
+        quote: "**The camera moves with a real rig's weight** — dolly, crane, Steadicam — or holds."
   documentary-photo:
     clause: "**The camera stands and watches, at eye level.** It holds; if it moves at all it moves to keep the subject in frame, never to make a point."
     offers:
@@ -51,7 +51,7 @@ cards:
     clause: "**The camera holds on the page** and may drift down it as the record descends, but never leaves it."
     offers:
       - term: drift
-        quote: "The camera holds on the page and may drift down it as the record descends, but never leaves it."
+        quote: "**The camera holds on the page** and may drift down it as the record descends, but never leaves it."
   landscape-photo:
     clause: "**The camera is set up, not followed.** A large-format frame stands on a tripod; the shot is composed and then left alone."
     offers: []
