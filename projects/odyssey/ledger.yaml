@@ -1,0 +1,705 @@
+# 制作台帳 — 主題歌MV『永遠より遠い』（odyssey）
+#
+# ⚠️ **台帳は一つである。** 連続性（世界の状態）と開示（観客の知識の状態）を同じファイルに持つ。
+#    **参照集合と禁制集合は、この一点から導かれる**（`CLAUDE.md` の固定方針）。
+#    **二つに割ってはならない。**
+#
+# ⚠️ **この作品の台帳は、家の台帳より小さい。**
+#    **人物2・場所6・道具4。** habits-mv は 人物28・場所6・道具5 であった。
+#    ⚠️ **これは作品が短いからではない。作品が狭いからである**——裁定③が境界を閉じた。
+#    **この作品には、一人の男と、声と、島と、海しか居ない。**
+#
+# ⚠️ **ここに「何が与えられたか」は書かない。** それは `bible.yaml` である。
+#    **ここに在るのは「何を決めたか」である。**（`song_coverage` の註を見る）
+
+# ───────────────────────────────────────────────────────────────── characters
+#
+# ⚠️ **キーが `男` と `女神` である理由。** **人名ではない。**
+#    `bible.world.rules` の三番——**「固有名は、画面にも歌にも一度も現れない。」**
+#    ⚠️ **台帳の鍵に人名を書けば、この作品は「彼の作品」でなく「彼についての作品」になる**
+#       ——**禁制を、台帳の鍵から破ることになる。**
+#    ⚠️ **ゆえにこの2つは、名ではなく役である。**（`女`・`男` でさえなく、`女神`と`男`。）
+#
+# ⚠️ **`identity` の欄は、ここでは「参照画像を指す」ではない。**
+#    裁定②——**この作品は参照画像を渡さない**（Seedance 2.5 は実在の人物の顔を含む参照を
+#    受け取らない。`docs/seedance-route.md`）。**ゆえに identity lock は、文だけが運ぶ。**
+#    ⚠️ **その文が、この欄である。** **ショットの §6 `REF_FORMAT` に、毎回まるごと貼る**
+#       ——**要約しない。参照もしない。** 要約は identity lock の意味を消す。
+#    ⚠️ **英語である。** 生成に渡る文字列だからである。
+#    ⚠️ **これは「参照画像が無い」のではなく「参照画像の代わりが文である」である。**
+#       ゆえにこの欄は、家の台帳でいちばん長い欄になった。
+characters:
+  # ─────────────────────────────────────────────────────── 男
+  #
+  # ⚠️ **世界の規則の七番が、この人物の見た目を決めている。**
+  #    「**神話のギリシアは、この作品の様式ではない。** 大理石も円柱も神殿も無い
+  #      ——詩は古典以前である。石は荒い。木と布と青銅がある。」
+  #    **ゆえにこの男は、古典の英雄の姿をしない**——青銅器時代の、海に焼かれた男である。
+  #
+  # ⚠️ **世界の規則の四番が、この人物の持ち物を決めている。**
+  #    「**弓は、この作品に一度も現れない。**」**彼は弓を持たない。**
+  #    **持つのは斧だけである**——そして斧は第五巻の内側にある道具である。
+  男:
+    identity: >-
+      One man, weathered by years at sea. Tall, heavy-boned, broad-shouldered, deep-chested,
+      thickened rather than muscled — the build of a man who has rowed and hauled all his life.
+      Skin burned dark brown and roughened by salt and sun. Forearms and hands cross-hatched
+      with pale scars and rope burns; the hands of a man who works wood and cordage.
+      Hair: dark, going grey at the temples, uncut, matted with salt, falling past the ears.
+      Beard: full and unkempt, dark with grey in it.
+      Face: heavy brow, deep-set eyes, a nose broken once and set crooked, a hard jaw,
+      deep lines from the eyes and the mouth. The face of a man who is not young and
+      does not look old.
+      Clothing, and only this: one coarse undyed wool tunic, worn through at the shoulder seam,
+      belted with a plain leather cord; no cloak, no sandals, no brooch, no ring, no ornament.
+      Feet bare, legs bare, arms bare.
+
+    # ⚠️ **空である。** **この作品は、一晩しか映さない。**
+    #    男は一着しか持たず、**着替える場面が一つも無い**——ゆえに状態が無い。
+    #    ⚠️ **女神が与える布は、衣装ではない。** **帆である**（`props.帆` を見る）。
+    #       曲の `l15`「帆を縫って風を待つ」が、その布の行き先を決めている。
+    #    ⚠️ **空の `states` は「決めていない」ではない。** 「変化が無い」である。
+    states: {}
+    negatives:
+      # ⚠️ **この7行は、参照画像の代わりである。** 文章だけで同一性を運ぶので、
+      #    **出てはならないものを、出てはならないものとして並べる。**
+      - "no armour, no helmet, no greaves, no shield"
+      - "no sword, no spear, no bow, no arrow, no quiver"
+      - "no weapon of any kind except the bronze double-axe, and only where the work calls for it"
+      - "no crown, no diadem, no sceptre, no ring, no brooch, no jewellery"
+      - "no cloak, no sandals, no fitted or tailored clothing, no dyed fabric"
+      - "no youthful face, no beardless face, no clean or unlined skin"
+      - "no muscular hero's body, no heroic pose, no heroic lighting"
+
+  # ─────────────────────────────────────────────────────── 女神
+  #
+  # ⛔ **この人物は、この作品の中で一度も顔を持たない。**
+  #    **これは裁定である**（2026-09-29。物語の境界の裁定③と同じ日に置かれた）——
+  #    ⚠️ **「女神は言う ここにいれば」と歌いながら、彼女を写せば、それは説明である。**
+  #       曲の `l08`「**私の顔を見ている**」は、**彼女の顔ではなく、見られている彼の顔**である。
+  #       **この一行が、この設計の出所である。**
+  #
+  # ⚠️ **この設計には、三つの効き目がある**——どれも偶然ではない。
+  #    ① **参照不能な同一性が一つ減る。** 裁定②の下で、この作品は顔の参照を渡せない。
+  #       彼女に顔を与えれば、**いちばん参照が要る人物が、いちばん参照できない人物になる。**
+  #    ② **`theme-song.md` の裁定5（女神に言葉を与えない。遠くの声だけ）と一致する。**
+  #       曲は既にそう書かれている——`[Pre-Chorus: distant female voice]`。
+  #    ③ **彼女は声と熱であり、それ以上ではない。** 神を写せば、この作品は
+  #       **「神話の映像化」**になり、**「島にいる男の話」**でなくなる。
+  #
+  # ⚠️ **先例がこの工房に在る。** habits-mv の `さくら` は「**凍らせる者がいない**」ことが
+  #    同一性であった——**居ないことを同一性にする、という形は既に検査を通っている。**
+  #    ここでは「**顔が無いこと**」が同一性である。
+  #
+  # ⚠️ **ゆえに `identity` の欄が、この作品で唯一「禁止の形をした同一性」である。**
+  #    参照集合が引くのは `女神.negatives` のほうである（`identity` も引けるが、
+  #    **§6 に貼るのは negatives の側である**）。
+  女神:
+    identity: >-
+      The goddess is never a face. In this work she has no face, no body, no hands, no feet —
+      she is not shown as a person at any moment. She is present as four things only:
+      (1) a low female voice from off-frame, distant and unhurried;
+      (2) a warmth on surfaces — the sheen on wet stone, the glow on the underside of leaves —
+      where no fire is ever shown;
+      (3) moving air, where nothing else explains it;
+      (4) a light on the water that comes from behind the camera.
+      Where the frame must hold a person-shaped thing at the cave mouth, it is an unlit
+      silhouette at full distance, smaller than the opening, and it never resolves.
+    # ⚠️ **空である。** 彼女は姿を変えない——**姿を持たないからである。**
+    states: {}
+    negatives:
+      # ⛔ **この6行が、この人物の設計そのものである。**
+      #    ⚠️ **禁制集合は「出してはならないもの」である。** 彼女の場合、
+      #       **出してはならないものが彼女の全部である**——ゆえに長い。
+      #    ⚠️ **`negative_base` の8行目と同じことを言っている。** 重複ではない——
+      #       **基盤の側は「全ショットに掛かる床」であり、こちらは「この人物が居るショットで
+      #       引かれる鍵」である。** 台帳の鍵から引けるのはこちらだけである。
+      - "no face for the goddess, no portrait, no close-up of a woman"
+      - "no visible body, no hands, no feet, no arms, no silhouette with a readable outline"
+      - "no woman in frame at all, at any distance, in any focus"
+      - "no white robes, no classical drapery, no veil, no chiton, no peplos"
+      - "no wings, no halo, no aura, no glowing outline, no divine light around a figure"
+      - "no second person in frame"
+
+# ────────────────────────────────────────────────────────────────── locations
+#
+# ⚠️ **6つしかない。34本が6つを巡る。**
+#    ⚠️ **この6つは、曲の1行が立つ現場である。** 話の記名の現場ではない
+#       ——habits-mv の同じ註がそのまま効く。
+#
+# ⚠️ **`base` は「基準画像」である。** ここでも参照画像は無い——
+#    **文が基準である**（`characters` の註と同じ扱い）。
+# ⚠️ **`geography` は位置関係である。** **全ショットに添付する**（家の規約）。
+#    この作品の地理は一つである——**島の岸と、その海と、内陸の洞口**。
+#    **ゆえに `geography` の6本は、互いに矛盾してはならない。**
+#    ⚠️ **方位は書かない。** 詩は方位を書いていない——**書けば、この作品が主張を足す。**
+#       **陸／海、内陸／海側、右手／左手で書く。**
+locations:
+  # ─────────── 岸 ── **この作品の地面である。**
+  # 出所: `theme-song.md` の情景「島。岸。低い波。」——**曲が名指した最初の場所である。**
+  岸:
+    base: >-
+      The island's shore at the waterline. Coarse dark sand and wet shingle, strewn with
+      sea-worn driftwood, dry weed, and small flat stones. Low wet rocks at the water's edge.
+      Behind the beach, a rising bank of dense low scrub — no trees, no path, no stairs.
+      The sea fills the upper half of any frame that faces it. No jetty, no boat, no
+      building, no fire, no footprint of any structure.
+    geography: >-
+      One island in open sea. The shore runs left to right across the near edge of frame;
+      the water lies beyond it and away from the camera. The cave mouth stands upslope and
+      inland, behind the camera in any shot that faces the sea — so a shore shot and a cave
+      shot can never share a frame. The raft is built on the shingle at the shore's right-hand
+      end, out of sight of the cave mouth. The shore is continuous: the same waterline runs
+      through every shore shot, and the horizon stays level and unmoved.
+    # ⚠️ **この場所は、一日のうちの一つの光しか持たない。**
+    #    **実測（ショット割り）: 5本、すべて `日没` である**
+    #    （`s01`・`s04`・`s05`・`s06`・`s08`）。
+    #    ⛔ **`s08` のあと、この作品は岸へ戻らない。**
+    #       **岸を離れることが、この作品の唯一の物語である**（`world.rules` の五番）。
+    #    ⚠️ **`夜` と `夜明け` の項を消した。** **この作品の岸に、その光は来ない。**
+    #       来るのは、彼がそこを離れたあとである——`s09` 以降の夜は `森の洞口` のものであり、
+    #       `s16` 以降の夜明けは `舟の置き場` と `海` のものである。
+    #       ⛔ **場所の状態は、実際にそこを写したショットから書く。****見込みで足さない。**
+    states:
+      日没:
+        note: "日が傾き、海面に一本の道ができている。空は低く、色は橙から灰へ。影は長い。"
+
+  # ─────────── 森の洞口 ── **声の出る場所である。彼は入らない。**
+  # 出所: 曲の `l06`「女神は言う ここにいれば」。⚠️ **彼女はここから出てこない。**
+  森の洞口:
+    base: >-
+      The mouth of a cave in a wooded slope, always seen from outside. Rough grey rock split
+      into a wide low opening; the interior is wholly unlit — a black shape, not a room.
+      Dense low scrub and thin trees crowd the entrance and grow right up to the rock.
+      Nothing is ever visible inside the opening. Nothing enters or leaves.
+    geography: >-
+      Upslope and inland from the shore, behind the camera in any shot that faces the sea.
+      The opening faces seaward, so the interior's darkness is silhouetted against the sky.
+      A shot at the cave mouth can hold the opening and the sky; it can never hold the shore
+      or the water. A person standing outside the opening is small against it, and is never
+      inside it.
+    # ⚠️ **実測（ショット割り）: 4本である**——`日没` が1本（`s02`）、`夜` が3本（`s09`・`s10`・`s11`）。
+    #    ⛔ **この場所は、日没に一度だけ見られ、夜に声を持つ。**
+    #       **彼がそこへ着くのが夜であり、彼女が喋るのがその夜である。**
+    #    ⚠️ **`夜明け` の項を作らない。** **この作品は、明るくなった洞口を写さない**——
+    #       `s16` の夜明けに彼がいるのは `舟の置き場` である。**洞は、もう背後にある。**
+    states:
+      日没:
+        note: >-
+          日の残りが斜面に当たり、潅木が橙色である。洞口はまだ黒くならない——
+          黒くなるのは、この光が消えたあとである。岩の割れ目だけが細い線になる。
+      夜:
+        note: >-
+          光源は月と星だけである。洞の黒は、いっそう黒い——空が明るいぶんだけ、
+          開口部が輪郭を持つ。洞から出てくる空気だけが、外の潅木を動かす。
+
+  # ─────────── 舟の置き場 ── **この作品の唯一の労働の場所である。**
+  # 出所: 曲の `l14`「木を削って舟にする」。⚠️ **`l14` の直後に 7.234秒の歌の無い間がある。**
+  舟の置き場:
+    base: >-
+      A working place on the shingle just above the waterline: a raft under construction,
+      unseasoned pine logs and hewn planks on trestles of driftwood, drifts of wood shavings
+      and cut cordage, a bronze double-axe left standing in a log. A sail of stiff undyed
+      cloth laid out flat on the shingle and weighted at the corners with stones.
+      No building, no shelter, no fire, no tool other than the axe.
+    geography: >-
+      The right-hand end of the shore, out of sight of the cave mouth. The waterline is two
+      paces from the work. When the camera faces the sea, the raft stands in the near ground
+      and the water lies beyond it. The shavings spread outward from the raft and are never
+      swept.
+    # ⚠️ **実測（ショット割り）: 2本、どちらも `夜明け` である**（`s16`・`s17`）。
+    #    ⛔ **この作品で、ここだけが「明るくなっていく場所」である。**
+    #       **彼は夜明けに働く。****そして明るくなりきる前に、この場所を離れる。**
+    #    ⚠️ **一日のうちの一つの光しか持たない。** 岸と同じである。
+    states:
+      夜明け:
+        note: >-
+          空が青から灰白へ移る30分。海はまだ暗く、空だけが明るい。影は無い——
+          光がまだ斜めでないので、物は影ではなく、輪郭だけで立っている。
+          削り屑の白だけが、いちばん先に明るくなる。
+
+  # ─────────── 海 ── **この作品でいちばん大きいもの。**
+  # ⚠️ **岸から見る海と、舟から見る海は、同じ場所である。** **二つに割らない。**
+  #    割れば、この作品は「島の話」と「海の話」になり、**それは別の作品である。**
+  海:
+    base: >-
+      Open sea, far from any land. Long low swells with no white water, moving steadily in
+      one direction; the surface broken only by the raft's own wake and by weed passing.
+      No land, no sail, no bird, no other vessel. The horizon is level and unbroken.
+      At night the surface carries one broken path of reflected light.
+    geography: >-
+      Behind the camera when the camera stands on the island's shore — the water lies beyond
+      the shingle, away from the land. From the raft, the water surrounds the frame on all
+      sides and no land is visible in any direction, including behind. The same waterline
+      and the same horizon appear in both, so that the two views are demonstrably one sea.
+    # ⚠️ **実測（ショット割り）: 19本である**——`日没` 3本（`s03`・`s07`・`s12`）／
+    #    `夜` 15本（`s13`・`s14`・`s15`・`s20`・`s21`・`s22`・`s26`〜`s34`）／
+    #    `夜明け` 1本（`s18`）。**⚠️ 34本のうち19本——この作品の過半がこの場所である。**
+    #    ⛔ **この作品でいちばん多く写る場所であり、三つの光すべてを持つ唯一の場所である。**
+    #       ⚠️ **岸は日没しか持たず、舟の置き場は夜明けしか持たない。**
+    #       **海だけが、彼がそこに居るあいだずっと、光を変えていく。**
+    states:
+      日没:
+        note: "低い太陽が水面に一本の道を作っている。この光は岸から見たものである。"
+      夜:
+        note: "光源は星と、その水面の反射だけである。波は黒く、反射の道だけが白い。"
+      夜明け:
+        note: >-
+          空が青から灰白へ移る30分。海はまだ暗い。星が一つずつ消えていくが、
+          北の七つは高さを変えない——この場所の状態のうち、これが最後のものである。
+
+  # ─────────── 沈んだ場所 ── **記憶である。いまではない。**
+  # 出所: 曲の `l23`「あの者たちは太陽の牛を屠った」／`l24`「私だけが浮いていた」。
+  # ⚠️ **この場所は、この作品の中でいちばん危うい。**
+  #    **死を写せば、この作品は悲惨な話になり、`theme-song.md` の抑制と衝突する。**
+  #    ゆえにこの場所の `base` は、**物ではなく水を書く。**
+  沈んだ場所:
+    base: >-
+      The same open sea, empty, at night. No wreckage, no bodies, no oars,
+      no mast, no floating wood, no blood, no cloth. Nothing is visible in the water and
+      nothing is visible on it. The surface is the whole of the frame.
+    geography: >-
+      In the memory, this is the same water as 海. Its only difference is that the raft is
+      not in it. There is no landmark and no shore; the camera cannot orient by anything. A
+      body in this location floats at the surface, alone, face up, with nothing else in frame.
+    # ⚠️ **実測（ショット割り）: 3本、すべて `夜` である**（`s23`・`s24`・`s25`）。
+    #    ⛔ **`base` の一句を直した**——もとは "at the hour before dawn" と書いてあった。
+    #       **この3本は夜である**（`橋` の区間、205.053–229.787秒）。
+    #       ⚠️ **夜明けは `s16`〜`s19` であり、この記憶はその手前に在る。**
+    #       **夜であるのに夜明けと書けば、参照画像を1枚も渡さないこの作品では、
+    #       その一句がそのまま生成器への指示になる。****直さねばならなかった。**
+    states:
+      夜:
+        note: >-
+          光源は星だけである。岸も舟も無いので、明るいものは何も無い——
+          水面だけが、星を受けて黒く光る。この場所には、前後が無い。
+
+
+  # ─────────── 沈まない星 ── **舵を取る空である。**
+  # 出所: 曲の `l17`「北斗は沈まない」／`l18`「沈まない星を見ている」。
+  # ⚠️ **この作品で唯一、上が開いている場所である。** **他の5つは、すべて水平である。**
+  沈まない星:
+    base: >-
+      The night sky above open water, seen from below. Seven bright stars in the shape of a
+      long-handled ladle, the four of the bowl and the three of the handle, holding their
+      position low and clear above the horizon. The horizon line runs across the lower part
+      of frame and the stars sit above it, unmoved. No clouds, no moon in this frame, no
+      other constellation read as a shape.
+    geography: >-
+      Directly above the raft. The handle of the ladle points toward the raft's own bow, and
+      the ladle is on the raft's left hand — the same side in every frame that holds it. The
+      horizon stays level and the stars keep their height above it; they never approach it.
+    # ⚠️ **実測（ショット割り）: 1本だけである**（`s19`）。
+    #    ⛔ **この1本は `夜明け` である。****それがこの場所の意味である**——
+    #       **夜明けに、他の星は全部消える。****北の七つだけが高さを変えない。**
+    #       ⚠️ **夜に置けば、「沈まない」は何も言わない。** **全部が沈まないからである。**
+    #    ⚠️ **`base` は "The night sky" で始まる。****それでよい**——
+    #       **夜明けの空も、まだ夜の空である**（この作品の `夜明け` は
+    #       「空が青から灰白へ移る30分」であり、星がまだ出ている）。
+    states:
+      夜明け:
+        note: >-
+          空の低いところが灰白へ移りはじめ、星が一つずつ消えていく。
+          北の七つだけが、同じ高さに残る——**この状態の主題は、残ることである。**
+
+
+# ────────────────────────────────────────────────────────────────────── props
+#
+# ⚠️ **4つである。** 「この作品に何が現れるか」を並べたものである——
+#    ゆえに**この一覧が、この作品の持ち物の全部である。**
+#    ⚠️ **`弓` が無いのは意図である**（`world.rules` の四番）。**`negative_base` が禁じている。**
+props:
+  # ─────────── 舟 ── **手で作った筏である。** ⚠️ **船ではない。**
+  # ⚠️ **詩は筏を詳しく書かない。この作品は書く。** ——**参照画像が無い以上、
+  #    文が持たねばならない。** そして**「船」と書けば生成器は船を作る**——
+  #    **作り手のいない船は、この作品では嘘である**（`l14` が木を削っている）。
+  舟:
+    appearance: >-
+      A raft, not a boat. Twenty-odd unseasoned pine logs lashed side by side with coarse
+      hand-twisted cordage, the logs still barked and uneven; a low platform of hewn planks
+      laid across them, not fastened flush. No keel, no ribs, no planking, no mast step,
+      no rudder — a steering oar tied at the stern, lashed, not fitted. A short mast of a
+      trimmed pine trunk, stayed with rope. Roughly the length of a man and a half, and it
+      sits low, awash at the edges. Everything about it is improvised and none of it is
+      symmetrical.
+    negative:
+      - "no boat, no ship, no hull, no keel, no planking"
+      - "no sail already raised on the raft before the sail exists"
+      - "no rope that is not hand-twisted, no metal fastenings, no nails"
+
+  # ─────────── 帆 ── **女神の布である。** ⚠️ **衣装ではない。**
+  # 出所: 曲の `l15`「帆を縫って風を待つ」。⚠️ **この一行が、布の行き先を決めている。**
+  # ⚠️ **`theme-song.md` は「女神の布」と書いている**——**断られた側が、道具を与える**
+  #    （`world.rules` の二番）。**ゆえにこの帆は、この作品で唯一の「与えられた物」である。**
+  帆:
+    appearance: >-
+      A square sail of heavy undyed cloth, hand-sewn with long uneven stitches, the seams
+      visible as raised lines. The cloth is stiff and slightly yellowed, the weave coarse
+      and open; the lower edge is raw and unhemmed. Where it is spread flat on the shingle
+      it holds the shape of its folds; where it is raised it bellies hard and pulls the
+      stays taut. Plain cloth, no pattern, no dye, no mark of any kind on it.
+    negative:
+      - "no pattern, no dye, no embroidery, no emblem, no mark on the sail"
+      - "no modern canvas, no synthetic fabric, no machine stitching"
+      - "no sail worn as a garment by any person"
+
+  # ─────────── 斧 ── **この作品で唯一の道具であり、唯一の武器である。**
+  # 出所: 曲の `l14`「木を削って舟にする」。⚠️ **`theme-song.md` は「青銅の両刃の斧」と書く。**
+  # ⚠️ **`世界.rules` の四番が、この斧を弓から切り離している**——
+  #    **どちらも詩に出る。内側にあるのは斧だけである。**
+  斧:
+    appearance: >-
+      A bronze double-axe: two symmetrical crescent blades of patinated bronze on a haft of
+      seasoned olive wood, the haft slightly bowed and dark with handling. The bronze is
+      dull, green-black in the hollows, bright only along the two edges where it has been
+      ground. The head is lashed to the haft with wet leather that has dried hard. It is a
+      working tool, not a weapon: the haft shows the marks of wedges and of being struck.
+    negative:
+      - "no steel blade, no iron, no polished mirror finish"
+      - "no single-bit axe, no hatchet, no saw, no chisel, no other tool"
+      - "no axe held as a weapon, no axe raised against a person"
+
+  # ─────────── 太陽の牛 ── **記憶の中にしか居ない。**
+  # 出所: 曲の `l23`「あの者たちは太陽の牛を屠った」。
+  # ⛔ **この道具の扱いが、この作品でいちばん微妙である。**
+  #    **歌は屠ったと歌う。** **では屠る場面を映すか。**
+  #    ⚠️ **映さない。** 理由は二つ——
+  #      ① **歌は既に過去形で歌っている**（「屠った」）。**いま起きていることではない。**
+  #      ② **この作品の抑制**（`theme-song.md` の裁定5、および全編の語り口）。
+  #    ⚠️ **ゆえに画面は、屠られる前の牛を写す。** **耳が出来事を聞き、目が失われたものを
+  #       見る**——**この食い違いは事故ではなく、この作品の設計である。**
+  #    ⚠️ **`negative` の1行目が、その設計の実装である。**
+  太陽の牛:
+    appearance: >-
+      Cattle standing at the edge of the sea in the last of the light: seven or eight head,
+      white and pale gold, heavy-horned, standing still, facing the water. Their ribs show.
+      They do not graze and they do not move away. The herd stands at a distance, the whole
+      group in one frame, small against the sea, and no person is visible with them.
+    negative:
+      - "no slaughter, no butchery, no blood, no carcass, no hide, no meat, no fire, no spits"
+      - "no person with the herd, no herder, no weapon near them"
+      - "no cattle in any other scene of this work — the herd appears here and nowhere else"
+
+# ────────────────────────────────────────────────────────────────── disclosure
+#
+# **開示の「意図」。変化点だけを持つ。全ショットは並べない。**
+#
+# ⚠️ **4つの変化点である。** 曲の4つの転換に対応する。
+# ⚠️ **`s01` はここに無い**——**変化点ではないからである**（`L9`「初出は遷移ではない」）。
+#    `s01` はこの作品の最初のショットであり、**観客はそこで初めて島と海を知る。**
+#    **しかしそれは遷移ではない**——**出発点はショット記録の `disclosure_state` が持つ。**
+#
+# ⚠️ **4つとも `negative: covered` である。** **これは判断であって、手抜きではない。**
+#    この作品の禁制集合は**全ショットで同一である**——様式が一つ（裁定①）であり、
+#    参照画像が無く（裁定②）、世界の禁止は全部 `bible.negative_base` の8行に入っている。
+#    **ゆえに開示が動いても、§18 の `Negative Prompt` の節は動かない。**
+#    ⚠️ **`L10` がこれを両方向に検算する**（`changed` と言って変わっていなければ誤り、
+#       `covered` と言って変わっていれば理由が誤り）。**② で §18 を書いたとき、この4行が
+#       検算される**——**いまは相手が無いので、まだ鳴っていない。**
+#
+# ⚠️ **値は `unknown` / `present` / `absent` の3つである。**
+#    `present`＝**観客はそれを知った**（それが在ることを知った）。
+#    `absent`＝**観客はそれが無いことを知った**——
+#    ⚠️ **「まだ知らない」と「無いと知った」は違う。** habits-mv の
+#    `鍵に付いた預かり札.宛先: absent` と同じ形である（「宛先が書かれていない」）。
+disclosure:
+  # ── ① 向こうの岸の家と妻。**観客は、彼が見ているものを知る。**
+  # 出所: 曲の `l03`「向こうに家がある」／`l04`「向こうに妻がいる」。
+  # ⚠️ **この作品は、家も妻も写さない。** **写るのは、それがある方向を見ている男である。**
+  #    **ゆえに開示は「向こうの岸に家と妻が在る」という事実であって、家と妻の姿ではない。**
+  # ⚠️ **`l05`「それを口にしない」の直後ではなく、`l03`/`l04` の側に置いた**——
+  #    **観客が知るのは、彼が口にしないと決める前である。** 順序が逆になれば、
+  #    **「口にしない」が何を指すのか、観客には分からない。**
+  - shot: odyssey-s07
+    向こうの岸.家: present
+    negative: covered
+
+  # ── ② 女神の差し出し。**観客は、ここで初めて「ここにいれば」の意味を知る。**
+  # 出所: 曲の `l06`「女神は言う ここにいれば」。
+  # ⚠️ **`l07`「老いない 死なない」は、同じ開示の続きである**——**別の変化点にしない。**
+  #    観客は `s09` で差し出しを知り、`s10` でその中身を知る。**知っているのは同じ一つである。**
+  # ⚠️ **この変化点の `Negative Prompt` が動かないのは、`no face for the goddess` が
+  #    既に基盤と `女神.negatives` に在るからである。**
+  - shot: odyssey-s09
+    女神.差し出し: present
+    negative: covered
+
+  # ── ③ 沈んだ者たち。**観客は、彼が一人で浮いていたことを知る。**
+  # 出所: 曲の `l24`「私だけが浮いていた」。
+  # ⚠️ **`s23`「あの者たちは太陽の牛を屠った」を変化点にしなかった理由**——
+  #    **あの一行は、仲間が居たことを告げるが、彼らがどうなったかを告げない。**
+  #    **「居た」と「もう居ない」は別の知である。** 観客が失うことを知るのは `s24` である。
+  #    ⚠️ **`L7a`（早すぎる開示）は鳴らない**——`s23` の記録にはこの属性がまだ
+  #       `unknown` と書かれているからである。
+  - shot: odyssey-s24
+    沈んだ者たち: present
+    negative: covered
+
+  # ── ④ 男の名。**観客は、名が無いことを知る。**
+  # 出所: 曲の `l25`「誰でもないと名乗った」。
+  # ⚠️ **値が `present` でなく `absent` である。** **この作品は彼の名を一度も与えない**
+  #    （`world.rules` の三番）。**観客が知るのは「名乗られた名が、名でない」ことである。**
+  #    ⚠️ **ゆえにこの属性は、以後の全ショットで `absent` のまま動かない。**
+  #       **これがこの作品の最後の開示である**——**ここから先、観客は何も新しく知らない。**
+  - shot: odyssey-s25
+    男.名: absent
+    negative: covered
+
+# ───────────────────────────────────────────────────────────── song_coverage
+#
+# **歌詞行 × ショットの対応。** ⚠️ **`bible.song` に在るのは「何が与えられたか」であり、
+# ここに在るのは「何を決めたか」である。** **曲は与えられ、対応は決められる。**
+#
+# ⚠️ **なぜ `disclosure` の隣か**——**歌は、歌われている間ずっと観客へ何かを渡している。**
+#    **対応を決めることは、開示を決めることの一部である。** ゆえに同じファイルの隣に置く。
+#
+# ⚠️ **この表は、34本のショットから生まれたのではない。**（逆である——**曲が先である。**）
+#    切れ目は**曲の内側の境界だけ**から採った——**節の頭・行の頭・行の終わり。**
+#    ⚠️ **行の頭は、実測である**（`bible.song.lines[].at`、Suno の字幕から取った43キュー）。
+#    ⛔ **曲の外から区切りを持ち込んではいない。** ——**ただし `intro` の中でだけ、例外がある。**
+#       **下の「⚠️ 53秒について」を読むこと。**
+#
+# ⚠️ **4つの形が在る**——**1行→1本（29本）／複数行→1本（5本）／1行→2本（1行）。**
+#    ⚠️ **「複数行→1本」は、行が短すぎる場所で使う。** 実測: **この曲の最短の行は 3.510秒**
+#       （`l04`・`l17`）。**Seedance 2.5 の下限は 4秒である。**
+#       **ゆえに 4秒に満たない6行は、単独でショットになれない。**
+#       ⚠️ **「4秒より短いから伸ばす」をしない**（`docs/seedance-route.md` の明示の規則）。
+#       **行を束ねるのであって、行を引き伸ばすのではない。**
+#       束ねた6行は、対になる行と組にしてある——
+#         `l03`+`l04`（向こうに家がある／向こうに妻がいる）
+#         `l12`+`l13`・`l21`+`l22`（永遠より遠い／なんでもない島へ）
+#         `l17`+`l18`（北斗は沈まない／沈まない星を見ている）
+#         `l25`+`l26`（誰でもないと名乗った／誰でもない者にも）
+#       ——**どれも、曲が既に並べている対である。** **この作品が組を発明したのは一つも無い。**
+#    ⚠️ **「1行→2本」は `l34` だけである**——**行が10.000秒を1人で持ち、
+#       その後 8.431秒の後奏が続く。** ⚠️ **後奏を節の対応にすると `L36`①が空になる**
+#       （`l34` の対応が1つでなくなる）——**ゆえに後奏は `l34` の2本目の側に置く。**
+#       ⚠️ **この手当ては habits-mv の `l31` と同じであり、同じ理由である。**
+#
+# ⚠️ **歌の無い間に、専用の行を作っていない。** **容器を作らないためである。**
+#    実測: **この曲には 5つの歌の無い間がある**——
+#      0.452秒（`l07` と `l08` の間）／7.234秒（`l14` の直後）／1.649秒（`l23` の直後）／
+#      1.091秒（`l27` の直後）／8.431秒（後奏）。
+#    **前の4つは、隣の行のショットが吸う**（そのぶん、そのショットの尺が伸びる）。
+#    ⚠️ **歌われていない時間を、歌の行として記録しない**——**それは歌ではない。**
+#    ⚠️ **「歌の無い時間は、画面の側が持つ」**（habits-mv の家の規則）——
+#       **吸わせるとは、その時間の画面をそのショットが負う、ということである。**
+#
+# ⚠️ **53秒について。** **`intro` は 52.899秒あり、歌が1行も無い。**
+#    ⚠️ **曲の内側に、この区間を割る境界が一つも無い**（`bible.song.sections` の註——
+#       実測: `[Intro]` のマーカーは 52.899秒に在り、`[Verse 1]` と同じ時刻である。
+#       **ゆえに頭 52.899秒には、曲が置いた区切りが一つも無い。**）
+#    ⛔ **それでも4本に割った。** 理由は**長さの上限である**——
+#       **Seedance 2.5 の上限は30秒**（`docs/seedance-route.md`「Duration 4–30 s or -1」）。
+#       **52.899秒は、1本では引けない。**
+#    ⚠️ **では2本か4本か。** ——**4本の側の根拠は、実測である。**
+#       **曲の頭 53秒を 0.25秒窓で測った**（PCM 8kHz モノラル、RMS dB とゼロ交差）:
+#         0→1.5秒　　−63.5 → −29.1 dB（立ち上がり）
+#         **10.50秒　　 +14.6 dB——頭の中で最大の跳びである**
+#         23.5→28.5秒　持続した大きい平台（28.25秒で −18.4）
+#         40.00秒　　 −17.8（局所の山）
+#         41.5→52.5秒　長い減衰（52.25秒で −27.8）
+#         **52.75秒　　 +8.9 dB——声の入りである**
+#    ⚠️ **ゆえに切れ目を 10.500 / 23.500 / 41.500 に置いた。** **発明した時刻ではない。**
+#    ⚠️ **正直に書く**: **曲は 53秒の中に区切りを一つも置いていない。**
+#       **切れ目が要るのは上限のためであり、切れ目が4つ在るのは実測のためである。**
+#       **2本でも引ける**——**4本を選んだのは、頭が無地の持続でないと測れたからである。**
+#
+# ⚠️ **`L36` がこの表を読む。** 二箇条——① すべての行がちょうど1つの対応を持つ。
+#    ② 節ごとに、その節の行が全部覆われている ∨ その節を名指す対応が在る。
+#    ⚠️ **第1節に `∨` は無い**——**節ごとの対応は、行を覆わない。**
+song_coverage:
+  # ── 歌を持たない区間。**ここは節で受ける。**
+  # ⚠️ **`intro` は、この作品で唯一 `section` の形を使う場所である。**
+  #    理由は `L36` の註が言うとおり——**空の行（`text: ""`）で受けてはならない。**
+  #    **空の行は、覆われた行に見える。**
+  - section: intro
+    shots: [odyssey-s01, odyssey-s02, odyssey-s03, odyssey-s04]
+    note: >-
+      **52.899秒を4本で負う。** ⚠️ **この区間、歌は何も言わない——ゆえに画面が全部を負う。**
+      4本の切れ目は 10.500 / 23.500 / 41.500 であり、**曲の頭を実測した山である**
+      （上の「⚠️ 53秒について」を見る）。
+      ⚠️ **この4本に男は一度も現れない。** **島が先にあり、人は後に来る**——
+      曲の最初の行は 52.899秒の「日のあるかぎり岸に出て」であり、
+      **それまでの53秒は、人の居ない島である。**
+
+  # ── [Verse 1] 52.899–81.622（5行 → 4本）
+  # ⚠️ **男がここで初めて現れる。** **`l01` の1行がその門である。**
+  - line: l01
+    shots: [odyssey-s05]
+    note: "**日のあるかぎり岸に出て**——この作品で最初の人間である。7.580秒。"
+  - line: l02
+    shots: [odyssey-s06]
+    note: "**海の方を見ていた**——見ることは、この作品で最初の行為である。6.143秒。`mode: still`。"
+  - line: l03
+    shots: [odyssey-s07]
+    note: >-
+      **向こうに家がある**——`l04` と束ねた。⚠️ **単独では 3.511秒であり、
+      Seedance の下限 4秒に満たない。** 2行で 7.022秒。
+  - line: l04
+    shots: [odyssey-s07]
+    note: >-
+      **向こうに妻がいる**——`l03` と同じ1本である。⚠️ **3.511秒。**
+      ⚠️ **この2行は曲が既に並べている対である**（「向こうに…がある／…がいる」）。
+      **この作品が組を発明したのではない。**
+  - line: l05
+    shots: [odyssey-s08]
+    note: "**それを口にしない**——この作品の返事は、ここで既に無い。7.978秒。`mode: still`。"
+
+  # ── [Pre-Chorus: distant female voice] 81.622–113.617（4行 → 4本）
+  - line: l06
+    shots: [odyssey-s09]
+    note: >-
+      **女神は言う ここにいれば**——**開示の変化点②である**（`disclosure` を見る）。
+      ⚠️ **彼女は画面に居ない。** 声は枠の外から来る。5.027秒。
+  - line: l07
+    shots: [odyssey-s10]
+    note: >-
+      **老いない 死なない**——10.000秒の行である。⚠️ **この行の直後に 0.452秒の
+      歌の無い間がある**（96.649–97.101）。**この1本が吸うので、尺は 10.452秒になる。**
+      ⚠️ **10.000秒という数は、字幕キューの上限を疑わせる**（`bible.song.lines` の註）。
+      **「10秒歌われた」と読まない。**
+  - line: l08
+    shots: [odyssey-s11]
+    note: >-
+      **私の顔を見ている**——**この一行が、女神に顔を与えない設計の出所である**
+      （`characters.女神` を見る）。⚠️ **写るのは、見られている男の顔である。** 6.782秒。
+      `mode: still`。
+  - line: l09
+    shots: [odyssey-s12]
+    note: "**私は海を見ている**——`l08` と対である。**視線が交わらない。** 9.734秒。"
+
+  # ── [Chorus] 113.617–138.032（4行 → 3本）
+  # ⚠️ **サビの4行は、`chorus-2`・`final-chorus` にもう一度ずつ現れる。**
+  #    **同じ行が2箇所で別々に扱われることは、`L36` が註にする**（誤りではない）。
+  - line: l10
+    shots: [odyssey-s13]
+    note: "**死なない島を出て**——この作品で初めて岸が枠の外へ出る。7.739秒。"
+  - line: l11
+    shots: [odyssey-s14]
+    note: "**海を渡る**——5.745秒。"
+  - line: l12
+    shots: [odyssey-s15]
+    note: >-
+      **永遠より遠い**——`l13` と束ねた。⚠️ **`l13` は単独で 3.910秒である。**
+      2行で 10.931秒。⚠️ **曲が並べている対である。**
+  - line: l13
+    shots: [odyssey-s15]
+    note: "**なんでもない島へ**——3.910秒。⚠️ **下限に満たないので `l12` と同じ1本である。**"
+
+  # ── [Verse 2] 138.032–181.037（5行 → 4本）
+  # ⚠️ **この節が、この曲で最も長い**（43.005秒を並べた実測）。
+  - line: l14
+    shots: [odyssey-s16]
+    note: >-
+      **木を削って舟にする**——10.000秒の行である。⚠️ **この行の直後に 7.234秒の
+      歌の無い間がある**（148.032–155.266）。**この曲で最も長い、歌の無い間である。**
+      **この1本が吸うので、尺は 17.234秒になる**——**この作品で最も長いショットである。**
+      ⚠️ **斧の音だけが鳴る7秒である**（`props.斧`、`locations.舟の置き場`）。
+  - line: l15
+    shots: [odyssey-s17]
+    note: "**帆を縫って風を待つ**——与えられた布が、帆になる行である。6.543秒。"
+  - line: l16
+    shots: [odyssey-s18]
+    note: "**星を数えて舵を取る**——7.101秒。"
+  - line: l17
+    shots: [odyssey-s19]
+    note: >-
+      **北斗は沈まない**——`l18` と束ねた。⚠️ **単独では 3.510秒**——
+      **この曲で最も短い行の一つである。** 2行で 12.127秒。
+  - line: l18
+    shots: [odyssey-s19]
+    note: "**沈まない星を見ている**——8.617秒。⚠️ **`l17` と同じ1本である。**"
+
+  # ── [Chorus] 181.037–205.053（4行 → 3本）
+  # ⚠️ **言葉は `chorus-1` と一語も違わない。** **この作品は役も同じにした**——
+  #    **差分は §6 の形式が持つ**（② の担当である）。
+  - line: l19
+    shots: [odyssey-s20]
+    note: "**死なない島を出て**——2度目である。⚠️ **今回は意図ではなく、行為である。** 6.942秒。"
+  - line: l20
+    shots: [odyssey-s21]
+    note: "**海を渡る**——6.143秒。"
+  - line: l21
+    shots: [odyssey-s22]
+    note: "**永遠より遠い**——`l22` と束ねた。2行で 10.931秒。"
+  - line: l22
+    shots: [odyssey-s22]
+    note: "**なんでもない島へ**——3.909秒。⚠️ **`l21` と同じ1本である。**"
+
+  # ── [Bridge] 205.053–240.878（5行 → 4本）
+  # ⚠️ **この曲で唯一、島と海の外へ出る節である。**
+  - line: l23
+    shots: [odyssey-s23]
+    note: >-
+      **あの者たちは太陽の牛を屠った**——10.000秒の行である。⚠️ **直後に 1.649秒の
+      歌の無い間がある**（215.053–216.702）。**この1本が吸うので 11.649秒になる。**
+      ⚠️ **画面は屠る前の牛を写す**（`props.太陽の牛` の註を見る）。
+      **これは事故ではなく、この作品の設計である。**
+  - line: l24
+    shots: [odyssey-s24]
+    note: >-
+      **私だけが浮いていた**——**開示の変化点③である。** 4.708秒。
+      ⚠️ **この作品で最も短いショットである**（4.708秒）。
+      **それでも下限の4秒を上回っている**——**ゆえに伸ばさない。**
+  - line: l25
+    shots: [odyssey-s25]
+    note: >-
+      **誰でもないと名乗った**——**開示の変化点④である**（`男.名: absent`）。
+      `l26` と束ねた。⚠️ **単独では 3.590秒。** 2行で 8.377秒。
+  - line: l26
+    shots: [odyssey-s25]
+    note: "**誰でもない者にも**——4.787秒。⚠️ **`l25` と同じ1本である。**"
+  - line: l27
+    shots: [odyssey-s26]
+    note: >-
+      **帰る先がひとつある**——10.000秒の行である。⚠️ **直後に 1.091秒の歌の無い間がある**
+      （239.787–240.878）。**この1本が吸うので 11.091秒になる。**
+      ⚠️ **この行が、この作品でいちばん危うい**——**「帰る先」を写せば、
+      この作品は帰還の物語になる。** 裁定③がそれを閉じている。
+
+  # ── [Final Chorus] 240.878–281.489（6行 → 6本）
+  # ⚠️ **`chorus-1` との差分は2点だけである**——`なんでもない島へ` が 3.910→6.542秒に伸び、
+  #    `まだ着かない` が2行に増える。**この6本は、その差分のために在る。**
+  - line: l28
+    shots: [odyssey-s27]
+    note: "**死なない島を出て**——3度目である。7.500秒。"
+  - line: l29
+    shots: [odyssey-s28]
+    note: "**海を渡る**——3度目である。5.744秒。"
+  - line: l30
+    shots: [odyssey-s29]
+    note: "**永遠より遠い**——3度目である。7.022秒。"
+  - line: l31
+    shots: [odyssey-s30]
+    note: >-
+      **なんでもない島へ**——⚠️ **ここだけ 6.542秒である。** `chorus-1` では 3.910秒であり、
+      **束ねる相手（永遠より遠い）が要った。ここでは1行で下限を超える。**
+      **ゆえにここでは束ねない**——**曲が伸ばしたからであり、この作品が割ったのではない。**
+  - line: l32
+    shots: [odyssey-s31]
+    note: >-
+      **まだ着かない**——**この曲にしか無い行である**（`chorus-1`・`chorus-2` には無い）。
+      7.101秒。`mode: still`。⚠️ **着かないことが、この作品の主題である。**
+  - line: l33
+    shots: [odyssey-s32]
+    note: >-
+      **まだ着かない**——**同じ行が2度目である。** 6.702秒。`mode: still`。
+      ⚠️ **同じ行なので、この作品は役も同じにした。** **差分は§6の形式が持つ。**
+      ⚠️ **`L36` は「同じ行を2回覆う」を註にする**——**誤りではない**
+      （サビの反復を別のショットで受けるのは正しい）。**註が言うのは、
+      「同じ行が2箇所で別々に扱われていることが、記録のどこからも見えない」ことである。**
+
+  # ── [Outro] 281.489–299.920（1行 → 2本）
+  # ⚠️ **この1行が、この作品の最後の言葉である。**
+  - line: l34
+    shots: [odyssey-s33, odyssey-s34]
+    note: >-
+      **耐えよ わが心よ**——10.000秒の行であり、**その後 8.431秒の後奏が続く。**
+      ⚠️ **この行だけが「1行→2本」である。**
+      **`s33` が行を負い（10.000秒）、`s34` が後奏を負う（8.431秒）。**
+      ⚠️ **後奏を `outro` の節の対応にしなかった理由**——**節の対応は行を覆わない**
+      （`L36`①）。**`l34` の対応が2つになることを避けられないので、
+      後奏は `l34` の2本目の側に置く。** habits-mv の `l31` と同じ手当てである。
+      ⚠️ **`s34` は、この作品で唯一、歌の無い画面を歌の行の側で受けるショットである**
+      ——**最後の8.4秒、歌はもう終わっている。**

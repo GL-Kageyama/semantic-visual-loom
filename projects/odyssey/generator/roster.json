@@ -1,0 +1,3462 @@
+{
+ "s01": {
+  "id": "s01",
+  "section": "intro",
+  "mode": "motion",
+  "role": "情景",
+  "format": "video-spec",
+  "title": "島と海と、まだ人の居ない光",
+  "line": "行: — ／ 場所: 岸 ／ 時刻: 日没 ／ 尺: 10.500秒",
+  "header_notes": [
+   "行: — ／ 場所: 岸 ／ 時刻: 日没 ／ 尺: 10.500秒",
+   "⚠️ **形式（`video-spec`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **53秒の頭——歌が1行も無い区間の、最初の1本である。**",
+   "   出所: `bible.song.sections` の `intro`。**曲の17.6%を、この4本が負う。**",
+   "⚠️ **実測（2026-09-29、PCM 8kHz モノラル・0.25秒窓）**: 頭 0→1.5秒は",
+   "   −63.5 → −29.1 dB の立ち上がりである。**この1本は、その立ち上がりを丸ごと負う。**",
+   "   そして**切れ目の 10.500秒は、頭の中で最大の跳び（+14.6 dB）である**——",
+   "   ゆえに末尾のビートは `dense` であり、**跳びが切れ目のコマで起きる。**",
+   "⛔ **この1本に、人は一人も居ない。** `intro` の4本はすべてそうである——",
+   "   **島が先にあり、人は後に来る。**（曲の最初の行は 52.899秒の「日のあるかぎり岸に出て」である。）",
+   "⚠️ **形式は `video-spec`（基盤）である。** **最初の画に文法を足さない**——",
+   "   足せば、この作品は「幻想の作品」として始まり、**実写であることが後から分かる。**"
+  ],
+  "duration": "10.500s",
+  "place": "岸",
+  "time": "日没",
+  "unit_before": "海は色を持たず、岸は灰色である。人の姿はどこにも無い。",
+  "unit_after": "日が傾き、水面に一本の道ができている。**砂の粒と、乾いた海藻と、寄せた小石が見えている。**",
+  "aim": "53秒の頭で、**島と海と光だけで観客を止められるか。**そして**この作品に人が現れない4本**の1本目として、不在を退屈にせずに立てられるか。",
+  "motion": {
+   "subject": "海面と、そこを渡る日の道。砂の上の小石、乾いた海藻、風で動く低い潅木。",
+   "quality": "波は低く、寄せては返し、形を保たない。日の道は水面で細かく砕け、網目のように揺れる。**カメラは寄りながら右へ流れる**——動機は「日の道を追うこと」である。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ この作品の色の基準が、ここで決まる。以後の34本は、この1本の色から外れてはならない。"
+  },
+  "spec": "specs/video/odyssey-s01.md",
+  "beats": [
+   {
+    "range": "0-1.501s",
+    "density": "transition",
+    "text": "暗い青から、画が立ち上がる。**水面だけが先に見え、岸はまだ判別できない。**"
+   },
+   {
+    "range": "1.501-5.995s",
+    "density": "sparse",
+    "text": "波の面と、砂の粒。**カメラは低く、水面すれすれを右へ。**"
+   },
+   {
+    "range": "5.995-10.5s",
+    "density": "dense",
+    "text": "**日の道ができ、砕け、網目になる。**砂の粒が一つずつ見えはじめ、乾いた海藻が風で転がる——**転がりきるのが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "岸",
+   "岸.geography",
+   "岸.states.日没"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "unknown",
+   "女神.差し出し": "unknown",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s02": {
+  "id": "s02",
+  "section": "intro",
+  "mode": "motion",
+  "role": "質感",
+  "format": "remembered-world",
+  "title": "女神が居る場所を、彼女を写さずに立てる",
+  "line": "行: — ／ 場所: 森の洞口 ／ 時刻: 日没 ／ 尺: 13.000秒",
+  "header_notes": [
+   "行: — ／ 場所: 森の洞口 ／ 時刻: 日没 ／ 尺: 13.000秒",
+   "⚠️ **形式（`remembered-world`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **10.500–23.500。曲が置いた境界が無い区間の2本目である。**",
+   "   **切れ目は実測の山（10.500秒の +14.6 dB）の直後に在る。**",
+   "⛔ **この1本で島の内陸を見せる。男はまだ入らない。**",
+   "   **入らないことが、`world.rules` の一番である**——",
+   "   「**返事は、この作品の中で一度も返されない。**」",
+   "   彼女の場所へ入れば、返事をすることになる。",
+   "⚠️ **形式は `remembered-world`**（記録でなく記憶。保たれた瞬間の中で中身が滑る）。",
+   "   ⚠️ **この作品で洞窟を使うのは3本だけである**（`s02`・`s09`・`s10`）。",
+   "   **この1本が最初であり、そして最も外側である。**"
+  ],
+  "duration": "13.000s",
+  "place": "森の洞口",
+  "time": "日没",
+  "unit_before": "森の斜面が、日の残りを受けて橙色である。洞口はまだ黒くならない。",
+  "unit_after": "洞口が完全に黒い。**岩の割れ目だけが、最後の光を受けて細い線になっている。**",
+  "aim": "**女神が居る場所を、彼女を写さずに立てられるか。****内側を一度も見せないことで、内側があると信じさせられるか。**",
+  "motion": {
+   "subject": "岩の面、潅木の葉、洞口の黒。**そして洞の内側から出てくる気配としての空気。**",
+   "quality": "木の葉は風で裏返り、岩の面の光がゆっくり斜めへ滑る。**黒は動かない**——動くのは黒の縁である。カメラは潅木の間を抜けながら洞口へ寄る。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **この作品に火は一つも無い**（`bible.negative_base`）。洞の内側が温かいのは、**光ではなく気配である。**"
+  },
+  "spec": "specs/video/odyssey-s02.md",
+  "beats": [
+   {
+    "range": "0-3.003s",
+    "density": "transition",
+    "text": "潅木の間から、洞の入り口が現れる。**まだ遠い。**"
+   },
+   {
+    "range": "3.003-8.996s",
+    "density": "sparse",
+    "text": "岩の面を光が滑り、葉が裏返る。**洞口はまだ灰である。**"
+   },
+   {
+    "range": "8.996-13s",
+    "density": "dense",
+    "text": "**洞口が黒くなる。**最後の光が岩の割れ目に細い線を残し、**その線が消えるのが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "森の洞口",
+   "森の洞口.geography",
+   "森の洞口.states.夜"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "unknown",
+   "女神.差し出し": "unknown",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s03": {
+  "id": "s03",
+  "section": "intro",
+  "mode": "motion",
+  "role": "運動（時間の運動）",
+  "format": "time-fold",
+  "title": "切らない一枠を、夕から夜へ通す",
+  "line": "行: — ／ 場所: 海 ／ 時刻: 日没 ／ 尺: 18.000秒",
+  "header_notes": [
+   "行: — ／ 場所: 海 ／ 時刻: 日没 ／ 尺: 18.000秒",
+   "⚠️ **形式（`time-fold`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⛔ **この作品で最も長いショットの一つである（18.000秒）。**",
+   "   出所: `bible.song.sections` の `intro`——**曲の内側に区切りが無い区間である。**",
+   "⚠️ **実測**: 23.5→28.5秒は持続した大きい平台であり（28.25秒で −18.4 dB）、",
+   "   40.0秒に局所の山がある（−17.8 dB）。**ゆえにこの1本は、曲の頭で",
+   "   いちばん音が充実している区間を丸ごと負う。**",
+   "⛔ **形式は `time-fold`。この作品の看板である。**",
+   "   **切らない一枠を、多くの時間が通る**——18秒で夕から夜へ。",
+   "   ⚠️ **この作品で `time-fold` を使うのは4本である**（`s03`・`s10`・`s19`・`s32`）。",
+   "   **4本は互いに別の仕事をする**——ここは「時間が通る」であり、",
+   "   `s10` は「時間が通らない」であり、`s19` は「一つだけが時間の外にある」であり、",
+   "   `s32` は「近づかない時間」である。",
+   "⚠️ **上限について。** この1本は 18.000秒であり、**Seedance 2.5 の上限は30秒である**",
+   "   （`docs/seedance-route.md`「Duration 4–30 s or -1」）。**ゆえに1本で引ける。**",
+   "   ⚠️ **53秒を1本で引けないことが、`intro` が4本である理由である**（`ledger.yaml` を見る）。"
+  ],
+  "duration": "18.000s",
+  "place": "海",
+  "time": "日没",
+  "unit_before": "日はまだ水面の上にある。海は一つの色である。",
+  "unit_after": "日は水面の下に沈み、海と空の区別が薄れている。**同じ画の中で、夕から夜へ移っている。**",
+  "aim": "⛔ **切らずに、時間そのものを画面上で通過させられるか。**53秒の無音区間の真ん中で、**観客に「時間が経っている」と信じさせられるか。**",
+  "motion": {
+   "subject": "水面、雲、そして光そのもの。**主題は時間である。**",
+   "quality": "波は同じ速さで寄せ続けるが、**その色が18秒のあいだに段階的に落ちる。**影が伸び、雲が流れ、星が一つ、二つと出る。カメラはほぼ動かない——**三脚の上で、わずかに左へ回るだけである。**",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **主題は「時間の運動」である**（`rolemap.MOTION_PATTERNS` の「時間の運動」——「その速度である理由・速度が開示するもの」）。**速さは、この1本の内容である。**"
+  },
+  "spec": "specs/video/odyssey-s03.md",
+  "beats": [
+   {
+    "range": "0-3.996s",
+    "density": "transition",
+    "text": "日がまだ高い。**水面は一つの色で、影は短い。**"
+   },
+   {
+    "range": "3.996-9s",
+    "density": "sparse",
+    "text": "光が斜めになり、水面の反射が長くなる。**雲が右から左へ渡る。**"
+   },
+   {
+    "range": "9-14.004s",
+    "density": "dense",
+    "text": "**日が水面に接する。**反射が一本の道になり、割れる。**空の色が橙から灰へ移る。**"
+   },
+   {
+    "range": "14.004-18s",
+    "density": "dense",
+    "text": "**日が沈む。**星が二つ出て、海と空の境が消える——**境が消えるのが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "海",
+   "海.geography",
+   "海.states.日没"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "unknown",
+   "女神.差し出し": "unknown",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s04": {
+  "id": "s04",
+  "section": "intro",
+  "mode": "motion",
+  "role": "情景",
+  "format": "video-spec",
+  "title": "声の入る1コマ手前で、島を置く",
+  "line": "行: — ／ 場所: 岸 ／ 時刻: 日没 ／ 尺: 11.399秒",
+  "header_notes": [
+   "行: — ／ 場所: 岸 ／ 時刻: 日没 ／ 尺: 11.399秒",
+   "⚠️ **形式（`video-spec`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **41.500–52.899。`intro` の最後の1本である。**",
+   "   出所: `bible.song.sections` の `intro`。**次の1本（`s05`）から歌が始まる。**",
+   "⚠️ **実測**: 41.5→52.5秒は長い減衰であり（52.25秒で −27.8 dB）、",
+   "   そして **52.75秒に +8.9 dB——声の入りである。**",
+   "   ⛔ **ゆえにこの1本の切れ目は、この作品で最も強い音の事象と一致する。**",
+   "   **歌が始まる直前に終わる。**",
+   "⚠️ **形式は `video-spec`。****声を迎える画は、いちばん素である。**",
+   "   ⚠️ **`s01` と同じ形式である**——**`intro` は `video-spec` で始まり `video-spec` で終わる。**",
+   "   真ん中の2本だけが文法を持つ。"
+  ],
+  "duration": "11.399s",
+  "place": "岸",
+  "time": "日没",
+  "unit_before": "海はもう色を持たない。岸の砂は判別できない。",
+  "unit_after": "岸がほぼ黒であり、**水平線だけが細く残っている。**次の瞬間に声が入る。",
+  "aim": "**53秒を、声の入りの1コマ手前で閉じられるか。**そして**男が現れる前の島を、最後にもう一度だけ見せられるか。**",
+  "motion": {
+   "subject": "波の白だけが明るい。砂、海藻、小石はもう見えない。",
+   "quality": "波は低く、白だけが残る。**カメラは引きながら、ゆっくり後ろへ下がる**——動機は「島から離れること」ではなく「**島を置くこと**」である。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **この1本の末尾は、この作品で最も強い音の事象と一致する。**"
+  },
+  "spec": "specs/video/odyssey-s04.md",
+  "beats": [
+   {
+    "range": "0-2.998s",
+    "density": "transition",
+    "text": "日の道が消え、海が一色になる。**岸はまだ判別できる。**"
+   },
+   {
+    "range": "2.998-6.999s",
+    "density": "sparse",
+    "text": "砂が黒くなり、**波の白だけが残る。**"
+   },
+   {
+    "range": "6.999-11.399s",
+    "density": "dense",
+    "text": "**水平線だけが細く残る。**カメラが下がりきり、**島が画面から出るのが、切れ目のコマである**——その直後に声が入る。"
+   }
+  ],
+  "reference_set": [
+   "岸",
+   "岸.geography",
+   "岸.states.日没"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "unknown",
+   "女神.差し出し": "unknown",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s05": {
+  "id": "s05",
+  "section": "verse-1",
+  "mode": "motion",
+  "role": "所作",
+  "format": "video-spec",
+  "title": "この作品で最初の人間",
+  "line": "行: l01 ／ 場所: 岸 ／ 時刻: 日没 ／ 尺: 7.580秒",
+  "header_notes": [
+   "行: l01 ／ 場所: 岸 ／ 時刻: 日没 ／ 尺: 7.580秒",
+   "⚠️ **形式（`video-spec`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⛔ **この作品で最初の人間である。**",
+   "   出所: 曲の `l01`「日のあるかぎり岸に出て」——**この一文の実体がこの1本である。**",
+   "⚠️ **53秒の不在のあとである。** `intro` の4本に人は一人も居なかった——",
+   "   **ゆえにこの1本の1歩が、この作品の最初の出来事である。**",
+   "   ⚠️ **曲の最初の行と、この1本の切れ目が一致する**（52.899秒）。",
+   "⚠️ **形式は `video-spec`。** **最初の人間に文法を足さない**——",
+   "   足せば、**彼が特別な者に見える。** この作品に必要なのは、**普通の男である。**",
+   "⚠️ **規則の七番が、この人物の見た目を決めている**（`world.rules`）——",
+   "   **古典の英雄の姿をしない。** 大理石も円柱も無い。**粗い石と、木と、布と、青銅がある。**"
+  ],
+  "duration": "7.580s",
+  "place": "岸",
+  "time": "日没",
+  "unit_before": "岸には誰も居ない。砂は一様に平らである。",
+  "unit_after": "**男が水際に立っている。**砂に足跡が一つずつ付いている。",
+  "aim": "⛔ **沈黙の53秒に、人を一人入れられるか。**そして**それが「英雄の登場」に見えないか**——この作品に必要なのは、**疲れた男が歩いてくること**である。",
+  "motion": {
+   "subject": "男の全身と、彼が踏む砂。**そして裾を払う低い潅木。**",
+   "quality": "**速くない。**彼は斜面を降りてきて、水際で止まる。tunic の裾が風で鳴り、足が砂に沈み、**沈んだ足跡の縁が崩れる。**カメラは彼を横から追い、止まったところで止まる。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **この1本から `男.identity` が参照集合に入る。** **§6 に、あの塊をまるごと貼ること**——要約しない。"
+  },
+  "spec": "specs/video/odyssey-s05.md",
+  "beats": [
+   {
+    "range": "0-2.501s",
+    "density": "transition",
+    "text": "潅木の影から、人の足が現れる。**まだ誰かは分からない。**"
+   },
+   {
+    "range": "2.501-5.503s",
+    "density": "sparse",
+    "text": "**彼が斜面を降りてくる。**速くない。裾が風で鳴る。"
+   },
+   {
+    "range": "5.503-7.58s",
+    "density": "dense",
+    "text": "**水際で止まる。**足が砂に沈み、**足跡の縁が崩れるのが、切れ目のコマである**——その瞬間に歌が始まる。"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "岸",
+   "岸.geography",
+   "岸.states.日没"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "unknown",
+   "女神.差し出し": "unknown",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s06": {
+  "id": "s06",
+  "section": "verse-1",
+  "mode": "still",
+  "role": "反応",
+  "format": "meaning-responsive",
+  "title": "見る——この作品で最初の行為",
+  "line": "行: l02 ／ 場所: 岸 ／ 時刻: 日没 ／ 尺: 6.143秒",
+  "header_notes": [
+   "行: l02 ／ 場所: 岸 ／ 時刻: 日没 ／ 尺: 6.143秒",
+   "⚠️ **形式（`meaning-responsive`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **`mode: still` である。** この作品で `still` を使うのは6本だけである",
+   "   （`s06`・`s08`・`s11`・`s24`・`s31`・`s32`）。",
+   "   ⛔ **2026-09-29 に「5本」から直した。** 前の稿は `s24` を落としていた——",
+   "   ⚠️ **`s24` 自身の法の行も「5本のうちの1本」と言っていた。6本目が、5本の中に自分を数えていた。**",
+   "   実測: `shots/*.yaml` で `mode: still` を持つのは6本、検査器 `L24` も「motion 28本／still 6本」と言う。",
+   "   **2つの独立した実測が一致する。**",
+   "   ⛔ **6本に共通する性質がある——ここは、この作品が何かを言わない場所である。**",
+   "   **見る（`s06`）・言わない（`s08`）・見られる（`s11`）・浮いている（`s24`）・着かない（`s31`・`s32`）。**",
+   "   **沈黙が、静止として現れる。**",
+   "⚠️ **役は `反応` である。** 固有基準は「抑制・微細な身体・表情の段階」——",
+   "   **この1本では、その3つが全部「動かないこと」の中にある。**",
+   "⚠️ **形式は `meaning-responsive`**（起きたことではなく意味に反応して画面が変わる）。",
+   "   ⛔ **この1本では、彼が海を見るという「意味」に、海の側が反応する。**",
+   "   **何も起きていないのに、画面が彼の行為を知っている。**"
+  ],
+  "duration": "6.143s",
+  "place": "岸",
+  "time": "日没",
+  "unit_before": "男は水際に立っている。海は彼の前にある。",
+  "unit_after": "**海が、彼の視線の先でだけ広がっている。**彼は一歩も動いていない。",
+  "aim": "**止まっている人間を6秒保てるか。**そして**「見る」という行為だけで画面を変えられるか**——**この作品で最初の行為がそれである。**",
+  "motion": {
+   "subject": "男の顔、肩、そして彼の前の海。⚠️ **主題は止まる。**動くのは波と、彼の髪と裾と、埃である。",
+   "quality": "**彼は動かない。**波だけが寄せては返す。風が髪を押し、tunic を押す。**カメラは彼の背中から海へ寄っていく**——ゆえに彼は小さくなり、海が大きくなる。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **`mode: still` である。****止まるのは主題であって、画面ではない。光と埃とカメラは動く**（`shot-record.schema.json` の `motion`）。**ゆえに末尾のビートは `dense` である。**"
+  },
+  "spec": "specs/video/odyssey-s06.md",
+  "beats": [
+   {
+    "range": "0-2.003s",
+    "density": "transition",
+    "text": "彼の背中。**海はまだ遠い。**"
+   },
+   {
+    "range": "2.003-4.503s",
+    "density": "sparse",
+    "text": "**カメラが海へ寄る。**彼が小さくなり、波が大きくなる。"
+   },
+   {
+    "range": "4.503-6.143s",
+    "density": "dense",
+    "text": "**海が画面の大半を占める。**波が返り、**彼の髪が一度だけ強く押されるのが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "岸",
+   "岸.geography",
+   "岸.states.日没"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "unknown",
+   "女神.差し出し": "unknown",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s07": {
+  "id": "s07",
+  "section": "verse-1",
+  "mode": "motion",
+  "role": "開示",
+  "format": "coexisting-realities",
+  "title": "家と妻——写さずに、そこにあると知らせる",
+  "line": "行: l03+l04 ／ 場所: 海 ／ 時刻: 日没 ／ 尺: 7.022秒",
+  "header_notes": [
+   "行: l03+l04 ／ 場所: 海 ／ 時刻: 日没 ／ 尺: 7.022秒",
+   "⚠️ **形式（`coexisting-realities`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⛔ **開示の変化点①である**（`ledger.disclosure`）——`向こうの岸.家: present`。",
+   "   出所: 曲の `l03`「向こうに家がある」／`l04`「向こうに妻がいる」。",
+   "⚠️ **2行を束ねた理由は長さである。** 実測: `l03` は 3.511秒、`l04` は 3.511秒。",
+   "   **Seedance 2.5 の下限は4秒である**（`docs/seedance-route.md`）。",
+   "   ⛔ **「4秒より短いから伸ばす」をしない**（同）。**束ねるのであって、伸ばすのではない。**",
+   "   ⚠️ **この2行は曲が既に並べている対である**（「向こうに…がある／…がいる」）。",
+   "   **この作品が組を発明したのではない。**",
+   "⛔ **この1本が、この作品でいちばん危うい1本の一つである。**",
+   "   **家と妻を写せば、この作品は帰還の物語になる**——裁定③がそれを閉じている。",
+   "   ⚠️ **`world.rules` の五番**: 「**この作品は、帰り着かない。**上陸・犬・乳母・",
+   "   殺害・床・和睦を映さない。」",
+   "⚠️ **形式は `coexisting-realities`**——**複数の現実が一枠に並び、どれも先ではない。**",
+   "   ⛔ **「ここ」と「向こう」が、同じ一枠に並ぶ。** **どちらも先ではない。**",
+   "   ⚠️ **この形式をこの作品で使うのは4本である**（`s07`・`s15`・`s22`・`s29`）。",
+   "⚠️ **`l05`「それを口にしない」を、この1本の側に置かなかった理由**——",
+   "   **観客が知るのは、彼が口にしないと決める前である。** 順序が逆になれば、",
+   "   **「口にしない」が何を指すのか、観客には分からない。**"
+  ],
+  "duration": "7.022s",
+  "place": "海",
+  "time": "日没",
+  "unit_before": "海は灰色であり、水平線に何も無い。",
+  "unit_after": "**海の向こうに、家と、妻が「ある」。**——⚠️ **写っているのではない。彼が見ているのである。**",
+  "aim": "⛔ **存在しないものを、存在するように写せるか。**⚠️ 裁定③により、**家も妻も画面に置けない。****置かずに、そこにあると観客に知らせられるか。**",
+  "motion": {
+   "subject": "海面と水平線。**そして、そこに在るはずのものの形。**",
+   "quality": "水面の反射の中に、**家の屋根の形と、立っている人の形が、一瞬だけ結ばれて、崩れる。**波が動くたびに結ばれ、崩れる。**カメラは動かない**——動くのは水面だけである。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **この1本の危険は、`world.rules` の五番にある**——「**この作品は、帰り着かない。**」**家を写せば、帰還の物語になる。**"
+  },
+  "spec": "specs/video/odyssey-s07.md",
+  "beats": [
+   {
+    "range": "0-2.001s",
+    "density": "transition",
+    "text": "海と水平線。**何も無い。**"
+   },
+   {
+    "range": "2.001-5s",
+    "density": "sparse",
+    "text": "**水面の反射が、形を結びはじめる。**屋根の形、立っている形。"
+   },
+   {
+    "range": "5-7.022s",
+    "density": "dense",
+    "text": "**形が二つ、同時に結ばれる。**波が返り、**二つとも崩れるのが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.日没"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "unknown",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s08": {
+  "id": "s08",
+  "section": "verse-1",
+  "mode": "still",
+  "role": "余白",
+  "format": "meaning-responsive",
+  "title": "何も起こらない8秒——返事が、ここで既に無い",
+  "line": "行: l05 ／ 場所: 岸 ／ 時刻: 日没 ／ 尺: 7.978秒",
+  "header_notes": [
+   "行: l05 ／ 場所: 岸 ／ 時刻: 日没 ／ 尺: 7.978秒",
+   "⚠️ **形式（`meaning-responsive`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **`mode: still`。** この作品の6本のうちの1本である（`s06` の註を見る）。",
+   "⛔ **この1本は、`world.rules` の一番の最初の現れである**——",
+   "   「**返事は、この作品の中で一度も返されない。**」",
+   "   ⚠️ **返事が無いことは、`s09` の女神の差し出しを待たない。**",
+   "   **`l05`「それを口にしない」は、家と妻についての沈黙である**——",
+   "   そして**この作品の沈黙は、最初から一貫している。**",
+   "   **ゆえに開示の変化点は `s09` に在り、ここには無い。**",
+   "⚠️ **役は `余白` である。** 固有基準は「耐えるか・張力の保持」——",
+   "   ⛔ **8秒間、何も言わないことが、耐えられるかどうかがこの1本の検収である。**",
+   "⚠️ **形式は `meaning-responsive`。** **`s06` と同じである**——",
+   "   **`s06` は「見る」に反応し、この1本は「言わない」に反応する。**"
+  ],
+  "duration": "7.978s",
+  "place": "岸",
+  "time": "日没",
+  "unit_before": "男は海を見ている。口は閉じている。",
+  "unit_after": "**同じ姿勢のまま、7.978秒が過ぎている。**何も言われていない。",
+  "aim": "⛔ **何も起こらない8秒を、退屈にせずに持てるか。**そして**この作品の返事がここで既に「無い」ことを、台詞なしで立てられるか。**",
+  "motion": {
+   "subject": "男の横顔（⚠️ **顔がここで初めて近くに出る**）、喉、顎。そして前の海。",
+   "quality": "**彼は動かない。**喉が一度だけ動く。**それがこの1本で唯一の身体の事象である**——飲み込んだのであって、喋ったのではない。髪と裾は風で動き続ける。カメラはごくゆっくり、横顔へ寄る。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **`mode: still`。** **止まるのは主題である**——**言わないことが、静止として現れる。**"
+  },
+  "spec": "specs/video/odyssey-s08.md",
+  "beats": [
+   {
+    "range": "0-2.497s",
+    "density": "transition",
+    "text": "横顔が入る。**口は閉じている。**"
+   },
+   {
+    "range": "2.497-5.497s",
+    "density": "sparse",
+    "text": "**喉が一度だけ動く。**それだけである。**海は動き続ける。**"
+   },
+   {
+    "range": "5.497-7.978s",
+    "density": "dense",
+    "text": "**カメラが横顔へ寄りきる。**髪が一度強く押され、**口が閉じたままであることが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "岸",
+   "岸.geography",
+   "岸.states.日没"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "unknown",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s09": {
+  "id": "s09",
+  "section": "pre-chorus",
+  "mode": "motion",
+  "role": "対話",
+  "format": "remembered-world",
+  "title": "画面に居ない者に喋らせる",
+  "line": "行: l06 ／ 場所: 森の洞口 ／ 時刻: 夜 ／ 尺: 5.027秒",
+  "header_notes": [
+   "行: l06 ／ 場所: 森の洞口 ／ 時刻: 夜 ／ 尺: 5.027秒",
+   "⚠️ **形式（`remembered-world`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⛔ **開示の変化点②である**（`ledger.disclosure`）——`女神.差し出し: present`。",
+   "   出所: 曲の `l06`「女神は言う ここにいれば」。",
+   "   ⚠️ **`l07`「老いない 死なない」は、同じ開示の続きである**——**別の変化点にしない。**",
+   "⛔ **彼女は画面に居ない。そして、この作品のどこにも居ない。**",
+   "   **これは裁定である**（`characters.女神` の註に、三つの効き目が書いてある）。",
+   "   ⚠️ **声は枠の外から来る**——出所は曲のマーカー `[Pre-Chorus: distant female voice]`。",
+   "   **曲は既にそう書いている。** この作品はそれに従っただけである。",
+   "⚠️ **参照集合に `女神.identity` を入れない。** 入れるのは `女神.negatives` である——",
+   "   ⚠️ **この人物は「顔が無いこと」が同一性であり、参照集合が固定するのは",
+   "   「出てはならないもの」の側だからである**（`characters.女神` の註を見る）。",
+   "⚠️ **形式は `remembered-world`。** **`s02` と同じである**——",
+   "   **`s02` は外側から見た洞であり、この1本は声の側から見た洞である。**",
+   "⚠️ **役は `対話` である。** 固有基準は「間・沈黙・聞き手の反応・視線・声との同期」——",
+   "   ⛔ **この1本では、聞き手は画面の中に居るのに、話し手が居ない。**",
+   "⛔ **§18 の Master Prompt を、2026-09-29 に直した。** 前の稿はこう言っていた——",
+   "   「**No person appears in this frame at any distance or in any focus**」。",
+   "   ⚠️ **同じ欄の5文前に、既にこう書いてあった**——「**The man stands with his back to the",
+   "   lens for the whole take**」。**1つの塊が、彼が居ると言い、誰も居ないと言っていた。**",
+   "   ⛔ **出所を測って直した。** この1本の意図は「**話し手が枠に居ない**」である（上の行）——",
+   "   ゆえに否定すべきは**二人目**であって、**聞き手である彼ではない**。**同じ場所・同じ時刻の",
+   "   `s10` が既に正しい形を持っていたので、それに合わせた**（「No **second** person is…」）。",
+   "   ⚠️ **この誤りは目立たない形で入っていた**——他の9本は「塊 ＋ 誰も居ない」で鳴ったが、",
+   "   **この1本だけ動詞が違った**（`appears`）ため、句を鍵にした走査をすり抜けた。"
+  ],
+  "duration": "5.027s",
+  "place": "森の洞口",
+  "time": "夜",
+  "unit_before": "男は洞口の前に立っている。洞は黒い。",
+  "unit_after": "**男はまだ立っている。**彼は一言も発していない。**洞の黒は何も返さない。**",
+  "aim": "⛔ **画面に居ない者に喋らせられるか。**そして**観客に、彼女が本当にそこに居ると信じさせられるか**——**姿を一度も見せずに。**",
+  "motion": {
+   "subject": "男の背中と、洞の黒。**そして、洞から出てくる空気。**",
+   "quality": "男は動かない。**潅木が洞の側だけ揺れる**——風向きが説明できない。カメラは彼の後ろから洞口へ寄り、**黒が画面の大半を占めたところで止まる。**",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **この経路は参照画像を受け取らない**（裁定②）。**ゆえに彼女の不在は、文だけが運ぶ**——`女神.negatives` の6行がそれである。"
+  },
+  "spec": "specs/video/odyssey-s09.md",
+  "beats": [
+   {
+    "range": "0-1.498s",
+    "density": "transition",
+    "text": "男の背中と、黒い洞。**音はまだ無い。**"
+   },
+   {
+    "range": "1.498-3.499s",
+    "density": "sparse",
+    "text": "**潅木が洞の側だけ揺れる。**風向きが説明できない。**声はまだ来ない。**"
+   },
+   {
+    "range": "3.499-5.027s",
+    "density": "dense",
+    "text": "**黒が画面の大半を占める。**彼は動かない。**口が閉じたままであることが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "女神.negatives",
+   "森の洞口",
+   "森の洞口.geography",
+   "森の洞口.states.夜"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s10": {
+  "id": "s10",
+  "section": "pre-chorus",
+  "mode": "motion",
+  "role": "開示",
+  "format": "time-fold",
+  "title": "老いない 死なない——時間が通らない10秒",
+  "line": "行: l07 ／ 場所: 森の洞口 ／ 時刻: 夜 ／ 尺: 10.452秒",
+  "header_notes": [
+   "行: l07 ／ 場所: 森の洞口 ／ 時刻: 夜 ／ 尺: 10.452秒",
+   "⚠️ **形式（`time-fold`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **この行は 10.000秒であり、直後に 0.452秒の歌の無い間がある**（96.649–97.101）。",
+   "   **この1本が吸うので、尺は 10.452秒になる。**",
+   "   ⚠️ **歌の無い間を、専用の行にしない**（`ledger.song_coverage` の註を見る）——",
+   "   **それは容器である。**",
+   "   ⚠️ **この曲の「ちょうど 10.000秒」の行は5本ある。****字幕キューの上限を疑わせる**——",
+   "   **「10秒歌われた」と読まない**（`bible.song.lines` の註）。",
+   "⛔ **形式は `time-fold` である。****この作品で4本あるうちの2本目である**",
+   "   （`s03` の註に、4本の仕事の違いが書いてある）。",
+   "   ⛔ **`s03` は時間を通し、この1本は時間を通さない。**",
+   "   **同じ形式の逆の使い方であり、ゆえにこの1本は `s03` を参照して読まれる。**",
+   "⚠️ **役は `開示` である。** 固有基準は「見せ方の順序・情報量・**何を隠したか**」——",
+   "   ⛔ **この1本が隠すのは、時間である。**"
+  ],
+  "duration": "10.452s",
+  "place": "森の洞口",
+  "time": "夜",
+  "unit_before": "洞の黒が画面を占めている。男は立っている。",
+  "unit_after": "**同じ画のまま、10.452秒が過ぎている。**彼は年を取っていない。**何も変わっていないことが、この1本の変化である。**",
+  "aim": "⛔ **「死なない」を、否定形でなく肯定形で写せるか。**⚠️ **人を止めて写すのではない**——**光と空気だけが動き、そこにいる者が時間から外れている**ことを、10秒保てるか。",
+  "motion": {
+   "subject": "洞の黒、潅木の葉、男の髪と裾。**時間そのものが主題である。**",
+   "quality": "**光は動く。**月の光がゆっくり角度を変え、葉の裏の温度が変わり、男の髪が揺れる。**しかし一度も「進んだ」と言えない。**カメラは三脚の上で、髪の一筋へ寄っていく。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **「動くが進まない」は、様式の物理である。** `cinematic-still` は演出的な照明を許す——**その許しが、ここで時間を作る。**"
+  },
+  "spec": "specs/video/odyssey-s10.md",
+  "beats": [
+   {
+    "range": "0-2.498s",
+    "density": "transition",
+    "text": "洞の黒。**葉が一枚、裏返る。**"
+   },
+   {
+    "range": "2.498-5.999s",
+    "density": "sparse",
+    "text": "**光が角度を変える。**髪が揺れる。**しかし何も進まない。**"
+   },
+   {
+    "range": "5.999-8.497s",
+    "density": "dense",
+    "text": "**カメラが髪の一筋へ寄る。**光はまだ動いている。**同じ一筋が、まだ同じ場所にある。**"
+   },
+   {
+    "range": "8.497-10.452s",
+    "density": "dense",
+    "text": "**歌の無い 0.452秒が、この1本の末尾に在る。**光だけが動き、**何も変わらないまま切れ目が来る。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "女神.negatives",
+   "森の洞口",
+   "森の洞口.geography",
+   "森の洞口.states.夜"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s11": {
+  "id": "s11",
+  "section": "pre-chorus",
+  "mode": "still",
+  "role": "反応",
+  "format": "impossible-camera",
+  "title": "私の顔を見ている——見る主体を写さない",
+  "line": "行: l08 ／ 場所: 森の洞口 ／ 時刻: 夜 ／ 尺: 6.782秒",
+  "header_notes": [
+   "行: l08 ／ 場所: 森の洞口 ／ 時刻: 夜 ／ 尺: 6.782秒",
+   "⚠️ **形式（`impossible-camera`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⛔ **この一行が、女神に顔を与えない設計の出所である**（`characters.女神` の註）。",
+   "   出所: 曲の `l08`「私の顔を見ている」。",
+   "   ⛔ **写るのは、見られている男の顔である。** **彼女の顔ではない。**",
+   "   ⚠️ **この読み替えが、裁定②（参照なし）と `world.rules` の二番を同時に満たす。**",
+   "⛔ **形式は `impossible-camera`**——**物理的に存在しえない視点**。",
+   "   **彼女の位置は、この作品で唯一カメラが立てる場所である。**",
+   "   ⚠️ **この形式をこの作品で使うのは4本である**（`s11`・`s21`・`s28`・`s33`）。",
+   "⚠️ **`mode: still`。** **止まるのは主題である**——**見られている者は動かない。**"
+  ],
+  "duration": "6.782s",
+  "place": "森の洞口",
+  "time": "夜",
+  "unit_before": "洞の黒の前に、男の横顔がある。",
+  "unit_after": "**男は視線を動かしていない。****誰かが見ていることが、画面の側に残っている。**",
+  "aim": "⛔ **見る主体を一度も写さずに、「見られている」を写せるか。**⚠️ **不可視の視点が、この1本の全部である。**",
+  "motion": {
+   "subject": "男の顔。**そして、彼の顔の上を動く光**——光源は枠の外にある。",
+   "quality": "**彼は動かない。**闇の中の彼の頬に、**誰かの体温のような、ごく弱い光が当たり続ける。**光源は動かず、彼も動かない。**カメラだけが、彼の目と同じ高さへゆっくり上がる。**",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **`mode: still`。** この作品の6本のうちの1本である（`s06` の註を見る）。"
+  },
+  "spec": "specs/video/odyssey-s11.md",
+  "beats": [
+   {
+    "range": "0-2.001s",
+    "density": "transition",
+    "text": "暗い中に横顔がある。**光は当たっていない。**"
+   },
+   {
+    "range": "2.001-4.503s",
+    "density": "sparse",
+    "text": "**頬に、ごく弱い光が当たりはじめる。**光源は枠の外である。**彼は動かない。**"
+   },
+   {
+    "range": "4.503-6.782s",
+    "density": "dense",
+    "text": "**光が当たり続ける。**彼は一度も視線を動かさない——**動かさないことが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "女神.negatives",
+   "森の洞口",
+   "森の洞口.geography",
+   "森の洞口.states.夜"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s12": {
+  "id": "s12",
+  "section": "pre-chorus",
+  "mode": "motion",
+  "role": "情景",
+  "format": "video-spec",
+  "title": "私は海を見ている——視線が交わらない",
+  "line": "行: l09 ／ 場所: 海 ／ 時刻: 日没 ／ 尺: 9.734秒",
+  "header_notes": [
+   "行: l09 ／ 場所: 海 ／ 時刻: 日没 ／ 尺: 9.734秒",
+   "⚠️ **形式（`video-spec`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **`l08` と対である**——**視線が交わらない。**",
+   "   `s11` は「**見られている**」であり、この1本は「**見ている**」である。",
+   "   ⛔ **この作品は、この2行を1本ずつに割った**——",
+   "   **同じ1本に入れれば、視線が交わることになる。**",
+   "⛔ **形式は `video-spec`。** 不可視の視点（`s11`）が続いた直後に、",
+   "   **いちばん素の画を置く。****文法を戻すことで、対が見える。**",
+   "⚠️ **この1本は `海` であるが、彼は岸に居る。**（`locations.海.geography` の註——",
+   "   「岸から見る海と、舟から見る海は、同じ場所である。**二つに割らない**。」）",
+   "   **ゆえにこの1本は `岸` ではなく `海` を引く。****見えているものが海だからである。**"
+  ],
+  "duration": "9.734s",
+  "place": "海",
+  "time": "日没",
+  "unit_before": "洞の黒の前に男が居る。",
+  "unit_after": "**男は岸に居て、海を見ている。**海は彼の前にある。",
+  "aim": "**「私は海を見ている」を、海の画だけで返せるか。**そして**`l08` の対であることを、観客に説明せずに立てられるか。**",
+  "motion": {
+   "subject": "海面、水平線、そして岸の手前の砂。",
+   "quality": "波は低く、反射だけが細かく割れる。**カメラは水面すれすれを左へ滑る**——動機は「彼の視線の先へ行くこと」である。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **この作品の言語は日本語である**（`bible.language`）。**歌以外に何も喋らないが、名指す**——`L27` がそれを読む。"
+  },
+  "spec": "specs/video/odyssey-s12.md",
+  "beats": [
+   {
+    "range": "0-2.502s",
+    "density": "transition",
+    "text": "海と、手前の砂。**彼はもう画面に居ない。**"
+   },
+   {
+    "range": "2.502-5.996s",
+    "density": "sparse",
+    "text": "**カメラが水面すれすれを滑る。**反射が割れる。"
+   },
+   {
+    "range": "5.996-9.734s",
+    "density": "dense",
+    "text": "**水平線が画面の中央に来る。**波が返り、**反射が一度に割れるのが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.日没"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s13": {
+  "id": "s13",
+  "section": "chorus-1",
+  "mode": "motion",
+  "role": "離脱",
+  "format": "video-spec",
+  "title": "この作品で初めて、岸が枠の外へ出る",
+  "line": "行: l10 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 7.739秒",
+  "header_notes": [
+   "行: l10 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 7.739秒",
+   "⚠️ **形式（`video-spec`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⛔ **この作品で初めて、岸が枠の外へ出る。**",
+   "   出所: 曲の `l10`「死なない島を出て」——**サビの1行目である。**",
+   "⚠️ **この行は3回歌われる**（`l10`／`l19`／`l28`）。**この作品は3本とも役を同じにした**",
+   "   ——**差分は §6 の形式が持つ。**（② の担当である。）",
+   "   ⛔ **`s13` は意図であり、`s20` は島の応答であり、`s27` は労働である。**",
+   "⚠️ **形式は `video-spec`。****この一変化を、いちばん素の文法で立てる。**"
+  ],
+  "duration": "7.739s",
+  "place": "海",
+  "time": "夜",
+  "unit_before": "島の岸が画面の下端にある。海はまだ島のものである。",
+  "unit_after": "**岸が画面の外へ出ている。**海だけが残っている。",
+  "aim": "⛔ **島を出ることを、島を写さずに写せるか。**そして**この一変化が、3回反復される最初の1回として立てられるか。**",
+  "motion": {
+   "subject": "海面と、後ろへ遠ざかる島の輪郭。**そして岸の水際の白。**",
+   "quality": "**島がゆっくり小さくなる。**波だけが前に流れ、島は後ろへ下がる。**カメラは島から海へ、左へ回る**——動機は「彼が離れること」ではなく「**島が離れること**」である。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **この作品の様式は一つである**（裁定①）。**34本とも `cinematic-still` の物理に従う**——**様式は作品定数であり、ショットは名乗れない。**"
+  },
+  "spec": "specs/video/odyssey-s13.md",
+  "beats": [
+   {
+    "range": "0-1.997s",
+    "density": "transition",
+    "text": "岸が画面の下端にまだある。**海は島のものである。**"
+   },
+   {
+    "range": "1.997-4.999s",
+    "density": "sparse",
+    "text": "**島が小さくなる。**波が前に流れる。"
+   },
+   {
+    "range": "4.999-7.739s",
+    "density": "dense",
+    "text": "**岸が枠の外へ出る。**海だけが残る——**島が消えるのが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.夜",
+   "舟",
+   "舟.appearance",
+   "舟.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s14": {
+  "id": "s14",
+  "section": "chorus-1",
+  "mode": "motion",
+  "role": "運動",
+  "format": "video-spec",
+  "title": "海を渡る——移動を、速さでなく距離で",
+  "line": "行: l11 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 5.745秒",
+  "header_notes": [
+   "行: l11 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 5.745秒",
+   "⚠️ **形式（`video-spec`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **この作品で唯一、移動そのものを写す行である。**",
+   "   出所: 曲の `l11`「海を渡る」。**この行も3回歌われる**（`l11`／`l20`／`l29`）。",
+   "⛔ **`props.舟` の `negative` が、この1本で効く**——",
+   "   「**no boat, no ship, no hull, no keel, no planking**」。",
+   "   ⚠️ **詩は筏を詳しく書かない。この作品は書く**——**参照画像が無い以上、文が持たねばならない。**",
+   "   そして**「船」と書けば生成器は船を作る。****作り手のいない船は、この作品では嘘である**",
+   "   （`l14` が木を削っている）。"
+  ],
+  "duration": "5.745s",
+  "place": "海",
+  "time": "夜",
+  "unit_before": "島はもう画面に無い。海だけがある。",
+  "unit_after": "**海が、動いている面としてある。**舟はその上を進んでいる。",
+  "aim": "**移動を、速さでなく距離で写せるか。**⚠️ この作品に「冒険」の画は要らない——**要るのは、まだ着かないことである。**",
+  "motion": {
+   "subject": "波面、舟の縁、そして航跡。",
+   "quality": "波は低く、舟はそれに乗って上下する。**航跡だけが後ろへ伸び、消える。**カメラは舟の舳先の高さで、前へ進む。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **主題は「運動」である。** 固有基準は「重さ・慣性・加速・流れ・衝撃・**身体の可読性**・リズム」——**様式の物理で測る。**"
+  },
+  "spec": "specs/video/odyssey-s14.md",
+  "beats": [
+   {
+    "range": "0-1.499s",
+    "density": "transition",
+    "text": "海だけがある。**舟の舳先が画面の下端に入る。**"
+   },
+   {
+    "range": "1.499-3.499s",
+    "density": "sparse",
+    "text": "**舟が上下する。**航跡が後ろへ伸びる。"
+   },
+   {
+    "range": "3.499-5.745s",
+    "density": "dense",
+    "text": "**舳先が波を割る。**航跡が一度に伸び、**泡が消えるのが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.夜",
+   "舟",
+   "舟.appearance",
+   "舟.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s15": {
+  "id": "s15",
+  "section": "chorus-1",
+  "mode": "motion",
+  "role": "様式美",
+  "format": "coexisting-realities",
+  "title": "永遠より遠い／なんでもない島へ——二つの行き先が、一枠に",
+  "line": "行: l12+l13 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 10.931秒",
+  "header_notes": [
+   "行: l12+l13 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 10.931秒",
+   "⚠️ **形式（`coexisting-realities`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **2行を束ねた理由は長さである。** 実測: `l12` は 7.021秒、`l13` は 3.910秒。",
+   "   ⚠️ **`l13` は下限4秒に満たない**（`s07` の註を見る）。",
+   "   ⚠️ **この2行も、曲が既に並べている対である**（「永遠より遠い／なんでもない島へ」）。",
+   "⛔ **この1本で、この作品の主題が一度だけ正面から出る。**",
+   "   **「永遠より遠い」と「なんでもない」**——**この二つは矛盾している。**",
+   "   **そして曲は、それを同じサビの続きの2行として並べている。**",
+   "   ⚠️ **形式は `coexisting-realities`。****この形式がこの作品で要るのは、まさにこの1本のためである。**",
+   "⚠️ **役は `様式美`。** 固有基準は「構図・余白・**静止の強度**」——",
+   "   ⛔ **この1本では、動いているのに静止している。** **引くほど遠くなるだけである。**"
+  ],
+  "duration": "10.931s",
+  "place": "海",
+  "time": "夜",
+  "unit_before": "海と、水平線だけがある。",
+  "unit_after": "**同じ一枠の中に、二つの行き先がある。**どちらへも着いていない。",
+  "aim": "⛔ **二つの矛盾する行き先を、一つの画に並べられるか。**⚠️ 説明せずに。**この作品の主題が、ここで一度だけ正面から出る。**",
+  "motion": {
+   "subject": "水面、水平線、そしてその上の空。",
+   "quality": "**二つの遠さが、同時に動く。**近い水面は速く流れ、遠い水平線は動かない。カメラはゆっくり後ろへ引く——**引くほど、二つとも遠くなる。**",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **様式は一つである。****この1本は「様式美」を役に持ち、形式の側で二つの現実を並べる**——**様式と形式は別の軸である**（裁定①と §6）。"
+  },
+  "spec": "specs/video/odyssey-s15.md",
+  "beats": [
+   {
+    "range": "0-2.995s",
+    "density": "transition",
+    "text": "水面と水平線。**遠さが二つある。**"
+   },
+   {
+    "range": "2.995-6.996s",
+    "density": "sparse",
+    "text": "**近い水面が流れる。**遠い水平線は動かない。"
+   },
+   {
+    "range": "6.996-10.931s",
+    "density": "dense",
+    "text": "**カメラが引ききる。**二つの遠さが、どちらも遠くなる——**同じ一枠に並ぶのが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.夜",
+   "舟",
+   "舟.appearance",
+   "舟.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s16": {
+  "id": "s16",
+  "section": "verse-2",
+  "mode": "motion",
+  "role": "所作",
+  "format": "transformation",
+  "title": "木が、舟になる——17秒の斧",
+  "line": "行: l14 ／ 場所: 舟の置き場 ／ 時刻: 夜明け ／ 尺: 17.234秒",
+  "header_notes": [
+   "行: l14 ／ 場所: 舟の置き場 ／ 時刻: 夜明け ／ 尺: 17.234秒",
+   "⚠️ **形式（`transformation`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⛔ **この作品で最も長いショットである（17.234秒）。**",
+   "   出所: 曲の `l14`「木を削って舟にする」——⚠️ **この行は 10.000秒であり、",
+   "   直後に 7.234秒の歌の無い間がある**（148.032–155.266）。",
+   "   **これはこの曲で最も長い、歌の無い間である。**",
+   "   ⚠️ **この1本が吸う**（`ledger.song_coverage` の註を見る）。",
+   "⛔ **形式は `transformation`**——**切断も過程も無しに、あるものが別のものになる。**",
+   "   **この作品の2本目の看板である**（1本目は `s03` の `time-fold`）。",
+   "   ⚠️ **この形式をこの作品で使うのは3本である**（`s16`・`s17`・`s25`）。",
+   "   **3本は互いに別の仕事をする**——ここは「**木が筏になる**」であり、",
+   "   `s17` は「**布が帆になる**」であり、`s25` は「**人が誰でもない者になる**」である。",
+   "⚠️ **7.234秒の歌の無い間について。** `world.rules` の八番——",
+   "   **この作品に音楽は無い**（曲はポストで載る）。**ゆえにこの7秒は、斧の音だけである。**",
+   "   ⛔ **「歌の無い時間は、画面の側が持つ」**——**この1本では、画面が斧の音を持つ。**",
+   "⚠️ **節 `verse-2` は43.005秒あり、この曲で最も長い節である**（9節を並べた実測）。"
+  ],
+  "duration": "17.234s",
+  "place": "舟の置き場",
+  "time": "夜明け",
+  "unit_before": "浜に、丸太と板が散らばっている。舟は無い。",
+  "unit_after": "**同じ浜に、筏がある。**木は木のままであり、**もう木ではない。**",
+  "aim": "⛔ **17秒で、木が筏になるのを見せられるか。**⚠️ 切って繋ぐのでなく、**一つの画の中でそうなっている**ことを。**そして7.234秒の歌の無い間を、斧の音だけで持てるか。**",
+  "motion": {
+   "subject": "丸太、板、鉋屑、縄。**そして男の手と斧。**",
+   "quality": "**斧が入るたびに、木が変わる。**削り屑が舞い、板が組み合わさり、縄が結ばれる。⚠️ **速くしない。**一つずつ起きる。**7.234秒の歌の無い間、斧の音だけが続く。**カメラは作業台の周りを半周する。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **`props.斧` の物理である**——青銅の両刃、オリーグの柄、革で縛った頭。**銅は鈍く、刃の側だけが明るい。****この作品に、鋼も鉄も無い**（`斧.negative`）。"
+  },
+  "spec": "specs/video/odyssey-s16.md",
+  "beats": [
+   {
+    "range": "0-3.998s",
+    "density": "transition",
+    "text": "浜と、散らばった材木。**まだ何も無い。**"
+   },
+   {
+    "range": "3.998-8.996s",
+    "density": "sparse",
+    "text": "**斧の一撃目が入る。**削り屑が舞う。**板が一本、外れる。**"
+   },
+   {
+    "range": "8.996-12.994s",
+    "density": "dense",
+    "text": "**丸太が組み合わさり、縄が結ばれる。**⚠️ **ここから 7.234秒、歌は無い。****斧の音だけが続く。**"
+   },
+   {
+    "range": "12.994-17.234s",
+    "density": "dense",
+    "text": "**最後の板が収まる。**木は木のままであり、**もう木ではない**——**それが切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "舟の置き場",
+   "舟の置き場.geography",
+   "舟の置き場.states.夜明け",
+   "舟",
+   "舟.appearance",
+   "舟.negative",
+   "斧",
+   "斧.appearance",
+   "斧.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s17": {
+  "id": "s17",
+  "section": "verse-2",
+  "mode": "motion",
+  "role": "質感",
+  "format": "transformation",
+  "title": "布が、帆になる",
+  "line": "行: l15 ／ 場所: 舟の置き場 ／ 時刻: 夜明け ／ 尺: 6.543秒",
+  "header_notes": [
+   "行: l15 ／ 場所: 舟の置き場 ／ 時刻: 夜明け ／ 尺: 6.543秒",
+   "⚠️ **形式（`transformation`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **`world.rules` の二番が、この1本に出る**——",
+   "   「**女神は差し出したあとも、道具を与える。**斧・錐・帆の布・星の道——",
+   "   **断られた側が、出発の術を教える。**」",
+   "   ⛔ **ゆえにこの帆は、この作品で唯一の「与えられた物」である。**",
+   "   ⚠️ **誰から来たのかを、この作品は一度も言わない。** **言わないことが、この規則の実装である。**",
+   "⚠️ **`props.帆.negative` の1行が効く**——「**no sail worn as a garment by any person**」。",
+   "   ⚠️ **詩では、この布は彼の身にも掛かる。この作品では掛からない**——",
+   "   **曲の `l15`「帆を縫って風を待つ」が、布の行き先を帆に決めている。**",
+   "⚠️ **形式は `transformation`。** **`s16` と同じである**——",
+   "   **`s16` は木が筏になり、この1本は布が帆になる。****この作品は2本を対にして置いた。**"
+  ],
+  "duration": "6.543s",
+  "place": "舟の置き場",
+  "time": "夜明け",
+  "unit_before": "布は浜に平らに広げられ、石で四隅を押さえられている。",
+  "unit_after": "**布は帆になっている。**縫い目が浮き、風を孕んでいる。",
+  "aim": "⛔ **縫うことを、布の変化として写せるか。**そして**この布が誰から来たのかを、一度も言わずに知らせられるか。**",
+  "motion": {
+   "subject": "布、針、糸、そして風。",
+   "quality": "**針が出入りするたびに、布の形が決まっていく。**縫い目が浮き、布が張り、風が入って膨らむ。**カメラは布の面に沿って低く滑る**——動機は「縫い目を追うこと」である。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **糸は手で撚られている。機械の縫い目は無い**（`props.帆.negative`）。**この作品に、後の時代の物は一つも無い**（`world.rules` の七番）。"
+  },
+  "spec": "specs/video/odyssey-s17.md",
+  "beats": [
+   {
+    "range": "0-1.498s",
+    "density": "transition",
+    "text": "布が平らに広がっている。**まだ帆ではない。**"
+   },
+   {
+    "range": "1.498-3.998s",
+    "density": "sparse",
+    "text": "**針が出入りする。**縫い目が浮いていく。"
+   },
+   {
+    "range": "3.998-6.543s",
+    "density": "dense",
+    "text": "**風が布に入る。**布が膨らみ、張る——**張りきるのが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "舟の置き場",
+   "舟の置き場.geography",
+   "舟の置き場.states.夜明け",
+   "帆",
+   "帆.appearance",
+   "帆.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s18": {
+  "id": "s18",
+  "section": "verse-2",
+  "mode": "motion",
+  "role": "所作",
+  "format": "video-spec",
+  "title": "星を数えて舵を取る——この作品で初めて、彼は水の上に居る",
+  "line": "行: l16 ／ 場所: 海 ／ 時刻: 夜明け ／ 尺: 7.101秒",
+  "header_notes": [
+   "行: l16 ／ 場所: 海 ／ 時刻: 夜明け ／ 尺: 7.101秒",
+   "⚠️ **形式（`video-spec`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **この作品で初めて、男が水の上に居る。**",
+   "   出所: 曲の `l16`「星を数えて舵を取る」。",
+   "⚠️ **`verse-2` は夜明けである。** ただし——**夜明けでも、星はまだ出ている。**",
+   "   ⛔ **この読みが、`s19` の設計を決めている**（そちらの註を見る）。",
+   "⚠️ **形式は `video-spec`。** ⚠️ **`s16`・`s17` と連続して `transformation` を",
+   "   使わなかった**——**17秒と6.5秒の変身のあとに、素の画を置く。**",
+   "   **文法を戻すことで、変身が終わったことが分かる。**"
+  ],
+  "duration": "7.101s",
+  "place": "海",
+  "time": "夜明け",
+  "unit_before": "海は暗く、空だけが明るくなりはじめている。",
+  "unit_after": "**男が舵を取っている。**星が、数えられる数だけ残っている。",
+  "aim": "**「数える」を、数を言わずに写せるか。**そして**夜明けの海を、暗い画として立てられるか。**",
+  "motion": {
+   "subject": "男の手と舵、舟の縁、そして空の星。",
+   "quality": "**彼は星を見て、舵を動かす。**動きは小さく、確かである。舟は上下し、星は動かない。**カメラは彼の肩越しに、空へ上がっていく。**",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **舵は舵輪ではない。** 縛られた一本の櫂である（`props.舟.appearance`——「a steering oar tied at the stern, lashed, not fitted」）。**機構の可読性が、この様式の物理である。**"
+  },
+  "spec": "specs/video/odyssey-s18.md",
+  "beats": [
+   {
+    "range": "0-2.002s",
+    "density": "transition",
+    "text": "暗い海と、明るくなりはじめた空。**星がまだ出ている。**"
+   },
+   {
+    "range": "2.002-4.502s",
+    "density": "sparse",
+    "text": "**彼が星を見て、舵を動かす。**動きは小さい。"
+   },
+   {
+    "range": "4.502-7.101s",
+    "density": "dense",
+    "text": "**舟が向きを変える。**星は動かない——**星が動かないことが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.夜明け",
+   "舟",
+   "舟.appearance",
+   "舟.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s19": {
+  "id": "s19",
+  "section": "verse-2",
+  "mode": "motion",
+  "role": "様式美",
+  "format": "time-fold",
+  "title": "北斗は沈まない——一つだけが時間の外にある",
+  "line": "行: l17+l18 ／ 場所: 沈まない星 ／ 時刻: 夜明け ／ 尺: 12.127秒",
+  "header_notes": [
+   "行: l17+l18 ／ 場所: 沈まない星 ／ 時刻: 夜明け ／ 尺: 12.127秒",
+   "⚠️ **形式（`time-fold`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **2行を束ねた理由は長さである。** 実測: `l17` は 3.510秒——",
+   "   **この曲で最も短い行である**（`l04` と同位）。`l18` は 8.617秒。**2行で 12.127秒。**",
+   "   ⚠️ **この2行も、曲が既に並べている対である**（「北斗は沈まない／沈まない星を見ている」）。",
+   "⛔ **`verse-2` を夜明けにした読みが、この1本で効く。**",
+   "   **沈まない、とは——夜明けにも、まだ沈まない、ということである。**",
+   "   **日の出とともに全部が消えるとき、一つだけが残る。** **「沈まない星」の意味が、夜ではなく夜明けにある。**",
+   "   ⚠️ **この読みは、詩の第五巻に忠実である**——彼は舵を取りながら、",
+   "   **一度も沈まない星座を左手に保つ**（5.273）。",
+   "⚠️ **この場所だけが、この作品で唯一「上が開いている」**（`locations.沈まない星`）——",
+   "   **他の5つは、すべて水平である。**",
+   "⚠️ **形式は `time-fold`。** **この作品で4本目である**（`s03` の註を見る）。"
+  ],
+  "duration": "12.127s",
+  "place": "沈まない星",
+  "time": "夜明け",
+  "unit_before": "空が明るくなりはじめ、星が一つずつ消えている。",
+  "unit_after": "**北斗だけが、まだ同じ高さにある。**他の星はもう無い。",
+  "aim": "**一つの星が沈まないことを、12秒で写せるか。**⚠️ **時間が経っていることが見えなければ、沈まないことは見えない。**",
+  "motion": {
+   "subject": "空、星、そして明るくなっていく東の空。",
+   "quality": "**星が次々に消える。**空の色が青から灰白へ移る。**北斗だけが高さを変えない。**カメラは三脚の上で、北斗へゆっくり寄る。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **`time-fold` の4本目である**（`s03` の註を見る）。⛔ **ここでは、一つの星だけが時間の外にある。****他の全部が動いているから、一つが動かないことが見える。**"
+  },
+  "spec": "specs/video/odyssey-s19.md",
+  "beats": [
+   {
+    "range": "0-2.995s",
+    "density": "transition",
+    "text": "空に星がある。**まだ全部出ている。**"
+   },
+   {
+    "range": "2.995-7.494s",
+    "density": "sparse",
+    "text": "**星が消えはじめる。**空が青くなる。**北斗は高いままである。**"
+   },
+   {
+    "range": "7.494-12.127s",
+    "density": "dense",
+    "text": "**他の星が全部消える。**空は灰白である。**北斗だけが同じ高さにあるのが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "沈まない星",
+   "沈まない星.geography",
+   "沈まない星.states.夜明け",
+   "海",
+   "海.geography",
+   "海.states.夜明け"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s20": {
+  "id": "s20",
+  "section": "chorus-2",
+  "mode": "motion",
+  "role": "離脱",
+  "format": "recognizing-world",
+  "title": "2度目の出発には、島の側が応える",
+  "line": "行: l19 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 6.942秒",
+  "header_notes": [
+   "行: l19 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 6.942秒",
+   "⚠️ **形式（`recognizing-world`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **`l19`「死なない島を出て」の2度目である。** ⚠️ **言葉は `chorus-1` と一語も違わない。**",
+   "   ⛔ **この作品は役も同じにした**（`s13` の註を見る）——**差分は §6 の形式が持つ。**",
+   "⛔ **形式は `recognizing-world`**——**場所が、そこにいる者に反応し、反応が積み重なる。**",
+   "   ⚠️ **この形式をこの作品で使うのは、この1本だけである。**",
+   "   **ゆえに「2度目」であることが、形式の側から保証される。**",
+   "   ⚠️ **1度目（`s13`）は島が黙って遠ざかり、この1本は島が応える。**",
+   "⚠️ **この1本の `time` は `夜` である。** 直前の `verse-2` は `夜明け` であった——",
+   "   ⛔ **曲が `l14` から `l18` で暁を歌い、`l19` のサビで夜へ戻る。**",
+   "   **この作品は曲に従った**（`bible.time_source: song`）。**時計には従っていない。**"
+  ],
+  "duration": "6.942s",
+  "place": "海",
+  "time": "夜",
+  "unit_before": "海と、遠い島の輪郭がある。",
+  "unit_after": "**島は、もう在ることをやめている。**海だけが応えている。",
+  "aim": "**同じ行の2度目に、別の何かを返せるか。**⚠️ **`s13` が「意図」であり、この1本は「行為」である**——その差を、形式の差だけで立てられるか。",
+  "motion": {
+   "subject": "海面、島の輪郭、そして航跡。",
+   "quality": "**島の輪郭が、波の動きに合わせて一度だけ揺れる**——それから消える。航跡は後ろへ伸びる。**カメラは舟の上で、島へ向かって回る**——動機は「島が応えるのを見ること」である。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **この作品の禁制は、全ショットで同一である**（`bible.negative_base` の8行）。**開示が動いても §18 の節は動かない**——`ledger.disclosure` の4行が、4つとも `covered` である理由。"
+  },
+  "spec": "specs/video/odyssey-s20.md",
+  "beats": [
+   {
+    "range": "0-1.999s",
+    "density": "transition",
+    "text": "海と、遠い島の輪郭。**輪郭はまだ動かない。**"
+   },
+   {
+    "range": "1.999-4.498s",
+    "density": "sparse",
+    "text": "**輪郭が揺れる。**波の動きに合わせて、一度だけ。"
+   },
+   {
+    "range": "4.498-6.942s",
+    "density": "dense",
+    "text": "**輪郭が消える。**海だけが残る——**島が在ることをやめるのが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.夜",
+   "舟",
+   "舟.appearance",
+   "舟.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s21": {
+  "id": "s21",
+  "section": "chorus-2",
+  "mode": "motion",
+  "role": "運動",
+  "format": "impossible-camera",
+  "title": "海を渡る——海の全体と、その上の舟とを、同じ画に",
+  "line": "行: l20 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 6.143秒",
+  "header_notes": [
+   "行: l20 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 6.143秒",
+   "⚠️ **形式（`impossible-camera`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **`l20`「海を渡る」の2度目である。** ⚠️ **役は `運動` で、`s14` と同じである。**",
+   "   ⛔ **差分は形式が持つ**——`s14` は舳先の高さであり、**この1本は在りえない高さである。**",
+   "⛔ **形式は `impossible-camera`。** ⚠️ **この作品で4本あるうちの2本目である**",
+   "   （`s11` の註を見る）。",
+   "   ⚠️ **`s28`（`l29`「海を渡る」の3度目）は、この1本と対になる**——",
+   "   **`s21` は上から、`s28` は下から。****同じ海を、二つの在りえない視点で挟む。**",
+   "⚠️ **この作品の `海` は、この1本で最も広く出る。** **34本の中で、この1本だけが海の全体を持つ。**"
+  ],
+  "duration": "6.143s",
+  "place": "海",
+  "time": "夜",
+  "unit_before": "舟は水の上にある。海は一様である。",
+  "unit_after": "**海の全体と、その上の舟とが、同じ画にある。**距離が、初めて見える。",
+  "aim": "**海の大きさを、一度だけ正面から見せられるか。**⚠️ **壮大さは、広さではなく、着かなさから来る。**",
+  "motion": {
+   "subject": "波面の全体、舟、そしてその航跡。",
+   "quality": "**波は同じ方向へ流れ続ける。**舟は小さく、航跡だけが長い。**カメラは高さを上げ続ける**——上げるほど、舟が小さい。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **この作品に、他の船は一隻も無い**（`ledger.props.舟.negative`——「**no boat, no ship, no hull, no keel, no planking**」／`ledger.locations.海.base`——「**No land, no sail, no bird, no other vessel.**」）。 ⚠️ **出所を直した（2026-09-29）。** 前の稿はこれを `bible.negative_base` に帰していたが、**同欄の8行に船の行は1つも無い**（実測）——「no watermark／no on-screen subtitles／no background music／no legible text／no bow…／no classical architecture…／no armour…／no face for the goddess」。**引用の形にした句は出典として読まれる。ゆえに宛先を実測に合わせた。**"
+  },
+  "spec": "specs/video/odyssey-s21.md",
+  "beats": [
+   {
+    "range": "0-1.499s",
+    "density": "transition",
+    "text": "舟と、その周りの海。**まだ近い。**"
+   },
+   {
+    "range": "1.499-3.999s",
+    "density": "sparse",
+    "text": "**カメラが上がる。**舟が小さくなる。**航跡だけが長い。**"
+   },
+   {
+    "range": "3.999-6.143s",
+    "density": "dense",
+    "text": "**海の全体が入る。**舟は点である——**点になるのが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.夜",
+   "舟",
+   "舟.appearance",
+   "舟.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s22": {
+  "id": "s22",
+  "section": "chorus-2",
+  "mode": "motion",
+  "role": "様式美",
+  "format": "coexisting-realities",
+  "title": "永遠より遠い／なんでもない島へ——2度目",
+  "line": "行: l21+l22 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 10.931秒",
+  "header_notes": [
+   "行: l21+l22 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 10.931秒",
+   "⚠️ **形式（`coexisting-realities`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **`l21`+`l22` の2度目である。** ⚠️ **役も形式も `s15` と同じである。**",
+   "   ⛔ **この作品は、サビの反復に同じ手当てを2度する。**",
+   "   ⚠️ **`s15` との差は、曲の位置だけである**——**それで足りるかが、この1本の問いである。**",
+   "⚠️ **2行を束ねた理由は長さである**（`l22` は 3.909秒。`s07` の註を見る）。",
+   "⛔ **この作品はサビを3度持つ**（`chorus-1`・`chorus-2`・`final-chorus`）。",
+   "   **ゆえに同じ言葉が、34本の中で3度ずつ現れる。**",
+   "   ⚠️ **`L36` が「同じ行を2回以上覆う」を註にする**——",
+   "   **誤りではない**（サビの反復を別のショットで受けるのは正しい）。",
+   "   **註が言うのは「同じ行が2箇所で別々に扱われていることが、記録のどこからも見えない」ことである。**"
+  ],
+  "duration": "10.931s",
+  "place": "海",
+  "time": "夜",
+  "unit_before": "海と水平線だけがある。",
+  "unit_after": "**二つの行き先が、また同じ一枠にある。**まだどちらにも着いていない。",
+  "aim": "**2度目であることを、退屈にせずに持てるか。**⚠️ **`s15` より、少しだけ遠くにあるように見えるか。**",
+  "motion": {
+   "subject": "水面、水平線、空。",
+   "quality": "**`s15` とほぼ同じ動きを、より遠い位置から。**近い水面は速く、遠い水平線は動かない。カメラは三脚の上で、動かない。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **この作品は、サビの反復に同じ手当てを2度する**——**差分は、曲が2度目に置いたものが持つ。****この方針は3度目（`s29`）でも同じである。**"
+  },
+  "spec": "specs/video/odyssey-s22.md",
+  "beats": [
+   {
+    "range": "0-2.995s",
+    "density": "transition",
+    "text": "水面と水平線。**遠さが二つある。**"
+   },
+   {
+    "range": "2.995-6.996s",
+    "density": "sparse",
+    "text": "**近い水面が流れる。**遠い水平線は動かない。"
+   },
+   {
+    "range": "6.996-10.931s",
+    "density": "dense",
+    "text": "**二つの遠さが、同じ一枠にある。****`s15` より遠い**——**それが切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.夜",
+   "舟",
+   "舟.appearance",
+   "舟.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s23": {
+  "id": "s23",
+  "section": "bridge",
+  "mode": "motion",
+  "role": "開示",
+  "format": "remembered-world",
+  "title": "太陽の牛——歌は屠ったと歌い、画面は屠る前を写す",
+  "line": "行: l23 ／ 場所: 沈んだ場所 ／ 時刻: 夜 ／ 尺: 11.649秒",
+  "header_notes": [
+   "行: l23 ／ 場所: 沈んだ場所 ／ 時刻: 夜 ／ 尺: 11.649秒",
+   "⚠️ **形式（`remembered-world`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⛔ **この作品でいちばん危うい1本である。**",
+   "   出所: 曲の `l23`「あの者たちは太陽の牛を屠った」——",
+   "   ⚠️ **この行は 10.000秒であり、直後に 1.649秒の歌の無い間がある**（215.053–216.702）。",
+   "⛔ **歌は「屠った」と歌う。では屠る場面を映すか。**",
+   "   **映さない。** 理由は二つ（`props.太陽の牛` の註に書いてある）——",
+   "     ① **歌は既に過去形で歌っている。** **いま起きていることではない。**",
+   "     ② **この作品の抑制**（`theme-song.md` の裁定5、および全編の語り口）。",
+   "   ⚠️ **ゆえに画面は、屠られる前の牛を写す。**",
+   "   ⛔ **耳が出来事を聞き、目が失われたものを見る**——",
+   "   **この食い違いは事故ではなく、この作品の設計である。**",
+   "⚠️ **参照集合に `男.identity` を入れない。** **彼はこの記憶の中に居ない**——",
+   "   **`l24`「私だけが浮いていた」が、彼の位置を決めている。**",
+   "   ⚠️ **`太陽の牛.negative` の3行目**——「**no cattle in any other scene of this work**」",
+   "   **この牛は、この1本にしか現れない。**",
+   "⚠️ **形式は `remembered-world`**（記録でなく記憶。保たれた瞬間の中で中身が滑る）。",
+   "   ⚠️ **この作品で3本あるうちの3本目である**（`s02` の註を見る）。"
+  ],
+  "duration": "11.649s",
+  "place": "沈んだ場所",
+  "time": "夜",
+  "unit_before": "海は空であり、何も無い。",
+  "unit_after": "**牛の群れが、水際に立っている。**誰もそれを見ていない。",
+  "aim": "⛔ **歌が歌ったことを、画面が否定せずに、しかし写さずに済ませられるか。**⛔ **この作品の抑制がいちばん強く試される1本である。**",
+  "motion": {
+   "subject": "牛の群れ、水面、そして最後の光。",
+   "quality": "**牛は動かない。**水面だけが動く。光が低く、牛の脚の間を抜ける。**カメラは群れの前を左へ流れる**——動機は「数えること」である。**1.649秒の歌の無い間、牛だけが居る。**",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **この作品に血も死体も無い**（`bible.negative_base`——「**no blood, no wound, no corpse, no slaughter, no carcass**」）。**その一行が、この1本のために在る。**"
+  },
+  "spec": "specs/video/odyssey-s23.md",
+  "beats": [
+   {
+    "range": "0-3.005s",
+    "density": "transition",
+    "text": "空の海。**何も無い。**"
+   },
+   {
+    "range": "3.005-7.001s",
+    "density": "sparse",
+    "text": "**牛の群れが現れる。**水際に、白と淡い金。**動かない。**"
+   },
+   {
+    "range": "7.001-11.649s",
+    "density": "dense",
+    "text": "**光が脚の間を抜ける。**⚠️ **ここから 1.649秒、歌は無い。****牛が立ったままであることが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.negatives",
+   "沈んだ場所",
+   "沈んだ場所.geography",
+   "沈んだ場所.states.夜",
+   "太陽の牛",
+   "太陽の牛.appearance",
+   "太陽の牛.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "unknown",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s24": {
+  "id": "s24",
+  "section": "bridge",
+  "mode": "still",
+  "role": "余白",
+  "format": "meaning-responsive",
+  "title": "私だけが浮いていた——最も短いショットが、最も重い一行を負う",
+  "line": "行: l24 ／ 場所: 沈んだ場所 ／ 時刻: 夜 ／ 尺: 4.708秒",
+  "header_notes": [
+   "行: l24 ／ 場所: 沈んだ場所 ／ 時刻: 夜 ／ 尺: 4.708秒",
+   "⚠️ **形式（`meaning-responsive`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⛔ **開示の変化点③である**（`ledger.disclosure`）——`沈んだ者たち: present`。",
+   "   出所: 曲の `l24`「私だけが浮いていた」。",
+   "⚠️ **この作品で最も短いショットである（4.708秒）。**",
+   "   ⚠️ **下限の4秒は上回っている**——**ゆえに伸ばさない。**",
+   "   ⛔ **「短いから伸ばす」をしない**（`docs/seedance-route.md` の明示の規則）。",
+   "⚠️ **`s23` を変化点にしなかった理由**（`ledger.disclosure` の註を見る）——",
+   "   **あの一行は、仲間が居たことを告げるが、彼らがどうなったかを告げない。**",
+   "   **「居た」と「もう居ない」は別の知である。**",
+   "⛔ **形式は `meaning-responsive`。****起きたことではなく意味に反応して画面が変わる。**",
+   "   ⚠️ **この1本では、何も起きていない。** **水面だけが動いている。**",
+   "   **それでも画面が、失われたことを知っている。**",
+   "⚠️ **`mode: still`。** **止まるのは主題である**——**浮かんでいる者は、何もしていない。**"
+  ],
+  "duration": "4.708s",
+  "place": "沈んだ場所",
+  "time": "夜",
+  "unit_before": "海は空であり、牛も居ない。",
+  "unit_after": "**一人が、水面に浮いている。**他には何も無い。",
+  "aim": "⛔ **一人だけが残ったことを、4.708秒で写せるか。**⛔ **いちばん短いショットが、いちばん重い一行を負う。**",
+  "motion": {
+   "subject": "水面と、浮いている男の背中。**主題は止まる**——彼は浮いているだけである。",
+   "quality": "**彼は浮いている。**呼吸のたびに、水面がわずかに上下する。**それだけである。**カメラは真上から、彼と、彼の周りの空の海を写す。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **`mode: still`。** この作品の6本のうちの1本である（`s06` の註を見る）。"
+  },
+  "spec": "specs/video/odyssey-s24.md",
+  "beats": [
+   {
+    "range": "0-1.502s",
+    "density": "transition",
+    "text": "真上から見た、空の海。**何も無い。**"
+   },
+   {
+    "range": "1.502-2.5s",
+    "density": "sparse",
+    "text": "**一人が浮いている。**呼吸のたびに、水面が上下する。"
+   },
+   {
+    "range": "2.5-4.708s",
+    "density": "dense",
+    "text": "**水面が一度だけ大きく上下する。**それだけである——**それだけであることが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "沈んだ場所",
+   "沈んだ場所.geography",
+   "沈んだ場所.states.夜"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "present",
+   "男.名": "unknown"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s25": {
+  "id": "s25",
+  "section": "bridge",
+  "mode": "motion",
+  "role": "開示",
+  "format": "transformation",
+  "title": "誰でもない——変身の形式で、何も変えない",
+  "line": "行: l25+l26 ／ 場所: 沈んだ場所 ／ 時刻: 夜 ／ 尺: 8.377秒",
+  "header_notes": [
+   "行: l25+l26 ／ 場所: 沈んだ場所 ／ 時刻: 夜 ／ 尺: 8.377秒",
+   "⚠️ **形式（`transformation`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⛔ **開示の変化点④である**（`ledger.disclosure`）——`男.名: absent`。",
+   "   出所: 曲の `l25`「誰でもないと名乗った」。",
+   "   ⚠️ **値が `present` でなく `absent` である**——",
+   "   **観客が知るのは「名乗られた名が、名でない」ことである。**",
+   "   ⛔ **これがこの作品の最後の開示である**——**ここから先、観客は何も新しく知らない。**",
+   "⚠️ **2行を束ねた理由は長さである。** 実測: `l25` は 3.590秒、`l26` は 4.787秒。",
+   "   ⚠️ **`l25` は下限4秒に満たない**（`s07` の註を見る）。",
+   "⛔ **形式は `transformation`。****この作品で3本目である。**",
+   "   ⛔ **この1本が、この形式の使い方の頂点である**——",
+   "   **変身の形式を使い、変身を一度も見せない。** **変わったのは名だけである。**",
+   "   ⚠️ **「誰でもない」とは、そういうことである。**",
+   "⚠️ **`world.rules` の三番が、ここで初めて意味を持つ**——",
+   "   「**固有名は、画面にも歌にも一度も現れない。**」",
+   "   ⛔ **この作品は、名が無いことを名乗る1本を持っている。**"
+  ],
+  "duration": "8.377s",
+  "place": "沈んだ場所",
+  "time": "夜",
+  "unit_before": "一人が水面に浮いている。",
+  "unit_after": "**同じ一人が、名を持っていない。**⚠️ **見た目は変わっていない。変わったのは、名だけである。**",
+  "aim": "⛔ **名を失うことを、姿を変えずに写せるか。**⛔ **変身の形式を使いながら、何も変えない**——**これがこの作品でいちばん難しい要求である。**",
+  "motion": {
+   "subject": "男の顔、そして彼の周りの水面。",
+   "quality": "**光が彼の顔から少しずつ抜けていく。**それだけである。**影が濃くなり、輪郭が水と区別できなくなる。**カメラは彼から離れず、しかし寄りもしない。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **`transformation` の3本目である**（`s16` の註を見る）。⛔ **この作品は、この形式を「物が変わる」ために2度使い、「人が変わる」ために1度使う。****そして3度目は、何も変わらない。**"
+  },
+  "spec": "specs/video/odyssey-s25.md",
+  "beats": [
+   {
+    "range": "0-2.002s",
+    "density": "transition",
+    "text": "水面に浮かぶ男の顔。**光が当たっている。**"
+   },
+   {
+    "range": "2.002-5.001s",
+    "density": "sparse",
+    "text": "**光が抜けはじめる。**影が濃くなる。**顔の形は変わらない。**"
+   },
+   {
+    "range": "5.001-8.377s",
+    "density": "dense",
+    "text": "**輪郭が水と区別できなくなる。**⚠️ **しかし顔は同じ顔である**——**変わらないことが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "沈んだ場所",
+   "沈んだ場所.geography",
+   "沈んだ場所.states.夜"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "present",
+   "男.名": "absent"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s26": {
+  "id": "s26",
+  "section": "bridge",
+  "mode": "motion",
+  "role": "語り",
+  "format": "video-spec",
+  "title": "帰る先がひとつある——水平線の向こうに、何も現れない",
+  "line": "行: l27 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 11.091秒",
+  "header_notes": [
+   "行: l27 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 11.091秒",
+   "⚠️ **形式（`video-spec`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⛔ **この行が、この作品でいちばん危うい。**",
+   "   出所: 曲の `l27`「帰る先がひとつある」——",
+   "   ⚠️ **この行は 10.000秒であり、直後に 1.091秒の歌の無い間がある**（239.787–240.878）。",
+   "⛔ **「帰る先」を写せば、この作品は帰還の物語になる**（裁定③が閉じている）。",
+   "   ⚠️ **`world.rules` の五番**: 「**この作品は、帰り着かない。**」",
+   "⛔ **ゆえに役は `語り` である。** 固有基準は",
+   "   「声が運ぶ内容の量・沈黙との配分・**画像が嘘をついていないか**」——",
+   "   ⛔ **この1本の危険は、まさにそこにある。**",
+   "   **声は「帰る先がある」と言い、画像は「何も無い」を見せる。**",
+   "   ⚠️ **これは嘘ではない**——**「ある」と「見える」は別である。**",
+   "   **この作品は、見えないことを、見えるように写さない。**",
+   "   ⚠️ **この役をこの作品で使うのは、この1本だけである。**",
+   "⚠️ **形式は `video-spec`。****抑制がこの1本の全部である**——",
+   "   **文法を足せば、足したぶんだけ「何かがある」と言うことになる。**"
+  ],
+  "duration": "11.091s",
+  "place": "海",
+  "time": "夜",
+  "unit_before": "海があり、水平線がある。",
+  "unit_after": "**海があり、水平線がある。**⚠️ **水平線の向こうに、何も現れていない。**",
+  "aim": "⛔ **「帰る先がひとつある」と歌いながら、それを一度も写さないで済ませられるか。**⛔ **この作品の主題が、いちばん強く禁じられる場所である。**",
+  "motion": {
+   "subject": "海面、水平線、そして舟の舳先。",
+   "quality": "**舟が、わずかに向きを変える。**それだけである。海は動き続け、水平線は動かない。**カメラは舳先の先へ、まっすぐ前へ進む**——動機は「彼が見ている方へ行くこと」であり、**着くことではない。**",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **この様式は、動機の無いカメラ移動を禁じる。** **この1本のカメラの動機は明確である**——**「彼と同じ方向を見ること」。****着くことは、動機にならない。**"
+  },
+  "spec": "specs/video/odyssey-s26.md",
+  "beats": [
+   {
+    "range": "0-2.995s",
+    "density": "transition",
+    "text": "海と水平線。**何も無い。**"
+   },
+   {
+    "range": "2.995-6.998s",
+    "density": "sparse",
+    "text": "**舟がわずかに向きを変える。**海は動き続ける。"
+   },
+   {
+    "range": "6.998-11.091s",
+    "density": "dense",
+    "text": "**舳先が水平線の一点を指す。**⚠️ **そこに何も現れない**——**現れないことが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.夜",
+   "舟",
+   "舟.appearance",
+   "舟.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "present",
+   "男.名": "absent"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s27": {
+  "id": "s27",
+  "section": "final-chorus",
+  "mode": "motion",
+  "role": "所作",
+  "format": "video-spec",
+  "title": "3度目は、行為である——彼は漕いでいる",
+  "line": "行: l28 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 7.500秒",
+  "header_notes": [
+   "行: l28 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 7.500秒",
+   "⚠️ **形式（`video-spec`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **`l28`「死なない島を出て」の3度目である。** ⛔ **`final-chorus` の1行目である。**",
+   "⚠️ **`s13`（`離脱`）・`s20`（`recognizing-world`）と役を変えた**——",
+   "   ⛔ **3度目は、行為である。** **彼はもう出発していて、いま漕いでいる。**",
+   "   ⚠️ **3本の役が違うことが、3度の違いの実装である。**（形式の差だけに頼っていない。）",
+   "⚠️ **この1本は `final-chorus` の最初であり、ここから6行が続く。**",
+   "   ⚠️ **`final-chorus` は `chorus-1`・`chorus-2` と言葉が2点だけ違う**",
+   "   （`なんでもない島へ` が伸び、`まだ着かない` が2行に増える）。**その2点は `s30`・`s31`・`s32` が負う。**"
+  ],
+  "duration": "7.500s",
+  "place": "海",
+  "time": "夜",
+  "unit_before": "舟は水の上にあり、島は無い。",
+  "unit_after": "**男が漕いでいる。**舟が前に進んでいる。",
+  "aim": "**3度目のサビの1行目に、初めて「労働」を置けるか。**⚠️ **`s13` は意図、`s20` は島の応答、そしてこの1本は手である。**",
+  "motion": {
+   "subject": "男の背中、腕、そして漕ぎ手の柄。",
+   "quality": "**漕ぐ。**柄が水に入り、引き、抜ける。**その繰り返しだけがこの1本である。**カメラは舟の後ろから、彼の背中を写す。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠. **この作品の労働はすべて手である**——`s16` の斧、`s17` の針、そしてこの1本の櫂。**機構は一つも無い**（`斧.negative` の「no steel blade, no iron」）。"
+  },
+  "spec": "specs/video/odyssey-s27.md",
+  "beats": [
+   {
+    "range": "0-2.002s",
+    "density": "transition",
+    "text": "舟の後ろ姿。**まだ漕いでいない。**"
+   },
+   {
+    "range": "2.002-5.003s",
+    "density": "sparse",
+    "text": "**柄が水に入る。**引き、抜ける。**繰り返す。**"
+   },
+   {
+    "range": "5.003-7.5s",
+    "density": "dense",
+    "text": "**もう一度、柄が水に入る。**舟が進む——**進むことが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.夜",
+   "舟",
+   "舟.appearance",
+   "舟.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "present",
+   "男.名": "absent"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s28": {
+  "id": "s28",
+  "section": "final-chorus",
+  "mode": "motion",
+  "role": "運動",
+  "format": "impossible-camera",
+  "title": "海を渡る——水の中から、舟の影が通る",
+  "line": "行: l29 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 5.744秒",
+  "header_notes": [
+   "行: l29 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 5.744秒",
+   "⚠️ **形式（`impossible-camera`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **`l29`「海を渡る」の3度目である。** ⚠️ **役は `運動` で、`s14`・`s21` と同じである。**",
+   "   ⛔ **3本は形式で分かれる**——`s14` は舳先の高さ、`s21` は上から、**この1本は下から。**",
+   "   ⚠️ **`s21` とこの1本が対である**——**同じ海を、二つの在りえない視点で挟む。**",
+   "⛔ **形式は `impossible-camera`。****この作品で4本あるうちの3本目である**（`s11` の註を見る）。"
+  ],
+  "duration": "5.744s",
+  "place": "海",
+  "time": "夜",
+  "unit_before": "舟は水の上を進んでいる。",
+  "unit_after": "**水面の下から見て、舟の影が通っていく。**",
+  "aim": "**水を渡ることを、水の中から写せるか。**⚠️ **壮大さを、3度目に別の角度から。**",
+  "motion": {
+   "subject": "水中の光、水面の裏側、そして舟の影。",
+   "quality": "**水面が上で波立ち、その影がゆっくり横切る。**光が水中を揺らす。**カメラは水の中にあり、上へ向いている。**",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠. **この様式は実写である**（裁定①）。**水中の画も、実写の物理に従う**——**光は水面で屈折し、影は水の動きで歪む。**"
+  },
+  "spec": "specs/video/odyssey-s28.md",
+  "beats": [
+   {
+    "range": "0-1.499s",
+    "density": "transition",
+    "text": "水中。**上に水面がある。**"
+   },
+   {
+    "range": "1.499-3.498s",
+    "density": "sparse",
+    "text": "**影が横切る。**ゆっくりである。**光が揺れる。**"
+   },
+   {
+    "range": "3.498-5.744s",
+    "density": "dense",
+    "text": "**影が通り過ぎる。**水面が歪み、**影が消えるのが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.夜",
+   "舟",
+   "舟.appearance",
+   "舟.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "present",
+   "男.名": "absent"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s29": {
+  "id": "s29",
+  "section": "final-chorus",
+  "mode": "motion",
+  "role": "様式美",
+  "format": "coexisting-realities",
+  "title": "永遠より遠い——3度目",
+  "line": "行: l30 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 7.022秒",
+  "header_notes": [
+   "行: l30 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 7.022秒",
+   "⚠️ **形式（`coexisting-realities`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **`l30`「永遠より遠い」の3度目である。** ⚠️ **役も形式も `s15`・`s22` と同じである。**",
+   "   ⛔ **この作品は、サビの反復に3度とも同じ手当てをする**——",
+   "   **反復そのものが、この行の意味である**（`s22` の註を見る）。",
+   "⚠️ **この1本が、`final-chorus` の4行目である。** ここから先、曲は",
+   "   **`まだ着かない` を2度歌う**（`s31`・`s32`）——**この曲にしか無い2行である。**"
+  ],
+  "duration": "7.022s",
+  "place": "海",
+  "time": "夜",
+  "unit_before": "海と水平線がある。",
+  "unit_after": "**遠さだけが、同じ一枠にある。**",
+  "aim": "**3度目を、飽きさせずに持てるか。**⚠️ **`s15`・`s22` との差は、曲の位置だけである**——**それで足りるか、がこの1本の問いである。**",
+  "motion": {
+   "subject": "水面、水平線、空。",
+   "quality": "**前の2本と同じ動きを、いちばん静かに。**近い水面だけが流れ、遠い水平線は動かない。カメラは動かない。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **3度目に、この作品は何も足さない。****足せば、この行が「特別な3度目」になる**——**曲は3度同じことを言っている。****画面も3度同じことをする。**"
+  },
+  "spec": "specs/video/odyssey-s29.md",
+  "beats": [
+   {
+    "range": "0-2.001s",
+    "density": "transition",
+    "text": "水面と水平線。**遠さがある。**"
+   },
+   {
+    "range": "2.001-4.501s",
+    "density": "sparse",
+    "text": "**近い水面が流れる。**遠い水平線は動かない。"
+   },
+   {
+    "range": "4.501-7.022s",
+    "density": "dense",
+    "text": "**二つの遠さが、同じ一枠にある。**いちばん静かに——**静けさが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.夜",
+   "舟",
+   "舟.appearance",
+   "舟.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "present",
+   "男.名": "absent"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s30": {
+  "id": "s30",
+  "section": "final-chorus",
+  "mode": "motion",
+  "role": "情景",
+  "format": "meaning-responsive",
+  "title": "なんでもない島へ——水平線の一点だけが、少し明るい",
+  "line": "行: l31 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 6.542秒",
+  "header_notes": [
+   "行: l31 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 6.542秒",
+   "⚠️ **形式（`meaning-responsive`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **ここだけ 6.542秒である。**",
+   "   ⛔ **`chorus-1` では 3.910秒であり、束ねる相手（`l12`「永遠より遠い」）が要った。**",
+   "   **ここでは1行で下限4秒を超える。****ゆえにここでは束ねない**——",
+   "   **曲が伸ばしたからであり、この作品が割ったのではない。**",
+   "   ⚠️ **この差分が、`final-chorus` と `chorus-1` の2点のうちの1点目である**（`s27` の註を見る）。",
+   "⛔ **形式は `meaning-responsive`。** **`s24` と同じである**——",
+   "   ⚠️ **`s24` は「失われた」に反応し、この1本は「何でもない」に反応する。**",
+   "⚠️ **この作品で `情景` を使うのは4本である**（`s01`・`s04`・`s12`・`s30`）——",
+   "   ⛔ **`intro` の両端と、`pre-chorus` の終わりと、ここである。**",
+   "   **すべて「世界が、人の居ないところで在る」ショットである。**"
+  ],
+  "duration": "6.542s",
+  "place": "海",
+  "time": "夜",
+  "unit_before": "海と水平線がある。島はまだ無い。",
+  "unit_after": "**水平線のあたりが、少しだけ明るい。**何も見えないが、そこに何かがある。",
+  "aim": "⛔ **「何でもない」を、6.5秒で肯定的に写せるか。**⚠️ **島を写せば、この行は「島へ着く」になる。**⛔ **明るさだけで、そこに何かがあると言えるか。**",
+  "motion": {
+   "subject": "海面、水平線、そして水平線の上の空気。",
+   "quality": "**水平線の一点だけが、わずかに明るい。**波は動き、その明るさは動かない。**カメラはその一点へ、ごくゆっくり寄る。**",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠. **この作品に陸は現れない**（`world.rules` の五番）。**明るさは、陸の証明ではない。****「そこに何かがある」という最小の画である。**"
+  },
+  "spec": "specs/video/odyssey-s30.md",
+  "beats": [
+   {
+    "range": "0-2.002s",
+    "density": "transition",
+    "text": "海と水平線。**一様である。**"
+   },
+   {
+    "range": "2.002-4.501s",
+    "density": "sparse",
+    "text": "**一点が、わずかに明るい。**波は動き、明るさは動かない。"
+   },
+   {
+    "range": "4.501-6.542s",
+    "density": "dense",
+    "text": "**カメラが一点へ寄る。**明るさは同じ大きさのままである——**大きくならないのが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.夜",
+   "舟",
+   "舟.appearance",
+   "舟.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "present",
+   "男.名": "absent"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s31": {
+  "id": "s31",
+  "section": "final-chorus",
+  "mode": "still",
+  "role": "余白",
+  "format": "meaning-responsive",
+  "title": "まだ着かない——近づかないことを、7秒",
+  "line": "行: l32 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 7.101秒",
+  "header_notes": [
+   "行: l32 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 7.101秒",
+   "⚠️ **形式（`meaning-responsive`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⛔ **この行は、この曲にしか無い**（`chorus-1`・`chorus-2` には無い）。",
+   "   出所: 曲の `l32`「まだ着かない」——",
+   "   ⚠️ **この差分が、`final-chorus` と `chorus-1` の2点のうちの2点目である**（`s27` の註を見る）。",
+   "⛔ **着かないことが、この作品の主題である。**",
+   "   **`world.rules` の五番**: 「**この作品は、帰り着かない。**」",
+   "   ⚠️ **この1本と `s32` は、その主題を2度置く。**",
+   "⚠️ **`mode: still`。** **止まるのは主題である**——**近づくという主題が止まっている。**"
+  ],
+  "duration": "7.101s",
+  "place": "海",
+  "time": "夜",
+  "unit_before": "水平線の一点が明るい。",
+  "unit_after": "**同じ明るさが、同じ位置にある。**7.101秒のあいだ、近づいていない。",
+  "aim": "⛔ **近づかないことを、7秒で写せるか。**⚠️ **`mode: still`——止まるのは主題である。****近づくという主題が、止まっている。**",
+  "motion": {
+   "subject": "水面、そしてあの一点。**主題は止まる。**",
+   "quality": "**波だけが動き続ける。**あの明るさは動かない。**カメラも動かない。**ゆえに、何も近づいていない。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠️ **`mode: still`。** この作品の6本のうちの1本である（`s06` の註を見る）。"
+  },
+  "spec": "specs/video/odyssey-s31.md",
+  "beats": [
+   {
+    "range": "0-2.002s",
+    "density": "transition",
+    "text": "一点と、その周りの海。**距離がある。**"
+   },
+   {
+    "range": "2.002-4.502s",
+    "density": "sparse",
+    "text": "**波が動く。**一点は動かない。**カメラも動かない。**"
+   },
+   {
+    "range": "4.502-7.101s",
+    "density": "dense",
+    "text": "**同じ距離のままである。**波が返る——**近づかないことが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.夜",
+   "舟",
+   "舟.appearance",
+   "舟.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "present",
+   "男.名": "absent"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s32": {
+  "id": "s32",
+  "section": "final-chorus",
+  "mode": "still",
+  "role": "余白",
+  "format": "time-fold",
+  "title": "まだ着かない——2度目。近づかない時間そのもの",
+  "line": "行: l33 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 6.702秒",
+  "header_notes": [
+   "行: l33 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 6.702秒",
+   "⚠️ **形式（`time-fold`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⚠️ **`l33`「まだ着かない」の2度目である。****同じ行が2度歌われる。**",
+   "   ⛔ **この作品は、同じ行に同じ役（`余白`）と同じ `mode`（`still`）を与え、",
+   "   形式だけを変えた。**——**`s31` は `meaning-responsive`、この1本は `time-fold`。**",
+   "⛔ **2つの形式が、2つの違うことを言う**——",
+   "   `s31` は「**意味に反応して、近づかない**」であり、",
+   "   この1本は「**時間そのものが、距離にならない**」である。",
+   "   ⚠️ **`L36` が「同じ行を2回覆う」を註にする**（`s22` の註を見る）。",
+   "⚠️ **この1本の直後に、この作品の最後の行が来る**（`l34`「耐えよ わが心よ」）。"
+  ],
+  "duration": "6.702s",
+  "place": "海",
+  "time": "夜",
+  "unit_before": "明るさは、まだ同じ位置にある。",
+  "unit_after": "**まだ同じ位置にある。**⚠️ **この1本の中でも、一歩も近づいていない。**",
+  "aim": "**同じ一行の2度目に、別の何かを返せるか。**⚠️ **`s31` が「近づかない」であり、この1本は「その時間そのもの」である。**",
+  "motion": {
+   "subject": "水面、あの一点、そして時間。",
+   "quality": "**波が、同じ形で何度も寄せる。**あの明るさは動かない。**カメラは三脚の上で、波の一つの周期を丸ごと写す。**",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠. **`time-fold` の4本目である**（`s03` の註を見る）。⛔ **この4本目では、時間が「過ぎる」のでも「止まる」のでもない**——**時間が、距離に変わらない。**"
+  },
+  "spec": "specs/video/odyssey-s32.md",
+  "beats": [
+   {
+    "range": "0-1.997s",
+    "density": "transition",
+    "text": "一点と、その周りの海。**距離がある。**"
+   },
+   {
+    "range": "1.997-4.504s",
+    "density": "sparse",
+    "text": "**波が一つの周期を描く。**寄せて、返す。**一点は動かない。**"
+   },
+   {
+    "range": "4.504-6.702s",
+    "density": "dense",
+    "text": "**もう一度、同じ周期が始まる。**一点は同じ位置にある——**周期が始まることが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.夜",
+   "舟",
+   "舟.appearance",
+   "舟.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "present",
+   "男.名": "absent"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s33": {
+  "id": "s33",
+  "section": "outro",
+  "mode": "motion",
+  "role": "対話",
+  "format": "impossible-camera",
+  "title": "耐えよ わが心よ——聞き手の居ない対話",
+  "line": "行: l34 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 10.000秒",
+  "header_notes": [
+   "行: l34 ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 10.000秒",
+   "⚠️ **形式（`impossible-camera`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⛔ **この作品の最後の言葉である。** 出所: 曲の `l34`「耐えよ わが心よ」。",
+   "   ⚠️ **この行は 10.000秒であり、その後 8.431秒の後奏が続く**——",
+   "   **後奏は `s34` が負う**（`ledger.song_coverage` の註を見る）。",
+   "⛔ **この作品で唯一、男が何かに向かって話す行である。**",
+   "   **そして話しかけている相手は、画面の中に居ない**——**彼自身である。**",
+   "   ⚠️ **`world.rules` の一番が、ここで最後にもう一度効く**——",
+   "   「**返事は、この作品の中で一度も返されない。**」",
+   "   ⛔ **この1本でも、返事は返らない。**",
+   "⛔ **形式は `impossible-camera`。****この作品で4本あるうちの4本目である**（`s11` の註を見る）。",
+   "   ⚠️ **聞き手の居ない対話を撮るには、聞き手の位置が要る。****その位置は、存在しない。**",
+   "⚠️ **役は `対話` である。** 固有基準は「間・沈黙・**聞き手の反応**・視線・声との同期」——",
+   "   ⛔ **この1本には、その基準のうち「聞き手の反応」が一つも無い。**",
+   "   **無いことが検収である。**"
+  ],
+  "duration": "10.000s",
+  "place": "海",
+  "time": "夜",
+  "unit_before": "海がある。舟があり、男が居る。",
+  "unit_after": "**男はまだ漕いでいる。**何も答えていない。**誰も答えていない。**",
+  "aim": "⛔ **自分に言い聞かせることを、独白に見せずに写せるか。**⛔ **`world.rules` の一番——「返事は一度も返されない」が、この1本で最後にもう一度効く。**",
+  "motion": {
+   "subject": "男の横顔、胸、そして彼の前の海。",
+   "quality": "**彼は一度だけ口を開く。**それだけである。**胸が息で上下し、漕ぐ手が止まらない。**カメラは彼と、彼が話しかけているであろう方向との間に立つ。",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠. **この作品に音楽は無い**（`world.rules` の八番、`bible.negative_base` の `no background music`）。**ゆえにこの10秒は、漕ぐ音と息だけである。**"
+  },
+  "spec": "specs/video/odyssey-s33.md",
+  "beats": [
+   {
+    "range": "0-2.5s",
+    "density": "transition",
+    "text": "漕ぐ背中。**口は閉じている。**"
+   },
+   {
+    "range": "2.5-6s",
+    "density": "sparse",
+    "text": "**彼が一度だけ口を開く。**誰も答えない。**漕ぐ手は止まらない。**"
+   },
+   {
+    "range": "6-8.5s",
+    "density": "dense",
+    "text": "**口が閉じる。**胸が息で上下する。"
+   },
+   {
+    "range": "8.5-10s",
+    "density": "dense",
+    "text": "**漕ぐ手が、もう一度水に入る。**誰も答えていない——**答えが無いことが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.夜",
+   "舟",
+   "舟.appearance",
+   "舟.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "present",
+   "男.名": "absent"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ },
+ "s34": {
+  "id": "s34",
+  "section": "outro",
+  "mode": "motion",
+  "role": "離脱",
+  "format": "video-spec",
+  "title": "歌が終わったあとの8.4秒——着かせずに閉じる",
+  "line": "行: l34（後奏） ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 8.431秒",
+  "header_notes": [
+   "行: l34（後奏） ／ 場所: 海 ／ 時刻: 夜 ／ 尺: 8.431秒",
+   "⚠️ **形式（`video-spec`）は ② で §6 `REF_FORMAT` に書く提案である。**",
+   "   **ショット記録に `REF_FORMAT` の欄は無い**——形式は仕様（§6）の側にある。",
+   "   ⚠️ **ゆえにここに書いた形式は、まだ検査されていない。**",
+   "⛔ **この8.431秒が、この作品の最後の画面である。**",
+   "   出所: 曲の後奏（291.489–299.920）。**歌はもう無い。**",
+   "   ⚠️ **節 `outro` の対応にせず、`l34` の2本目として受けた**——",
+   "   **理由は `ledger.song_coverage` の註にある**（habits-mv の `l31` と同じ手当て）。",
+   "⛔ **形式は `video-spec`。****最後の画は、いちばん素の形式でなければならない。**",
+   "   ⚠️ **この作品が繰り返し使った文法を、ここで全部脱ぐ。**",
+   "   **脱ぐことは、この1本の内容である。**",
+   "⛔ **回数を、2026-09-29 に外した。** 前の稿は「**27回使った文法**」と書いていた。",
+   "   ⚠️ **その数を、どの数え方でも再現できなかった**（実測）——`REF_FORMAT` の実測は",
+   "   `video-spec` 10本・`meaning-responsive` 5本・`time-fold` 4本・`coexisting-realities` 4本・",
+   "   `impossible-camera` 4本・`remembered-world` 3本・`transformation` 3本・`recognizing-world` 1本",
+   "   （合計34本）。**素の形式は10本、それ以外を名乗る本は24本である。**",
+   "   ⛔ **27は部分和としては作れる**（例: 10+5+4+4+4）——**ゆえに「誤り」とまでは言えない。",
+   "   しかし、どれを数えた数なのかを記録から読めない。**⚠️ **読めない数は、読者には実測として読まれる。**",
+   "   ⚠️ **同じ判断を、この1本の仕様（§20）が既にしていた**——仕様は数を写さず",
+   "   「繰り返し使った文法」と書いて、実測を註に残している。**記録を、仕様に合わせた。**",
+   "⛔ **着かせずに閉じる。**",
+   "   **`world.rules` の五番**: 「**この作品は、帰り着かない。**",
+   "   上陸・犬・乳母・殺害・床・和睦を映さない。**最後の画面でも、舟はまだ沖にある。**」",
+   "   ⚠️ **この一行が、この1本の設計そのものである。**",
+   "⚠️ **役は `離脱` である。** 固有基準は「境界の可視化・**出た先の示唆**」——",
+   "   ⛔ **この1本が出た先を示唆しないことが、この作品の最後の判断である。**"
+  ],
+  "duration": "8.431s",
+  "place": "海",
+  "time": "夜",
+  "unit_before": "男が漕いでいる。海がある。",
+  "unit_after": "**海がある。**舟はまだ沖にあり、**どこにも着いていない。**",
+  "aim": "⛔ **歌が終わったあとの8.4秒で、この作品を閉じられるか。**⛔ **着かせずに閉じる**——**それがこの作品の最後の一変化である。**",
+  "motion": {
+   "subject": "海面、舟の影、そして水平線。",
+   "quality": "**舟は進み続ける。**しかし**水平線との距離は、この8.431秒では測れない。**波が寄せ、舟が上下し、暗さが少しだけ濃くなる。**カメラは舟から離れ、海の画になる。**",
+   "law": "`cinematic-still` の運動である。**この様式は、動機のあるカメラ移動だけを許す**——ドリー・クレーン・ステディカムは動いてよいが、**動機の無い移動は禁じられる。**ゆえにこの作品のカメラは、常に何かを追っているか、何かへ寄っているか、何かから離れている。⚠️ **第二のセットアップへのカットをしない**——1本は1つの画である。⚠️ **均平なテレビ照明をしない**——光は演出的である。⚠️ **手ぶれをしない。** ⚠️ ⚠. **基盤の床の3行目が、この1本で最も効く**——「**no background music**」。**この8.431秒は無音である**（曲はここで終わっている）。"
+  },
+  "spec": "specs/video/odyssey-s34.md",
+  "beats": [
+   {
+    "range": "0-2.496s",
+    "density": "transition",
+    "text": "舟が進んでいる。**まだ近い。**"
+   },
+   {
+    "range": "2.496-5.497s",
+    "density": "sparse",
+    "text": "**カメラが舟から離れる。**暗さが少し濃くなる。**舟が小さくなる。**"
+   },
+   {
+    "range": "5.497-8.431s",
+    "density": "dense",
+    "text": "**海の画になる。**舟はまだ沖にある——**着いていないことが、切れ目のコマである。**"
+   }
+  ],
+  "reference_set": [
+   "男.identity",
+   "男.negatives",
+   "海",
+   "海.geography",
+   "海.states.夜",
+   "舟",
+   "舟.appearance",
+   "舟.negative"
+  ],
+  "forbidden_set": [
+   "no watermark",
+   "no on-screen subtitles",
+   "no background music",
+   "no legible text on any surface",
+   "no bow, no arrow, no quiver, no archery",
+   "no classical architecture, no columns, no marble, no temple",
+   "no armour, no helmet, no shield, no sword",
+   "no face for the goddess",
+   "no woman in frame at all, at any distance, in any focus",
+   "no other human being in frame — no companion, no crowd, no second person",
+   "no boat, no ship, no hull, no other vessel",
+   "no blood, no wound, no corpse, no slaughter, no carcass",
+   "no fire, no torch, no lamp, no flame used as a light source",
+   "no modern object, no machine, no synthetic material, no clothing of any later age"
+  ],
+  "disclosure_state": {
+   "向こうの岸.家": "present",
+   "女神.差し出し": "present",
+   "沈んだ者たち": "present",
+   "男.名": "absent"
+  },
+  "raw_keys": [
+   "aim",
+   "beats",
+   "disclosure_state",
+   "duration",
+   "forbidden_set",
+   "mode",
+   "motion",
+   "place",
+   "reference_set",
+   "role",
+   "shot",
+   "spec",
+   "time",
+   "unit"
+  ]
+ }
+}

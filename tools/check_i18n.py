@@ -70,6 +70,7 @@ DOCS = (
     "projects/migenzo/media/README.md",
     "projects/hitosara/takes/README.md",
     "projects/hitosara/timeline/README.md",
+    "projects/odyssey/generator/README.md",
     "references/formats/video-spec.md",
     # ⚠️ **Skill は1行目が frontmatter である**——ヘッダはその直後に在る（R2 を見ること）。
     "skills/breakdown/SKILL.md",
