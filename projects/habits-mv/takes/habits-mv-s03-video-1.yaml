@@ -45,7 +45,7 @@ take:
   provider:
     model: SEEDANCE 2.5
   params:
-    source: specs/video/habits-mv-s03.md
+    source: specs/video/seedance-2.5/habits-mv-s03.md
     source_version: "0.1.0"
     duration: 10.000
     aspect: "16:9"

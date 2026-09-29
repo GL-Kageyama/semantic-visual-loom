@@ -20,7 +20,7 @@
 - 生成器: `chatgpt-image-2.5`（種別 `image`）——**投入は著者が手で行う。** このリポジトリは生成を実行しない
 - 作る道具: `distill-essence-engine`——**2つの軸を別々に引く**
   - `format`: `scene-board`（5つの穴）／`style`: `luminous-anime`（4つの穴）
-  - ⚠️ **1本目と同じ組である。** `specs/video/habits-mv-s02.md` §6 は
+  - ⚠️ **1本目と同じ組である。** `specs/video/seedance-2.5/habits-mv-s02.md` §6 は
     `REF_STYLE: luminous-anime (HIGH)` を名乗り、§2 は
     「**Luminous realist anime, translated into the opened page of a register at the end of a working day**」
     ——**動画の側が、この1本でも既に「頁へ翻訳した」と書いている。**

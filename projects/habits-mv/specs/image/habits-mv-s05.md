@@ -29,7 +29,7 @@ shot where that is hardest** — the plate is the subject and fills the frame, a
 - 生成器: `chatgpt-image-2.5`（種別 `image`）——**投入は著者が手で行う。** このリポジトリは生成を実行しない
 - 作る道具: `distill-essence-engine`——**2つの軸を別々に引く**
   - `format`: `scene-board`（5つの穴）／`style`: `luminous-anime`（4つの穴）
-  - ⚠️ **1本目から4本目までと同じ組である。** `specs/video/habits-mv-s05.md` §6 は
+  - ⚠️ **1本目から4本目までと同じ組である。** `specs/video/seedance-2.5/habits-mv-s05.md` §6 は
     `REF_STYLE: luminous-anime (HIGH)` を名乗り、§2 `Visual Language` は
     「**Luminous realist anime, translated into a left sleeve and the hands at it.**」
     ——**動画の側が、この1本では「左袖へ翻訳した」と書いている。**

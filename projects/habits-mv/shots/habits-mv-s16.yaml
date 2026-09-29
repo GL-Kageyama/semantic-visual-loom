@@ -41,7 +41,7 @@ mode: "motion"
 duration: "8.457s"
 
 # 動画の仕様（§1–20）。
-spec: specs/video/habits-mv-s16.md
+spec: specs/video/seedance-2.5/habits-mv-s16.md
 
 key_image: specs/image/habits-mv-s16.md
 

@@ -42,7 +42,7 @@ mode: "motion"
 duration: "7.155s"
 
 # 動画の仕様（§1–20）。
-spec: specs/video/habits-mv-s04.md
+spec: specs/video/seedance-2.5/habits-mv-s04.md
 
 key_image: specs/image/habits-mv-s04.md
 

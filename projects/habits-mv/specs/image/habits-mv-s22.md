@@ -33,7 +33,7 @@ two places.**」⚠️ **ゆえに `place` は単数である**（`名札`）—
 - 生成器: `chatgpt-image-2.5`（種別 `image`）——**投入は著者が手で行う。** このリポジトリは生成を実行しない
 - 作る道具: `distill-essence-engine`——**2つの軸を別々に引く**
   - `format`: `scene-board`（5つの穴）／`style`: `luminous-anime`（4つの穴）
-  - ⚠️ **この組は、この作品の動画の仕様が既に名乗っている。** `specs/video/habits-mv-s22.md` §6 は
+  - ⚠️ **この組は、この作品の動画の仕様が既に名乗っている。** `specs/video/seedance-2.5/habits-mv-s22.md` §6 は
     `REF_STYLE: luminous-anime (HIGH)` であり、§2 `Visual Language` は
     「**Luminous realist anime, translated into two hands at rest on two sheets.**」そして
     「here it is the same light in both places, **which is the only thing that says they belong to one
@@ -203,7 +203,7 @@ no watermark, no on-screen subtitles, no captions, no subtitles in any language,
     ⛔ **この作品の正典が持たないことを註が持てば、註そのものが新しい事実になる。**
   - ⛔ **そして理由は、もう一つ在る。** **`CHARACTERS` の穴は註ではなく、生成器へ渡る文字列である**
     ——**そこに書かれたものは、描かれる。** 動画の仕様が年齢や職を書くのは、
-    **出典についての日本語の散文**であり、読む相手は人である（実測——`specs/video/habits-mv-s06.md` は
+    **出典についての日本語の散文**であり、読む相手は人である（実測——`specs/video/seedance-2.5/habits-mv-s06.md` は
     「**路線バス運転士・52歳**」と引く）。⚠️ **同じ語をこの1枚の `CHARACTERS` に英語で置けば、
     行き先は `chatgpt-image-2.5` の入力である。** **中身が同じでも、行き先が違えば意味が違う。**
     ⚠️ **ゆえにこの穴には、名前と指し先しか置かない。**

@@ -36,7 +36,7 @@ mode: "motion"
 duration: "4.867s"
 
 # 動画の仕様（§1–20）。
-spec: specs/video/habits-mv-s15.md
+spec: specs/video/seedance-2.5/habits-mv-s15.md
 
 # 画像の仕様（**§1–20 を持たない**。§18 も `Negative Prompt` も `Style Motion` も無い）。
 # ⚠️ **この欄は、この稿で足した**（実測 2026-09-28——この稿を書くために開いた時点で、

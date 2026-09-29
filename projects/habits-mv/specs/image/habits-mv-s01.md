@@ -22,7 +22,7 @@
 - 生成器: `chatgpt-image-2.5`（種別 `image`）——**投入は著者が手で行う。** このリポジトリは生成を実行しない
 - 作る道具: `distill-essence-engine`——**2つの軸を別々に引く**
   - `format`: `scene-board`（5つの穴）／`style`: `luminous-anime`（4つの穴）
-  - ⚠️ **この組は、この作品の動画の仕様が既に名乗っている。** `specs/video/habits-mv-s01.md` §6 は
+  - ⚠️ **この組は、この作品の動画の仕様が既に名乗っている。** `specs/video/seedance-2.5/habits-mv-s01.md` §6 は
     `REF_STYLE: luminous-anime (HIGH)` であり、§2 `Visual Language` は
     「**Luminous realist anime, translated into a desk in a school staff room at the end of the day**」
     ——**動画の側が先に、この様式を「机へ翻訳した」と書いている。** 画像の側はその1枚である。
@@ -150,7 +150,7 @@ no watermark, no on-screen subtitles, no captions, no subtitles in any language,
   **理由は `s02` と同じである**——⛔ **出典はこの人を `女33` と言う**
   （`distill-essence-engine/examples/habits/character/メイン/01_碓氷千夏/prompt.md` の「出典の語」）。
   **`girl` は10代を意味し、出典に無い。**
-  ⛔ **そして、この一語は外へ出ていた。** `specs/video/habits-mv-s01.md` の `Observed Problems` と
+  ⛔ **そして、この一語は外へ出ていた。** `specs/video/seedance-2.5/habits-mv-s01.md` の `Observed Problems` と
   `takes/habits-mv-s01-video-1.yaml` が、戻ってきた手を
   **「10代の女子の手として読めない」と欠陥に数えていた**——**その前提は、この一語から来ている。**
   **前提が誤りなら、成人の手であることは欠陥ではない**（両文書とも、そう書き直した）。

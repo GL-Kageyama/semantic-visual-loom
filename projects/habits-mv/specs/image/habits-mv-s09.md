@@ -29,7 +29,7 @@ the face belongs to `s10`.」を持つ。
 - 生成器: `chatgpt-image-2.5`（種別 `image`）——**投入は著者が手で行う。** このリポジトリは生成を実行しない
 - 作る道具: `distill-essence-engine`——**2つの軸を別々に引く**
   - `format`: `scene-board`（5つの穴）／`style`: `luminous-anime`（4つの穴）
-  - ⚠️ **この組は、この作品の動画の仕様が既に名乗っている。** `specs/video/habits-mv-s09.md` §6 は
+  - ⚠️ **この組は、この作品の動画の仕様が既に名乗っている。** `specs/video/seedance-2.5/habits-mv-s09.md` §6 は
     `REF_STYLE: luminous-anime (HIGH)` であり、§2 `Visual Language` は
     「**Luminous realist anime, translated into the side of a cardboard box and the slips gummed to it.**
     **The light, not the figure, is the subject** — and here it rakes across the stack so that
