@@ -41,6 +41,27 @@ def _bullets(items):
     return "\n".join(b if b.lstrip().startswith(("-", "1.")) else "- " + b for b in items)
 
 
+def _band(c, A):
+    """演出要約——**題の上に開く帯である。**
+
+    雛形が持つのは**形だけ**（罫線・副題の位置・3行の字下げ）であり、
+    文はそのショットの `content/sNN.py` が持つ（`c["band"]`＝副題＋3行）。
+    ⚠️ **この帯は生成器へ1バイトも届かない**——投入されるのは §18 だけである。
+    ゆえにここだけが日本語である（`CLAUDE.md`「**Do not make the strings handed
+    to generation Japanese**」は投入される文字列の規則であって、帯は投入されない）。
+    ⚠️ **欠けたら落ちる**——`c["band"]` は必須である（`L38` が仕様の側でも鳴る）。
+    """
+    band = c["band"]
+    assert len(band) >= 4, "%s: 帯は副題のほかに3行を要る" % c["n"]
+    A("# ═══ 演出要約 ════════════════════════════════════")
+    A("# " + band[0])
+    A("#")
+    for ln in band[1:]:
+        A("#   " + ln)
+    A("# ═════════════════════════════════════════════════")
+    A("")
+
+
 def render(c):
     n, D, fmt = c["n"], c["duration"], c["format"]
     has_man = c.get("has_man", False)
@@ -48,6 +69,7 @@ def render(c):
     L = []
     A = L.append
 
+    _band(c, A)
     A("# Seedance 2.5 Full Specification — 主題歌MV『永遠より遠い』 odyssey-%s「%s」 / %ss" % (n, c["title"], D))
     A("")
     A(c["header"].strip("\n"))
