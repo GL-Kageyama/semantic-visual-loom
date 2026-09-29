@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.2.0 | canonical: docs/usage.md | translated: 2026-09-30 -->
+<!-- i18n-version: 1.3.0 | canonical: docs/usage.md | translated: 2026-09-30 -->
 
 **Language:** [English](usage.md) | [日本語](usage-ja.md) | [中文](usage-zh.md)
 
@@ -82,7 +82,7 @@ inside ②**, and **the count of stages does not move because it exists.**
 | stage | you hand in | it emits | where it lands |
 |---|---|---|---|
 | **① breakdown** | a story, a plot, a draft | the shot list, the work ledger, and the disclosure change points | `bible.yaml`, `ledger.yaml`, `shots/` |
-| **② design** | one shot | the staging record, the §1–20 video specification (**§18's seven slots**), and the image specification — and, on the video route that goes through a storyboard, **the board prompt handed to `distill-essence-engine`** | `shots/<id>.yaml`, `specs/video/<id>.md`, `specs/image/<id>.md`, `specs/board/<id>-board.md` |
+| **② design** | one shot | the staging record, the §1–20 video specification (**§18's seven slots**), and the image specification — and, on the video route that goes through a storyboard, **the board prompt handed to `distill-essence-engine`** | `shots/<id>.yaml`, `specs/video/<id>.md` (**`specs/video/<route>/<id>.md` on a work that keeps two routes**), `specs/image/<id>.md`, `specs/board/<id>-board.md` |
 | **③ ledger** | one shot | the ledger grown, and the derived sets on each shot record | `ledger.yaml`, `shots/<id>.yaml` |
 | **④ shot** | what came back | the self-contained record, and the take ⚠️ **it does not adopt** | `shots/<id>.yaml`, `takes/<id>-<kind>-<n>.yaml` |
 
@@ -215,14 +215,16 @@ The counts behind that are in `HISTORY.md`.
 
 ## The layers
 
-The check is **38 layers, `L0`–`L38`**, plus schema-shape validation.
-⚠️ **`L35` is reserved and unwritten**, so **the codes skip a number** — `L0`–`L38` is 39 codes and
-**38 layers.** ⚠️ **`L34` and `L36` read the song**, and a work that does not name the song as its
+The check is **39 layers, `L0`–`L39`**, plus schema-shape validation.
+⚠️ **`L35` is reserved and unwritten**, so **the codes skip a number** — `L0`–`L39` is 40 codes and
+**39 layers.** ⚠️ **`L34` and `L36` read the song**, and a work that does not name the song as its
 time source **is told they saw nothing** — **they are not silent about it.**
 ⚠️ **`L37` reads the inside of a shot** — whether its beats tile its `duration` — and **it reads
 every work, whether or not a song exists.** ⚠️ **`L38` reads the head of a video specification** —
 whether a staging summary opens it — and **a work that holds no video specification is told it
 confirmed nothing**, rather than that it is clean.
+⚠️ **`L39` reads the pair when one shot is kept on two routes** — the specifications standing side by
+side under route-named directories — and **a work that keeps one route is told it read no pairs.**
 **They are not one verdict**—each layer fires on its own and is reported with the
 number it saw.
 

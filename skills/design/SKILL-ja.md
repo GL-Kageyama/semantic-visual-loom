@@ -26,6 +26,10 @@ argument-hint: '（任意）プロジェクト名、または演出するショ�
 | **画像の仕様** | 1つの節の中の、名前を持った段落——`Prompt`・`Negative` | `projects/<name>/specs/image/<id>.md` |
 | **ボードのプロンプト** | ⚠️ **絵コンテを経由する動画の経路だけ**——その経路の①：`distill-essence-engine` へ渡す絵コンテ表（`storyboard` × `luminous-anime`） | `projects/<name>/specs/board/<id>-board.md` |
 
+⚠️ **同じショットを2つ以上の経路に持つ作品は、仕様を経路の名のディレクトリの下に置く**——
+`projects/<name>/specs/video/<経路>/<id>.md`、経路ごとに1つ。**`L39` が対を読む。**
+経路が1つの作品は、表のとおりの場所に置く。
+
 ⚠️ **§10 は、この段の演出の文書であり、中に受け渡しを1つ持つ唯一の節である。**
 カメラは其処で決まり、**理由も其処に保たれる**——§18 の `Camera Prompt` は **§10 から導かれる**
 からである（形式カード自身の導出であり、`specmap.PROMPT_SLOT_SOURCE` も同じことを言う）。

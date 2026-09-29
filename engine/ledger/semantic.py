@@ -4631,6 +4631,201 @@ def check_staging_summary(project):
     return out
 
 
+# ---------------------------------------------------------------- 経路の並立
+
+#: **経路の名**（slug）→ モデルの名。⚠️ **検査器に経路の名を書き写さない**——
+#: 出所は `specmap.MODELS` の `種別` が `video` であるもの（`L18`・`L30` と同じ出所）。
+ROUTE_SLUGS = {m["slug"]: name for name, m in specmap.MODELS.items()
+               if m.get("種別") == "video" and m.get("slug")}
+
+
+def check_route_side_by_side(project):
+    """L39 — **同じショットの仕様が、経路ごとに並んでいるか。**
+
+    ```
+    ∀ 作品:
+        あるショットの `spec:` の親ディレクトリの名が、経路の slug である
+            ⇒ この作品は**並立を選んでいる**（作品がディレクトリで宣言する）
+               すべての `spec:` の親が、経路の名であること
+               在る経路のすべてに、`spec:` を持つ各ショットの仕様が在ること
+               各仕様の題の行と §18 の見出しが、そのディレクトリの経路を名乗ること
+    ```
+
+    ⚠️ **なぜこれが層になるか。** `spec` は `string` ひとつである——ゆえに
+    **1つのショットが2つの `spec` を持つことはできない**（`HISTORY.md` の穴）。
+    だが**作品は、同じショットを2つの経路に持てる**——**経路の名のディレクトリに
+    並べれば。** この層はその並びを読む。**ゆえに「撮り比べ」は、台帳を割らずにできる。**
+
+    ⚠️ **武装は作品がする。** 経路の名を持つディレクトリが**1つでも在れば**、その作品は
+    並立を選んだということである（`base_negatives_waived` と同じ考え方——
+    **エンジンが「どの作品が特別か」を覚えていない**）。**武装しなければ、この層は何も言わない。**
+
+    ⚠️ **経路は「`spec:` が指しているか」ではなく「そこに在るか」で決まる。**
+    相方をまだ書いていない日が在る——**その日こそ、この層は「相方が無い」と言わねば
+    ならない。** 指している1本だけを見れば、`wan-3.0/` を起こした瞬間に
+    **そのディレクトリが視界から消える**（**空を検査しない検査**になる）。
+
+    ⚠️ **並立を選んだ以上、欠けは「まだ書いていない」ではなく欠陥である**——
+    **対で動くものが、片方だけ動く。** ゆえにこの層は、相方の無いショットを鳴らす。
+
+    ⚠️ **この層が見るのは、形と揃いだけである。** **2つの仕様の本文が同じことを
+    言っているかは、誰も見ていない**——`§18 Negative Prompt` が対で一致することを
+    **註で数える**だけである（**ゆえにこの層は「撮り比べができる」とは言わない。
+    「並んでいる」と言うだけである**）。
+
+    ⚠️ **`spec:` を持たないショットは対象外**（`L18` が唄う）。読めなかった仕様も、
+    ここでは鳴らさず**註で数を申告する**——**確かめていないことを、確かめた顔にしない。**
+    """
+    out = []
+
+    # ---- 相手を決める。**ショットごとに、その動画仕様の在り処を引く。**
+    by_sid = {}
+    for sid in project.order():
+        src = _spec_of(project.shots[sid], "video")
+        if src:
+            by_sid[sid] = src
+
+    # ---- 武装。⚠️ **作品がディレクトリで宣言する。**
+    #      ⚠️ **経路は、`spec:` が指しているかではなく、そこに在るかで決まる。**
+    #         相方をまだ書いていない日が在る——**その日、この層は「相方が無い」と
+    #         言えなければならない。** 指している1本だけを見れば、`wan-3.0/` を
+    #         起こした瞬間に**そのディレクトリが視界から消える。**
+    routes, off_route, scanned = {}, [], {}
+    for sid, src in by_sid.items():
+        here, up = Path(src).parent, Path(src).parent.parent
+        if up not in scanned:
+            try:
+                scanned[up] = sorted(x.name for x in (project.root / up).iterdir()
+                                     if x.is_dir())
+            except OSError:
+                scanned[up] = []
+        for name in scanned[up]:
+            if name in ROUTE_SLUGS:
+                routes.setdefault(name, up / name)
+        if here.name in ROUTE_SLUGS:
+            routes.setdefault(here.name, here)
+        else:
+            off_route.append((sid, src))
+
+    if not routes:
+        if not by_sid:
+            out.append(finding(
+                "L39", "0本",
+                "**動画の仕様が1本も無い**——ゆえに、この走りは経路の並立を1つも"
+                "確かめていない。⚠️ **確かめていないことは、緑ではない。**",
+                severity="note"))
+        else:
+            out.append(finding(
+                "L39", f"{len(by_sid)}本",
+                "この作品は**経路を並立させていない**——`spec:` の置き場に、経路の名"
+                "（" + "・".join(f"`{s}`" for s in sorted(ROUTE_SLUGS)) + "）の"
+                "ディレクトリが1つも無い。⚠️ **ゆえにこの層は、ここで何も確かめていない。**"
+                "**確かめていないことは、緑ではない。**",
+                severity="note"))
+        return out
+
+    names = "・".join(f"`{ROUTE_SLUGS[s]}`（`{s}/`）" for s in sorted(routes))
+
+    # ---- ① 並立を選んだ作品では、置き場が**すべて**経路の名であること。
+    for sid, src in off_route:
+        out.append(finding(
+            "L39", sid,
+            f"`{src}` が**経路の名を持たない置き場**に在る——"
+            f"⚠️ **この作品は並立を選んでいる**（{names}）。"
+            "**ゆえに動画の仕様は、すべて経路の名のディレクトリへ置く。**"
+            "⚠️ **同じショットの2つの言い方が離れた置き場に在れば、"
+            "並んでいることが読めない。**"))
+
+    # ---- ② 在る経路のすべてに、`spec:` を持つ各ショットの仕様が在ること。
+    found, miss = {}, []
+    for sid, src in by_sid.items():
+        stem, here = Path(src).stem, Path(src).parent.name
+        for slug, d in sorted(routes.items()):
+            peer = d / f"{stem}.md"
+            if slug == here or (project.root / peer).is_file():
+                found[(slug, stem)] = (peer, sid)
+            else:
+                miss.append((sid, peer, slug))
+
+    for sid, peer, slug in sorted(miss):
+        out.append(finding(
+            "L39", sid,
+            f"`{peer}` が無い——⚠️ **この作品は経路を並立させている**（{names}）のに、"
+            f"このショットの仕様が `{ROUTE_SLUGS[slug]}` の側に無い。"
+            "**対で読むはずのものが、片方だけでは読めない。**"))
+
+    # ---- ③ 各仕様が、**そのディレクトリの経路**を名乗ること。
+    #      ⚠️ 題は `Seedance 2.5`、§18 は `SEEDANCE 2.5`、目録は `SEEDANCE 2.5`——
+    #         **大小を畳んで突き合わせる**（字面ではなく、名乗りを見る）。
+    n_read, read_ok, neg = 0, set(), {}
+    for (slug, stem), (peer, sid) in sorted(found.items()):
+        want = ROUTE_SLUGS[slug]
+        try:
+            text = (project.root / peer).read_text(encoding="utf-8")
+        except OSError:
+            continue
+        n_read += 1
+        read_ok.add((slug, stem))
+
+        title = next((ln for ln in text.splitlines() if SPEC_TITLE.match(ln)), None)
+        if title is None:
+            out.append(finding(
+                "L39", sid,
+                f"`{peer}` に題の行（`# … Full Specification — …`）が無い。"
+                "**並びは題の行で読まれる**——**無ければ、どちらの経路の仕様なのかを"
+                "言わない。**"))
+        elif want.casefold() not in title.casefold():
+            out.append(finding(
+                "L39", sid,
+                f"`{peer}` の題の行が `{want}` を名乗っていない——"
+                f"⚠️ **このディレクトリ（`{slug}/`）が経路を名乗っている。**"
+                "**題は、その名乗りに従う。**"))
+
+        got = _model_of(project.root / peer)
+        if got is None:
+            out.append(finding(
+                "L39", sid,
+                f"`{peer}` に §18 が無い。**§18 こそ、経路がモデルへ渡す文である**——"
+                "無ければ、この仕様はどの経路のものでもない。"))
+        elif got.casefold() != want.casefold():
+            out.append(finding(
+                "L39", sid,
+                f"`{peer}` の §18 が "
+                + (f"`{got}`" if got else "**モデルを名乗っていない**")
+                + f" ——⚠️ **このディレクトリは `{want}`（`{slug}/`）である。**"
+                "**並んだ2つの仕様が同じ経路を名乗れば、対は対でなくなる。**"))
+
+        neg[(slug, stem)] = specdoc.section(text, "Negative Prompt")
+
+    # ---- まとめ。**宛先は「確かめた数」である**（`L38` と同じ位置）。
+    n_pairs = n_same = 0
+    for sid, src in by_sid.items():
+        stem = Path(src).stem
+        keys = [(slug, stem) for slug in routes]
+        if len(keys) >= 2 and all(k in read_ok for k in keys):
+            n_pairs += 1
+            if len({neg.get(k) for k in keys}) == 1 and neg.get(keys[0]) is not None:
+                n_same += 1
+
+    note = (f"経路を並立させている作品である（{names}）。"
+            f"`spec:` を持つショット {len(by_sid)} 本について、仕様を {n_read} 本読んだ"
+            f"——**対で読めたもの {n_pairs} 組**。")
+    if n_pairs:
+        note += (f"うち **§18 `Negative Prompt` が文面まで一致したのは {n_same} 組**。"
+                 "⚠️ **本文のずれを、この層は欠陥と呼ばない**——"
+                 "**この数が減ることは、対の片方だけが動いた合図である。**")
+    if miss:
+        note += f"⚠️ **確かめていない**: 相方の無いショット {len(miss)} 本。"
+    n_bad = len(found) - n_read
+    if n_bad:
+        note += f"⚠️ **確かめていない**: 読めなかった仕様 {n_bad} 本。"
+    if off_route:
+        note += (f"⚠️ **確かめていない**: 経路の名を持たない置き場の仕様 "
+                 f"{len(off_route)} 本（**本文の名乗りは読んでいない**）。")
+    out.append(finding("L39", f"{n_read}本", note, severity="note"))
+    return out
+
+
 # ---------------------------------------------------------------- まとめ
 
 CHECKS_SHOT = (check_unit, check_one_place, check_one_time, check_move,
@@ -4690,6 +4885,12 @@ def run(project, schema_dir=None, repo_root=None):
     #    ⚠️ **`L11` との関係は註に書いてある**：あちらは節の目録、こちらは仕様の読み口。
     #    **どちらも動画仕様を開く**——ゆえに**片方を直したら、もう片方の註を読む。**
     out += check_staging_summary(project)
+    # ⚠️ **動画仕様を開く層は隣に置く。** `L38` は1本の仕様の読み口を開き、
+    #    こちらは**経路ごとに並んだ2本**を開く——**同じ「仕様のテキストを読む層」である**
+    #    （`L20` と `L31` を離すなと書いたのと同じ理由）。
+    #    ⚠️ **`L18` とは別のことである**：あちらは `spec:` が指す1本が**そのモデルの形**を
+    #    しているかを見る。こちらは**並んだ相方が在るか、その名乗りが合っているか**を見る。
+    out += check_route_side_by_side(project)
     if schema_dir:
         out += check_field_source(schema_dir)
         out += check_field_destination(schema_dir)

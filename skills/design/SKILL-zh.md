@@ -26,6 +26,10 @@ argument-hint: '（任意）项目名，或要演出的镜头。例: /semantic-v
 | **图像规格** | 一个节之中、有名字的段落——`Prompt`・`Negative` | `projects/<name>/specs/image/<id>.md` |
 | **板式提示词** | ⚠️ **只在经由分镜的视频路径上**——那条路径的①：交给 `distill-essence-engine` 的分镜表（`storyboard` × `luminous-anime`） | `projects/<name>/specs/board/<id>-board.md` |
 
+⚠️ **把同一个镜头放在两条以上路径上的作品，把规格放在以路径命名的目录下**——
+`projects/<name>/specs/video/<路径>/<id>.md`，每条路径一个。**`L39` 读这一对。**
+只有一条路径的作品，放在表格所说的位置。
+
 ⚠️ **§10 是这一段的演出文书，也是唯一一个内部持有交接的节。**
 摄像机在那里决定，**理由也保存在那里**——因为 §18 的 `Camera Prompt` 是**从 §10 导出的**
 （这是格式卡片自己的导出；`specmap.PROMPT_SLOT_SOURCE` 也说着同一件事）。

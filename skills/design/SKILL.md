@@ -27,6 +27,10 @@ stage ② in this repository** — the only command that runs is the checker, an
 | **the image specification** | named paragraphs inside one section — `Prompt`, `Negative` | `projects/<name>/specs/image/<id>.md` |
 | **the board prompt** | ⚠️ **only on the video route that goes through a storyboard** — the ① of that route: a storyboard sheet for `distill-essence-engine` (`storyboard` × `luminous-anime`) | `projects/<name>/specs/board/<id>-board.md` |
 
+⚠️ **A work that keeps one shot on more than one route places the specifications under
+route-named directories** — `projects/<name>/specs/video/<route>/<id>.md`, one per route.
+**`L39` reads the pair**; a work with a single route keeps them where the table says.
+
 ⚠️ **§10 is this stage's staging document, and it is the one section with a handover inside it.**
 The camera is decided there — and **its reasons are kept there** — because §18's `Camera Prompt`
 is **derived from §10** (the format card's own derivation; `specmap.PROMPT_SLOT_SOURCE` says the

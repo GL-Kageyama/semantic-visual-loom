@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.2.0 | canonical: engine/ledger/README.md | translated: 2026-09-30 -->
+<!-- i18n-version: 1.3.0 | canonical: engine/ledger/README.md | translated: 2026-09-30 -->
 
 **Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
 
@@ -67,6 +67,7 @@ in order to fire on "`before` and `after` are the same" — but **JSON Schema ca
 | **L36** | **A sung line is covered by no shot** — and its converse: a coverage entry that names nothing, names no shot, or names a shot that is not there. ⚠️ **A section the lyric never enters must be covered too**, or the picture has an ownerless stretch. ⚠️ **A `section:` entry does not cover that section's lines** — it is the form for the stretches the lyric never enters | "Is Every Sung Line Covered" below |
 | **L37** | **The beats do not tile the shot's `duration`** — the first does not start at 0, the last does not end at the shot's end, or two neighbours leave a gap or an overlap. ⚠️ **It reads every work, song or no song** — the shot's inside is the shot's own | "Do the Beats Tile the Shot" below |
 | **L38** | **The video specification does not open with a staging summary** — a band of comments above its title, closed by a `═` rule, holding a subtitle and at least two more lines. ⚠️ **It was a reading, not a requirement, until 2026-09-30** — by the day this layer went in, all 112 specifications carried one | "Does the Video Specification Open with a Staging Summary" below |
+| **L39** | **Route specifications do not stand side by side** — armed only where a `spec:` sits in a route-named directory: every `spec:` must sit in one, every route must hold one for every shot carrying a `spec:`, and each specification's title line and §18 heading must name that directory's route. ⚠️ **The routes are read from `specmap.MODELS`; no route name is written into the check** | "Do the Routes Stand Side by Side" below |
 
 **L2, L3 and L4 are transplants.** Applied to all 57 segments of Gozen-niji,
 a checker that scored **recall 2/2 and 0 false positives** went in just as it was.
@@ -92,7 +93,7 @@ reaches too far. **Recorded here, where it happens, as a hole.**
 And L7 **counts and reports the shots that hold no disclosure state** —
 without counting, you cannot tell whether "0 violations" means "0 after checking" or "not checked".
 
-`--self-test` holds **one example that fires and one that does not, for each check** (330 examples).
+`--self-test` holds **one example that fires and one that does not, for each check** (339 examples).
 ⚠️ **Nothing compares that number against the run.** The self-test **prints how many examples it ran
 and how many came out as expected** — so **read the number off the run, not off this line.**
 ⚠️ **How many examples run depends on what the check can find** — without the sibling
@@ -1263,6 +1264,43 @@ carry, and it belongs to the author.**
 
 ⚠️ **This is not `L35`.** `L35` stays reserved and unwritten.
 
+### L39 — do the routes stand side by side
+
+**A work chooses this by its directories.** When the parent of a specification a `spec:` points at is
+named for a registered route, the work is declaring that it keeps the same shot on more than one
+route — **and that is the whole of the arming rule.** ⚠️ **A work whose specifications sit anywhere
+else hears nothing from this layer**, so **a quiet `L39` there is not a satisfied `L39`** — **the
+note says which it was.**
+
+⚠️ **The route names are not written into the check.** They are read from `specmap.MODELS`, where
+`種別 == "video"` — **a new video route arrives in the registry and this layer follows it without an
+edit.** ⛔ **Writing the names here would have made the check a list of the routes that existed on the
+day it was written.**
+
+**Three things fire, once armed:**
+
+1. **A specification that sits outside a route-named directory.** Standing side by side is the whole
+   declaration — **one specification left in the old place is one shot the pair does not reach.**
+2. **A route that is missing a specification** for a shot whose `spec:` exists. ⚠️ **A missing side is
+   not "not written yet" here** — **having chosen to stand side by side, the pair is what moves.**
+3. **A specification whose title line or §18 heading names the wrong route.** ⚠️ **The comparison is
+   case-folded**: the title writes `Seedance 2.5`, §18 writes `SEEDANCE 2.5`, and the registry writes
+   `SEEDANCE 2.5` — **three spellings of one route, and folding them is the only honest comparison.**
+
+⚠️ **One note reports what was read**: the routes, the number of specifications, **the number read as
+pairs**, **the number of pairs whose §18 `Negative Prompt` agrees word for word**, the number that
+could not be read, and the shots left unpaired. **An empty count is not a quiet one.**
+
+⚠️ **What it cannot see is the body.** It reads the shape and the fit — **not whether one side of a
+pair has drifted from the other.** §18's `Negative Prompt` is the one stretch compared word for word,
+**and it is compared because the work declares that the negative set does not depend on the route**
+(`bible.disclosure`): **the pair is meant to agree there, so a disagreement is a defect.**
+⛔ **A change made to §11 on one side and forgotten on the other is nobody's check** — **that hole is
+written down here rather than closed.**
+
+⚠️ **Why it is not in `CHECKS_SHOT`.** The counterpart is **the set of files the work's `spec:`s point
+at**, not one shot record — **and one shot's defect would otherwise be counted once per route.**
+
 ### ⚠️ Firing Against a Running Artifact
 
 | Check | Ukebi V2 (30 takes) | What it is saying |
@@ -1286,6 +1324,7 @@ carry, and it belongs to the author.**
 | L36 | **0** | Same — **no work carries a song, so this layer has no lyric to ask about.** ⚠️ **Its silence here is the very shape it exists to break**: *a sung line nobody answers* is what it is for, and **here there is no line.** ⚠️ **The one thing that would look green and be wrong — an empty `song_coverage` on a work that has a song — cannot arise while no work has a song.** |
 | L37 | **0** (1 note) | **All 30 tile their `duration`** — 91 beats across 30 shots. ⚠️ **This is the first layer to read the inside of a shot**, and **the only one of these rows that reads a work with no song in it.** ⚠️ **No work in this repository has a song** — so `L34` and `L36` above are still unfed, and **the MV will be the first work they read.** |
 | L38 | **0** (1 note) | **Ukebi V2 holds no video specification**, so this layer has nothing to open. ⚠️ **The note says "no video specification — this run confirmed no staging summary"**, not "all clear": **a run that confirmed nothing is not a green run.** |
+| L39 | **0** (1 note) | **Ukebi V2 does not stand two routes side by side** — no directory under its `spec:` parents is named for a route. ⚠️ **The note says so, and says what that means**: nothing was confirmed here. ⛔ **A quiet layer that had nothing to read is not a green row.** |
 
 ⚠️ **`L31` reads only the home and the specification** — **`L20` and `L22` need the style cards,
 and the cards are not in this repository.** So **two green rows here can mean different things**:
@@ -1459,7 +1498,7 @@ What it can say is —
 | **Guarantees** | **The song's length adds up** — the sections reach `song.duration`, and each section's shots reach that section. ⚠️ **Only for a work naming the song as its time source** (`bible.time_source: song`) | **L34** |
 | **Guarantees** | **Every sung line is answered by a shot, and every stretch where the song says nothing has an owner** — ⚠️ **among the shots the record lists.** Whether the picture says the same thing as the lyric is not measured | **L36** |
 | **Guarantees** | **The beats tile the shot's `duration`** — from 0 to the end, with no gap and no overlap. ⚠️ **Whether the beats are well placed is not measured** | **L37** |
-| **Guarantees** | **It is not broken.** L0–L38 fire before generation, and everything that fired can be explained. ⚠️ **`L35` is reserved and unwritten** — **38 layers across 39 codes: `L34`/`L36` speak only where a song exists, and `L38` only where a video specification does** | all |
+| **Guarantees** | **It is not broken.** L0–L39 fire before generation, and everything that fired can be explained. ⚠️ **`L35` is reserved and unwritten** — **39 layers across 40 codes: `L34`/`L36` speak only where a song exists, and `L38` only where a video specification does** | all |
 | **Does not guarantee** | **That `song.duration` is the real length of the file `song.master` names** — no layer opens the audio | —— |
 | **Does not guarantee** | **That the generator draws the aim.** | —— |
 | **Does not guarantee** | **That a still shot's §11 really stops the subject.** | —— |

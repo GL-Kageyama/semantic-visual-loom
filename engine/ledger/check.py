@@ -3142,6 +3142,73 @@ def _self_test():
          semantic.check_staging_summary, _Stage(_P(tempfile.mkdtemp()), {}), False, None,
          note="演出要約を1つも確かめていない")
 
+    # ---- L39（同じショットの仕様が、経路ごとに並んでいるか）
+    #     ⚠️ **相手はディレクトリの名と、仕様の冒頭である。** ゆえに一時の根に
+    #        経路の名のディレクトリを実際に掘り、`.md` を書いて読ませる
+    #        ——**定数を直に当てるだけでは、`spec:` の親から経路を読めることを検査できない。**
+    def sib_proj(files, *, shots):
+        d = _P(tempfile.mkdtemp())
+        for rel, body in files.items():
+            f = d / rel
+            f.parent.mkdir(parents=True, exist_ok=True)
+            f.write_text(body, encoding="utf-8")
+        return _Stage(d, {sid: {"shot": sid, "duration": "6s", **rec}
+                          for sid, rec in shots.items()})
+
+    SPEC_WAN = "# 18. WAN 3.0 PROMPT MAPPING\n\n## Negative Prompt\n\nno BGM\n"
+    SPEC_SEED = "# 18. SEEDANCE 2.5 PROMPT MAPPING\n\n## Negative Prompt\n\nno BGM\n"
+    TIT_WAN = "# Wan 3.0 Full Specification — X / 6s\n"
+    TIT_SEED = "# Seedance 2.5 Full Specification — X / 6s\n"
+    S_WAN = "specs/video/wan-3.0/mv-s01.md"
+    S_SEED = "specs/video/seedance-2.5/mv-s01.md"
+
+    run1("L39 経路が並んでいる（鳴ってはならない）", semantic.check_route_side_by_side,
+         sib_proj({S_WAN: TIT_WAN + SPEC_WAN, S_SEED: TIT_SEED + SPEC_SEED},
+                  shots={"mv-s01": {"spec": S_SEED}}),
+         False, None, note="対で読めたもの 1 組")
+    # ⚠️ **並立を選んだ作品では、置き場がすべて経路の名であること。**
+    run1("L39 経路の名を持たない置き場に在る", semantic.check_route_side_by_side,
+         sib_proj({"specs/video/mv-s02.md": TIT_SEED + SPEC_SEED,
+                   S_WAN: TIT_WAN + SPEC_WAN},
+                  shots={"mv-s01": {"spec": S_WAN},
+                         "mv-s02": {"spec": "specs/video/mv-s02.md"}}),
+         True, "経路の名を持たない置き場")
+    # ⚠️ **並立を選んだ以上、欠けは欠陥である**——**対で動くものが、片方だけ動く。**
+    run1("L39 相方の仕様が無い", semantic.check_route_side_by_side,
+         sib_proj({S_SEED: TIT_SEED + SPEC_SEED, }
+                  | {"specs/video/wan-3.0/mv-s02.md": TIT_WAN + SPEC_WAN},
+                  shots={"mv-s01": {"spec": S_SEED},
+                         "mv-s02": {"spec": "specs/video/wan-3.0/mv-s02.md"}}),
+         True, "の側に無い")
+    # ⚠️ **ディレクトリが経路を名乗り、題がそれに従う。**
+    run1("L39 題が別の経路を名乗る", semantic.check_route_side_by_side,
+         sib_proj({S_WAN: TIT_SEED + SPEC_WAN, S_SEED: TIT_SEED + SPEC_SEED},
+                  shots={"mv-s01": {"spec": S_SEED}}),
+         True, "の題の行が")
+    run1("L39 §18 が別の経路を名乗る", semantic.check_route_side_by_side,
+         sib_proj({S_WAN: TIT_WAN + SPEC_SEED, S_SEED: TIT_SEED + SPEC_SEED},
+                  shots={"mv-s01": {"spec": S_SEED}}),
+         True, "の §18 が")
+    # ⚠️ **大小を畳む。** 実測: 題は `Seedance 2.5`、§18 は `SEEDANCE 2.5`、
+    #    目録は `SEEDANCE 2.5` である——**字面ではなく、名乗りを見る。**
+    run1("L39 大小の違いだけなら鳴らない", semantic.check_route_side_by_side,
+         sib_proj({S_WAN: "# WAN 3.0 Full Specification — X / 6s\n"
+                          "# 18. Wan 3.0 PROMPT MAPPING\n\n## Negative Prompt\n\nno BGM\n",
+                   S_SEED: TIT_SEED + SPEC_SEED},
+                  shots={"mv-s01": {"spec": S_SEED}}),
+         False, None, note="対で読めたもの 1 組")
+    # ⚠️ **武装しなければ何も言わない**——既存の作品に鳴らさないための条件である。
+    run1("L39 並立していない作品は、鳴らない", semantic.check_route_side_by_side,
+         sib_proj({"specs/video/mv-s01.md": TIT_SEED + SPEC_SEED},
+                  shots={"mv-s01": {"spec": "specs/video/mv-s01.md"}}),
+         False, None, note="経路を並立させていない")
+    run1("L39 spec を持たないショットは、対象の外", semantic.check_route_side_by_side,
+         sib_proj({}, shots={"mv-s01": {}}), False, None, note="動画の仕様が1本も無い")
+    # ⚠️ **読めなかった仕様を「相方が無い」と言わない**（`L38` と同じ規律）。
+    run1("L39 仕様が読めなければ、確かめた数に入れない", semantic.check_route_side_by_side,
+         sib_proj({}, shots={"mv-s01": {"spec": S_SEED}}),
+         False, None, note="読めなかった仕様 1 本")
+
     print("\n=== 自己検査 — 形（スキーマ）が鳴るか\n")
     class _Shape:
         bible = ledger = None

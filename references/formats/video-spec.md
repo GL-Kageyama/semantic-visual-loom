@@ -1,4 +1,4 @@
-<!-- i18n-version: 2.1.0 | canonical: references/formats/video-spec.md | translated: 2026-09-18 -->
+<!-- i18n-version: 2.2.0 | canonical: references/formats/video-spec.md | translated: 2026-09-30 -->
 
 **Language:** [English](video-spec.md) | [日本語](video-spec-ja.md) | [中文](video-spec-zh.md)
 
@@ -101,8 +101,12 @@ storyboard image and has no image path at all**, its paper made by `distill-esse
 carry its own clock** (`0-3s:` `3-6s:`), while **its `Negative Prompt` slot is not received as a
 floor** (`L30`). ⚠️ **The whole of that route's constraints is
 [`docs/seedance-route.md`](../docs/seedance-route.md).**
-⚠️ **One shot carries one `spec`**, so **a shot cannot hold more than one route** — shooting the
-same shot on two of them and comparing them is not possible yet.
+⚠️ **One shot carries one `spec`** — but **a work may keep the same shot on more than one route.**
+Its specifications then sit side by side under route-named directories (`specs/video/<route>/<id>.md`),
+and **`L39` reads the pair**: every specification must sit in a route-named directory, every route
+must hold one for every shot that carries a `spec:`, and each specification's **title line and §18
+heading must name the route of the directory it sits in**. ⚠️ **What that does not read is the body**
+— except for §18's `Negative Prompt` agreeing word for word, one side of a pair drifting from the other is still nobody's check.
 
 ⚠️ **This card is the normal format, and all three routes fill it.** It fixes no grammar of
 time of its own: what a clip's time is made of is decided by the route, and **each route
@@ -120,8 +124,13 @@ specification must say which it is**: the source never uses the word カット, 
 cut-versus-continuous is the shot's own decision. ⚠️ **The full list of the constraints that
 hold on this route — the strings handed over and the paper alike — is
 [`docs/h3-route.md`](../docs/h3-route.md).**
-⚠️ **One shot carries one `spec`**, so **a shot cannot hold more than one route** — shooting
-the same shot on two of them and comparing them is not possible yet.
+⚠️ **One shot carries one `spec`** — but **a work may keep the same shot on more than one route.**
+Its specifications then sit side by side under route-named directories (`specs/video/<route>/<id>.md`),
+and **`L39` reads the pair**: every specification must sit in a route-named directory, every route
+must hold one for every shot that carries a `spec:`, and each specification's **title line and §18
+heading must name the route of the directory it sits in**. ⚠️ **What that does not read is the body**
+— except for §18's `Negative Prompt` agreeing word for word, one side of a pair drifting from the
+other is still nobody's check.
 ⚠️ **What `L28` reads is §18 of the specification, matched against `specmap.MODEL_ROUTE`** —
 it does not open this card. ⚠️ **Carrying one route's grammar into another route's
 specification is the trap** — the failure that produced this warning is recorded in `HISTORY.md`.

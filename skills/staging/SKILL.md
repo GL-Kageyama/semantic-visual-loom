@@ -60,6 +60,10 @@ and the derivation does not fail loudly; it produces a slot full of prohibitions
 **Write the decision *and its reason* into §10 first.** §18 is then a copy that carries them,
 and copying is a thing a check can see.
 
+⚠️ **A work that keeps one shot on more than one route places the specifications under
+route-named directories** — `specs/video/<route>/<id>.md`, one per route. **`L39` reads the
+pair**; a work with a single route keeps them where §10's path says.
+
 **3. The budget — what this shot spends, and what it does not.** Movement is not free in any
 style, and it is priced differently in each: **in one style a focus rack is a full gesture; in
 another, a camera that travels spends the picture's whole reserve.** Two rules hold here:
