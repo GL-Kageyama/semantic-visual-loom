@@ -4483,6 +4483,154 @@ def check_beat_tiling(project):
     return out
 
 
+# ---------------------------------------------------------------- 仕様の読み口
+
+# **演出要約**——動画仕様の冒頭を開ける `#` コメントの帯である。
+# ⚠️ **`L11` はこの帯を1行も見ていない。** `_spec_tops` は `specdoc.HEADING` で拾ったうえで
+#    さらに `TOP_SECTION`（**数字で始まる見出し**）でふるう——帯は数字で始まらない。
+#    ゆえに**この層が、帯を読む初めての者である**（0.38.0 で「読む者を与えない」と決めた、
+#    その決めを覆した先がここだ）。
+STAGING_RULE = re.compile(r"^#\s*═+\s*演出要約\s*═*\s*$")
+# 罫線だけの行。**`# ═══════` であって `# ═══ 演出要約 ═══` ではない。**
+RULE_ONLY = re.compile(r"^#\s*═+\s*$")
+# 題の行。実測（2026-09-30）: **動画仕様 112本すべてが持つ**
+# （`Wan 3.0` / `Seedance 2.5` / `MiniMax H3` / `MINIMAX H3` の4つの綴り）。
+SPEC_TITLE = re.compile(r"^#\s+\S.*Full Specification")
+
+
+def _band_line(ln):
+    """帯の1行から `#` と余白を落とす。**`#` だけの行は、空である。**"""
+    return ln.lstrip("#").strip()
+
+
+def check_staging_summary(project):
+    """L38 — **動画仕様の冒頭に、演出要約の帯が在るか。**
+
+    ```
+    ∀ shot (spec を持つ):
+        `# ═… 演出要約 ═…` の罫線が在る
+        それは題の行（`# … Full Specification — …`）より**上**に在る
+        題の行は消えていない（**帯は題を開ける。代わらない。**）
+        罫線だけの行が、題の行より上で帯を閉じている
+        罫線の内側に、副題のほかに**2行以上**が在る
+    ```
+
+    ⚠️ **なぜこれが層になるか。** 演出要約は `skills/design` の第9段である——
+    **仕様を開く前に「この1本が何をする1本なのか」を読ませる**ための帯である。
+    ⛔ **そして 0.38.0（2026-09-23）は、ここで3つを同時に決めた**：欄ではなく帯にする／
+    検査は付けない／**帯の無い仕様は欠陥ではない**（「検査を足せば、帯より古い仕様すべてで
+    鳴る——それは作品ではなく、暦を測っている」）。
+    ⛔ **著者がこれを覆した（2026-09-30）。** **演出要約は必須である。**
+    ゆえに**この層がその決めを運ぶ**——暦を測ると言われたことを、いま測る。
+    （覆った理由は `HISTORY.md` にある。**この層は、覆ったことだけを知っていればよい。**）
+
+    ⚠️ **この層が見るのは、形と存在だけである。** **その演出が良いかは今も誰も見ない。**
+    帯の中身を機械が読む日は来ない——**「①画面で何が起きるか」が正しく書かれているかは、
+    著者が読む。** ここが言えるのは**帯が在るか／題の上に在るか／空でないか**だけである。
+
+    ⚠️ **帯は生成器へ1バイトも届かない。** 投入されるのは §18 だけである——
+    ゆえに**この帯は日本語で書かれる唯一の欄である**（`CLAUDE.md`の
+    「生成器へ渡す文字列は英語」はここに掛からない）。**この層はその言語を見ない**
+    ——**見れば、帯を英語で書けと言うことになる。**
+
+    ⚠️ **`spec:` を持たないショットと、読めなかった仕様は、ここでは鳴らさない。**
+    どちらも `L11` と `L18` が既に唄っている——**二重に報告すれば、片方だけを直したときに
+    もう片方が別の符号で同じ欠陥を唄う。****だが黙りもしない**：読んだ本数を註で申告する。
+
+    ⚠️ **`CHECKS_SHOT` に入れない。** 相手は**ショットの記録ではなく仕様のテキスト**であり、
+    同じ仕様を2本のショットが指せば**同じ欠陥を2度数えることになる**
+    （ここでは経路で畳んでから読む）。
+    """
+    out = []
+
+    # ---- 相手を決める。**ショットではなく仕様の経路で畳む。**
+    seen, n_nospec = {}, 0
+    for sid in project.order():
+        src = _spec_of(project.shots[sid], "video")
+        if not src:
+            n_nospec += 1
+            continue
+        seen.setdefault(src, sid)
+
+    n_read = n_unread = n_band = 0
+    for src, sid in seen.items():
+        try:
+            lines = (project.root / src).read_text(encoding="utf-8").splitlines()
+        except OSError:
+            n_unread += 1
+            continue
+        n_read += 1
+
+        title = next((i for i, ln in enumerate(lines) if SPEC_TITLE.match(ln)), None)
+        band = next((i for i, ln in enumerate(lines) if STAGING_RULE.match(ln)), None)
+
+        if band is None:
+            out.append(finding("L38", sid,
+                               f"`{src}` の冒頭に**演出要約の帯が無い**。"
+                               "⚠️ **帯は読みであって源ではない**——ゆえに無くても生成は回る。"
+                               "**だがこの1本が何をする1本なのかを、"
+                               "仕様を開く前に読む者が1人も居ない。**"))
+            continue
+
+        if title is None:
+            out.append(finding("L38", sid,
+                               f"`{src}` に題の行（`# … Full Specification — …`）が無い。"
+                               "**帯は題を開けるものであって、題に代わるものではない。**"))
+            continue
+
+        if band > title:
+            out.append(finding("L38", sid,
+                               f"`{src}` の演出要約が {band + 1} 行目に在り、"
+                               f"題の行（{title + 1} 行目）より**下**である。"
+                               "**帯は仕様の読み口である**——題より上に置く。"))
+            continue
+
+        close = next((j for j in range(band + 1, len(lines)) if RULE_ONLY.match(lines[j])), None)
+        if close is None or close > title:
+            out.append(finding("L38", sid,
+                               f"`{src}` の演出要約が罫線で閉じていない——"
+                               f"{band + 1} 行目から題の行（{title + 1} 行目）までのあいだに、"
+                               "罫線だけの行が無い。**閉じていない帯は、"
+                               "仕様のどこまでが読み口なのかを言わない。**"))
+            continue
+
+        body = [x for x in (_band_line(ln) for ln in lines[band + 1:close]) if x]
+        if not body:
+            out.append(finding("L38", sid,
+                               f"`{src}` の演出要約が空である——"
+                               "罫線が2本あるだけで、内側に1行も無い。"
+                               "⚠️ **罫線だけの帯は、帯の顔をして、何も読ませない。**"))
+            continue
+        if len(body) < 3:
+            out.append(finding("L38", sid,
+                               f"`{src}` の演出要約が {len(body)} 行しかない"
+                               "（副題のほかに2行以上を要る）。"
+                               "**①画面で何が起きるか ②どう撮るか ③何が起きないか**"
+                               "——**この3つが、仕様を開く前に読む者の得るものである。**"))
+            continue
+
+        n_band += 1
+
+    # ---- まとめ。**宛先は「確かめた本数」である**（`L34`／`L37` と同じ位置）。
+    # ⚠️ **0本を「確かめた」と言わない**（memory: 「検算器は『相手が空なら落ちる』を入れる」）。
+    if n_read:
+        head = f"動画仕様 {n_read} 本の冒頭を確かめた（うち {n_band} 本が演出要約を持つ）。"
+    else:
+        head = ("**動画仕様が1本も無い**——ゆえに、この走りは演出要約を1つも確かめていない。"
+                "⚠️ **確かめていないことは、緑ではない。**")
+    missed = []
+    if n_nospec:
+        missed.append(f"`spec:` を持たないショット {n_nospec} 本")
+    if n_unread:
+        missed.append(f"読めなかった動画仕様 {n_unread} 本")
+    if missed:
+        head += ("⚠️ **確かめていない**: " + "／".join(missed)
+                 + "（**`L11` と `L18` が報告する**）。"
+                 "**確かめていないことを、確かめた顔にしない。**")
+    out.append(finding("L38", f"{n_read}本", head, severity="note"))
+    return out
+
+
 # ---------------------------------------------------------------- まとめ
 
 CHECKS_SHOT = (check_unit, check_one_place, check_one_time, check_move,
@@ -4537,6 +4685,11 @@ def run(project, schema_dir=None, repo_root=None):
     #    **作品の `frame_rate` を要る**——**許容をフレームで言うためである。**
     #    `fn(shot)` の形に合わせるには、記録に無い fps をショットへ混ぜることになる。
     out += check_beat_tiling(project)
+    # ⚠️ **仕様のテキストを読む層は、`L11` の隣に置きたいところだが、ここに置く。**
+    #    この層は 2026-09-30 に生まれた——**番号は生まれた順である**（`L35` は予約のまま）。
+    #    ⚠️ **`L11` との関係は註に書いてある**：あちらは節の目録、こちらは仕様の読み口。
+    #    **どちらも動画仕様を開く**——ゆえに**片方を直したら、もう片方の註を読む。**
+    out += check_staging_summary(project)
     if schema_dir:
         out += check_field_source(schema_dir)
         out += check_field_destination(schema_dir)

@@ -4,7 +4,7 @@ description: 'Stage ② of semantic-visual-loom — stage a shot, and specify it
 argument-hint: '(optional) the project name, or the shot to stage. e.g. /semantic-visual-loom:design hitosara'
 ---
 
-<!-- i18n-version: 1.1.0 | canonical: skills/design/SKILL.md | translated: 2026-09-23 -->
+<!-- i18n-version: 1.2.0 | canonical: skills/design/SKILL.md | translated: 2026-09-30 -->
 
 **Language:** [English](SKILL.md) | [日本語](SKILL-ja.md) | [中文](SKILL-zh.md)
 
@@ -105,12 +105,40 @@ because `L3` and `L4` read the beat body, not only the field.**
    "§1 is there but has no `Duration:` line" is **`L23` and nobody else.** A requirement that
    cannot be matched up **is not being matched up.**
 9. **The staging summary — the band of comments that opens the video specification.**
-   ⚠️ **It is a band, not a field.** `check.py` never reads it and **no string in it reaches a
-   generator** — ⚠️ **only §18 is handed over**, and the band is not in it. **Which is why it may
-   be written in Japanese**: §1–17 are the underlay and §19–20 are our record, so **a line written
-   for a person is not a line handed to a model.**
-   ⚠️ **Two or three lines, each one sentence, inside a `═` rule**, placed above the
-   specification's own title (`# Wan 3.0 …`) — ⚠️ **do not drop that title; the band opens it.**
+   ⚠️ **It is required.** A video specification without the band is **a violation** — **`L38`
+   fires on it.** ⚠️ **The band is older than this rule and was written as a reading, not as a
+   requirement** (2026-09-23). **The author made it required on 2026-09-30, and by then every
+   specification on disk carried one** — **a rule that costs nobody anything is the only kind of
+   rule that may be made retroactive.**
+   ⚠️ **It is still a band, not a field.** **No string in it reaches a generator** — ⚠️ **only §18
+   is handed over**, and the band is not in it. **Which is why it may be written in Japanese**:
+   §1–17 are the underlay and §19–20 are our record, so **a line written for a person is not a
+   line handed to a model.**
+   ⚠️ **The shape — a rule, a subtitle, a blank comment, three lines, a rule:**
+   ```
+   # ═══ 演出要約 ════════════════════════════════════
+   # <work> <where this shot sits>「<place>」 / <role> / <mode> —— <the change, in one line>
+   #
+   #   ① what happens on screen
+   #   ② how it is shot
+   #   ③ what does not happen
+   # ═════════════════════════════════════════════════
+   ```
+   ⚠️ **The whole band sits above the specification's own title (`# Wan 3.0 …`)** — ⚠️ **do not
+   drop that title; the band opens it.** **`L38` looks only at this shape: a title, a band above
+   it, closed by a rule, holding at least a subtitle and two more lines.**
+   ⚠️ **`<where this shot sits>` is the work's own way of naming position.** **A work divided by
+   chapters names the chapter** (`第1章「現像」`) — **a work that follows a song names the song's
+   section**, and **the section changes from shot to shot** (`intro` · `verse-1` ·
+   `pre-chorus` · `chorus-1` · `bridge` · `final-chorus` · `outro`) — **a band that says `intro`
+   over an `outro` shot is a band nobody read.** ⚠️ **Its tail is this shot's change in one
+   line** — **what is true at the end that was not true at the beginning.** ⚠️ **The band writes
+   it; it does not look for a field to take it from.** ⚠️ **A work whose shot titles already name
+   the change has it written already** (odyssey: `見る——この作品で最初の行為`) — ⚠️ **a work
+   divided by chapters does not, and its title is not a source** (hakuchizu: 「暖簾」 — **a
+   chapter is not a change**). ⚠️ **Measured on the 112 specifications on disk: 75 tails are the
+   band's own writing, 29 repeat the title's quoted phrase, and 8 sit under a title that quotes
+   nothing at all.**
    **① what happens on screen** (`unit.before` / `unit.after`, said another way) ·
    **② how it is shot** (`motion` and `duration`) ·
    **③ what does not happen** (`motion.law`, §16's `MUST NOT` — **this shot's law**).
@@ -119,7 +147,8 @@ because `L3` and `L4` read the beat body, not only the field.**
    specification disagree, the specification wins.** ⚠️ **Write no number the specification does
    not carry** — **a number written here is read as a measurement.**
    ⚠️ **Write it after §1–20** — **the band is the document's face, and it summarizes a document
-   that has to exist first.**
+   that has to exist first.** ⚠️ **`L38` reads the band; nothing else does, and no check has ever
+   read what it says** — **a band that is bad and well-formed passes.**
 
 10. **§18's 7 slots** — `Master Prompt` · `Visual Prompt` · `Motion Prompt` · `Camera Prompt` ·
    `Audio Prompt` · `Negative Prompt` · `Style Motion`. **Fires if wrong:** `L17`.
@@ -261,14 +290,20 @@ not to delete the prohibition, it is to carry §10's reason into the slot**
   resolved from `place` × `time`, and deriving that from prose produces false positives (a
   classroom at night, a school-festival yard at night, a room at dawn). **The conditions are
   confirmed against the artifact side. Record the reading; do not write a rule.**
-- ⚠️ **Nothing reads the staging summary — and that is what it is for.** It is a band of comments
-  at the head of the video specification, so **the form layer, the ledger layers and the generator
-  are all blind to it** — **only §18 is handed over, and the band is not in it.**
-  ⚠️ **Do not give it a reader.** ⚠️ **A specification without the band is not a defect**: **one
-  written before the band existed is not a specification that disagrees with anything** — the same
-  handling as `aim` and `key_image`, and **the reason no check is added here.** ⚠️ **A check would
-  fire on every specification older than the band** — **it would be measuring the calendar, not
-  the work.** ⚠️ **Measured 2026-09-23: all 38 video specifications on disk already open with a
+- ⚠️ **The staging summary has one reader, and it reads the shape only — `L38`.** It is a band of
+  comments at the head of the video specification, so **the form layer, the ledger layers and the
+  generator are all blind to it** — **only §18 is handed over, and the band is not in it.**
+  ⚠️ **That reader arrived on 2026-09-30, and it arrived late on purpose.** ⚠️ **A specification
+  without the band was not a defect until then, and the reason was a count, not a principle**:
+  **a check added before the backfill would have fired on every specification older than the band
+  — it would have been measuring the calendar, not the work.** ⚠️ **So the order was: write the
+  band into every work first, add the reader afterwards** — **by the day the check went in, all
+  112 specifications on disk carried a band, and the check found no work to condemn.**
+  ⚠️ **`L38` reads presence and shape** — a title, a band above it, closed by a rule, holding at
+  least a subtitle and two more lines. **It does not read one word of what the band says**, and
+  **no check should**: **whether the staging is any good is a judgment, and this is where the
+  judgments live.**
+  ⚠️ **Measured 2026-09-23: all 38 video specifications on disk already open with a
   Japanese preamble before §1, 11 to 84 lines long** — so **the band is not a new layer. It is a
   floor put under a layer that was already there.** ⚠️ **What varied was whether that preamble
   held a two-or-three-line summary: 15 of the 38 did** (10 of hakuchizu's 11).

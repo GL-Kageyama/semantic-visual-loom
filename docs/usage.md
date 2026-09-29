@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.1.0 | canonical: docs/usage.md | translated: 2026-09-18 -->
+<!-- i18n-version: 1.2.0 | canonical: docs/usage.md | translated: 2026-09-30 -->
 
 **Language:** [English](usage.md) | [日本語](usage-ja.md) | [中文](usage-zh.md)
 
@@ -215,12 +215,14 @@ The counts behind that are in `HISTORY.md`.
 
 ## The layers
 
-The check is **37 layers, `L0`–`L37`**, plus schema-shape validation.
-⚠️ **`L35` is reserved and unwritten**, so **the codes skip a number** — `L0`–`L37` is 38 codes and
-**37 layers.** ⚠️ **`L34` and `L36` read the song**, and a work that does not name the song as its
+The check is **38 layers, `L0`–`L38`**, plus schema-shape validation.
+⚠️ **`L35` is reserved and unwritten**, so **the codes skip a number** — `L0`–`L38` is 39 codes and
+**38 layers.** ⚠️ **`L34` and `L36` read the song**, and a work that does not name the song as its
 time source **is told they saw nothing** — **they are not silent about it.**
 ⚠️ **`L37` reads the inside of a shot** — whether its beats tile its `duration` — and **it reads
-every work, whether or not a song exists.**
+every work, whether or not a song exists.** ⚠️ **`L38` reads the head of a video specification** —
+whether a staging summary opens it — and **a work that holds no video specification is told it
+confirmed nothing**, rather than that it is clean.
 **They are not one verdict**—each layer fires on its own and is reported with the
 number it saw.
 

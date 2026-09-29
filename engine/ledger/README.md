@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.1.0 | canonical: engine/ledger/README.md | translated: 2026-09-18 -->
+<!-- i18n-version: 1.2.0 | canonical: engine/ledger/README.md | translated: 2026-09-30 -->
 
 **Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
 
@@ -66,6 +66,7 @@ in order to fire on "`before` and `after` are the same" — but **JSON Schema ca
 | **L34** | **The song's length does not add up** — the sections' sum against `song.duration`, and each section's shots against that section. ⚠️ **`bible.time_source` decides whether this layer reads at all** — a work whose time is the story's may carry a `song` and is told *this layer saw none of its length* | "Does the Song's Length Add Up" below |
 | **L36** | **A sung line is covered by no shot** — and its converse: a coverage entry that names nothing, names no shot, or names a shot that is not there. ⚠️ **A section the lyric never enters must be covered too**, or the picture has an ownerless stretch. ⚠️ **A `section:` entry does not cover that section's lines** — it is the form for the stretches the lyric never enters | "Is Every Sung Line Covered" below |
 | **L37** | **The beats do not tile the shot's `duration`** — the first does not start at 0, the last does not end at the shot's end, or two neighbours leave a gap or an overlap. ⚠️ **It reads every work, song or no song** — the shot's inside is the shot's own | "Do the Beats Tile the Shot" below |
+| **L38** | **The video specification does not open with a staging summary** — a band of comments above its title, closed by a `═` rule, holding a subtitle and at least two more lines. ⚠️ **It was a reading, not a requirement, until 2026-09-30** — by the day this layer went in, all 112 specifications carried one | "Does the Video Specification Open with a Staging Summary" below |
 
 **L2, L3 and L4 are transplants.** Applied to all 57 segments of Gozen-niji,
 a checker that scored **recall 2/2 and 0 false positives** went in just as it was.
@@ -91,7 +92,7 @@ reaches too far. **Recorded here, where it happens, as a hole.**
 And L7 **counts and reports the shots that hold no disclosure state** —
 without counting, you cannot tell whether "0 violations" means "0 after checking" or "not checked".
 
-`--self-test` holds **one example that fires and one that does not, for each check** (320 examples).
+`--self-test` holds **one example that fires and one that does not, for each check** (330 examples).
 ⚠️ **Nothing compares that number against the run.** The self-test **prints how many examples it ran
 and how many came out as expected** — so **read the number off the run, not off this line.**
 ⚠️ **How many examples run depends on what the check can find** — without the sibling
@@ -1214,6 +1215,54 @@ tile**, and nothing more.
 because the number is not in the record. `L37` asks **whether the beats tile the shot itself**, which
 needs nothing but the shot.
 
+### L38 — does the video specification open with a staging summary
+
+**The staging summary is the band of comments that opens a video specification** — a `═` rule that
+names it, a subtitle, a blank comment, three lines, a closing rule, **all of it above the
+specification's own title.** ⛔ **No string in it reaches a generator** (only §18 is handed over), so
+**nothing read it** — and **on 2026-09-23 the author ruled three things at once**: it is a band and
+not a field · **no check is added** · **and a specification without the band is not a defect** —
+because **a check added then would have fired on every specification older than the band: it would
+have been measuring the calendar, not the work.**
+
+⛔ **The author reversed that on 2026-09-30, and in the order the old ruling demanded.** **The band
+was written into every video specification first** — 88 were written, and the 24 that already had one
+were left as they were — **and the reader was added afterwards.** ⚠️ **By the day this layer went in,
+all 112 specifications on disk carried a band, and the run found no work to condemn** — **a rule that
+costs nobody anything is the only kind that may be made retroactive.**
+
+```
+a title line (`# … Full Specification — …`)
+above it, a band opened by a rule that names the staging summary (演出要約)
+that band closed by another rule — still above the title
+inside it: a subtitle, and at least two more lines that are neither rules nor blanks
+```
+
+⚠️ **A bare `#` is not a line.** That blank comment is how the subtitle is parted from the body,
+**and counting it as content would let a one-line band pass** — the same discipline as `L37` refusing
+to add an unreadable `range` as 0 seconds: **`0 == 0` is how an empty check passes.**
+
+⚠️ **It reads the file as raw lines, not through the section reader** — **the band is not a section.**
+`_spec_tops` keeps only headings that start with a number, so **`L11` cannot see a band**, and **that
+is why writing 112 bands moved no other layer's count.**
+
+⚠️ **A shot with no `spec:`, and a specification that cannot be read, do not fire here.** `L11` and
+`L18` already report both, **and reporting one defect under two codes means fixing one side leaves the
+other singing.** ⚠️ **But this layer does not go quiet either: it says how many it read** — and **a run
+holding no video specification says so**, rather than reporting a clean sweep. **"Confirmed nothing"
+is not "green."**
+
+⚠️ **Why it is not in `CHECKS_SHOT`.** The counterpart is **the specification's text, not the shot
+record** — and **two shots pointing at one specification would be one defect counted twice.** (This
+layer folds by path before reading.)
+
+⚠️ **What it cannot see: whether the staging is any good.** It sees that a band exists, that it sits
+above the title, that it is closed, and that it holds three lines. **Not one word of what the band
+says is read, and no check should read it** — **that judgment is exactly what the band exists to
+carry, and it belongs to the author.**
+
+⚠️ **This is not `L35`.** `L35` stays reserved and unwritten.
+
 ### ⚠️ Firing Against a Running Artifact
 
 | Check | Ukebi V2 (30 takes) | What it is saying |
@@ -1236,6 +1285,7 @@ needs nothing but the shot.
 | L34 | **0** | **No work declares `bible.time_source: song`**, so there is nothing to add up — **not even a note.** ⚠️ **This check has fired only inside the self-test.** ⚠️ **A layer whose counterpart does not exist is silent, and silence looks exactly like passing** — which is why the door is at `time_source` and not at `song`. |
 | L36 | **0** | Same — **no work carries a song, so this layer has no lyric to ask about.** ⚠️ **Its silence here is the very shape it exists to break**: *a sung line nobody answers* is what it is for, and **here there is no line.** ⚠️ **The one thing that would look green and be wrong — an empty `song_coverage` on a work that has a song — cannot arise while no work has a song.** |
 | L37 | **0** (1 note) | **All 30 tile their `duration`** — 91 beats across 30 shots. ⚠️ **This is the first layer to read the inside of a shot**, and **the only one of these rows that reads a work with no song in it.** ⚠️ **No work in this repository has a song** — so `L34` and `L36` above are still unfed, and **the MV will be the first work they read.** |
+| L38 | **0** (1 note) | **Ukebi V2 holds no video specification**, so this layer has nothing to open. ⚠️ **The note says "no video specification — this run confirmed no staging summary"**, not "all clear": **a run that confirmed nothing is not a green run.** |
 
 ⚠️ **`L31` reads only the home and the specification** — **`L20` and `L22` need the style cards,
 and the cards are not in this repository.** So **two green rows here can mean different things**:
@@ -1409,7 +1459,7 @@ What it can say is —
 | **Guarantees** | **The song's length adds up** — the sections reach `song.duration`, and each section's shots reach that section. ⚠️ **Only for a work naming the song as its time source** (`bible.time_source: song`) | **L34** |
 | **Guarantees** | **Every sung line is answered by a shot, and every stretch where the song says nothing has an owner** — ⚠️ **among the shots the record lists.** Whether the picture says the same thing as the lyric is not measured | **L36** |
 | **Guarantees** | **The beats tile the shot's `duration`** — from 0 to the end, with no gap and no overlap. ⚠️ **Whether the beats are well placed is not measured** | **L37** |
-| **Guarantees** | **It is not broken.** L0–L37 fire before generation, and everything that fired can be explained. ⚠️ **`L35` is reserved and unwritten** — **37 layers, and `L34`/`L36` speak only where a song exists** | all |
+| **Guarantees** | **It is not broken.** L0–L38 fire before generation, and everything that fired can be explained. ⚠️ **`L35` is reserved and unwritten** — **38 layers across 39 codes: `L34`/`L36` speak only where a song exists, and `L38` only where a video specification does** | all |
 | **Does not guarantee** | **That `song.duration` is the real length of the file `song.master` names** — no layer opens the audio | —— |
 | **Does not guarantee** | **That the generator draws the aim.** | —— |
 | **Does not guarantee** | **That a still shot's §11 really stops the subject.** | —— |

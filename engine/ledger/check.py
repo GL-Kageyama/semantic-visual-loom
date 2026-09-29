@@ -3071,6 +3071,77 @@ def _self_test():
          semantic.check_beat_tiling, _Beat({}), False, None,
          note="敷き詰めを1つも確かめていない")
 
+    # ---- L38（動画仕様の冒頭に、演出要約の帯が在るか）
+    #     ⚠️ **相手はショットの記録ではなく仕様のテキストである。** ゆえに一時の根に
+    #        `.md` を実際に書いて読ませる——**定数を直に当てるだけでは、
+    #        読み口が本当に読めることを検査できない。**
+    class _Stage:
+        def __init__(self, root, shots):
+            self.root = root
+            self.shots = shots
+            self.bible = {"bible": {"style": "t-card"}}
+
+        def order(self):
+            return sorted(self.shots, key=_natural)
+
+    def stage_proj(spec_text, *, sid="mv-s01", src="specs/video/mv-s01.md", spec=True):
+        d = _P(tempfile.mkdtemp())
+        f = d / src
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_text(spec_text, encoding="utf-8")
+        shot = {"shot": sid, "duration": "6s"}
+        if spec:
+            shot["spec"] = src
+        return _Stage(d, {sid: shot})
+
+    #: **実測の形そのまま**（2026-09-30: hakuchizu 11本・migenzo 13本がこの形を持つ）。
+    BAND_OPEN = "# ═══ 演出要約 ════════════════════════════════════\n"
+    BAND_CLOSE = "# ═════════════════════════════════════════════════\n"
+    BAND_SUB = "# 『白地図』第1章「暖簾」 / 情景 / motion —— 戻りかけの色が消える\n"
+    BAND_BODY = ("#   通りに残っていた夜の色が、朱から先に、群青と順に消えていく。\n"
+                 "#   6秒をほぼ均等に使う——消えることは出来事ではなく、経過である。\n"
+                 "#   誰も立たない。動くのは色だけで、町は動かない。\n")
+    TITLE = "# Wan 3.0 Full Specification — 白地図 第1章「暖簾」 Clip 1/11 / 6s\n"
+    BAND_OK = BAND_OPEN + BAND_SUB + "#\n" + BAND_BODY + BAND_CLOSE + "\n" + TITLE
+    NO_BAND = TITLE + "\n# 1. VIDEO\n"
+
+    run1("L38 題の上に帯が在る（鳴ってはならない）", semantic.check_staging_summary,
+         stage_proj(BAND_OK), False, None, note="1 本が演出要約を持つ")
+    run1("L38 帯が無い", semantic.check_staging_summary,
+         stage_proj(NO_BAND), True, "演出要約の帯が無い")
+    # ⚠️ **「相手が空なら落ちる」を入れる。** 罫線2本は、帯の顔をして何も読ませない。
+    run1("L38 罫線だけで中身が無い", semantic.check_staging_summary,
+         stage_proj(BAND_OPEN + BAND_CLOSE + "\n" + TITLE), True, "演出要約が空である")
+    # ⚠️ **副題だけの帯。** 題名は言うが、①画面 ②撮り方 ③起きないこと を1つも言わない。
+    run1("L38 副題だけで、中身が1行しかない", semantic.check_staging_summary,
+         stage_proj(BAND_OPEN + BAND_SUB + BAND_CLOSE + "\n" + TITLE),
+         True, "1 行しかない")
+    # ⚠️ **帯は題を開ける。** 題の下に置けば、仕様を開いた者はもう本文を読んでいる。
+    run1("L38 帯が題の下に在る", semantic.check_staging_summary,
+         stage_proj(TITLE + "\n" + BAND_OPEN + BAND_SUB + BAND_BODY + BAND_CLOSE),
+         True, "より**下**である")
+    run1("L38 帯は在るが、題の行が無い", semantic.check_staging_summary,
+         stage_proj(BAND_OPEN + BAND_SUB + BAND_BODY + BAND_CLOSE + "\n# 1. VIDEO\n"),
+         True, "題の行")
+    run1("L38 帯が罫線で閉じていない", semantic.check_staging_summary,
+         stage_proj(BAND_OPEN + BAND_SUB + BAND_BODY + "\n" + TITLE),
+         True, "罫線で閉じていない")
+    # ⚠️ **`spec:` を持たないショットは対象外**（`L11`／`L18` が唄う）——**だが黙らない。**
+    run1("L38 spec を持たないショットは、対象の外", semantic.check_staging_summary,
+         stage_proj(BAND_OK, spec=False), False, None,
+         note="`spec:` を持たないショット 1 本")
+    # ⚠️ **読めなかった仕様を「帯が無い」と言わない。** 言えば、無いのではなく
+    #    読めていないものを、欠陥として数えることになる。
+    run1("L38 仕様が読めなければ、確かめた数に入れない", semantic.check_staging_summary,
+         _Stage(_P(tempfile.mkdtemp()), {"mv-s01": {"shot": "mv-s01",
+                                                    "spec": "specs/video/none.md"}}),
+         False, None, note="読めなかった動画仕様 1 本")
+    # ⛔ **`0 == 0` の罠**（`L37` と同じ）。ショットが1本も無ければ、
+    #    まとめは「確かめた」と言ってしまう——**空を帯の顔にしない。**
+    run1("L38 ショットが1本も無ければ、確かめたと言わない",
+         semantic.check_staging_summary, _Stage(_P(tempfile.mkdtemp()), {}), False, None,
+         note="演出要約を1つも確かめていない")
+
     print("\n=== 自己検査 — 形（スキーマ）が鳴るか\n")
     class _Shape:
         bible = ledger = None
