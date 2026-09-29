@@ -201,7 +201,7 @@ Dust moves over the desk and crosses the open palm. **It keeps moving after the 
 
 ## PREFER
 
-- The hand at the frame's centre with **the desk's grain running under it**, so that the turn reads as happening on a surface rather than in the air.
+- The hand at the frame's centre **with the wrist running out of the picture on the right**, and **the desk's grain running under it**, so that the turn reads as happening on a surface rather than in the air. ⚠️ **切れ目は枠の縁で起きる**（2026-09-30、著者の裁定。理由は画像の仕様の「⚠️ 手首の切れ目は、枠の縁で起きる」の節）——**腕は描かず、手首を枠が切る。**
 
 ## ALLOW
 

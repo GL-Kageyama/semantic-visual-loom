@@ -118,7 +118,7 @@
 
 # 10. CAMERA
 
-- Camera Language: Third person, **close**, on the hand on the desk — **the work's desk site**, at hand height, looking slightly down, **with the whole desk empty around it.**
+- Camera Language: Third person, **close**, on the hand on the desk — **the work's desk site**, at hand height, looking slightly down, **with the wrist running out of the picture on the right and the rest of the desk empty.** ⚠️ **切れ目は枠の縁で起きる**（2026-09-30、著者の裁定。理由は画像の仕様の「⚠️ 手首の切れ目は、枠の縁で起きる」の節）——**腕は描かず、手首を枠が切る。**
 - Camera Events: **None.** ⚠️ **この1本には、カメラの出来事が無い。**
 - Camera Behavior: No handheld, no whip, no shake, **no push-in on the fist**. ⚠️ **The camera does not ask the fist what it is holding** — **there is nothing to show, and the shot does not look for it.**
 
