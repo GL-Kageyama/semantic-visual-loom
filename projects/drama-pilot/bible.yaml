@@ -1,0 +1,86 @@
+# 作品台帳 — 『灯を返す』（drama-pilot）
+#
+# ⚠️ **この作品は、劇作の層（`ledger.dramaturgy` と `shot.dramatic`）を
+#    最初に通すためのパイロットである。** 5ショット、1つの変化の連なり、
+#    1つの文法（`recognizing-world`）と1つの文法（`impossible-camera`）。
+#    **小さく、壊してよい。**
+#
+# ⚠️ **走らせ方。** リポジトリの直下から
+#    `SVL_FORMATS_DIR=references/formats` を張って走らせる。
+#    ⚠️ **形式の側を張らなければ `L32` が鳴る**——文法カードはこのリポジトリの
+#       `references/formats/` に在り、既定の探し先（隣の基盤）には無い。
+#       様式 `luminous-anime` は既定の探し先に在る（`docs/cards.md`）。
+#
+# ⚠️ **この作品の主題は光である。人物ではない。**
+#    少女は小さく、光のほうが大きい。**彼女が提げている提灯は、直前まで点かない。**
+
+project: drama-pilot
+
+bible:
+  style: luminous-anime
+
+  # ⚠️ **発話は無い（§14）。それでも宣言する。**
+  #    **空欄は中立ではない**——生成器は、指定されなければ自分の既定で喋る
+  #    （実測: 発話のある動画に**中国語の字幕が焼かれた**）。`L27` がこれを見る。
+  language: Japanese
+
+  world:
+    concept: >-
+      峠の一本道。夕暮れ。谷の向こうに、まだ光が残っている。
+      少女が一人、火の入っていない提灯を提げて登ってくる。
+      **この作品で起きることは、光がどこに在るかという1つだけである。**
+
+    rules:
+      - "**光が主語である。** 空・谷・路面の照り返しが、人物より大きく動く。"
+      - "**人物は小さく、光に従属する。** 顔は一度も寄らない。"
+      - "**提灯は点かない。** 点くのは最後の1本で、それも火ではなく、太陽の残光によってである。"
+      - "**彼が死んだことは、台詞で説明されない。** 割れたガードレールだけが言う。"
+      - "**超常は起こらない。** 光が答えるのは、光の物理の範囲で答える。"
+      - "**読み取れる文字は無い。**"
+
+    visual_language:
+      art_direction: >-
+        Luminous realist anime. Layered skies with individually shaped clouds,
+        volumetric god rays travelling through the air, anamorphic flare and bloom
+        around the light source, a saturated dusk of magenta and gold against deep
+        cyan shadow, particles suspended in the air, wet road doubling the light.
+        Clean anime lineart on the figure, **kept deliberately subordinate to the
+        light** — wide and sky-heavy, a low horizon, the figure small.
+
+      # ⚠️ **時代が無い。** 空欄ではなく宣言である——枠の中の何も、これを年代に結びつけない。
+      era: >-
+        Contemporary. Nothing in the frame dates it beyond the road itself.
+
+  constants:
+    # ⚠️ **この4つは §1 と突き合わされる**（`L26`）。写しはずれる——だから家を1つに決める。
+    video:
+      aspect: "16:9"
+      resolution: "1920x1080"
+      frame_rate: "24fps"
+      orientation: "Landscape"
+
+    # ⚠️ **以下はこの作品の定数である。** §1–20 に欄が無い（`自前`）——
+    #    生成へは渡らない。**渡らないことは、落ちることではない。**
+    灯: "**点かない。** 提灯は4本で点かず、最後の1本は太陽の残光を受けて白く光る。"
+    人物: "**顔は寄らない。** 少女は常に全身か、手か、背中である。"
+
+  negative_base:
+    - no watermark
+    - no on-screen subtitles
+    - no background music
+    # ---- 様式（様式カード `luminous-anime` の `## Negative` から）
+    - not photorealistic
+    - no 3D render
+    - no muted desaturated palette
+    - no flat gradient sky
+    - no grain
+    - no painterly brush strokes
+    - no photographic faces
+    # ---- この作品の禁止（§16 MUST NOT）
+    # ⚠️ **この作品に人は一人しか居ない。** 彼女だけである。
+    #    実測（2026-10-29）: `s02` と `s04` の生成で**二人目が現れた**——
+    #    **この行が無かったからである。** 空欄は中立ではない。
+    - no second person
+    - no readable text
+    - no close-up of a face
+    - no lit lantern before the last shot

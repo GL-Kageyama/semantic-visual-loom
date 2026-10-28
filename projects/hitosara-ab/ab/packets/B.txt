@@ -1,0 +1,22 @@
+A 5-second video is to be generated from the prompts below. They are provided to the model as seven separate fields; nothing else is provided.
+
+[Master Prompt]
+A 5-second continuous cinematic take (16:9), luminous realist anime, in a one-room bakery with no clock in it, at the wood-fired oven in the far wall. Beats, deliberately uneven: [0-1.5s] the iron door is shut and one line of light lengthens along the seam; [1.5-4s] the door turns on its hinges and the fire is simply there, taking the center of the frame, wavering in place; [4-5s] a mote of flour dust crosses in front of the flame and burns, and nothing else happens. The fire is the only light source from the moment the door opens; the room is lit from below. The palette narrows to gold and black. (No face, no clock — and the oven interior is permitted in this clip; it is the subject.)
+
+[Visual Prompt]
+Luminous realist anime. The palette narrows: gold and black, with the magenta of earlier shots gone and deep cyan only in the unlit half of the room. Hyper-detailed layered light — bloom and anamorphic flare around the fire, which is the only permitted source; flour dust suspended and visible against the dark. A wood-fired oven set into a far wall, its iron door on iron hinges. A stone floor dusted with flour. A window behind, blue going gold. Two-step cel on the hands; the light rendered continuously. Low visual density, and darker than any other shot in the film. No human face, no full body, no second person. No hand reaching into the oven. No cut loaf, no visible crumb, no torn-open loaf, no cross-section. No wall clock, no calendar, no readable text, no grain, no paper texture, no painterly stroke.
+
+[Motion Prompt]
+Full animation, not limited — the fire replaces the dust as the primary mover. The flame wavers in place with short tongues; it does not travel, does not spread, and does not go out. The iron door turns on its hinges, accelerates once, and stops. Flour dust falls continuously and crosses in front of the flame, and one mote burns. The window light changes from blue to gold. No impact, no collision, no motion blur smears, no stutter, no held frames.
+
+[Camera Prompt]
+Third-person, at the height of the door. The fire is the subject and the frame is built around it; the room falls away. Almost still — a very slow, weighted settle; no handheld, no whip, no shake. [0-1.5s] medium, the closed door and the seam of light. [1.5-4s] hold as the door opens and the fire takes the center. [4-5s] hold on the fire with the dust crossing it. One continuous take; no cut.
+
+[Audio Prompt]
+The language of this work is Japanese — Japanese is the language of this work and of every word it holds; if any speech is placed in it, that speech is Japanese. No speech is placed in this shot. No dialogue. The iron hinge, once, dry. The low breath of the fire, continuous. Music: one sustained tone held under the whole shot. No swell, no sting, no melody.
+
+[Negative Prompt]
+no readable text, no Japanese kanji or kana, no real-world alphabet, no watermark, no captions, no on-screen subtitles, no human face, no full body of the baker, no second person, no wall clock, no calendar, no digital timer, no brand label or packaging text, no kitchen appliance with a display, no cut loaf, no visible crumb, no torn-open loaf, no sliced bread, no cross-section, not photorealistic, no 3D render, no muted desaturated palette, no flat gradient sky, no grain, no painterly brush strokes, no photographic faces
+
+[Style Motion]
+Full animation, not limited — the opposite of the held-frame idiom. The atmosphere is the primary mover, and here the fire is the atmosphere: it wavers continuously and never holds. Camera moves with weight and commitment. No stutter, no shooting on threes, no held frames with only one element moving. (Source: the `Motion character` of the style card `luminous-anime`.)

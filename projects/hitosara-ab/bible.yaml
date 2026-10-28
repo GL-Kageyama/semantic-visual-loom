@@ -1,0 +1,138 @@
+# 作品台帳 — 一皿ができるまで（hitosara）
+#
+# 出所: このリポジトリの機能を**存分に踏む**ためのデモである（段1）。
+#       受け火 V2 からは完全に独立している——同じ台帳の形を使うが、世界も様式も違う。
+#
+# ⚠️ 不変部と可変部の線引きは未決定である（schemas/README.md）。
+#    ここは「作品に一つしか無いもの」だけを置いた。
+project: hitosara-ab
+
+bible:
+  # ⚠️ **本編 `projects/hitosara/` はこの欄を持たない**（`L27` が本編で鳴っている）。
+  #    この実験は写しに手を入れる——**写しをそのまま走らせれば、写しの穴まで写る。**
+  #    ⚠️ **発話は無い。** それでも言語を宣言する——**空欄は中立ではない**（`CLAUDE.md`）。
+  language: Japanese
+
+  # 作品の様式。**様式カードの名前である。**
+  # ⚠️ `luminous-anime` を選んだ理由は2つある。
+  #    ① **`Motion character` を持つ**——実測で55枚のうち2枚しか持たない。
+  #       持たない様式を選べば §18 の7つ目のスロット `Style Motion` は
+  #       **在るが空**になり、`L20` がそれを鳴らす（それも成立するが、
+  #       このデモの目的は「機能が存分に発揮されること」である）。
+  #    ② **受け火が使っていない側である**——受け火 V2 は 99/99 が `soft-cel-anime`。
+  #       同じ様式を選べば、このデモは受け火の続きになる。
+  # ⚠️ カードの中身は distill-essence-engine に在る。**読むだけ。書き換えない。**
+  #    ここに置くのは**名前だけ**である。
+  style: luminous-anime
+
+  world:
+    concept: >-
+      小麦粉と、水と、塩と、時間。それだけで一皿ができる。
+      時計はどこにも無い——時間は生地の側で進む。捏ねる手が時を作り、
+      発酵が時を運び、窯が時を閉じる。撮るのは、その四つが重なる一点である。
+    rules:
+      - "根本律：時は生地の側で進む。時計は画面に出ない。発酵は待つのではなく、起きる。"
+      - "手だけが映る。作り手の顔は映さない——この作品の人物は、手と、前掛けと、その影である。"
+      - "光が主役である。粉塵が光に浮かぶ。窯の火は光源そのものであり、他の光を作らない。"
+      - "窯の中は、開くまで見せない（開示の第1点）。"
+      - "パンの中は、割るまで見せない（開示の第2点）。"
+      - "道具は嘘をつかない。粉・水・塩・酵母・ボウル・窯——この6つ以外は画面に入らない。"
+      - "音はすべて近い。ただし music は疎——一皿ができるまでの音は、こねる音と、火の音と、静けさである。"
+    visual_language:
+      art_direction: >-
+        Luminous realist anime — the light, not the figure, is the subject.
+        Clean anime lineart on the hands, kept deliberately subordinate to the light.
+      color_language: >-
+        A saturated dusk palette of magenta and gold against deep cyan shadow.
+        The accent is the warm gold of the crust. In the oven segment the fire
+        is the only source and the palette narrows to gold and black.
+      texture: "Layered atmospheric depth. Flour dust suspended and catching the light. Wet, reflective work surfaces doubling the light source. No grain, no paper texture, no painterly stroke."
+      rendering: >-
+        Hyper-detailed layered light: volumetric shafts travelling through the air,
+        anamorphic flare and bloom around the source, particles suspended.
+        Two-step cel on the hands; the light is rendered continuously.
+      visual_density: >-
+        Low. The subject is small against the light. One focal point per beat,
+        generous negative space — the dough and the light, nothing else.
+      era: "Timeless. A one-room bakery with a wood-fired oven. No clock, no calendar, no label reads."
+      weather: "No weather. The light is the only weather — it changes inside the shot."
+      atmosphere: >-
+        Warm, saturated, dust-lit. Everything is slightly damp and slightly warm;
+        the air moves even when nothing else does.
+
+  constants:
+    根本律: "Time advances on the dough's side. No clock appears in frame."
+    光源: "光が主役。窯の火は光源そのものであり、flare と bloom は火にだけ許される。"
+    カメラ: "手の視座。作り手の顔もからだも映さない。"
+    様式変数: "SUBJECT／ACTION／LOCATION／ACCENT。ACCENT は焼き色の金。"
+
+    # §1 の作品定数。**ショットに依らない4つである。**
+    # ⚠️ これは新しい欄ではない——受け火の `series-constants.md` §1 が
+    #    全12本ぶんを手で持っていたものを、**作品ごとの家に移しただけである。**
+    # ⚠️ この4つは §1 の4行として**10本の仕様書へ手で写されていた。**
+    #    そして同じ4つが §19 の `Output:` 行にも**三つ目の写し**として現れ、
+    #    **10本すべてで綴りが違う**（`1920×1080` / `landscape` 対 ここ の `1920x1080` / `Landscape`）。
+    #    値は同じで、綴りだけが違う。**だから手で写す運用は、静かに壊れる。**
+    # ⚠️ **`duration` はここに無い。** 尺はショットごとに違う（この作品は 2s〜8s）——
+    #    **従属変数であり、家は `shot.duration`、読む者は `L23` である。**
+    # ⚠️ **値を変えるときは、§1 を10本とも直すこと。** `L26` が食い違いを鳴らす。
+    video:
+      aspect: "16:9"
+      resolution: "1920x1080"
+      frame_rate: "24fps"
+      orientation: "Landscape"
+
+  # 全ショットに必ず付く禁制。**英語不変部——訳してはならない。**
+  # ⚠️ 公開に必ず付くもの（読めない文字・透かし）と、**この作品の恒常的な禁止**
+  #    （顔・時計・第二の人物）を分けて置く。分ける理由は、前者が基盤の仕事で、
+  #    後者が作品の仕事だからである。
+  # ✅ **その区別は、いま機械可読である**（決定 2026-09-18）。基盤の分は
+  #    `engine/ledger/specmap.py` の `BASE_NEGATIVES` に在り、**作品が書き忘れても消えない**
+  #    ——`L21` が**両方の和**を要求する。⚠️ **この一覧の「基盤が必ず付けるもの」という
+  #    見出しは、いまや基盤の側にも実体を持つ。**
+  negative_base:
+    # 基盤が必ず付けるもの
+    - "no readable text"
+    - "no Japanese kanji or kana"
+    - "no real-world alphabet"
+    - "no watermark"
+    - "no captions"
+    - "no on-screen subtitles"
+    # この作品の恒常的な禁止
+    - "no human face"
+    - "no full body of the baker"
+    - "no second person"
+    - "no wall clock"
+    - "no calendar"
+    - "no digital timer"
+    - "no brand label or packaging text"
+    - "no kitchen appliance with a display"
+    # 様式カードの Negative（luminous-anime）
+    - "not photorealistic"
+    - "no 3D render"
+    - "no muted desaturated palette"
+    - "no flat gradient sky"
+    - "no grain"
+    - "no painterly brush strokes"
+    - "no photographic faces"
+
+  # ⚠️ **祖父条項——この作品を、基盤の新しい禁制から外す。**（決定 2026-09-18、著者——
+  #    「**hitosara は対象外にする**」）
+  #
+  #    基盤の禁制は増える。2026-09-18 に三つ目の節が増えた——
+  #    `no background music`（決定——「**リポジトリとして、BGM も出さないことを明記しよう**」）。
+  #    ⚠️ **この作品は、その節を一字も持っていない**（動画10本・画像10本を走査して零件）。
+  #
+  #    ⚠️ **規則は遡らない。** この作品が書かれたとき、その節は基盤に無かった——
+  #    書いていなかったことを理由に赤を立てれば、**赤は欠陥ではなく日付を指す。**
+  #    ✅ **ゆえに作品が除外を宣言する。** 基盤が作品名を覚えるのではない——
+  #    **基盤が特定の作品を知れば、その作品は基盤の一部になる。**
+  #
+  #    ⚠️ **`L21` はこの除外を註で報告する。** **報告しない除外は、通った検査に見える。**
+  #    ⚠️ **ここに書けるのは基盤の節だけである。** 作品が自分の禁制（上の一覧）を除けば、
+  #    `L21` は作品の側を何も見ていない——**それは違反になる。**
+  #
+  #    ⚠️ **この作品に BGM が要る、という意味ではない。** 要るか要らないかを
+  #    この作品は決めていない——**決めていないことは、決定ではない。**
+  base_negatives_waived:
+    - "no background music"
