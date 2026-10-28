@@ -14,7 +14,9 @@
 
 **生成モデルが作るのは標本である**——そして**独立した生成どうしは、互いを覚えていない。**
 だから状態は生成の外に置く。**その器が制作台帳である。1本のファイル**であり、
-連続性と開示を一緒に持つ。
+連続性と開示を一緒に持つ——**そして劇作**、すなわち**その変化が何の値だったか**を持つ
+（[`docs/dramaturgy-ja.md`](docs/dramaturgy-ja.md)）。⚠️ **三つの問い、ひとつのファイル。
+台帳は分割しない。**
 
 その中心に置く単位が **ショット** である——⚠️ **1ショットは1つの変化のために在る。**
 **長さは従属変数である。**
@@ -34,7 +36,7 @@
 | | よくある形 | この基盤 |
 | --- | --- | --- |
 | 単位 | 1プロンプト＝1動画 | **1ショット＝1生成**。作品はショットの列である |
-| 状態 | プロンプトに毎回書き直す | **制作台帳**が持つ（連続性＋開示） |
+| 状態 | プロンプトに毎回書き直す | **制作台帳**が持つ（連続性＋開示＋劇作） |
 | 文字 | 生成器に描かせる | **文字チャンネル**として分離し、合成で焼く |
 | 検収 | 目視 | **事前検証**——仕様の段で矛盾を鳴らす |
 
@@ -55,11 +57,24 @@
 | **③ 台帳** | ショット1本 | **台帳**（育てられる）と、そこから導かれる**参照集合**（固定されるもの）と**禁制集合**（映してはならないもの） |
 | **④ ショット** | 戻ってきたもの | **テイク**——1生成、1枚 |
 
+**②と④には、それぞれ第五段階ではない伴走者がいる。** **`direction` は①の中**、
+`breakdown` の後・`design` の前に走り、**作品の劇作**——premise・問い・価値の両極・幕・シーケンス、
+そして各ショットの `dramatic` の記録——を**同じ `ledger.yaml`** に書く
+（[`docs/dramaturgy-ja.md`](docs/dramaturgy-ja.md)）。**`review` は④の後に座る**：
+四人の評価者が仕様と treatment を読み、その点数がテイクの `verdict.council` に書かれる
+（[`skills/review/SKILL-ja.md`](skills/review/SKILL-ja.md)）。⚠️ **どちらも採用しない**——
+採用は作者の行為であり、**セッションは `adopted: true` を書かない。**
+
 **プロンプトが書かれるのは②である。** 7スロットは `Master` / `Visual` / `Motion` / `Camera` /
 `Audio` / `Negative` / `Style Motion` であり、**分かれていること自体が要点である**
 （[`references/formats/video-spec.md`](references/formats/video-spec-ja.md) §18）。⚠️ **`Camera`
 スロットを書くのは [`skills/staging/`](skills/staging/SKILL-ja.md) である**——**カメラをひとつの手で
 決める段**であり、②の中、`motion`・`duration` と仕様の間に座る。
+
+⚠️ **仕様はさらに、番号を持たない節をひとつ持ってよい——§17 と §18 の間の `## DIRECTION`。**
+**スロットではない**——七つは七つのままである。**生成時にはその本文が `Master Prompt` の先頭へ
+連結され**、**ショットの感情が生成器へ届く唯一の経路**になる
+（[`references/formats/video-spec.md`](references/formats/video-spec-ja.md)）。
 
 ⚠️ **プロンプトは2つの軸から作られ、どちらもカードである**——**Format（形式＝仕様の形）** と
 **Style（様式＝視覚言語）**。⚠️ **カードは既定ではこのリポジトリの隣に在る**
@@ -104,17 +119,20 @@ semantic-visual-loom/
 ├── schemas/         # データ構造の正典（bible / ledger / shot-record / take / timeline）
 ├── engine/ledger/   # 制作台帳と事前検証（生成を走らせずに設計の破綻を潰す）
 ├── engine/shot/     # ショットの仕様のうち、導出できる行を刷る（読み取り専用。何も書かない）
-├── docs/            # 使い方と、踏み込んだ解説（cards / routes）
-├── skills/          # Skill——分解・設計・台帳・ショット、そして staging（②の中のカメラ）
+├── docs/            # 使い方と、踏み込んだ解説（cards / dramaturgy / routes）
+├── skills/          # Skill——分解・direction（①の中）・設計・staging（②の中）・台帳・ショット・review（④の後）
 ├── tools/           # 検査（i18n のミラー）
-├── references/      # こちら側のカード——formats/（video-spec）と styles/（sumi-e）
+├── references/      # こちら側のカード——formats/（video-spec と文法）と styles/（sumi-e）、
+│                    #   そして grammars/——検査が読む目録
 ├── assets/          # リポジトリの顔（README の hero）
 └── projects/        # 作品ごとの実体
 ```
 
 **⚠️ `projects/` には2種類が同居している**——**生の仕様書**（受け火・午前二時の §1–20。
 そのまま残してある）と、**構造化した記録**（`bible.yaml` / `ledger.yaml` / `shots/`。
-`hitosara`・`ukebi-v2`・`habits`・`habits-promo-chinatsu` の**4本**である）。
+**17本**である——`drama-pilot`、`grammar-*` の実験作7本、`habits`・`habits-mv`・
+`habits-promo-chinatsu`・`hakuchizu`・`hitosara`・`ippitsu`・`migenzo`・`odyssey`、そして
+`ukebi/ukebi-v2`）。
 ⚠️ **すべての作品は自分の `bible.yaml` と `ledger.yaml` を持ち、作品は作品を抱えない**
 ——そしてこれが効く理由である：**`check.py` は再帰しない**ので、
 **作品が作品を抱えていると、親を走らせても読まれない。** `L29` が、
@@ -174,7 +192,9 @@ semantic-visual-loom/
 
 ⚠️ **`skills/` には2段が欠けている**——**⑥構成と⑦検収である。**
 書けない。**入力が記録の側に無いからである。** `clips[]` は定義上**採用テイクの列**であり、
-**動画のテイクに `adopted: true` が1本も無い。**
+**`adopted: true` を持つ動画テイクは2本ある**（`ippitsu-s01-video-2`・`habits-mv-s02-video-1`）が、
+**作品の採用テイクはまだ編集ではない**——どのクリップをどの順で並べたかを記録する場所が無く、
+`Project` は `timeline/` を開かない。
 書くのが難しいのではない——⚠️ **動かせないのであり、**
 ⚠️ **空のタイムラインを吐く Skill は、無い Skill より悪い。** 穴は起きた場所に書いてある——
 [`projects/hitosara/renders/README.md`](projects/hitosara/renders/README-ja.md)。
@@ -218,7 +238,7 @@ semantic-visual-loom/
 **開発は日本語で進め、文書の正典は英語である。**
 ミラーは接尾辞方式で**同じディレクトリ**に並ぶ——規則は [`CLAUDE.md`](CLAUDE-ja.md) にある。
 
-**21文書 × 3言語が揃っている**——⚠️ **これは [`tools/check_i18n.py`](tools/check_i18n.py) が
+**26文書 × 3言語が揃っている**——⚠️ **これは [`tools/check_i18n.py`](tools/check_i18n.py) が
 正典として報告する本数であって、リポジトリの `.md` を数えた数ではない。**
 **数は、数えた範囲の広さしか持たない。**
 **何を見て、何を見ないか**は [`docs/usage.md`](docs/usage-ja.md) にある。

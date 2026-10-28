@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.1.0 | canonical: docs/cards.md | translated: 2026-09-22 -->
+<!-- i18n-version: 1.2.0 | canonical: docs/cards.md | translated: 2026-10-29 -->
 
 **Language:** [English](cards.md) | [日本語](cards-ja.md) | [中文](cards-zh.md)
 
@@ -31,37 +31,83 @@ A check that cannot open a card **says so** rather than passing—**"could not v
 ```text
 references/formats/    # this side's format cards — `video-spec`
 references/styles/     # this side's style cards — `sumi-e`
+references/grammars/   # the registry — `index.yaml`
 ```
+
+⚠️ **The registry is not a third layer.** It holds no cards of its own; **it lists the format
+cards that are grammars**, and **it lives here rather than being derived at run time** so that a
+name a shot uses has one place to be registered.
 
 ⚠️ **The two directories are the same thing seen from two sides**—`_cards_dirs()` searches
 **one list per layer**, and **the order of that list is what the environment variable sets.**
 
 ## How many cards there are
 
-**Counted 2026-09-22**, over the two directories `_cards_dirs()` searches, by **counting the
+**Counted 2026-10-29**, over the two directories `_cards_dirs()` searches, by **counting the
 `.md` files in each and setting the mirrors aside**—`video-spec-ja.md` and `video-spec-zh.md`
 are translations of `video-spec.md`, not cards of their own, so the three are one card.
 
 | directory | format cards | style cards |
 |---|---|---|
-| `references/` — **this repository's own** | **8** | **16** |
+| `references/` — **this repository's own** | **16** | **16** |
 | `distill-essence-engine/references/` — the neighbour, where it is there | 45 | 55 |
 
-**What the 8 and the 16 are.**
+**What the 16 and the 16 are.**
 
-- **8 format cards** = `video-spec` **+ the seven grammars this side added**: `transformation`,
-  `time-fold`, `remembered-world`, `impossible-camera`, `meaning-responsive`,
-  `recognizing-world`, `coexisting-realities`.
-- **16 style cards** = `sumi-e` **+ fifteen carried over from the image side** (`watercolor`,
+- **16 format cards** = `video-spec` **+ the fifteen grammars**: `transformation`, `time-fold`,
+  `remembered-world`, `impossible-camera`, `meaning-responsive`, `recognizing-world`,
+  `coexisting-realities`, and the eight provisional ones — `recursive-frame`, `scale-rupture`,
+  `material-substitution`, `population-emergence`, `temporal-panorama`, `light-as-actor`,
+  `frame-escape`, `physics-with-a-rule`. **What makes one of these a grammar and not another
+  kind of card is that it is `video-spec` plus one rule**, and that rule is what the registry
+  below records.
+- **16 style cards** = `sumi-e` **+ fourteen carried over from the image side** (`watercolor`,
   `mokuhanga`, `oil-painting`, `gouache-abstract`, `cinematic-still`, `documentary-photo`,
   `instant-photo`, `landscape-photo`, `macro-photo`, `street-photo`, `studio-portrait`,
   `sketch-broadstroke`, `blueprint-plan`, `lab-notebook`) **+ `impossible-medium`, the one card
   here with no image-side original.**
 
-⚠️ **Of these 24 cards, one has mirrors.** `video-spec-ja.md` and `video-spec-zh.md` are the
-only pair, so **23 cards are canonical English with no translation**—and
+⚠️ **Of these 32 cards, one has mirrors.** `video-spec-ja.md` and `video-spec-zh.md` are the
+only pair, so **31 cards are canonical English with no translation**—and
 [`tools/check_i18n.py`](../tools/check_i18n.py) does not count them among its documents: **it
 checks the documents handed to a reader, and these are cards a run opens.**
+
+## The grammar registry
+
+`references/grammars/index.yaml` **is the list of grammars, and it is the list the checks
+read.** A grammar card is prose addressed to a person; **the registry is the same facts in a
+shape a check can open.**
+
+```text
+- name: transformation            # the name §6 REF_FORMAT uses
+  card: transformation            # references/formats/<card>.md
+  status: established             # established | provisional
+  routes: [WAN 3.0, MINIMAX H3, SEEDANCE 2.5]
+  written_into: ["9. ACTION", "11. MOTION"]
+  essential_moves: [ … ]          # what the grammar does, in one line each
+  negative_conflicts: ["no deforming silhouette"]   # clauses that would forbid the move
+  grounding: …                    # the ordinary shot this grammar is measured against
+  failure: …                      # the defect it is most often confused with
+```
+
+⚠️ **`status` says whether the list is canonical, not whether the card is good.** The seven
+`established` cards are the ones this repository already had. **The eight `provisional` ones
+fill seats that the author's own list will replace**—so **a provisional entry is not to be
+quoted as canon.**
+
+⚠️ **`routes` is a declaration, not a measurement.** The only entry with a measured reason is
+`coexisting-realities`, whose own card says a single continuous take cannot hold two places
+—**so `WAN 3.0` is excluded there and nowhere else.** Do not widen or narrow `routes` without
+a card saying why.
+
+⚠️ **`written_into` uses the section names of `specmap.SPEC_SECTIONS`** (`"9. ACTION"`), so the
+registry and the specification share one spelling. **The card writes the same list as `§9
+ACTION`**—two spellings, two readers, one list.
+
+⚠️ **`negative_conflicts` holds only clauses that already stand in some card's `## Negative`.**
+**It does not add to the floor**—it names phrases that would forbid the grammar's own move if
+a work copied them into §18. **An empty list means "no clause here forbids it," not "checked
+and clear."**
 
 ⚠️ **The neighbour's 45 and 55 are counted by the same rule, over that directory as it stands
 today.** They are **the image side's inventory, and this repository does not own them**—so
@@ -73,6 +119,7 @@ today.** They are **the image side's inventory, and this repository does not own
 |---|---|---|
 | format | `SVL_FORMATS_DIR` | where the format cards are |
 | style | `SVL_STYLES_DIR` | where the style cards are |
+| registry | `SVL_GRAMMARS_DIR` | where `index.yaml` is — **overlaid, never replaced**: this repository's own `references/grammars/` remains reachable |
 
 ⚠️ **Each layer reads its own variable.** Pointing at a style directory **does not move the
 format layer**—and **the converse holds too.** *A naming that is not read must not look like
@@ -140,9 +187,18 @@ name would have to lie about the other route.**
 | `L22` | **image** specifications, both layers | a hole no card declares; a card carrying holes the specification does not fill; a card that cannot be opened or has no `## Environment variables` |
 | `L31` | the style card named in §6 ⇄ `bible.style` | the home and the specification name different styles |
 | `L32` | the format card named in §6 | the named card cannot be opened, or declares no `## Negative` |
+| `L42` | §6 `REF_FORMAT`, the grammar registry, `dramaturgy.set_pieces` | the named grammar is not in the registry; a section it declares `written_into` is missing or empty; §18 names a route not in its `routes`; a set piece's `format` is not the §6 name |
+| `L45` | the registry's `negative_conflicts` and §18 `Negative Prompt` | the specification names a grammar and its own `Negative Prompt` forbids that grammar's essential move |
+| `L46` | `aim`'s `grammar: <name>` prefix and the registry | `aim` claims a grammar the registry does not hold |
 
-⚠️ **`L31` and `L32` are neighbours on purpose**—**they read the same §6 and differ only in the
-key.** Separated, one of them gets fixed and the other is forgotten.
+⚠️ **`L31`, `L32`, `L42`, `L45` and `L46` are neighbours on purpose**—**they read the same §6
+and the same registry, and differ only in the key.** Separated, one of them gets fixed and the
+others are forgotten.
+
+⚠️ **`L42` and `L46` are quiet by construction on a work that names no grammar.** A
+specification on `video-spec` has no grammar to register; an `aim` that does not start with
+`grammar:` is free prose and is left alone. **A work that names nothing is not a work that
+failed**—the notes say how many were looked at, so silence stays legible.
 
 ⚠️ **`L20` and `L32` report three outcomes, not two**—**a missing card directory is a note;
 a missing card is a violation; a card missing its section is a violation.** *A directory that
@@ -170,6 +226,16 @@ is the honest reading of "this repository does not hold the cards," not a bug.
   addressed to a reader.** ⚠️ **This is why `L22` cannot be extended to the video route**—a
   video specification uses §1–20 and fills none of the holes a video format card declares, so
   **the check would fire on every correct specification.**
+- **A grammar card's `## Written into` prose.** The check reads the registry's `written_into`,
+  not the card's list—**the card writes `§9 ACTION`, the registry writes `"9. ACTION"`**, and
+  **the checker only ever opens the registry.** The two lists are kept in step by `L42`'s
+  coverage note, which names any card on disk that the registry does not hold.
+- **The registry's `essential_moves`, `grounding` and `failure`.** These are the grammar's
+  meaning, and **no check compares them to the specification.** `L45` reads only
+  `negative_conflicts`; **whether a device is doing what its card says cannot be read from
+  here.**
+- **`dramaturgy.set_pieces[].why`.** `L42` compares the set piece's `format` with §6 and
+  nothing else—**whether the set piece earns its place is the author's judgement.**
 - **The board.** No shot record field points at `specs/board/`, so **no check opens it**
   ([`docs/usage.md`](usage.md)).
 

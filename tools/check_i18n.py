@@ -60,6 +60,7 @@ DOCS = (
     "docs/seedance-route.md",
     "docs/usage.md",
     "docs/cards.md",
+    "docs/dramaturgy.md",
     "engine/ledger/README.md",
     "engine/shot/README.md",
     "schemas/README.md",
@@ -74,12 +75,17 @@ DOCS = (
     "references/formats/video-spec.md",
     # ⚠️ **Skill は1行目が frontmatter である**——ヘッダはその直後に在る（R2 を見ること）。
     "skills/breakdown/SKILL.md",
+    "skills/direction/SKILL.md",
     "skills/design/SKILL.md",
     # ⚠️ **`staging` は5つ目の段ではない**——②の中の第7段である。それでも
     #    **`DOCS` に並べる**: 検査の外に出せば、外に出したこと自体が見えなくなる。
     "skills/staging/SKILL.md",
     "skills/ledger/SKILL.md",
     "skills/shot/SKILL.md",
+    # ⚠️ **`review` は⑥でも⑦でもない**——④のあとに座る評議会であり、検収の第三層に書く。
+    #    **段ではないものが `DOCS` に並ぶのは、`staging` と同じ理由である**: 外に出せば、
+    #    外に出したこと自体が見えなくなる。
+    "skills/review/SKILL.md",
 )
 
 #: ミラーの言語接尾辞。**正典は英語なので `en` は無い。**

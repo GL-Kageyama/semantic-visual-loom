@@ -70,8 +70,10 @@ leaves, are in [`engine/shot/README.md`](../engine/shot/README.md).
 
 ⚠️ **The skills in `skills/` are not commands**——**they are instructions to a Claude Code
 session**, and **they are what turns a story into the specifications.** See **The four stages**
-below. ⚠️ **Not every skill is a stage**——`staging` (the camera, decided in one hand) **runs
-inside ②**, and **the count of stages does not move because it exists.**
+below. ⚠️ **Not every skill is a stage**——`direction` (the work's dramaturgy) **runs inside
+①**, `staging` (the camera, decided in one hand) **runs inside ②**, `review` (the council)
+**sits down after ④**, and **the count of stages does not move because they exist.**
+⚠️ **`review` writes the take's `verdict.council` and never adopts**——a skill after ④ is not ⑤.
 
 ## The four stages
 
@@ -90,6 +92,11 @@ inside ②**, and **the count of stages does not move because it exists.**
 `Camera` / `Audio` / `Negative` / `Style Motion`——**all English**, and **being separated is
 itself the point** ([`references/formats/video-spec.md`](../references/formats/video-spec.md) §18).
 ⚠️ **They are fed separately, and only §18 is fed**——§19 and §20 are our own record.
+⚠️ **`## DIRECTION`, standing between §17 and §18, is not an eighth slot.** `PROMPT_SLOTS`
+stays seven; the section is **prepended to `Master Prompt` when the shot is generated**, so it
+reaches the model **without becoming a slot.** It is written from `ledger.dramaturgy`, the
+shot's `dramatic` record and §12 EMOTION, in English; **a shot with no `dramatic` record needs
+none**, and **L43 reports how many shots carry a section against how many carry a record.**
 
 ⚠️ **§18's heading names the model, and there are three video routes.** `L18` reads that heading
 against the registry (`specmap.MODELS`): **`WAN 3.0` takes a `key_image`, and `MINIMAX H3` does
@@ -120,8 +127,8 @@ is the one seat for it. ⚠️ **A second seat once existed** — a backticked l
 built**, because the ruling it served was withdrawn and **no specification used it.** The rule and
 the measurement are in [`engine/ledger/README.md`](../engine/ledger/README.md) (`L21`).
 
-⚠️ **The invocation carries a namespace**——`/semantic-visual-loom:breakdown`, `:design`,
-`:ledger`, `:shot`, `:staging`.
+⚠️ **The invocation carries a namespace**——`/semantic-visual-loom:breakdown`, `:direction`,
+`:design`, `:ledger`, `:shot`, `:staging`, `:review`.
 
 ⚠️ **The shape of ①'s input is undecided.** Nothing in this repository says **whether a work
 arrives as a plot, a script, or a novel**——read it with a person or with a session, and record
@@ -131,8 +138,10 @@ so **① alone cannot emit a record the checker can read.** ⚠️ **The checker
 ② is on disk.**
 
 ⚠️ **Two stages are not among them (⑥ structure, ⑦ acceptance)**——**the input is not on the
-record side**: `clips[]` is by definition a list of adopted takes, and **not one video take
-carries `adopted: true`.** ⚠️ **They cannot be moved**, and **a skill that emits an empty
+record side**: `clips[]` is by definition a list of adopted takes, and **while two video takes
+do carry `adopted: true`**, **a work's adopted takes are not yet an edit**——nothing records
+which clips were lined up, in which order, and `Project` does not open `timeline/`.
+⚠️ **They cannot be moved**, and **a skill that emits an empty
 timeline is worse than no skill.** The reason is in
 [`projects/hitosara/renders/README.md`](../projects/hitosara/renders/README.md).
 
@@ -215,9 +224,9 @@ The counts behind that are in `HISTORY.md`.
 
 ## The layers
 
-The check is **39 layers, `L0`–`L39`**, plus schema-shape validation.
-⚠️ **`L35` is reserved and unwritten**, so **the codes skip a number** — `L0`–`L39` is 40 codes and
-**39 layers.** ⚠️ **`L34` and `L36` read the song**, and a work that does not name the song as its
+The check is **52 layers, `L0`–`L52`**, plus schema-shape validation.
+⚠️ **`L35` is reserved and unwritten**, so **the codes skip a number** — `L0`–`L52` is 53 codes and
+**52 layers.** ⚠️ **`L34` and `L36` read the song**, and a work that does not name the song as its
 time source **is told they saw nothing** — **they are not silent about it.**
 ⚠️ **`L37` reads the inside of a shot** — whether its beats tile its `duration` — and **it reads
 every work, whether or not a song exists.** ⚠️ **`L38` reads the head of a video specification** —
@@ -225,6 +234,20 @@ whether a staging summary opens it — and **a work that holds no video specific
 confirmed nothing**, rather than that it is clean.
 ⚠️ **`L39` reads the pair when one shot is kept on two routes** — the specifications standing side by
 side under route-named directories — and **a work that keeps one route is told it read no pairs.**
+⚠️ **`L40`–`L47` read dramaturgy**, and **each of them is switched on by a record, not by a
+version**: `L40`/`L43`/`L47` by a shot's `dramatic`, `L44` by `beats[].intensity`, `L41` by
+`acts`/`sequences`, `L42`/`L45` by a grammar named in §6 `REF_FORMAT`, `L46` by an `aim` that
+opens with `grammar:`. ⚠️ **`L48`–`L50` read a sequence against its own shots** — `withheld`,
+`cuts` and `tempo` — and **a sequence that declares none of them is told it constrained nothing.**
+⚠️ **`L51` reads a shot's `population` against §18** — the number becomes the naming in
+`Master Prompt` and its copy in `Negative Prompt`, and both directions are read — and **a shot
+that declares no count is told nothing was read.** ⚠️ **`L52` reads a shot's `body_parts`** —
+which parts of the body the frame holds, and how many — against the same two sentences per
+part, and against `population`: **a count of people counts bodies, and the failure this field
+came from happened in a limb.** **A work that writes none of these is not failing them** — the notes say
+how many shots were looked at. What each one reads — and does not read — is in
+[`docs/dramaturgy.md`](dramaturgy.md), [`docs/cards.md`](cards.md) and the layer index in
+[`engine/ledger/README.md`](../engine/ledger/README.md).
 **They are not one verdict**—each layer fires on its own and is reported with the
 number it saw.
 
@@ -268,7 +291,7 @@ and the mirrors does not change.**
 ⚠️ **The working language of development stays Japanese** (commit messages, `HISTORY.md`,
 conversation) **while the canonical of the documents is English.** These two are different
 things: one is the language the work is done in, the other the language the documents are
-authoritative in. **21 documents × 3 languages are in place** (the count
+authoritative in. **26 documents × 3 languages are in place** (the count
 `tools/check_i18n.py` reports as canonical), and the rules are in
 [`CLAUDE.md`](../CLAUDE.md).
 
@@ -278,6 +301,7 @@ authoritative in. **21 documents × 3 languages are in place** (the count
 |---|---|
 | [`README.md`](../README.md) | what this foundation is, and what it is made of |
 | [`docs/cards.md`](cards.md) | **the two card axes** (Format / Style), where they live, and **which check reads what** |
+| [`docs/dramaturgy.md`](dramaturgy.md) | **the ledger's third register**—the treatment, the shot's `dramatic` record, and the `DIRECTION` section |
 | [`engine/ledger/README.md`](../engine/ledger/README.md) | the production ledger, the layers, and what each check does not see |
 | [`docs/h3-route.md`](h3-route.md) | the constraints that hold on the `MINIMAX H3` route—the strings handed over, and the paper |
 | [`docs/seedance-route.md`](seedance-route.md) | the constraints that hold on the `SEEDANCE 2.5` route—what is measured, the slot it does not receive, and what no check can see |

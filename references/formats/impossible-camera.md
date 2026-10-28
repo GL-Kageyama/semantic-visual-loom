@@ -39,5 +39,20 @@
 ## Examples
 - —
 
+## Written into
+- §10 CAMERA
+
+⚠️ **The machine-readable half of this list is [`references/grammars/index.yaml`](../grammars/index.yaml)** — `L42` reads the index, not this prose. **Two places, one list**: the card is for a person, the index is for the checker.
+
+## When it earns its place
+- **The value it turns.** A viewpoint no body can have — **and the impossibility is the argument**, not the decoration.
+- **What the audience loses without it.** Being shown something that cannot be stood in front of. **Every lawful camera says "someone was here."**
+- **The grounding shot.** A shot in the same world with a camera that a person could hold. ⚠️ **The impossible viewpoint spends the shot's whole budget** — a second one in the same sequence costs the first.
+- **What it costs.** The entry must be stated and the path must keep one law. **Both are stated in §10, and both must survive into `Camera Prompt`.**
+
+## Failure it is confused with
+- ⚠️ **A drone shot is not an impossible viewpoint.** A drone is a body's viewpoint with a budget. **If the shot would read the same as a drone, it is a drone.**
+- **Fisheye, whip-pan, or a tilted horizon standing in for impossibility.** Those are effects. **The grammar states where the viewpoint is and how it got there.**
+
 ## Sources
 The video side's own format card. **Its grammar is written into the `video-spec` skeleton — §10 CAMERA** — which asks for timing, movement, target and speed; this card asks what the viewpoint *is*, which that section has no field for. `distill-essence-engine/references/formats/` has no equivalent, because a still image has no camera to place.

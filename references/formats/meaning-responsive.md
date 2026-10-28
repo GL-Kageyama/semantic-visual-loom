@@ -40,5 +40,22 @@
 ## Examples
 - —
 
+## Written into
+- §10 CAMERA
+- §13 LIGHTING
+
+⚠️ **The machine-readable half of this list is [`references/grammars/index.yaml`](../grammars/index.yaml)** — `L42` reads the index, not this prose. **Two places, one list**: the card is for a person, the index is for the checker.
+
+## When it earns its place
+- **The value it turns.** The world answers what the shot means — **and the answer arrives with a delay the audience can feel.**
+- **What the audience loses without it.** The sense that the place is not indifferent. **A world that answers is a world that has been listening.**
+- **The grounding shot.** A shot in the same world with an ordinary camera, **so the answer is measured against an unanswering version of the same place.**
+- **What it costs.** The answer must have no visible cause — **no actor, no hand, no machine** — and it must change **one** thing, staged in §13.
+
+## Failure it is confused with
+- ⚠️ **An actor reacting is not the world answering.** The character's reaction is `recognizing-world`'s business, not this card's.
+- **A blanket colour grade** — the whole picture going warm because the scene is tender. **One element answers; the frame does not flood.**
+- **A camera move answering the meaning.** The camera is the audience's stand-in; if it answers, the world has not.
+
 ## Sources
-The video side's own format card. **Its grammar is written into the `video-spec` skeleton — §10 CAMERA's target and §12 LIGHTING** — and it is the card that most needs §12's lighting events, because the world's answer is staged there. `distill-essence-engine/references/formats/` has no equivalent, because a still frame cannot show a world answering with a delay.
+The video side's own format card. **Its grammar is written into the `video-spec` skeleton — §10 CAMERA's target and §13 LIGHTING** — and it is the card that most needs §12's lighting events, because the world's answer is staged there. `distill-essence-engine/references/formats/` has no equivalent, because a still frame cannot show a world answering with a delay.

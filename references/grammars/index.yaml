@@ -1,0 +1,226 @@
+# The grammar registry — 形式カードの目録
+#
+# ⚠️ **これは検査のための目録である。** `L42`（登録・節・経路）・`L45`（Negative との衝突）・
+#    `L46`（`aim` の名乗り）は、**この1枚だけを読む**——カードの散文は読まない。
+#    カード（`references/formats/<card>.md`）は人へ、この目録は機械へ向く。
+#    **二重に書くのは読者が違うからであり、片方だけ直せば食い違う。**
+#
+# ⚠️ **`status` は「この一覧が正典か」を言っている。**
+#    `established` … この基盤が既に持っていた7枚。
+#    `provisional` … 席を埋めるために置いた8枚。**作者の目録が届いたら差し替える。**
+#    **仮置きを正典と呼ばない。**
+#
+# ⚠️ **`routes` は「宣言」であって「実測」ではない。** 実測があるのは
+#    `coexisting-realities` の1件だけである（カード自身が、`WAN 3.0` では
+#    文法が矛盾になると書いている）。ほかの14枚は3経路すべてに載せている——
+#    **測っていないことを、測った顔にしない。**
+#
+# ⚠️ **`written_into` は仕様の節を `"N. NAME"` の形で書く**（`specmap.SPEC_SECTIONS`
+#    と同じ綴り）。`L42` は節が実在し、空でないことを見る。
+#
+# ⚠️ **`negative_conflicts` には、このリポジトリのカードの `## Negative` に
+#    **既に在る句**だけを書く。**新しい禁止を作らない**——この層は
+#    **デバイスと、仕様が既に持っている Negative の衝突**を見るのであって、
+#    床を増やす層ではない。⚠️ **空の一覧は「衝突が無い」であり、
+#    「照合していない」ではない**——`L45` は空の本数を註で報告する。
+#
+# ⚠️ **`essential_moves` は英語である。** 生成に渡る文字列ではないが、
+#    文法の核は言語を跨ぐ——記録側の日本語は `dramatic` と `performance` が持つ。
+
+version: 1
+
+grammars:
+  # ---------------------------------------------------------------- established
+  - name: transformation
+    card: transformation
+    status: established
+    routes: [WAN 3.0, MINIMAX H3, SEEDANCE 2.5]
+    written_into: ["9. ACTION", "11. MOTION"]
+    essential_moves:
+      - "one subject becomes another inside the shot"
+      - "the change happens without a cut and without a stated process"
+    negative_conflicts:
+      # `material-substitution` の `## Negative`。形が変わることを禁じる句であり、
+      # この文法の核（形が変わる）と正面から衝突する。
+      - "no deforming silhouette"
+    grounding: "the same world, ordinary camera, before or after — the subject unchanged across the clip"
+    failure: "a cut, a dissolve, or a held intermediate stage standing in for the change; face morphing read as identity drift"
+
+  - name: time-fold
+    card: time-fold
+    status: established
+    routes: [WAN 3.0, MINIMAX H3, SEEDANCE 2.5]
+    written_into: ["8. TEMPORAL STRUCTURE"]
+    essential_moves:
+      - "many times pass through one frame that does not cut away"
+      - "the place holds while what it is made of changes"
+    negative_conflicts:
+      # `population-emergence` と `temporal-panorama` の `## Negative`。
+      # 長い時間を一つのショットへ畳むことを禁じる句であり、この文法の核と衝突する。
+      - "no time-lapse"
+    grounding: "the same place, ordinary camera, one moment held"
+    failure: "a cut to a later time; several unrelated states with no survivor"
+
+  - name: remembered-world
+    card: remembered-world
+    status: established
+    routes: [WAN 3.0, MINIMAX H3, SEEDANCE 2.5]
+    written_into: ["11. MOTION", "15. CONTINUITY"]
+    essential_moves:
+      - "the moment holds while its contents drift"
+      - "the drift returns, and something stays exact"
+    negative_conflicts: []
+    grounding: "the same moment with a reliable world — nothing drifts"
+    failure: "drift that destroys meaning (illegible text, melting faces); drift that never returns"
+
+  - name: impossible-camera
+    card: impossible-camera
+    status: established
+    routes: [WAN 3.0, MINIMAX H3, SEEDANCE 2.5]
+    written_into: ["10. CAMERA"]
+    essential_moves:
+      - "the viewpoint cannot exist physically, and the shot is its journey"
+      - "the entry into that viewpoint is stated"
+    negative_conflicts: []
+    grounding: "the same world from a viewpoint a body could have"
+    failure: "an unstated entry; a path that changes its own physics; no arrival"
+
+  - name: meaning-responsive
+    card: meaning-responsive
+    status: established
+    routes: [WAN 3.0, MINIMAX H3, SEEDANCE 2.5]
+    written_into: ["10. CAMERA", "13. LIGHTING"]
+    essential_moves:
+      - "the picture answers what the shot means, and nothing in frame causes it"
+      - "the answer is in the world, not in the camera"
+    negative_conflicts: []
+    grounding: "the same frame with its ordinary cause — the rain starts because it rains"
+    failure: "a visible cause; a camera move standing in for the answer; a blanket grade"
+
+  - name: recognizing-world
+    card: recognizing-world
+    status: established
+    routes: [WAN 3.0, MINIMAX H3, SEEDANCE 2.5]
+    written_into: ["4. ENVIRONMENT", "13. LIGHTING"]
+    essential_moves:
+      - "the place responds to who is present, and the response accumulates"
+      - "the sign is environmental, not social"
+    negative_conflicts: []
+    grounding: "the same place with no one in it — the setting answers nobody"
+    failure: "a character reacting in place of the setting; a single cut from unrecognised to recognised"
+
+  - name: coexisting-realities
+    card: coexisting-realities
+    status: established
+    # ⚠️ **唯一の実測つきの制限である。** カード自身が「`WAN 3.0` の経路では衝突は
+    #    正面からであり、1本の連続したテイクは二つの場所を抱えない」と書き、
+    #    §18 が見出しで `MINIMAX H3` を名乗ることを要求している。
+    #    ⚠️ **除くのは `WAN 3.0` だけである。** カードが書いているのは
+    #    「連続した1テイクの家風」への衝突であり、`SEEDANCE 2.5` はその家風を
+    #    持たない（1本の長いプロンプトが自分の時計を持つ）。**書かれていない制限を、
+    #    ここで作らない**——目録は、カードが言ったことだけを写す。
+    routes: [MINIMAX H3, SEEDANCE 2.5]
+    written_into: ["15. CONTINUITY"]
+    essential_moves:
+      - "more than one reality stands in one frame and none is earlier"
+      - "the frame lays them out without a cut between them"
+    negative_conflicts: []
+    grounding: "the same place in one reality, ordinary camera — nothing coexists"
+    failure: "a cut or dissolve between realities; a dividing line; a reality declared earlier than another"
+
+  # ---------------------------------------------------------------- provisional
+  - name: recursive-frame
+    card: recursive-frame
+    status: provisional
+    routes: [WAN 3.0, MINIMAX H3, SEEDANCE 2.5]
+    written_into: ["10. CAMERA"]
+    essential_moves:
+      - "the picture holds a picture of the same place at the same moment"
+      - "the inner frame differs from the outer one in something that matters"
+    negative_conflicts: []
+    grounding: "the same place with no carrier in frame — the picture does not contain itself"
+    failure: "an unmotivated picture-in-picture; a frame that appears from nowhere; more than three levels"
+
+  - name: scale-rupture
+    card: scale-rupture
+    status: provisional
+    routes: [WAN 3.0, MINIMAX H3, SEEDANCE 2.5]
+    written_into: ["10. CAMERA", "11. MOTION"]
+    essential_moves:
+      - "the subject becomes the environment and the environment the subject"
+      - "one continuous travel flips the reading, with no cut"
+    negative_conflicts: []
+    grounding: "the same place at one scale, ordinary camera — the frame never turns"
+    failure: "a cut at the turn; a turn that happens twice; a focus rack alone"
+
+  - name: material-substitution
+    card: material-substitution
+    status: provisional
+    routes: [WAN 3.0, MINIMAX H3, SEEDANCE 2.5]
+    written_into: ["5. OBJECTS", "11. MOTION"]
+    essential_moves:
+      - "the shape holds while the substance changes"
+      - "one nameable material property flips, and the camera answers it"
+    negative_conflicts: []
+    grounding: "the same object in its first material, ordinary camera"
+    failure: "a deforming silhouette; a blanket soft-focus; a change with no cause in the world"
+
+  - name: population-emergence
+    card: population-emergence
+    status: provisional
+    routes: [WAN 3.0, MINIMAX H3, SEEDANCE 2.5]
+    written_into: ["4. ENVIRONMENT", "11. MOTION"]
+    essential_moves:
+      - "the many come out of the place itself"
+      - "the emergence has a count and stops"
+    negative_conflicts: []
+    grounding: "the same place, ordinary camera, empty — the place has not answered yet"
+    failure: "a crowd entering from the frame's edge; an emergence with no end; faces that read as characters"
+
+  - name: temporal-panorama
+    card: temporal-panorama
+    status: provisional
+    routes: [WAN 3.0, MINIMAX H3, SEEDANCE 2.5]
+    written_into: ["8. TEMPORAL STRUCTURE", "11. MOTION"]
+    essential_moves:
+      - "one person's moments occupy one frame at once"
+      - "the layers have a readable order, and the figure does not acknowledge them"
+    negative_conflicts: []
+    grounding: "the same place with one figure and one moment, ordinary camera"
+    failure: "several different characters; a figure looking at its own afterimage; an unordered smear"
+
+  - name: light-as-actor
+    card: light-as-actor
+    status: provisional
+    routes: [WAN 3.0, MINIMAX H3, SEEDANCE 2.5]
+    written_into: ["13. LIGHTING", "11. MOTION"]
+    essential_moves:
+      - "the light has one intent, and its lawful behaviour and that intent coincide"
+      - "the intent is read on a subject that is lit or left unlit"
+    negative_conflicts: []
+    grounding: "the same place with ordinary, undirected light"
+    failure: "a supernatural glow; atmosphere with no subject; a sequence of lighting moods"
+
+  - name: frame-escape
+    card: frame-escape
+    status: provisional
+    routes: [WAN 3.0, MINIMAX H3, SEEDANCE 2.5]
+    written_into: ["10. CAMERA", "15. CONTINUITY"]
+    essential_moves:
+      - "the subject crosses the frame's own edge and re-enters from another part of the same place"
+      - "the crossing is seen, not cut"
+    negative_conflicts: []
+    grounding: "the same place, ordinary camera, the subject staying inside the frame"
+    failure: "an exit-and-re-enter cut; walking around the frame's edge; a masked wipe"
+
+  - name: physics-with-a-rule
+    card: physics-with-a-rule
+    status: provisional
+    routes: [WAN 3.0, MINIMAX H3, SEEDANCE 2.5]
+    written_into: ["2. WORLD", "11. MOTION"]
+    essential_moves:
+      - "one law of the world is replaced, and the replacement is stated"
+      - "the law costs something, and a witness demonstrates it"
+    negative_conflicts: []
+    grounding: "the same place obeying ordinary physics, before or after"
+    failure: "an unstated rule; mixed laws in one frame; an impossible world with nothing paid for it"

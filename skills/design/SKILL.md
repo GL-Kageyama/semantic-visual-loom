@@ -54,6 +54,20 @@ order of their own. What follows is the order that **makes a thing exist before 
 reads it** — and one edge in it is load-bearing: **`place` and `time` come before `beats`,
 because `L3` and `L4` read the beat body, not only the field.**
 
+0. **Read the shot's dramatic record first — `ledger.dramaturgy` and this shot's
+   `dramatic`.** `function` · `value.from` / `value.to` · `stake` · `audience` ·
+   `button`. ⚠️ **This is not a second design pass** — it is what ① decided about
+   *why this shot exists*, and ② must not silently disagree with it. **If the record
+   is missing, say so and design as before** — ⚠️ **do not invent one here**: a
+   function written after the picture exists is a description, not an aim.
+   **Read by:** `L40` (a narrative function must turn a value) · `L43` (the words
+   must reach the `## DIRECTION` section) · `L47` (performance, when it is there).
+   ⚠️ **Then read what the sequence says about this shot** — `withheld` (what this
+   shot denies), `cuts` (whether this shot carries `cut: internal`) and `tempo` (the
+   seconds the sequence expects here). **The cut is not yours to decide alone**: when
+   the sequence declares it, the record carries it **and the specification stops
+   saying one continuous take** — `L49` reads both. ⚠️ **`duration` stays the source
+   of truth**; `tempo` is the sequence's copy of it.
 1. **`place` — exactly one.** Drawn from the continuity vocabulary ① opened
    (`locations:` in `ledger.yaml`). ⚠️ **The value does not travel.** What reaches the
    generator is `prompt:Visual Prompt` **and** `handover:distill` — **the field points at
@@ -92,17 +106,52 @@ because `L3` and `L4` read the beat body, not only the field.**
    `timeline.clips[].in`/`out` is the **adoption**. **Intent does not bind adoption** — the
    author finds the right length per take. ⚠️ **This is the only field the checker may compare
    by value** (33 of 33 agreed, measured).
-7. **The camera — §10, and its handover into §18's `Camera Prompt`.**
+   ⚠️ **And say how many people are in the frame — `population`, one integer.** It is **the
+   greatest number visible at any single moment**: someone who leaves is counted before they
+   leave. **A blank is not neutral** — measured, two shots of a one-character work came back
+   with a second person in them, because nothing had ever said "one."
+   ⚠️ **The number is not handed over; two sentences are.** `specmap.population_phrase(n)` goes
+   into §18's `Master Prompt` verbatim (`the only person in the frame` / `no one in the frame` /
+   `N people in the frame`), and the matching clause of `specmap.POPULATION_NEGATIVES` goes into
+   `Negative Prompt` (`no second person` / `no people`). **Write the phrase as it stands** —
+   it is an invariant string, and translating or paraphrasing it changes what the generator does.
+   ⚠️ **Do not backfill it into older shots.** A count written after the picture exists is an
+   explanation, not a declaration.
+   **Fires if wrong:** `L51` (the naming missing, the copy missing, or a copy that forbids fewer
+   people than the shot declares).
+   ⚠️ **And if the frame holds only part of a body, say which parts and how many —
+   `body_parts`** (`{hand: 2}`, `{foot: 2}`). **A count of people counts bodies**; measured, a
+   hands-only shot came back on one of two generations with **a third hand** while its
+   `population: 1` was correct. **It is limbs, not hands** — feet, legs and arms fail the same
+   way, and the vocabulary is `specmap.BODY_PARTS`. The number is not handed over either:
+   `specmap.body_part_phrase(part, n)` goes into `Master Prompt` (`2 hands in the frame`) and
+   the matching clause of `specmap.body_part_negatives(part)` into `Negative Prompt`. **One body
+   has two hands** — the layer reads that arithmetic against `population` too. ⚠️ **A frame that
+   holds the whole body needs no `body_parts`**, and nothing is backfilled.
+   **Fires if wrong:** `L52` (an unregistered part, the naming missing, a copy that forbids
+   fewer than declared, or a count the headcount cannot hold).
+7. **Mise-en-scène — the stage picture (§9 `## Blocking`), the light (§13), the camera (§10),
+   and the handover into §18's `Camera Prompt`.**
    ⚠️ **This step has its own document: [`skills/staging/SKILL.md`](../staging/SKILL.md).**
-   It decides **where the camera stands, what the style permits it, how many camera events the
-   shot has, and the reason for every prohibition** — and **writes the reasons into §10 first**,
-   because §18 is *derived* from §10. ⚠️ **The same hand writes both**: a camera decided in the
-   session becomes, in §18, prohibitions with nothing behind them — and §18 is **the only section
-   a generator receives.** ⚠️ **The style owns the camera**; the format may narrow it, **never
-   invert it** — and **a decline is written as a decline** (*The style permits a focus rack; this
-   shot spends neither*), in §18.
+   It decides **where the bodies are staged, where the camera stands and what it wants, what the
+   style permits it, how many camera events the shot has, and the reason for every prohibition**
+   — and **writes the reasons into §10 first**, because §18 is *derived* from §10.
+   ⚠️ **The same hand writes both**: a camera decided in the session becomes, in §18,
+   prohibitions with nothing behind them — and §18 is **the only section a generator receives.**
+   ⚠️ **The style owns the camera**; the format may narrow it, **never invert it** — and
+   **a decline is written as a decline** (*The style permits a focus rack; this shot spends
+   neither*), in §18.
+   ⚠️ **Blocking is written in §9 ACTION, not §10** — §10 is the camera, blocking is the stage
+   picture the camera is placed against. **Height, distance, entry and exit, and the frame's edge
+   are the cheapest things in cinema and the ones most often left unwritten.**
+   ⚠️ **The light is an actor too.** §13's `Lighting Events` is not a settings list: **say what
+   the light does during the shot** — enters, leaves, stops, fails — the same way the camera's
+   events are said. In a style whose card puts light in the subject's place, a shot whose light
+   does nothing has no subject.
    **Fires if wrong:** `L33` (a gesture the card offers, negated in §18's `Camera Prompt`) ·
    `L17` (the slot itself) · `L20` (`Style Motion`'s destination).
+   ⚠️ **Nothing reads §9's `## Blocking` and nothing reads §13's events as events** — the stage
+   picture is unmeasured. **A hole, recorded as one.**
 8. **The video specification, §1–20** — in `specmap.SPEC_SECTIONS`' order, all twenty. Write
    `spec:` in the record to point at it. **Fires if wrong:** `L11`.
    ⚠️ **Two failures are different and live in different layers.** "§1 is missing" is `L11`;
@@ -154,8 +203,21 @@ because `L3` and `L4` read the beat body, not only the field.**
    that has to exist first.** ⚠️ **`L38` reads the band; nothing else does, and no check has ever
    read what it says** — **a band that is bad and well-formed passes.**
 
-10. **§18's 7 slots** — `Master Prompt` · `Visual Prompt` · `Motion Prompt` · `Camera Prompt` ·
-   `Audio Prompt` · `Negative Prompt` · `Style Motion`. **Fires if wrong:** `L17`.
+10. **The `## DIRECTION` section first, then §18's 7 slots.**
+   ⚠️ **`## DIRECTION` stands between §17 and §18 and is not an eighth slot.**
+   `PROMPT_SLOTS` stays seven; **the section is prepended to `Master Prompt` when the
+   shot is generated**, so it reaches the model without becoming a slot. It is written
+   from `ledger.dramaturgy`, this shot's `dramatic`, and §12 EMOTION — **in English,
+   from the record, not translated from it.** `function` becomes its English type through
+   `specmap.DRAMATIC_FUNCTION_EN`; `value.from` / `value.to` become the `en` of the
+   matching `value_poles` entry. **Fires if wrong:** `L43` (a shot with a `dramatic`
+   record whose section is missing, or whose function / value words are not there).
+   ⚠️ **A shot with no `dramatic` record needs no section** — `L43` reports the count
+   instead. ⚠️ **The staging summary (step 9) is not its source** — that band is for
+   reading, and **only §18 reaches a generator** except through this section.
+   ⚠️ **Then write §18's 7 slots** — `Master Prompt` · `Visual Prompt` · `Motion Prompt` ·
+   `Camera Prompt` · `Audio Prompt` · `Negative Prompt` · `Style Motion`.
+   **Fires if wrong:** `L17`.
    ⚠️ **A slot may exist and carry nothing.** `Style Motion`'s source is the style card's
    `Motion character`, and **most style cards do not have one** — a card without it makes the
    slot present and empty, and `L17` passes it. **Fires if wrong:** `L20`.

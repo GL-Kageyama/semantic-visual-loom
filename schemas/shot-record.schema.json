@@ -50,7 +50,26 @@
     "duration": {
       "type": "string",
       "pattern": "^[0-9]+(\\.[0-9]+)?s$",
-      "description": "長さ。従属変数である——話数でも場面でも「30秒セグメント」でも割らない。§2.1。"
+      "description": "長さ。従属変数である——話数でも場面でも「30秒セグメント」でも割らない。§2.1。⚠️ **`L50` は、シーケンスが宣言した `tempo` とこの欄を照合する**——シーケンスは律動の**形**を持ち、ショットは**秒数**を持つ。片方だけを直せば、律動は嘘になる。"
+    },
+    "cut": {
+      "type": "string",
+      "enum": ["continuous", "internal"],
+      "description": "**このショットの内側に、切れ目を持てるか。** `continuous`＝1本の連続したテイク（§18 の既定であり、**この欄を省いたときの値でもある**）。`internal`＝**この短い尺の中に切れ目がある**——変化は一つ（`unit` は動かない）まま、時間を圧縮する。⚠️ **切れ目の判断は、ショットではなくシーケンスが持つ**（`ledger.dramaturgy.sequences[].cuts`）——切れ目は、隣のショットがあって初めて意味を持つからである。`L49` が両方向に照合する。⚠️ **遡って埋めない**——既存の仕様はすべてワンテイクであり、記録が無いことは食い違いではない。"
+    },
+    "population": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "**このショットに、人が何人映るか。**「同時に映る最大の人数」である——途中で去る人物は、去る前の数で数える。⚠️ **§1–20 に欄が無い**（`FIELD_SOURCE`: `added`）。§3 は「誰が」を書き、§18 の散文は人数を書くこともあるが、**数の正を持つ欄はどこにも無かった。** 実測（2026-10-29）: `drama-pilot` の `s02` と `s04` で**二人目の人間が現れた**——作品の人物は一人であり、**それを言う欄が無かった。** ⚠️ **空欄は中立ではない**（`bible.language` と同じ規律）——生成器は、指定されなければ空いた席を自分の既定で埋める。⚠️ **この数から2句が導かれる**: 肯定（`the only person in the frame`）が §18 `Master Prompt` へ、写し（`no second person`）が §18 `Negative Prompt` へ。**`L51` が両方向に読む。** ⚠️ **必須にしない。** 100本超の既存仕様はこの欄の前に書かれた——**記録が無いことは、食い違っていることではない。** ⚠️ **遡って埋めない。** 数を後から書いた記録は、宣言ではなく説明である。"
+    },
+    "body_parts": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "description": "**このショットの枠に入る、身体の部位とその数。**「同時に映る最大の数」である。鍵は部位の**単数形**（`specmap.BODY_PARTS` の鍵: `hand` / `arm` / `foot` / `leg` / `head` / `face` …）。⚠️ **`population` では足りない**——実測（2026-10-29）: `drama-pilot` の `s04` は**手だけのショット**で、**3本目の手**が現れた。`population: 1` は正しかった——**人数は身体を数え、失敗は肢で起きた。** ⚠️ **「手」ではなく「肢」である**——足・脚・腕にも同じ失敗が起きる。⚠️ **この数から2句が導かれる**: 肯定（`2 hands in the frame`）が §18 `Master Prompt` へ、写し（`no second hand`）が §18 `Negative Prompt` へ。**`L52` が両方向に読む**——そして `population` と並べて**解剖の算術**（1体の手は2本）を見る。⚠️ **任意であり、遡って埋めない。** 枠が身体の一部しか写さないショットだけが持つ。"
     },
     "spec": {
       "type": "string",
@@ -59,6 +78,54 @@
     "key_image": {
       "type": "string",
       "description": "**画像**の仕様書へのパス。§1–20 を持たない。⚠️ **これはこのショットの見せ場の1枚である**（決定 2026-09-13、著者）——**動画の最初のコマではない。** ⚠️ **その1枚は、動画へ添付（参照画像）として渡る。** 最初のコマとして渡せば、そのショットの変化（割る・盛り付ける）が**画面上で起きなくなる**——`mode` と `unit` が偽になる。添付なら、文から生成した動画が**その見た目へ寄る**（実測: 添付画像はテキスト指定に勝つ）。⚠️ **`key_image` から改名した**——前の名は「動画の最初のコマ」を意味しており、**著者が逆を選んだ以上、偽である。** ⚠️ **必須にしない。** 必須にすれば、この欄を知らない既存の記録（受け火 V2 の30本）が**形の層で落ちる**——**記録が無いことは、食い違っていることではない。** L18 が註で報告する。⚠️ **7欄**（SCENE / CHARACTERS / SUBJECT / ACTION / LOCATION / LIGHT / ACCENT——`format` カードと `style` カードの穴の和）と `Negative` を持ち、`Negative` は台帳の `bible.negative_base` を覆わねばならない（L21）。`REF_FORMAT` / `REF_STYLE` で名乗ったカードがその穴を宣言しているかを L22 が読む。"
+    },
+
+    "dramatic": {
+      "type": "object",
+      "description": "劇的記録。このショットが物語のどこを負い、何がどう変わるか。⚠️ **`unit` の二つ目の変化ではない**——`unit` は事実の変化、`dramatic` は**同じ一つの変化の値**である。⚠️ **`role` と語が重なるが、軸が違う**——`role` は「そのショットの仕事」、`function` は「物語のどこを負うか」。⚠️ **任意の欄である**——記録が無いことは食い違いではない。持つショットだけが `L40` / `L43` / `L47` の対象になる。",
+      "required": ["function"],
+      "additionalProperties": false,
+      "properties": {
+        "function": {
+          "type": "string",
+          "enum": ["設定", "上昇", "転換", "発見", "決断", "結果", "溜め", "解放", "余韻", "質感", "余白", "様式美"],
+          "description": "劇的関数。物語の関数（設定・上昇・転換・発見・決断・結果・溜め・解放・余韻）と、非物語の関数（質感・余白・様式美）。非物語の関数は値の転換を持たなくてよい。`DIRECTION` 節へは `specmap.DRAMATIC_FUNCTION_EN` で英語に写す。"
+        },
+        "value": {
+          "type": "object",
+          "description": "このショットが負う値の転換。⚠️ **`unit` とは別の変化ではない。** 同じ一つの変化を、価値の側から読んだものである。",
+          "required": ["from", "to"],
+          "additionalProperties": false,
+          "properties": {
+            "from": { "type": "string", "minLength": 1, "description": "変化の前の値。`ledger.dramaturgy.value_poles[].ja` を書く。" },
+            "to": { "type": "string", "minLength": 1, "description": "変化の後の値。`ledger.dramaturgy.value_poles[].ja` を書く。" },
+            "stake": { "type": "string", "description": "この転換で失われるもの／賭けられているもの。" }
+          }
+        },
+        "audience": {
+          "type": "object",
+          "description": "この瞬間の観客。⚠️ **`disclosure_state`（世界の事実）とは別である**——こちらは「観客がこの瞬間に何を感じ、何を予期し、何を知るか」。",
+          "additionalProperties": false,
+          "properties": {
+            "feel": { "type": "string", "description": "観客が感じること。" },
+            "expect": { "type": "string", "description": "観客が次に予期すること。" },
+            "know": { "type": "string", "description": "この瞬間に観客が知る（または知っている）こと。" }
+          }
+        },
+        "button": { "type": "string", "description": "最後の一枚。このショットが終わるときに残る像。" },
+        "performance": {
+          "type": "object",
+          "description": "人物の演技。人物がいないショット、または `mode: still` のショットでは任意。⚠️ **`objective == obstacle` は `L47` が鳴らす**——演技が「願望」ではなく「説明」になっている。",
+          "additionalProperties": false,
+          "properties": {
+            "objective": { "type": "string", "description": "その人物がこのショットで欲しがっていること。" },
+            "obstacle": { "type": "string", "description": "それを妨げているもの。" },
+            "tactic": { "type": "string", "description": "障害を押し返すために取る手段。" },
+            "subtext": { "type": "string", "description": "言葉・動作の下にあるもの。" },
+            "intensity": { "type": "integer", "minimum": 0, "maximum": 10, "description": "演技の強度（0–10）。" }
+          }
+        }
+      }
     },
 
     "aim": {
@@ -97,7 +164,9 @@
             "enum": ["sparse", "held", "dense", "transition"],
             "description": "密度。⚠️ 決定（2026-09-13）——**二値では足りない。** 当初は sparse | dense の二値だったが、受け火 V2 の30本が持つビート91個を数えたところ **held が59（65%）・sparse が30（33%）・dense が1・transition が1** で、**65% が enum に表現を持たなかった。** 二値に収めるには held を dense に読み替えることになるが、それは**意味を捨てる**——held は「濃い」ではなく「保たれている」であり、この作品の地である。実測が enum を広げた。"
           },
-          "what": { "type": "string", "description": "そこで何が起きるか。" }
+          "what": { "type": "string", "description": "そこで何が起きるか。" },
+          "intensity": { "type": "integer", "minimum": 0, "maximum": 10, "description": "このビートの強度（0–10）。⚠️ **`density` と直交する**——濃い＝強い、ではない。`L44` が緊張の曲線を読む。" },
+          "audience": { "type": "string", "description": "このビートで観客が予期すること。" }
         }
       }
     },

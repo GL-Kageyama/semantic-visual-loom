@@ -39,5 +39,21 @@
 ## Examples
 - —
 
+## Written into
+- §8 TEMPORAL STRUCTURE
+
+⚠️ **The machine-readable half of this list is [`references/grammars/index.yaml`](../grammars/index.yaml)** — `L42` reads the index, not this prose. **Two places, one list**: the card is for a person, the index is for the checker.
+
+## When it earns its place
+- **The value it turns.** A span becomes a presence in one frame — **the passage itself is what the shot offers**, not a date and not a summary.
+- **What the audience loses without it.** The sense that time is a place. Two shots cut together give two moments; **this gives the interval as an image.**
+- **The grounding shot.** A shot in the same place, ordinary camera, before or after — **so the fold is measured against a real duration.**
+- **What it costs.** One frame, one place, no cut. **Everything that would need a second angle is refused.**
+
+## Failure it is confused with
+- ⚠️ **A plain long take is not a fold.** If nothing marks the span — the survivor, the stepwise change — the shot is slow, not folded.
+- **A montage.** Cut-away-and-back is this card's refutation, not its cousin.
+- **A caption carrying the elapsed time.** The picture states the span; the words would replace it.
+
 ## Sources
 The video side's own format card. **Its grammar is written into the `video-spec` skeleton — §8 TEMPORAL STRUCTURE**, which already asks for deliberately unequal second ranges; this card is that instruction taken to its end. `distill-essence-engine/references/formats/` has no equivalent, because a format that folds time away has no frame for a span to pass through.

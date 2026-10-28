@@ -41,5 +41,21 @@
 ## Examples
 - —
 
+## Written into
+- §15 CONTINUITY
+
+⚠️ **The machine-readable half of this list is [`references/grammars/index.yaml`](../grammars/index.yaml)** — `L42` reads the index, not this prose. **Two places, one list**: the card is for a person, the index is for the checker.
+
+## When it earns its place
+- **The value it turns.** Two realities hold one place at once, **and neither arrives first.**
+- **What the audience loses without it.** The experience of a place that will not choose. **Sequence says one is past; this says both are present.**
+- **The grounding shot.** A shot of the same place in one reality, with an ordinary camera — **so the pair is legible as a coexistence rather than as a mistake.**
+- **What it costs.** §15's continuity, declared. ⚠️ **And the route: this grammar is reachable on `MINIMAX H3`, not on `WAN 3.0`** (`L42` reads the index's `routes`).
+
+## Failure it is confused with
+- ⚠️ **A split screen with a dividing line is not coexistence.** The line says "two pictures"; this card says "one place".
+- **A sequence** — one reality, then the other. **The order is the thing this card refuses.**
+- **A colour grade separating the realities.** A filter is a label; the grammar has to be in what the place *is*.
+
 ## Sources
 The video side's own format card, and **the one card whose reachability depends on the route** — `MINIMAX H3` carries it, `WAN 3.0` does not (`docs/h3-route.md`, and `L2`'s own docstring records that it cannot see this). **Its grammar is written into the `video-spec` skeleton — §15 CONTINUITY** — and it is the second grammar here that argues with a section it uses. `distill-essence-engine/references/formats/` has no equivalent: a still image holds several realities without any continuity to break, so the image side never needed a card for it.

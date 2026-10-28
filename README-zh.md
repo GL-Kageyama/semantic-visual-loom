@@ -14,7 +14,8 @@
 
 **生成模型做出来的是标本**——而且**独立的生成之间，互不相识。**
 所以状态要放在生成之外。**那个容器就是制作台账。一个文件**，
-把连续性与开示放在一起。
+把连续性与开示放在一起——**还有剧作**，也就是**那个变化值多少**
+（[`docs/dramaturgy-zh.md`](docs/dramaturgy-zh.md)）。⚠️ **三个问题，一个文件。台帐不分割。**
 
 放在其中心的单位是**镜头**——⚠️ **一个镜头为一个变化而存在。**
 **长度是从属变量。**
@@ -34,7 +35,7 @@
 | | 常见的样子 | 这个基盘 |
 | --- | --- | --- |
 | 单位 | 1 条提示词 ＝ 1 段视频 | **1 个镜头 ＝ 1 次生成**。作品是镜头的序列 |
-| 状态 | 每次都重写进提示词 | 由**制作台账**持有（连续性＋开示） |
+| 状态 | 每次都重写进提示词 | 由**制作台账**持有（连续性＋开示＋剧作） |
 | 文字 | 让生成器去画 | 分离为**文字通道**，用合成烧进去 |
 | 验收 | 目视 | **事前验证**——在规格的阶段报警矛盾 |
 
@@ -55,11 +56,24 @@
 | **③ 台账** | 一个镜头 | **台账**（被养大）以及从中导出的**参照集合**（被固定的东西）与**禁制集合**（不得拍到的东西） |
 | **④ 镜头** | 回来的东西 | **镜次**——一次生成，一张 |
 
+**②与④各有一位伴跑者，而它们都不是第五阶段。** **`direction` 在①之中**，
+在 `breakdown` 之后、`design` 之前跑，写**作品的剧作**——premise、问题、价值两极、幕、序列，
+以及每个镜头的 `dramatic` 记录——写进**同一个 `ledger.yaml`**
+（[`docs/dramaturgy-zh.md`](docs/dramaturgy-zh.md)）。**`review` 在④之后入座**：
+四位评估者读规格与 treatment，把分数写进镜次的 `verdict.council`
+（[`skills/review/SKILL-zh.md`](skills/review/SKILL-zh.md)）。⚠️ **两者都不采用**——
+采用是作者的行为，**会话不写 `adopted: true`。**
+
 **写提示词的是②。** 7 个槽位是 `Master` / `Visual` / `Motion` / `Camera` /
 `Audio` / `Negative` / `Style Motion`，而**分开这件事本身就是要点**
 （[`references/formats/video-spec.md`](references/formats/video-spec-zh.md) §18）。⚠️ **写 `Camera`
 槽的是 [`skills/staging/`](skills/staging/SKILL-zh.md)**——**把摄像机在一只手里决定的段**，
 坐在②之中、`motion`・`duration` 与规格之间。
+
+⚠️ **规格还可以带一个不带编号的节——§17 与 §18 之间的 `## DIRECTION`。**
+**它不是槽位**——七个仍然是七个。**生成时它的正文被接到 `Master Prompt` 的开头**，
+成为**镜头的感情抵达生成器的唯一路径**
+（[`references/formats/video-spec.md`](references/formats/video-spec-zh.md)）。
 
 ⚠️ **提示词由两个轴构成，而两者都是卡片**——**Format（形式＝规格的形状）**与
 **Style（样式＝视觉语言）**。⚠️ **卡片默认位于本仓库的旁边**
@@ -104,17 +118,20 @@ semantic-visual-loom/
 ├── schemas/         # 数据结构的正典（bible / ledger / shot-record / take / timeline）
 ├── engine/ledger/   # 制作台账与事前验证（不跑生成就把设计的破绽压掉）
 ├── engine/shot/     # 打印镜头规格中可以导出的行（只读。什么也不写）
-├── docs/            # 用法，以及更深入的解说（cards / routes）
-├── skills/          # Skill——分解、设计、台账、镜头，以及 staging（②之中的摄像机）
+├── docs/            # 用法，以及更深入的解说（cards / dramaturgy / routes）
+├── skills/          # Skill——分解、direction（①之中）、设计、staging（②之中）、台账、镜头、review（④之后）
 ├── tools/           # 检查（i18n 的镜像）
-├── references/      # 这一侧的卡片——formats/（video-spec）与 styles/（sumi-e）
+├── references/      # 这一侧的卡片——formats/（video-spec 与文法）与 styles/（sumi-e），
+│                    #   以及 grammars/——检查所读的目录
 ├── assets/          # 仓库的脸（README 的 hero）
 └── projects/        # 每部作品的实体
 ```
 
 **⚠️ `projects/` 里同居着两种东西**——**生的规格书**（Ukebi 与 Gozen-niji 的 §1–20，
 就那样留着）与**结构化的记录**（`bible.yaml` / `ledger.yaml` / `shots/`；
-有 `hitosara`、`ukebi-v2`、`habits` 与 `habits-promo-chinatsu` **四本**）。
+**十七本**——`drama-pilot`、`grammar-*` 的七个实验作、`habits`、`habits-mv`、
+`habits-promo-chinatsu`、`hakuchizu`、`hitosara`、`ippitsu`、`migenzo`、`odyssey`，以及
+`ukebi/ukebi-v2`）。
 ⚠️ **所有作品都带着自己的 `bible.yaml` 和 `ledger.yaml`，作品不抱着作品**
 ——而这正是它要紧的理由：**`check.py` 不递归**，所以
 **作品抱着作品时，跑父目录也读不到。** `L29` 会点名没有被读到的作品。
@@ -173,7 +190,9 @@ semantic-visual-loom/
 
 ⚠️ **`skills/` 里缺着 2 段**——**⑥构成与⑦验收。**
 写不出来。**因为输入不在记录那一侧。** `clips[]` 按定义是**采用镜次的列**，
-而**视频镜次里一张 `adopted: true` 都没有。**
+而**带 `adopted: true` 的视频镜次有两张**（`ippitsu-s01-video-2`、`habits-mv-s02-video-1`），
+**但一部作品的采用镜次还不是一次剪辑**——没有任何地方记录哪些片段按什么顺序排过，
+`Project` 也不打开 `timeline/`。
 不是难写——⚠️ **是动不了**，而
 ⚠️ **吐出一条空时间线的 Skill，比没有 Skill 更糟。** 洞写在它发生的地方——
 [`projects/hitosara/renders/README.md`](projects/hitosara/renders/README-zh.md)。
@@ -215,7 +234,7 @@ semantic-visual-loom/
 **开发用日语推进，文档的正典是英语。**
 镜像用后缀方式并排在**同一个目录**里——规则在 [`CLAUDE.md`](CLAUDE-zh.md) 里。
 
-**21 份文档 × 3 种语言已经齐备**——⚠️ **这是 [`tools/check_i18n.py`](tools/check_i18n.py)
+**26 份文档 × 3 种语言已经齐备**——⚠️ **这是 [`tools/check_i18n.py`](tools/check_i18n.py)
 作为正典报告的本数，不是把仓库里的 `.md` 数了一遍的数。**
 **数，只拥有它所数范围那么宽。**
 **它看什么、不看什么**，写在 [`docs/usage.md`](docs/usage-zh.md) 里。

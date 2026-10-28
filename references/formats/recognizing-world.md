@@ -40,5 +40,22 @@
 ## Examples
 - —
 
+## Written into
+- §4 ENVIRONMENT
+- §13 LIGHTING
+
+⚠️ **The machine-readable half of this list is [`references/grammars/index.yaml`](../grammars/index.yaml)** — `L42` reads the index, not this prose. **Two places, one list**: the card is for a person, the index is for the checker.
+
+## When it earns its place
+- **The value it turns.** The setting changes its behaviour when a character recognises something — **the world was already this, and it becomes visible.**
+- **What the audience loses without it.** The evidence that the recognition is real. **A reaction shot says the character understands; the setting answering says the understanding is true.**
+- **The grounding shot.** A shot in the same world with an ordinary camera, before the recognition — **so the change in the setting has a before.**
+- **What it costs.** The change must be **in the setting**, staged in §4 and §13, and **it must not be a global mood shift** — a place that changes everything changes nothing.
+
+## Failure it is confused with
+- ⚠️ **A reaction shot is not this grammar.** If the performance is carrying the turn, the world has not answered.
+- **A blanket mood change** — the frame uniformly brightening. **Name the element that changes and the element that does not.**
+- **A caption or a voice-over announcing the recognition.** The setting says it; words would explain it.
+
 ## Sources
 The video side's own format card. **Its grammar is written into the `video-spec` skeleton — §4's environmental behaviour and §13 LIGHTING EVENTS** — and it is the reason §13 exists as a section of its own rather than as a field of §12. `distill-essence-engine/references/formats/` has no equivalent, because a still frame has no accumulation to stage.

@@ -90,6 +90,11 @@ and no API key.
     conformance), `council` (evaluators). ⚠️ **Judgment and measurement are not separated in
     `machine`** — a measured number is itself the material of a judgment, and splitting them
     would add a distinction that carries no information.
+    ⚠️ **`council` is written by `review`, not here.** This stage **writes the seat empty**
+    rather than filling it with a guess — a score invented here would carry this stage's
+    authority into a judgment it did not make. The seat's shape is
+    `{score, note}` or a bare number; [`skills/review/SKILL.md`](../review/SKILL.md) decides
+    which evaluators sit and writes the note.
 11. ⚠️ **Do not write `adopted: true`.**
 12. **Run it again.**
 
@@ -138,8 +143,10 @@ written as adopted. **Read it: it says in its own words that it is not judging g
 - ⚠️ **What belongs in `params` differs per provider, and how to normalise it while keeping
   model-independence is undecided.** ⚠️ **Do not settle it here** — a normalisation invented by
   one session becomes a shape every later take is measured against.
-- **`verdict.council`:** **which evaluators are called differs by role**, and whether the
-  role-to-evaluator map belongs here or in a separate table **is undecided.**
+- ⚠️ **`verdict.council` is not read by any layer.** The seat is filled by
+  [`skills/review/SKILL.md`](../review/SKILL.md), which names the evaluators and writes the
+  notes — and **nothing compares a score to anything.** A judgment that no machine can check is
+  the whole point of the seat; ⚠️ **do not give it a reader to make it feel covered.**
 - ⚠️ **Nothing reads `timeline/`.** `Project` does not open it, so **the order of the clips is
   not read by anything** — the checker falls back to the natural order of the shot ids, and
   `Project.order()`'s own docstring says that when `timeline/` arrives **that should be treated

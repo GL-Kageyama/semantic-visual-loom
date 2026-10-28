@@ -39,5 +39,21 @@
 ## Examples
 - —
 
+## Written into
+- §11 MOTION
+- §15 CONTINUITY
+
+⚠️ **The machine-readable half of this list is [`references/grammars/index.yaml`](../grammars/index.yaml)** — `L42` reads the index, not this prose. **Two places, one list**: the card is for a person, the index is for the checker.
+
+## When it earns its place
+- **The value it turns.** The world behaves by memory's law instead of physics — **and the audience can tell which law is running.**
+- **What the audience loses without it.** The knowledge that what they see is held by a person, not by a place. **The inconsistency is the evidence of the holder.**
+- **The grounding shot.** A shot of the same world with an ordinary camera — **the pair is what says the difference is memory and not an error.**
+- **What it costs.** §15's continuity, explicitly. ⚠️ **The exemption has to be written down** — an undeclared lapse in continuity is a mistake, and it reads as one no matter how it was intended.
+
+## Failure it is confused with
+- ⚠️ **A continuity error is not this grammar.** The difference is **declaration**: this card's lapses are named in §15 and are consistent with each other; an error is unnamed and inconsistent.
+- **Dream-logic slop** — everything wobbling at once. **One law is relaxed, and it is named.** More than one is a picture nobody is holding.
+
 ## Sources
 The video side's own format card. **Its grammar is written into the `video-spec` skeleton — §11 MOTION and §15 CONTINUITY** — and it is the one grammar here that argues with a section it uses: §15 fixes the continuity this card deliberately relaxes, so the exemption has to be declared. `distill-essence-engine/references/formats/` has no equivalent, because a still image has no continuity to break.

@@ -1,4 +1,4 @@
-<!-- i18n-version: 2.2.0 | canonical: references/formats/video-spec.md | translated: 2026-09-30 -->
+<!-- i18n-version: 3.0.0 | canonical: references/formats/video-spec.md | translated: 2026-10-29 -->
 
 **Language:** [English](video-spec.md) | [日本語](video-spec-ja.md) | [中文](video-spec-zh.md)
 
@@ -135,6 +135,31 @@
 它不打开这张卡片。⚠️ **把一条路径的文法带进另一条路径的规格，才是陷阱**——
 产生这条警告的失败记录在 `HISTORY.md` 里。
 
+## 镜头内部的切口
+
+镜头可以**在自己的片段内部拥有切口**。记录上的 `cut: internal` 说明了这一点，而**决定属于序列**（`ledger.dramaturgy.sequences[].cuts`）——**没有旁边的镜头，切口就没有意义。** 只有记录不够：§10 必须写明在哪里断开，§18 的 `Camera Prompt` 必须承载它——**生成器读的是规格，不是记录**（`L49` 双向读取，并打开本文）。
+⚠️ **变成变形的切口，不是切口。** `Negative Prompt` 必须拒绝那种融合——**有意的切口与模型自行连接的画面，在成片里无法区分。** 能区分它们的只有规格。
+没有 `cut` 的镜头，是**一个连续的镜头**。**默认不变。不回填。**
+
+## DIRECTION（§17 与 §18 之间）
+
+规格可以在 §17 与 §18 之间放置**一个**无编号的节 `## DIRECTION`。它**不是槽位**——`PROMPT_SLOTS` 仍为七个，`L17`／`L28`／`L30` 不读取它。生成时，其正文被**前置到 `Master Prompt`**——在规格中是一个独立的节，在生成器中是 Master 的第一段。
+
+**从记录写，不从演出摘要抄。** 来源是 `ledger.dramaturgy`、该镜头的 `dramatic` 记录，以及 §12 EMOTION。规格开头的演出摘要是**读物，不是来源**——不要抄到这里。
+
+**用英语。** 记录侧是日语（`function`、`value.from/to`），`specmap.DRAMATIC_FUNCTION_EN` 把函数变成英语类型，`dramaturgy.value_poles` 提供值的英语词。`stake`、`audience.feel`、`button` 由作者直接用英语写。
+
+```text
+DIRECTION  ← ledger.dramaturgy + shot.dramatic + §12 EMOTION
+  Play {FUNCTION} for {AUDIENCE_FEEL}. The value turns from {VALUE_FROM} to
+  {VALUE_TO}; the stake is {STAKE}. Use {DEVICE} only to {DEVICE_WHY}; keep
+  {INVARIANT}. End on {BUTTON}.
+```
+
+⚠️ **没有 `dramatic` 记录的镜头不写 `DIRECTION`**——`L43` 以注记报告其数量。**拥有** `dramatic` 记录的镜头必须带这一节，且节中必须出现英语函数与英语价值词——**`L43` 只看这些**。英语是否好、`stake` 或 `button` 是否存在、观众是否真的感受到，它都不读。
+
+⚠️ **省略 `Use {DEVICE} ...` 行**，对于除 `video-spec` 外不使用任何格式卡的镜头是正确的。⚠️ **这一节不是第二个摘要，也不是重述规格的地方**——它是说明该镜头**为何存在**的一段。
+
 ## §18 的提示词槽位
 
 七条提示词。前六条**主要**取自上文指名的各节。
@@ -181,6 +206,39 @@ Style Motion    ← the style card's Motion character (not §1–17 — the only
 混在一起会让**规格覆盖样式**（或反之）。
 ⚠️ **即使 §11 MOTION 为空，`Style Motion` 也能写。** 即使是主体静止的镜头，
 **这个样式如何处理静止的主体**也是确定的——**这是两个不同的槽位。**
+
+## 画面里有几个人
+
+**镜头的 `population`——任何瞬间同时可见的人数上限——变成两句固定的句子抵达生成器**，
+两句都不是槽位的选择：
+
+```text
+0 → no one in the frame      / no people
+1 → the only person in the frame / no second person
+n → {n} people in the frame  / （没有句子——禁止不数人）
+```
+
+第一句**原样**写进 `Master Prompt`；第二句写进 `Negative Prompt`。**两句都是不变的字符串**——
+翻译或改述都会改变生成器所做的事。不声明 `population` 的镜头两句都不写，**也不回头补。**
+⚠️ **点名数目，不要只禁掉症状**——这与 `L27` 对 `bible.language` 保持的纪律相同，
+而理由是实测的：人物只有一个的作品**带回了第二个人**，因为**从来没有任何句子说过「一个」**。
+`L51` 读这两句，并把**禁掉的人数少于镜头所声明**的 `Negative` 句子读作矛盾。
+
+**画面只装下身体一部分时，要声明 `body_parts`**——哪些部位、各几个——
+每个部位变成同样的两句。⚠️ **人数数的是身体**：实测中，一个只有手的镜头**带回了第三只手**，
+而 `population: 1` 是对的。**不是「手」，是「部位」**——脚、腿、臂都会以同样的方式失败。
+
+```text
+0 → no hands in the frame      / no hands
+1 → 1 hand in the frame        / no second hand
+n → {n} hands in the frame     /（没有句子——禁止不数数目）
+```
+
+词汇在 `specmap.BODY_PARTS`（`hand`・`arm`・`finger`・`shoulder`・`foot`・`leg`・`head`・
+`face`・`eye`・`torso`），点名由 `specmap.body_part_phrase(部位, 数)` 给出，副本由
+`specmap.body_part_negatives(部位)` 给出。装得下全身的画面不需要 `body_parts`，
+`population` 就够了——而且不回头补。`L52` 两个方向都读字符串，也读两个声明之间的算术：
+**一个身体两只手**，所以 `population: 1` 旁边的 `hand: 4` 是互相矛盾的两个声明。
 
 ## Negative
 `no uniform pacing, no equal-length beats, no static slideshow of stills, no floaty weightless motion, no scene cuts to unrelated locations, no on-screen subtitles, no background music, no watermark, no morphing or drifting facial identity`

@@ -1,4 +1,4 @@
-<!-- i18n-version: 2.2.0 | canonical: references/formats/video-spec.md | translated: 2026-09-30 -->
+<!-- i18n-version: 3.0.0 | canonical: references/formats/video-spec.md | translated: 2026-10-29 -->
 
 **Language:** [English](video-spec.md) | [日本語](video-spec-ja.md) | [中文](video-spec-zh.md)
 
@@ -135,6 +135,31 @@ other is still nobody's check.
 it does not open this card. ⚠️ **Carrying one route's grammar into another route's
 specification is the trap** — the failure that produced this warning is recorded in `HISTORY.md`.
 
+## The cut inside a shot
+
+A shot may carry **cut points inside its own clip.** `cut: internal` on the shot record says so, and the decision belongs to the sequence (`ledger.dramaturgy.sequences[].cuts`) — **a cut means nothing without the shot beside it.** The record is not enough: §10 must say where the shot breaks and §18's `Camera Prompt` must carry it, because the generator reads the specification, not the record (`L49` reads both directions and opens this text).
+⚠️ **A cut that morphs is not a cut.** The `Negative Prompt` must refuse the blend — an intended cut and a model's own join are indistinguishable in the finished clip, and only the specification can tell them apart.
+When a shot carries no `cut`, it is **one continuous take.** The default does not change, and nothing is backfilled.
+
+## DIRECTION (between §17 and §18)
+
+A specification **may** carry one unnumbered section, `## DIRECTION`, between §17 and §18. It is **not a slot**: `PROMPT_SLOTS` stays seven, and `L17`／`L28`／`L30` do not read it. At generation time its body is **prepended to `Master Prompt`** — the specification has an independent section; the generator receives the first paragraph of Master.
+
+**It is written from the records, not from the staging summary.** Its sources are `ledger.dramaturgy`, the shot's `dramatic` record, and §12 EMOTION. The summary band at the head of the specification is *a reading, not a source*; do not copy it here.
+
+**It is English.** The record side is Japanese (`function`, `value.from/to`); `specmap.DRAMATIC_FUNCTION_EN` turns the function into an English type, and `dramaturgy.value_poles` supplies the English words for the values. `stake`, `audience.feel` and `button` are written directly in English by the author.
+
+```text
+DIRECTION  ← ledger.dramaturgy + shot.dramatic + §12 EMOTION
+  Play {FUNCTION} for {AUDIENCE_FEEL}. The value turns from {VALUE_FROM} to
+  {VALUE_TO}; the stake is {STAKE}. Use {DEVICE} only to {DEVICE_WHY}; keep
+  {INVARIANT}. End on {BUTTON}.
+```
+
+⚠️ **A shot without a `dramatic` record writes no `DIRECTION`**, and `L43` reports the count as a note. A shot **with** a `dramatic` record must carry the section, and the section must contain the English function and the English value words — **that is the whole of `L43`**. It does not read whether the English is any good, whether `stake` or `button` are present, or whether the audience felt anything.
+
+⚠️ **Omitting the `Use {DEVICE} ...` line** is correct for a shot that uses no format card beyond `video-spec`. ⚠️ **The section is not a second summary, and it is not a place to restate the specification** — it is the one paragraph that says what the shot is *for*.
+
 ## §18 prompt slots
 
 Seven prompts. The first six are drawn **mainly** from the sections named above.
@@ -184,6 +209,43 @@ different questions, and mixing them lets **the specification overwrite the styl
 ⚠️ **`Style Motion` can be written even when §11 MOTION is empty.** Even in a shot
 where the subject holds still, **how that style treats a still subject** is decided —
 **these are two different slots.**
+
+## Whose count is in the frame
+
+**A shot's `population` — the greatest number of people visible at any single moment — reaches
+the generator as two fixed sentences**, and neither is a slot-selection decision:
+
+```text
+0 → no one in the frame      / no people
+1 → the only person in the frame / no second person
+n → {n} people in the frame  / (no clause — a prohibition cannot count people)
+```
+
+The first goes into `Master Prompt` **as written**; the second into `Negative Prompt`. **They are
+invariant strings** — translating or paraphrasing them changes what the generator does. A shot that
+declares no `population` writes neither, and nothing is backfilled. ⚠️ **Name the count; do not
+only forbid the symptom** — the same rule `L27` holds for `bible.language`, and the reason is
+measured: a one-character work came back with a second person in the frame because no sentence
+had ever said "one". `L51` reads both sentences, and reads a `Negative` clause that forbids
+*fewer* people than the shot declares as a contradiction.
+
+**A frame that holds only part of a body declares `body_parts` — the parts and how many — and
+each part becomes the same pair of sentences.** ⚠️ **A count of people counts bodies**: measured,
+a hands-only shot came back with **a third hand** while its `population: 1` was correct.
+**It is limbs, not hands** — feet, legs and arms fail the same way.
+
+```text
+0 → no hands in the frame      / no hands
+1 → 1 hand in the frame        / no second hand
+n → {n} hands in the frame     / (no clause — a prohibition cannot count)
+```
+
+`specmap.BODY_PARTS` holds the vocabulary (`hand`, `arm`, `finger`, `shoulder`, `foot`,
+`leg`, `head`, `face`, `eye`, `torso`); `specmap.body_part_phrase(part, n)` gives the
+naming and `specmap.body_part_negatives(part)` the copy. A frame that holds the whole body
+needs no `body_parts` — `population` is enough — and nothing is backfilled. `L52` reads the
+strings both ways, and reads the arithmetic between the two declarations: **one body has two
+hands**, so `population: 1` beside `hand: 4` is two declarations that contradict each other.
 
 ## Negative
 `no uniform pacing, no equal-length beats, no static slideshow of stills, no floaty weightless motion, no scene cuts to unrelated locations, no on-screen subtitles, no background music, no watermark, no morphing or drifting facial identity`

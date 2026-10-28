@@ -37,5 +37,21 @@
 ## Examples
 - —
 
+## Written into
+- §9 ACTION
+- §11 MOTION
+
+⚠️ **The machine-readable half of this list is [`references/grammars/index.yaml`](../grammars/index.yaml)** — `L42` reads the index, not this prose. **Two places, one list**: the card is for a person, the index is for the checker.
+
+## When it earns its place
+- **The value it turns.** A form that was one thing becomes another — **and the shot is that turn**, not a scene that contains it.
+- **What the audience loses without it.** The change happening *in front of them*, in time, in one unbroken strip. A cut before and after gives them the two states and withholds the passage between them.
+- **The grounding shot.** A shot in the same world seen with an ordinary camera, before or after. ⚠️ **Two device shots in a row with no grounding between them is the third failure on this list** — the audience stops measuring the change against anything.
+- **What it costs.** The shot's whole seconds, and the subject's identity budget: **the form may change; the person may not drift.**
+
+## Failure it is confused with
+- ⚠️ **Face morphing and identity drift are not this grammar.** They are the generator failing at the identity lock, and they read as a mistake in every frame. **This card changes the world, the material, the scale or the light — not the face.**
+- **Spectacle.** A transformation that no value turns through is decoration. **If the shot would be the same with the change removed, remove it.**
+
 ## Sources
 The video side's own format card. **Its grammar is written into the `video-spec` skeleton — §9 ACTION and §11 MOTION** — and the card does not replace that one: a work names this card in §6 when the shot's event *is* the change. `distill-essence-engine/references/formats/` has no equivalent, because a format that folds time away never needs a grammar for a change that takes time.

@@ -1,4 +1,4 @@
-<!-- i18n-version: 2.2.0 | canonical: references/formats/video-spec.md | translated: 2026-09-30 -->
+<!-- i18n-version: 3.0.0 | canonical: references/formats/video-spec.md | translated: 2026-10-29 -->
 
 **Language:** [English](video-spec.md) | [日本語](video-spec-ja.md) | [中文](video-spec-zh.md)
 
@@ -135,6 +135,31 @@
 このカードは開かない。⚠️ **ある経路の文法を別の経路の仕様へ持ち込むことが罠である**——
 この警告を生んだ失敗は `HISTORY.md` に記録してある。
 
+## ショットの内側の切れ目
+
+ショットは**自分のクリップの内側に切れ目を持てる**。記録の `cut: internal` がそれを言い、**判断はシーケンスが持つ**（`ledger.dramaturgy.sequences[].cuts`）——**切れ目は、隣のショットが無ければ意味を持たない。** 記録だけでは足りない：§10 がどこで切れるかを書き、§18 の `Camera Prompt` がそれを運ぶ——**生成器が読むのは記録ではなく仕様である**（`L49` が両方向を読み、本文を開く）。
+⚠️ **モーフになる切れ目は、切れ目ではない。** `Negative Prompt` が混ざりを拒むこと——**意図した切れ目と、モデルが繋いだものは、上がったクリップの中では区別できない。** 区別できるのは仕様だけである。
+`cut` を持たないショットは、**1本の連続したテイク**である。**既定は変わらない。遡って埋めない。**
+
+## DIRECTION（§17 と §18 の間）
+
+仕様は、§17 と §18 のあいだに、番号を持たない節 `## DIRECTION` を**一つ**置いてよい。これは**スロットではない**——`PROMPT_SLOTS` は七つのままで、`L17`／`L28`／`L30` はこれを読まない。生成時、その本文は **`Master Prompt` の先頭へ連結される**。仕様の上では独立した節であり、生成器へは Master の第一段落として届く。
+
+**記録から書く。演出要約から写さない。** 出所は `ledger.dramaturgy`、ショットの `dramatic` 記録、そして §12 EMOTION である。仕様の先頭にある演出要約は**読み物であって、出所ではない**——ここへ写さない。
+
+**英語である。** 記録側は日本語（`function`、`value.from/to`）であり、`specmap.DRAMATIC_FUNCTION_EN` が関数を英語の型にし、`dramaturgy.value_poles` が値の英語を供給する。`stake`、`audience.feel`、`button` は著者が英語で直接書く。
+
+```text
+DIRECTION  ← ledger.dramaturgy + shot.dramatic + §12 EMOTION
+  Play {FUNCTION} for {AUDIENCE_FEEL}. The value turns from {VALUE_FROM} to
+  {VALUE_TO}; the stake is {STAKE}. Use {DEVICE} only to {DEVICE_WHY}; keep
+  {INVARIANT}. End on {BUTTON}.
+```
+
+⚠️ **`dramatic` 記録を持たないショットは `DIRECTION` を書かない**——`L43` はその本数を註で報告する。`dramatic` 記録を**持つ**ショットはこの節を必ず持ち、節には英語の関数と英語の値の語が現れなければならない——**`L43` が見るのはそこだけである**。英語が良いか、`stake` や `button` があるか、観客が実際に感じたかは読まない。
+
+⚠️ **`Use {DEVICE} ...` の行を落とす**のは、`video-spec` 以外の形式カードを使わないショットとして正しい。⚠️ **この節は二つ目の要約ではなく、仕様の言い直しの場所でもない**——そのショットが**何のためにあるか**を言う一段落である。
+
 ## §18 のプロンプトスロット
 
 7つのプロンプト。最初の6つは**主に**上記の名指しされた節から取る。
@@ -182,6 +207,42 @@ through the Negative slot.
 混ぜれば**仕様が様式を上書きする**（あるいはその逆）。
 ⚠️ **§11 MOTION が空でも `Style Motion` は書ける。** 主題が止まるショットでも、
 **その様式が止まった主題をどう扱うか**は決まっている——**この2つは別の欄である。**
+
+## 枠に何人映るか
+
+**ショットの `population`——どの瞬間にも同時に映る人数の最大——は、2つの固定の文になって
+生成器へ届く。** どちらもスロットの選択ではない：
+
+```text
+0 → no one in the frame      / no people
+1 → the only person in the frame / no second person
+n → {n} people in the frame  / （句は無い——禁制は人数を数えない）
+```
+
+1つ目は `Master Prompt` に**そのまま**、2つ目は `Negative Prompt` に書く。**どちらも不変の
+文字列である**——訳しても言い換えても、生成器がすることは変わる。`population` を宣言しない
+ショットはどちらも書かず、**遡って埋めない。** ⚠️ **数を名指せ。症状を禁じるだけにしない**——
+`bible.language` について `L27` が保つのと同じ規律であり、理由は実測である：
+人物が一人の作品が**二人目を映して**戻ったのは、**「一人」と言う文がどこにも無かったから**である。
+`L51` は2つの文を読み、**宣言より少ない人数を禁じる** `Negative` の句を矛盾として読む。
+
+**枠が身体の一部しか写さないなら `body_parts` を宣言する**——部位と、その数である——
+そして部位ごとに同じ2句になる。⚠️ **人数は身体を数える**：実測で、手だけのショットが
+**3本目の手**を映して戻り、`population: 1` は正しかった。**「手」ではなく「肢」である**
+——足も脚も腕も同じように失敗する。
+
+```text
+0 → no hands in the frame      / no hands
+1 → 1 hand in the frame        / no second hand
+n → {n} hands in the frame     / (句は無い——禁制は数を数えない)
+```
+
+語彙は `specmap.BODY_PARTS`（`hand`・`arm`・`finger`・`shoulder`・`foot`・`leg`・`head`・
+`face`・`eye`・`torso`）に在り、名指しは `specmap.body_part_phrase(部位, 数)`、写しは
+`specmap.body_part_negatives(部位)` が与える。全身を写す枠に `body_parts` は要らず、
+`population` で足りる——そして遡って埋めない。`L52` は文字列を両方向に読み、
+2つの宣言の間の算術も読む：**1体に手は2本**であり、`population: 1` の隣の `hand: 4` は
+互いに矛盾する2つの宣言である。
 
 ## Negative
 `no uniform pacing, no equal-length beats, no static slideshow of stills, no floaty weightless motion, no scene cuts to unrelated locations, no on-screen subtitles, no background music, no watermark, no morphing or drifting facial identity`

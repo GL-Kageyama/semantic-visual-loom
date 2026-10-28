@@ -4,14 +4,14 @@
     "name": "GL-Kageyama"
   },
   "metadata": {
-    "description": "A foundation that carries a story all the way to film. Footage is not generated — it is edited. The production ledger holds continuity (the state of the world) and disclosure (the state of the audience's knowledge) in one file, and both the reference set and the forbidden set are derived from it. Pre-flight verification crushes the breakdowns in the design without running a single generation."
+    "description": "A foundation that carries a story all the way to film. Footage is not generated — it is edited. The production ledger holds continuity (the state of the world), disclosure (the state of the audience's knowledge) and dramaturgy (what the changes are worth) in one file, and both the reference set and the forbidden set are derived from it. Pre-flight verification crushes the breakdowns in the design without running a single generation."
   },
   "plugins": [
     {
       "name": "semantic-visual-loom",
       "source": "./",
-      "description": "Semantic Visual Loom — carries a story to film. The unit is the shot (one shot, one change; length is a dependent variable), and the state is placed outside the generation in one production ledger. The skills walk the foundation's own body: breakdown (① cut a work into shots), design (② stage a shot and write its two specifications — with staging, the camera decided in one hand, running inside it), ledger (③ fix what is fixed), and shot (④ the self-contained record and the sample that comes back). ⚠️ Assembly and acceptance are not among them — the adopted takes are not on the record side, and a skill that cannot be moved is worse than no skill.",
-      "version": "0.41.0",
+      "description": "Semantic Visual Loom — carries a story to film. The unit is the shot (one shot, one change; length is a dependent variable), and the state is placed outside the generation in one production ledger. The skills walk the foundation's own body: breakdown (① cut a work into shots), direction (①'s second half — the work's dramaturgy: premise, value poles, acts, sequences, and each shot's dramatic record, all in the same ledger), design (② stage a shot and write its two specifications — with staging, the camera decided in one hand, running inside it), ledger (③ fix what is fixed), shot (④ the self-contained record and the sample that comes back), and review (the council after ④ — four evaluators write the take's verdict, and never adopt). ⚠️ Assembly and acceptance are not among them — the adopted takes are not on the record side, and a skill that cannot be moved is worse than no skill.",
+      "version": "0.45.0",
       "author": {
         "name": "GL-Kageyama"
       },

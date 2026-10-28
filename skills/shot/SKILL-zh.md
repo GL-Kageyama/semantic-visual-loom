@@ -80,6 +80,10 @@ python3 engine/ledger/check.py --self-test       # 确认检查器会响
 10. **`verdict`——3个层。** `machine`（决定论的）・`adherence`（规格符合）・
     `council`（评价者）。⚠️ **在 `machine` 里不把「判定」与「测量」分开**——
     量出来的数就是判定的材料本身，分开只会多出一个不运信息的区分。
+    ⚠️ **写 `council` 的是 `review`，不是这里。** 这一段**把席位空着写**，
+    不拿猜测去填——在这里编出来的分数，**会把这一段的权威，加到它并未做过的判断上。**
+    席位的形是 `{score, note}` 或裸数字，
+    [`skills/review/SKILL.md`](../review/SKILL-zh.md) 决定谁来坐，并写下注释。
 11. ⚠️ **不要写 `adopted: true`。**
 12. **再跑一次。**
 
@@ -125,8 +129,10 @@ python3 engine/ledger/check.py --self-test       # 确认检查器会响
   **不要让两者长得一样。**
 - ⚠️ **`params` 里放什么因提供方而异，而在保持模型无关的同时怎么规范化是未决定的。**
   ⚠️ **不要在这里决定**——一个会话发明的规范化，会成为此后所有镜次被测量的形状。
-- **`verdict.council`:** **按职能调用的评价者不同**，所以
-  职能→评价者的对应放在这里还是另立一表，**尚未决定。**
+- ⚠️ **`verdict.council` 没有任何层读它。** 填这个席位的是
+  [`skills/review/SKILL.md`](../review/SKILL-zh.md)，它名指评价者、写下注释——
+  而**没有任何东西拿分数去和什么比。** 机器无法核对的判断，正是这个席位存在的理由；
+  ⚠️ **不要为了让这里显得被覆盖，就给它一个读者。**
 - ⚠️ **没有人读 `timeline/`。** `Project` 不打开它，所以
   **clip 的顺序没有任何东西在读**——检查器落到镜头 ID 的自然顺序，
   而 `Project.order()` 自己的 docstring 说，`timeline/` 进来之后，

@@ -25,7 +25,7 @@ REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SKILLS_DIR="$REPO_DIR/skills"
 
 #: インストールする Skill の名。**`skills/` の下のディレクトリ名と一致する。**
-SKILLS=(breakdown design ledger shot)
+SKILLS=(breakdown direction design staging ledger shot review)
 
 MODE="global"
 ACTION="install"

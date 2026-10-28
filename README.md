@@ -14,7 +14,9 @@
 
 **What the model makes is a sample**—and **independent generations have no memory of each other.**
 So state is placed outside the generation: **that vessel is the production ledger, one file**,
-holding continuity and disclosure together.
+holding continuity and disclosure together—**and dramaturgy**, which is what the changes are
+*worth* ([`docs/dramaturgy.md`](docs/dramaturgy.md)). ⚠️ **Three questions, one file; the ledger
+is not split.**
 
 The unit placed at its center is the **shot**——⚠️ **one shot exists for one change**,
 and **length is a dependent variable.**
@@ -34,7 +36,7 @@ GitHub's included allowance is **10 GiB of storage and 10 GiB of transfer a mont
 | | The common shape | This foundation |
 | --- | --- | --- |
 | Unit | 1 prompt = 1 video | **1 shot = 1 generation**. A work is a sequence of shots |
-| State | Rewritten into the prompt every time | Held by the **production ledger** (continuity + disclosure) |
+| State | Rewritten into the prompt every time | Held by the **production ledger** (continuity + disclosure + dramaturgy) |
 | Text | Let the generator draw it | Separated as a **text channel** and burned in by compositing |
 | Acceptance | Visual inspection | **Pre-flight verification**—fires contradictions at the specification stage |
 
@@ -55,11 +57,24 @@ specifications**, and **fire the contradictions in them before anything is gener
 | **③ ledger** | one shot | the **ledger**, grown—and the **reference set** (what is fixed) and the **forbidden set** (what must not be shown) derived from it |
 | **④ shot** | what came back | the **take**—one generation, one sheet |
 
+**② and ④ each carry a companion that is not a fifth stage.** **`direction` runs inside ①**,
+after `breakdown` and before `design`: it writes **the work's dramaturgy**—premise, question,
+value poles, acts, sequences, and each shot's `dramatic` record—into **the same `ledger.yaml`**
+([`docs/dramaturgy.md`](docs/dramaturgy.md)). **`review` sits down after ④**: four evaluators
+read the specification and the treatment, and their scores are written into the take's
+`verdict.council` ([`skills/review/SKILL.md`](skills/review/SKILL.md)). ⚠️ **Neither adopts**—
+adoption is the author's act, and no session writes `adopted: true`.
+
 **② is where the prompt is written.** The seven slots are `Master` / `Visual` / `Motion` / `Camera` /
 `Audio` / `Negative` / `Style Motion`, and **being separated is itself the point**
 ([`references/formats/video-spec.md`](references/formats/video-spec.md) §18). ⚠️ **The `Camera` slot
 is written by [`skills/staging/`](skills/staging/SKILL.md)**—**the camera decided in one hand**,
 inside ②, between `motion`/`duration` and the specification.
+
+⚠️ **A specification may also carry one unnumbered section, `## DIRECTION`, between §17 and §18.**
+**It is not a slot**—the seven stay seven. **At generation time its body is prepended to
+`Master Prompt`**, and it is the one route the shot's emotion has to the generator
+([`references/formats/video-spec.md`](references/formats/video-spec.md)).
 
 ⚠️ **The prompt is built from two axes, and both are cards**—**Format** (the shape of the
 specification) and **Style** (the visual language). **A card lives beside this repository by
@@ -105,17 +120,20 @@ semantic-visual-loom/
 ├── schemas/         # the canonical of the data structures (bible / ledger / shot-record / take / timeline)
 ├── engine/ledger/   # the production ledger and pre-flight verification (crush breakdowns in the design without running generation)
 ├── engine/shot/     # prints the derivable lines of a shot's specification (read-only; writes nothing)
-├── docs/            # usage, and the deep dives (cards / routes)
-├── skills/          # the skills — breakdown, design, ledger, shot, and staging (inside ②)
+├── docs/            # usage, and the deep dives (cards / dramaturgy / routes)
+├── skills/          # the skills — breakdown, direction (inside ①), design, staging (inside ②), ledger, shot, review (after ④)
 ├── tools/           # checks (i18n mirrors)
-├── references/      # this side's own cards — formats/ (video-spec) and styles/ (sumi-e)
+├── references/      # this side's own cards — formats/ (video-spec + the grammars) and styles/ (sumi-e),
+│                    #   and grammars/ — the registry the checks read
 ├── assets/          # the repository's face (the README hero)
 └── projects/        # the substance of each work
 ```
 
 **⚠️ Two kinds live side by side in `projects/`**—**raw specification trees** (§1–20 of Ukebi and
 Gozen Niji, left as they are) and **structured records** (`bible.yaml` / `ledger.yaml` / `shots/`;
-**four** of them—`hitosara`, `ukebi-v2`, `habits` and `habits-promo-chinatsu`).
+**seventeen** of them—`drama-pilot`, the seven `grammar-*` pilot works, `habits`, `habits-mv`,
+`habits-promo-chinatsu`, `hakuchizu`, `hitosara`, `ippitsu`, `migenzo`, `odyssey`, and
+`ukebi/ukebi-v2`).
 ⚠️ **Every work carries its own `bible.yaml` and `ledger.yaml`, and a work does not hold a work**
 —and this is why that matters: **`check.py` does not recurse**, so **a work held by a work is not
 read by a run over its parent.** `L29` names the works a run does not read.
@@ -176,7 +194,10 @@ floor.** That gate is what `L30` fires on, and the route's constraints are in
 
 ⚠️ **Two stages are missing from `skills/`**——**structure (⑥) and acceptance (⑦).**
 They cannot be written, because **the input is not on the record side.** `clips[]` is by definition
-**a list of adopted takes**, and **not one video take carries `adopted: true`.**
+**a list of adopted takes**——and **while two video takes do carry `adopted: true`**
+(`ippitsu-s01-video-2`, `habits-mv-s02-video-1`), **a work's adopted takes are not yet an edit**:
+nothing records which clips were lined up, in which order. `Project` does not open `timeline/`,
+and no record field points at it.
 It is not that they are hard to write——⚠️ **it is that they cannot be moved**, and
 **a skill that emits an empty timeline is worse than no skill.** The hole is written where it happened:
 [`projects/hitosara/renders/README.md`](projects/hitosara/renders/README.md).
@@ -221,7 +242,7 @@ is marked **invention (awaiting approval)**; running ② first would freeze an u
 Mirrors use the suffix scheme and sit in the **same directory**—the rules are in
 [`CLAUDE.md`](CLAUDE.md).
 
-**21 documents × 3 languages are in place**——**that is the count
+**26 documents × 3 languages are in place**——**that is the count
 [`tools/check_i18n.py`](tools/check_i18n.py) reports as the canonical set, not a count of every
 `.md` in the repository.** ⚠️ **A number is only as wide as what was counted.** What that check sees,
 and what it does not, is in [`docs/usage.md`](docs/usage.md).

@@ -110,6 +110,7 @@ import json
 import re
 from pathlib import Path
 
+import grammars
 import rolemap
 import specdoc
 import specmap
@@ -3848,6 +3849,302 @@ def check_format_reference(project, repo_root=None):
     return out
 
 
+# ---------------------------------------------------------------- 文法の目録
+
+#: `aim` の接頭辞。`grammar: transformation` / `文法：transformation` を受ける。
+#: ⚠️ **接頭辞が要る理由。** 自由文のままでは、`aim` を読む検査は1つも書けない
+#: ——**意味を推測しない**という規律の下では、名乗りだけが読める。
+#: 名乗らない自由文は、註で通す（遅れて書かれた狙いは、狙いではなく説明である）。
+AIM_GRAMMAR = re.compile(r"^\s*(?:grammar|文法|语法)\s*[:：]\s*[`\"']?([^`\"'\s]+)")
+
+
+def _grammar_specs(project):
+    """動画の仕様を開けるショットの並び。`(ショット, パス, §6 が名乗る名 | None)`。
+
+    ⚠️ **読めなかった仕様は落とす。** `L11`／`L18` が報告している——**ここで
+    「名乗りが無い」と言えば、同じ欠けを二度、別の顔で報告することになる。**
+    """
+    out = []
+    for s in project.order():
+        src = _spec_of(project.shots[s], "video")
+        if not src:
+            continue
+        p = project.root / src
+        if not p.is_file():
+            continue
+        name, _how, _vocab = _format_ref_of(p)
+        out.append((s, p, name))
+    return out
+
+
+def _grammar_unreadable(code, problem, where):
+    """目録が読めないときの註。**「照合していない」と言う——空を緑にしない。**"""
+    why = {
+        "missing": f"置き場が無い（探した範囲: {where}）",
+        "unreadable": f"読めない（{where}）",
+        "malformed": f"形が違う（{where}）",
+        "PyYAML が無い": "PyYAML が無い",
+    }.get(problem, f"{problem}（{where}）")
+    return finding(code, "0本",
+                   f"文法の目録が読めない——{why}。"
+                   "**この層は、形式カードの目録を1本も照合していない。**"
+                   "⚠️ **確かめていないことは、緑ではない。**",
+                   severity="note")
+
+
+def check_grammar_registry(project, repo_root=None):
+    """L42 — **名指した形式カードは目録に在り、その節を持ち、その経路で名指されているか。**
+
+    ⚠️ **デバイスは新しい欄ではない。** 仕様の §6 `REF_FORMAT` が既にカードを
+    名指している——この層は**その名乗りを、目録へ突き合わせる**。
+    ⚠️ **`L32` の隣に在る。** あちらは「カードが読めるか」を、こちらは
+    「**目録に登録されているか**」を見る。**同じ §6 を読む層は隣に置く。**
+
+    3つに分ける（原因の違うものを同じ顔で報告しない）:
+
+    | | 何を | 鳴り方 |
+    |---|---|---|
+    | **a** | 目録に無いカードを名指している | **違反** |
+    | **b** | 目録の `written_into` が指す節が、無い／空である | **違反** |
+    | **c** | §18 が名乗る経路が、目録の `routes` に無い | **違反** |
+
+    ⚠️ **文法を持たない仕様（`video-spec`）は対象の外**である。**文法を名乗らない
+    ことが違反になった日から、既存の100本超が赤くなる**——記録が無いことは、
+    食い違っていることではない。
+
+    ⚠️ **見せ場（`set_pieces`）は、§6 と同じ名でなければならない。** 台帳が
+    `transformation` と言い、仕様の §6 が `video-spec` と言えば、**見せ場は
+    生成器へ1文字も届かない**——台帳は設計の眺めであり、生成に渡るのは仕様だからである。
+    """
+    out = []
+    root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
+    entries, where, problem = grammars.catalog(root)
+    if problem:
+        out.append(_grammar_unreadable("L42", problem, where))
+        return out
+
+    specs = _grammar_specs(project)
+    silent = sum(1 for _s, _p, n in specs if n is None)
+    base = sum(1 for _s, _p, n in specs if n == "video-spec")
+    devices = [(s, p, n) for s, p, n in specs if n and n != "video-spec"]
+    if not specs:
+        out.append(finding("L42", "0本",
+                           "動画の仕様を1本も開けない——**この層は登録を確かめていない**"
+                           "（`L11`／`L18` が報告する）。",
+                           severity="note"))
+        return out
+
+    checked = set()
+    for s, p, name in devices:
+        entry = entries.get(name)
+        if entry is None:
+            out.append(finding(
+                "L42", s,
+                f"形式カード `{name}` を名指しているが、文法の目録に無い（{where}）。"
+                "⚠️ **目録に無いデバイスは、`negative_conflicts` も `written_into` も"
+                "持たない**——`L45` はその名前について1句も照合できず、"
+                "**デバイスが効くかどうかを、誰も読んでいない。**"
+                "⇒ `references/grammars/index.yaml` に登録すること。"))
+            continue
+        checked.add(name)
+
+        secs = [str(x) for x in (entry.get("written_into") or [])]
+        if not secs:
+            out.append(finding(
+                "L42", s,
+                f"文法 `{name}` の目録に `written_into` が無い——**この文法はどの節にも"
+                "書かれない。** ショットはデバイスを名指したが、"
+                "**仕様の本文はその文法を1行も持たない。**"))
+        tops = _spec_tops(p)
+        for label in secs:
+            num, _, rest = label.partition(".")
+            num, rest = num.strip(), rest.strip()
+            prefix = f"{num}."
+            shown = f"§{num} {rest}".strip()     # ⚠️ 「§9. ACTION」ではなく「§9 ACTION」
+            if not any(t.startswith(prefix) for t in tops):
+                out.append(finding(
+                    "L42", s,
+                    f"文法 `{name}` の `written_into` が指す {shown} が、"
+                    "この仕様に無い。⚠️ **文法の居場所が無ければ、"
+                    "名乗りは名乗りだけで終わる。**"))
+                continue
+            if not _section_body(p, prefix).strip():
+                out.append(finding(
+                    "L42", s,
+                    f"文法 `{name}` の `written_into` が指す {shown} が、空である。"
+                    "⚠️ **節は在るが、文法は書かれていない**——"
+                    "**空の節は、名乗りを運ばない。**"))
+
+        model = _model_of(p)
+        routes = [str(x) for x in (entry.get("routes") or [])]
+        if model and model not in routes:
+            out.append(finding(
+                "L42", s,
+                f"文法 `{name}` を、目録の `routes` に無い経路 `{model}` で名指している"
+                f"（目録: {'／'.join(routes) or '空'}）。"
+                "⚠️ **経路によって文法が成立しないことがある**"
+                "（実測: `coexisting-realities` は `MINIMAX H3` でのみ成立する）。"
+                "⇒ 目録の `routes` か、この仕様の §18 の名乗りを直すこと。"))
+
+    # ---- 見せ場。⚠️ **台帳と仕様の名が、同じでなければならない。**
+    ledger = getattr(project, "ledger", None) or {}
+    dram = ledger.get("dramaturgy") if isinstance(ledger, dict) else None
+    pieces = (dram or {}).get("set_pieces") if isinstance(dram, dict) else None
+    by_shot = {s: n for s, _p, n in specs}
+    pieces_checked = 0
+    for i, piece in enumerate(pieces or []):
+        if not isinstance(piece, dict):
+            continue
+        sid = piece.get("shot")
+        fmt = piece.get("format")
+        if sid not in by_shot:
+            continue                     # 実在しないショットは `L41` が報告する
+        pieces_checked += 1
+        if str(fmt or "") != str(by_shot[sid] or ""):
+            out.append(finding(
+                "L42", sid,
+                f"`dramaturgy.set_pieces[{i}]` は形式 `{fmt}` と言うが、"
+                f"このショットの §6 `REF_FORMAT` は `{by_shot[sid] or '（名乗り無し）'}` である。"
+                "⚠️ **見せ場は台帳の眺めであり、生成に渡るのは仕様である**——"
+                "**名が違えば、見せ場は生成器へ届かない。**"))
+
+    if not devices:
+        out.append(finding("L42", "0本",
+                           f"文法の目録を読んだ（{where}、{len(entries)} 本）が、"
+                           "**この作品は文法を1つも名指していない**"
+                           f"（`video-spec` {base} 本・名乗り無し {silent} 本）。"
+                           "⚠️ **この層は登録を確かめていない。**",
+                           severity="note"))
+        return out
+
+    note = (f"文法の目録を読んだ（{where}、{len(entries)} 本）。"
+            f"文法を名指す仕様 {len(devices)} 本・`video-spec` {base} 本・"
+            f"名乗り無し {silent} 本。確かめたカード {len(checked)} 種"
+            + (f"・見せ場 {pieces_checked} 件" if pieces_checked else "")
+            + "。⚠️ **登録・節・経路だけを見ており、デバイスが効くかは読まない。**")
+    on_disk = set(grammars.card_names(root))
+    unindexed = sorted(on_disk - set(entries))
+    if unindexed:
+        # ⚠️ **カードは在るのに目録に無い**——見せ場に選べば、いま登録が足りない。
+        note += ("⚠️ **目録に無いカードが在る**: "
+                 + "・".join(f"`{n}`" for n in unindexed)
+                 + "——**ショットが名指せば `L42` が鳴る。**")
+    provisional = sorted(n for n, e in entries.items() if e.get("status") == "provisional")
+    if provisional:
+        note += (f"⚠️ **仮置きの文法 {len(provisional)} 本**（作者の目録が届いたら差し替える）: "
+                 + "・".join(f"`{n}`" for n in provisional) + "。")
+    if silent:
+        note += f"⚠️ **`REF_FORMAT` を名乗らない仕様が {silent} 本ある**——この層はそれを見ていない。"
+    out.append(finding("L42", f"{len(devices)}本", note, severity="note"))
+    return out
+
+
+def check_grammar_negative(project, repo_root=None):
+    """L45 — **デバイスの核を、この仕様の `Negative Prompt` が禁じていないか。**
+
+    ⚠️ **名前と禁制は、別々に書かれる。** ショットは §6 でデバイスを名指し、
+    §18 の `Negative Prompt` は台帳・床・カードから組まれる——**両者が同じショットで
+    正面から衝突しても、いままで誰も並べていなかった。**
+
+    ⚠️ **照合するのは目録の `negative_conflicts` だけである。** 目録の外の句は読まない
+    ——**意味を推測しない**という規律の下では、禁制の衝突は名指しでしか読めない。
+    ⚠️ **`negative_conflicts` が空の文法は、この層が何も言わない。**
+    **それは「衝突が無い」であり、「照合した」ではない**——註が本数を報告する。
+    """
+    out = []
+    root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
+    entries, where, problem = grammars.catalog(root)
+    if problem:
+        out.append(_grammar_unreadable("L45", problem, where))
+        return out
+
+    with_conflicts = sum(1 for e in entries.values() if e.get("negative_conflicts"))
+    device_specs = 0
+    checked = 0
+    for s, p, name in _grammar_specs(project):
+        if not name or name == "video-spec":
+            continue
+        entry = entries.get(name)
+        if entry is None:
+            continue                      # L42 が報告する
+        device_specs += 1
+        clauses = [str(c) for c in (entry.get("negative_conflicts") or [])]
+        if not clauses:
+            continue
+        try:
+            neg = specdoc.negative_prompt(p)
+        except FileNotFoundError:
+            continue
+        if neg is None:
+            continue                      # §18 に `Negative Prompt` が無い——`L17` が報告する
+        checked += 1
+        text = " ".join(" , ".join(neg).split()).casefold()
+        hits = [c for c in clauses if " ".join(c.split()).casefold() in text]
+        for clause in hits:
+            out.append(finding(
+                "L45", s,
+                f"文法 `{name}` を名指しているが、§18 `Negative Prompt` の `{clause}` が"
+                "**その文法の核を禁じている**。"
+                "⚠️ **生成器は名乗りと禁制の両方を受け取る**——"
+                "どちらが勝つかは決まっておらず、**どちらも正しい指示である。**"
+                "⇒ 禁制を外すか、デバイスをやめるか、**作品が選ぶこと。**"))
+
+    note = (f"文法の目録 {len(entries)} 本のうち、`negative_conflicts` を持つのは "
+            f"{with_conflicts} 本。文法を名指す仕様 {device_specs} 本のうち、"
+            f"`Negative Prompt` と照合したのは {checked} 本。"
+            "⚠️ **残りは空の一覧であり、この層はその文法について1句も照合していない**"
+            "——**空は「衝突が無い」であって、「照合した」ではない。**")
+    out.append(finding("L45", f"{checked}本", note, severity="note"))
+    return out
+
+
+def check_aim_grammar(project, repo_root=None):
+    """L46 — **`aim` が `grammar:` を名乗るなら、その文法は目録に在るか。**
+
+    ⚠️ **この層が在る理由。** `aim` は「狙い」の欄として 2026-09-21 に生まれ、
+    **読む検査が1つも無かった**（`schemas/shot-record.schema.json` 自身がそう書いている）。
+    自由文のままでは読めない——**読めない欄は、書かれていない欄と同じである。**
+    だから**名乗りの席**を用意し、名乗った名前だけを目録へ突き合わせる。
+
+    ⚠️ **名乗らない自由文は、註で通す。** 意味を推測しない——`aim` を `enum` に
+    しなかったのは、目録が作者のものであり、ここが**その目録を読む側**だからである。
+    ⚠️ **この層は `aim` の中身が「良い狙い」かは読まない。** 読むのは名前だけである。
+    """
+    out = []
+    root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
+    entries, where, problem = grammars.catalog(root)
+    if problem:
+        out.append(_grammar_unreadable("L46", problem, where))
+        return out
+
+    aimed = claimed = free = blank = 0
+    for s in project.order():
+        aim = project.shots[s].get("aim")
+        if not isinstance(aim, str) or not aim.strip():
+            blank += 1
+            continue
+        aimed += 1
+        m = AIM_GRAMMAR.match(aim)
+        if not m:
+            free += 1
+            continue
+        claimed += 1
+        name = m.group(1).strip().strip("`\"'")
+        if name not in entries:
+            out.append(finding(
+                "L46", s,
+                f"`aim` が `grammar: {name}` を名乗るが、文法の目録に無い（{where}）。"
+                "⚠️ **名乗りは、目録に在って初めて名前になる**——"
+                "無い名を名乗った狙いは、**誰も引けない狙いである。**"))
+
+    note = (f"`aim` を持つショット {aimed} 本のうち、`grammar:` を名乗るのは {claimed} 本。"
+            f"⚠️ **名乗らない自由文 {free} 本は読まない**（意味を推測しない）、"
+            f"`aim` を持たない {blank} 本は対象の外。"
+            "⚠️ **この層は名乗りが目録に在るかだけを見ており、狙いが良いかは読まない。**")
+    out.append(finding("L46", f"{aimed}本", note, severity="note"))
+    return out
+
+
 # ---------------------------------------------------------------- 曲が時間の主であるとき
 
 #: `bible.time_source` の語彙。**語彙を持つのは、それを読む者である**——
@@ -4826,6 +5123,1143 @@ def check_route_side_by_side(project):
     return out
 
 
+# ---------------------------------------------------------------- 劇作
+
+#: `## DIRECTION` の見出し。⚠️ **番号を持たない**——§17 と §18 の間に置かれ、
+#: `_spec_tops`（番号付きの節だけを読む）には現れない。**ゆえに `L11` は鳴らない。**
+#: **値の転換を負わない関数。** 質感・余白・様式美は「物語のどこを負うか」ではなく
+#: 「作品の肌をどう作るか」である。**これらは `value` を持たなくてよい**——
+#: 持たないことが欠けなのではない。⚠️ **物語の関数は、値の転換を負う。**
+NON_NARRATIVE_FUNCTIONS = frozenset({"質感", "余白", "様式美"})
+
+
+def check_dramatic_value(project):
+    """L40 — **物語の関数を持つショットは、値を転換させているか。**
+
+    ⚠️ **`unit` の二つ目の変化ではない。** `unit` は事実（`before` → `after`）、
+    `dramatic.value` は**同じ一つの変化の値**である。**両方を読むが、二つの変化は無い。**
+
+    ⚠️ **非物語の関数（質感・余白・様式美）は対象外**である。値を持たないことが
+    その関数の意味だからである。⚠️ **物語の関数で値が無いのも鳴らす**——
+    「変えない」と「書いていない」は、どちらも転換が無い。
+
+    ⚠️ **`dramatic` を持たないショットは対象外**で、本数を註で報告する。
+    **記録が無いことは、食い違っていることではない。**
+
+    ⚠️ **この層は値が「良い」かも、転換が「効く」かも読まない。**
+    それは評議会と作者に属する。
+    """
+    out = []
+    dramatic = [s for s in project.order()
+                if isinstance((project.shots[s] or {}).get("dramatic"), dict)]
+    if not dramatic:
+        out.append(finding(
+            "L40", "0本",
+            "`dramatic` を持つショットが1本も無い——**この層は何も照合していない。**"
+            "⚠️ **確かめていないことは、緑ではない。**",
+            severity="note"))
+        return out
+
+    narrative = 0
+    non_narrative = 0
+    for s in dramatic:
+        d = project.shots[s]["dramatic"]
+        fn = d.get("function")
+        if fn in NON_NARRATIVE_FUNCTIONS:
+            non_narrative += 1
+            continue
+        # ⚠️ **関数の不在はスキーマが捕まえる。** ここで第二の報告を重ねない。
+        if not fn:
+            continue
+        narrative += 1
+        val = d.get("value") or {}
+        f, t = val.get("from"), val.get("to")
+        if not f or not t:
+            out.append(finding(
+                "L40", s,
+                f"`dramatic.function` は物語の `{fn}` だが、`value.from` / `value.to` が"
+                "揃っていない。⚠️ **物語の関数は値の転換を負う**——"
+                "値を持たないショットなら、関数は質感・余白・様式美である。"))
+        elif str(f) == str(t):
+            out.append(finding(
+                "L40", s,
+                f"`dramatic.function` は物語の `{fn}` だが、値が `{f}` のまま変わらない。"
+                "⚠️ **変わらないショットは変化の単位ではない**——"
+                "値を持たないショットなら、関数は質感・余白・様式美である。"))
+
+    out.append(finding(
+        "L40", f"{len(dramatic)}本",
+        f"`dramatic` を持つショット {len(dramatic)} 本のうち、物語の関数 {narrative} 本・"
+        f"非物語の関数 {non_narrative} 本。⚠️ **値の転換が「良い」かは、この層は読まない。**",
+        severity="note"))
+    return out
+
+
+def check_dramaturgy_shape(project):
+    """L41 — **幕とシーケンスは、実在するショットを引き、転換と対比を持つか。**
+
+    ⚠️ **幕とシーケンスは設計の眺めである**——ショットは単位のまま、生成単位には
+    しない。ゆえにこの層が読むのは**眺めが実在に届いているか**だけであり、
+    幕の転換が「効く」か、対比が「面白い」かは読まない。
+
+    ⚠️ **`payoff` は前方参照を許す**（回収の予約は状態ではない）。ゆえに見るのは
+    **引いた先が実在するか**だけである。⚠️ **回収を書かないことは鳴らさない**
+    ——「無い」と「まだ無い」を機械は区別できない。
+
+    ⚠️ **`dramaturgy` を持たない作品は註**である。**記録が無いことは、食い違って
+    いることではない。** 遡って埋めもしない。
+    """
+    out = []
+    dram = project.ledger.get("dramaturgy")
+    if not isinstance(dram, dict) or not dram:
+        out.append(finding(
+            "L41", "0本",
+            "`ledger.dramaturgy` が無い——**この層は何も照合していない。**"
+            "⚠️ **確かめていないことは、緑ではない。**",
+            severity="note"))
+        return out
+
+    acts = [a for a in (dram.get("acts") or []) if isinstance(a, dict)]
+    seqs = [s for s in (dram.get("sequences") or []) if isinstance(s, dict)]
+    if not acts and not seqs:
+        out.append(finding(
+            "L41", "0本",
+            "`dramaturgy` はあるが `acts` も `sequences` も無い——"
+            "**この層は何も照合していない。**"
+            "⚠️ **台帳の上部（premise / question / argument）だけでは、"
+            "ショットの並びを誰も負っていない。**",
+            severity="note"))
+        return out
+
+    known = set(project.order())
+
+    def _unknown(ids, what, name):
+        bad = [s for s in ids if s not in known]
+        if not bad:
+            return
+        out.append(finding(
+            "L41", name,
+            f"{what} `{name}` が、実在しないショットを引いている: "
+            + "・".join(f"`{s}`" for s in bad[:5])
+            + ("…" if len(bad) > 5 else "")
+            + "。⚠️ **引いた先が無ければ、その眺めは誰も負っていない。**"))
+
+    for i, act in enumerate(acts):
+        aid = act.get("id") or f"acts[{i}]"
+        shots = act.get("shots") or []
+        if not shots:
+            out.append(finding(
+                "L41", aid,
+                f"幕 `{aid}` がショットを1本も引いていない。"
+                "⚠️ **ショットを持たない幕は、眺めではなく名前である。**"))
+            continue
+        _unknown(shots, "幕", aid)
+        if not str(act.get("turn") or "").strip():
+            out.append(finding(
+                "L41", aid,
+                f"幕 `{aid}` に `turn`（この幕の転換）が無い。"
+                "⚠️ **転換を持たない幕は、まとめただけである。**"))
+        climax = act.get("climax")
+        if climax and climax not in shots:
+            out.append(finding(
+                "L41", aid,
+                f"幕 `{aid}` の山場 `{climax}` が、この幕の `shots` に無い。"
+                "⚠️ **山場は、幕の外に置けない。**"))
+
+    for i, seq in enumerate(seqs):
+        qid = seq.get("id") or f"sequences[{i}]"
+        shots = seq.get("shots") or []
+        if not shots:
+            out.append(finding(
+                "L41", qid,
+                f"シーケンス `{qid}` がショットを1本も引いていない。"
+                "⚠️ **空の並びは、並びではない。**"))
+            continue
+        _unknown(shots, "シーケンス", qid)
+        if not str(seq.get("contrast") or "").strip():
+            out.append(finding(
+                "L41", qid,
+                f"シーケンス `{qid}` に `contrast`（隣接ショットの対比）が無い。"
+                "⚠️ **対比の無い並びは、並びではなく連続である。**"))
+        payoff = seq.get("payoff")
+        if payoff and payoff not in known:
+            out.append(finding(
+                "L41", qid,
+                f"シーケンス `{qid}` の回収先 `{payoff}` が実在しない。"
+                "⚠️ **前方参照は許す**——ただし引いた先が無ければ、回収は起きない。"))
+
+    out.append(finding(
+        "L41", f"{len(acts)}幕/{len(seqs)}本",
+        f"幕 {len(acts)} 本・シーケンス {len(seqs)} 本を確かめた。"
+        "⚠️ **幕の転換が「効く」か、対比が「面白い」かは、この層は読まない。**",
+        severity="note"))
+    return out
+
+
+def _peak_intensity(shot):
+    """`beats[].intensity` の最大値。1つも無ければ `None`。
+
+    ⚠️ **`bool` は `int` である**——`isinstance(v, int)` だけでは `True` を 1 と読む。
+    """
+    vals = [b.get("intensity") for b in (shot.get("beats") or [])
+            if isinstance(b, dict)
+            and isinstance(b.get("intensity"), int)
+            and not isinstance(b.get("intensity"), bool)]
+    return max(vals) if vals else None
+
+
+def check_tension_curve(project):
+    """L44 — **緊張の曲線は、平坦でも跳ねてもよいが、平坦は理由を要る。**
+
+    ⚠️ **`intensity` を持つショットが3本未満なら、この層は何も読まない**（註）。
+    曲線は並びの性質であり、1本には無い。
+
+    ⚠️ **同じ強度が3本以上続くことを鳴らす。** ただし**シーケンスが `flat: true`
+    と `note`（理由）を宣言していれば註**である——**平らであることは失敗ではない**、
+    意図された平らと、強度を書かなかっただけの平らを、機械は区別できないからである。
+    ⚠️ **`flat: true` に理由が無ければ鳴る。** 理由の無い `flat` は宣言ではない。
+
+    ⚠️ **幕に `climax` があるなら、それは幕の最大でなければならない。**
+    山場が山場でないなら、曲線の頂点は名指されたショットの外にある。
+
+    ⚠️ **強度の付け方が「良い」かは読まない。** `density` との直交も読まない。
+    それは評議会と作者に属する。
+    """
+    out = []
+    order = project.order()
+    peaks = {}
+    for s in order:
+        p = _peak_intensity(project.shots[s] or {})
+        if p is not None:
+            peaks[s] = p
+
+    if len(peaks) < 3:
+        out.append(finding(
+            "L44", f"{len(peaks)}本",
+            f"`beats[].intensity` を持つショットが {len(peaks)} 本——**曲線はまだ無い。**"
+            "⚠️ **確かめていないことは、緑ではない。**",
+            severity="note"))
+        return out
+
+    dram = project.ledger.get("dramaturgy")
+    dram = dram if isinstance(dram, dict) else {}
+
+    flat_ok = set()
+    flat_names = []
+    for i, seq in enumerate(dram.get("sequences") or []):
+        if not isinstance(seq, dict) or seq.get("flat") is not True:
+            continue
+        qid = seq.get("id") or f"sequences[{i}]"
+        if not str(seq.get("note") or "").strip():
+            out.append(finding(
+                "L44", qid,
+                f"シーケンス `{qid}` は `flat: true`（平らな曲線）を宣言しているが、"
+                "`note`（理由）が無い。⚠️ **理由の無い `flat` は宣言ではない**——"
+                "意図された平らと、強度を書かなかっただけの平らを、機械は区別できない。"))
+            continue
+        flat_names.append(qid)
+        flat_ok |= {s for s in (seq.get("shots") or []) if s in peaks}
+
+    # ⚠️ **並びの上で隣り合うこと**が条件である。`intensity` を持たないショットが
+    #    間に挟まれば、そこで切れる——曲線は記録のある点だけを結ぶのではない。
+    runs = []
+    i = 0
+    while i < len(order):
+        if order[i] not in peaks:
+            i += 1
+            continue
+        j = i
+        while (j + 1 < len(order)
+               and order[j + 1] in peaks
+               and peaks[order[j + 1]] == peaks[order[i]]):
+            j += 1
+        if j - i + 1 >= 3:
+            runs.append(order[i:j + 1])
+        i = j + 1
+
+    for run in runs:
+        members = "・".join(f"`{s}`" for s in run)
+        if set(run) <= flat_ok:
+            out.append(finding(
+                "L44", run[0],
+                f"同じ強度 {peaks[run[0]]} が {len(run)} 本続く（{members}）——"
+                "**理由つきの `flat` が宣言されている。** "
+                "⚠️ **平らであることは失敗ではない**——宣言された平らは註である。",
+                severity="note"))
+            continue
+        out.append(finding(
+            "L44", run[0],
+            f"同じ強度 {peaks[run[0]]} が {len(run)} 本続く（{members}）。"
+            "⚠️ **3本以上同じなら、それは曲線ではなく床である**——"
+            "意図して平らなら、シーケンスに `flat: true` と `note` を書く。"))
+
+    act_checked = 0
+    for i, act in enumerate(dram.get("acts") or []):
+        if not isinstance(act, dict):
+            continue
+        climax = act.get("climax")
+        if not climax:
+            continue
+        aid = act.get("id") or f"acts[{i}]"
+        shots = [s for s in (act.get("shots") or []) if s in peaks]
+        if len(shots) < 2:
+            continue
+        act_checked += 1
+        if climax not in peaks:
+            out.append(finding(
+                "L44", climax,
+                f"幕 `{aid}` の山場 `{climax}` が `beats[].intensity` を持たない。"
+                "⚠️ **山場は、他のどのショットより強いと読める位置に置く。**"))
+            continue
+        best = max(peaks[s] for s in shots)
+        if peaks[climax] < best:
+            out.append(finding(
+                "L44", climax,
+                f"幕 `{aid}` の山場 `{climax}` の強度は {peaks[climax]} だが、"
+                f"この幕の最大は {best}。⚠️ **山場が山場でない**——"
+                "曲線の頂点が、名指されたショットの外にある。"))
+
+    note = (f"`beats[].intensity` を持つショット {len(peaks)} 本"
+            f"（全 {len(order)} 本）、幕の山場を確かめたのは {act_checked} 幕。")
+    if flat_names:
+        note += ("⚠️ **理由つきで平らを宣言したシーケンス**: "
+                 + "・".join(f"`{q}`" for q in flat_names) + "。")
+    note += "⚠️ **強度の付け方が「良い」かは、この層は読まない。**"
+    out.append(finding("L44", f"{len(peaks)}本", note, severity="note"))
+    return out
+
+
+def _duration_seconds(value):
+    """`"5s"` → `5.0`。読めなければ `None`。
+
+    ⚠️ **推測しない。**`"5"` も `"5 sec"` も `None` である——スキーマが
+    `^[0-9]+(\\.[0-9]+)?s$` を要求しており、ここはそれを二度目に読むだけである。
+    """
+    if not isinstance(value, str):
+        return None
+    v = value.strip()
+    if not v.endswith("s"):
+        return None
+    try:
+        return float(v[:-1])
+    except ValueError:
+        return None
+
+
+def check_withheld(project):
+    """L48 — **序列は、観客が欲しがっている画を、渡さずに済ませているか。**
+
+    ⚠️ **これが「見せない」の席である。** 開示台帳は *何を知っているか* を持ち、
+    この層は *何を期待させて、何を見せなかったか* を持つ。**両方は別である**——
+    知っていることは、見たことではない。
+
+    ⚠️ **`wanted` と `given` が同じなら鳴る。** 同じものを渡すのは欠けではなく
+    先延ばしである。**`given` が空なら鳴る**——何も渡さないのは欠けではなく事故である。
+
+    ⚠️ **最後の1本で欠けていることは、註であって違反ではない。**
+    最後まで見せないことは強い選択でありうる（**見せないことが結末になる**）。
+    機械は「選択」と「書き忘れ」を区別できないので、註で名指すだけにする。
+
+    ⚠️ **欠けの意味は読まない。** `wanted` が本当に観客の欲求か、`given` が
+    それを裏切っているかは、この層は見ない——**評議会と作者に属する。**
+    """
+    out = []
+    dram = project.ledger.get("dramaturgy")
+    if not isinstance(dram, dict) or not dram:
+        out.append(finding(
+            "L48", "0本",
+            "`ledger.dramaturgy` が無い——**この層は何も照合していない。**"
+            "⚠️ **確かめていないことは、緑ではない。**",
+            severity="note"))
+        return out
+
+    order = project.order()
+    known = set(order)
+    last = order[-1] if order else None
+    seqs = [s for s in (dram.get("sequences") or []) if isinstance(s, dict)]
+    total = 0
+
+    for i, seq in enumerate(seqs):
+        qid = seq.get("id") or f"sequences[{i}]"
+        shots = seq.get("shots") or []
+        for j, w in enumerate(seq.get("withheld") or []):
+            if not isinstance(w, dict):
+                continue
+            total += 1
+            s = w.get("shot")
+            if not s or s not in known:
+                out.append(finding(
+                    "L48", qid,
+                    f"シーケンス `{qid}` の `withheld[{j}]` が、実在しない"
+                    f"ショット `{s}` を引いている。"
+                    "⚠️ **引いた先が無ければ、欠けは誰も負っていない。**"))
+                continue
+            if s not in shots:
+                out.append(finding(
+                    "L48", s,
+                    f"ショット `{s}` の欠けが、そのショットを含まない"
+                    f"シーケンス `{qid}` で宣言されている。"
+                    "⚠️ **自分の並びに無いショットの欠けは、並びの判断ではない。**"))
+            wanted = str(w.get("wanted") or "").strip()
+            given = str(w.get("given") or "").strip()
+            if not wanted or not given:
+                out.append(finding(
+                    "L48", s,
+                    f"ショット `{s}` の欠けの `wanted` か `given` が空である。"
+                    "⚠️ **何も渡さないのは欠けではなく事故である**——"
+                    "映さないことは、何も起きないことではない。"))
+            elif wanted == given:
+                out.append(finding(
+                    "L48", s,
+                    f"ショット `{s}` の `wanted` と `given` が同じ（`{wanted}`）。"
+                    "⚠️ **同じものを渡すのは、欠けではなく先延ばしである。**"))
+            if s == last:
+                out.append(finding(
+                    "L48", s,
+                    "このショットは作品の最後の1本であり、そこで欠けている——"
+                    "**回収されない欠けである。**"
+                    "⚠️ **最後を欠けで終えるのは選択でありうる**"
+                    "（見せないことが結末になる）。ここでは違反にしない。",
+                    severity="note"))
+
+    if total == 0:
+        out.append(finding(
+            "L48", "0本",
+            "`withheld` を持つショットが1本も無い——**この層は何も照合していない。**"
+            "⚠️ **観客に何も隠していない作品は、開示しているだけである。**",
+            severity="note"))
+        return out
+
+    out.append(finding(
+        "L48", f"{total}本",
+        f"欠け（`withheld`）を宣言したショット {total} 本、"
+        f"シーケンス {len(seqs)} 本を確かめた。"
+        "⚠️ **欠けが「効く」かは、この層は読まない。**",
+        severity="note"))
+    return out
+
+
+def check_cut_declaration(project):
+    """L49 — **切れ目は、シーケンスが決め、ショットが持ち、仕様が書いているか。**
+
+    ⚠️ **両方向に見る。** シーケンスが宣言した切れ目にショットの記録が無ければ、
+    仕様はワンテイクのまま書かれる。ショットが `cut: internal` を持つのに
+    誰も宣言していなければ、その切れ目は律動を負っていない。
+
+    ⚠️ **そして仕様の本文を開く。** 記録だけを変えても、**生成器は記録を読まない**
+    ——`§18` の本文に「ワンテイク」の句が残っていれば、記録は嘘になる。
+
+    ⚠️ **切れ目が「映画的」かは読まない。** 何回切るか、どこで切るかは作者の仕事である。
+    """
+    out = []
+    order = project.order()
+    known = set(order)
+    dram = project.ledger.get("dramaturgy")
+    dram = dram if isinstance(dram, dict) else {}
+
+    declared = {}
+    for i, seq in enumerate(dram.get("sequences") or []):
+        if not isinstance(seq, dict):
+            continue
+        qid = seq.get("id") or f"sequences[{i}]"
+        shots = seq.get("shots") or []
+        for s in seq.get("cuts") or []:
+            if not isinstance(s, str) or not s:
+                continue
+            declared.setdefault(s, []).append(qid)
+            if s not in known:
+                out.append(finding(
+                    "L49", qid,
+                    f"シーケンス `{qid}` の `cuts` が、実在しないショット"
+                    f" `{s}` を引いている。"
+                    "⚠️ **引いた先が無ければ、切れ目は起きない。**"))
+            elif s not in shots:
+                out.append(finding(
+                    "L49", s,
+                    f"ショット `{s}` の切れ目が、そのショットを含まない"
+                    f"シーケンス `{qid}` で宣言されている。"
+                    "⚠️ **自分の並びに無いショットの切れ目は、並びの判断ではない。**"))
+
+    internal = [s for s in order if (project.shots[s] or {}).get("cut") == "internal"]
+
+    for s in internal:
+        if s not in declared:
+            out.append(finding(
+                "L49", s,
+                "`cut: internal` を持つが、どのシーケンスの `cuts` にも無い。"
+                "⚠️ **誰の律動も負わない切れ目は、編集の事故と同じものである**"
+                "——切れ目は、隣のショットがあって初めて意味を持つ。"))
+
+    for s in sorted(declared):
+        if s in known and (project.shots[s] or {}).get("cut") != "internal":
+            out.append(finding(
+                "L49", s,
+                f"シーケンス（`{'`・`'.join(declared[s])}`）が切れ目を宣言しているが、"
+                "ショットの記録には `cut: internal` が無い。"
+                "⚠️ **宣言と記録が食い違えば、仕様はワンテイクのまま書かれる。**"))
+
+    # ⚠️ **記録ではなく、仕様の本文を読む。** 生成器が読むのはこちらである。
+    #    ⚠️ **`root` を持たない検査用の作品では飛ばす**——自己検査は
+    #    **その層が鳴る条件**を見るものであり、ファイルの読み口は `L38` の仕事である。
+    root = getattr(project, "root", None)
+    for s in internal:
+        if root is None:
+            break
+        shot = project.shots[s] or {}
+        src = _spec_of(shot, "video")
+        if not src:
+            continue
+        path = Path(root) / src
+        if not path.is_file():
+            continue
+        body = path.read_text(encoding="utf-8").lower()
+        hits = [p for p in ("continuous take", "no cut") if p in body]
+        if hits:
+            out.append(finding(
+                "L49", s,
+                "`cut: internal` だが、仕様の本文にまだ「ワンテイク」の句が残っている: "
+                + "・".join(f"`{h}`" for h in hits)
+                + "。⚠️ **記録だけを変えても、生成器は記録を読まない。**"))
+
+    n = len(internal) + len(declared)
+    if n == 0:
+        out.append(finding(
+            "L49", "0本",
+            "`cut: internal` を持つショットも、`cuts` を宣言したシーケンスも無い——"
+            "**この層は何も照合していない。**"
+            "⚠️ **全部がワンテイクであることは、緑ではない**——"
+            "**作品に切れ目が無いという、測定値である。**",
+            severity="note"))
+        return out
+
+    out.append(finding(
+        "L49", f"{len(internal)}本",
+        f"内側に切れ目を持つショット {len(internal)} 本、"
+        f"`cuts` を宣言したシーケンス {len({q for qs in declared.values() for q in qs})} 本を"
+        "両方向に照合した。⚠️ **切れ目が「映画的」かは、この層は読まない。**",
+        severity="note"))
+    return out
+
+
+def check_tempo(project):
+    """L50 — **シーケンスの律動（`tempo`）は、ショットの秒数と合っているか。**
+
+    ⚠️ **秒数の正はショット記録に在る。** シーケンスが持つのは**並びの形**であり、
+    ここはその写しを照合するだけである——**二つに正を持たせない**（台帳の分割と同じ規律）。
+
+    ⚠️ **等間隔の律動は律動ではない。** 3本以上が同じ秒数なら鳴る——
+    ただし `flat: true` と `note`（理由）を宣言していれば註である。
+    **平らであることは失敗ではない**（`L44` と同じ規律）。
+
+    ⚠️ **尺が「良い」かは読まない。** 長ければいいというものでもない（決定 2026-09-13）。
+    """
+    out = []
+    dram = project.ledger.get("dramaturgy")
+    if not isinstance(dram, dict) or not dram:
+        out.append(finding(
+            "L50", "0本",
+            "`ledger.dramaturgy` が無い——**この層は何も照合していない。**"
+            "⚠️ **確かめていないことは、緑ではない。**",
+            severity="note"))
+        return out
+
+    total = 0
+    flat_ok = []
+    for i, seq in enumerate(dram.get("sequences") or []):
+        if not isinstance(seq, dict):
+            continue
+        tempo = seq.get("tempo")
+        if not isinstance(tempo, list) or not tempo:
+            continue
+        total += 1
+        qid = seq.get("id") or f"sequences[{i}]"
+        shots = seq.get("shots") or []
+        vals = [v for v in tempo
+                if isinstance(v, (int, float)) and not isinstance(v, bool)]
+        if len(vals) != len(tempo):
+            out.append(finding(
+                "L50", qid,
+                f"シーケンス `{qid}` の `tempo` に、数でない値が混じっている。"
+                "⚠️ **読めない律動は、律動ではない。**"))
+            continue
+        if len(tempo) != len(shots):
+            out.append(finding(
+                "L50", qid,
+                f"シーケンス `{qid}` の `tempo` は {len(tempo)} 個だが、"
+                f"`shots` は {len(shots)} 本である。"
+                "⚠️ **並びの形は、並びと同じ長さでなければ読めない。**"))
+        for k, (v, s) in enumerate(zip(tempo, shots)):
+            secs = _duration_seconds((project.shots.get(s) or {}).get("duration"))
+            if secs is None:
+                continue
+            if abs(float(v) - secs) > 0.001:
+                out.append(finding(
+                    "L50", qid,
+                    f"シーケンス `{qid}` の `tempo[{k}]` は {v} 秒だが、"
+                    f"ショット `{s}` の `duration` は {secs:g}s である。"
+                    "⚠️ **律動の形とショットの秒数が食い違えば、並びは嘘になる**——"
+                    "秒数の正はショット記録に在る。"))
+        if len(vals) >= 3 and (max(vals) - min(vals)) < 0.001:
+            if seq.get("flat") is True and str(seq.get("note") or "").strip():
+                flat_ok.append(qid)
+            else:
+                out.append(finding(
+                    "L50", qid,
+                    f"シーケンス `{qid}` の `tempo` が {len(vals)} 本とも "
+                    f"{vals[0]:g} 秒である。"
+                    "⚠️ **等間隔は律動ではない**——意図して平らなら、"
+                    "`flat: true` と `note`（理由）を書く。"))
+
+    if total == 0:
+        out.append(finding(
+            "L50", "0本",
+            "`tempo` を宣言したシーケンスが1本も無い——**この層は何も照合していない。**"
+            "⚠️ **リズムを見ていないことは、リズムが無いことではない**"
+            "——ただし**確かめてはいない。**",
+            severity="note"))
+        return out
+
+    note = f"`tempo` を宣言したシーケンス {total} 本を、ショットの秒数と照合した。"
+    if flat_ok:
+        note += ("⚠️ **理由つきで等間隔を宣言したシーケンス**: "
+                 + "・".join(f"`{q}`" for q in flat_ok) + "。")
+    note += "⚠️ **尺が「良い」かは、この層は読まない。**"
+    out.append(finding("L50", f"{total}本", note, severity="note"))
+    return out
+
+
+def _flat(text):
+    """**比べるために平らにする。** 強調（`**`）と改行だけを落とし、意味は落とさない。
+
+    ⚠️ **仕様の散文は強調を持つ。** `drama-pilot` の `s02` は
+    `**She is the only person in the frame**` と書く——**印を落とさなければ、
+    同じ句が「無い」と鳴る。** 落とすのは**印だけ**であり、語は1つも落とさない。
+    """
+    return re.sub(r"\s+", " ", re.sub(r"[*_`]+", "", str(text))).strip().lower()
+
+
+def check_population(project):
+    """L51 — **ショットが宣言した人数は、生成器へ届いているか。**
+
+    ⚠️ **なぜ要るか。** 実測（2026-10-29）: `drama-pilot` の `s02` と `s04` の生成で
+    **二人目の人間が現れた。** 作品の人物は一人であり、`bible.negative_base` にも
+    §18 にも、**それを言う文がどこにも無かった。**
+    ⚠️ **`L21` はこの欠陥を捕まえられない**——あちらは「作品が**宣言した**禁制が届いているか」
+    を見る。**宣言が無ければ、届いていないことも分からない。**
+    **空欄は中立ではない**（`L27` の言語と同じ規律）——生成器は空いた席を自分の既定で埋める。
+
+    ⚠️ **両方向に読む。** 記録が数を持ち、仕様が文字列を持つ。**数は2つの句になる**
+    （`specmap` の註を見よ）:
+      · **肯定**——`the only person in the frame` が §18 `Master Prompt` に在ること。
+        こちらが本体である（`L27`——**言語を名指せ、症状を禁じるな**）。
+      · **写し**——`no second person` が §18 `Negative Prompt` に在ること、
+        そして**宣言より少ない人数で止めていない**こと。
+    **足りない節と、厳しすぎる節は、別の欠陥である**——だから別々に鳴らす。
+
+    ⚠️ **2人以上のショットには、禁制の句を求めない**（`POPULATION_NEGATIVES` に2人以上の行が無い）。
+    **禁制は人数を数えない。** 数えられるのは「居ない」（0）と「一人だけ」（1）であり、
+    **この基盤が実際に踏んだ失敗もその2つである。** 無い行を空で埋めない——
+    **無いことは「何も要求しない」ではなく、註で報告される。**
+
+    ⚠️ **`population` を持たないショットは違反にしない。** 記録が無いことは、
+    食い違っていることではない（`key_image`・`aim`・`cut` と同じ扱い）。
+    ただし**本数を註で報告する**——数えないことは、緑ではない。
+
+    ⚠️ **読まないもの**: その人数が**このショットに正しいか**（作者と評議会に属する）、
+    誰が映るか（§3 と参照集合の仕事）、そして `reference_set` との突き合わせ——
+    **参照は人物の名前を持ち、人数は数を持つ。両者は別の欄であり、片方から他方は導けない。**
+    """
+    out = []
+    order = project.order()
+
+    declared = []
+    for s in order:
+        n = (project.shots.get(s) or {}).get("population")
+        if isinstance(n, bool) or not isinstance(n, int):
+            continue
+        declared.append((s, n))
+
+    if not declared:
+        out.append(finding(
+            "L51", "0本",
+            "`population` を宣言したショットが1本も無い——**この層は何も照合していない。**"
+            "⚠️ **確かめていないことは、緑ではない。**"
+            "**人数を書かなければ、生成器は空いた席を自分の既定で埋める**"
+            "（実測 2026-10-29: 人物が一人の作品で、二人目が描かれた）。",
+            severity="note"))
+        return out
+
+    seen = []
+    for s, n in declared:
+        rec = project.shots.get(s) or {}
+        src = _spec_of(rec, "video")
+        if not src:
+            continue                      # L18 が「持たない」と報告している
+        p = project.root / src
+        if not p.is_file():
+            continue                      # L18 が「読めない」と報告している
+        seen.append(f"{s}:{n}")
+
+        text = p.read_text(encoding="utf-8")
+        phrase = specmap.population_phrase(n)
+        master = specdoc.section(text, "Master Prompt")
+        if master is None:
+            out.append(finding(
+                "L51", s,
+                "§18 に `## Master Prompt` の節が無い。"
+                "**人数を1度も確かめられない**——節が無いのは、人数が届いていることではない。"))
+        elif _flat(phrase) not in _flat(master):
+            out.append(finding(
+                "L51", s,
+                f"`population: {n}` だが、§18 `Master Prompt` に"
+                f"「{phrase}」が無い。"
+                "**人数が生成器へ届いていない**——空いた席は、生成器が自分の既定で埋める"
+                "（実測 2026-10-29: 人物が一人の作品で、二人目が描かれた）。"
+                "⚠️ **禁じるのではなく、名指す**のである。"))
+
+        clauses, flaw = _negative_of(p, "video")
+        if flaw:
+            continue                      # L21 が同じ仕様について報告している
+        got = {_stem(c) for c in clauses}
+
+        # ① 足りない節——宣言した数を超えさせない1句。
+        #    ⚠️ **厳しすぎる節が在るなら、こちらは言わない。** 同じ1句が
+        #    「足りない」と「厳しすぎる」の両方に数えられると、**欠陥が2つに見える。**
+        need = specmap.POPULATION_NEGATIVES.get(n)
+        too_strict = []
+        for k, vals in sorted(specmap.POPULATION_NEGATIVES.items()):
+            if k >= n:
+                continue
+            bad = [c for c in vals if _stem(c) in got]
+            if bad:
+                too_strict.append((k, bad[0]))
+
+        if need and not too_strict:
+            miss = [c for c in need if _stem(c) not in got]
+            if len(miss) == len(need):
+                out.append(finding(
+                    "L51", s,
+                    f"`population: {n}` だが、§18 `Negative Prompt` が"
+                    f"「{'／'.join(need)}」のどれも持たない。"
+                    "**肯定の1句は数を置くが、数を超える人数を止めない**——"
+                    "台帳の `negative_base` にも無ければ、二人目は黙って描かれる。"))
+
+        # ② 厳しすぎる節——宣言より少ない人数で止めている（矛盾）。
+        for k, bad in too_strict:
+            out.append(finding(
+                "L51", s,
+                f"`population: {n}` だが、§18 `Negative Prompt` が"
+                f"「{bad}」で **{k} 人**に止めている。"
+                "**記録と、生成器へ渡る文字列が食い違っている**——"
+                "どちらが正かは決まっていない。**片方を直さなければ、"
+                "生成器は2つの指示の間で選ぶ。**"))
+
+    if not seen:
+        out.append(finding(
+            "L51", "0本",
+            "`population` を宣言したショットに、動画の仕様が1本も無い——"
+            "**この層は何も照合していない**（`L18` が仕様の不在を報告している）。",
+            severity="note"))
+        return out
+
+    avg = sum(n for _, n in declared) / len(declared)
+    note = (f"`population` を宣言した {len(seen)}/{len(order)} 本を、"
+            f"§18 の `Master Prompt`（肯定の1句）と `Negative Prompt`（写し）に照合した。"
+            f"**人数**: {'・'.join(seen)}（平均 {avg:g} 人）。")
+    beyond = [f"{s}:{n}" for s, n in declared
+              if n >= 2]
+    if beyond:
+        note += (f"⚠️ **2人以上のショットには禁制の句を求めない**: "
+                 f"{'・'.join(beyond)}——**禁制は人数を数えない。**")
+    note += ("⚠️ **その人数がこのショットに正しいかは、この層は読まない**"
+             "——それは作者と評議会に属する。")
+    out.append(finding("L51", f"{len(seen)}本", note, severity="note"))
+    return out
+
+
+def check_body_parts(project):
+    """L52 — **ショットが宣言した部位の数は、生成器へ届いているか。**
+
+    ⚠️ **なぜ要るか。** 実測（2026-10-29）: `drama-pilot` の `s04` は**手だけのショット**で、
+    同じ仕様から2回生成したうち1回に**3本目の手**が現れた。記録は `population: 1` を
+    持っており、**人数は正しかった**——人は一人である。**失敗は肢で起きた。**
+    ⚠️ **`L51` は、この失敗を緑と報告する。** あちらが数えるのは**人**であり、
+    **身体の部位は数えない。** 空いた席は生成器が自分の既定で埋める（`L27` の規律）。
+
+    ⚠️ **「手」ではなく「肢」である。** 同じ失敗は足・脚・腕・指にも起きる——
+    枠が身体の一部しか写さないショットは、**その部位の数を名指さなければならない。**
+    語彙は `specmap.BODY_PARTS`（部位 → 複数形・1体あたりの最大数）である。
+
+    ⚠️ **三つを読む。**
+      ① **算術**——`population` と `body_parts` が**互いに矛盾しないか**
+         （1体の手は2本である。`population: 1` の枠に `hand: 4` は置けない）。
+         ⚠️ **`population` が無ければ、この算術は走らない**——推測で埋めない。
+      ② **肯定**——`2 hands in the frame` が §18 `Master Prompt` に在ること。
+         **こちらが本体である**（`L27`——**名指せ、症状を禁じるな**）。
+      ③ **写し**——`no second hand` が §18 `Negative Prompt` に在ること、
+         そして**宣言より少ない数で止めていない**こと。
+
+    ⚠️ **足りない節と、厳しすぎる節は、別の欠陥である**——`L51` と同じく別々に鳴らす。
+    そして**厳しすぎる節が在るなら「足りない」は言わない**——同じ1句を2つの欠陥に
+    数えると、**欠陥が2つに見える。**
+
+    ⚠️ **2本以上の部位には、禁制の句を求めない**（`BODY_PARTS` の写しに2以上の行が無い）。
+    **禁制は数を数えない**——数えられるのは「無い」（0）と「1本だけ」（1）である。
+    2本の手に効くのは**肯定の句**であり、無い行を空で埋めない。
+
+    ⚠️ **`body_parts` を持たないショットは違反にしない。** 記録が無いことは、
+    食い違っていることではない（`population` と同じ扱い）。ただし**本数を註で報告する。**
+    枠が全身を写すショットは、`population` だけで足りる——**部位は、枠が身体の一部の
+    ときの欄である。**
+
+    ⚠️ **読まないもの**: その数が**このショットに正しいか**（作者と評議会に属する）、
+    部位が**何をしているか**（§11 MOTION の仕事）、そして `reference_set` との突き合わせ。
+    """
+    out = []
+    order = project.order()
+
+    declared = []
+    for s in order:
+        rec = project.shots.get(s) or {}
+        parts = rec.get("body_parts")
+        if not isinstance(parts, dict) or not parts:
+            continue
+        counts = {}
+        for k, v in parts.items():
+            if isinstance(v, bool) or not isinstance(v, int):
+                continue
+            counts[str(k)] = v
+        if counts:
+            declared.append((s, counts))
+
+    if not declared:
+        out.append(finding(
+            "L52", "0本",
+            "`body_parts` を宣言したショットが1本も無い——**この層は何も照合していない。**"
+            "⚠️ **確かめていないことは、緑ではない。**"
+            "枠が身体の一部しか写さないショットは、**その部位の数を名指さなければ、"
+            "生成器が自分の既定で埋める**（実測 2026-10-29: 手だけのショットに、3本目の手が描かれた）。",
+            severity="note"))
+        return out
+
+    seen = []
+    arithmetic_skipped = []
+    no_clause = []
+    for s, counts in declared:
+        rec = project.shots.get(s) or {}
+
+        # ① 登録されていない部位——**句を導けない。**
+        #    ⚠️ `L42` が未登録の文法を鳴らすのと同じ形である。
+        unknown = sorted(k for k in counts if k not in specmap.BODY_PARTS)
+        for k in unknown:
+            out.append(finding(
+                "L52", s,
+                f"`body_parts` の「{k}」は登録されていない部位である。"
+                f"**名指しの句を導けない**——登録されているのは "
+                f"{'・'.join(sorted(specmap.BODY_PARTS))} である"
+                "（`engine/ledger/specmap.py` の `BODY_PARTS`）。"
+                "⚠️ **語彙を勝手に増やさない**——増やすなら表に登録する。"))
+
+        known = {k: v for k, v in counts.items() if k in specmap.BODY_PARTS}
+        if not known:
+            continue
+
+        # ② 解剖の算術——2つの宣言が互いに矛盾しないか。
+        n_people = rec.get("population")
+        if isinstance(n_people, bool) or not isinstance(n_people, int):
+            arithmetic_skipped.append(s)
+        else:
+            for k, v in sorted(known.items()):
+                plural, per_body = specmap.BODY_PARTS[k]
+                cap = per_body * max(n_people, 0)
+                if v > cap:
+                    out.append(finding(
+                        "L52", s,
+                        f"`body_parts: {k}: {v}` だが `population: {n_people}` である。"
+                        f"**1体に「{k}」は {per_body} までであり、枠には最大 {cap} までしか"
+                        f"置けない。** 2つの宣言が互いに矛盾している——"
+                        "**どちらが正かは決まっていない。片方を直さなければ、"
+                        "生成器は2つの指示の間で選ぶ。**"))
+
+        src = _spec_of(rec, "video")
+        if not src:
+            continue                      # L18 が「持たない」と報告している
+        p = project.root / src
+        if not p.is_file():
+            continue                      # L18 が「読めない」と報告している
+        seen.append(s + ":" + "・".join(f"{k}{v}" for k, v in sorted(known.items())))
+
+        text = p.read_text(encoding="utf-8")
+        master = specdoc.section(text, "Master Prompt")
+        if master is None:
+            out.append(finding(
+                "L52", s,
+                "§18 に `## Master Prompt` の節が無い。"
+                "**部位の数を1度も確かめられない**——節が無いのは、数が届いていることではない。"))
+        else:
+            flat = _flat(master)
+            for k, v in sorted(known.items()):
+                phrase = specmap.body_part_phrase(k, v)
+                if _flat(phrase) not in flat:
+                    out.append(finding(
+                        "L52", s,
+                        f"`body_parts: {k}: {v}` だが、§18 `Master Prompt` に"
+                        f"「{phrase}」が無い。"
+                        "**部位の数が生成器へ届いていない**——空いた席は、生成器が自分の既定で埋める"
+                        "（実測 2026-10-29: 手だけのショットに、3本目の手が描かれた）。"
+                        "⚠️ **禁じるのではなく、名指す**のである。"))
+                if v >= 2:
+                    no_clause.append(f"{s}:{k}")
+
+        clauses, flaw = _negative_of(p, "video")
+        if not flaw:
+            got = {_stem(c) for c in clauses}
+            for k, v in sorted(known.items()):
+                table = specmap.body_part_negatives(k)
+                need = table.get(v)
+                too_strict = []
+                for kk, vals in sorted(table.items()):
+                    if kk >= v:
+                        continue
+                    bad = [c for c in vals if _stem(c) in got]
+                    if bad:
+                        too_strict.append((kk, bad[0]))
+
+                # 足りない節——ただし**厳しすぎる節が在るなら言わない**（二重報告を避ける）。
+                if need and not too_strict:
+                    miss = [c for c in need if _stem(c) not in got]
+                    if len(miss) == len(need):
+                        out.append(finding(
+                            "L52", s,
+                            f"`body_parts: {k}: {v}` だが、§18 `Negative Prompt` が"
+                            f"「{'／'.join(need)}」のどれも持たない。"
+                            "**肯定の1句は数を置くが、それを超える数を止めない**——"
+                            "台帳の `negative_base` にも無ければ、3本目の手は黙って描かれる。"))
+
+                # 厳しすぎる節——宣言より少ない数で止めている（矛盾）。
+                for kk, bad in too_strict:
+                    out.append(finding(
+                        "L52", s,
+                        f"`body_parts: {k}: {v}` だが、§18 `Negative Prompt` が"
+                        f"「{bad}」で **{kk} 本**に止めている。"
+                        "**記録と、生成器へ渡る文字列が食い違っている**——"
+                        "どちらが正かは決まっていない。**片方を直さなければ、"
+                        "生成器は2つの指示の間で選ぶ。**"))
+
+    if not seen:
+        out.append(finding(
+            "L52", "0本",
+            "`body_parts` を宣言したショットに、動画の仕様が1本も無い——"
+            "**この層は何も照合していない**（`L18` が仕様の不在を報告している）。",
+            severity="note"))
+        return out
+
+    note = (f"`body_parts` を宣言した {len(seen)}/{len(order)} 本を、"
+            f"§18 の `Master Prompt`（部位ごとの肯定の1句）と `Negative Prompt`（写し）に"
+            f"照合した。**部位**: {'・'.join(seen)}。")
+    if arithmetic_skipped:
+        note += (f"⚠️ **解剖の算術を走らせていない**（`population` が無い）: "
+                 f"{'・'.join(arithmetic_skipped)}——**推測で埋めない。**")
+    if no_clause:
+        note += (f"⚠️ **2本以上の部位には禁制の句を求めない**: {'・'.join(no_clause)}"
+                 "——**禁制は数を数えない。**")
+    note += ("⚠️ **その数がこのショットに正しいかは、この層は読まない**"
+             "——それは作者と評議会に属する。")
+    out.append(finding("L52", f"{len(seen)}本", note, severity="note"))
+    return out
+
+
+def check_performance_want(project):
+    """L47 — **演技は「願望」か、それとも「説明」か。**
+
+    `performance.objective`（その人物が欲しがっていること）と
+    `performance.obstacle`（それを妨げているもの）が**同じ語なら**、演技は
+    「何かを願っている」のではなく「状況を言い直している」——**動かない。**
+
+    ⚠️ **これは形の検査である。** 文字列が同じことを見るだけで、
+    願望が「強い」か、障害が「重い」かは読まない。それは作者と評議会に属する。
+
+    ⚠️ **`performance` を持たないショットは違反にしない。** 人物のいないショットも、
+    `mode: still` のショットもある。**ただし数を註で報告する**——数えないことは、
+    緑ではない。⚠️ **`objective` / `obstacle` を欠く `performance` も註**である
+    （形の欠けは `dramatic` を任意にした以上、ここでは鳴らさない）。
+    """
+    out = []
+    order = project.order()
+    dramatic = [s for s in order
+                if isinstance((project.shots[s] or {}).get("dramatic"), dict)]
+    if not dramatic:
+        out.append(finding(
+            "L47", "0本",
+            "`dramatic` を持つショットが1本も無い——**この層は何も照合していない。**"
+            "⚠️ **確かめていないことは、緑ではない。**",
+            severity="note"))
+        return out
+
+    with_perf = 0
+    incomplete = 0
+    for s in dramatic:
+        perf = (project.shots[s]["dramatic"] or {}).get("performance")
+        if not isinstance(perf, dict) or not perf:
+            continue
+        with_perf += 1
+        obj = str(perf.get("objective") or "").strip()
+        obs = str(perf.get("obstacle") or "").strip()
+        if not obj or not obs:
+            incomplete += 1
+            continue
+        # ⚠️ **空白と大小の差で逃げない。** 同じ願望を書き直しただけである。
+        if " ".join(obj.split()).casefold() == " ".join(obs.split()).casefold():
+            out.append(finding(
+                "L47", s,
+                f"`performance.objective` と `performance.obstacle` が同じ（`{obj}`）。"
+                "⚠️ **願望と障害が同じなら、演技は動かない**——"
+                "人物は何かを欲しがり、何かに妨げられている。**同じ語は、その二つが"
+                "まだ分かれていないことを言う。**"))
+
+    note = (f"`dramatic` を持つショット {len(dramatic)} 本のうち、`performance` を持つのは "
+            f"{with_perf} 本。")
+    if incomplete:
+        note += (f"⚠️ **`objective` か `obstacle` を欠くもの {incomplete} 本**"
+                 "——願望と障害の対になっていない演技は、まだ照合できない。")
+    note += ("⚠️ **人物のいないショット・`mode: still` のショットは違反にしない**——"
+             "演技の欠落は質の欠落だが、人物のいない1本に演技を要求する形は無い。"
+             "⚠️ **演技が「強い」かは、この層は読まない。**")
+    out.append(finding("L47", f"{with_perf}本", note, severity="note"))
+    return out
+
+
+DIRECTION_HEADING = re.compile(r"^##\s+DIRECTION\s*$")
+
+
+def _direction_body(path):
+    """その仕様の `## DIRECTION` 節の本文。節が無ければ `None`。
+
+    ⚠️ **本文の終わりは、次の `##` 以上の見出しである。** `###` の小節は
+    本文に含める——節の中身は小節にある（`_section_body` と同じ理由）。
+    """
+    lines = Path(path).read_text(encoding="utf-8").splitlines()
+    start = None
+    for i, ln in enumerate(lines):
+        if DIRECTION_HEADING.match(ln.strip()):
+            start = i + 1
+            break
+    if start is None:
+        return None
+    body = []
+    for ln in lines[start:]:
+        h = specdoc.HEADING.match(ln)
+        if h:
+            if len(h.group(1)) <= 2:
+                break
+            body.append(ln)
+            continue
+        body.append(ln)
+    return "\n".join(body).strip()
+
+
+def _has_term(body, term):
+    """英語の語が、語として現れるか。**活用も同義語も追わない**（literal 照合）。"""
+    return re.search(r"(?<![A-Za-z])" + re.escape(term) + r"(?![A-Za-z])",
+                     body, re.IGNORECASE) is not None
+
+
+def check_direction_section(project):
+    """L43 — **`dramatic` を持つショットの `DIRECTION` 節が、記録と合っているか。**
+
+    ⚠️ **照合するのは function と value の語だけである。**
+    `stake` / `audience.feel` / `button` は日本語の散文で、英語の節は著者が書く。
+    **ここを「導出」と呼ばない**——`DIRECTION` は記録から**書く**ものであり、
+    機械翻訳ではない。`L43` が見るのは、記録から機械的に引ける語が節に現れるかだけである。
+
+    ⚠️ **`dramatic` を持たないショットは対象外**であり、本数を註で報告する。
+    **記録が無いことは、食い違っていることではない。** 遡って埋めもしない。
+
+    ⚠️ **`value_poles` に写像の無い値は註である。** 意味を推測しない——
+    写像を持つのは作品であり、検査は辞書を引くだけである。
+
+    ⚠️ **この層は `dramatic` の意味も、英語の自然さも読まない。**
+    値の転換が「良い」か、節が観客を動かすかは、評議会と作者に属する。
+    """
+    out = []
+    order = project.order()
+    dramatic = [s for s in order
+                if isinstance((project.shots[s] or {}).get("dramatic"), dict)]
+    if not dramatic:
+        out.append(finding(
+            "L43", "0本",
+            "`dramatic` を持つショットが1本も無い——**この層は何も照合していない。**"
+            "⚠️ **確かめていないことは、緑ではない。**",
+            severity="note"))
+        return out
+
+    poles = {}
+    for p in ((project.ledger.get("dramaturgy") or {}).get("value_poles") or []):
+        if isinstance(p, dict) and p.get("ja") and p.get("en"):
+            poles[p["ja"]] = p["en"]
+
+    with_section = 0
+    missing_spec = 0
+    unmapped = set()
+    for s in dramatic:
+        shot = project.shots[s]
+        src = _spec_of(shot, "video")
+        if not src:
+            missing_spec += 1
+            continue
+        path = project.root / src
+        if not path.is_file():
+            missing_spec += 1
+            continue
+        body = _direction_body(path)
+        if body is None:
+            out.append(finding(
+                "L43", s,
+                "`dramatic` を持つショットに `## DIRECTION` 節が無い。"
+                "⚠️ **記録は書かれたが、生成器へ届く文になっていない**——"
+                "`DIRECTION` は §18 の前の独立した節であり、生成時に "
+                "`Master Prompt` の先頭へ連結される。"))
+            continue
+        with_section += 1
+
+        fn = shot["dramatic"].get("function")
+        term = specmap.DRAMATIC_FUNCTION_EN.get(fn)
+        if term and not _has_term(body, term):
+            out.append(finding(
+                "L43", s,
+                f"`dramatic.function` は `{fn}`（英語の型 `{term}`）だが、"
+                f"`DIRECTION` 節に `{term}` が無い。"
+                "⚠️ **関数は、節に届いて初めて演技になる。**"))
+
+        val = shot["dramatic"].get("value") or {}
+        for key in ("from", "to"):
+            ja = val.get(key)
+            if not ja:
+                continue
+            en = poles.get(ja)
+            if not en:
+                unmapped.add(ja)
+                continue
+            if not _has_term(body, en):
+                out.append(finding(
+                    "L43", s,
+                    f"`dramatic.value.{key}` は `{ja}`（`value_poles` の英語 `{en}`）だが、"
+                    f"`DIRECTION` 節に `{en}` が無い。"
+                    "⚠️ **値の転換は、節に届いて初めて観客に届く。**"))
+
+    note = (f"`dramatic` を持つショット {len(dramatic)} 本のうち、"
+            f"`DIRECTION` 節を持つのは {with_section} 本。")
+    if missing_spec:
+        note += (f"⚠️ **確かめていない**: 動画の仕様を読めなかったもの "
+                 f"{missing_spec} 本（`L11`／`L18` が報告する）。")
+    if unmapped:
+        note += ("⚠️ **写像の無い値**（註であって違反ではない）: "
+                 + "・".join(f"`{v}`" for v in sorted(unmapped))
+                 + "——**`value_poles` に `en` を足せば照合できる。**")
+    out.append(finding("L43", f"{len(dramatic)}本", note, severity="note"))
+    return out
+
+
 # ---------------------------------------------------------------- まとめ
 
 CHECKS_SHOT = (check_unit, check_one_place, check_one_time, check_move,
@@ -4869,6 +6303,17 @@ def run(project, schema_dir=None, repo_root=None):
     # ⚠️ **`L31` の直後に置く。** 同じ §6 を読み、鍵だけが違う（`REF_STYLE` ⇄
     #    `REF_FORMAT`）。**`L20` と `L31` を離すなと書いたのと同じ理由である。**
     out += check_format_reference(project, repo_root=repo_root)
+    # ⚠️ **`L32` の直後に置く。** 同じ §6 `REF_FORMAT` を読み、相手だけが違う
+    #    ——あちらは**カードそのもの**、こちらは**文法の目録**である。
+    #    **同じ名乗りを2つの相手へ突き合わせる層は、隣に置く。**
+    out += check_grammar_registry(project, repo_root=repo_root)
+    # ⚠️ **`L42` の直後に置く。** 同じ目録を読み、鍵だけが違う
+    #    ——あちらは `written_into`／`routes`、こちらは `negative_conflicts`。
+    out += check_grammar_negative(project, repo_root=repo_root)
+    # ⚠️ **目録を読む層の隣に置く。** 読む相手は `aim` だが、**同じ目録の名**である。
+    #    ⚠️ **`CHECKS_SHOT` には入れない**——あれは `fn(shot)` であり、目録の
+    #    置き場を知らない（`repo_root` を渡す席が無い）。
+    out += check_aim_grammar(project, repo_root=repo_root)
     out += check_mode_demands(project)
     # ⚠️ **曲を読む2層は隣に置く。** 同じ `bible.song` と `ledger.song_coverage` を読み、
     #    相手だけが違う——あちらは尺、こちらは覆い。**離すと、片方だけが直される。**
@@ -4891,6 +6336,44 @@ def run(project, schema_dir=None, repo_root=None):
     #    ⚠️ **`L18` とは別のことである**：あちらは `spec:` が指す1本が**そのモデルの形**を
     #    しているかを見る。こちらは**並んだ相方が在るか、その名乗りが合っているか**を見る。
     out += check_route_side_by_side(project)
+    # ⚠️ **仕様のテキストを読む層の隣に置く。** `L38` は仕様の読み口、`L39` は
+    #    経路の並び、`L43` は §18 の前の節——**どれも動画仕様を開く。**
+    #    ⚠️ **`L40`/`L41`/`L44`/`L47` も台帳と仕様を横断する**ので、ここへ並ぶ（Phase 3）。
+    #    ⚠️ **`L40` を `L43` の前に置く。** あちらは記録（値）、こちらは仕様（節）——
+    #       **記録が先、仕様が後**という順序を、層の並びでも保つ。
+    out += check_dramatic_value(project)
+    # ⚠️ **`L40` の直後に置く。** あちらは**点**（ショットの値）を、こちらは
+    #    **眺め**（幕とシーケンス）を読む——**同じ登録簿の二つの読み**である。
+    #    離すと、記録だけが書かれて並びが誰も負わない作品が、緑に見える。
+    out += check_dramaturgy_shape(project)
+    out += check_direction_section(project)
+    # ⚠️ **`L41`/`L43` の後に置く。** 曲線は**ショットの `beats[].intensity` と
+    #    台帳の `sequences[].flat` の両方**を読む——**両方が揃ってからでないと読めない。**
+    out += check_tension_curve(project)
+    # ⚠️ **`L41` の直後ではなく、ここに置く。** `L48`–`L50` は**シーケンスの三つの拘束**
+    #    （欠け・切れ目・律動）を読み、どれも**ショット記録と仕様の本文を横断する**。
+    #    `L41` は「並びが実在に届いているか」だけを見る——**拘束は、その次である。**
+    #    ⚠️ **三つを離さない。** どれか一つだけを直すと、**序列が記述に戻る。**
+    out += check_withheld(project)
+    out += check_cut_declaration(project)
+    out += check_tempo(project)
+    # ⚠️ **演技はショットの内側で閉じる**ので `CHECKS_SHOT` に置けそうだが、
+    #    置かない——**分母（`dramatic` を持つショットの数）を作品で数える**からである。
+    #    1本だけを見れば「performance が無い」と鳴るか黙るかしかなく、
+    #    **何本のうち何本か**を言えない。
+    out += check_performance_want(project)
+    # ⚠️ **`L21` の隣に置きたい層である**（どちらも「数と禁制が §18 に届いているか」を読む）が、
+    #    置かない——`L21` は**作品の禁制**を、こちらは**ショットの人数**を読む。
+    #    **同じ形の問いを、別の記録に対して立てている。** 劇作の側（`L40`–`L50`）は
+    #    ショット記録を横断する層であり、**この層もショット記録と仕様の本文を横断する**ので、
+    #    ここへ並ぶ。
+    #    ⚠️ **`L49` と同じ理由で「記録が先、仕様が後」の側である**——記録が数を宣言し、
+    #    仕様がその数の2句を持つ。
+    out += check_population(project)
+    # ⚠️ **`L51` の隣に置く。** 同じ問い（記録の数が生成器へ届いているか）を、
+    #    一つ細かい粒（人ではなく身体の部位）で立てている。**同じ変更で入った層である**
+    #    ——人数だけを数える層は、肢で起きた失敗を緑と報告する（実測 2026-10-29）。
+    out += check_body_parts(project)
     if schema_dir:
         out += check_field_source(schema_dir)
         out += check_field_destination(schema_dir)

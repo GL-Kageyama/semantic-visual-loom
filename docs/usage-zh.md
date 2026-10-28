@@ -64,6 +64,10 @@ python3 tools/check_i18n.py                                # 文档的镜像
 
 ⚠️ **`skills/` 里的东西不是命令**——**是对 Claude Code 会话的指示**，
 而**把故事变成规格的，正是这 4 个。** 见下面的 **四个阶段**。
+⚠️ **并非每个 Skill 都是一个阶段**——`direction`（作品的剧作）在**①之内**、
+`staging`（一只手决定摄影机）在**②之内**运行，`review`（评议会）**在④之后入座**。
+**它们的存在不改变阶段的数量。**
+⚠️ **`review` 写入镜次的 `verdict.council`，且从不采用**——一个在④之后的 Skill，不是⑤。
 
 ## 四个阶段
 
@@ -83,6 +87,11 @@ python3 tools/check_i18n.py                                # 文档的镜像
 **分开这件事本身就是要点**
 （[`references/formats/video-spec.md`](../references/formats/video-spec-zh.md) §18）。
 ⚠️ **分开交出去。过去的只有 §18**——§19 与 §20 是我们自己的记录。
+⚠️ **立在 §17 与 §18 之间的 `## DIRECTION` 不是第八个槽位。**
+`PROMPT_SLOTS` 仍是七个。该节在**生成时被连接到 `Master Prompt` 的开头**，
+从而**不变为槽位地抵达模型。** 它由台账的 `dramaturgy`、镜头的 `dramatic`
+与 §12 EMOTION 用英语写成。**没有 `dramatic` 的镜头不需要它**——
+**`L43` 并列报告持节的条数与持记录的条数。**
 
 ⚠️ **§18 的标题自称模型，而视频的路径有三条。** `L18` 把这个标题与
 登记簿（`specmap.MODELS`）对照——**`WAN 3.0` 取 `key_image`，`MINIMAX H3` 不取。**
@@ -110,7 +119,8 @@ python3 tools/check_i18n.py                                # 文档的镜像
 **它在造出来的当天就被拆掉了**，因为它所服务的那条裁定被撤回，而**再没有一份规格使用它。**
 规则与实测在 [`engine/ledger/README.md`](../engine/ledger/README-zh.md)（`L21`）。
 
-⚠️ **调用带着名字空间**——`/semantic-visual-loom:breakdown`、`:design`、`:ledger`、`:shot`、`:staging`。
+⚠️ **调用带着名字空间**——`/semantic-visual-loom:breakdown`、`:direction`、`:design`、
+`:ledger`、`:shot`、`:staging`、`:review`。
 
 ⚠️ **①的输入形状未定。** 作品是**以情节来的、以脚本来的、还是以小说来的**，
 这个仓库里哪里都没有写——和人或与会话一起读，**把你读到的形状记下来。**
@@ -119,7 +129,9 @@ python3 tools/check_i18n.py                                # 文档的镜像
 ⚠️ **在②落到磁盘上之前，检查器什么都读不到。**
 
 ⚠️ **⑥构成与⑦验收不在其中**——**因为输入不在记录那一侧。**
-`clips[]` 按定义是采用镜次的列，而**视频镜次里一张 `adopted: true` 都没有。**
+`clips[]` 按定义是采用镜次的列，而**带 `adopted: true` 的视频镜次有两张**，
+**但一部作品的采用镜次还不是一次剪辑**——没有任何地方记录哪些片段按什么顺序排过，
+`Project` 也不打开 `timeline/`。
 ⚠️ **是动不了**，而⚠️ **吐出一条空时间线的 Skill，比没有 Skill 更糟。**
 理由在 [`projects/hitosara/renders/README.md`](../projects/hitosara/renders/README-zh.md) 里。
 
@@ -199,9 +211,9 @@ projects/<name>/
 
 ## 层
 
-检查由**39 层，`L0`–`L39`**，以及模式（schema）的形状验证构成。
-⚠️ **`L35` 是预约，尚未写出**——所以**号码跳过一个。** `L0`–`L39` 是 40 个号码，
-**39 层。** ⚠️ **`L34` 与 `L36` 读曲**——没有指名曲为时间之主的作品会被告知
+检查由**52 层，`L0`–`L52`**，以及模式（schema）的形状验证构成。
+⚠️ **`L35` 是预约，尚未写出**——所以**号码跳过一个。** `L0`–`L52` 是 53 个号码，
+**52 层。** ⚠️ **`L34` 与 `L36` 读曲**——没有指名曲为时间之主的作品会被告知
 **「什么都没看见」**——**它们并没有沉默。**
 ⚠️ **`L37` 读镜头的内侧**——节拍是否铺满 `duration`——而且
 **无论有没有曲，它都读每一部作品。** ⚠️ **`L38` 读影片规格的读口**——
@@ -209,6 +221,18 @@ projects/<name>/
 **而不是「它是干净的」。**
 ⚠️ **`L39` 在一个镜头被放在两条路径上时，读这一对**——并排放在以路径命名的目录里的规格——
 而**只持一条路径的作品会被告知「一对都没有读到」。**
+⚠️ **`L40`–`L47` 读剧作**——而且**它们各自由记录点亮，不由版本点亮**：
+`L40`/`L43`/`L47` 由镜头的 `dramatic`，`L44` 由 `beats[].intensity`，
+`L41` 由 `acts`/`sequences`，`L42`/`L45` 由 §6 `REF_FORMAT` 所点名的文法，
+`L46` 由以 `grammar:` 开头的 `aim`。⚠️ **`L48`–`L50` 把序列与它自己的镜头对照**——
+`withheld`、`cuts`、`tempo`——而**一条都不声明的序列会被告知「什么都没有约束」。**
+⚠️ **`L51` 把镜头的 `population` 对着 §18 读**——数变成 `Master Prompt` 里的点名与
+`Negative Prompt` 里的副本，两个方向都读——而**不声明人数的镜头会被告知「什么都没读到」。** ⚠️ **`L52` 读镜头的 `body_parts`**——画面装下身体的哪些部分、各几个——对着每个部位
+同样的两句，以及对着 `population`：**人数数的是身体，这个字段来自的失败发生在肢体上。**
+**一条都不写的作品，并没有落在这几层上**——
+注会说出看过的镜头数。每一层读什么、不读什么，在
+[`docs/dramaturgy-zh.md`](dramaturgy-zh.md) 与 [`docs/cards-zh.md`](cards-zh.md)，
+以及 [`engine/ledger/README-zh.md`](../engine/ledger/README-zh.md) 的层目录里。
 **它不是单一判定**——每一层各自报警，并**连同它看到的数字**一起被报告。
 
 ⚠️ **什么也没看到的层会作为注被报告，而什么也没看到的层，看起来和通过的层一模一样。**
@@ -248,7 +272,7 @@ python3 tools/check_i18n.py               # 实物
 ⚠️ **不使用子文件夹方式（`ja/` `zh/`）**——为了让**正典与镜像的深度不发生变化**。
 ⚠️ **开发的工作语言保持日语**（提交信息、`HISTORY.md`、会话），
 而**文档的正典是英语。** 这两者是不同的东西——**做事所用的语言**，与**文档具有权威所用的语言**。
-**21 份文档 × 3 种语言已经齐备**（这是 `tools/check_i18n.py` 作为正典报告的本数），
+**26 份文档 × 3 种语言已经齐备**（这是 `tools/check_i18n.py` 作为正典报告的本数），
 规则在 [`CLAUDE.md`](../CLAUDE-zh.md) 里。
 
 ## 延伸阅读
@@ -257,6 +281,7 @@ python3 tools/check_i18n.py               # 实物
 |---|---|
 | [`README.md`](../README-zh.md) | 这个基盘是什么，由什么构成 |
 | [`docs/cards.md`](cards-zh.md) | **卡片的那两个轴**（Format / Style）、它们住在哪，以及**哪个检查读什么** |
+| [`docs/dramaturgy.md`](dramaturgy-zh.md) | **台账的第三个登记簿**——treatment、镜头的 `dramatic` 记录，以及 `DIRECTION` 一节 |
 | [`engine/ledger/README.md`](../engine/ledger/README-zh.md) | 制作台账、各层、以及每个检查不看什么 |
 | [`docs/h3-route.md`](h3-route-zh.md) | 落在 `MINIMAX H3` 这条路径上的约束——交出去的字符串，以及那张纸 |
 | [`docs/seedance-route.md`](seedance-route-zh.md) | 落在 `SEEDANCE 2.5` 这条路径上的约束——实测到的、它不接收的槽位、以及检查看不见的东西 |

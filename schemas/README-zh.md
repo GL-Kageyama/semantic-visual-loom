@@ -19,10 +19,29 @@
 | 文件 | 是什么的结构 | 决定度 |
 |---|---|---|
 | `bible.schema.json` | **作品台账**。作品世界的不变部。每个项目一份 | 低（不变部与可变部的分界线未决定） |
-| `ledger.schema.json` | **制作台账**。把连续性与开示**放在一个文件里**持有。每个项目一份 | 中（开示的形已定。属性的类型仍未定） |
+| `ledger.schema.json` | **制作台账**。把连续性与开示**以及剧作**放在**一个文件里**持有。每个项目一份 | 中（开示的形已定。属性的类型仍未定） |
 | `shot-record.schema.json` | **镜头记录**。一次生成一张。自身完结 | 高（`unit` 与 `role` 已决定） |
 | `take.schema.json` | **镜次**。一个标本一张 | 中（从属于验收的层数） |
 | `timeline.schema.json` | **时间线**。采用镜次的序列 ＋ 剪辑点 ＋ 文字 ＋ 声音 | **最低**（以哪一个为正未决定） |
+
+**在这个形之上，叠着两个可选的追加，而两者都不是这个形所要求的。**
+`ledger.dramaturgy`（premise、question、价值两极、幕、序列、见场、声音的弧、
+最后的一张）与 `shot.dramatic`（`function`、`value`、`audience`、`button`、`performance`），
+再加上 `beats[].intensity` 与 `beats[].audience`。⚠️ **序列还带三条约束**
+——`withheld`（`wanted` / `given`）、`cuts`、`tempo`；切口在镜头一侧写作
+`cut: continuous | internal`。**由序列决定切口，由镜头记录它**——
+切口的含义只在紧邻的镜头旁才成立。⚠️ **镜头的记录还可以声明 `population`**——
+它那条镜头里任何瞬间同时可见的人数上限——而由这一个整数导出两句英文：
+§18 `Master Prompt` 里的点名，以及 `Negative Prompt` 里的副本。 ⚠️ **画面只装下身体一部分的镜头要声明 `body_parts`**——`{部位: 数}`，键是
+`specmap.BODY_PARTS`——因为**人数数的是身体**，而实测的失败发生在肢体上：
+一个只有手的镜头在 `population` 正确的情况下带回了第三只手。
+同样的两句按部位导出，而 `L52` 还读两个声明之间的算术。
+⚠️ **字段与 schema 的 property 在同一次改动里加入。
+否则就成了谎言**——每一处顶层的记录字段都必须带 `specmap.FIELD_SOURCE` 与
+`FIELD_DESTINATION`，因为 `L12` 与 `L19` 会对 schema 的 property 做遍历。
+`dramatic` 的去向是新的类别 **`direction`**——**不是 `prompt:` 槽位**，
+因为 `DIRECTION` 不是槽位。形状与理由在
+[`docs/dramaturgy-zh.md`](../docs/dramaturgy-zh.md) 里。
 
 ## ⚠️ 这个 schema 报不出来的东西
 
@@ -68,7 +87,7 @@
 
 **它们作为 `description` 写进了 schema。** 主要的几条——
 
-- **职能（`role`）的目录。** 12 种里只有 5 种在使用（已实测、登记未决定）
+- **职能（`role`）的目录。** 15 种已登记，**15 种全都在使用**——另有带修饰的拼写（`運動（停止）`），`L15` 把它作为注而不是违规来报告
 - **是否把运动的层设为必需栏位。** 「所有镜头都有它」这个主张，与是否允许空栏对不上
 - **`beats` 的 `density` 用二值是否够**
 - **`disclosure_state` 的值的类型**

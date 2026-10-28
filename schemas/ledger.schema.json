@@ -131,6 +131,134 @@
       }
     },
 
+    "dramaturgy": {
+      "type": "object",
+      "description": "**劇作の登録簿。連続性（世界）・開示（知識）と並ぶ第三の登録簿であり、同じ `ledger.yaml` の中に置く。** 台帳は分割しない。⚠️ **作品全体を一度に検査対象にしない**——`L41` は `acts`/`sequences` の存在で、`L40`/`L43`/`L44`/`L47` は**ショットの `dramatic` / `beats[].intensity` の存在**で鳴る。任意の欄である。",
+      "additionalProperties": false,
+      "properties": {
+        "version": { "type": "integer", "minimum": 1, "description": "この登録簿の版。検査のスイッチではない——スイッチはショットの `dramatic` が持つ。" },
+        "premise": { "type": "string", "description": "何が起きる話か（一行）。" },
+        "question": { "type": "string", "description": "観客が最後まで持ち越す問い。" },
+        "argument": { "type": "string", "description": "この作品が言うこと（主題）。" },
+        "visual_thesis": { "type": "string", "description": "光・色・構図で何を言うか。" },
+        "value_poles": {
+          "type": "array",
+          "description": "作品を貫く価値の両極。⚠️ **`L43` の照合語彙である**——`dramatic.value.from/to` の日本語を `en` に写し、`DIRECTION` 節にその語が現れるかを見る。写像の無い値は註であり、違反ではない。",
+          "items": {
+            "type": "object",
+            "required": ["ja", "en"],
+            "additionalProperties": false,
+            "properties": {
+              "ja": { "type": "string", "minLength": 1, "description": "記録側の値（日本語）。" },
+              "en": { "type": "string", "minLength": 1, "description": "`DIRECTION` 節にそのまま現れる英語の語。" }
+            }
+          }
+        },
+        "acts": {
+          "type": "array",
+          "description": "幕。⚠️ **ショットは単位のまま**——幕はその上に重なる設計の眺めであり、生成単位ではない。",
+          "items": {
+            "type": "object",
+            "required": ["id", "shots"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "shots": { "type": "array", "items": { "type": "string", "minLength": 1 }, "description": "実在する `shots/*.yaml` の `shot` を引く。" },
+              "turn": { "type": "string", "description": "この幕の転換（一つの変化）。`L41` が不在を鳴らす。" },
+              "climax": { "type": "string", "description": "山場のショット。" },
+              "value_from": { "type": "string", "description": "幕の始まりの値（`value_poles[].ja`）。" },
+              "value_to": { "type": "string", "description": "幕の終わりの値（`value_poles[].ja`）。" },
+              "rhythm": { "type": "string", "description": "この幕の律動（例: 溜め → 爆発 → 余韻）。" }
+            }
+          }
+        },
+        "sequences": {
+          "type": "array",
+          "description": "**シーケンス。隣接ショットの対比・エスカレーション・次への渡し・回収を持ち、加えてショット1本では決められない三つを拘束する**——`withheld`（何を見せないか）・`cuts`（どこで切るか）・`tempo`（何秒持つか）。⚠️ **どれもショット単体では意味を持たない**——隣のショットがあって初めて決まるからである。**これが「序列は記述ではなく拘束である」の実装である。**",
+          "items": {
+            "type": "object",
+            "required": ["id", "shots"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "shots": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+              "contrast": { "type": "string", "description": "隣接ショットの対比。`L41` が不在を鳴らす。" },
+              "escalation": { "type": "string", "description": "何がエスカレートするか。" },
+              "transition": { "type": "string", "description": "次へどう渡すか。" },
+              "payoff": { "type": "string", "description": "この序列が回収する先のショット。前方参照を許す。`L41` は実在だけを見る。" },
+              "withheld": {
+                "type": "array",
+                "description": "**この序列が観客に与えない画。** 観客が欲しいものを名指し（`wanted`）、代わりに渡すものを書く（`given`）。⚠️ **`wanted` と `given` が同じなら、それは欠けではなく先延ばしである**（`L48` が鳴る）。⚠️ **`given` が空の欠けは、単なる不在である**——映さないことは、何も起きないことではない。",
+                "items": {
+                  "type": "object",
+                  "required": ["shot", "wanted", "given"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "shot": { "type": "string", "minLength": 1, "description": "この序列の `shots` に含まれるショット。" },
+                    "wanted": { "type": "string", "minLength": 1, "description": "観客がこの時点で欲しがっている画。" },
+                    "given": { "type": "string", "minLength": 1, "description": "代わりに渡す画。**空でないこと**——何も渡さないのは欠けではなく事故である。" }
+                  }
+                }
+              },
+              "cuts": {
+                "type": "array",
+                "items": { "type": "string", "minLength": 1 },
+                "description": "**この序列のうち、内側に切れ目を持つショット。** 引いたショットは `cut: internal` を持たなければならない（`L49` が両方向に照合する）。⚠️ **切れ目は律動の一部である**——誰の律動も負わない切れ目は、編集の事故と同じものである。"
+              },
+              "tempo": {
+                "type": "array",
+                "items": { "type": "number", "exclusiveMinimum": 0 },
+                "description": "**この序列の律動の形（秒）。** `shots` と同じ順・同じ長さで、各ショットの秒数を並べる。`L50` が `shots/*.yaml` の `duration` と照合する。⚠️ **等間隔の律動は律動ではない**——3本以上が同じ秒数なら、`flat: true` と `note`（理由）を要る。⚠️ **これは拘束であって複製ではない**——秒数の正はショット記録に在り、ここに在るのは**並びの形**である。",
+                "minItems": 1
+              },
+              "flat": { "type": "boolean", "description": "緊張の曲線（または `tempo` の律動）が平らなことを宣言する。`L44`/`L50` は `flat: true` を註にする。⚠️ **理由（`note`）の無い `flat` は宣言ではない**——`L44` が鳴る。" },
+              "note": { "type": "string", "description": "`flat: true` の理由。⚠️ **平らであることは、失敗ではない**——理由が書かれていれば註であり、書かれていなければ違反である。" }
+            }
+          }
+        },
+        "motifs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "first"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "type": "string", "minLength": 1 },
+              "first": { "type": "string", "minLength": 1 },
+              "recurrences": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+              "payoff": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "set_pieces": {
+          "type": "array",
+          "description": "AI デバイスを使う見せ場。⚠️ **`format` は仕様 §6 `REF_FORMAT` と一致すること**（`L42` が見る）。デバイスはショット記録に複製しない——`REF_FORMAT` が正である。",
+          "items": {
+            "type": "object",
+            "required": ["shot", "format"],
+            "additionalProperties": false,
+            "properties": {
+              "shot": { "type": "string", "minLength": 1 },
+              "format": { "type": "string", "minLength": 1, "description": "形式カードの名前（例: transformation）。" },
+              "why": { "type": "string", "description": "この見せ場が値の転換を負う理由。" }
+            }
+          }
+        },
+        "sound_arc": {
+          "type": "object",
+          "description": "沈黙と音楽の設計。⚠️ **床（`no background music`）は既定のまま**——音楽を使う作品は `bible.base_negatives_waived` に書く。",
+          "additionalProperties": false,
+          "properties": {
+            "silence": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+            "score_enters": { "type": "string", "description": "音楽が入るショット。" },
+            "diegetic": { "type": "array", "items": { "type": "string", "minLength": 1 }, "description": "作中の音が主になるショット。" },
+            "note": { "type": "string", "description": "自由文。" }
+          }
+        },
+        "ending_image": { "type": "string", "description": "最後に残る一枚。" }
+      }
+    },
+
     "at": {
       "type": "object",
       "description": "at の表現。決定——§16 の見出しのレンジ名をそのまま持つ。人手で名づけない。午前二時では人手の分類が1度誤り（S14/S15 を昼の寝室と夜、S56 を夜と朝と誤認）、対象の再確定を強いられた。導出規則は §16 の見出しから取り、ショットIDからは取らない——受け火ではたまたま ID から導けるが、午前二時の Segment ID は S32 の形でレンジ名を持たず、レンジも 31 / S32 / S33–34 / S35 / 36–40 と不均等に切られている。⚠️ at は「鍵」ではない——§16 の見出しはレンジを名指すが本体は「この1本」の禁止を書くので、10レンジのうち9つで禁止集合が割れ、その9つにショットの27/30が属する。人が読むための群れであって、禁止集合を引く鍵にはならない。",

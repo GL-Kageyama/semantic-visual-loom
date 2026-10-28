@@ -68,6 +68,19 @@ in order to fire on "`before` and `after` are the same" — but **JSON Schema ca
 | **L37** | **The beats do not tile the shot's `duration`** — the first does not start at 0, the last does not end at the shot's end, or two neighbours leave a gap or an overlap. ⚠️ **It reads every work, song or no song** — the shot's inside is the shot's own | "Do the Beats Tile the Shot" below |
 | **L38** | **The video specification does not open with a staging summary** — a band of comments above its title, closed by a `═` rule, holding a subtitle and at least two more lines. ⚠️ **It was a reading, not a requirement, until 2026-09-30** — by the day this layer went in, all 112 specifications carried one | "Does the Video Specification Open with a Staging Summary" below |
 | **L39** | **Route specifications do not stand side by side** — armed only where a `spec:` sits in a route-named directory: every `spec:` must sit in one, every route must hold one for every shot carrying a `spec:`, and each specification's title line and §18 heading must name that directory's route. ⚠️ **The routes are read from `specmap.MODELS`; no route name is written into the check** | "Do the Routes Stand Side by Side" below |
+| **L40** | **A narrative shot's value does not turn** — a shot carrying `dramatic` with a narrative `function` whose `value.from == value.to`. ⚠️ **Non-narrative functions are exempt; a shot with no `dramatic` is a note count** | "Dramaturgy" below |
+| **L41** | **An act has no turn, a sequence has no contrast, or a reference points at nothing** — `acts`/`sequences` against the shots that exist | same |
+| **L42** | **The grammar named in §6 is not registered, or does not reach its sections** — an unregistered card; a `written_into` section missing or empty; a route outside the registry's `routes`; a set piece whose `format` is not the §6 name | "The Grammar Registry" below |
+| **L43** | **A shot with `dramatic` has no `DIRECTION` section, or the section lacks the English function or value** — ⚠️ **it reads words, not prose** | "Dramaturgy" below |
+| **L44** | **The intensity curve is flat** — the same `beats[].intensity` across three or more shots, or no peak in an act. ⚠️ **`flat: true` with a `note` is a declaration; the bare flag fires** | same |
+| **L45** | **The specification forbids its own grammar** — a registry `negative_conflicts` clause standing in §18 `Negative Prompt` | "The Grammar Registry" below |
+| **L46** | **`aim` claims a grammar the registry does not hold** — only where `aim` opens with `grammar: <name>`; free prose is a note | same |
+| **L47** | **`performance.objective == performance.obstacle`** — an objective its own obstacle restates is an explanation, not a wish. ⚠️ **A missing `performance` is a note count** | "Dramaturgy" below |
+| **L48** | **A sequence withholds nothing** — `withheld[].wanted` and `given` are the same, or either is empty. ⚠️ **A gap on the last shot is a note** — a gap that is never paid off | "What a Sequence Constrains" below |
+| **L49** | **The declared cut and the recorded cut disagree — in either direction — or the specification still says one continuous take** | same |
+| **L50** | **`tempo` disagrees with the shots' `duration`**, or a flat rhythm carries no `flat: true` and `note` | same |
+| **L51** | **The count a shot declares never reaches the strings** — `population` against §18 `Master Prompt` (the naming) and `Negative Prompt` (its copy), in both directions | "L51 — how many people are in the frame" below |
+| **L52** | **The parts a shot declares never reach the strings, or contradict its own headcount** — `body_parts` against §18 (the same two sentences per part) and against `population` (one body has two hands) | "L52 — which parts of the body are in the frame" below |
 
 **L2, L3 and L4 are transplants.** Applied to all 57 segments of Gozen-niji,
 a checker that scored **recall 2/2 and 0 false positives** went in just as it was.
@@ -93,7 +106,7 @@ reaches too far. **Recorded here, where it happens, as a hole.**
 And L7 **counts and reports the shots that hold no disclosure state** —
 without counting, you cannot tell whether "0 violations" means "0 after checking" or "not checked".
 
-`--self-test` holds **one example that fires and one that does not, for each check** (339 examples).
+`--self-test` holds **one example that fires and one that does not, for each check** (434 examples).
 ⚠️ **Nothing compares that number against the run.** The self-test **prints how many examples it ran
 and how many came out as expected** — so **read the number off the run, not off this line.**
 ⚠️ **How many examples run depends on what the check can find** — without the sibling
@@ -252,7 +265,7 @@ So **layer F** looks at **the registry itself** — **whether the registration i
 | **the slots a route does not receive** | `specmap.MODEL_UNRECEIVED_SLOTS` | per video route, the §18 slots its generator does not take as a **floor**, **each with its reason**. `WAN 3.0`'s and `MINIMAX H3`'s rows are **empty — they have not been measured**, which is not the same as "they are received" | **L30** |
 | **the exclusions a work accepts** | `bible.route_limits_accepted` | the work's own declaration, `<MODEL>: <slot>`. **The work writes the exclusion** | **L30** (downgrades it to a note) |
 | **specification kinds** | `specmap.SPEC_KINDS` | `video` (field `spec`, holds §1–20) / `image` (field `key_image`, holds neither) | **L18** (`L11`, `L21` and `L22` follow it) |
-| **field destinations** | `specmap.FIELD_DESTINATION` | 19 fields. **There is no `mode` dimension.** The vocabulary is `自前` (own) / `prompt:<slot>` / `params:<key>` / `handover:<base>` / `edit:timeline` | **L19** |
+| **field destinations** | `specmap.FIELD_DESTINATION` | 23 fields, 37 destinations. **There is no `mode` dimension.** The vocabulary is `自前` (own) / `prompt:<slot>` / `params:<key>` / `handover:<base>` / `edit:timeline` / `direction:DIRECTION` | **L19** |
 | **what `mode` requires** | `specmap.MODE_DEMANDS` | `still` (§11), `composite` (§11 + `text_channel`), **`motion` (empty row)** | **L24** |
 | **handover bases** | `specmap.HANDOVER` | `distill` (image prompts), `loom` (sound) | **L19** |
 
@@ -1301,6 +1314,135 @@ written down here rather than closed.**
 ⚠️ **Why it is not in `CHECKS_SHOT`.** The counterpart is **the set of files the work's `spec:`s point
 at**, not one shot record — **and one shot's defect would otherwise be counted once per route.**
 
+### L40–L47 — dramaturgy and the grammar registry
+
+**These eight read the ledger's third register and the format cards that are grammars.** What
+they are *for*, and how a work writes the records they read, is in
+[`docs/dramaturgy.md`](../../docs/dramaturgy.md) and [`docs/cards.md`](../../docs/cards.md);
+**what follows is what each layer does and does not see.**
+
+⚠️ **Every one of them is switched on by a record, not by a version.** `L40`, `L43` and `L47`
+need a shot's `dramatic`; `L44` needs `beats[].intensity`; `L41` needs `acts`/`sequences`; `L42`
+and `L45` need a grammar named in §6 `REF_FORMAT`; `L46` needs an `aim` that opens with
+`grammar:`. **A work that writes none of them is not failing them** — **the notes say how many
+shots and specifications were looked at**, and **the engine does not remember which works are
+special.**
+
+- **`L40` reads words, not meaning.** It compares `value.from` against `value.to` by string
+  equality. ⚠️ **Two spellings of one value pass**, and **one spelling used for two values
+  passes too** — *whether the turn is real is the author's judgment.*
+- **`L41` reads existence.** An act's `turn`, a sequence's `contrast`, and every `payoff` and
+  `shots` entry resolving to a record. ⚠️ **A `payoff` may point forward** — a scheduled payoff
+  is not a state. **A tie between `acts[].shots` and the shot list is not checked**: a shot in no
+  act is not a violation.
+- **`L42` reads the registry, not the card's prose.** The card writes `§9 ACTION`; the registry
+  writes `"9. ACTION"`; **the checker only ever opens the registry.** ⚠️ **Its coverage note is
+  what keeps the two lists from drifting** — any grammar card on disk that the registry does not
+  hold is named there.
+- **`L43` reads words, not prose.** The English function (through `specmap.DRAMATIC_FUNCTION_EN`)
+  and the English of `value.from`/`value.to` (through the work's `value_poles`) must **literally
+  appear** in the `DIRECTION` section. ⚠️ **It does not follow inflections or synonyms, it does
+  not read `stake` or `button`, and it cannot tell whether the English is any good.**
+- **`L44` reads the curve, not the taste.** The same `intensity` three shots running, or an act
+  with no maximum. ⚠️ **`flat: true` is a declaration only with a `note`** — **the bare flag
+  fires**, because a level curve that nobody explained is the defect, not the levelness.
+- **`L45` reads the floor, not the intent.** A clause in the registry's `negative_conflicts`
+  that the specification copied into §18 `Negative Prompt`. ⚠️ **The registry holds only clauses
+  that already stand in some card's `## Negative`** — **this layer adds nothing to the floor**,
+  and **an empty `negative_conflicts` list means "nothing here forbids it," not "checked."**
+- **`L46` reads a name, not a meaning.** `grammar: <name>` in `aim` against the registry. ⚠️ **An
+  `aim` that does not open with the prefix is free prose and is left alone** — **this layer never
+  guesses what a sentence is about.**
+- **`L47` reads two strings.** `objective` against `obstacle`. ⚠️ **A missing `performance` is a
+  note count** (how many shots with a person carry one), **never a violation** — some shots have
+  nobody in them.
+
+⚠️ **None of them judges quality.** A level curve, trivial values, arbitrary acts and a grammar
+copied from a card all pass. **That is the design**: the [council](../../skills/review/SKILL.md)
+advises and the author decides.
+
+### L48–L50 — what a sequence constrains
+
+**These three read a sequence against its own shots**: the gap it withholds (`withheld`), the cut
+it declares (`cuts`), and its shape in seconds (`tempo`). What they are *for*, and how a work
+writes them, is in [`docs/dramaturgy.md`](../../docs/dramaturgy.md); **what follows is what each
+layer does and does not see.**
+
+⚠️ **They are switched on by the sequence, not by the version.** A sequence that declares none of
+the three is told that **it constrained nothing** — which is a note, not a failure.
+
+- **`L48` reads two strings per gap.** `wanted` against `given`, and neither may be empty.
+  ⚠️ **A gap on the last shot is a note** — it is never paid off, and the last shot is allowed to
+  keep what it withholds.
+- **`L49` reads both directions, and then reads the specification.** A declared cut whose shot
+  carries no `cut: internal`; a recorded cut that no sequence declares; and a specification that
+  **still says `continuous take` or `no cut`** — **the generator never reads the record**, so a
+  record that says `internal` beside a specification that says one take leaves the cut unbuilt.
+- **`L50` reads seconds, not taste.** `tempo[k]` against that shot's `duration`, element by
+  element. ⚠️ **The source of truth is the shot** — `tempo` is the copy. Three or more equal values
+  need `flat: true` and a `note`: **a level rhythm that nobody explained is the defect**, and one
+  that was explained is a decision.
+
+⚠️ **None of them reads whether a gap is worth waiting for, a cut lands where it should, or a
+rhythm is a rhythm.** That is the author's.
+
+### L51 — how many people are in the frame
+
+**The shot declares a count (`population`); the strings handed to the generator must agree with
+it.** The field came from a measured failure: in `drama-pilot`, two shots came back with **a second
+person in them** while the work holds a single character — **no layer had ever said "one".**
+⚠️ **`L21` cannot catch that**: it reads whether the clauses a work *declared* reach §18. **A blank
+declares nothing, and a blank looks exactly like a clean bill.**
+
+⚠️ **It names the count; it does not forbid the symptom** — the rule `L27` holds for language. The
+record's number becomes two sentences:
+
+| | Where | What |
+|---|---|---|
+| **the naming** | §18 `Master Prompt` | `the only person in the frame` (one); `no one in the frame` (none); `N people in the frame` |
+| **the copy** | §18 `Negative Prompt` | `no second person` (one); `no people` (none) |
+
+- **It reads both directions.** A missing sentence and a contradiction are different defects: a
+  shot declaring two people while carrying `no second person` forbids what it declares.
+- ⚠️ **At two people or more it asks for no prohibition.** `specmap.POPULATION_NEGATIVES` holds 0
+  and 1 — **a prohibition does not count people**, and the two failures this base has actually
+  taken were zero and one. A crowded shot is reported as **uncovered**, not as passed.
+- ⚠️ **A shot with no `population` is not failing this layer.** The existing specifications were
+  written before the field — **a missing record is not a contradiction**, and **nothing is
+  backfilled**: a count written after the fact is an explanation, not a declaration. The note says
+  how many shots were looked at.
+- ⚠️ **It does not read who is in frame** (§3 and the reference set own that), and it does not
+  compare `reference_set` against the count — **a reference carries a name, a count carries a
+  number**, and neither is derivable from the other.
+
+### L52 — which parts of the body are in the frame
+
+**A shot whose frame holds only part of a body declares which parts, and how many
+(`body_parts`); the strings must agree.** The field came from a measured failure the layer above
+could not see: a hands-only shot in `drama-pilot` came back, on one of two generations, with **a
+third hand in it** — and its `population: 1` was **correct**. **A count of people counts bodies;
+the failure happened in a limb.** ⚠️ **`L51` reports that take as green.**
+
+- ⚠️ **It is limbs, not hands.** The same failure happens to feet, legs, arms and fingers, so the
+  vocabulary is `specmap.BODY_PARTS` — a table of parts, each with its plural and **how many one
+  body has**. There is no special case for hands.
+- **The naming** (§18 `Master Prompt`) is `2 hands in the frame`, `1 hand in the frame`,
+  `no feet in the frame` — one sentence per declared part, derived from the record.
+- **The copy** (§18 `Negative Prompt`) is read in both directions, exactly as `L51` reads people:
+  `no second hand` (allows one) and `no hands` (allows none). ⚠️ **A shot declaring two hands that
+  carries `no second hand` is forbidding what it declares** — a contradiction, not a missing copy.
+- ⚠️ **At two or more of a part it asks for no prohibition** — **a prohibition does not count**,
+  and the one failure on record is a count the naming sentence already fixes.
+- **It also reads the arithmetic between the two declarations.** One body has two hands, and
+  `population: 1` beside `hand: 4` is **two declarations that contradict each other**. ⚠️ **If
+  `population` is absent the arithmetic does not run** — the layer does not guess a body count to
+  fill the gap, and the note says so.
+- ⚠️ **An unregistered part is a violation**: the sentence cannot be derived, so nothing reaches
+  the generator — the same shape as `L42` firing on an unregistered grammar.
+- ⚠️ **A shot with no `body_parts` is not failing this layer.** A frame that holds the whole body
+  needs only `population` — **the part field is for the frame that holds a part.** Nothing is
+  backfilled.
+
 ### ⚠️ Firing Against a Running Artifact
 
 | Check | Ukebi V2 (30 takes) | What it is saying |
@@ -1498,7 +1640,7 @@ What it can say is —
 | **Guarantees** | **The song's length adds up** — the sections reach `song.duration`, and each section's shots reach that section. ⚠️ **Only for a work naming the song as its time source** (`bible.time_source: song`) | **L34** |
 | **Guarantees** | **Every sung line is answered by a shot, and every stretch where the song says nothing has an owner** — ⚠️ **among the shots the record lists.** Whether the picture says the same thing as the lyric is not measured | **L36** |
 | **Guarantees** | **The beats tile the shot's `duration`** — from 0 to the end, with no gap and no overlap. ⚠️ **Whether the beats are well placed is not measured** | **L37** |
-| **Guarantees** | **It is not broken.** L0–L39 fire before generation, and everything that fired can be explained. ⚠️ **`L35` is reserved and unwritten** — **39 layers across 40 codes: `L34`/`L36` speak only where a song exists, and `L38` only where a video specification does** | all |
+| **Guarantees** | **It is not broken.** L0–L52 fire before generation, and everything that fired can be explained. ⚠️ **`L35` is reserved and unwritten** — **52 layers across 53 codes: `L34`/`L36` speak only where a song exists, `L38` only where a video specification does, `L40`–`L50` only where a work writes dramaturgy or names a grammar, `L51` only where a shot declares `population`, and `L52` only where a shot declares `body_parts`** | all |
 | **Does not guarantee** | **That `song.duration` is the real length of the file `song.master` names** — no layer opens the audio | —— |
 | **Does not guarantee** | **That the generator draws the aim.** | —— |
 | **Does not guarantee** | **That a still shot's §11 really stops the subject.** | —— |

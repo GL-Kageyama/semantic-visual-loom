@@ -319,7 +319,11 @@ def self_test():
     （`docs/cards.md`）。**指示どおりに走らせた者が、壊れた自己検査を見ることになる。**
 
     ⇒ **検査が環境で変わるなら、検査ではない。** だからここで外す。
-    **外した状態で、4条件すべてが 273 例中 273 例である**（実測 2026-09-22）。
+
+    ⚠️ **上の表は 2026-09-22 の実測であり、例の数はそれ以来増えた。**
+    ここで主張しているのは**数ではなく比である**——**外した状態で、走った例が
+    すべて期待どおりである**こと。**数を書き直さない**: 手で書いた数は、
+    次の例で嘘になる（`--self-test` は自分が走らせた数を毎回印字する）。
     """
     import os
     sys.path.insert(0, str(HERE))
@@ -1926,6 +1930,174 @@ def _self_test():
         if not _ok:
             print(f"        {_got}")
 
+    # ---- L42 / L45 / L46（文法の目録）
+    #     ⚠️ **目録を偽物にする。** 本物の `references/grammars/index.yaml` を読ませると、
+    #        この例は**目録が育つたびに変わる**——**検査ではなく、目録の写しの検査になる。**
+    #        ⚠️ **`SVL_GRAMMARS_DIR` で指す。** 環境変数は `repo_root` より先に読まれる
+    #        ——ゆえに**必ず張って、必ず戻す**（`L32` の `l32()` と同じ手）。
+    print("\n=== 自己検査 — 文法の目録（登録・Negative・aim の名乗り）\n")
+
+    IDX_OK = """\
+version: 1
+grammars:
+  - name: transformation
+    card: transformation
+    status: established
+    routes: [WAN 3.0, MINIMAX H3]
+    written_into: ["9. ACTION", "11. MOTION"]
+    essential_moves: ["one subject becomes another inside the shot"]
+    negative_conflicts: ["no deforming silhouette"]
+  - name: time-fold
+    card: time-fold
+    status: provisional
+    routes: [WAN 3.0]
+    written_into: ["8. TEMPORAL STRUCTURE"]
+    essential_moves: ["many times pass through one frame"]
+    negative_conflicts: []
+"""
+
+    def gram_index(text):
+        d = _P(tempfile.mkdtemp())
+        if text is not None:
+            (d / "index.yaml").write_text(text, encoding="utf-8")
+        return d
+
+    def with_index(fn, index_dir):
+        """`run1` の `fn(proj)` に合わせて、目録の置き場を張ってから呼ぶ。"""
+        def call(p):
+            env = semantic.grammars.GRAMMARS_ENV
+            keep = _os.environ.get(env)
+            _os.environ[env] = str(index_dir)
+            try:
+                return fn(p, repo_root=p.root)
+            finally:
+                if keep is None:
+                    _os.environ.pop(env, None)
+                else:
+                    _os.environ[env] = keep
+        return call
+
+    SEC_NAMES = ("1. VIDEO", "2. WORLD", "3. SUBJECTS", "4. ENVIRONMENT", "5. OBJECTS",
+                 "6. REFERENCES", "7. NARRATIVE", "8. TEMPORAL STRUCTURE", "9. ACTION",
+                 "10. CAMERA", "11. MOTION", "12. EMOTION", "13. LIGHTING", "14. AUDIO",
+                 "15. CONTINUITY", "16. CONSTRAINTS", "17. GENERATION PRIORITIES")
+
+    def gram_spec(*, fmt="transformation", route="WAN 3.0", empty=(), omit=(),
+                  negative="no watermark, no on-screen subtitles"):
+        """⚠️ **節を実際に書く。** 節を割る側・空を見る側を検査するには、
+        合成の文字列ではなく**本物の形**を読ませる必要がある（`L38` と同じ理由）。"""
+        parts = []
+        for name in SEC_NAMES:
+            if name in omit:
+                continue
+            body = ""
+            if name == "6. REFERENCES":
+                body = f"- REF_FORMAT: `{fmt}`\n" if fmt else ""
+            elif name not in empty:
+                body = "本文。\n"
+            parts.append(f"# {name}\n\n{body}")
+        parts.append(f"# 18. {route} PROMPT MAPPING\n\n"
+                     f"## Negative Prompt\n\n{negative}\n")
+        return "".join(parts)
+
+    class _Gram:
+        def __init__(self, root, shots, ledger=None):
+            self.root = root
+            self.shots = shots
+            self.ledger = ledger or {"characters": {}, "locations": {}, "disclosure": []}
+
+        def order(self):
+            return sorted(self.shots, key=_natural)
+
+    def gram_proj(spec_text, *, ledger=None, aim=None):
+        d = _P(tempfile.mkdtemp())
+        src = "specs/video/mv-s01.md"
+        f = d / src
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_text(spec_text, encoding="utf-8")
+        shot = {"shot": "mv-s01", "duration": "6s", "spec": src}
+        if aim is not None:
+            shot["aim"] = aim
+        return _Gram(d, {"mv-s01": shot}, ledger)
+
+    run1("L42 登録・節・経路が合っている（鳴ってはならない）",
+         with_index(semantic.check_grammar_registry, gram_index(IDX_OK)),
+         gram_proj(gram_spec()), False, None, note="文法の目録を読んだ")
+    # ⚠️ **a。目録に無いデバイス**——名前だけが在り、読む者が居ない。
+    run1("L42 目録に無い形式カードを名指している",
+         with_index(semantic.check_grammar_registry, gram_index(IDX_OK)),
+         gram_proj(gram_spec(fmt="unknown-device")), True, "文法の目録に無い")
+    # ⚠️ **b。文法の居場所が節にあるが、空である。**
+    run1("L42 目録が指す節が空である",
+         with_index(semantic.check_grammar_registry, gram_index(IDX_OK)),
+         gram_proj(gram_spec(empty=("9. ACTION",))), True, "空である")
+    # ⚠️ **b。文法の居場所が、そもそも節に無い。**
+    run1("L42 目録が指す節が仕様に無い",
+         with_index(semantic.check_grammar_registry, gram_index(IDX_OK)),
+         gram_proj(gram_spec(omit=("11. MOTION",))), True, "この仕様に無い")
+    # ⚠️ **c。経路。** 目録が `MINIMAX H3` までしか許さない文法を、別の経路で名指す。
+    run1("L42 目録の routes に無い経路で名指している",
+         with_index(semantic.check_grammar_registry, gram_index(IDX_OK)),
+         gram_proj(gram_spec(route="SEEDANCE 2.5")), True, "`routes` に無い")
+    # ⚠️ **門。** `video-spec` は文法ではない——**名乗らないことが違反になった日から、
+    #    既存の100本超が赤くなる。**
+    run1("L42 video-spec は対象の外",
+         with_index(semantic.check_grammar_registry, gram_index(IDX_OK)),
+         gram_proj(gram_spec(fmt="video-spec")), False, None,
+         note="文法を1つも名指していない")
+    # ⚠️ **見せ場は台帳の眺めであり、生成に渡るのは仕様である。** 名が違えば届かない。
+    run1("L42 見せ場の形式が §6 と違う",
+         with_index(semantic.check_grammar_registry, gram_index(IDX_OK)),
+         gram_proj(gram_spec(),
+                   ledger={"dramaturgy": {"set_pieces": [
+                       {"shot": "mv-s01", "format": "time-fold", "why": "x"}]}}),
+         True, "見せ場")
+    # ⚠️ **目録が読めないことを、登録が正しいと言わない**（`L32` の a-1 と同じ規律）。
+    run1("L42 目録が読めない",
+         with_index(semantic.check_grammar_registry, gram_index(None)),
+         gram_proj(gram_spec()), False, None, note="文法の目録が読めない")
+    # ⚠️ **名乗らない仕様を、数えずに流さない。**
+    run1("L42 REF_FORMAT を名乗らない仕様は数える",
+         with_index(semantic.check_grammar_registry, gram_index(IDX_OK)),
+         gram_proj(gram_spec(fmt=None)), False, None, note="名乗り無し 1 本")
+
+    # ---- L45（デバイスの核を、§18 の Negative が禁じていないか）
+    run1("L45 衝突が無い（鳴ってはならない）",
+         with_index(semantic.check_grammar_negative, gram_index(IDX_OK)),
+         gram_proj(gram_spec()), False, None, note="`negative_conflicts` を持つのは 1 本")
+    # ⚠️ **本命。** デバイスを名指し、その核を §18 の Negative が禁じている。
+    run1("L45 Negative がデバイスの核を禁じている",
+         with_index(semantic.check_grammar_negative, gram_index(IDX_OK)),
+         gram_proj(gram_spec(negative="no watermark, no deforming silhouette")),
+         True, "禁じている")
+    # ⚠️ **空の一覧は「衝突が無い」であり、「照合した」ではない**——註で言う。
+    run1("L45 negative_conflicts が空の文法は黙る",
+         with_index(semantic.check_grammar_negative, gram_index(IDX_OK)),
+         gram_proj(gram_spec(fmt="time-fold", negative="no watermark, no time-lapse")),
+         False, None, note="1句も照合していない")
+    run1("L45 video-spec は対象の外",
+         with_index(semantic.check_grammar_negative, gram_index(IDX_OK)),
+         gram_proj(gram_spec(fmt="video-spec", negative="no deforming silhouette")),
+         False, None, note="文法を名指す仕様 0 本")
+
+    # ---- L46（`aim` の名乗りが、目録に在るか）
+    run1("L46 名乗りが目録に在る（鳴ってはならない）",
+         with_index(semantic.check_aim_grammar, gram_index(IDX_OK)),
+         gram_proj(gram_spec(), aim="grammar: transformation — 形が保たれること"),
+         False, None, note="`grammar:` を名乗るのは 1 本")
+    run1("L46 目録に無い名を名乗る",
+         with_index(semantic.check_aim_grammar, gram_index(IDX_OK)),
+         gram_proj(gram_spec(), aim="grammar: nobody-knows — 何か"),
+         True, "文法の目録に無い")
+    # ⚠️ **名乗らない自由文は註で通す。** 遡って書き換えさせない。
+    run1("L46 名乗らない自由文は註",
+         with_index(semantic.check_aim_grammar, gram_index(IDX_OK)),
+         gram_proj(gram_spec(), aim="扉が開くこと"), False, None,
+         note="名乗らない自由文 1 本")
+    run1("L46 aim を持たないショットは対象の外",
+         with_index(semantic.check_aim_grammar, gram_index(IDX_OK)),
+         gram_proj(gram_spec()), False, None, note="持たない 1 本")
+
     # ---- L21〜L24（画像の経路の中身・尺の一致・`mode` が要求するもの）
     #     ⚠️ **本物の節見出しを書いたファイルを読ませる。** 合成の見出しでは、
     #        節を割る側・語幹を取る側が壊れていても通る（L10・L11 と同じ理由）。
@@ -3208,6 +3380,454 @@ def _self_test():
     run1("L39 仕様が読めなければ、確かめた数に入れない", semantic.check_route_side_by_side,
          sib_proj({}, shots={"mv-s01": {"spec": S_SEED}}),
          False, None, note="読めなかった仕様 1 本")
+
+    # ---- L40（物語の関数を持つショットが、値を転換させているか）
+    #     ⚠️ **仕様もカードも要らない。** 読むのはショットの `dramatic` だけである
+    #        ——ゆえにこの層は、clone した人の手元でも鳴る。
+    print("\n=== 自己検査 — 劇的関数と値の転換\n")
+
+    def dram_proj(dramatic):
+        p = _One({"shot": "p-ch01-seg01", "duration": "6s"})
+        if dramatic is not None:
+            p.shots["p-ch01-seg01"]["dramatic"] = dramatic
+        return p
+
+    run1("L40 値が転換している（鳴ってはならない）", semantic.check_dramatic_value,
+         dram_proj({"function": "転換", "value": {"from": "安全", "to": "危険"}}),
+         False, None, note="物語の関数 1 本")
+    run1("L40 物語の関数なのに、値が変わらない", semantic.check_dramatic_value,
+         dram_proj({"function": "転換", "value": {"from": "安全", "to": "安全"}}),
+         True, "変わらない")
+    run1("L40 物語の関数なのに、値が無い", semantic.check_dramatic_value,
+         dram_proj({"function": "上昇"}), True, "揃っていない")
+    # ⚠️ **非物語の関数は、値を持たなくてよい**——持たないことがその関数の意味である。
+    run1("L40 質感は値を持たなくてよい（鳴ってはならない）", semantic.check_dramatic_value,
+         dram_proj({"function": "質感"}), False, None, note="非物語の関数 1 本")
+    run1("L40 dramatic を持たないショットは対象の外", semantic.check_dramatic_value,
+         dram_proj(None), False, None, note="1本も無い")
+
+    # ---- L43（`dramatic` を持つショットの `DIRECTION` 節が、記録と合っているか）
+    #     ⚠️ **照合するのは function と value の語だけである。** 節を実際に書いて読ませる
+    #        ——定数を直に当てるだけでは、**節を切り出す側**を検査できない。
+    print("\n=== 自己検査 — 演出節（DIRECTION）と劇的記録\n")
+
+    DIR_HEAD = "# 17. AUDIO\n\n沈黙。\n\n"
+    DIR_TAIL = "\n# 18. WAN 3.0 PROMPT MAPPING\n\n本文\n"
+    DIR_OK = (DIR_HEAD + "## DIRECTION\n\n"
+              "Play turn for held breath. The value turns from safety to danger.\n"
+              + DIR_TAIL)
+    # ⚠️ **節そのものが無い**——記録は書かれたが、生成器へ届く文になっていない。
+    DIR_NONE = DIR_HEAD + DIR_TAIL
+    # ⚠️ **関数の語だけが無い。** `turns` は `turn` ではない（語の境界で読む）。
+    DIR_NO_FUNCTION = DIR_OK.replace("Play turn", "Play the moment")
+    # ⚠️ **値の片側だけが無い。**
+    DIR_NO_TO = DIR_OK.replace("to danger", "to the end")
+
+    DRAMATIC = {"function": "転換",
+                "value": {"from": "安全", "to": "危険", "stake": "父の記憶"}}
+    POLES = [{"ja": "安全", "en": "safety"}, {"ja": "危険", "en": "danger"}]
+
+    def dir_proj(spec_text, *, dramatic=DRAMATIC, poles=POLES, spec=True):
+        p = stage_proj(spec_text, spec=spec)
+        if dramatic is not None:
+            p.shots["mv-s01"]["dramatic"] = dramatic
+        p.ledger = {"characters": {}, "locations": {}, "disclosure": [],
+                    "dramaturgy": {"value_poles": poles}}
+        return p
+
+    run1("L43 記録と節が合っている（鳴ってはならない）", semantic.check_direction_section,
+         dir_proj(DIR_OK), False, None,
+         note="`DIRECTION` 節を持つのは 1 本")
+    run1("L43 節が無い", semantic.check_direction_section,
+         dir_proj(DIR_NONE), True, "節が無い")
+    run1("L43 function の英語が節に無い", semantic.check_direction_section,
+         dir_proj(DIR_NO_FUNCTION), True, "節に `turn` が無い")
+    run1("L43 value の英語が節に無い", semantic.check_direction_section,
+         dir_proj(DIR_NO_TO), True, "値の転換は")
+    # ⚠️ **写像を持たないのは作品の欠けであって、節の誤りではない**——註にする。
+    run1("L43 写像の無い値は註", semantic.check_direction_section,
+         dir_proj(DIR_OK, poles=[]), False, None, note="写像の無い値")
+    # ⚠️ **記録が無いことは、食い違っていることではない。** 遡って埋めもしない。
+    run1("L43 dramatic を持たないショットは対象の外", semantic.check_direction_section,
+         dir_proj(DIR_NONE, dramatic=None), False, None, note="1本も無い")
+    # ⚠️ **読めなかった仕様を「節が無い」と言わない**（`L38`/`L39` と同じ規律）。
+    run1("L43 仕様が読めなければ、確かめた数に入れない", semantic.check_direction_section,
+         dir_proj(DIR_NONE, spec=False), False, None, note="確かめていない")
+
+    # ---- L41 / L44（幕とシーケンスの形、緊張の曲線）
+    #     ⚠️ **どちらも並びを読むので、1本の見本では鳴らない。** 見本を複数本持ち、
+    #        台帳に `dramaturgy` を置く——`_One` は1本しか持てない。
+    print("\n=== 自己検査 — 幕・シーケンス・緊張の曲線\n")
+
+    class _Many:
+        def __init__(self, shots, dramaturgy=None):
+            self.shots = {s["shot"]: s for s in shots}
+            self.ledger = {"characters": {}, "locations": {}, "disclosure": []}
+            if dramaturgy is not None:
+                self.ledger["dramaturgy"] = dramaturgy
+            self.disclosure = []
+
+        def order(self):
+            return sorted(self.shots, key=_natural)
+
+    def many(*peaks, dramaturgy=None):
+        """`peaks` は `beats[].intensity` の最大値（`None` なら強度を持たない）。"""
+        shots = []
+        for i, p in enumerate(peaks, start=1):
+            s = {"shot": f"mv-s{i:02d}", "duration": "6s"}
+            if p is not None:
+                s["beats"] = [{"range": "0-3s", "density": "held", "intensity": p - 1},
+                              {"range": "3-6s", "density": "dense", "intensity": p}]
+            shots.append(s)
+        return _Many(shots, dramaturgy)
+
+    SHAPED = {"acts": [{"id": "act-1", "shots": ["mv-s01", "mv-s02", "mv-s03"],
+                        "turn": "安全 → 危険", "climax": "mv-s03"}],
+              "sequences": [{"id": "seq-1", "shots": ["mv-s01", "mv-s02"],
+                             "contrast": "静 → 動", "payoff": "mv-s03"}]}
+
+    run1("L41 幕とシーケンスが実在を引き、転換と対比を持つ（鳴ってはならない）",
+         semantic.check_dramaturgy_shape, many(2, 4, 9, dramaturgy=SHAPED),
+         False, None, note="幕 1 本・シーケンス 1 本")
+    # ⚠️ **`dramaturgy` が無いことは、食い違っていることではない。**
+    run1("L41 dramaturgy を持たない作品は対象の外", semantic.check_dramaturgy_shape,
+         many(2, 4, 9), False, None, note="何も照合していない")
+    run1("L41 dramaturgy はあるが幕もシーケンスも無い", semantic.check_dramaturgy_shape,
+         many(2, 4, 9, dramaturgy={"premise": "…"}), False, None, note="誰も負っていない")
+    run1("L41 幕に turn が無い", semantic.check_dramaturgy_shape,
+         many(2, 4, 9, dramaturgy={
+             "acts": [{"id": "act-1", "shots": ["mv-s01", "mv-s02"]}]}),
+         True, "`turn`")
+    run1("L41 幕が実在しないショットを引く", semantic.check_dramaturgy_shape,
+         many(2, 4, 9, dramaturgy={
+             "acts": [{"id": "act-1", "shots": ["mv-s01", "mv-s99"],
+                       "turn": "…"}]}),
+         True, "実在しないショット")
+    run1("L41 山場が幕の外にある", semantic.check_dramaturgy_shape,
+         many(2, 4, 9, dramaturgy={
+             "acts": [{"id": "act-1", "shots": ["mv-s01", "mv-s02"],
+                       "turn": "…", "climax": "mv-s03"}]}),
+         True, "幕の外に置けない")
+    run1("L41 シーケンスに contrast が無い", semantic.check_dramaturgy_shape,
+         many(2, 4, 9, dramaturgy={
+             "sequences": [{"id": "seq-1", "shots": ["mv-s01", "mv-s02"]}]}),
+         True, "`contrast`")
+    run1("L41 回収先が実在しない", semantic.check_dramaturgy_shape,
+         many(2, 4, 9, dramaturgy={
+             "sequences": [{"id": "seq-1", "shots": ["mv-s01"], "contrast": "…",
+                            "payoff": "mv-s99"}]}),
+         True, "回収先")
+    # ⚠️ **回収を書かないことは鳴らさない**——「無い」と「まだ無い」は区別できない。
+    run1("L41 payoff を書かないことは鳴らない", semantic.check_dramaturgy_shape,
+         many(2, 4, 9, dramaturgy={
+             "sequences": [{"id": "seq-1", "shots": ["mv-s01"], "contrast": "…"}]}),
+         False, None, note="幕 0 本")
+
+    run1("L44 曲線が動いている（鳴ってはならない）", semantic.check_tension_curve,
+         many(2, 5, 8, 4, 3), False, None, note="を持つショット 5 本")
+    # ⚠️ **3本未満では曲線が無い。** 註であって違反ではない。
+    run1("L44 強度を持つショットが3本未満なら対象の外", semantic.check_tension_curve,
+         many(2, 5), False, None, note="曲線はまだ無い")
+    run1("L44 同じ強度が3本続く", semantic.check_tension_curve,
+         many(2, 4, 4, 4, 8), True, "同じ強度")
+    # ⚠️ **記録の無いショットが間に入れば、曲線はそこで切れる。**
+    run1("L44 記録の無いショットを挟んだ2本は連続ではない", semantic.check_tension_curve,
+         many(4, 4, None, 4, 4), False, None, note="を持つショット 4 本")
+    run1("L44 flat: true に理由が無ければ鳴る", semantic.check_tension_curve,
+         many(4, 4, 4, dramaturgy={
+             "sequences": [{"id": "seq-1", "shots": ["mv-s01", "mv-s02", "mv-s03"],
+                            "flat": True}]}),
+         True, "理由の無い `flat`")
+    # ⚠️ **平らであることは失敗ではない**——理由が書かれていれば註である。
+    run1("L44 flat: true に理由があれば註", semantic.check_tension_curve,
+         many(4, 4, 4, dramaturgy={
+             "sequences": [{"id": "seq-1", "shots": ["mv-s01", "mv-s02", "mv-s03"],
+                            "flat": True, "note": "この幕は意図して平らである"}]}),
+         False, None, note="理由つきで平らを宣言したシーケンス")
+    # ⚠️ **`flat` は**その序列の旗**である——旗の外のショットは覆わない。**
+    run1("L44 flat の宣言は、その序列の外を覆わない", semantic.check_tension_curve,
+         many(4, 4, 4, 4, dramaturgy={
+             "sequences": [{"id": "seq-1", "shots": ["mv-s01", "mv-s02"],
+                            "flat": True, "note": "…"}]}),
+         True, "同じ強度")
+    run1("L44 幕の山場が、幕の最大でない", semantic.check_tension_curve,
+         many(2, 6, 9, dramaturgy={
+             "acts": [{"id": "act-1", "shots": ["mv-s01", "mv-s02", "mv-s03"],
+                       "climax": "mv-s02"}]}),
+         True, "山場が山場でない")
+    run1("L44 幕の山場が最大なら鳴らない", semantic.check_tension_curve,
+         many(2, 6, 9, dramaturgy={
+             "acts": [{"id": "act-1", "shots": ["mv-s01", "mv-s02", "mv-s03"],
+                       "climax": "mv-s03"}]}),
+         False, None, note="幕の山場を確かめたのは 1 幕")
+    run1("L44 幕の山場が強度を持たない", semantic.check_tension_curve,
+         many(2, 6, None, 5, dramaturgy={
+             "acts": [{"id": "act-1", "shots": ["mv-s01", "mv-s02", "mv-s03"],
+                       "climax": "mv-s03"}]}),
+         True, "持たない")
+
+    # ---- L48 / L49 / L50（序列の三つの拘束——欠け・切れ目・律動）
+    #     ⚠️ **三つを離さない。** どれか一つだけを直すと、**序列が記述に戻る。**
+    print("\n=== 自己検査 — 序列の拘束（欠け・切れ目・律動）\n")
+
+    def beat(durations, dram=None, *, cut_internal=()):
+        """`durations` は秒。`cut_internal` のショットだけ `cut: internal` を持つ。"""
+        shots = []
+        for i, d in enumerate(durations, start=1):
+            sid = f"mv-s{i:02d}"
+            s = {"shot": sid, "duration": f"{d}s"}
+            if sid in cut_internal:
+                s["cut"] = "internal"
+            shots.append(s)
+        return _Many(shots, dram)
+
+    def sq(shots=("mv-s01", "mv-s02", "mv-s03"), **kw):
+        """シーケンス1本を持つ `dramaturgy`。"""
+        base = {"id": "seq-1", "shots": list(shots), "contrast": "静 → 動"}
+        base.update(kw)
+        return {"sequences": [base]}
+
+    # --- L48（欠け）
+    run1("L48 欲しがっている画を渡さない（鳴ってはならない）", semantic.check_withheld,
+         beat(["5s", "5s", "5s"], sq(withheld=[
+             {"shot": "mv-s02", "wanted": "窯の中の火", "given": "開いた暗がり"}])),
+         False, None, note="`withheld`")
+    run1("L48 wanted と given が同じ", semantic.check_withheld,
+         beat(["5s", "5s", "5s"], sq(withheld=[
+             {"shot": "mv-s02", "wanted": "火", "given": "火"}])),
+         True, "先延ばし")
+    run1("L48 given が空", semantic.check_withheld,
+         beat(["5s", "5s", "5s"], sq(withheld=[
+             {"shot": "mv-s02", "wanted": "火", "given": ""}])),
+         True, "事故")
+    run1("L48 欠けが並びの外のショットを引く", semantic.check_withheld,
+         beat(["5s", "5s", "5s"], sq(shots=["mv-s01", "mv-s02"], withheld=[
+             {"shot": "mv-s03", "wanted": "火", "given": "暗がり"}])),
+         True, "並びの判断ではない")
+    run1("L48 実在しないショットを引く", semantic.check_withheld,
+         beat(["5s", "5s", "5s"], sq(withheld=[
+             {"shot": "mv-s99", "wanted": "火", "given": "暗がり"}])),
+         True, "実在しないショット")
+    # ⚠️ **最後の1本で欠けていることは、違反ではなく註である。**
+    run1("L48 最後の1本で欠けているのは註", semantic.check_withheld,
+         beat(["5s", "5s", "5s"], sq(withheld=[
+             {"shot": "mv-s03", "wanted": "火", "given": "暗がり"}])),
+         False, None, note="回収されない欠け")
+    run1("L48 欠けが1つも無いのは註", semantic.check_withheld,
+         beat(["5s", "5s", "5s"], sq()),
+         False, None, note="何も照合していない")
+
+    # --- L49（切れ目）
+    run1("L49 切れ目が記録と一致する（鳴ってはならない）", semantic.check_cut_declaration,
+         beat(["5s", "5s", "5s"], sq(cuts=["mv-s01"]), cut_internal=("mv-s01",)),
+         False, None, note="両方向に照合した")
+    run1("L49 宣言した切れ目に記録が無い", semantic.check_cut_declaration,
+         beat(["5s", "5s", "5s"], sq(cuts=["mv-s01"])),
+         True, "`cut: internal` が無い")
+    run1("L49 記録した切れ目を誰も負っていない", semantic.check_cut_declaration,
+         beat(["5s", "5s", "5s"], sq(), cut_internal=("mv-s02",)),
+         True, "誰の律動も負わない")
+    run1("L49 切れ目が並びの外のショットを引く", semantic.check_cut_declaration,
+         beat(["5s", "5s", "5s"], sq(shots=["mv-s01"], cuts=["mv-s03"]),
+              cut_internal=("mv-s03",)),
+         True, "並びの判断ではない")
+    run1("L49 切れ目が実在しないショットを引く", semantic.check_cut_declaration,
+         beat(["5s", "5s", "5s"], sq(cuts=["mv-s99"])),
+         True, "実在しないショット")
+    run1("L49 切れ目が1つも無いのは註", semantic.check_cut_declaration,
+         beat(["5s", "5s", "5s"], sq()),
+         False, None, note="作品に切れ目が無い")
+
+    # --- L50（律動）
+    run1("L50 律動の形が秒数と合う（鳴ってはならない）", semantic.check_tempo,
+         beat(["1.2", "9", "3.5"], sq(tempo=[1.2, 9, 3.5])),
+         False, None, note="照合した")
+    run1("L50 律動の形が秒数と食い違う", semantic.check_tempo,
+         beat(["1.2", "9", "3.5"], sq(tempo=[1.2, 9, 5])),
+         True, "並びは嘘になる")
+    run1("L50 律動の長さが並びと違う", semantic.check_tempo,
+         beat(["1.2", "9", "3.5"], sq(tempo=[1.2, 9])),
+         True, "同じ長さでなければ読めない")
+    run1("L50 等間隔の律動", semantic.check_tempo,
+         beat(["5s", "5s", "5s"], sq(tempo=[5, 5, 5])),
+         True, "等間隔は律動ではない")
+    run1("L50 理由つきで等間隔を宣言すれば註", semantic.check_tempo,
+         beat(["5s", "5s", "5s"], sq(tempo=[5, 5, 5], flat=True,
+                                     note="意図して等間隔にした")),
+         False, None, note="理由つきで等間隔")
+    run1("L50 tempo を持たないシーケンスは註", semantic.check_tempo,
+         beat(["5s", "5s", "5s"], sq()),
+         False, None, note="何も照合していない")
+
+    # ---- L51（人数——記録の数が、§18 の2つの句になっているか）
+    #     ⚠️ **仕様を実際に書いて読ませる。** 定数を直に当てるだけでは、
+    #        **Master と Negative を切り出す側**を検査できない。
+    print("\n=== 自己検査 — 人数\n")
+
+    def pop_spec(master, negative):
+        return ("# 18. WAN 3.0 PROMPT MAPPING\n\n"
+                f"## Master Prompt\n\n{master}\n\n"
+                f"## Negative Prompt\n\n{negative}\n\n"
+                "## Style Motion\n\n全アニメーション。\n")
+
+    def pop_proj(n, master, negative):
+        p = stage_proj(pop_spec(master, negative))
+        p.shots["mv-s01"]["population"] = n
+        return p
+
+    OK_ONE = "**She is the only person in the frame** — the road is empty."
+    OK_NEG = "no second person, no watermark, no on-screen subtitles"
+
+    run1("L51 数が肯定と写しの両方に届いている（鳴ってはならない）", semantic.check_population,
+         pop_proj(1, OK_ONE, OK_NEG), False, None, note="照合した")
+    # ⚠️ **強調（`**`）は印であって語ではない。** 落とさなければ、同じ句が「無い」と鳴る。
+    run1("L51 強調の印は語ではない", semantic.check_population,
+         pop_proj(1, "She is the only person in the frame.", OK_NEG),
+         False, None, note="照合した")
+    run1("L51 0 人は「居ない」と言う", semantic.check_population,
+         pop_proj(0, "No one in the frame — the road is empty.", "no people, no watermark"),
+         False, None, note="照合した")
+    # ⚠️ **記録は数を持つが、生成器へ届いていない。** 空いた席は生成器が埋める。
+    run1("L51 Master に人数が無い", semantic.check_population,
+         pop_proj(1, "A girl walks up the road.", OK_NEG),
+         True, "人数が生成器へ届いていない")
+    run1("L51 Negative に写しが無い", semantic.check_population,
+         pop_proj(1, OK_ONE, "no watermark, no on-screen subtitles"),
+         True, "どれも持たない")
+    # ⚠️ **逆向き。** 二人を宣言したショットが、一人で止める節を持つ。
+    run1("L51 厳しすぎる節は矛盾である", semantic.check_population,
+         pop_proj(2, "**2 people in the frame** — they stand at the rail.", OK_NEG),
+         True, "に止めている")
+    # ⚠️ **同じ1句を2つの欠陥に数えない。** 一人と言いながら「誰も居ない」と禁じるのは
+    #    **矛盾であって、「写しが無い」ではない**——届いていないのではなく、届きすぎている。
+    run1("L51 厳しすぎる節を「足りない」と二重に数えない", semantic.check_population,
+         pop_proj(1, OK_ONE, "no people, no watermark"), True, "に止めている")
+    # ⚠️ **件数まで見る。** `run1` は「鳴った」ことしか見ないので、**二重報告は通ってしまう。**
+    _dup = [f for f in semantic.check_population(
+        pop_proj(1, OK_ONE, "no people, no watermark")) if f["severity"] != "note"]
+    n += 1
+    _ok = len(_dup) == 1
+    bad += not _ok
+    print(f"    {'L51 矛盾は1件だけ鳴る':<50}{len(_dup):>10}  "
+          f"{'期待どおり' if _ok else '⚠️ 期待と違う'}")
+    # ⚠️ **2人以上に禁制の句は求めない**——禁制は人数を数えない。註で報告する。
+    run1("L51 2人以上には禁制の句を求めない", semantic.check_population,
+         pop_proj(2, "**2 people in the frame** — they stand at the rail.", "no watermark"),
+         False, None, note="2人以上のショットには禁制の句を求めない")
+    # ⚠️ **記録が無いことは、食い違っていることではない。**
+    run1("L51 population を持たない作品は対象の外", semantic.check_population,
+         pop_proj(None, OK_ONE, OK_NEG), False, None, note="何も照合していない")
+
+    # ---- L52（部位——枠に入る身体の部分の数が、§18 の2つの句になっているか）
+    #     ⚠️ **人数の層は、肢で起きた失敗を緑と報告する**（実測 2026-10-29:
+    #        手だけのショットに3本目の手が描かれ、`population: 1` は正しかった）。
+    print("\n=== 自己検査 — 身体の部位\n")
+
+    def part_proj(parts, master, negative, population=None):
+        p = stage_proj(pop_spec(master, negative))
+        p.shots["mv-s01"]["body_parts"] = parts
+        if population is not None:
+            p.shots["mv-s01"]["population"] = population
+        return p
+
+    # ⚠️ **2本のショットに「写し」は要らない**（表は 0 と 1 までしか持たない）。
+    #    そして **`no second hand` を持つのは矛盾である**——2本目を禁じているのだから。
+    run1("L52 部位の数が肯定と写しに届いている（鳴ってはならない）",
+         semantic.check_body_parts,
+         part_proj({"hand": 2}, "**2 hands in the frame**, both hers.",
+                   "no third hand, no watermark", population=1),
+         False, None, note="照合した")
+    # ⚠️ **手だけの欄ではない。** 足・脚・腕にも同じ失敗が起きる——語彙は肢である。
+    run1("L52 足も同じ層が読む", semantic.check_body_parts,
+         part_proj({"foot": 2}, "**2 feet in the frame**, on the rail.",
+                   "no third foot, no watermark", population=1),
+         False, None, note="照合した")
+    # ⚠️ **逆向きの写し。** 2本を宣言したショットが「2本目」を禁じている。
+    run1("L52 2本に「2本目を禁じる」は矛盾である", semantic.check_body_parts,
+         part_proj({"hand": 2}, "**2 hands in the frame**.",
+                   "no second hand, no watermark", population=1),
+         True, "に止めている")
+    # ⚠️ **記録は数を持つが、生成器へ届いていない。**
+    run1("L52 Master に部位の数が無い", semantic.check_body_parts,
+         part_proj({"hand": 2}, "Her hands work in the dark.",
+                   "no second hand, no watermark", population=1),
+         True, "部位の数が生成器へ届いていない")
+    # ⚠️ **登録されていない部位は、句を導けない**（`L42` が未登録の文法を鳴らすのと同じ形）。
+    run1("L52 登録されていない部位", semantic.check_body_parts,
+         part_proj({"tentacle": 2}, "**2 hands in the frame**.",
+                   "no second hand, no watermark", population=1),
+         True, "登録されていない部位")
+    # ⚠️ **解剖の算術**——1体の手は2本である。2つの宣言が互いに矛盾している。
+    run1("L52 人数と部位の数が矛盾する", semantic.check_body_parts,
+         part_proj({"hand": 4}, "**4 hands in the frame**.",
+                   "no watermark", population=1),
+         True, "置けない")
+    # ⚠️ **同じ算術が通る**——2人なら4本は矛盾しない。数そのものは違反ではない。
+    run1("L52 2人なら4本は矛盾しない（鳴ってはならない）", semantic.check_body_parts,
+         part_proj({"hand": 4}, "**4 hands in the frame**.",
+                   "no watermark", population=2),
+         False, None, note="照合した")
+    # ⚠️ **逆向き。** 2本を宣言したショットが、「手は無い」で止めている。
+    run1("L52 厳しすぎる節は矛盾である", semantic.check_body_parts,
+         part_proj({"hand": 2}, "**2 hands in the frame**.",
+                   "no hands, no watermark", population=1),
+         True, "に止めている")
+    # ⚠️ **同じ1句を2つの欠陥に数えない。**
+    _dup2 = [f for f in semantic.check_body_parts(
+        part_proj({"hand": 2}, "**2 hands in the frame**.",
+                  "no hands, no watermark", population=1))
+        if f["severity"] != "note"]
+    n += 1
+    _ok2 = len(_dup2) == 1
+    bad += not _ok2
+    print(f"    {'L52 矛盾は1件だけ鳴る':<50}{len(_dup2):>10}  "
+          f"{'期待どおり' if _ok2 else '⚠️ 期待と違う'}")
+    # ⚠️ **2本以上に禁制の句は求めない**——禁制は数を数えない。
+    run1("L52 2本以上には禁制の句を求めない", semantic.check_body_parts,
+         part_proj({"hand": 2}, "**2 hands in the frame**.", "no watermark",
+                   population=1),
+         False, None, note="2本以上の部位には禁制の句を求めない")
+    # ⚠️ **`population` が無ければ、算術は走らない**——推測で埋めない。
+    run1("L52 population が無ければ算術は走らない", semantic.check_body_parts,
+         part_proj({"hand": 4}, "**4 hands in the frame**.", "no watermark"),
+         False, None, note="推測で埋めない")
+    # ⚠️ **記録が無いことは、食い違っていることではない。** 枠が全身を写すショットは
+    #    `population` だけで足りる——部位は、枠が身体の一部のときの欄である。
+    run1("L52 body_parts を持たない作品は対象の外", semantic.check_body_parts,
+         stage_proj(pop_spec(OK_ONE, OK_NEG)), False, None, note="何も照合していない")
+
+    # ---- L47（演技が「願望」か「説明」か）
+    #     ⚠️ **文字列が同じことを見るだけである。** 願望の「強さ」は読まない。
+    print("\n=== 自己検査 — 演技の願望と障害\n")
+
+    def perf_proj(performance, *, dramatic=True):
+        d = {"function": "転換", "value": {"from": "安全", "to": "危険"}}
+        if performance is not None:
+            d["performance"] = performance
+        p = many(2, dramaturgy=None)
+        if dramatic:
+            p.shots["mv-s01"]["dramatic"] = d
+        return p
+
+    run1("L47 願望と障害が分かれている（鳴ってはならない）", semantic.check_performance_want,
+         perf_proj({"objective": "娘を守る", "obstacle": "扉が開かない"}),
+         False, None, note="`performance` を持つのは 1 本")
+    run1("L47 願望と障害が同じ", semantic.check_performance_want,
+         perf_proj({"objective": "扉を開ける", "obstacle": "扉を開ける"}),
+         True, "同じなら、演技は動かない")
+    # ⚠️ **空白と大小の差は、別の願望ではない。**
+    run1("L47 空白の差だけなら、同じ願望である", semantic.check_performance_want,
+         perf_proj({"objective": "Open  the door", "obstacle": "open the door "}),
+         True, "演技は動かない")
+    # ⚠️ **`performance` を持たないことは違反ではない**——人物のいない1本もある。
+    run1("L47 performance を持たないショットは違反にしない", semantic.check_performance_want,
+         perf_proj(None), False, None, note="`performance` を持つのは 0 本")
+    run1("L47 dramatic を持たないショットは対象の外", semantic.check_performance_want,
+         perf_proj({"objective": "a", "obstacle": "a"}, dramatic=False),
+         False, None, note="1本も無い")
+    # ⚠️ **対になっていない演技は、まだ照合できない**——数を言う。
+    run1("L47 objective だけの performance は註", semantic.check_performance_want,
+         perf_proj({"objective": "娘を守る"}), False, None, note="を欠くもの 1 本")
 
     print("\n=== 自己検査 — 形（スキーマ）が鳴るか\n")
     class _Shape:

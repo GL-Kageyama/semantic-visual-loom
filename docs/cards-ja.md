@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.1.0 | canonical: docs/cards.md | translated: 2026-09-22 -->
+<!-- i18n-version: 1.2.0 | canonical: docs/cards.md | translated: 2026-10-29 -->
 
 **Language:** [English](cards.md) | [日本語](cards-ja.md) | [中文](cards-zh.md)
 
@@ -31,37 +31,81 @@ distill-essence-engine/references/styles/    # the style cards
 ```text
 references/formats/    # this side's format cards — `video-spec`
 references/styles/     # this side's style cards — `sumi-e`
+references/grammars/   # the registry — `index.yaml`
 ```
+
+⚠️ **目録は第三の層ではない。** 自分ではカードを1枚も持たない——**文法である形式カードを
+並べるだけである。** そして**走る時に導出せず、ここに置く**のは、
+**ショットが使う名に、登録される場所が1つだけ在る**ようにするためである。
 
 ⚠️ **2つのディレクトリは、同じものが2つの側から見えているものである**——`_cards_dirs()` は
 **層ごとに1つの一覧**を探し、**その一覧の順を決めるのが環境変数である。**
 
 ## カードは何枚あるか
 
-**2026-09-22 に数えた。** 数えた範囲は `_cards_dirs()` が探す2つのディレクトリであり、
+**2026-10-29 に数えた。** 数えた範囲は `_cards_dirs()` が探す2つのディレクトリであり、
 数え方は**各ディレクトリの `.md` を数え、ミラーを脇に置く**である——`video-spec-ja.md` と
 `video-spec-zh.md` は `video-spec.md` の訳であって独立したカードではないので、3つで1枚である。
 
 | ディレクトリ | 形式カード | 様式カード |
 |---|---|---|
-| `references/`——**このリポジトリ自身のもの** | **8** | **16** |
+| `references/`——**このリポジトリ自身のもの** | **16** | **16** |
 | `distill-essence-engine/references/`——隣。そこに在る場合 | 45 | 55 |
 
-**8 と 16 の中身。**
+**16 と 16 の中身。**
 
-- **形式カード 8 枚** = `video-spec` **＋ こちら側が足した7つの文法**: `transformation`、
-  `time-fold`、`remembered-world`、`impossible-camera`、`meaning-responsive`、
-  `recognizing-world`、`coexisting-realities`。
-- **様式カード 16 枚** = `sumi-e` **＋ 画像側から引き継いだ15枚**（`watercolor`、`mokuhanga`、
+- **形式カード 16 枚** = `video-spec` **＋ 15の文法**: `transformation`、`time-fold`、
+  `remembered-world`、`impossible-camera`、`meaning-responsive`、`recognizing-world`、
+  `coexisting-realities`、そして仮置きの8枚——`recursive-frame`、`scale-rupture`、
+  `material-substitution`、`population-emergence`、`temporal-panorama`、`light-as-actor`、
+  `frame-escape`、`physics-with-a-rule`。**どれが文法で、どれが別の種類のカードかは、
+  「`video-spec` プラス一つの規則」であるかで決まる**——そしてその規則を記録するのが、
+  下の目録である。
+- **様式カード 16 枚** = `sumi-e` **＋ 画像側から引き継いだ14枚**（`watercolor`、`mokuhanga`、
   `oil-painting`、`gouache-abstract`、`cinematic-still`、`documentary-photo`、`instant-photo`、
   `landscape-photo`、`macro-photo`、`street-photo`、`studio-portrait`、`sketch-broadstroke`、
   `blueprint-plan`、`lab-notebook`）**＋ `impossible-medium`。これがここで唯一、
   画像側の原盤を持たないカードである。**
 
-⚠️ **この 24 枚のうち、ミラーを持つのは1枚だけである。** `video-spec-ja.md` と
-`video-spec-zh.md` がその1組であり、**23 枚は訳を持たない英語の正典である**——そして
+⚠️ **この 32 枚のうち、ミラーを持つのは1枚だけである。** `video-spec-ja.md` と
+`video-spec-zh.md` がその1組であり、**31 枚は訳を持たない英語の正典である**——そして
 [`tools/check_i18n.py`](../tools/check_i18n.py) はそれらを自分の文書として数えない。
 **あれが数えるのは読み手に渡される文書であり、これらは走る時に開かれるカードである。**
+
+## 文法の目録
+
+`references/grammars/index.yaml` **が文法の一覧であり、検査が読む一覧である。**
+文法カードは人へ向けた散文であり、**目録は同じ事実を、検査が開ける形にしたものである。**
+
+```text
+- name: transformation            # the name §6 REF_FORMAT uses
+  card: transformation            # references/formats/<card>.md
+  status: established             # established | provisional
+  routes: [WAN 3.0, MINIMAX H3, SEEDANCE 2.5]
+  written_into: ["9. ACTION", "11. MOTION"]
+  essential_moves: [ … ]          # what the grammar does, in one line each
+  negative_conflicts: ["no deforming silhouette"]   # clauses that would forbid the move
+  grounding: …                    # the ordinary shot this grammar is measured against
+  failure: …                      # the defect it is most often confused with
+```
+
+⚠️ **`status` が言うのは「この一覧が正典か」であり、カードが良いかではない。**
+`established` の7枚は、このリポジトリが既に持っていたカードである。**`provisional` の8枚は、
+作者自身の一覧が差し替える席を埋めている**——ゆえに**仮置きを正典として引かない。**
+
+⚠️ **`routes` は宣言であって、実測ではない。** 実測の理由を持つのは
+`coexisting-realities` の1件だけで、そのカード自身が「1本の連続したテイクは二つの場所を
+抱えない」と書いている——**ゆえに `WAN 3.0` が除かれるのは、そこだけである。**
+**カードが理由を書いていない限り、`routes` を広げも狭めもしない。**
+
+⚠️ **`written_into` は `specmap.SPEC_SECTIONS` の節名（`"9. ACTION"`）で書く**ので、
+目録と仕様は1つの綴りを共有する。**カードは同じ一覧を `§9 ACTION` と書く**——
+2つの綴り、2人の読者、1つの一覧である。
+
+⚠️ **`negative_conflicts` には、どれかのカードの `## Negative` に既に立っている句だけを
+入れる。** **床を増やさない**——作品が §18 へ写したときに**その文法の核を禁じる句**を、
+名指しするだけである。**空の一覧は「ここでは禁じていない」であって、
+「照合して問題が無い」ではない。**
 
 ⚠️ **隣の 45 と 55 も同じ規則で、今日のそのディレクトリのままを数えたものである。**
 それらは**画像側の在庫であり、このリポジトリのものではない**——ゆえに
@@ -73,6 +117,7 @@ references/styles/     # this side's style cards — `sumi-e`
 |---|---|---|
 | format | `SVL_FORMATS_DIR` | 形式のカードがどこに在るか |
 | style | `SVL_STYLES_DIR` | 様式のカードがどこに在るか |
+| registry | `SVL_GRAMMARS_DIR` | `index.yaml` がどこに在るか——**重ねる。置き換えない**: このリポジトリ自身の `references/grammars/` も読まれ続ける |
 
 ⚠️ **層はそれぞれ自分の変数を読む。** 様式のディレクトリを指しても、
 **形式の層は動かない**——**逆もまた同じである。** *読まれていない名乗りが、
@@ -139,9 +184,17 @@ SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles \
 | `L22` | **画像**仕様、両方の層 | どのカードも宣言していない穴。仕様が埋めない穴を抱えたカード。開けないカード、または `## Environment variables` を持たないカード |
 | `L31` | §6 で名指しされた様式カード ⇄ `bible.style` | 住みかと仕様が、別の様式を名乗っている |
 | `L32` | §6 で名指しされた形式カード | 名指しされたカードが開けない、または `## Negative` を宣言していない |
+| `L42` | §6 `REF_FORMAT`・文法の目録・`dramaturgy.set_pieces` | 名指しされた文法が目録に無い。`written_into` が指す節が無いか空である。§18 が `routes` に無い経路を名乗っている。見せ場の `format` が §6 の名と違う |
+| `L45` | 目録の `negative_conflicts` と §18 `Negative Prompt` | 仕様が文法を名指し、その仕様自身の `Negative Prompt` がその文法の核を禁じている |
+| `L46` | `aim` の `grammar: <name>` 接頭辞と目録 | `aim` が、目録に無い文法を名乗っている |
 
-⚠️ **`L31` と `L32` が隣に在るのは、意図である**——**同じ §6 を読み、違うのは鍵だけである。**
-離せば、片方が直され、もう片方が忘れられる。
+⚠️ **`L31`・`L32`・`L42`・`L45`・`L46` が隣に在るのは、意図である**——**同じ §6 と
+同じ目録を読み、違うのは鍵だけである。** 離せば、片方が直され、ほかが忘れられる。
+
+⚠️ **`L42` と `L46` は、文法を1つも名指さない作品では、作られると静かである。**
+`video-spec` の仕様には登録する文法が無く、`grammar:` で始まらない `aim` は自由文であり、
+そのまま通す。**何も名指さない作品は、失敗した作品ではない**——
+註が「何本を見たか」を書くので、**沈黙が読めるものとして残る。**
 
 ⚠️ **`L20` と `L32` は2つではなく3つの結果を報告する**——**カードの置き場が無いのは註であり、
 カードが無いのは違反であり、節を欠いたカードも違反である。** *ディレクトリが無いことと
@@ -169,6 +222,15 @@ SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles \
   読み手に向けられている。** ⚠️ **`L22` を動画の経路へ広げられないのは、これが理由である**——
   動画仕様は §1–20 を使い、動画の形式カードが宣言する穴を1つも埋めないので、
   **正しい仕様の上で検査が鳴ってしまう。**
+- **文法カードの `## Written into` の散文。** 検査が読むのは目録の `written_into` であり、
+  カードの一覧ではない——**カードは `§9 ACTION` と書き、目録は `"9. ACTION"` と書き、
+  検査器は目録しか開かない。** 2つの一覧を揃えるのは `L42` の覆いの註であり、
+  **目録に無いカードがディスクに在れば、そこが名指しする。**
+- **目録の `essential_moves`・`grounding`・`failure`。** これらは文法の意味であり、
+  **どの検査も仕様と比べない。** `L45` が読むのは `negative_conflicts` だけである——
+  **デバイスがカードの言う通りに働いているかは、ここからは読めない。**
+- **`dramaturgy.set_pieces[].why`。** `L42` が比べるのは見せ場の `format` と §6 だけで
+  あり、**見せ場がその場所に値するかは作者の判断である。**
 - **絵コンテ。** ショット記録のどの欄も `specs/board/` を指さないので、
   **どの検査もそれを開かない**（[`docs/usage.md`](usage-ja.md)）。
 

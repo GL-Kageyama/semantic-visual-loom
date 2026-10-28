@@ -19,10 +19,30 @@ are the English-invariant part, the keys stay in English.
 | File | Structure of what | How settled |
 |---|---|---|
 | `bible.schema.json` | **Work ledger**. The invariant part of the work's world. One per project | Low (where the line between the invariant part and the variable part falls is undecided) |
-| `ledger.schema.json` | **Production ledger**. Holds continuity and disclosure **in a single file**. One per project | Medium (the shape of disclosure is settled. The attribute types remain) |
+| `ledger.schema.json` | **Production ledger**. Holds continuity, disclosure **and dramaturgy** in a single file. One per project | Medium (the shape of disclosure is settled. The attribute types remain) |
 | `shot-record.schema.json` | **Shot record**. One per generation. Self-contained | High (`unit` and `role` are decided) |
 | `take.schema.json` | **Take**. One per sample | Medium (dependent on the number of acceptance layers) |
 | `timeline.schema.json` | **Timeline**. The sequence of adopted takes + cut points + text + audio | **Lowest** (which one is authoritative is undecided) |
+
+**Two optional additions sit on top of that shape, and neither is required by it.**
+`ledger.dramaturgy` (premise, question, value poles, acts, sequences, set pieces, sound arc,
+ending image) and `shot.dramatic` (`function`, `value`, `audience`, `button`, `performance`),
+plus `beats[].intensity` and `beats[].audience`. ⚠️ **A sequence also carries three constraints**
+— `withheld` (`wanted` / `given`), `cuts` and `tempo` — and the cut is carried on the shot side
+as `cut: continuous | internal`. **The sequence decides the cut and the shot records it**,
+because a cut means something only next to the shot beside it. ⚠️ **A shot record may also
+declare `population`** — the greatest number of people visible at any moment in it — and from
+that one integer two English sentences are derived: the naming in §18 `Master Prompt` and its
+copy in `Negative Prompt`. ⚠️ **A shot whose frame holds only part of a body declares `body_parts`** — `{part: count}`,
+keyed by `specmap.BODY_PARTS` — because **a count of people counts bodies**, and a measured
+failure happened in a limb: a hands-only shot came back with a third hand while its
+`population` was correct. The same two sentences are derived per part, and `L52` also reads
+the arithmetic between the two declarations. ⚠️ **One field was added in the same change as
+the schema property, or it would have been a lie**: every new top-level record field must carry
+a `specmap.FIELD_SOURCE` and `FIELD_DESTINATION` entry, because `L12` and `L19` walk the
+schema's properties. `dramatic` goes to the new destination **`direction`** — **not to a
+`prompt:` slot**, because `DIRECTION` is not a slot. The shapes and the reasons are in
+[`docs/dramaturgy.md`](../docs/dramaturgy.md).
 
 ## ⚠️ What this schema cannot fire
 
@@ -68,7 +88,8 @@ The same shape of hole exists elsewhere. **What JSON Schema guarantees is "shape
 
 **They are written into the schema as `description`.** The main ones —
 
-- **The registry of roles (`role`).** Only 5 of 12 are in use (measured; registration is undecided)
+- **The registry of roles (`role`).** 15 are registered and **all 15 are in use** — plus
+  qualified spellings (`運動（停止）`), which `L15` reports as a note rather than a violation
 - **Whether to make the motion layer a required field.** The claim that "every shot has it" and whether blanks are allowed do not mesh
 - **Whether binary is enough for the `density` of `beats`**
 - **The type of the `disclosure_state` value**

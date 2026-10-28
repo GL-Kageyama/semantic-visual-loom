@@ -105,8 +105,21 @@
             },
             "council": {
               "type": "object",
-              "description": "層3 評議会。種別によって呼ばれる評価者が違うので、種別→評価者の対応をここに持つか別表にするかは未決定。",
-              "additionalProperties": { "type": "number" }
+              "description": "層3 評議会。種別によって呼ばれる評価者が違うので、種別→評価者の対応をここに持つか別表にするかは未決定。⚠️ **値は素の数値（既存）か、`{score, note}`（評議会の註）である。** `skills/review` は後者を書く。",
+              "additionalProperties": {
+                "oneOf": [
+                  { "type": "number" },
+                  {
+                    "type": "object",
+                    "required": ["score"],
+                    "additionalProperties": false,
+                    "properties": {
+                      "score": { "type": "number" },
+                      "note": { "type": "string" }
+                    }
+                  }
+                ]
+              }
             }
           }
         },

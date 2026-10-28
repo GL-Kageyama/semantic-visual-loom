@@ -38,6 +38,7 @@ Therefore, **do not** link from this repository's documents to the design notes 
 - **Generation is a sample.** What the generator makes is a candidate for adoption, not the work. **Adoption is selection, and the author is the editor.**
 - **The strings handed to the generator are English.** The word sequences of the specification, prompt, and Negative are **written in English**—the canonical is English. **Do not translate them**—translating changes the output.
 - **The work has a language, and it speaks it.** If there is speech it is in `bible.language`—**and a work with no speech declares one too, because a blank is not neutral: the generator fills it with its own default.** Measured: a video with speech in it came back with **Chinese subtitles burned into the picture.** ⚠️ **Name the language; do not forbid the symptom** (`L27`).
+- **The shot says how many people are in the frame.** `population` is an integer on the shot record — **the greatest number visible at any single moment** — and the record is where the decision lives, not the prose. **A blank is not neutral**: measured, two shots of a one-character work came back with **a second person in them**, because no layer had ever said "one." ⚠️ **The number becomes two English sentences** — the naming in §18 `Master Prompt` and its copy in `Negative Prompt` — and `L51` reads both directions. ⚠️ **Do not backfill it** into shots that predate the field: a count written after the picture exists is an explanation, not a declaration. ⚠️ **A count of people counts bodies.** When the frame holds only part of one, the shot declares `body_parts` as well (`{hand: 2}`) — measured, a hands-only shot came back with **a third hand** while its `population` was right. **It is limbs, not hands**: feet and legs fail the same way, and `L52` reads the same two sentences per part, plus the arithmetic against `population` (one body has two hands).
 - **Subtitles and background music are off unless asked for.** The foundation carries both as its floor (`specmap.BASE_NEGATIVES`), and **`L21` requires them on both paths**—the video's §18 `Negative Prompt` and the image's `Negative`. ⚠️ **A work that predates the floor declares `bible.base_negatives_waived`**—**the work writes the exclusion, because an engine that remembers which works are special has stopped being an engine.**
 
 ## Language (i18n)
@@ -52,7 +53,7 @@ Therefore, **do not** link from this repository's documents to the design notes 
 - **Invariant blocks** (the strings handed to the generator = specification, prompt, Negative, enum values) are **left in English, untranslated**.
 - **`HISTORY.md` stays Japanese.** It is the record of the work, not a document for readers.
 
-**22 documents × 3 languages are in place.** `tools/check_i18n.py` checks them: mirror existence and non-emptiness, the `i18n-version` header, the switcher line, the invariant blocks, and the heading levels.
+**26 documents × 3 languages are in place.** `tools/check_i18n.py` checks them: mirror existence and non-emptiness, the `i18n-version` header, the switcher line, the invariant blocks, and the heading levels.
 
 ⚠️ **That check does not see whether the prose is translated correctly.** It reports **how many files it looked at and which blocks it treated as invariant**—because a check that reports nothing looks like a check that passed.
 
