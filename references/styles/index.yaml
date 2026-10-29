@@ -226,7 +226,7 @@ techniques:
     shadow
   family: 絵画・伝統の表現
   star: 3
-  medium: 手描き（油）／ 道具=刷毛
+  medium: 手描き（油）
   card: null
   status: draft
 - id: 019
@@ -236,7 +236,7 @@ techniques:
   - rococo painting, soft pastel palette, delicate curves, gentle light
   family: 絵画・伝統の表現
   star: 3
-  medium: 手描き（油）／ 道具=刷毛
+  medium: 手描き（油）
   card: null
   status: draft
 - id: '020'
@@ -256,7 +256,7 @@ techniques:
   - fresco, pigment on wet plaster, matte chalky surface, earth colors
   family: 絵画・伝統の表現
   star: 3
-  medium: 手描き（壁）／ 道具=漆喰と顔料
+  medium: 手描き（壁）
   card: null
   status: draft
 - id: '022'
@@ -276,7 +276,7 @@ techniques:
   - impasto, thick raised paint, palette knife, the paint casting its own shadows
   family: 絵画・伝統の表現
   star: 2
-  medium: 手描き（油またはアクリル）／ 道具=刷毛・ナイフ
+  medium: 手描き（油またはアクリル）
   card: null
   status: draft
 - id: '024'
@@ -296,7 +296,7 @@ techniques:
   - gold leaf, burnished gold ground, the gold catching light, visible leaf seams
   family: 絵画・伝統の表現
   star: 2
-  medium: 手描き（装飾）／ 道具=箔と膠
+  medium: 手描き（装飾）
   card: null
   status: draft
 - id: '026'
@@ -442,7 +442,7 @@ techniques:
   - scratchboard, white lines scratched into a black inked surface
   family: 線画・版画・手描き
   star: 2
-  medium: 手描き（引っ掻き）／ 道具=刃
+  medium: 手描き（引っ掻き）
   card: null
   status: draft
 - id: '040'
@@ -512,7 +512,7 @@ techniques:
   - risograph print, limited fluorescent spot colors, visible grain, misregistration
   family: 線画・版画・手描き
   star: 3
-  medium: 版（デジタル孔版）／ 道具=インク
+  medium: 版（デジタル孔版）
   card: risograph
   status: draft
 - id: '047'
@@ -532,7 +532,7 @@ techniques:
   - rubber stamp print, repeated impressions, hard edges, uneven ink coverage
   family: 線画・版画・手描き
   star: 2
-  medium: 版（手押し）／ 道具=スタンプ
+  medium: 版（手押し）
   card: null
   status: draft
 - id: 049
@@ -542,7 +542,7 @@ techniques:
   - hand-carved eraser stamp, rough cut edges, uneven ink, naive simple shape
   family: 線画・版画・手描き
   star: 1
-  medium: 版（手彫り）／ 道具=消しゴムと彫刻刀
+  medium: 版（手彫り）
   card: null
   status: draft
 - id: '050'
@@ -624,7 +624,7 @@ techniques:
   - pop art, bold flat primary colors, thick black outlines, comic-print dots
   family: イラスト・グラフィック
   star: 3
-  medium: 版（印刷）／ 道具=スクリーン
+  medium: 版（印刷）
   card: null
   status: draft
 - id: '057'
@@ -634,7 +634,7 @@ techniques:
   - halftone print, a regular grid of dots, dots larger in shadow
   family: イラスト・グラフィック
   star: 2
-  medium: 版（印刷）／ 道具=網点
+  medium: 版（印刷）
   card: null
   near_card:
     id: manga-halftone
@@ -657,7 +657,7 @@ techniques:
   - bauhaus, primary colors, circle square and triangle, asymmetric balance, sans-serif
   family: イラスト・グラフィック
   star: 3
-  medium: デジタル（または版）／ 道具=定規とコンパス
+  medium: デジタル（または版）
   card: bauhaus-vector
   status: draft
 - id: '060'
@@ -678,7 +678,7 @@ techniques:
   - retro poster, mid-century print, limited palette, slight paper yellowing
   family: イラスト・グラフィック
   star: 2
-  medium: 版（印刷）／ 道具=任意
+  medium: 版（印刷）
   card: null
   status: draft
 - id: '062'
@@ -688,7 +688,7 @@ techniques:
   - american comic book art, bold black outlines, flat color, halftone shading
   family: イラスト・グラフィック
   star: 2
-  medium: 版（印刷）／ 道具=インクと網点
+  medium: 版（印刷）
   card: null
   near_card:
     id: flat-comic
@@ -701,7 +701,7 @@ techniques:
   - manga style, black and white, screentone shading, fine expressive linework
   family: イラスト・グラフィック
   star: 3
-  medium: デジタル（または手描き）／ 道具=ペンとスクリーントーン
+  medium: デジタル（または手描き）
   card: manga-ink
   status: draft
 - id: '064'
@@ -711,7 +711,7 @@ techniques:
   - cel animation style, flat color, two-tone hard-edged shadow, clean uniform outlines
   family: イラスト・グラフィック
   star: 3
-  medium: デジタル（セル画の模倣）／ 道具=塗り分け
+  medium: デジタル（セル画の模倣）
   card: cel-shade
   status: draft
 - id: '065'
@@ -722,7 +722,7 @@ techniques:
     shapes
   family: イラスト・グラフィック
   star: 2
-  medium: 手描き（水彩・ガッシュ）／ 道具=筆
+  medium: 手描き（水彩・ガッシュ）
   card: null
   status: draft
 - id: '066'
@@ -796,7 +796,7 @@ techniques:
     layers
   family: イラスト・グラフィック
   star: 3
-  medium: 立体（紙）／ 道具=鋏と紙
+  medium: 立体（紙）
   card: paper-cut
   status: draft
 - id: '073'
@@ -817,7 +817,7 @@ techniques:
   - mosaic, small tesserae tiles, visible grout lines, slightly uneven surface
   family: イラスト・グラフィック
   star: 3
-  medium: 立体（タイル）／ 道具=小片
+  medium: 立体（タイル）
   card: null
   status: draft
 - id: '075'
@@ -847,7 +847,7 @@ techniques:
   - felt art, fuzzy wool fibers, soft matted surface, stitched details
   family: 立体・素材・世界観
   star: 2
-  medium: 立体（繊維）／ 道具=針
+  medium: 立体（繊維）
   card: null
   status: draft
 - id: 078
@@ -857,7 +857,7 @@ techniques:
   - embroidery, visible stitched threads, satin stitch filling, fabric ground
   family: 立体・素材・世界観
   star: 2
-  medium: 立体（糸）／ 道具=針と糸
+  medium: 立体（糸）
   card: null
   status: draft
 - id: 079
@@ -867,7 +867,7 @@ techniques:
   - knitted art, visible knit stitches, chunky wool yarn, soft irregular surface
   family: 立体・素材・世界観
   star: 2
-  medium: 立体（毛糸）／ 道具=編み針
+  medium: 立体（毛糸）
   card: null
   status: draft
 - id: 080
@@ -877,7 +877,7 @@ techniques:
   - origami, folded paper, sharp creases, flat polygonal facets, no cutting
   family: 立体・素材・世界観
   star: 3
-  medium: 立体（紙）／ 道具=折る
+  medium: 立体（紙）
   card: null
   status: draft
 - id: 081
@@ -887,7 +887,7 @@ techniques:
   - paper silhouette, black cut-paper shapes, layered, lit from behind
   family: 立体・素材・世界観
   star: 1
-  medium: 立体（紙）／ 道具=切る
+  medium: 立体（紙）
   card: null
   near_card:
     id: paper-cut
@@ -901,7 +901,7 @@ techniques:
     through
   family: 立体・素材・世界観
   star: 3
-  medium: 立体（ガラス）／ 道具=鉛の桟
+  medium: 立体（ガラス）
   card: stained-glass
   status: draft
 - id: 083
@@ -911,7 +911,7 @@ techniques:
   - ceramic, glazed pottery, glossy glaze pooling, rounded thrown form
   family: 立体・素材・世界観
   star: 2
-  medium: 立体（陶）／ 道具=轆轤と釉
+  medium: 立体（陶）
   card: null
   status: draft
 - id: 084
@@ -921,7 +921,7 @@ techniques:
   - wood carving, chisel marks, visible wood grain, unfinished matte surface
   family: 立体・素材・世界観
   star: 2
-  medium: 立体（木）／ 道具=鑿
+  medium: 立体（木）
   card: null
   status: draft
 - id: 085
@@ -931,7 +931,7 @@ techniques:
   - stone sculpture, carved stone, coarse granular surface, cool grey
   family: 立体・素材・世界観
   star: 2
-  medium: 立体（石）／ 道具=鑿
+  medium: 立体（石）
   card: null
   status: draft
 - id: 086
@@ -941,7 +941,7 @@ techniques:
   - low poly 3D, the form built from a small number of flat polygons, visible facets
   family: 立体・素材・世界観
   star: 2
-  medium: デジタル（3D）／ 道具=多角形
+  medium: デジタル（3D）
   card: null
   near_card:
     id: ps1-polygon
@@ -954,7 +954,7 @@ techniques:
   - voxel art, built from small cubes, visible cube grid, isometric or 3D render
   family: 立体・素材・世界観
   star: 3
-  medium: デジタル（3D）／ 道具=立方体
+  medium: デジタル（3D）
   card: null
   near_card:
     id: pixel
@@ -967,7 +967,7 @@ techniques:
   - 3D toy render, soft plastic material, smooth rounded shapes, soft studio lighting
   family: 立体・素材・世界観
   star: 1
-  medium: デジタル（3D）／ 道具=レンダラ
+  medium: デジタル（3D）
   card: null
   status: draft
 - id: 089
@@ -977,7 +977,7 @@ techniques:
   - miniature model, tiny scale, shallow depth of field, tilt-shift
   family: 立体・素材・世界観
   star: 1
-  medium: 立体（模型）／ 道具=任意
+  medium: 立体（模型）
   card: null
   status: draft
 - id: 090
@@ -987,7 +987,7 @@ techniques:
   - diorama, a scene inside a box, visible frame edges, small scale
   family: 立体・素材・世界観
   star: 2
-  medium: 立体（模型）／ 道具=任意
+  medium: 立体（模型）
   card: null
   status: draft
 - id: 091
@@ -997,7 +997,7 @@ techniques:
   - papercraft, assembled from printed paper, visible fold and tab seams, matte paper
   family: 立体・素材・世界観
   star: 2
-  medium: 立体（紙）／ 道具=印刷と糊
+  medium: 立体（紙）
   card: null
   status: draft
 - id: 092
@@ -1007,7 +1007,7 @@ techniques:
   - photorealistic, indistinguishable from a photograph, lens-accurate detail
   family: 立体・素材・世界観
   star: 3
-  medium: デジタル（描画）／ 道具=任意
+  medium: デジタル（描画）
   card: null
   status: draft
 - id: 093
@@ -1040,7 +1040,7 @@ techniques:
   - cyanotype, prussian blue and white, sun-exposed silhouette, matte paper
   family: 立体・素材・世界観
   star: 3
-  medium: 写真（日光写真）／ 道具=感光紙と太陽
+  medium: 写真（日光写真）
   card: null
   status: draft
 - id: 096
@@ -1081,7 +1081,7 @@ techniques:
   - fantasy art, epic scale, dramatic light, painterly detail, magical atmosphere
   family: 立体・素材・世界観
   star: 2
-  medium: 手描き（油・デジタル）／ 道具=刷毛
+  medium: 手描き（油・デジタル）
   card: null
   status: draft
 - id: '100'

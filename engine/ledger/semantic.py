@@ -5253,6 +5253,12 @@ def check_style_catalog(project, repo_root=None):
                 bad(f"`medium` の頭の語 `{head}` は "
                     f"{'／'.join(STYLE_MEDIUM_HEADS)} のどれでもない"
                     f"（`{med}`）。")
+            # ⚠️ **頭だけを見ていると、欄が隣の欄を飲んでいても緑になる。**
+            #    解剖の `分解:` は `媒材=… ／ 道具=…` と並ぶ——**媒材は区切りの手前までである。**
+            #    `／` か `=` が残っていれば、**転記が欄を越えている。**
+            if "／" in med or "=" in med:
+                bad(f"`medium` に分解の区切りが残っている（`{med}`）——"
+                    "**媒材は `／` の手前までである。**")
 
         en = item.get("en")
         if (not isinstance(en, list) or not en

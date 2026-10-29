@@ -2247,6 +2247,11 @@ def _self_test():
         # ⚠️ **頭で見る。** `手描き（油）` は `手描き`——**括弧は媒材を変えない。**
         style_catalog_case("L59 `medium` の括弧は頭を変えない（註）",
                            [style_entry(medium="手描き（油）")], False, "照合した"),
+        # ⚠️ **頭が正しくても、欄が隣の欄を飲んでいれば赤。** 実測：転記の切り方が
+        #    ` ／ ` だったため、区切りが `／`（空白なし）の37件が `道具=…` を飲んだ。
+        style_catalog_case("L59 `medium` が分解の区切りを飲んでいる",
+                           [style_entry(medium="手描き（油）／ 道具=刷毛")], True,
+                           "媒材は `／` の手前まで"),
         style_catalog_case("L59 `en` が空である",
                            [style_entry(en=[])], True, "生成へ渡る句が無い"),
         style_catalog_case("L59 `card` と `near_card` を同時に持つ",
