@@ -106,6 +106,23 @@ python3 engine/shot/camera.py --id 007
 general film practice, not measured — and **a work's use wins.** ⚠️ **The Japanese name never
 reaches the generator; the `en` line does.**
 
+## The light lookup
+
+`engine/shot/look.py --light` reads the lighting catalog (`references/lighting/index.yaml`) and
+prints **the techniques that fit a kind, a role, a function, a directing job or a position** —
+each with the `en` line that §13 carries.
+
+```bash
+python3 engine/shot/look.py --light --kind 自然 --function 設定
+python3 engine/shot/look.py --light --id 038
+```
+
+⚠️ **`--light` is required, and so is one filter** — a command with no filter would print all
+100 entries and look like an answer. ⚠️ **Light names are nouns**, so `L56` matches them without
+inflection — §13 carries the `en` line as written, and a paraphrase is invisible to it. ⚠️ **Every
+entry is `status: draft`** — the mapping is the designer's, applied from general lighting
+practice, and **a work's use wins.**
+
 ## What Reads It
 
 - **`L26`** — `bible.constants.video` against §1's four lines

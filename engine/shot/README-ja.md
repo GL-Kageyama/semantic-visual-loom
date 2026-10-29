@@ -103,6 +103,21 @@ python3 engine/shot/camera.py --id 007
 映画作法から当てたもので、測られていない——**作品の使い方が勝つ。** ⚠️ **生成器へ渡るのは
 `en` の行であり、和名ではない。**
 
+## 光の引き方
+
+`engine/shot/look.py --light` は光の目録（`references/lighting/index.yaml`）を読み、
+**作り方・役割・劇的関数・演出上の仕事・位置に合う技法**を、§13 が運ぶ `en` の行つきで刷る。
+
+```bash
+python3 engine/shot/look.py --light --kind 自然 --function 設定
+python3 engine/shot/look.py --light --id 038
+```
+
+⚠️ **`--light` と、絞り込みが1つ要る**——絞りの無い呼び出しは100件を刷り、
+**答えのように見える。** ⚠️ **光の名は名詞である**——`L56` は活用を許さない。§13 は
+`en` の行をそのまま運び、**言い換えは当たらない。** ⚠️ **全件が `status: draft`**——
+当てはめは設計者のもので、一般の照明作法から起こした——**作品の使い方が勝つ。**
+
 ## これを読む者
 
 - **`L26`** —— `bible.constants.video` と §1 の4行を突き合わせる

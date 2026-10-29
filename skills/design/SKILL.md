@@ -148,10 +148,21 @@ because `L3` and `L4` read the beat body, not only the field.**
    the light does during the shot** — enters, leaves, stops, fails — the same way the camera's
    events are said. In a style whose card puts light in the subject's place, a shot whose light
    does nothing has no subject.
+   ⚠️ **The light's names are in [`references/lighting/index.yaml`](../../references/lighting/index.yaml)**
+   — 100 techniques, each with the English line §13 carries, its `kind` (灯／自然／光学／編集 —
+   placed on set, or added in the edit), and the roles and functions it can serve. **Take the
+   entry's `en` line into §13, and carry it into §18's `Visual Prompt`** — the handover the
+   camera makes from §10, made once more. ⚠️ **Light names are nouns; `L56` matches them without
+   inflection** — `Bloom` does not match *the source blooms*, so **write the `en` line as it is.**
+   Ask the catalog by anything but the name:
+   `python3 engine/shot/look.py --light --kind 自然` · `--light --id 038`.
+   ⚠️ **A light named in §13 that never reaches §18's `Visual Prompt` is reported as a note,
+   not a violation** — the catalog's `en` lines are ordinary nouns (`Dawn`, `Direct sun`), and
+   prose uses them without naming the technique. **Read the note and look at the shot.**
    **Fires if wrong:** `L33` (a gesture the card offers, negated in §18's `Camera Prompt`) ·
    `L17` (the slot itself) · `L20` (`Style Motion`'s destination).
-   ⚠️ **Nothing reads §9's `## Blocking` and nothing reads §13's events as events** — the stage
-   picture is unmeasured. **A hole, recorded as one.**
+   ⚠️ **Nothing reads §9's `## Blocking`, and nothing reads §13's events as events** — `L56`
+   counts the names, not the doing. **The stage picture is unmeasured. A hole, recorded as one.**
 8. **The video specification, §1–20** — in `specmap.SPEC_SECTIONS`' order, all twenty. Write
    `spec:` in the record to point at it. **Fires if wrong:** `L11`.
    ⚠️ **Two failures are different and live in different layers.** "§1 is missing" is `L11`;

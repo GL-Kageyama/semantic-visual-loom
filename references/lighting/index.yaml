@@ -1,0 +1,2172 @@
+# 光の演出の目録 — 機械が読む一覧
+#
+# ⚠️ **これは検査（L55・L56）のための目録である。** 人が読む解説はここには書かない。
+#
+# ⚠️ **出所。** 100項目は「AI動画で使える 光の演出 100選」のカード4枚を書き起こしたもの。
+#    **原図のカードには名前と英名しか無い**——説明の文は原図に無いので、この目録にも無い。
+#    ここに在る `roles`・`functions`・`grammars`・`directing` は**私（設計者）の当てはめ**であり、
+#    作品の実測ではない。`kind` だけは原図の区分（1/4〜4/4 と各ページの脚注）から来ている。
+#
+# ⚠️ **`status: draft` は全件である。** 作品の使い方が目録と違えば、**作品が勝つ**——
+#    食い違ったら目録を直す。
+#
+# ⚠️ **`kind` は「この光を誰が作るか」である。** 灯＝現場の照明、自然＝太陽・空・水、
+#    光学＝レンズと絞り、編集＝後処理。⚠️ **デジタル生成では「現場」が無い**——
+#    区別は作業の分担ではなく、**何が起きているか**として読む。
+#    ⚠️ **原図の4/4 は「編集で足す光」と一括りに名乗るが、中身は 編集10・光学14・自然1 に割れる**
+#    （081 光芒は霧が要るので現場である）。**ページの名を、そのまま `kind` にしない。**
+#
+# ⚠️ **`name` は一意でない。** 原図で 42 と 43 が同じ「強い明暗差」である（43 の英名は
+#    `Low contrast`——原図の誤植である）。**写しの側で直さない**——`en` と `source` で区別する。
+#    043 の `name` は設計の表が付けた「強い明暗差（低）」である。
+#
+# ⚠️ **文法は `light-as-actor` だけが当たる（9件）。** このカードは
+#    `references/grammars/index.yaml` で `status: provisional` である——
+#    **○ は「一般論でよく組む」であって、正典ではない。**
+#
+# ⚠️ **`roles` は「使える役割の集合」であって、決定ではない。** 1対1に潰さない。
+#
+# ⚠️ **運動の型は無い。** 光はカメラでも身体でも物でもない——カメラ目録にあった
+#    `motion_pattern` の列が、この目録には丸ごと無い。柱は `kind` である。
+
+version: 1
+techniques:
+- id: '001'
+  name: 正面光
+  en:
+  - Front light
+  kind: 灯
+  roles:
+  - 様式美
+  - 反応
+  functions:
+  - 設定
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 焦点
+    - 様式
+    pairs_with:
+    - 記録・喜劇の平坦さ
+    position:
+    - 中
+  source: '01'
+  status: draft
+- id: '002'
+  name: 斜め前45度
+  en:
+  - 45° key
+  kind: 灯
+  roles:
+  - 反応
+  - 質感
+  functions:
+  - 設定
+  - 質感
+  grammars: []
+  directing:
+    job:
+    - 立体
+    - 焦点
+    pairs_with:
+    - キーライトの基準
+    position:
+    - 全編
+  source: '02'
+  status: draft
+- id: '003'
+  name: 真横の光
+  en:
+  - Side light
+  kind: 灯
+  roles:
+  - 反応
+  - 様式美
+  functions:
+  - 溜め
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 立体
+    - 感情
+    pairs_with:
+    - 半分の影／二面性
+    position:
+    - 中
+  source: '03'
+  status: draft
+- id: '004'
+  name: 斜め後ろの光
+  en:
+  - Rear side light
+  kind: 灯
+  roles:
+  - 開示
+  - 様式美
+  functions:
+  - 転換
+  - 発見
+  grammars: []
+  directing:
+    job:
+    - 分離
+    - 様式
+    pairs_with:
+    - 暗い背景との組
+    position:
+    - 中
+  source: '04'
+  status: draft
+- id: '005'
+  name: 真後ろの光
+  en:
+  - Backlight
+  kind: 灯
+  roles:
+  - 開示
+  - 情景
+  functions:
+  - 発見
+  - 結果
+  grammars: []
+  directing:
+    job:
+    - 分離
+    - 意味
+    pairs_with:
+    - シルエット／リビール
+    position:
+    - 中
+    - 尾
+  source: '05'
+  status: draft
+- id: '006'
+  name: 真上の光
+  en:
+  - Top light
+  kind: 灯
+  roles:
+  - 反応
+  - 様式美
+  functions:
+  - 溜め
+  grammars: []
+  directing:
+    job:
+    - 感情
+    - 立体
+    pairs_with:
+    - 下からの光との対
+    position:
+    - 中
+  source: '06'
+  status: draft
+- id: '007'
+  name: 下からの光
+  en:
+  - Underlight
+  kind: 灯
+  roles:
+  - 反応
+  - 様式美
+  functions:
+  - 溜め
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 意味
+    - 感情
+    pairs_with:
+    - 恐怖・焚き火
+    position:
+    - 中
+  source: '07'
+  status: draft
+- id: '008'
+  name: ループ照明
+  en:
+  - Loop lighting
+  kind: 灯
+  roles:
+  - 反応
+  - 質感
+  functions:
+  - 設定
+  - 質感
+  grammars: []
+  directing:
+    job:
+    - 立体
+    - 焦点
+    pairs_with:
+    - 会話の標準
+    position:
+    - 全編
+  source: '08'
+  status: draft
+- id: '009'
+  name: レンブラント照明
+  en:
+  - Rembrandt
+  kind: 灯
+  roles:
+  - 反応
+  - 様式美
+  functions:
+  - 設定
+  - 溜め
+  grammars: []
+  directing:
+    job:
+    - 立体
+    - 様式
+    pairs_with:
+    - ドラマの顔
+    position:
+    - 中
+  source: '09'
+  status: draft
+- id: '010'
+  name: バタフライ照明
+  en:
+  - Butterfly
+  kind: 灯
+  roles:
+  - 反応
+  - 質感
+  functions:
+  - 設定
+  - 質感
+  grammars: []
+  directing:
+    job:
+    - 立体
+    - 様式
+    pairs_with:
+    - 美容の基準
+    position:
+    - 中
+  source: '10'
+  status: draft
+- id: '011'
+  name: スプリット照明
+  en:
+  - Split lighting
+  kind: 灯
+  roles:
+  - 反応
+  - 様式美
+  functions:
+  - 溜め
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 意味
+    - 感情
+    pairs_with:
+    - ノワール／二面性
+    position:
+    - 中
+  source: '11'
+  status: draft
+- id: '012'
+  name: ブロード照明
+  en:
+  - Broad lighting
+  kind: 灯
+  roles:
+  - 反応
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 立体
+    pairs_with:
+    - ショートとの対
+    position:
+    - 中
+  source: '12'
+  status: draft
+- id: '013'
+  name: ショート照明
+  en:
+  - Short lighting
+  kind: 灯
+  roles:
+  - 反応
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 立体
+    pairs_with:
+    - ブロードとの対
+    position:
+    - 中
+  source: '13'
+  status: draft
+- id: '014'
+  name: クラムシェル照明
+  en:
+  - Clamshell
+  kind: 灯
+  roles:
+  - 質感
+  - 反応
+  functions:
+  - 質感
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 立体
+    - 様式
+    pairs_with:
+    - 美容の基準
+    position:
+    - 中
+  source: '14'
+  status: draft
+- id: '015'
+  name: クロス照明
+  en:
+  - Cross lighting
+  kind: 灯
+  roles:
+  - 様式美
+  - 反応
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 焦点
+    - 様式
+    pairs_with:
+    - 左右の均衡
+    position:
+    - 中
+  source: '15'
+  status: draft
+- id: '016'
+  name: 三点照明
+  en:
+  - Three-point
+  kind: 灯
+  roles:
+  - 情景
+  - 質感
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 分離
+    - 立体
+    pairs_with:
+    - 標準のセット
+    position:
+    - 全編
+  source: '16'
+  status: draft
+- id: '017'
+  name: 二点照明
+  en:
+  - Two-point
+  kind: 灯
+  roles:
+  - 情景
+  - 反応
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 立体
+    - 分離
+    pairs_with:
+    - キー＋フィル
+    position:
+    - 全編
+  source: '17'
+  status: draft
+- id: '018'
+  name: 一灯ライティング
+  en:
+  - Single light
+  kind: 灯
+  roles:
+  - 様式美
+  - 反応
+  functions:
+  - 溜め
+  grammars: []
+  directing:
+    job:
+    - 感情
+    - 立体
+    pairs_with:
+    - 濃い影を残す
+    position:
+    - 中
+  source: '18'
+  status: draft
+- id: '019'
+  name: 両側リムライト
+  en:
+  - Dual rim
+  kind: 灯
+  roles:
+  - 様式美
+  - 開示
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 分離
+    - 様式
+    pairs_with:
+    - 面の光との組
+    position:
+    - 中
+  source: '19'
+  status: draft
+- id: '020'
+  name: ヘアライト
+  en:
+  - Hair light
+  kind: 灯
+  roles:
+  - 開示
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 分離
+    pairs_with:
+    - 背景からの分離
+    position:
+    - 中
+  source: '20'
+  status: draft
+- id: '021'
+  name: 肩のエッジ光
+  en:
+  - Shoulder rim
+  kind: 灯
+  roles:
+  - 開示
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 分離
+    pairs_with:
+    - 背景からの分離
+    position:
+    - 中
+  source: '21'
+  status: draft
+- id: '022'
+  name: 背景スポット
+  en:
+  - Background spot
+  kind: 灯
+  roles:
+  - 情景
+  - 開示
+  functions:
+  - 設定
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 分離
+    - 焦点
+    pairs_with:
+    - 主役の手前に置く
+    position:
+    - 中
+  source: '22'
+  status: draft
+- id: '023'
+  name: 壁からの反射光
+  en:
+  - Wall bounce
+  kind: 灯
+  roles:
+  - 情景
+  - 質感
+  functions:
+  - 設定
+  - 質感
+  grammars: []
+  directing:
+    job:
+    - 立体
+    - 感情
+    pairs_with:
+    - 屋内の柔らかい光
+    position:
+    - 中
+  source: '23'
+  status: draft
+- id: '024'
+  name: 床からの反射光
+  en:
+  - Floor bounce
+  kind: 灯
+  roles:
+  - 質感
+  - 反応
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 立体
+    pairs_with:
+    - 下からの光の弱い版
+    position:
+    - 中
+  source: '24'
+  status: draft
+- id: '025'
+  name: 天井からの反射光
+  en:
+  - Ceiling bounce
+  kind: 灯
+  roles:
+  - 情景
+  - 質感
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 立体
+    - 位置づけ
+    pairs_with:
+    - 最も柔らかい光
+    position:
+    - 全編
+  source: '25'
+  status: draft
+- id: '026'
+  name: 柔らかい光
+  en:
+  - Soft light
+  kind: 灯
+  roles:
+  - 質感
+  - 反応
+  functions:
+  - 設定
+  - 質感
+  grammars: []
+  directing:
+    job:
+    - 立体
+    - 感情
+    pairs_with:
+    - 大きい光源
+    position:
+    - 全編
+  source: '26'
+  status: draft
+- id: '027'
+  name: 硬い光
+  en:
+  - Hard light
+  kind: 灯
+  roles:
+  - 質感
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 立体
+    - 様式
+    pairs_with:
+    - 小さい光源
+    position:
+    - 中
+  source: '27'
+  status: draft
+- id: '028'
+  name: 拡散光
+  en:
+  - Diffused
+  kind: 灯
+  roles:
+  - 情景
+  - 質感
+  functions:
+  - 設定
+  - 質感
+  grammars: []
+  directing:
+    job:
+    - 立体
+    - 感情
+    pairs_with:
+    - 媒体を通す
+    position:
+    - 全編
+  source: '28'
+  status: draft
+- id: '029'
+  name: 直射日光
+  en:
+  - Direct sun
+  kind: 自然
+  roles:
+  - 情景
+  - 質感
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 位置づけ
+    - 時間
+    pairs_with:
+    - 曇天との対
+    position:
+    - 中
+  source: '29'
+  status: draft
+- id: '030'
+  name: 曇天の光
+  en:
+  - Overcast
+  kind: 自然
+  roles:
+  - 情景
+  - 様式美
+  functions:
+  - 設定
+  - 余白
+  grammars: []
+  directing:
+    job:
+    - 位置づけ
+    - 感情
+    pairs_with:
+    - 直射との対
+    position:
+    - 中
+  source: '30'
+  status: draft
+- id: '031'
+  name: 薄曇りの光
+  en:
+  - Hazy sky
+  kind: 自然
+  roles:
+  - 情景
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 位置づけ
+    - 立体
+    pairs_with:
+    - 曇天と直射の間
+    position:
+    - 中
+  source: '31'
+  status: draft
+- id: '032'
+  name: 窓越しの光
+  en:
+  - Window light
+  kind: 自然
+  roles:
+  - 情景
+  - 反応
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 立体
+    - 位置づけ
+    pairs_with:
+    - 屋内の標準
+    position:
+    - 全編
+  source: '32'
+  status: draft
+- id: '033'
+  name: レース越しの光
+  en:
+  - Sheer curtain
+  kind: 灯
+  roles:
+  - 質感
+  - 様式美
+  functions:
+  - 質感
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 様式
+    - 立体
+    pairs_with:
+    - 模様の影
+    position:
+    - 中
+  source: '33'
+  status: draft
+- id: '034'
+  name: ブラインドの影
+  en:
+  - Blind shadows
+  kind: 灯
+  roles:
+  - 様式美
+  - 開示
+  functions:
+  - 溜め
+  - 様式美
+  grammars:
+  - card: light-as-actor
+    confidence: △
+  directing:
+    job:
+    - 様式
+    - 意味
+    pairs_with:
+    - ノワール
+    position:
+    - 中
+  source: '34'
+  status: draft
+- id: '035'
+  name: 木漏れ日
+  en:
+  - Dappled light
+  kind: 自然
+  roles:
+  - 情景
+  - 質感
+  functions:
+  - 設定
+  - 質感
+  grammars: []
+  directing:
+    job:
+    - 立体
+    - 位置づけ
+    pairs_with:
+    - 森・昼
+    position:
+    - 中
+  source: '35'
+  status: draft
+- id: '036'
+  name: 葉の影
+  en:
+  - Leaf shadows
+  kind: 自然
+  roles:
+  - 質感
+  - 様式美
+  functions:
+  - 質感
+  grammars: []
+  directing:
+    job:
+    - 様式
+    - 立体
+    pairs_with:
+    - 壁の影
+    position:
+    - 中
+  source: '36'
+  status: draft
+- id: '037'
+  name: 格子の影
+  en:
+  - Grid shadows
+  kind: 灯
+  roles:
+  - 様式美
+  - 開示
+  functions:
+  - 溜め
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 意味
+    - 様式
+    pairs_with:
+    - 監視・閉塞
+    position:
+    - 中
+  source: '37'
+  status: draft
+- id: '038'
+  name: スリット光
+  en:
+  - Slit light
+  kind: 灯
+  roles:
+  - 開示
+  - 様式美
+  functions:
+  - 発見
+  - 様式美
+  grammars:
+  - card: light-as-actor
+    confidence: ○
+  directing:
+    job:
+    - 焦点
+    - 意味
+    pairs_with:
+    - 帯が1本
+    position:
+    - 中
+  source: '38'
+  status: draft
+- id: '039'
+  name: 円形スポット
+  en:
+  - Circular spot
+  kind: 灯
+  roles:
+  - 開示
+  - 様式美
+  functions:
+  - 発見
+  - 決断
+  grammars: []
+  directing:
+    job:
+    - 焦点
+    - 意味
+    pairs_with:
+    - 外側の暗がり
+    position:
+    - 中
+  source: '39'
+  status: draft
+- id: '040'
+  name: 細い光の帯
+  en:
+  - Narrow beam
+  kind: 灯
+  roles:
+  - 様式美
+  - 開示
+  functions:
+  - 発見
+  grammars: []
+  directing:
+    job:
+    - 焦点
+    - 様式
+    pairs_with:
+    - 霧と組む
+    position:
+    - 中
+  source: '40'
+  status: draft
+- id: '041'
+  name: 幅広い光の帯
+  en:
+  - Wide beam
+  kind: 灯
+  roles:
+  - 情景
+  - 開示
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 焦点
+    - 位置づけ
+    pairs_with:
+    - 040との対
+    position:
+    - 中
+  source: '41'
+  status: draft
+- id: '042'
+  name: 強い明暗差
+  en:
+  - High contrast
+  kind: 灯
+  roles:
+  - 様式美
+  - 反応
+  functions:
+  - 溜め
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 感情
+    - 様式
+    pairs_with:
+    - ローキー
+    position:
+    - 中
+  source: '42'
+  status: draft
+- id: '043'
+  name: 強い明暗差（低）
+  en:
+  - Low contrast
+  kind: 灯
+  roles:
+  - 情景
+  - 質感
+  functions:
+  - 設定
+  - 余白
+  grammars: []
+  directing:
+    job:
+    - 感情
+    - 位置づけ
+    pairs_with:
+    - ハイキー
+    position:
+    - 中
+  source: '43'
+  status: draft
+- id: '044'
+  name: ハイキー
+  en:
+  - High key
+  kind: 灯
+  roles:
+  - 様式美
+  - 情景
+  functions:
+  - 様式美
+  - 解放
+  grammars: []
+  directing:
+    job:
+    - 感情
+    - 様式
+    pairs_with:
+    - 喜劇・夢
+    position:
+    - 全編
+  source: '44'
+  status: draft
+- id: '045'
+  name: ローキー
+  en:
+  - Low key
+  kind: 灯
+  roles:
+  - 様式美
+  - 反応
+  functions:
+  - 溜め
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 感情
+    - 意味
+    pairs_with:
+    - ノワール・悲劇
+    position:
+    - 全編
+  source: '45'
+  status: draft
+- id: '046'
+  name: シルエット
+  en:
+  - Silhouette
+  kind: 灯
+  roles:
+  - 様式美
+  - 開示
+  functions:
+  - 決断
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 意味
+    - 分離
+    pairs_with:
+    - 逆光／リビール
+    position:
+    - 中
+    - 尾
+  source: '46'
+  status: draft
+- id: '047'
+  name: 薄い輪郭光
+  en:
+  - Soft rim
+  kind: 灯
+  roles:
+  - 開示
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 分離
+    pairs_with:
+    - 大きい光源
+    position:
+    - 中
+  source: '47'
+  status: draft
+- id: '048'
+  name: 鋭い輪郭光
+  en:
+  - Hard rim
+  kind: 灯
+  roles:
+  - 開示
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 分離
+    - 様式
+    pairs_with:
+    - 小さい光源
+    position:
+    - 中
+  source: '48'
+  status: draft
+- id: '049'
+  name: 霧に広がる光
+  en:
+  - Light in mist
+  kind: 灯
+  roles:
+  - 情景
+  - 様式美
+  functions:
+  - 設定
+  - 様式美
+  grammars:
+  - card: light-as-actor
+    confidence: ○
+  directing:
+    job:
+    - 位置づけ
+    - 様式
+    pairs_with:
+    - 光芒（081）
+    position:
+    - 中
+  source: '49'
+  status: draft
+- id: '050'
+  name: 水面の反射光
+  en:
+  - Water reflections
+  kind: 自然
+  roles:
+  - 質感
+  - 情景
+  functions:
+  - 質感
+  - 余韻
+  grammars:
+  - card: light-as-actor
+    confidence: ○
+  directing:
+    job:
+    - 立体
+    - 様式
+    pairs_with:
+    - 揺れる水面
+    position:
+    - 中
+  source: '50'
+  status: draft
+- id: '051'
+  name: 夜明け
+  en:
+  - Dawn
+  kind: 自然
+  roles:
+  - 情景
+  - 転換
+  functions:
+  - 設定
+  - 転換
+  grammars: []
+  directing:
+    job:
+    - 時間
+    - 位置づけ
+    pairs_with:
+    - ゴールデンアワーの前
+    position:
+    - 頭
+  source: '51'
+  status: draft
+- id: '052'
+  name: 朝の光
+  en:
+  - Morning light
+  kind: 自然
+  roles:
+  - 情景
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 時間
+    - 位置づけ
+    pairs_with:
+    - 夜明けの後
+    position:
+    - 頭
+  source: '52'
+  status: draft
+- id: '053'
+  name: 昼の白い光
+  en:
+  - Midday
+  kind: 自然
+  roles:
+  - 情景
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 時間
+    - 位置づけ
+    pairs_with:
+    - 朝と夕方の間
+    position:
+    - 中
+  source: '53'
+  status: draft
+- id: '054'
+  name: 夕方の斜光
+  en:
+  - Afternoon
+  kind: 自然
+  roles:
+  - 情景
+  - 質感
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 時間
+    - 位置づけ
+    pairs_with:
+    - ゴールデンアワーの前
+    position:
+    - 中
+  source: '54'
+  status: draft
+- id: '055'
+  name: ゴールデンアワー
+  en:
+  - Golden hour
+  kind: 自然
+  roles:
+  - 情景
+  - 反応
+  functions:
+  - 設定
+  - 余韻
+  grammars: []
+  directing:
+    job:
+    - 時間
+    - 感情
+    pairs_with:
+    - ブルーアワーとの対
+    position:
+    - 中
+    - 尾
+  source: '55'
+  status: draft
+- id: '056'
+  name: ブルーアワー
+  en:
+  - Blue hour
+  kind: 自然
+  roles:
+  - 情景
+  - 転換
+  functions:
+  - 設定
+  - 転換
+  grammars: []
+  directing:
+    job:
+    - 時間
+    - 感情
+    pairs_with:
+    - ゴールデンアワーとの対
+    position:
+    - 中
+  source: '56'
+  status: draft
+- id: '057'
+  name: 月明かり
+  en:
+  - Moonlight
+  kind: 自然
+  roles:
+  - 情景
+  - 様式美
+  functions:
+  - 設定
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 時間
+    - 意味
+    pairs_with:
+    - 夜の外景
+    position:
+    - 中
+  source: '57'
+  status: draft
+- id: '058'
+  name: 暖色照明
+  en:
+  - Warm light
+  kind: 灯
+  roles:
+  - 情景
+  - 質感
+  functions:
+  - 設定
+  - 質感
+  grammars: []
+  directing:
+    job:
+    - 感情
+    - 位置づけ
+    pairs_with:
+    - 寒色との対
+    position:
+    - 全編
+  source: '58'
+  status: draft
+- id: '059'
+  name: 寒色照明
+  en:
+  - Cool light
+  kind: 灯
+  roles:
+  - 情景
+  - 質感
+  functions:
+  - 設定
+  - 質感
+  grammars: []
+  directing:
+    job:
+    - 感情
+    - 位置づけ
+    pairs_with:
+    - 暖色との対
+    position:
+    - 全編
+  source: '59'
+  status: draft
+- id: '060'
+  name: 中性白色
+  en:
+  - Neutral white
+  kind: 灯
+  roles:
+  - 情景
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 位置づけ
+    pairs_with:
+    - 色の基準
+    position:
+    - 全編
+  source: '60'
+  status: draft
+- id: '061'
+  name: キャンドル光
+  en:
+  - Candlelight
+  kind: 灯
+  roles:
+  - 情景
+  - 反応
+  functions:
+  - 設定
+  - 溜め
+  grammars:
+  - card: light-as-actor
+    confidence: ○
+  directing:
+    job:
+    - 意味
+    - 感情
+    pairs_with:
+    - 揺れ／灯が消える
+    position:
+    - 中
+  source: '61'
+  status: draft
+- id: '062'
+  name: 焚き火の光
+  en:
+  - Firelight
+  kind: 灯
+  roles:
+  - 情景
+  - 反応
+  functions:
+  - 設定
+  - 溜め
+  grammars:
+  - card: light-as-actor
+    confidence: ○
+  directing:
+    job:
+    - 意味
+    - 位置づけ
+    pairs_with:
+    - 屋外の夜
+    position:
+    - 中
+  source: '62'
+  status: draft
+- id: '063'
+  name: 暖炉の光
+  en:
+  - Fireplace
+  kind: 灯
+  roles:
+  - 情景
+  - 余白
+  functions:
+  - 設定
+  - 余韻
+  grammars: []
+  directing:
+    job:
+    - 位置づけ
+    - 感情
+    pairs_with:
+    - 屋内の夜
+    position:
+    - 中
+  source: '63'
+  status: draft
+- id: '064'
+  name: 電球色
+  en:
+  - Tungsten
+  kind: 灯
+  roles:
+  - 情景
+  - 質感
+  functions:
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 位置づけ
+    - 時間
+    pairs_with:
+    - 屋内の標準
+    position:
+    - 全編
+  source: '64'
+  status: draft
+- id: '065'
+  name: 蛍光灯風
+  en:
+  - Fluorescent
+  kind: 灯
+  roles:
+  - 情景
+  - 様式美
+  functions:
+  - 設定
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 位置づけ
+    - 意味
+    pairs_with:
+    - 事務所・病院
+    position:
+    - 中
+  source: '65'
+  status: draft
+- id: '066'
+  name: 赤い光
+  en:
+  - Red light
+  kind: 灯
+  roles:
+  - 様式美
+  - 反応
+  functions:
+  - 溜め
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 意味
+    - 感情
+    pairs_with:
+    - 青との対
+    position:
+    - 中
+  source: '66'
+  status: draft
+- id: '067'
+  name: 青い光
+  en:
+  - Blue light
+  kind: 灯
+  roles:
+  - 様式美
+  - 反応
+  functions:
+  - 溜め
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 意味
+    - 感情
+    pairs_with:
+    - 赤との対
+    position:
+    - 中
+  source: '67'
+  status: draft
+- id: '068'
+  name: 緑の光
+  en:
+  - Green light
+  kind: 灯
+  roles:
+  - 様式美
+  - 情景
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 意味
+    pairs_with:
+    - 毒・モニター
+    position:
+    - 中
+  source: '68'
+  status: draft
+- id: '069'
+  name: 紫の光
+  en:
+  - Purple light
+  kind: 灯
+  roles:
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 意味
+    - 様式
+    pairs_with:
+    - 幻想
+    position:
+    - 中
+  source: '69'
+  status: draft
+- id: '070'
+  name: ピンクの光
+  en:
+  - Pink light
+  kind: 灯
+  roles:
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 意味
+    - 様式
+    pairs_with:
+    - ポップ
+    position:
+    - 中
+  source: '70'
+  status: draft
+- id: '071'
+  name: シアンの光
+  en:
+  - Cyan light
+  kind: 灯
+  roles:
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 意味
+    - 様式
+    pairs_with:
+    - SF
+    position:
+    - 中
+  source: '71'
+  status: draft
+- id: '072'
+  name: 琥珀色の光
+  en:
+  - Amber light
+  kind: 灯
+  roles:
+  - 情景
+  - 余白
+  functions:
+  - 余韻
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 意味
+    - 時間
+    pairs_with:
+    - 記憶・街灯
+    position:
+    - 中
+  source: '72'
+  status: draft
+- id: '073'
+  name: 青と橙の光
+  en:
+  - Blue and orange
+  kind: 灯
+  roles:
+  - 様式美
+  - 情景
+  functions:
+  - 様式美
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 感情
+    - 様式
+    pairs_with:
+    - 補色の基準
+    position:
+    - 全編
+  source: '73'
+  status: draft
+- id: '074'
+  name: 赤と青の光
+  en:
+  - Red and blue
+  kind: 灯
+  roles:
+  - 様式美
+  - 反応
+  functions:
+  - 様式美
+  - 溜め
+  grammars: []
+  directing:
+    job:
+    - 意味
+    - 感情
+    pairs_with:
+    - 対立
+    position:
+    - 中
+  source: '74'
+  status: draft
+- id: '075'
+  name: 紫とシアン
+  en:
+  - Purple and cyan
+  kind: 灯
+  roles:
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 様式
+    - 意味
+    pairs_with:
+    - ネオン
+    position:
+    - 中
+  source: '75'
+  status: draft
+- id: '076'
+  name: 光漏れ
+  en:
+  - Light leak
+  kind: 編集
+  roles:
+  - 様式美
+  - 転換
+  functions:
+  - 転換
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 様式
+    - 時間
+    pairs_with:
+    - 画面の端
+    position:
+    - 中
+  source: '76'
+  status: draft
+- id: '077'
+  name: レンズフレア
+  en:
+  - Lens flare
+  kind: 光学
+  roles:
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 様式
+    pairs_with:
+    - 光源の延長線
+    position:
+    - 中
+  source: '77'
+  status: draft
+- id: '078'
+  name: 横長フレア
+  en:
+  - Anamorphic flare
+  kind: 光学
+  roles:
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 様式
+    pairs_with:
+    - 縦長ボケと組
+    position:
+    - 全編
+  source: '78'
+  status: draft
+- id: '079'
+  name: 光の筋
+  en:
+  - Light streak
+  kind: 光学
+  roles:
+  - 様式美
+  - 開示
+  functions:
+  - 様式美
+  - 発見
+  grammars: []
+  directing:
+    job:
+    - 様式
+    - 焦点
+    pairs_with:
+    - 光源の位置
+    position:
+    - 中
+  source: '79'
+  status: draft
+- id: '080'
+  name: 放射状の光
+  en:
+  - Radial rays
+  kind: 編集
+  roles:
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 様式
+    - 意味
+    pairs_with:
+    - 中心の一点
+    position:
+    - 中
+  source: '80'
+  status: draft
+- id: '081'
+  name: 光芒
+  en:
+  - God rays
+  kind: 自然
+  roles:
+  - 情景
+  - 様式美
+  functions:
+  - 設定
+  - 様式美
+  grammars:
+  - card: light-as-actor
+    confidence: ○
+  directing:
+    job:
+    - 位置づけ
+    - 様式
+    pairs_with:
+    - 媒体（霧・埃）
+    position:
+    - 中
+  source: '81'
+  status: draft
+- id: '082'
+  name: グロー
+  en:
+  - Glow
+  kind: 編集
+  roles:
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 様式
+    - 意味
+    pairs_with:
+    - 光源そのもの
+    position:
+    - 中
+  source: '82'
+  status: draft
+- id: '083'
+  name: ブルーム
+  en:
+  - Bloom
+  kind: 光学
+  roles:
+  - 様式美
+  - 質感
+  functions:
+  - 様式美
+  - 質感
+  grammars: []
+  directing:
+    job:
+    - 様式
+    - 感情
+    pairs_with:
+    - ハレーションとの対
+    position:
+    - 中
+  source: '83'
+  status: draft
+- id: '084'
+  name: ハレーション
+  en:
+  - Halation
+  kind: 光学
+  roles:
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 様式
+    - 時間
+    pairs_with:
+    - ブルームとの対
+    position:
+    - 全編
+  source: '84'
+  status: draft
+- id: '085'
+  name: スターバースト
+  en:
+  - Starburst
+  kind: 光学
+  roles:
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 様式
+    - 焦点
+    pairs_with:
+    - 点光源と絞り
+    position:
+    - 中
+  source: '85'
+  status: draft
+- id: '086'
+  name: 十字の光
+  en:
+  - Cross star
+  kind: 編集
+  roles:
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 様式
+    pairs_with:
+    - 古い映画の記号
+    position:
+    - 中
+  source: '86'
+  status: draft
+- id: '087'
+  name: 玉ボケ
+  en:
+  - Bokeh
+  kind: 光学
+  roles:
+  - 様式美
+  - 質感
+  functions:
+  - 質感
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 焦点
+    - 様式
+    pairs_with:
+    - 背景の点光源
+    position:
+    - 中
+  source: '87'
+  status: draft
+- id: '088'
+  name: 六角ボケ
+  en:
+  - Hex bokeh
+  kind: 光学
+  roles:
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 様式
+    pairs_with:
+    - 絞り羽根の数
+    position:
+    - 中
+  source: '88'
+  status: draft
+- id: '089'
+  name: 前ボケ
+  en:
+  - Foreground bokeh
+  kind: 光学
+  roles:
+  - 開示
+  - 様式美
+  functions:
+  - 発見
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 焦点
+    - 分離
+    pairs_with:
+    - 手前の遮蔽物
+    position:
+    - 中
+  source: '89'
+  status: draft
+- id: '090'
+  name: 光の粒
+  en:
+  - Light particles
+  kind: 光学
+  roles:
+  - 質感
+  - 様式美
+  functions:
+  - 質感
+  grammars:
+  - card: light-as-actor
+    confidence: △
+  directing:
+    job:
+    - 様式
+    - 位置づけ
+    pairs_with:
+    - 埃・雪・火の粉
+    position:
+    - 中
+  source: '90'
+  status: draft
+- id: '091'
+  name: 輝くほこり
+  en:
+  - Dust sparkle
+  kind: 光学
+  roles:
+  - 質感
+  - 情景
+  functions:
+  - 質感
+  - 様式美
+  grammars:
+  - card: light-as-actor
+    confidence: △
+  directing:
+    job:
+    - 立体
+    - 様式
+    pairs_with:
+    - 逆光
+    position:
+    - 中
+  source: '91'
+  status: draft
+- id: '092'
+  name: 光のきらめき
+  en:
+  - Glints
+  kind: 光学
+  roles:
+  - 質感
+  - 様式美
+  functions:
+  - 質感
+  grammars: []
+  directing:
+    job:
+    - 立体
+    - 様式
+    pairs_with:
+    - 水面・金属
+    position:
+    - 中
+  source: '92'
+  status: draft
+- id: '093'
+  name: 光る輪郭
+  en:
+  - Edge glow
+  kind: 編集
+  roles:
+  - 様式美
+  - 開示
+  functions:
+  - 様式美
+  - 発見
+  grammars: []
+  directing:
+    job:
+    - 様式
+    - 分離
+    pairs_with:
+    - 輪郭光との対
+    position:
+    - 中
+  source: '93'
+  status: draft
+- id: '094'
+  name: ネオンの縁取り
+  en:
+  - Neon outline
+  kind: 編集
+  roles:
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 様式
+    pairs_with:
+    - サイバーパンク
+    position:
+    - 中
+  source: '94'
+  status: draft
+- id: '095'
+  name: スポット強調
+  en:
+  - Spotlight mask
+  kind: 編集
+  roles:
+  - 開示
+  - 様式美
+  functions:
+  - 発見
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 焦点
+    pairs_with:
+    - 円の外の暗さ
+    position:
+    - 中
+  source: '95'
+  status: draft
+- id: '096'
+  name: 周辺減光
+  en:
+  - Vignette
+  kind: 編集
+  roles:
+  - 様式美
+  - 余白
+  functions:
+  - 様式美
+  - 余白
+  grammars: []
+  directing:
+    job:
+    - 焦点
+    - 様式
+    pairs_with:
+    - 四隅
+    position:
+    - 全編
+  source: '96'
+  status: draft
+- id: '097'
+  name: 画面端の光
+  en:
+  - Edge light wash
+  kind: 編集
+  roles:
+  - 様式美
+  - 余白
+  functions:
+  - 様式美
+  - 余白
+  grammars: []
+  directing:
+    job:
+    - 様式
+    pairs_with:
+    - 画面の端
+    position:
+    - 中
+  source: '97'
+  status: draft
+- id: '098'
+  name: グラデーション光
+  en:
+  - Gradient wash
+  kind: 編集
+  roles:
+  - 様式美
+  - 情景
+  functions:
+  - 様式美
+  - 設定
+  grammars: []
+  directing:
+    job:
+    - 様式
+    - 感情
+    pairs_with:
+    - 一方向の移り変わり
+    position:
+    - 全編
+  source: '98'
+  status: draft
+- id: '099'
+  name: プリズム分光
+  en:
+  - Prism rainbow
+  kind: 光学
+  roles:
+  - 様式美
+  - 質感
+  functions:
+  - 様式美
+  - 質感
+  grammars: []
+  directing:
+    job:
+    - 様式
+    pairs_with:
+    - プリズム
+    position:
+    - 中
+  source: '99'
+  status: draft
+- id: '100'
+  name: 虹色フレア
+  en:
+  - Rainbow flare
+  kind: 光学
+  roles:
+  - 様式美
+  functions:
+  - 様式美
+  grammars: []
+  directing:
+    job:
+    - 様式
+    pairs_with:
+    - レンズフレアの虹色版
+    position:
+    - 中
+  source: '100'
+  status: draft

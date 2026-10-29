@@ -112,6 +112,7 @@ from pathlib import Path
 
 import camera
 import grammars
+import lighting
 import rolemap
 import specdoc
 import specmap
@@ -4367,15 +4368,19 @@ def _sentence_around(text, start, end):
     return text[left:right]
 
 
-def _camera_phrase_regex(phrase):
+def _phrase_regex(phrase, inflect=True):
     """目録の句を、**英文の活用を1つだけ許す**正規表現へ。
 
     ⚠️ **先頭の語にだけ `-s/-es/-ed/-ing` を許す。** 目録は `push in slowly` と
     原形で置き、§18 は `pushes in slowly` と書く——**その差で当たらなくなるのは、
     検査ではなく綴りの都合である。** 語幹の一致以上は許さない（言い換えは探さない）。
+
+    ⚠️ **光の目録は `inflect=False` で引く。** 光の名は**名詞**であり、
+    活用を許すと `Bloom` が `the source blooms`（動詞）に当たる——**名指していない光を、
+    名指したと数える。** カメラの句は動詞句ゆえ活用が要る。**軸で規則を変える。**
     """
     words = phrase.split()
-    head = re.escape(words[0]) + r"(?:s|es|ed|ing)?"
+    head = re.escape(words[0]) + (r"(?:s|es|ed|ing)?" if inflect else "")
     tail = r"\s+".join(re.escape(w) for w in words[1:])
     return re.compile(r"\b" + head + (r"\s+" + tail if tail else "") + r"\b", re.I)
 
@@ -4388,20 +4393,22 @@ def _clause_prefix(text, start):
     return text[left:start]
 
 
-def _camera_techniques(text, entries):
-    """§18 の本文が名乗る技法。`{id: (項目, 句)}` を返す。
+def _named_techniques(text, entries, inflect=True):
+    """本文（§18 の `Camera Prompt`／§13 の `LIGHTING`）が名乗る技法。`{id: (項目, 句)}` を返す。
 
     ⚠️ **言い換えを探さない。** 目録の `en` の句が**在るか**だけを見る——
     意味の近さを測る層ではない（`aim` の自由文を読まないのと同じ規律）。
     ⚠️ **否定された句は数えない**（`no push in` は、押していない）。
     ⚠️ **辞退された句も数えない**（`…; this shot spends none`）。
+    ⚠️ **`inflect` は軸で変える。** カメラの句は動詞句（`push in`）ゆえ活用を許し、
+    光の名は名詞（`Bloom`）ゆえ**許さない**——`_phrase_regex` を見よ。
     """
     found = {}
     for key, item in entries.items():
         for phrase in item.get("en") or []:
             if not isinstance(phrase, str) or not phrase.strip():
                 continue
-            occurrences = list(_camera_phrase_regex(phrase).finditer(text))
+            occurrences = list(_phrase_regex(phrase, inflect).finditer(text))
             if not occurrences:
                 continue
             allowed = [m for m in occurrences
@@ -4457,7 +4464,7 @@ def check_camera_use(project, repo_root=None):
         if not slot.strip():
             continue                     # L17 が「スロットが無い」と言う
         seen += 1
-        hits = _camera_techniques(slot, entries)
+        hits = _named_techniques(slot, entries)
         if not hits:
             unmatched.append(s)
             continue
@@ -4507,6 +4514,299 @@ def check_camera_use(project, repo_root=None):
                            "目録の `roles` に無い `role` のショットが、その技法を名乗っている"
                            f"（{sample}{more}）。⚠️ **目録は草案であり、作品が勝つ**——"
                            "**食い違ったら目録を直す。**",
+                           severity="note"))
+    return out
+
+
+# ---------------------------------------------------------------- 層F2 目録（光の演出）
+
+#: 光の目録の `kind`——**この光を誰が作るか。** 原図の区分から来ている。
+#: ⚠️ **2値（現場／編集）にしない。** 100を当てると `光学` が14件出る
+#: （レンズと絞りの光は、現場でも後処理でもない）。
+LIGHT_KINDS = ("灯", "自然", "光学", "編集")
+
+#: `directing.job`——照明の一般論の8つの仕事。**sVL の `role` ではない。**
+#: `role` は「そのショットの仕事」、こちらは「その光が演出上すること」——**軸が違う。**
+LIGHT_JOBS = ("位置づけ", "立体", "分離", "焦点", "感情", "時間", "意味", "様式")
+
+#: 場面の位置の語彙は**カメラと同じ5つである**。⚠️ 光の目録は4つしか使っていない
+#: （`つなぎ` が0件）——**語彙を目録の実測に合わせて狭めない。**
+LIGHT_POSITIONS = CAMERA_POSITIONS
+
+#: 文法の確度・`status`。**軸が違っても記号は同じである**（`references/grammars/index.yaml`）。
+LIGHT_CONFIDENCE = CAMERA_CONFIDENCE
+LIGHT_STATUS = CAMERA_STATUS
+
+
+def check_lighting_catalog(project, repo_root=None):
+    """L55 — 光の演出の目録が、この基盤の語彙に引けるか。
+
+    ⚠️ **なぜ要るか。** `L53` と同じ理由である——100の技法を目録に置いても、
+    読む層が無ければ腐る。この層は目録の**形**だけを見る。
+
+    ⚠️ **見ていないもの。**
+      * **その光をその作品で選ぶのが適切か。** 作品の側の判断である。
+      * **`roles` の当てはめが正しいか。** 目録は `draft` であり、
+        **作品の `role` が違えば作品が勝つ。**
+      * **`kind` の判断が正しいか。** 形（4値のどれか）だけを見る。
+      * **`name` の一意。** ⚠️ **課さない**——原図で 42 と 43 が同じ名である
+        （43 の英名は `Low contrast`。原図の誤植）。**写しの側で直さない。**
+
+    ⚠️ **`physical` を要求しない。** 原図のカードには**名前と英名しか無い**——
+    説明の無い欄を「書き漏れ」として鳴らせば、**推測で埋める圧力になる。**
+    """
+    out = []
+    root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
+    entries, where, problem = lighting.catalog(root)
+
+    if problem == "missing":
+        out.append(finding("L55", "",
+                           f"光の目録が**無い**——探した範囲: {where}。"
+                           "**この層は1件も照合していない。**",
+                           severity="note"))
+        return out
+    if problem == "unreadable":
+        out.append(finding("L55", "",
+                           f"光の目録が**読めない**——{where}。"
+                           "**読めないことを、正しいと言わない。**",
+                           severity="note"))
+        return out
+    if problem == "malformed":
+        out.append(finding("L55", "",
+                           f"光の目録の**形が違う**——{where}。"
+                           "`techniques:` が並びで、各項が一意の `id` を持つこと。",
+                           severity="note"))
+        return out
+    if not entries:
+        out.append(finding("L55", "",
+                           "光の目録が**空である**——**1件も照合していない。**",
+                           severity="note"))
+        return out
+
+    grammar_entries, grammar_where, grammar_problem = grammars.catalog(root)
+    if grammar_problem:
+        out.append(finding("L55", "",
+                           f"文法の目録が読めないので、`grammars` は**照合していない**"
+                           f"——{grammar_where}。",
+                           severity="note"))
+
+    provisional = collections.Counter()
+    for key, item in entries.items():
+        sid = str(item.get("id") or key)
+
+        def bad(msg, sid=sid):
+            out.append(finding("L55", sid, msg))
+
+        if not re.fullmatch(r"\d{3}", sid):
+            bad(f"`id` は3桁の文字列であること（いまは `{sid}`）。")
+        if not isinstance(item.get("name"), str) or not item["name"].strip():
+            bad("`name` が空である。")
+        en = item.get("en")
+        if (not isinstance(en, list) or not en
+                or any(not isinstance(x, str) or not x.strip() for x in en)):
+            bad("`en` が空である——生成へ渡る句が無い。")
+
+        if item.get("kind") not in LIGHT_KINDS:
+            bad(f"`kind` の `{item.get('kind')}` は "
+                f"{'／'.join(LIGHT_KINDS)} のどれでもない。")
+
+        roles = item.get("roles")
+        if not isinstance(roles, list) or not roles:
+            bad("`roles` が空である——**使える役割の集合**を1つ以上書くこと。")
+        else:
+            for r in roles:
+                if r not in rolemap.ROLES:
+                    bad(f"`roles` の `{r}` は種別の目録に無い。")
+
+        funcs = item.get("functions")
+        if not isinstance(funcs, list) or not funcs:
+            bad("`functions` が空である。")
+        else:
+            for f in funcs:
+                if f not in specmap.DRAMATIC_FUNCTION_EN:
+                    bad(f"`functions` の `{f}` は劇的関数の enum に無い。")
+
+        grams = item.get("grammars")
+        if not isinstance(grams, list):
+            bad("`grammars` が並びでない（0枚なら `[]`）。")
+        elif not grammar_problem:
+            for g in grams:
+                if not isinstance(g, dict):
+                    bad("`grammars` の項が辞書でない。")
+                    continue
+                card = g.get("card")
+                if card not in grammar_entries:
+                    bad(f"`grammars` の `{card}` は文法の目録に無い。")
+                elif (grammar_entries[card] or {}).get("status") == "provisional":
+                    provisional[card] += 1
+                if g.get("confidence") not in LIGHT_CONFIDENCE:
+                    bad(f"`grammars` の `{card}` の確度 `{g.get('confidence')}` は"
+                        "◎・○・△のどれでもない。")
+
+        d = item.get("directing")
+        if not isinstance(d, dict):
+            bad("`directing` が辞書でない。")
+        else:
+            job = d.get("job")
+            if not isinstance(job, list) or not job:
+                bad("`directing.job` が空である。")
+            else:
+                for j in job:
+                    if j not in LIGHT_JOBS:
+                        bad(f"`directing.job` の `{j}` は8つの仕事に無い。")
+            pos = d.get("position")
+            if not isinstance(pos, list) or not pos:
+                bad("`directing.position` が空である。")
+            else:
+                for p in pos:
+                    if p not in LIGHT_POSITIONS:
+                        bad(f"`directing.position` の `{p}` は場面の位置に無い。")
+            pairs = d.get("pairs_with")
+            if (not isinstance(pairs, list) or not pairs
+                    or any(not isinstance(x, str) or not x.strip() for x in pairs)):
+                bad("`directing.pairs_with` が空である。")
+
+        if not isinstance(item.get("source"), str) or not item["source"].strip():
+            bad("`source` が空である。")
+        if item.get("status") not in LIGHT_STATUS:
+            bad(f"`status` の `{item.get('status')}` は "
+                f"{'／'.join(LIGHT_STATUS)} のどれでもない。")
+
+    for card, count in sorted(provisional.items()):
+        out.append(finding("L55", f"{count}件",
+                           f"`{card}` は文法の目録で `status: provisional` である"
+                           f"——{count}件がそれを引いている。"
+                           "⚠️ **○ は「一般論でよく組む」であって、正典ではない。**",
+                           severity="note"))
+    if not any(f["severity"] != "note" for f in out):
+        covered = {r for item in entries.values() for r in (item.get("roles") or [])}
+        silent = [r for r in rolemap.ROLES if r not in covered]
+        out.append(finding("L55", f"{len(entries)}件",
+                           f"光の目録 {len(entries)} 件を照合した。"
+                           f"⚠️ **role は15のうち{len(covered)}に当たる**"
+                           f"（当たらない: {'・'.join(silent)}）——"
+                           "**光は「何をするか」より「どう見えるか」の軸である。** "
+                           "⚠️ **この層は作品を見ていない**——"
+                           "光の選択が適切かは、まだ誰も見ていない。",
+                           severity="note"))
+    return out
+
+
+def check_lighting_use(project, repo_root=None):
+    """L56 — **作品の §13 が名乗る光を、目録が引けるか。**
+
+    ⚠️ **なぜ要るか。** `specmap.PROMPT_SLOT_SOURCE` は `Visual Prompt` の出所に
+    §13 を挙げ、`L53` は目録の形を見る——だが **§13 を読む層がゼロであった**
+    （`SPEC_SECTIONS["13. LIGHTING"]["to"] = ()`）。**光は「§13 に書け」とだけ
+    言われて、書いた中身を誰も読まない。** この層がその穴を塞ぐ。
+
+    ⚠️ **違反は無い。出口はすべて註である。** 19の作品は §13 を書くよう
+    言われたことが無い——**名指さない作品は失敗ではない。**
+    この層は「§13 を見たか、目録のどの光を名指したか」を数えるだけである。
+
+    ⚠️ **「§13 が名指した光が §18 `Visual Prompt` に届いていない」も註で出す**
+    ——**違反にしなかった理由は実測である**（2026-10-30）。19作品へ当てたところ
+    **7本**が鳴り、そのすべてが普通の名詞だった（`Dawn`・`Direct sun`・`Bloom`・
+    `Daylight`・`Lens flare`・`Fluorescent`）。**散文がそれらの語を普通に使う**ので、
+    「目録を名指した」と「その語を使った」を区別できない。**違反は、区別できないものを
+    断じない。** 註には「どの光が消えたか」を書く——**見る者は、そのショットを一度見る。**
+    """
+    out = []
+    root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
+    entries, where, problem = lighting.catalog(root)
+    if problem or not entries:
+        out.append(finding("L56", "",
+                           "光の目録が読めないので、**この層は1本も照合していない**"
+                           "（目録の側は `L55` が言う）。",
+                           severity="note"))
+        return out
+
+    seen = 0
+    empty = []
+    named = {}          # 技法 id -> 名乗ったショット
+    unmatched = []
+    kinds = collections.Counter()
+    dropped = []        # (ショット, §13 が名指した id) —— §18 に一つも届いていない
+    for s in project.order():
+        shot = project.shots[s]
+        src = _spec_of(shot, "video")
+        if not src:
+            continue
+        p = project.root / src
+        if not p.is_file():
+            continue
+        body = _section_body(p, "13.")
+        if not body.strip():
+            empty.append(s)
+            continue
+        seen += 1
+        hits = _named_techniques(body, entries, inflect=False)
+        if not hits:
+            unmatched.append(s)
+            continue
+        for tid, (item, _phrase) in hits.items():
+            named.setdefault(tid, set()).add(s)
+            kinds[item.get("kind")] += 1
+        slot = _slot_body(p, "Visual Prompt")
+        if not slot.strip():
+            continue                     # L17 が「スロットが無い」と言う
+        landed = _named_techniques(slot, entries, inflect=False)
+        if not (set(hits) & set(landed)):
+            dropped.append((s, sorted(hits)))
+
+    if dropped:
+        sample = "／".join(
+            f"`{s}`" + "（" + "・".join(f"`{t}`" for t in tids) + "）"
+            for s, tids in dropped[:4])
+        more = "…" if len(dropped) > 4 else ""
+        out.append(finding(
+            "L56", f"{len(dropped)}本",
+            f"{len(dropped)}本の §13 が目録の光を名指しているのに、§18 `Visual Prompt` に"
+            f"その `en` の句が一つも届いていない（{sample}{more}）。"
+            "**§13 の光は §18 を経て生成器へ行く**"
+            "（`specmap.PROMPT_SLOT_SOURCE` が `Visual Prompt` の出所に §13 を挙げている）。"
+            "⚠️ **これは違反ではない**——目録の `en` は普通の名詞でもあり、"
+            "**散文がその語を名指さずに使うことがある**（実測で、この註の大半がそれである）。"
+            "**名が消えたショットを一度見ること。** 言い換えは見えない。",
+            severity="note"))
+
+    if not seen and not empty:
+        out.append(finding("L56", "",
+                           "動画の仕様が1本も無い——**この層は作品を見ていない。**",
+                           severity="note"))
+        return out
+    if seen:
+        out.append(finding("L56", f"{seen}本",
+                           f"§13 `LIGHTING` に中身を持つ動画の仕様を {seen} 本読んだ。"
+                           + ("⚠️ **この層が見るのは、目録の `en` の句が在るかだけである**"
+                              "——**その光が場面に正しいかは見ない。**"),
+                           severity="note"))
+    if named:
+        listing = "・".join(f"`{tid}` {entries[tid].get('name')}（{len(shots)}本）"
+                            for tid, shots in sorted(named.items()))
+        tally = "・".join(f"{k}{v}" for k, v in kinds.most_common() if k)
+        out.append(finding("L56", f"{len(named)}件",
+                           f"§13 が目録の光を名指した——{listing}。"
+                           f"⚠️ **作り方の内訳は {tally}**（延べ）。",
+                           severity="note"))
+    if empty:
+        sample = "／".join(f"`{x}`" for x in empty[:4])
+        more = "…" if len(empty) > 4 else ""
+        out.append(finding("L56", f"{len(empty)}本",
+                           f"{len(empty)}本の動画の仕様は §13 に中身が無い（{sample}{more}）。"
+                           "⚠️ **失敗ではない**——§13 を書くよう言われた作品は"
+                           "まだ無い。**この層は、書いた作品だけを照合する。**",
+                           severity="note"))
+    if unmatched:
+        sample = "／".join(f"`{x}`" for x in unmatched[:4])
+        more = "…" if len(unmatched) > 4 else ""
+        out.append(finding("L56", f"{len(unmatched)}本",
+                           f"{len(unmatched)}本の §13 は、目録のどの `en` にも当たらない"
+                           f"（{sample}{more}）。"
+                           "⚠️ **目録を引いていないか、目録に無い光である**——"
+                           "**この層には、その区別がつかない。**"
+                           "⚠️ **言い換え（`afternoon light` と書いて `Afternoon` を名指さない）は"
+                           "当たらない**——目録の句をそのまま書くこと。",
                            severity="note"))
     return out
 
@@ -6689,6 +6989,13 @@ def run(project, schema_dir=None, repo_root=None):
     #    **作品の §18 を目録へ当てる**——**同じ目録の表と裏である。**
     #    ⚠️ **`CHECKS_SHOT` には入れない**（`repo_root` を渡す席が無い）。
     out += check_camera_use(project, repo_root=repo_root)
+    # ⚠️ **`L53`/`L54` の対を、光にも置く。** 同じ `catalog.py` を読み、
+    #    読む目録と読む節（§18 か §13 か）だけが違う——**片方だけを直さない。**
+    #    ⚠️ **`CHECKS_SHOT` には入れない**（`repo_root` を渡す席が無い）。
+    out += check_lighting_catalog(project, repo_root=repo_root)
+    # ⚠️ **`L56` は `L55` の直後に置く。** あちらは目録の形、こちらは
+    #    **作品の §13 を目録へ当てる**——**同じ目録の表と裏である。**
+    out += check_lighting_use(project, repo_root=repo_root)
     out += check_mode_demands(project)
     # ⚠️ **曲を読む2層は隣に置く。** 同じ `bible.song` と `ledger.song_coverage` を読み、
     #    相手だけが違う——あちらは尺、こちらは覆い。**離すと、片方だけが直される。**

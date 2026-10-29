@@ -151,6 +151,50 @@ against `rolemap.MOTION_PATTERNS`, each `role` against `rolemap.ROLES`, each fun
 schema's enum, and each grammar card against the grammar registry. **Whether a move is right for
 a shot is not a question this layer can ask.**
 
+## The lighting registry
+
+`references/lighting/index.yaml` **is the list of lighting techniques, and it is the list the
+checks read.** It answers a different question from the camera registry: the camera list says
+**how the camera moves**, and this one says **who is making the light** — 100 techniques, each
+carrying the English line, the maker, the roles it can serve, the functions it leans toward,
+the grammar it commonly pairs with, and the directing job it does.
+
+```text
+- id: "038"                              # the source list's number, normalised to three digits
+  name: スリット光
+  en: [Slit light]                       # the line §13 is built from
+  kind: 灯                               # 灯 · 自然 · 光学 · 編集 — who makes it
+  roles: [開示, 様式美]                   # a set, not a choice
+  functions: [発見, 様式美]
+  grammars: [{card: light-as-actor, confidence: ○}]
+  directing: {job: [焦点, 意味], pairs_with: [帯が1本], position: [中]}
+  source: "38"                           # the number as the source printed it
+  status: draft
+```
+
+⚠️ **`kind` is the pillar here, and it is not a motion type.** The camera list resolves almost
+one-to-one against `MOTION_PATTERNS`; **light has no motion group at all** — the column is
+absent, not empty. What replaces it is **who makes the light**: `灯` (lamps on the set), `自然`
+(sun, sky, water), `光学` (lens and aperture), `編集` (the grade). ⚠️ **Those four are not the
+source cards' four pages**: the page titled "effects added in the edit" holds 10 edits, 14 lens
+effects and one that needs mist in the air.
+
+⚠️ **`name` is not unique, and the layer does not ask it to be.** The source prints 42 and 43
+under the same Japanese name while their English names read `High contrast` and `Low contrast`.
+**The copy keeps the source; `en` and `source` tell them apart.**
+
+⚠️ **`physical` is absent.** The cards carry a name and an English name and nothing else —
+**a field with no source is not a missing field**, and asking for it would invite a guess.
+
+⚠️ **`L55` reads the whole list and judges none of it.** **`L56` reads §13 `LIGHTING` against
+the catalog's `en` lines** — the first layer in this repository to open §13 at all.
+⚠️ **`L56` does not inflect the head word**: light names are nouns, and inflection makes
+`Bloom` match `the source blooms` — **a light the shot did not name.**
+
+⚠️ **Every entry is `status: draft`**, and the grammar card the list leans on most,
+`light-as-actor`, is `provisional` in the grammar registry. **The notes say how many entries
+cite it** — a provisional card cited from a draft list is still not canon.
+
 ## The environment variables
 
 | layer | variable | |
@@ -159,6 +203,7 @@ a shot is not a question this layer can ask.**
 | style | `SVL_STYLES_DIR` | where the style cards are |
 | registry | `SVL_GRAMMARS_DIR` | where `index.yaml` is — **overlaid, never replaced**: this repository's own `references/grammars/` remains reachable |
 | camera | `SVL_CAMERA_DIR` | where the technique list is — **overlaid, never replaced**: this repository's own `references/camera/` remains reachable |
+| light | `SVL_LIGHTING_DIR` | where the lighting list is — **overlaid, never replaced**: this repository's own `references/lighting/` remains reachable |
 
 ⚠️ **Each layer reads its own variable.** Pointing at a style directory **does not move the
 format layer**—and **the converse holds too.** *A naming that is not read must not look like
@@ -231,9 +276,13 @@ name would have to lie about the other route.**
 | `L46` | `aim`'s `grammar: <name>` prefix and the registry | `aim` claims a grammar the registry does not hold |
 | `L53` | the camera catalog and this foundation's vocabulary | a `motion_pattern`, `role`, function, grammar card or shape that does not resolve; ⚠️ **a catalog that cannot be opened is a note** |
 | `L54` | §18 `Camera Prompt` and the catalog's `en` lines | a whole-take hold beside a technique whose `travels` is true. ⚠️ **a prompt that uses no catalog line is a note** |
+| `L55` | the lighting catalog and this foundation's vocabulary | a `kind`, `role`, function, grammar card or shape that does not resolve; ⚠️ **a catalog that cannot be opened is a note** |
+| `L56` | §13 `LIGHTING` and the lighting catalog's `en` lines | nothing — **every outcome is a note**: how many specifications carry §13, which lights were named, how many named none, **and which shots name a light that §18's `Visual Prompt` never carries** |
 
 ⚠️ **`L53` and `L54` are neighbours the other way round**—**`L53` reads the catalog alone,
 `L54` reads a work against it.** **Neither judges whether a move is right for a shot.**
+⚠️ **`L55` and `L56` are the same pair for light**, with one difference in the direction of
+reading: **`L54` reads §18, `L56` reads §13** — and §13 had no reader at all before `L56`.
 
 ⚠️ **`L31`, `L32`, `L42`, `L45` and `L46` are neighbours on purpose**—**they read the same §6
 and the same registry, and differ only in the key.** Separated, one of them gets fixed and the

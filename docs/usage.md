@@ -43,6 +43,11 @@ python3 engine/shot/print_spec.py projects/hitosara --shot hitosara-ch01-seg04
 python3 engine/shot/camera.py --role 情景 --motion 停止
 python3 engine/shot/camera.py --id 007
 
+# the look-up — the lighting catalog, by kind, role, function or job. It writes nothing
+python3 engine/shot/look.py --light --role 情景
+python3 engine/shot/look.py --light --kind 自然 --function 設定
+python3 engine/shot/look.py --light --id 055
+
 # the repository's own document check — not used to make a work
 python3 tools/check_i18n.py                                # the document mirrors
 ```
@@ -76,6 +81,23 @@ python3 tools/check_i18n.py                                # the document mirror
 not a decision** — `roles` is the set of jobs a move *can* serve, and **the shot decides
 which one.** ⚠️ **The `en` line is what §18 carries**; the Japanese name never reaches
 the generator.
+
+**`engine/shot/look.py`**
+
+| flag | |
+|---|---|
+| `--light` | read the lighting catalog (`references/lighting/`). **The only axis so far** — `--style` and `--composition` arrive with their own catalogs |
+| `--kind` | who makes the light: `灯` · `自然` · `光学` · `編集` |
+| `--role` | a `role` the light can serve (one of the fifteen) |
+| `--function` | a dramatic function (`設定`, `様式美`, …) |
+| `--job` | one of the eight directing jobs for light (`位置づけ`, `立体`, …) |
+| `--position` | `頭` · `中` · `尾` · `つなぎ` · `全編` |
+| `--id` / `--name` | one technique by its number or its Japanese name |
+
+**Every filter given must hold**; at least one is required. ⚠️ **The `en` line is what §13
+carries** — and `L56` matches it **without inflecting the head word**, because light names
+are nouns. ⚠️ **A filter that matches nothing is not an empty catalog**: the tool says which
+of the two it is.
 
 ⚠️ **`check.py` and `print_spec.py` are not alternatives—they cover disjoint ground.**
 **A line `print_spec.py` prints is a line that goes silent the moment you copy it**
@@ -247,9 +269,9 @@ The counts behind that are in `HISTORY.md`.
 
 ## The layers
 
-The check is **54 layers, `L0`–`L54`**, plus schema-shape validation.
-⚠️ **`L35` is reserved and unwritten**, so **the codes skip a number** — `L0`–`L54` is 55 codes and
-**54 layers.** ⚠️ **`L34` and `L36` read the song**, and a work that does not name the song as its
+The check is **56 layers, `L0`–`L56`**, plus schema-shape validation.
+⚠️ **`L35` is reserved and unwritten**, so **the codes skip a number** — `L0`–`L56` is 57 codes and
+**56 layers.** ⚠️ **`L34` and `L36` read the song**, and a work that does not name the song as its
 time source **is told they saw nothing** — **they are not silent about it.**
 ⚠️ **`L37` reads the inside of a shot** — whether its beats tile its `duration` — and **it reads
 every work, whether or not a song exists.** ⚠️ **`L38` reads the head of a video specification** —
@@ -273,7 +295,16 @@ grammar card must resolve against the vocabulary — and **`L54` reads §18's `C
 against the catalog's `en` lines.** ⚠️ **`L54` fires on one thing only**: a shot that says
 the camera holds still for the whole take and also names a move whose `travels` is true.
 **A work whose prompts use none of the catalog's lines is told it matched none** — and
-**that note is the measure of adoption**, not a defect. **A work that writes none of these is not failing them** — the notes say
+**that note is the measure of adoption**, not a defect.
+⚠️ **`L55` reads the lighting catalog's shape** — each `kind`, `role`, function and grammar
+card must resolve, and **`L56` reads §13 `LIGHTING` against that catalog's `en` lines.**
+⚠️ **`L56` has no violation**: it reports how many video specifications carry §13, which
+lights they named, how many named none, **and which shots name a light that §18's `Visual
+Prompt` never carries** — a note too: the catalog's `en` lines are ordinary nouns (`Dawn`,
+`Direct sun`), and prose uses them without naming the technique. ⚠️ **It reads §13 without
+inflecting the head word**, because light names are nouns — `Bloom` must not match
+`the source blooms`.
+**A work that writes none of these is not failing them** — the notes say
 how many shots were looked at. What each one reads — and does not read — is in
 [`docs/dramaturgy.md`](dramaturgy.md), [`docs/cards.md`](cards.md) and the layer index in
 [`engine/ledger/README.md`](../engine/ledger/README.md).

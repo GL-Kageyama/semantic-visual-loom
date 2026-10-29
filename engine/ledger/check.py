@@ -1825,6 +1825,188 @@ def _self_test():
         if not _ok:
             print(f"        {_got[:88]}")
 
+    # ---- L55（光の演出の目録が、この基盤の語彙に引けるか）
+    #     ⚠️ **カメラと同じく、目録は使い捨てのリポジトリに置く**——本物を試すと、
+    #        目録を直すたびに自己検査の期待値が動く。
+    print("\n=== 自己検査 — 光の演出の目録\n")
+
+    def light_entry(**kw):
+        e = {"id": "038", "name": "スリット光", "en": ["Slit light"],
+             "kind": "灯", "roles": ["開示"], "functions": ["発見"],
+             "grammars": [],
+             "directing": {"job": ["焦点"], "pairs_with": ["帯が1本"],
+                           "position": ["中"]},
+             "source": "38", "status": "draft"}
+        e.update(kw)
+        return e
+
+    def light_catalog_case(label, entries, want, fragment, *, write=True):
+        """`(名前, 成否, 実測)` を返す。**`want` は違反の有無である。**"""
+        d = _P(tempfile.mkdtemp())
+        if write:
+            text = yaml.safe_dump({"version": 1, "techniques": entries},
+                                  allow_unicode=True, sort_keys=False)
+            (d / "index.yaml").write_text(text, encoding="utf-8")
+            g = d / "references" / "grammars"
+            g.mkdir(parents=True)
+            (g / "index.yaml").write_text(
+                "version: 1\ngrammars:\n- name: time-fold\n"
+                "- name: light-as-actor\n  status: provisional\n",
+                encoding="utf-8")
+        env = semantic.lighting.LIGHTING_ENV
+        keep = _os.environ.get(env)
+        _os.environ[env] = str(d)
+        try:
+            got = semantic.check_lighting_catalog(_Bare(), repo_root=d)
+        finally:
+            if keep is None:
+                _os.environ.pop(env, None)
+            else:
+                _os.environ[env] = keep
+        v = [f for f in got if f["severity"] != "note"]
+        nts = [f for f in got if f["severity"] == "note"]
+        ok = (bool(v) == want
+              and (not want or any(fragment in f["message"] for f in v))
+              and (want or any(fragment in f["message"] for f in nts)))
+        return label, ok, (v[0]["message"] if v
+                           else (nts[0]["message"] if nts else "（何も出ない）"))
+
+    _no_pairs = light_entry()
+    _no_pairs["directing"] = {"job": ["焦点"], "position": ["中"]}
+
+    for _label, _ok, _got in [
+        light_catalog_case("L55 目録が語彙に引ける（鳴ってはならない）",
+                           [light_entry()], False, "照合した"),
+        # ⚠️ **名前の重複は鳴らさない。** 原図で 42 と 43 が同じ名である——
+        #    写しの側で直さず、`en` と `source` で区別する。
+        light_catalog_case("L55 同じ名前の2件は鳴らない",
+                           [light_entry(id="042", name="X", source="42"),
+                            light_entry(id="043", name="X", source="43")],
+                           False, "照合した"),
+        light_catalog_case("L55 作り方が4値に無い",
+                           [light_entry(kind="現場")], True, "`kind`"),
+        light_catalog_case("L55 種別が目録に無い",
+                           [light_entry(roles=["景色"])], True, "種別の目録"),
+        light_catalog_case("L55 劇的関数が enum に無い",
+                           [light_entry(functions=["爆発"])], True, "劇的関数"),
+        light_catalog_case("L55 文法が目録に無い",
+                           [light_entry(grammars=[{"card": "no-such",
+                                                   "confidence": "○"}])],
+                           True, "文法の目録"),
+        light_catalog_case("L55 文法の確度が記号でない",
+                           [light_entry(grammars=[{"card": "light-as-actor",
+                                                   "confidence": "×"}])],
+                           True, "◎・○・△"),
+        light_catalog_case("L55 暫定のカードを引いた（註）",
+                           [light_entry(grammars=[{"card": "light-as-actor",
+                                                   "confidence": "○"}])],
+                           False, "provisional"),
+        light_catalog_case("L55 生成へ渡る句が無い",
+                           [light_entry(en=[])], True, "`en`"),
+        light_catalog_case("L55 演出の仕事が8つに無い",
+                           [light_entry(directing={"job": ["確立"],
+                                                   "pairs_with": ["x"],
+                                                   "position": ["中"]})],
+                           True, "8つの仕事"),
+        light_catalog_case("L55 場面の位置に無い",
+                           [light_entry(directing={"job": ["焦点"],
+                                                   "pairs_with": ["x"],
+                                                   "position": ["外"]})],
+                           True, "場面の位置"),
+        light_catalog_case("L55 定石の相手が無い",
+                           [_no_pairs], True, "`directing.pairs_with`"),
+        light_catalog_case("L55 目録が空＝1件も照合していない",
+                           [], False, "空である"),
+        light_catalog_case("L55 目録が無い＝確かめられない",
+                           [], False, "無い", write=False),
+        light_catalog_case("L55 同じ id が2度ある＝形が違う",
+                           [light_entry(), light_entry()], False, "形が違う"),
+    ]:
+        n += 1
+        bad += not _ok
+        print(f"    {_label:<50}{'':>10}  {'期待どおり' if _ok else '⚠️ 期待と違う'}")
+        if not _ok:
+            print(f"        {_got[:88]}")
+
+    # ---- L56（§13 が名乗る光を、目録が引けるか）
+    print("\n=== 自己検査 — 作品の §13 を目録へ当てる\n")
+
+    class _LightProj:
+        def __init__(self, root, shots):
+            self.root, self.shots = root, shots
+
+        def order(self):
+            return sorted(self.shots)
+
+    def light_use_case(label, entries, body, want, fragment, *, write=True,
+                       slot=None):
+        d = _P(tempfile.mkdtemp())
+        if write:
+            text = yaml.safe_dump({"version": 1, "techniques": entries},
+                                  allow_unicode=True, sort_keys=False)
+            (d / "index.yaml").write_text(text, encoding="utf-8")
+        spec = f"# 13. LIGHTING\n\n{body}\n\n# 14. AUDIO\n\n—\n"
+        if slot is not None:
+            spec += f"\n# 18. PROMPT MAPPING\n\n## Visual Prompt\n\n{slot}\n"
+        (d / "s01.md").write_text(spec, encoding="utf-8")
+        proj = _LightProj(d, {"s01": {"shot": "s01", "spec": "s01.md"}})
+        env = semantic.lighting.LIGHTING_ENV
+        keep = _os.environ.get(env)
+        _os.environ[env] = str(d)
+        try:
+            got = semantic.check_lighting_use(proj, repo_root=d)
+        finally:
+            if keep is None:
+                _os.environ.pop(env, None)
+            else:
+                _os.environ[env] = keep
+        v = [f for f in got if f["severity"] != "note"]
+        nts = [f for f in got if f["severity"] == "note"]
+        ok = (bool(v) == want
+              and (not want or any(fragment in f["message"] for f in v))
+              and (want or any(fragment in f["message"] for f in nts)))
+        return label, ok, (v[0]["message"] if v
+                           else (nts[0]["message"] if nts else "（何も出ない）"))
+
+    _bloom = light_entry(id="083", name="ブルーム", en=["Bloom"],
+                         roles=["様式美"], functions=["様式美"])
+
+    for _label, _ok, _got in [
+        light_use_case("L56 §13 が目録の光を名指す（註）",
+                       [light_entry()],
+                       "- Base Lighting: A single Slit light across the wall.",
+                       False, "名指した"),
+        # ⚠️ **光の名は名詞である。** 活用を許すと `blooms`（動詞）に当たる。
+        light_use_case("L56 動詞の `blooms` は名指しと数えない",
+                       [_bloom], "- Base Lighting: The source blooms.",
+                       False, "当たらない"),
+        light_use_case("L56 否定された句は数えない",
+                       [light_entry()], "- Base Lighting: No Slit light here.",
+                       False, "当たらない"),
+        light_use_case("L56 §13 が空である（註）",
+                       [light_entry()], "", False, "中身が無い"),
+        light_use_case("L56 目録が読めない＝1本も照合していない",
+                       [], "- Base Lighting: Slit light.", False,
+                       "1本も照合していない", write=False),
+        # ⚠️ **§13 の光が §18 に届いたか。** 違反ではなく註である——目録の `en` は
+        # 普通の名詞でもあり、「名指した」と「その語を使った」を区別できない。
+        light_use_case("L56 §13 の光が §18 に届いた（註を足さない）",
+                       [light_entry()],
+                       "- Base Lighting: A single Slit light across the wall.",
+                       False, "名指した",
+                       slot="A single Slit light across the wall."),
+        light_use_case("L56 §13 の光が §18 から消えた（註）",
+                       [light_entry()],
+                       "- Base Lighting: A single Slit light across the wall.",
+                       False, "届いていない",
+                       slot="A warm wall, empty."),
+    ]:
+        n += 1
+        bad += not _ok
+        print(f"    {_label:<50}{'':>10}  {'期待どおり' if _ok else '⚠️ 期待と違う'}")
+        if not _ok:
+            print(f"        {_got[:88]}")
+
     def run1(label, fn, proj, want, fragment, note=None):
         """⚠️ **註も読む。** 註が出ないことも「違反0件」に見えるからである。"""
         nonlocal n, bad

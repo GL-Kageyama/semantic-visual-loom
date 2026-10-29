@@ -97,6 +97,21 @@ python3 engine/shot/camera.py --id 007
 **到底是哪一件，由镜头的 `role` 决定。** ⚠️ **每一条都是 `status: draft`**——从一般性的
 电影作法套上去的，没有量过——**作品的用法赢。** ⚠️ **交给生成器的是 `en` 这一行，不是日文名。**
 
+## 怎么引光
+
+`engine/shot/look.py --light` 读光目录（`references/lighting/index.yaml`），打印
+**适合某个做法、角色、剧作功能、演出差事或位置的技法**，并带上 §13 要运的 `en` 行。
+
+```bash
+python3 engine/shot/look.py --light --kind 自然 --function 設定
+python3 engine/shot/look.py --light --id 038
+```
+
+⚠️ **必须带 `--light`，也必须带一个筛选条件**——不带筛选的调用会打印 100 条，
+**看起来像个答案。** ⚠️ **光的名字是名词**——`L56` 不允许变位。§13 原样运 `en` 行，
+**换一种说法就命不中。** ⚠️ **每一条都是 `status: draft`**——套用是设计者做的，
+从一般照明作法起的——**作品的用法赢。**
+
 ## 谁在读它
 
 - **`L26`** —— 把 `bible.constants.video` 与 §1 的四行对照
