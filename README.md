@@ -124,7 +124,7 @@ semantic-visual-loom/
 ├── skills/          # the skills — breakdown, direction (inside ①), design, staging (inside ②), ledger, shot, review (after ④)
 ├── tools/           # checks (i18n mirrors)
 ├── references/      # this side's own cards — formats/ (video-spec + the grammars) and styles/ (sumi-e),
-│                    #   and grammars/ — the registry the checks read
+│                    #   and the two registries the checks read — grammars/ and camera/ (100 techniques)
 ├── assets/          # the repository's face (the README hero)
 └── projects/        # the substance of each work
 ```

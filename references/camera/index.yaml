@@ -1,0 +1,2612 @@
+# カメラ技法の目録 — 機械が読む一覧
+#
+# ⚠️ **これは検査（L53）のための目録である。** 人が読む解説はここには書かない——
+#    **配布物は目録だけであり、二重に書けば片方だけ直して食い違う。**
+#
+# ⚠️ **出所。** 100項目は「AI動画のカメラワーク100選」のカード4枚を
+#    書き起こしたもの。`physical` はその書き起こしからの写しであり、**速度・焦点距離・尺は
+#    実務の目安である**——検索で裏が取れたのは定義と原理だけである。
+#
+# ⚠️ **`status: draft` は全件である。** `roles`・`functions`・`directing` は
+#    **私が一般論の映画作法から当てた設計案**であり、作品の実測ではない。
+#    文法目録の `provisional` と同じ心持で、**仮置きを正典と呼ばない。**
+#    作品の `role` が目録と違ったときは、**作品が勝つ**——目録を直す。
+#
+# ⚠️ **`roles` は「使える役割の集合」であって、決定ではない。**
+#    1つの技法が複数の role に使える。**1対1に潰した表は嘘になる。**
+#
+# ⚠️ **`travels` は「設計上、カメラの位置が変わるか」である。**
+#    回転（パン・チルト・ロール）と画角（ズーム）は false。手ぶれ・手持ちも false
+#    ——技法そのものが移動を要求しないからである。**これも draft の判断である。**
+#
+# ⚠️ **`motion_pattern` は配列である。** `停止・微細運動` のように2つを持つものがあり、
+#    `機械・乗物` のように名前自体が `・` を含むものがある。
+#    **綴りを割る前に、13の名に丸ごと当てる**（L53 がそうする）。
+#
+# ⚠️ **`grammars` は配列である。** 0枚・1枚・2枚がある。`confidence` は
+#    ◎＝定義上ほぼ必然、○＝一般論でよく組む、△＝候補。
+
+version: 1
+techniques:
+- id: '001'
+  name: パン
+  en:
+  - pan left
+  - pan right
+  - slow pan
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 情景
+  - 開示
+  functions:
+  - 設定
+  - 発見
+  grammars: []
+  travels: false
+  physical: 位置=固定 ／ 経路=ヨー回転（左右） ／ 速さ=5–15°/秒 ／ レンズ=24–50mm ／ 尺=2–5秒
+  directing:
+    job:
+    - 確立
+    - 転換
+    pairs_with:
+    - 場面の頭で空間を渡す
+    - 切り返しの代わりに振る
+    position:
+    - 頭
+    - つなぎ
+  source: '001'
+  status: draft
+- id: '002'
+  name: チルト
+  en:
+  - tilt up
+  - tilt down
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 情景
+  - 開示
+  functions:
+  - 設定
+  - 発見
+  grammars: []
+  travels: false
+  physical: 位置=固定 ／ 経路=ピッチ回転（上下） ／ 速さ=5–10°/秒 ／ レンズ=24–50mm ／ 尺=2–5秒
+  directing:
+    job:
+    - 確立
+    - 焦点
+    pairs_with:
+    - 足から顔へ尺度の階段
+    - 垂直の発見
+    position:
+    - 頭
+    - 中
+  source: '002'
+  status: draft
+- id: '003'
+  name: ドリーイン
+  en:
+  - dolly in
+  - push in slowly
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 開示
+  - 反応
+  functions:
+  - 発見
+  - 決断
+  grammars: []
+  travels: true
+  physical: 位置=前進 ／ 経路=光軸方向へ直進 ／ 速さ=ゆっくり一定 ／ レンズ=35–50mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 圧力
+    - 焦点
+    pairs_with:
+    - クローズアップの代わり
+    - 気づきの瞬間
+    position:
+    - 中
+  source: '003'
+  status: draft
+- id: '004'
+  name: ドリーアウト
+  en:
+  - dolly out
+  - pull back slowly
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 開示
+  - 余白
+  functions:
+  - 結果
+  - 余韻
+  grammars: []
+  travels: true
+  physical: 位置=後退 ／ 経路=光軸方向へ直進 ／ 速さ=ゆっくり一定 ／ レンズ=35–50mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 解放
+    - 確立
+    pairs_with:
+    - 場面の幕切れ
+    - 人物を空間へ戻す
+    position:
+    - 尾
+  source: '004'
+  status: draft
+- id: '005'
+  name: トラッキング
+  en:
+  - tracking shot, camera moves sideways with the subject
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 運動
+  - 所作
+  functions:
+  - 上昇
+  grammars: []
+  travels: true
+  physical: 被写体=人物 ／ 位置=横 ／ 経路=被写体と並走・距離一定 ／ 速さ=被写体と同速 ／ レンズ=35–50mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 確立
+    - 分解
+    pairs_with:
+    - 歩行に動機づけられた移動
+    - 並走する会話
+    position:
+    - 中
+  source: '005'
+  status: draft
+- id: '006'
+  name: オービット
+  en:
+  - orbit around the subject
+  - 360-degree orbit
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 様式美
+  - 開示
+  functions:
+  - 上昇
+  - 解放
+  grammars:
+  - card: impossible-camera
+    confidence: △
+  travels: true
+  physical: 位置=被写体の周囲 ／ 経路=円周移動 ／ 速さ=90°を4–6秒（一周なら15–25秒） ／ レンズ=35–50mm ／ 尺=4–10秒
+  directing:
+    job:
+    - 様式
+    - 圧力
+    pairs_with:
+    - 二者の周りを回る
+    - 音楽の盛り
+    position:
+    - 中
+    - 尾
+  source: '006'
+  status: draft
+- id: '007'
+  name: クレーンアップ
+  en:
+  - crane up
+  - camera rises on a crane
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 開示
+  - 情景
+  functions:
+  - 転換
+  - 発見
+  grammars:
+  - card: impossible-camera
+    confidence: △
+  travels: true
+  physical: 位置=上昇しながら弧 ／ 経路=斜め上へ ／ 速さ=ゆっくり ／ レンズ=24–35mm ／ 尺=4–8秒
+  directing:
+    job:
+    - 解放
+    - 確立
+    pairs_with:
+    - 幕切れで視野を開く
+    - 勝利の後
+    position:
+    - 尾
+  source: '007'
+  status: draft
+- id: 008
+  name: クレーンダウン
+  en:
+  - crane down
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 情景
+  - 開示
+  functions:
+  - 設定
+  - 余韻
+  grammars: []
+  travels: true
+  physical: 位置=下降しながら弧 ／ 速さ=ゆっくり ／ レンズ=24–35mm ／ 尺=4–8秒
+  directing:
+    job:
+    - 確立
+    - 焦点
+    pairs_with:
+    - 場面の頭で一点へ降りる
+    - 敗北の後
+    position:
+    - 頭
+  source: 008
+  status: draft
+- id: 009
+  name: ラックフォーカス
+  en:
+  - rack focus from the foreground to the background
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 開示
+  - 反応
+  functions:
+  - 発見
+  - 転換
+  grammars: []
+  travels: false
+  physical: 位置=固定 ／ 変化=ピント面の移動（手前→奥） ／ 速さ=1–3秒で移動 ／ レンズ=85mm・f/2前後 ／ 尺=2–4秒
+  directing:
+    job:
+    - 焦点
+    - 転換
+    pairs_with:
+    - 視線の移動を画面内でつなぐ
+    - 二者の関係
+    position:
+    - 中
+  source: 009
+  status: draft
+- id: '010'
+  name: ウィップパン
+  en:
+  - whip pan with heavy motion blur
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 転換
+  - 運動
+  functions:
+  - 転換
+  grammars: []
+  travels: false
+  physical: 位置=固定 ／ 経路=高速ヨー（90–180°） ／ 速さ=0.3–0.5秒 ／ レンズ=24–50mm ／ 尺=1–2秒
+  directing:
+    job:
+    - 転換
+    pairs_with:
+    - カットの代わり
+    - コメディの拍
+    position:
+    - つなぎ
+  source: '010'
+  status: draft
+- id: '011'
+  name: スローモーション
+  en:
+  - slow motion, 4x slower
+  - 0.25x speed
+  motion_pattern:
+  - 時間の運動
+  roles:
+  - 運動
+  - 反応
+  functions:
+  - 溜め
+  - 解放
+  grammars: []
+  travels: false
+  physical: 時間=0.25倍（4倍遅い） ／ 速さ=一定 ／ レンズ=50–85mm ／ 尺=2–5秒
+  directing:
+    job:
+    - 圧力
+    - 解放
+    pairs_with:
+    - 決定的瞬間
+    - 記憶
+    position:
+    - 中
+    - 尾
+  source: '011'
+  status: draft
+- id: '012'
+  name: タイムラプス
+  en:
+  - time-lapse, clouds racing across the sky
+  motion_pattern:
+  - 時間の運動
+  roles:
+  - 情景
+  - 運動
+  functions:
+  - 設定
+  - 転換
+  grammars:
+  - card: time-fold
+    confidence: ◎
+  - card: temporal-panorama
+    confidence: ○
+  travels: false
+  physical: 位置=固定 ／ 時間=長い変化を圧縮（雲・光・人） ／ 速さ=10–30倍 ／ レンズ=24–35mm ／ 尺=3–8秒
+  directing:
+    job:
+    - 確立
+    - 転換
+    pairs_with:
+    - 時間経過の要約
+    - 場面転換の橋
+    position:
+    - つなぎ
+    - 頭
+  source: '012'
+  status: draft
+- id: '013'
+  name: ペデスタルアップ
+  en:
+  - pedestal up, camera rises straight up
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 情景
+  - 様式美
+  functions:
+  - 設定
+  grammars: []
+  travels: true
+  physical: 位置=垂直上昇 ／ 経路=真上（向き固定） ／ 速さ=ゆっくり ／ レンズ=35–50mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 確立
+    - 焦点
+    pairs_with:
+    - 立ち上がる芝居
+    - 威圧の上昇
+    position:
+    - 中
+  source: '013'
+  status: draft
+- id: '014'
+  name: ペデスタルダウン
+  en:
+  - pedestal down, camera lowers straight down
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 情景
+  - 様式美
+  functions:
+  - 設定
+  - 余韻
+  grammars: []
+  travels: true
+  physical: 位置=垂直下降 ／ 経路=真下 ／ 速さ=ゆっくり ／ レンズ=35–50mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 確立
+    - 解放
+    pairs_with:
+    - 座る芝居
+    - 疲労・降参
+    position:
+    - 中
+  source: '014'
+  status: draft
+- id: '015'
+  name: トラック
+  en:
+  - truck left
+  - camera moves sideways without rotating
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 情景
+  - 運動
+  functions:
+  - 設定
+  - 上昇
+  grammars: []
+  travels: true
+  physical: 位置=横移動 ／ 経路=平行移動（向き固定） ／ 速さ=ゆっくり一定 ／ レンズ=35–50mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 確立
+    - 様式
+    pairs_with:
+    - 横に流れる風景
+    - 群衆の帯
+    position:
+    - 頭
+    - 中
+  source: '015'
+  status: draft
+- id: '016'
+  name: 先行トラッキング
+  en:
+  - camera moves backward ahead of the walking subject
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 所作
+  - 対話
+  functions:
+  - 上昇
+  grammars: []
+  travels: true
+  physical: 被写体=人物 ／ 位置=人物の前方 ／ 経路=後退 ／ 速さ=同速 ／ レンズ=35–50mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 分解
+    - 視点
+    pairs_with:
+    - 背中を追う
+    - 未知へ進む
+    position:
+    - 中
+  source: '016'
+  status: draft
+- id: '017'
+  name: 後方トラッキング
+  en:
+  - camera follows behind the subject
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 所作
+  - 運動
+  functions:
+  - 上昇
+  - 結果
+  grammars: []
+  travels: true
+  physical: 位置=人物の背後 ／ 経路=前進して追従 ／ 速さ=同速 ／ レンズ=35–50mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 解放
+    - 分解
+    pairs_with:
+    - 去る背中
+    - 置き去り
+    position:
+    - 尾
+  source: '017'
+  status: draft
+- id: 018
+  name: アークショット
+  en:
+  - arc shot, camera circles 90 degrees around the subject
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 様式美
+  - 反応
+  functions:
+  - 溜め
+  grammars: []
+  travels: true
+  physical: 位置=被写体の周囲 ／ 経路=短い円弧（30–90°） ／ 速さ=ゆっくり ／ レンズ=50mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 圧力
+    - 様式
+    pairs_with:
+    - 二者の間に回り込む
+    - 関係の変化
+    position:
+    - 中
+  source: 018
+  status: draft
+- id: 019
+  name: ハンドヘルド
+  en:
+  - handheld camera, subtle shake, documentary feel
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 所作
+  - 反応
+  functions:
+  - 上昇
+  - 結果
+  grammars: []
+  travels: false
+  physical: 位置=手持ち ／ 経路=小刻みな揺れ ／ 速さ=不規則 ／ レンズ=24–50mm ／ 尺=3–8秒
+  directing:
+    job:
+    - 圧力
+    pairs_with:
+    - 混乱・緊迫
+    - 即時性
+    position:
+    - 中
+  source: 019
+  status: draft
+- id: '020'
+  name: ジンバル
+  en:
+  - gimbal shot, smooth stabilized movement
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 所作
+  - 運動
+  functions:
+  - 上昇
+  grammars: []
+  travels: false
+  physical: 位置=移動 ／ 経路=歩行に沿って滑らか ／ 速さ=歩速 ／ レンズ=24–35mm ／ 尺=3–8秒
+  directing:
+    job:
+    - 分解
+    - 様式
+    pairs_with:
+    - 長回しの安定
+    - 追従
+    position:
+    - 中
+  source: '020'
+  status: draft
+- id: '021'
+  name: ロール
+  en:
+  - camera roll around the lens axis
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 様式美
+  - 転換
+  functions:
+  - 転換
+  grammars: []
+  travels: false
+  physical: 位置=固定 ／ 経路=光軸まわりの回転 ／ 速さ=ゆっくり（30–90°/秒） ／ レンズ=35–50mm ／ 尺=2–4秒
+  directing:
+    job:
+    - 転換
+    - 様式
+    pairs_with:
+    - 意識の揺らぎ
+    - 場面の裏返し
+    position:
+    - 中
+    - つなぎ
+  source: '021'
+  status: draft
+- id: '022'
+  name: ズームイン
+  en:
+  - zoom in slowly
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 開示
+  - 反応
+  functions:
+  - 発見
+  grammars: []
+  travels: false
+  physical: 位置=固定 ／ 変化=画角を狭める（24mm→85mm） ／ 速さ=ゆっくり ／ 尺=2–4秒
+  directing:
+    job:
+    - 焦点
+    pairs_with:
+    - 望遠の圧縮
+    - 注意の一点化
+    position:
+    - 中
+  source: '022'
+  status: draft
+- id: '023'
+  name: ズームアウト
+  en:
+  - zoom out slowly
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 開示
+  - 余白
+  functions:
+  - 結果
+  - 余韻
+  grammars: []
+  travels: false
+  physical: 位置=固定 ／ 変化=画角を広げる（85mm→24mm） ／ 速さ=ゆっくり ／ 尺=2–4秒
+  directing:
+    job:
+    - 解放
+    - 確立
+    pairs_with:
+    - 幕切れ
+    - 孤立の提示
+    position:
+    - 尾
+  source: '023'
+  status: draft
+- id: '024'
+  name: スナップズーム
+  en:
+  - snap zoom, sudden fast zoom in
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 転換
+  - 開示
+  functions:
+  - 転換
+  - 決断
+  grammars: []
+  travels: false
+  physical: 位置=固定 ／ 変化=画角を一気に狭める ／ 速さ=0.2–0.5秒 ／ 尺=1–2秒
+  directing:
+    job:
+    - 転換
+    - 圧力
+    pairs_with:
+    - コメディの拍
+    - 驚きの強調
+    position:
+    - 中
+  source: '024'
+  status: draft
+- id: '025'
+  name: ドリーズーム
+  en:
+  - dolly zoom, vertigo effect, subject stays the same size while the background stretches
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 反応
+  - 様式美
+  functions:
+  - 溜め
+  - 決断
+  grammars: []
+  travels: true
+  physical: 位置=前進（または後退） ／ 変化=同時に逆向きのズーム ／ 速さ=ゆっくり一定 ／ レンズ=24mm→85mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 圧力
+    pairs_with:
+    - 世界観の歪み
+    - 眩暈
+    - 決断
+    position:
+    - 中
+  source: '025'
+  status: draft
+- id: '026'
+  name: エクストリームワイド
+  en:
+  - extreme wide shot, tiny figure in a vast landscape
+  motion_pattern:
+  - 停止
+  roles:
+  - 情景
+  - 様式美
+  functions:
+  - 設定
+  grammars:
+  - card: scale-rupture
+    confidence: △
+  travels: false
+  physical: 被写体=人物（画面高の10%以下） ／ 環境=主役 ／ レンズ=14–24mm ／ 位置=遠景 ／ 尺=3–6秒
+  directing:
+    job:
+    - 確立
+    pairs_with:
+    - 場面の頭
+    - 人の小ささ
+    position:
+    - 頭
+  source: '026'
+  status: draft
+- id: '027'
+  name: ワイドショット
+  en:
+  - wide shot showing the subject and the surroundings
+  motion_pattern:
+  - 停止
+  roles:
+  - 情景
+  functions:
+  - 設定
+  grammars: []
+  travels: false
+  physical: 被写体=人物＋周辺 ／ フレーミング=全身＋余白 ／ レンズ=24–35mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 確立
+    pairs_with:
+    - 場面の頭
+    - 空間の提示
+    position:
+    - 頭
+  source: '027'
+  status: draft
+- id: 028
+  name: フルショット
+  en:
+  - full shot, head to toe
+  motion_pattern:
+  - 停止
+  roles:
+  - 所作
+  - 情景
+  functions:
+  - 設定
+  - 上昇
+  grammars: []
+  travels: false
+  physical: 被写体=全身 ／ フレーミング=頭から足先、画面高の70–90% ／ レンズ=35–50mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 確立
+    - 分解
+    pairs_with:
+    - 全身の芝居
+    - アクションの基準
+    position:
+    - 頭
+    - 中
+  source: 028
+  status: draft
+- id: 029
+  name: ミディアムロング
+  en:
+  - medium long shot, framed from the knees up
+  motion_pattern:
+  - 停止
+  roles:
+  - 所作
+  - 対話
+  functions:
+  - 上昇
+  grammars: []
+  travels: false
+  physical: 被写体=ひざ上 ／ フレーミング=画面下でひざ ／ レンズ=35–50mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 分解
+    pairs_with:
+    - 会話の基準
+    - 動きの余白
+    position:
+    - 中
+  source: 029
+  status: draft
+- id: '030'
+  name: ミディアム
+  en:
+  - medium shot, waist up
+  motion_pattern:
+  - 停止
+  roles:
+  - 対話
+  - 所作
+  functions:
+  - 上昇
+  - 溜め
+  grammars: []
+  travels: false
+  physical: 被写体=腰上 ／ フレーミング=画面下で腰 ／ レンズ=35–50mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 分解
+    pairs_with:
+    - 会話の標準
+    - 切り返しの土台
+    position:
+    - 中
+  source: '030'
+  status: draft
+- id: '031'
+  name: ミディアムクローズ
+  en:
+  - medium close-up, chest up
+  motion_pattern:
+  - 停止
+  roles:
+  - 対話
+  - 反応
+  functions:
+  - 溜め
+  - 発見
+  grammars: []
+  travels: false
+  physical: 被写体=胸上 ／ フレーミング=画面下で胸 ／ レンズ=50–85mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 分解
+    - 焦点
+    pairs_with:
+    - 会話と反応の境目
+    position:
+    - 中
+  source: '031'
+  status: draft
+- id: '032'
+  name: クローズアップ
+  en:
+  - close-up on the face
+  motion_pattern:
+  - 停止
+  roles:
+  - 反応
+  functions:
+  - 決断
+  - 発見
+  grammars: []
+  travels: false
+  physical: 被写体=顔 ／ フレーミング=首から上、顔が画面の大半 ／ レンズ=85mm ／ 尺=2–5秒
+  directing:
+    job:
+    - 焦点
+    - 圧力
+    pairs_with:
+    - 感情の頂点
+    - 台詞の着地
+    position:
+    - 中
+    - 尾
+  source: '032'
+  status: draft
+- id: '033'
+  name: エクストリームクローズ
+  en:
+  - extreme close-up on the eyes
+  motion_pattern:
+  - 停止
+  - 微細運動
+  roles:
+  - 反応
+  - 質感
+  functions:
+  - 溜め
+  - 決断
+  grammars: []
+  travels: false
+  physical: 被写体=目・口などの細部 ／ フレーミング=パーツ単体 ／ レンズ=100mmマクロ ／ 尺=1–3秒
+  directing:
+    job:
+    - 圧力
+    pairs_with:
+    - 目・口・手の一点
+    - 極限
+    position:
+    - 中
+    - 尾
+  source: '033'
+  status: draft
+- id: '034'
+  name: インサート
+  en:
+  - insert shot of the hand holding the phone
+  motion_pattern:
+  - 停止
+  roles:
+  - 開示
+  - 質感
+  functions:
+  - 発見
+  grammars: []
+  travels: false
+  physical: 被写体=小物・手元 ／ フレーミング=物だけ ／ レンズ=50–100mm ／ 尺=1–3秒
+  directing:
+    job:
+    - 焦点
+    pairs_with:
+    - 小道具の情報
+    - 時の刻み
+    position:
+    - 中
+  source: '034'
+  status: draft
+- id: '035'
+  name: エスタブリッシング
+  en:
+  - establishing shot of the town at dusk
+  motion_pattern:
+  - 停止
+  roles:
+  - 情景
+  - 総覧
+  functions:
+  - 設定
+  grammars: []
+  travels: false
+  physical: 被写体=場所 ／ フレーミング=街・建物の全景 ／ レンズ=24–35mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 確立
+    pairs_with:
+    - 場面の頭
+    - 場所の交代
+    position:
+    - 頭
+  source: '035'
+  status: draft
+- id: '036'
+  name: マスターショット
+  en:
+  - master shot, wide framing of the whole scene
+  motion_pattern:
+  - 停止
+  roles:
+  - 総覧
+  - 情景
+  functions:
+  - 設定
+  grammars: []
+  travels: false
+  physical: 被写体=場面の全員 ／ フレーミング=場面全体が入る引き ／ レンズ=35mm ／ 尺=長め（5–10秒）
+  directing:
+    job:
+    - 確立
+    - 分解
+    pairs_with:
+    - 場面の骨格
+    - 切り返しの基準
+    position:
+    - 頭
+  source: '036'
+  status: draft
+- id: '037'
+  name: ツーショット
+  en:
+  - two-shot of the two characters
+  motion_pattern:
+  - 停止
+  roles:
+  - 対話
+  functions:
+  - 設定
+  - 上昇
+  grammars: []
+  travels: false
+  physical: 被写体=2人 ／ フレーミング=2人を同じ画面に ／ レンズ=35–50mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 分解
+    pairs_with:
+    - 関係の提示
+    - 会話の土台
+    position:
+    - 中
+  source: '037'
+  status: draft
+- id: 038
+  name: グループショット
+  en:
+  - group shot of five people
+  motion_pattern:
+  - 停止
+  roles:
+  - 総覧
+  - 情景
+  functions:
+  - 設定
+  grammars:
+  - card: population-emergence
+    confidence: ○
+  travels: false
+  physical: 被写体=複数人 ／ フレーミング=全員が入る ／ レンズ=24–35mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 確立
+    - 分解
+    pairs_with:
+    - 集団の力関係
+    - 場面の頭
+    position:
+    - 頭
+    - 中
+  source: 038
+  status: draft
+- id: 039
+  name: オーバーショルダー
+  en:
+  - over-the-shoulder shot, the other character's face in focus
+  motion_pattern:
+  - 停止
+  roles:
+  - 対話
+  - 反応
+  functions:
+  - 溜め
+  - 発見
+  grammars: []
+  travels: false
+  physical: 被写体=手前の人物の肩＋奥の相手 ／ 位置=手前の人物の後ろ斜め ／ レンズ=50–85mm ／ 尺=3–6秒
+  directing:
+    job:
+    - 分解
+    - 視点
+    pairs_with:
+    - 切り返しの片側
+    - 会話の圧
+    position:
+    - 中
+  source: 039
+  status: draft
+- id: '040'
+  name: 主観ショット
+  en:
+  - point-of-view shot, what the character sees
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 開示
+  - 反応
+  functions:
+  - 発見
+  grammars: []
+  travels: false
+  physical: 被写体=見ているもの ／ 位置=人物の目の位置 ／ レンズ=35–50mm ／ 尺=2–5秒
+  directing:
+    job:
+    - 視点
+    pairs_with:
+    - 見る者と見られる者
+    - 恐怖
+    position:
+    - 中
+  source: '040'
+  status: draft
+- id: '041'
+  name: アイレベル
+  en:
+  - eye-level shot
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  - 情景
+  functions:
+  - 設定
+  grammars: []
+  travels: false
+  physical: 位置=被写体の目の高さ ／ 角度=水平 ／ レンズ=35–50mm ／ 尺=—
+  directing:
+    job:
+    - 確立
+    pairs_with:
+    - 中立の基準
+    - 観客の目
+    position:
+    - 全編
+  source: '041'
+  status: draft
+- id: '042'
+  name: ハイアングル
+  en:
+  - high-angle shot looking down at the subject
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  - 開示
+  functions:
+  - 設定
+  - 転換
+  grammars: []
+  travels: false
+  physical: 位置=被写体より上 ／ 角度=斜め下30–45° ／ レンズ=35–50mm ／ 尺=—
+  directing:
+    job:
+    - 圧力
+    - 視点
+    pairs_with:
+    - 見下ろす
+    - 弱さ
+    position:
+    - 中
+  source: '042'
+  status: draft
+- id: '043'
+  name: ローアングル
+  en:
+  - low-angle shot looking up at the subject
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  - 反応
+  functions:
+  - 上昇
+  - 決断
+  grammars: []
+  travels: false
+  physical: 位置=被写体より下 ／ 角度=斜め上 ／ レンズ=24–35mm ／ 尺=—
+  directing:
+    job:
+    - 圧力
+    - 視点
+    pairs_with:
+    - 見上げる
+    - 強さ
+    position:
+    - 中
+  source: '043'
+  status: draft
+- id: '044'
+  name: 真俯瞰
+  en:
+  - top-down shot, camera directly overhead looking straight down
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  - 図解
+  functions:
+  - 設定
+  grammars:
+  - card: scale-rupture
+    confidence: △
+  travels: false
+  physical: 位置=真上 ／ 角度=90° ／ レンズ=24–35mm ／ 尺=—
+  directing:
+    job:
+    - 確立
+    - 様式
+    pairs_with:
+    - 場の全体
+    - 運命の視点
+    position:
+    - 頭
+    - 中
+  source: '044'
+  status: draft
+- id: '045'
+  name: ワームズアイ
+  en:
+  - worm's-eye view, camera on the ground looking up
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  - 情景
+  functions:
+  - 設定
+  - 転換
+  grammars:
+  - card: scale-rupture
+    confidence: △
+  travels: false
+  physical: 位置=地面すれすれ ／ 角度=ほぼ真上へ ／ レンズ=14–24mm ／ 尺=—
+  directing:
+    job:
+    - 圧力
+    - 様式
+    pairs_with:
+    - 極端な威圧
+    - 非日常
+    position:
+    - 中
+  source: '045'
+  status: draft
+- id: '046'
+  name: 空撮
+  en:
+  - aerial shot from a drone
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 情景
+  - 様式美
+  functions:
+  - 設定
+  - 解放
+  grammars:
+  - card: temporal-panorama
+    confidence: △
+  travels: true
+  physical: 位置=上空 ／ 経路=移動可 ／ レンズ=24–35mm ／ 尺=3–8秒
+  directing:
+    job:
+    - 確立
+    pairs_with:
+    - 場面の頭
+    - スケール
+    position:
+    - 頭
+  source: '046'
+  status: draft
+- id: '047'
+  name: ダッチアングル
+  en:
+  - Dutch angle, the horizon tilted
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  - 反応
+  functions:
+  - 転換
+  - 溜め
+  grammars: []
+  travels: false
+  physical: 位置=任意 ／ 角度=水平線を10–30°傾ける ／ 枠=水平のまま ／ レンズ=35–50mm ／ 尺=—
+  directing:
+    job:
+    - 圧力
+    pairs_with:
+    - 不安・異常
+    - 悪の気配
+    position:
+    - 中
+  source: '047'
+  status: draft
+- id: 048
+  name: グラウンドレベル
+  en:
+  - ground-level shot, camera at ground height
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  - 質感
+  functions:
+  - 設定
+  grammars: []
+  travels: false
+  physical: 位置=地面の高さ ／ 角度=水平 ／ レンズ=24–35mm ／ 尺=—
+  directing:
+    job:
+    - 様式
+    - 視点
+    pairs_with:
+    - 地面の質感
+    - 這う視点
+    position:
+    - 中
+  source: 048
+  status: draft
+- id: 049
+  name: 横顔ショット
+  en:
+  - profile shot, the subject seen from the side
+  motion_pattern:
+  - 停止
+  roles:
+  - 反応
+  - 様式美
+  functions:
+  - 溜め
+  grammars: []
+  travels: false
+  physical: 位置=被写体の真横 ／ 角度=90° ／ レンズ=85mm ／ 尺=—
+  directing:
+    job:
+    - 焦点
+    - 様式
+    pairs_with:
+    - 沈黙の演技
+    - 窓の外
+    position:
+    - 中
+  source: 049
+  status: draft
+- id: '050'
+  name: バックショット
+  en:
+  - rear-view shot, the subject seen from behind
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 開示
+  - 所作
+  functions:
+  - 決断
+  - 余韻
+  grammars: []
+  travels: false
+  physical: 位置=被写体の背後 ／ 経路=固定でも可 ／ レンズ=35–50mm ／ 尺=—
+  directing:
+    job:
+    - 視点
+    - 解放
+    pairs_with:
+    - 去る・待つ
+    - 謎の提示
+    position:
+    - 中
+    - 尾
+  source: '050'
+  status: draft
+- id: '051'
+  name: 浅い被写界深度
+  en:
+  - shallow depth of field, only the subject in focus, background heavily blurred
+  motion_pattern:
+  - 停止
+  roles:
+  - 反応
+  - 質感
+  functions:
+  - 溜め
+  grammars: []
+  travels: false
+  physical: 絞り=f/1.4–2.8 ／ レンズ=85–135mm ／ 合焦=主役だけ ／ 背景=大きくぼける ／ 尺=—
+  directing:
+    job:
+    - 焦点
+    pairs_with:
+    - 注意の限定
+    - 内心への圧縮
+    position:
+    - 中
+  source: '051'
+  status: draft
+- id: '052'
+  name: ディープフォーカス
+  en:
+  - deep focus, everything sharp from foreground to background
+  motion_pattern:
+  - 停止
+  roles:
+  - 情景
+  - 図解
+  functions:
+  - 設定
+  grammars: []
+  travels: false
+  physical: 絞り=f/8–16 ／ レンズ=24–35mm ／ 合焦=手前から奥まで ／ 尺=—
+  directing:
+    job:
+    - 確立
+    - 分解
+    pairs_with:
+    - 前後関係の同時提示
+    - 選択の画面
+    position:
+    - 中
+  source: '052'
+  status: draft
+- id: '053'
+  name: ピント追従
+  en:
+  - focus tracking, the moving subject stays sharp
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 運動
+  - 所作
+  functions:
+  - 上昇
+  grammars: []
+  travels: false
+  physical: 位置=固定か並走 ／ 変化=動く被写体にピントを保つ ／ レンズ=85mm・f/2 ／ 尺=3–6秒
+  directing:
+    job:
+    - 焦点
+    - 分解
+    pairs_with:
+    - 動く被写体を追う
+    - 群衆の中の一人
+    position:
+    - 中
+  source: '053'
+  status: draft
+- id: '054'
+  name: ソフトフォーカス
+  en:
+  - soft focus, dreamy glow, edges slightly diffused
+  motion_pattern:
+  - 停止
+  roles:
+  - 反応
+  - 様式美
+  functions:
+  - 溜め
+  - 余韻
+  grammars:
+  - card: remembered-world
+    confidence: △
+  travels: false
+  physical: レンズ=50–85mm ／ 処理=輪郭を甘く ／ 光=にじませる ／ 尺=—
+  directing:
+    job:
+    - 様式
+    - 圧力
+    pairs_with:
+    - 記憶・夢
+    - 美化
+    position:
+    - 中
+  source: '054'
+  status: draft
+- id: '055'
+  name: デフォーカス
+  en:
+  - defocused, the subject goes soft
+  motion_pattern:
+  - 停止
+  roles:
+  - 反応
+  - 余白
+  functions:
+  - 余韻
+  - 転換
+  grammars: []
+  travels: false
+  physical: 合焦=意図的に外す ／ 主役=ぼける ／ 尺=1–3秒
+  directing:
+    job:
+    - 視点
+    - 解放
+    pairs_with:
+    - 意識の混濁
+    - 主観の揺れ
+    position:
+    - 中
+    - 尾
+  source: '055'
+  status: draft
+- id: '056'
+  name: フォーカスリビール
+  en:
+  - focus reveal, from blurred to sharp
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 開示
+  functions:
+  - 発見
+  grammars: []
+  travels: false
+  physical: 変化=ぼけ→合焦 ／ 速さ=1–2秒 ／ レンズ=85mm ／ 尺=2–4秒
+  directing:
+    job:
+    - 焦点
+    - 転換
+    pairs_with:
+    - 情報の開示
+    - 驚き
+    position:
+    - 中
+  source: '056'
+  status: draft
+- id: '057'
+  name: スプリットディオプター
+  en:
+  - split diopter, foreground and background both in sharp focus
+  motion_pattern:
+  - 停止
+  roles:
+  - 図解
+  - 開示
+  functions:
+  - 発見
+  grammars: []
+  travels: false
+  physical: 合焦=近景と遠景の両方 ／ 中景=ぼける ／ レンズ=35–50mm＋ディオプター ／ 尺=—
+  directing:
+    job:
+    - 焦点
+    - 様式
+    pairs_with:
+    - 前後の同時
+    - 分裂
+    position:
+    - 中
+  source: '057'
+  status: draft
+- id: 058
+  name: マクロ
+  en:
+  - macro shot of the water droplet
+  motion_pattern:
+  - 停止
+  - 微細運動
+  roles:
+  - 質感
+  functions:
+  - 設定
+  - 発見
+  grammars:
+  - card: scale-rupture
+    confidence: △
+  travels: false
+  physical: 被写体=小さなもの ／ 倍率=等倍（1:1） ／ レンズ=100mmマクロ ／ 尺=2–5秒
+  directing:
+    job:
+    - 焦点
+    - 様式
+    pairs_with:
+    - 質感の拡大
+    - 非日常化
+    position:
+    - 中
+  source: 058
+  status: draft
+- id: 059
+  name: 広角
+  en:
+  - wide-angle shot, 16mm, exaggerated perspective
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 情景
+  - 様式美
+  functions:
+  - 設定
+  grammars: []
+  travels: false
+  physical: レンズ=14–24mm ／ 効果=奥行き強調・周辺のゆがみ ／ 尺=—
+  directing:
+    job:
+    - 確立
+    - 様式
+    pairs_with:
+    - 空間の歪み
+    - スケール
+    position:
+    - 頭
+    - 中
+  source: 059
+  status: draft
+- id: '060'
+  name: 望遠
+  en:
+  - telephoto shot, 200mm, compressed background
+  motion_pattern:
+  - 停止
+  roles:
+  - 情景
+  - 反応
+  functions:
+  - 設定
+  - 溜め
+  grammars: []
+  travels: false
+  physical: レンズ=85–200mm以上 ／ 効果=背景の圧縮・遠くを大きく ／ 尺=—
+  directing:
+    job:
+    - 焦点
+    - 圧力
+    pairs_with:
+    - 圧縮・孤立
+    - 遠くの観察
+    position:
+    - 中
+  source: '060'
+  status: draft
+- id: '061'
+  name: 魚眼
+  en:
+  - fisheye shot, extreme barrel distortion
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  functions:
+  - 転換
+  grammars: []
+  travels: false
+  physical: レンズ=8–15mm ／ 効果=樽型のゆがみ・四隅が曲がる ／ 尺=—
+  directing:
+    job:
+    - 様式
+    pairs_with:
+    - 非現実・滑稽
+    position:
+    - 中
+  source: '061'
+  status: draft
+- id: '062'
+  name: アナモルフィック
+  en:
+  - anamorphic look, oval bokeh, horizontal blue lens flares, 2.39:1
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  functions:
+  - 設定
+  grammars: []
+  travels: false
+  physical: 画面=2.39:1 ／ ボケ=縦長の楕円 ／ フレア=水平の青い筋 ／ レンズ=40–75mm相当 ／ 尺=—
+  directing:
+    job:
+    - 様式
+    pairs_with:
+    - 映画の質感
+    - 光の筋
+    position:
+    - 全編
+  source: '062'
+  status: draft
+- id: '063'
+  name: ミニチュア風
+  en:
+  - tilt-shift miniature effect, a narrow band in focus, toy-like
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  - 図解
+  functions:
+  - 転換
+  grammars:
+  - card: scale-rupture
+    confidence: ◎
+  travels: false
+  physical: 位置=高い所から見下ろす ／ 合焦=横一帯だけ ／ 上下=ぼける ／ 尺=—
+  directing:
+    job:
+    - 様式
+    pairs_with:
+    - 模型化・距離
+    position:
+    - 中
+  source: '063'
+  status: draft
+- id: '064'
+  name: 中央構図
+  en:
+  - centered composition, subject in the middle of the frame
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  functions:
+  - 設定
+  - 決断
+  grammars: []
+  travels: false
+  physical: 配置=主役を画面中央 ／ 左右=対称に近い ／ 尺=—
+  directing:
+    job:
+    - 様式
+    - 焦点
+    pairs_with:
+    - 権威・正面
+    - 対称の緊張
+    position:
+    - 中
+  source: '064'
+  status: draft
+- id: '065'
+  name: 三分割構図
+  en:
+  - rule of thirds, subject on the right third
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  functions:
+  - 設定
+  grammars: []
+  travels: false
+  physical: 配置=主役を縦横の三分割の交点 ／ 目=上の線に ／ 尺=—
+  directing:
+    job:
+    - 確立
+    pairs_with:
+    - 落ち着き
+    - 視線の余白
+    position:
+    - 全編
+  source: '065'
+  status: draft
+- id: '066'
+  name: 左右対称構図
+  en:
+  - symmetrical composition, balanced left and right
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  functions:
+  - 設定
+  - 溜め
+  grammars: []
+  travels: false
+  physical: 配置=左右対称 ／ 主役=中央 ／ 尺=—
+  directing:
+    job:
+    - 様式
+    pairs_with:
+    - 秩序・儀式
+    - 崩れの予感
+    position:
+    - 中
+  source: '066'
+  status: draft
+- id: '067'
+  name: ネガティブスペース
+  en:
+  - negative space, subject small at the edge, large empty area
+  motion_pattern:
+  - 停止
+  roles:
+  - 余白
+  - 様式美
+  functions:
+  - 余韻
+  grammars: []
+  travels: false
+  physical: 配置=主役を端に小さく ／ 余白=画面の大半 ／ 尺=—
+  directing:
+    job:
+    - 解放
+    - 様式
+    pairs_with:
+    - 孤独
+    - 余白の圧
+    position:
+    - 中
+    - 尾
+  source: '067'
+  status: draft
+- id: 068
+  name: フレーム内フレーム
+  en:
+  - frame within a frame, the subject seen through a doorway
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  - 開示
+  functions:
+  - 設定
+  grammars:
+  - card: recursive-frame
+    confidence: △
+  travels: false
+  physical: 配置=窓・扉・トンネルで主役を囲む ／ 尺=—
+  directing:
+    job:
+    - 様式
+    - 視点
+    pairs_with:
+    - 監視・閉塞
+    - 入れ子
+    position:
+    - 中
+  source: 068
+  status: draft
+- id: 069
+  name: 三層構図
+  en:
+  - layered composition, blurred foreground, subject in the middle ground, distant background
+  motion_pattern:
+  - 停止
+  roles:
+  - 質感
+  - 情景
+  functions:
+  - 設定
+  grammars: []
+  travels: false
+  physical: 配置=前景・中景・遠景を重ねる ／ 前景=ぼかす ／ 尺=—
+  directing:
+    job:
+    - 確立
+    pairs_with:
+    - 奥行きの提示
+    - 前景の質感
+    position:
+    - 中
+  source: 069
+  status: draft
+- id: '070'
+  name: リーディングライン
+  en:
+  - leading lines, the road draws the eye toward the subject
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 様式美
+  - 情景
+  functions:
+  - 設定
+  grammars: []
+  travels: false
+  physical: 配置=道・線・線路が主役へ収束 ／ 尺=—
+  directing:
+    job:
+    - 確立
+    - 焦点
+    pairs_with:
+    - 視線の誘導
+    - 空間の骨
+    position:
+    - 頭
+    - 中
+  source: '070'
+  status: draft
+- id: '071'
+  name: ルックルーム
+  en:
+  - look room, empty space in the direction the subject is looking
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  - 余白
+  functions:
+  - 余韻
+  grammars: []
+  travels: false
+  physical: 配置=視線の先に余白 ／ 主役=反対側 ／ 尺=—
+  directing:
+    job:
+    - 確立
+    pairs_with:
+    - 進行方向の余白
+    - 期待
+    position:
+    - 中
+  source: '071'
+  status: draft
+- id: '072'
+  name: ヘッドルーム
+  en:
+  - proper headroom, small space above the head
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  functions:
+  - 設定
+  grammars: []
+  travels: false
+  physical: 配置=頭上の空き ／ 量=画面高の5–15% ／ 尺=—
+  directing:
+    job:
+    - 確立
+    pairs_with:
+    - 頭上空間
+    - 圧迫と解放
+    position:
+    - 中
+  source: '072'
+  status: draft
+- id: '073'
+  name: 前景のかぶせ
+  en:
+  - shot through a blurred foreground object, the subject behind it
+  motion_pattern:
+  - 停止
+  roles:
+  - 質感
+  - 情景
+  functions:
+  - 設定
+  grammars: []
+  travels: false
+  physical: 配置=前景に物を重ねる ／ 前景=ぼける ／ 奥=被写体 ／ 尺=—
+  directing:
+    job:
+    - 確立
+    - 様式
+    pairs_with:
+    - 奥行き
+    - 覗き見
+    position:
+    - 中
+  source: '073'
+  status: draft
+- id: '074'
+  name: シルエット
+  en:
+  - silhouette shot, backlit subject, completely dark outline
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  - 情景
+  functions:
+  - 設定
+  - 決断
+  grammars:
+  - card: light-as-actor
+    confidence: ○
+  travels: false
+  physical: 光=後方から強い光 ／ 被写体=真っ黒な輪郭 ／ 尺=—
+  directing:
+    job:
+    - 様式
+    - 圧力
+    pairs_with:
+    - 匿名・威圧
+    - 光の逆転
+    position:
+    - 中
+  source: '074'
+  status: draft
+- id: '075'
+  name: 反射ショット
+  en:
+  - reflection shot in a puddle
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  - 開示
+  functions:
+  - 発見
+  grammars:
+  - card: recursive-frame
+    confidence: ○
+  travels: false
+  physical: 配置=鏡・水面に映す ／ 被写体=映った像 ／ 尺=—
+  directing:
+    job:
+    - 様式
+    - 視点
+    pairs_with:
+    - 二重の視線
+    - 内面
+    position:
+    - 中
+  source: '075'
+  status: draft
+- id: '076'
+  name: スピードランプ
+  en:
+  - speed ramp, the motion slows down smoothly then returns to normal
+  motion_pattern:
+  - 時間の運動
+  roles:
+  - 運動
+  - 反応
+  functions:
+  - 溜め
+  - 解放
+  grammars:
+  - card: time-fold
+    confidence: ○
+  travels: false
+  physical: 時間=等速→減速→等速（100%→25%→100%） ／ 尺=3–6秒
+  directing:
+    job:
+    - 圧力
+    - 転換
+    pairs_with:
+    - 加速と停止
+    - 記憶の跳躍
+    position:
+    - 中
+  source: '076'
+  status: draft
+- id: '077'
+  name: ハイパーラプス
+  en:
+  - hyperlapse, moving through the street while time speeds up
+  motion_pattern:
+  - 時間の運動
+  roles:
+  - 情景
+  - 転換
+  functions:
+  - 転換
+  grammars:
+  - card: temporal-panorama
+    confidence: ◎
+  - card: time-fold
+    confidence: ○
+  travels: true
+  physical: 位置=移動しながら ／ 時間=圧縮（10–30倍） ／ 尺=3–8秒
+  directing:
+    job:
+    - 確立
+    - 転換
+    pairs_with:
+    - 場所と時間の圧縮
+    - 移動の要約
+    position:
+    - つなぎ
+  source: '077'
+  status: draft
+- id: 078
+  name: リアルタイム
+  en:
+  - real-time motion
+  motion_pattern: []
+  roles:
+  - 運動
+  - 所作
+  functions:
+  - 上昇
+  grammars: []
+  travels: false
+  physical: 時間=1倍 ／ 尺=—
+  directing:
+    job:
+    - 圧力
+    pairs_with:
+    - 同時性の緊張
+    - 長回しの一部
+    position:
+    - 中
+  source: 078
+  status: draft
+- id: 079
+  name: フリーズフレーム
+  en:
+  - freeze frame
+  motion_pattern:
+  - 停止
+  roles:
+  - 反応
+  - 様式美
+  functions:
+  - 決断
+  - 結果
+  grammars: []
+  travels: false
+  physical: 時間=停止（1コマを保持） ／ 尺=1–3秒
+  directing:
+    job:
+    - 転換
+    - 様式
+    pairs_with:
+    - 場面の句点
+    - 記憶の停止
+    position:
+    - 尾
+    - つなぎ
+  source: 079
+  status: draft
+- id: 080
+  name: 逆再生
+  en:
+  - reverse motion, the action plays backward
+  motion_pattern:
+  - 時間の運動
+  roles:
+  - 開示
+  - 転換
+  functions:
+  - 発見
+  - 転換
+  grammars:
+  - card: time-fold
+    confidence: ○
+  travels: false
+  physical: 時間=逆順 ／ 尺=2–5秒
+  directing:
+    job:
+    - 転換
+    - 視点
+    pairs_with:
+    - 因果の反転
+    - 記憶の巻き戻し
+    position:
+    - 中
+    - つなぎ
+  source: 080
+  status: draft
+- id: 081
+  name: モーションブラー
+  en:
+  - strong motion blur on the moving subject
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 運動
+  functions:
+  - 上昇
+  grammars: []
+  travels: false
+  physical: シャッター=開き長め ／ 効果=動く方向へ筋が伸びる ／ 尺=—
+  directing:
+    job:
+    - 圧力
+    - 様式
+    pairs_with:
+    - 速度の体感
+    - 混乱
+    position:
+    - 中
+  source: 081
+  status: draft
+- id: 082
+  name: ストップモーション
+  en:
+  - stop-motion animation, slightly jerky movement
+  motion_pattern:
+  - 時間の運動
+  roles:
+  - 運動
+  - 様式美
+  functions:
+  - 上昇
+  grammars:
+  - card: physics-with-a-rule
+    confidence: △
+  travels: false
+  physical: 時間=コマ打ち（12–24コマ/秒相当） ／ 尺=3–8秒
+  directing:
+    job:
+    - 様式
+    pairs_with:
+    - 手作り感
+    - 非現実
+    position:
+    - 全編
+  source: 082
+  status: draft
+- id: 083
+  name: シームループ
+  en:
+  - seamless loop, the end matches the beginning
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 様式美
+  - 余白
+  functions:
+  - 余韻
+  grammars:
+  - card: recursive-frame
+    confidence: △
+  travels: false
+  physical: 構成=終点＝始点 ／ 尺=2–6秒
+  directing:
+    job:
+    - 様式
+    pairs_with:
+    - 無限・反復
+    - 夢
+    position:
+    - 中
+  source: 083
+  status: draft
+- id: 084
+  name: ロングテイク
+  en:
+  - long take, no cuts
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 所作
+  - 運動
+  functions:
+  - 上昇
+  grammars: []
+  travels: true
+  physical: 構成=カットなし ／ 尺=10秒以上
+  directing:
+    job:
+    - 確立
+    - 分解
+    pairs_with:
+    - 場面を切らない
+    - 時間の実感
+    position:
+    - 中
+  source: 084
+  status: draft
+- id: 085
+  name: 固定ショット
+  en:
+  - locked-off static shot, camera completely still
+  motion_pattern:
+  - 停止
+  roles:
+  - 様式美
+  - 情景
+  functions:
+  - 設定
+  grammars: []
+  travels: false
+  physical: 位置=固定 ／ 向き=固定 ／ 尺=—
+  directing:
+    job:
+    - 確立
+    - 様式
+    pairs_with:
+    - 芝居を見せる
+    - 観察
+    position:
+    - 全編
+  source: 085
+  status: draft
+- id: 086
+  name: 横移動リビール
+  en:
+  - camera tracks sideways past a wall to reveal the subject behind it
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 開示
+  functions:
+  - 発見
+  grammars:
+  - card: frame-escape
+    confidence: △
+  travels: true
+  physical: 位置=遮蔽物の横 ／ 経路=横移動 ／ 速さ=ゆっくり ／ 尺=3–6秒
+  directing:
+    job:
+    - 確立
+    - 転換
+    pairs_with:
+    - 隠れたものの開示
+    position:
+    - 中
+  source: 086
+  status: draft
+- id: 087
+  name: 引きのリビール
+  en:
+  - pull back to reveal the wider scene
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 開示
+  functions:
+  - 発見
+  - 結果
+  grammars: []
+  travels: true
+  physical: 位置=後退 ／ 変化=周囲の全貌が出る ／ 速さ=ゆっくり ／ 尺=4–8秒
+  directing:
+    job:
+    - 確立
+    - 転換
+    pairs_with:
+    - 空間の拡大
+    - からかい
+    position:
+    - 尾
+  source: 087
+  status: draft
+- id: 088
+  name: くぐり抜け
+  en:
+  - camera pushes through a doorway into the room
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 開示
+  - 運動
+  functions:
+  - 転換
+  - 発見
+  grammars:
+  - card: frame-escape
+    confidence: ○
+  travels: true
+  physical: 位置=入口の外 ／ 経路=開口部を抜けて前進 ／ 速さ=一定 ／ 尺=3–6秒
+  directing:
+    job:
+    - 転換
+    - 視点
+    pairs_with:
+    - 空間の通過
+    - 未知への侵入
+    position:
+    - 中
+  source: 088
+  status: draft
+- id: 089
+  name: フライスルー
+  en:
+  - fly-through shot, camera glides through the space
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 情景
+  - 開示
+  functions:
+  - 設定
+  - 解放
+  grammars:
+  - card: impossible-camera
+    confidence: △
+  travels: true
+  physical: 位置=空間の中 ／ 経路=前進（飛行のように） ／ 速さ=一定 ／ 尺=3–8秒
+  directing:
+    job:
+    - 確立
+    - 様式
+    pairs_with:
+    - 空間の遊覧
+    - 非現実
+    position:
+    - 頭
+    - 中
+  source: 089
+  status: draft
+- id: 090
+  name: フライオーバー
+  en:
+  - camera flies over the subject and continues forward
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 情景
+  functions:
+  - 設定
+  grammars:
+  - card: impossible-camera
+    confidence: △
+  travels: true
+  physical: 位置=上空 ／ 経路=被写体の上を越えて前進 ／ 速さ=一定 ／ 尺=3–8秒
+  directing:
+    job:
+    - 確立
+    pairs_with:
+    - 場面の頭
+    - 地理の提示
+    position:
+    - 頭
+  source: 090
+  status: draft
+- id: 091
+  name: 上昇リビール
+  en:
+  - camera rises above the wall to reveal what is behind it
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 開示
+  functions:
+  - 発見
+  grammars:
+  - card: frame-escape
+    confidence: ○
+  travels: true
+  physical: 位置=遮蔽物の手前 ／ 経路=上昇して越える ／ 速さ=ゆっくり ／ 尺=4–8秒
+  directing:
+    job:
+    - 転換
+    - 確立
+    pairs_with:
+    - 隠れていたものの出現
+    position:
+    - 中
+  source: 091
+  status: draft
+- id: 092
+  name: パララックス
+  en:
+  - parallax move, the foreground shifts faster than the background
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 様式美
+  - 運動
+  functions:
+  - 設定
+  grammars: []
+  travels: true
+  physical: 位置=横移動 ／ 効果=前景ほど大きくずれる ／ 速さ=一定 ／ 尺=3–6秒
+  directing:
+    job:
+    - 確立
+    - 様式
+    pairs_with:
+    - 奥行きの体感
+    - 移動
+    position:
+    - 中
+  source: 092
+  status: draft
+- id: 093
+  name: ボディマウント
+  en:
+  - camera mounted on the body facing the wearer, face steady, background moving
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 反応
+  - 所作
+  functions:
+  - 上昇
+  grammars: []
+  travels: true
+  physical: 位置=身体に固定 ／ 被写体=自分 ／ 経路=歩行に追従 ／ レンズ=14–24mm ／ 尺=3–8秒
+  directing:
+    job:
+    - 視点
+    - 分解
+    pairs_with:
+    - 身体の動き
+    - 臨場
+    position:
+    - 中
+  source: 093
+  status: draft
+- id: 094
+  name: 車載ショット
+  en:
+  - camera mounted on the car, the road moving past
+  motion_pattern:
+  - 機械・乗物
+  roles:
+  - 運動
+  functions:
+  - 上昇
+  grammars: []
+  travels: true
+  physical: 位置=車体 ／ 経路=走行に追従 ／ 速さ=車速 ／ 尺=3–6秒
+  directing:
+    job:
+    - 分解
+    - 様式
+    pairs_with:
+    - 移動の実感
+    - 会話の密室
+    position:
+    - 中
+  source: 094
+  status: draft
+- id: 095
+  name: 水中ショット
+  en:
+  - underwater shot, bubbles and light caustics
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 情景
+  - 質感
+  functions:
+  - 設定
+  grammars: []
+  travels: false
+  physical: 位置=水中 ／ 効果=泡・揺らぎ・青い色 ／ 尺=3–6秒
+  directing:
+    job:
+    - 様式
+    - 確立
+    pairs_with:
+    - 非日常の空間
+    - 浮遊
+    position:
+    - 中
+  source: 095
+  status: draft
+- id: 096
+  name: 俯瞰トラッキング
+  en:
+  - overhead tracking shot, camera directly above moving with the subject
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 情景
+  - 運動
+  functions:
+  - 設定
+  - 上昇
+  grammars: []
+  travels: true
+  physical: 位置=真上 ／ 経路=被写体を追って移動 ／ 速さ=同速 ／ 尺=3–6秒
+  directing:
+    job:
+    - 確立
+    pairs_with:
+    - 地理の提示
+    - 移動の俯瞰
+    position:
+    - 頭
+    - 中
+  source: 096
+  status: draft
+- id: 097
+  name: 上昇オービット
+  en:
+  - rising orbit, camera circles the subject while climbing
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 開示
+  - 様式美
+  functions:
+  - 解放
+  grammars:
+  - card: impossible-camera
+    confidence: △
+  travels: true
+  physical: 位置=周囲 ／ 経路=円弧＋上昇 ／ 速さ=ゆっくり ／ 尺=5–10秒
+  directing:
+    job:
+    - 解放
+    - 様式
+    pairs_with:
+    - クライマックスの開放
+    position:
+    - 尾
+  source: 097
+  status: draft
+- id: 098
+  name: トラック+パン
+  en:
+  - truck and pan, moving sideways while rotating to keep the subject framed
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 開示
+  - 運動
+  functions:
+  - 上昇
+  grammars: []
+  travels: true
+  physical: 位置=横移動 ／ 経路=移動しながら向きも変える ／ 速さ=一定 ／ 尺=3–6秒
+  directing:
+    job:
+    - 確立
+    - 転換
+    pairs_with:
+    - 空間の連続提示
+    - 発見
+    position:
+    - 中
+  source: 098
+  status: draft
+- id: 099
+  name: ドリー+ピント追従
+  en:
+  - dolly in while keeping focus on the subject
+  motion_pattern:
+  - カメラのみ
+  roles:
+  - 開示
+  - 反応
+  functions:
+  - 発見
+  grammars: []
+  travels: true
+  physical: 位置=前進 ／ 変化=同時にピントを保つ ／ 速さ=ゆっくり ／ 尺=3–6秒
+  directing:
+    job:
+    - 焦点
+    - 分解
+    pairs_with:
+    - 二者をまたぐ移動
+    - 関係の変化
+    position:
+    - 中
+  source: 099
+  status: draft
+- id: '100'
+  name: バレットタイム
+  en:
+  - bullet time effect, time nearly frozen while the camera orbits
+  motion_pattern:
+  - 時間の運動
+  - 停止
+  roles:
+  - 反応
+  - 様式美
+  functions:
+  - 溜め
+  - 解放
+  grammars:
+  - card: impossible-camera
+    confidence: ◎
+  travels: true
+  physical: 時間=ほぼ停止（1/100以下） ／ 位置=周囲 ／ 経路=円弧移動 ／ 尺=2–5秒
+  directing:
+    job:
+    - 圧力
+    - 様式
+    pairs_with:
+    - 決定的瞬間の停止
+    - 驚き
+    position:
+    - 中
+    - 尾
+  source: '100'
+  status: draft

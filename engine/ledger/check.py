@@ -1666,6 +1666,95 @@ def _self_test():
         if not _ok:
             print(f"        {_got[:88]}")
 
+    # ---- L53（カメラ技法の目録が、この基盤の語彙に引けるか）
+    #     ⚠️ **目録は使い捨てのリポジトリに置く。** 本物の目録を試すと、
+    #        目録を直すたびに自己検査の期待値が動く——**検査が目録に従属する。**
+    print("\n=== 自己検査 — カメラ技法の目録\n")
+
+    def cam_entry(**kw):
+        e = {"id": "001", "name": "パン", "en": ["pan left"],
+             "motion_pattern": ["カメラのみ"], "roles": ["情景"],
+             "functions": ["設定"], "grammars": [], "travels": False,
+             "physical": "位置=固定",
+             "directing": {"job": ["確立"], "pairs_with": ["場面の頭"],
+                           "position": ["頭"]},
+             "source": "001", "status": "draft"}
+        e.update(kw)
+        return e
+
+    def cam_catalog_case(label, entries, want, fragment, *, write=True):
+        """`(名前, 成否, 実測)` を返す。**`want` は違反の有無である。**"""
+        d = _P(tempfile.mkdtemp())
+        if write:
+            text = yaml.safe_dump({"version": 1, "techniques": entries},
+                                  allow_unicode=True, sort_keys=False)
+            (d / "index.yaml").write_text(text, encoding="utf-8")
+            g = d / "references" / "grammars"
+            g.mkdir(parents=True)
+            (g / "index.yaml").write_text(
+                "version: 1\ngrammars:\n- name: time-fold\n", encoding="utf-8")
+        env = semantic.camera.CAMERA_ENV
+        keep = _os.environ.get(env)
+        _os.environ[env] = str(d)
+        try:
+            got = semantic.check_camera_catalog(_Bare(), repo_root=d)
+        finally:
+            if keep is None:
+                _os.environ.pop(env, None)
+            else:
+                _os.environ[env] = keep
+        v = [f for f in got if f["severity"] != "note"]
+        nts = [f for f in got if f["severity"] == "note"]
+        ok = (bool(v) == want
+              and (not want or any(fragment in f["message"] for f in v))
+              and (want or any(fragment in f["message"] for f in nts)))
+        return label, ok, (v[0]["message"] if v
+                           else (nts[0]["message"] if nts else "（何も出ない）"))
+
+    _no_physical = cam_entry()
+    _no_physical.pop("physical")
+
+    for _label, _ok, _got in [
+        cam_catalog_case("L53 目録が語彙に引ける（鳴ってはならない）",
+                         [cam_entry()], False, "照合した"),
+        cam_catalog_case("L53 運動の型が目録に無い",
+                         [cam_entry(motion_pattern=["走る"])], True,
+                         "運動の層の目録に無い"),
+        # ⚠️ **名前自体が `・` を含む型。** 先に割ると、正しい目録が鳴る。
+        cam_catalog_case("L53 `機械・乗物` は1つの型として引ける",
+                         [cam_entry(motion_pattern=["機械・乗物"])], False, "照合した"),
+        cam_catalog_case("L53 種別が目録に無い",
+                         [cam_entry(roles=["景色"])], True, "種別の目録"),
+        cam_catalog_case("L53 劇的関数が enum に無い",
+                         [cam_entry(functions=["爆発"])], True, "劇的関数"),
+        cam_catalog_case("L53 文法が目録に無い",
+                         [cam_entry(grammars=[{"card": "no-such",
+                                               "confidence": "○"}])],
+                         True, "文法の目録"),
+        cam_catalog_case("L53 文法の確度が記号でない",
+                         [cam_entry(grammars=[{"card": "time-fold",
+                                               "confidence": "×"}])],
+                         True, "◎・○・△"),
+        cam_catalog_case("L53 生成へ渡る句が無い",
+                         [cam_entry(en=[])], True, "`en`"),
+        cam_catalog_case("L53 移動するかが真偽値でない",
+                         [cam_entry(travels="yes")], True, "真偽値"),
+        cam_catalog_case("L53 物理の欄が無い",
+                         [_no_physical], True, "`physical`"),
+        cam_catalog_case("L53 目録が空＝1件も照合していない",
+                         [], False, "空である"),
+        cam_catalog_case("L53 目録が無い＝確かめられない",
+                         [], False, "無い", write=False),
+        # ⚠️ **同じ id を2度置く。** 後が先を黙って覆えば、読む者ごとに違う目録になる。
+        cam_catalog_case("L53 同じ id が2度ある＝形が違う",
+                         [cam_entry(), cam_entry()], False, "形が違う"),
+    ]:
+        n += 1
+        bad += not _ok
+        print(f"    {_label:<50}{'':>10}  {'期待どおり' if _ok else '⚠️ 期待と違う'}")
+        if not _ok:
+            print(f"        {_got[:88]}")
+
     def run1(label, fn, proj, want, fragment, note=None):
         """⚠️ **註も読む。** 註が出ないことも「違反0件」に見えるからである。"""
         nonlocal n, bad

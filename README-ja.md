@@ -123,7 +123,7 @@ semantic-visual-loom/
 ├── skills/          # Skill——分解・direction（①の中）・設計・staging（②の中）・台帳・ショット・review（④の後）
 ├── tools/           # 検査（i18n のミラー）
 ├── references/      # こちら側のカード——formats/（video-spec と文法）と styles/（sumi-e）、
-│                    #   そして grammars/——検査が読む目録
+│                    #   そして検査が読む2つの目録——grammars/ と camera/（100の技法）
 ├── assets/          # リポジトリの顔（README の hero）
 └── projects/        # 作品ごとの実体
 ```

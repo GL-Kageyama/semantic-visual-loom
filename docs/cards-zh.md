@@ -29,6 +29,7 @@ distill-essence-engine/references/styles/    # the style cards
 references/formats/    # this side's format cards — `video-spec`
 references/styles/     # this side's style cards — `sumi-e`
 references/grammars/   # the registry — `index.yaml`
+references/camera/     # the technique registry — `index.yaml` (100 camera techniques)
 ```
 
 ⚠️ **目录不是第三个层。** 它自己一张卡片也不持——**只是把属于文法的形式卡片列出来。**
@@ -103,6 +104,40 @@ references/grammars/   # the registry — `index.yaml`
 ⚠️ **旁边的 45 和 55 也是同一条规则，按那个目录今天的样子数出来的。**
 它们是**图像侧的库存，不是本仓库的东西**——所以**这边什么都不变，那两个数也可能动。**
 
+## 摄像机目录
+
+`references/camera/index.yaml` **是摄像机技法的一览，也是检查读的那份一览。**
+它回答的问题与文法目录不同——文法目录说**哪些形式卡片是文法**，
+摄像机目录说**动作叫什么名字**。100 个技法，每一个都带着英文一行、运动组、
+能充当的角色、常与它搭配的文法，以及它在演出上做的差事。
+
+```text
+- id: "007"                              # 原一览的编号
+  name: クレーンアップ
+  en: [crane up, camera rises on a crane]  # §18 拿来打底的那一行
+  motion_pattern: [カメラのみ]             # rolemap.MOTION_PATTERNS
+  roles: [開示, 情景]                     # 能担的差事——是集合，不是选择
+  functions: [転換, 発見]                 # specmap.DRAMATIC_FUNCTION_EN
+  grammars: [{card: impossible-camera, confidence: △}]
+  travels: true                          # 摄像机的位置会不会变
+  directing: {job: [解放, 確立], pairs_with: [幕切れで視野を開く, 勝利の後], position: [尾]}
+  physical: 位置=上昇しながら弧 ／ …       # 摄像机的身体在做什么
+  status: draft
+```
+
+⚠️ **`roles` 是集合，这正是设计。** 一个动作能担好几件差事——
+**是哪一件，由镜头的 `role` 决定。** 把每个技法压成一行的表**会变成谎话。**
+⚠️ **`travels` 是设计上的事实，不是测量**——摇、俯仰、旋转、变焦**不改变摄像机站的位置**，
+只是转向或改画角，所以画面在动，它也是 `false`。
+
+⚠️ **每一条都是 `status: draft`。** 这个对应是从一般性的电影作法套上去的，
+**没有在任何作品自己的镜头上量过。** **作品的用法赢**——不合时，
+**改目录，不改作品。**
+
+⚠️ **`L53` 读整份一览，但什么也不裁**：`motion_pattern` 必须能引到
+`rolemap.MOTION_PATTERNS`，`role` 必须能引到 `rolemap.ROLES`，function 必须能引到 schema 的
+enum，文法卡片必须能引到文法目录。**这个动作对这个镜头是否合适，不是这个层能问的问题。**
+
 ## 环境变量
 
 | 层 | 变量 | |
@@ -110,6 +145,7 @@ references/grammars/   # the registry — `index.yaml`
 | format | `SVL_FORMATS_DIR` | 形式的卡片在哪里 |
 | style | `SVL_STYLES_DIR` | 样式的卡片在哪里 |
 | registry | `SVL_GRAMMARS_DIR` | `index.yaml` 在哪里——**叠加，从不替换**：本仓库自己的 `references/grammars/` 依旧读得到 |
+| camera | `SVL_CAMERA_DIR` | 技法一览在哪里——**叠加，从不替换**：本仓库自己的 `references/camera/` 依旧读得到 |
 
 ⚠️ **每个层读自己的变量。** 指向样式的目录，**并不会挪动形式的层**——**反过来也一样。**
 *没被读到的名号，不能长得跟被读到的一样。*

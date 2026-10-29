@@ -32,6 +32,7 @@ A check that cannot open a card **says so** rather than passing—**"could not v
 references/formats/    # this side's format cards — `video-spec`
 references/styles/     # this side's style cards — `sumi-e`
 references/grammars/   # the registry — `index.yaml`
+references/camera/     # the technique registry — `index.yaml` (100 camera techniques)
 ```
 
 ⚠️ **The registry is not a third layer.** It holds no cards of its own; **it lists the format
@@ -113,6 +114,43 @@ and clear."**
 today.** They are **the image side's inventory, and this repository does not own them**—so
 **those two numbers can move without anything here changing.**
 
+## The camera registry
+
+`references/camera/index.yaml` **is the list of camera techniques, and it is the list the
+checks read.** It answers a different question from the grammar registry: the grammar registry
+says **which format cards are grammars**, and the camera registry says **what the moves are
+called** — 100 techniques, each carrying the English line, the motion group, the roles it can
+serve, the grammars it commonly pairs with, and the directing job it does.
+
+```text
+- id: "007"                              # the source list's number
+  name: クレーンアップ
+  en: [crane up, camera rises on a crane]  # the line §18 is built from
+  motion_pattern: [カメラのみ]             # rolemap.MOTION_PATTERNS
+  roles: [開示, 情景]                     # the jobs the move can do — a set, not a choice
+  functions: [転換, 発見]                 # specmap.DRAMATIC_FUNCTION_EN
+  grammars: [{card: impossible-camera, confidence: △}]
+  travels: true                          # does the camera change position
+  directing: {job: [解放, 確立], pairs_with: [幕切れで視野を開く, 勝利の後], position: [尾]}
+  physical: 位置=上昇しながら弧 ／ …       # what the camera's body does
+  status: draft
+```
+
+⚠️ **`roles` is a set, and that is the design.** A move can serve several jobs; **the shot's
+`role` decides which one**, and a table that collapses this to one row per technique **would be
+a lie.** ⚠️ **`travels` is a design fact, not a measurement**: pans, tilts, rolls and zooms turn
+or reframe **without changing where the camera stands**, so they are `false` even though the
+picture moves.
+
+⚠️ **Every entry is `status: draft`.** The mapping was applied from general film practice,
+**not measured against any work's own shots.** **A work's use wins**: when the two disagree,
+**the catalog is corrected, not the work.**
+
+⚠️ **`L53` reads the whole list and judges none of it**: each `motion_pattern` must resolve
+against `rolemap.MOTION_PATTERNS`, each `role` against `rolemap.ROLES`, each function against the
+schema's enum, and each grammar card against the grammar registry. **Whether a move is right for
+a shot is not a question this layer can ask.**
+
 ## The environment variables
 
 | layer | variable | |
@@ -120,6 +158,7 @@ today.** They are **the image side's inventory, and this repository does not own
 | format | `SVL_FORMATS_DIR` | where the format cards are |
 | style | `SVL_STYLES_DIR` | where the style cards are |
 | registry | `SVL_GRAMMARS_DIR` | where `index.yaml` is — **overlaid, never replaced**: this repository's own `references/grammars/` remains reachable |
+| camera | `SVL_CAMERA_DIR` | where the technique list is — **overlaid, never replaced**: this repository's own `references/camera/` remains reachable |
 
 ⚠️ **Each layer reads its own variable.** Pointing at a style directory **does not move the
 format layer**—and **the converse holds too.** *A naming that is not read must not look like

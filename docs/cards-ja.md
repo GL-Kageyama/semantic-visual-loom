@@ -32,6 +32,7 @@ distill-essence-engine/references/styles/    # the style cards
 references/formats/    # this side's format cards — `video-spec`
 references/styles/     # this side's style cards — `sumi-e`
 references/grammars/   # the registry — `index.yaml`
+references/camera/     # the technique registry — `index.yaml` (100 camera techniques)
 ```
 
 ⚠️ **目録は第三の層ではない。** 自分ではカードを1枚も持たない——**文法である形式カードを
@@ -111,6 +112,41 @@ references/grammars/   # the registry — `index.yaml`
 それらは**画像側の在庫であり、このリポジトリのものではない**——ゆえに
 **こちらの何も変わらないうちに、その2つの数は動きうる。**
 
+## カメラの目録
+
+`references/camera/index.yaml` は**カメラ技法の一覧であり、検査が読む一覧である。**
+文法の目録とは別の問いに答える——文法の目録は**どの形式カードが文法か**を並べ、
+カメラの目録は**動きの名は何か**を並べる。100の技法、それぞれが英語の一行、運動の群、
+担える役割、よく組む文法、そして演出上の仕事を運ぶ。
+
+```text
+- id: "007"                              # 元の一覧の番号
+  name: クレーンアップ
+  en: [crane up, camera rises on a crane]  # §18 が土台にする一行
+  motion_pattern: [カメラのみ]             # rolemap.MOTION_PATTERNS
+  roles: [開示, 情景]                     # 担える仕事——選択ではなく集合
+  functions: [転換, 発見]                 # specmap.DRAMATIC_FUNCTION_EN
+  grammars: [{card: impossible-camera, confidence: △}]
+  travels: true                          # カメラの位置が変わるか
+  directing: {job: [解放, 確立], pairs_with: [幕切れで視野を開く, 勝利の後], position: [尾]}
+  physical: 位置=上昇しながら弧 ／ …       # カメラの身体が何をするか
+  status: draft
+```
+
+⚠️ **`roles` が集合であることが設計である。** ひとつの動きは複数の仕事に使える——
+**どれなのかはショットの `role` が決める。** 1技法1行に潰した表は**嘘になる。**
+⚠️ **`travels` は設計上の事実であって、実測ではない**——パン・チルト・ロール・ズームは
+**カメラの立つ位置を変えずに**向きや画角を変えるので、絵が動いても `false` である。
+
+⚠️ **全件が `status: draft`。** 当てはめは一般論の映画作法から起こしたもので、
+**どの作品のショットでも測られていない。** **作品の使い方が勝つ**——食い違ったら
+**目録を直す。作品を直さない。**
+
+⚠️ **`L53` は一覧を読むが、何も裁かない**: `motion_pattern` は
+`rolemap.MOTION_PATTERNS` に、`role` は `rolemap.ROLES` に、function は schema の enum に、
+文法のカードは文法の目録に引けなければならない。**その動きがそのショットに正しいかは、
+この層が問えることではない。**
+
 ## 環境変数
 
 | 層 | 変数 | |
@@ -118,6 +154,7 @@ references/grammars/   # the registry — `index.yaml`
 | format | `SVL_FORMATS_DIR` | 形式のカードがどこに在るか |
 | style | `SVL_STYLES_DIR` | 様式のカードがどこに在るか |
 | registry | `SVL_GRAMMARS_DIR` | `index.yaml` がどこに在るか——**重ねる。置き換えない**: このリポジトリ自身の `references/grammars/` も読まれ続ける |
+| camera | `SVL_CAMERA_DIR` | 技法の一覧がどこに在るか——**重ねる。置き換えない**: このリポジトリ自身の `references/camera/` も読まれ続ける |
 
 ⚠️ **層はそれぞれ自分の変数を読む。** 様式のディレクトリを指しても、
 **形式の層は動かない**——**逆もまた同じである。** *読まれていない名乗りが、

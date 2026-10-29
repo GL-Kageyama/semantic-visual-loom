@@ -110,6 +110,7 @@ import json
 import re
 from pathlib import Path
 
+import camera
 import grammars
 import rolemap
 import specdoc
@@ -4145,6 +4146,194 @@ def check_aim_grammar(project, repo_root=None):
     return out
 
 
+# ---------------------------------------------------------------- 層F 目録（カメラ技法）
+
+#: カメラ目録の `directing.job`。**一般論の映画作法の8つである。**
+#: ⚠️ **sVL の `role` ではない。** `role` は「そのショットの仕事」、
+#: こちらは「その技法が演出上すること」——**軸が違う。混ぜて1対1にしない。**
+CAMERA_JOBS = ("確立", "分解", "焦点", "視点", "圧力", "解放", "転換", "様式")
+
+#: `directing.position`。場面の中の置かれ方。
+CAMERA_POSITIONS = ("頭", "中", "尾", "つなぎ", "全編")
+
+#: 文法の確度。`references/grammars/index.yaml` の註と同じ記号である。
+CAMERA_CONFIDENCE = ("◎", "○", "△")
+
+#: 目録の `status`。⚠️ **`draft` を正典と呼ばない。**
+CAMERA_STATUS = ("draft", "established")
+
+
+def _camera_motion_ok(value):
+    """`停止・微細運動` は2つに割り、`機械・乗物` は1つのまま引く。
+
+    ⚠️ **割る前に、13の名へ丸ごと当てる。** `機械・乗物` は名前自体が `・` を
+    含む——先に割れば、存在しない `機械` を探して**正しい目録が鳴る。**
+    """
+    if not isinstance(value, str) or not value:
+        return False
+    if value in rolemap.MOTION_PATTERNS:
+        return True
+    parts = [p for p in value.split("・") if p]
+    return bool(parts) and all(p in rolemap.MOTION_PATTERNS for p in parts)
+
+
+def check_camera_catalog(project, repo_root=None):
+    """L53 — カメラ技法の目録が、この基盤の語彙に引けるか。
+
+    ⚠️ **なぜ要るか。** 100の技法を目録に置いても、読む層が無ければ腐る
+    （`rolemap.py` の冒頭と同じ理由）。この層は目録の**形**だけを見る。
+
+    ⚠️ **見ていないもの。**
+      * **その技法をその作品で選ぶのが適切か。** 作品の側の判断である。
+      * **§18 `Camera Prompt` に実際に書かれたか。** 記録に技法の欄が無い
+        ——**目録と作品は、まだ繋がっていない。**
+      * **`roles` の当てはめが正しいか。** 目録は `draft` であり、
+        **作品の `role` が違えば作品が勝つ。** この層は引けるかだけを見る。
+      * **`travels` の判断が正しいか。** 形（真偽値）だけを見る。
+
+    ⚠️ **値を正典にしない。** 目録が在ることは、その当てはめが正しいことの
+    証拠ではない——`routes` と同じく、**宣言である。**
+    """
+    out = []
+    root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
+    entries, where, problem = camera.catalog(root)
+
+    if problem == "missing":
+        out.append(finding("L53", "",
+                           f"カメラの目録が**無い**——探した範囲: {where}。"
+                           "**この層は1件も照合していない。**",
+                           severity="note"))
+        return out
+    if problem == "unreadable":
+        out.append(finding("L53", "",
+                           f"カメラの目録が**読めない**——{where}。"
+                           "**読めないことを、正しいと言わない。**",
+                           severity="note"))
+        return out
+    if problem == "malformed":
+        out.append(finding("L53", "",
+                           f"カメラの目録の**形が違う**——{where}。"
+                           "`techniques:` が並びで、各項が一意の `id` を持つこと。",
+                           severity="note"))
+        return out
+    if not entries:
+        out.append(finding("L53", "",
+                           "カメラの目録が**空である**——**1件も照合していない。**",
+                           severity="note"))
+        return out
+
+    grammar_entries, grammar_where, grammar_problem = grammars.catalog(root)
+    if grammar_problem:
+        out.append(finding("L53", "",
+                           f"文法の目録が読めないので、`grammars` は**照合していない**"
+                           f"——{grammar_where}。",
+                           severity="note"))
+
+    typedlessness = 0
+    for key, item in entries.items():
+        sid = str(item.get("id") or key)
+
+        def bad(msg):
+            out.append(finding("L53", sid, msg))
+
+        if not re.fullmatch(r"\d{3}", sid):
+            bad(f"`id` は3桁の文字列であること（いまは `{sid}`）。")
+        if not isinstance(item.get("name"), str) or not item["name"].strip():
+            bad("`name` が空である。")
+        en = item.get("en")
+        if (not isinstance(en, list) or not en
+                or any(not isinstance(x, str) or not x.strip() for x in en)):
+            bad("`en` が空である——生成へ渡る句が無い。")
+
+        motion = item.get("motion_pattern")
+        if not isinstance(motion, list):
+            bad("`motion_pattern` が並びでない。")
+        else:
+            if not motion:
+                typedlessness += 1
+            for m in motion:
+                if not _camera_motion_ok(m):
+                    bad(f"`motion_pattern` の `{m}` は運動の層の目録に無い。")
+
+        roles = item.get("roles")
+        if not isinstance(roles, list) or not roles:
+            bad("`roles` が空である——**使える役割の集合**を1つ以上書くこと。")
+        else:
+            for r in roles:
+                if r not in rolemap.ROLES:
+                    bad(f"`roles` の `{r}` は種別の目録に無い。")
+
+        funcs = item.get("functions")
+        if not isinstance(funcs, list) or not funcs:
+            bad("`functions` が空である。")
+        else:
+            for f in funcs:
+                if f not in specmap.DRAMATIC_FUNCTION_EN:
+                    bad(f"`functions` の `{f}` は劇的関数の enum に無い。")
+
+        grams = item.get("grammars")
+        if not isinstance(grams, list):
+            bad("`grammars` が並びでない（0枚なら `[]`）。")
+        elif not grammar_problem:
+            for g in grams:
+                if not isinstance(g, dict):
+                    bad("`grammars` の項が辞書でない。")
+                    continue
+                card = g.get("card")
+                if card not in grammar_entries:
+                    bad(f"`grammars` の `{card}` は文法の目録に無い。")
+                if g.get("confidence") not in CAMERA_CONFIDENCE:
+                    bad(f"`grammars` の `{card}` の確度 `{g.get('confidence')}` は"
+                        "◎・○・△のどれでもない。")
+
+        if not isinstance(item.get("travels"), bool):
+            bad("`travels` が真偽値でない——**位置が変わるかを、真偽で書く。**")
+        if not isinstance(item.get("physical"), str) or not item["physical"].strip():
+            bad("`physical` が空である——**カメラが物理的にどう動くか**が無い。")
+
+        d = item.get("directing")
+        if not isinstance(d, dict):
+            bad("`directing` が辞書でない。")
+        else:
+            job = d.get("job")
+            if not isinstance(job, list) or not job:
+                bad("`directing.job` が空である。")
+            else:
+                for j in job:
+                    if j not in CAMERA_JOBS:
+                        bad(f"`directing.job` の `{j}` は8つの仕事に無い。")
+            pos = d.get("position")
+            if not isinstance(pos, list) or not pos:
+                bad("`directing.position` が空である。")
+            else:
+                for p in pos:
+                    if p not in CAMERA_POSITIONS:
+                        bad(f"`directing.position` の `{p}` は場面の位置に無い。")
+            pairs = d.get("pairs_with")
+            if (not isinstance(pairs, list) or not pairs
+                    or any(not isinstance(x, str) or not x.strip() for x in pairs)):
+                bad("`directing.pairs_with` が空である。")
+
+        if not isinstance(item.get("source"), str) or not item["source"].strip():
+            bad("`source` が空である。")
+        if item.get("status") not in CAMERA_STATUS:
+            bad(f"`status` の `{item.get('status')}` は "
+                f"{'／'.join(CAMERA_STATUS)} のどれでもない。")
+
+    if typedlessness:
+        out.append(finding("L53", f"{typedlessness}件",
+                           "`motion_pattern` を持たない技法がある——"
+                           "**意図か、書き漏れかは、この層には分からない。**",
+                           severity="note"))
+    if not any(f["severity"] != "note" for f in out):
+        out.append(finding("L53", f"{len(entries)}件",
+                           f"カメラの目録 {len(entries)} 件を照合した。"
+                           "**この層は作品を見ていない**——"
+                           "技法の選択が適切かは、まだ誰も見ていない。",
+                           severity="note"))
+    return out
+
+
 # ---------------------------------------------------------------- 曲が時間の主であるとき
 
 #: `bible.time_source` の語彙。**語彙を持つのは、それを読む者である**——
@@ -6314,6 +6503,11 @@ def run(project, schema_dir=None, repo_root=None):
     #    ⚠️ **`CHECKS_SHOT` には入れない**——あれは `fn(shot)` であり、目録の
     #    置き場を知らない（`repo_root` を渡す席が無い）。
     out += check_aim_grammar(project, repo_root=repo_root)
+    # ⚠️ **目録を読む層の隣に置く。** `L42`/`L45`/`L46` は文法の目録を読み、
+    #    こちらはカメラ技法の目録を読む——**読む相手だけが違う。**
+    #    ⚠️ **`CHECKS_SHOT` には入れない。** あれは `fn(shot)` であり、
+    #    目録の置き場を知らない（`repo_root` を渡す席が無い）。
+    out += check_camera_catalog(project, repo_root=repo_root)
     out += check_mode_demands(project)
     # ⚠️ **曲を読む2層は隣に置く。** 同じ `bible.song` と `ledger.song_coverage` を読み、
     #    相手だけが違う——あちらは尺、こちらは覆い。**離すと、片方だけが直される。**

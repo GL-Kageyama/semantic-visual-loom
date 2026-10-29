@@ -107,6 +107,18 @@ and judge the shot by that pattern's criterion.** ⚠️ **`L15` reports the qua
 note, never as a violation** — so **nothing forces you to name the pattern, and naming it is the
 whole point.**
 
+⚠️ **The moves are named, and the names are in [`references/camera/index.yaml`](../../references/camera/index.yaml)**
+— 100 techniques, each with its English line, the `MOTION_PATTERNS` group it belongs to, the
+`role`s it can serve, the grammar it most often pairs with, and where in the shot it usually sits.
+**Read the style card first, then this** — the card decides what a movement costs, and **the
+catalog does not know the style.** ⚠️ **It is a map, not a menu.** An entry's `roles` is **the set
+of jobs the move can do**, not a choice between them: **the shot's `role` decides what the move is
+for**, and **a move asked for by taste alone is a move the scene did not ask for.** ⚠️ **Every
+entry is `status: draft`** — the mapping was applied from general film practice and **has not been
+measured against any work's own shots**; when a work's use disagrees, **the work wins and the
+catalog is corrected.** Take the chosen entry's `en` line into §10, and derive §18 from it —
+**the technique's name is not handed to the generator; its English line is.**
+
 **6. How many camera events — in the policy's own vocabulary.** The unit of the shot is
 **one change** — and one change is **one camera event**
 ([`CLAUDE.md`](../../CLAUDE.md), Fixed Policy). §10's `Camera Events:` line carries each event

@@ -122,7 +122,7 @@ semantic-visual-loom/
 ├── skills/          # Skill——分解、direction（①之中）、设计、staging（②之中）、台账、镜头、review（④之后）
 ├── tools/           # 检查（i18n 的镜像）
 ├── references/      # 这一侧的卡片——formats/（video-spec 与文法）与 styles/（sumi-e），
-│                    #   以及 grammars/——检查所读的目录
+│                    #   以及检查所读的两份目录——grammars/ 与 camera/（100 个技法）
 ├── assets/          # 仓库的脸（README 的 hero）
 └── projects/        # 每部作品的实体
 ```
