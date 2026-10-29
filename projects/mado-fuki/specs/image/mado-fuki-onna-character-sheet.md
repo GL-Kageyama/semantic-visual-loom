@@ -35,9 +35,9 @@
 ⚠️ **`SUBJECT` は両方のカードに同名で在る**——だから**同じ値が両方の穴に入る。**
 4＋5＝9 ではなく、**和は8**である。
 
-- `SUBJECT`: a woman seen only from behind — dark sweater with the sleeves pushed up to the forearm, a grey cloth in her right hand, short dark hair cut to the nape, slim build, ordinary height
-- `N`: four views in one row — straight back, back three-quarter left, back three-quarter right, and a closer back from the waist up
-- `EXPRESSIONS`: no expression heads — this work never shows her face; the row beneath the figures holds the right hand and the cloth instead
+- `SUBJECT`: a woman — in the work seen only from behind, dark sweater with the sleeves pushed up to the forearm, a grey cloth in her right hand, short dark hair cut to the nape, slim build, ordinary height
+- `N`: five views in one row — front, straight back, back three-quarter left, back three-quarter right, and a closer back from the waist up
+- `EXPRESSIONS`: no expression heads — the row beneath the figures holds the right hand and the cloth instead
 - `DETAILS`: the cloth's wrung edge and the way the right hand takes it, the sleeve rolled to the forearm, the sweater's shoulder seam, the hem where it falls over the trousers
 - `ACTION`: standing still, arms relaxed and clear of the silhouette, the cloth held down at her right side
 - `LOCATION`: a plain white ground, no scene
@@ -46,29 +46,49 @@
 
 ## 投入する1本の文字列（英語・1段落目が `Prompt`、2段落目が `Negative`）
 
-A character model sheet of a woman seen only from behind — dark sweater with the sleeves pushed up to the forearm, a grey cloth in her right hand, short dark hair cut to the nape — on a plain white ground, four views in one row: straight back, back three-quarter left, back three-quarter right, and a closer back from the waist up, all at the same character height and the same eye line on a shared horizontal guide, standing with her arms relaxed and clear of the silhouette, the cloth held down at her right side. Below the row, no expression heads: the right hand taking the cloth's edge, and the same hand pressing the cloth flat against an unseen pane and stopping. Beside the figures, enlarged detail insets of the cloth's wrung edge, the sleeve rolled to the forearm, the sweater's shoulder seam, and the hem over the trousers. Flat even light, no cast shadow, no background scene. A production reference readable as a specification, not a finished illustration. Her build is slim and her height ordinary; the sweater is dark, plain knit, with a soft shoulder and no pattern; the trousers are dark and straight; the shoes are flat and worn. The clothing is contemporary and nothing in it dates her, and she wears no jewellery. A real person photographed under flat studio light — no anamorphic bokeh, no shallow-focus fall-off and no colour grade, because this sheet is a reference and not a frame of the film.
+A character model sheet of a woman on a plain white ground, five views in one row: front, straight back, back three-quarter left, back three-quarter right, and a closer back from the waist up, all at the same character height and the same eye line on a shared horizontal guide, standing with her arms relaxed and clear of the silhouette, a grey cloth held down at her right side. Below the row, no expression heads: the right hand taking the cloth's edge, and the same hand pressing the cloth flat against an unseen pane and stopping. Beside the figures, enlarged detail insets of the cloth's wrung edge, the sleeve rolled to the forearm, the sweater's shoulder seam, and the hem over the trousers. Flat even light, no cast shadow, no background scene. A production reference readable as a specification, not a finished illustration. Her build is slim and her height ordinary; the sweater is dark, plain knit, with a soft shoulder and no pattern; the trousers are dark and straight; the shoes are flat and worn; her hair is short and dark, cut to the nape, and the ears stand clear of it. The face is given by its ground and not by its features: the upper half and the lower half of the face are close to equal with the lower half a little the longer, the forehead narrow, the cheekbones high and defined with the cheek beneath them flat, the corner of the jaw sharp and set low, the eyes sitting at the middle height of the face and slightly close together, the bridge of the nose straight and defined, and the ears visible and standing slightly away from the head. Her expression is neutral and unreadable. The clothing is contemporary and nothing in it dates her, and she wears no jewellery. A real person photographed under flat studio light — no anamorphic bokeh, no shallow-focus fall-off and no colour grade, because this sheet is a reference and not a frame of the film.
 
-no human face, no head turned toward the camera, no front view, no profile view, no expression heads, no second person, no cast shadow, no background scene, no window, no sea, no room, no dramatic lighting, no dramatic pose, no anamorphic bokeh, no colour grade, no teal-and-orange grade, no props beyond the cloth, no mirror, no reflection of a face, no lettering of any kind, no callout lines, no annotations, no watermark, no on-screen subtitles, no CGI, no illustration, no painterly brush strokes
+no profile view, no expression heads, no second person, no cast shadow, no background scene, no window, no sea, no room, no dramatic lighting, no dramatic pose, no anamorphic bokeh, no colour grade, no teal-and-orange grade, no props beyond the cloth, no mirror, no lettering of any kind, no callout lines, no annotations, no watermark, no on-screen subtitles, no CGI, no illustration, no painterly brush strokes, no makeup, no smile, no stylised expression
 
-## ⚠️ なぜ正面と横顔が無いのか
+## ⚠️ 正面は1つ、横顔は無い（著者の裁定 2026-10-30）
 
-**この作品は、彼女の顔を一度も映さない。** `bible.yaml` の規則がそう決め
-（「彼女の顔は主役にならない。手と背中が主役である」）、`negative_base` が
-`no second person` を持ち、4本の §16 がすべて `No close-up of the face` を書き、
-`s02` は手と前腕しか枠に持たない。**ゆえに正面のカウンター（顔）は、この作品では一度も使われない。**
+**最初は正面も横顔も持たないシートとして書いた。** この作品は彼女の顔を一度も映さないからである
+（`bible.yaml` の規則「彼女の顔は主役にならない。手と背中が主役である」、`negative_base` の
+`no second person`、4本の §16 の `No close-up of the face`、`s02` は手と前腕だけ）。
+**著者が「顔もあった方がいいのでは」と言い、正面を1枚だけ足すことにした。**
 
-⚠️ **そして、顔を参照に入れることは中立ではない。** `character-sheet` のカード自身が言う——
-**顔を指定しなければ、様式の平均の顔が入る。** それは「指定しない」ではなく、
-**「その顔を選ぶ」である。** 参照に顔が在れば、生成器にとって**それを写す誘因**になる。
+⚠️ **足した理由は顔を見せることではなく、頭の形を固定することである。** 後ろ姿で見えるのは
+**輪郭**——顎の角・耳・生え際・うなじ——であって、目鼻ではない。**ground が決まっていなければ、
+その輪郭は様式の平均である。** 4本は別々に生成されるので、**平均が4通りに出れば、頭が4つになる。**
 
-だからこのシートは、**カードの標準的な回転図（front／three-quarter／side／back）から、
-意図して外れる**——**back と、back の three-quarter と、back の close だけ**。
-`drama-pilot` の `drama-pilot-akari-character-sheet` と同じ判断である。
+⚠️ **横顔は足さない。** 横顔が要るのは、横を向く画が在るときである。**この作品にそれは無い。**
+⚠️ **表情の頭（expression heads）も足さない。** この作品で彼女の表情は一度も読まれない。
 
-⚠️ **代わりに何が仕様を担うか。** **同じ高さ・同じアイラインの水平ガイド**と、
-**手・布・袖・肩の縫い目・裾の insets** である。**カードは「情報が mood に勝つ」と言う**——
-その情報を、顔ではなく**手と衣装**が負う。⚠️ **文字は持たない**（`bible` の
-「読み取れる文字は無い」）。**callout は書かず、insets が仕様になる。**
+## ⚠️ 顔は ground で書く（カードの「Specifying a face」）
+
+`character-sheet` のカードが言う——**指定されない顔は中立ではなく、様式の平均である。
+否定形も指定ではない**（「長くも丸くもない」は空欄であり、既定が埋める）。
+
+- **ground＝比率と骨**である。上の仕様では7つの軸を**すべて既定の側から離して**書いた：
+  上 half と下 half がほぼ等しく下がやや長い／額が狭い／頬骨が高く張り、その下の頬が平ら／
+  顎の角が鋭く低い／目は顔の中ほどで、やや寄っている／鼻梁がまっすぐ立っている／耳が立ち、頭から少し離れる。
+  ⚠️ **既定の側**（カードの計測）は「額が広く、目が低く、頬骨が平ら、顎が丸い、目が離れ、鼻が短く、耳が小さい」——**そこへ書けば、それは既定である。**
+- **shape（下まぶた、目の下の影、唇の摩耗）は書かない。** それは**拡大の inset でしか読まれない**。
+  そして **insets は手・布・袖・肩・裾に使っている**——顔の細部に枠を割かない。
+- ⚠️ **この計測はアニメ様式1つで取られている**（カードの `Scope of the measurement`）。
+  **写真の様式で同じように振る舞うかは未検証である**——ゆえに値を書き、**生成した1枚を見てから直す。**
+
+⚠️ **顔の造形を選ぶことは、この作品では画面に出ない。** 4本のどれも彼女の顔を映さないからである。
+**ゆえにこの選択は「彼女の顔」を決めるのではなく、4本の頭の輪郭を1つに揃えるための道具である。**
+⚠️ **ただし、あとで彼女が振り向く画を作ることになったら、この顔が既に決まっている。**
+
+## ⚠️ 代わりに何が仕様を担うか
+
+**同じ高さ・同じアイラインの水平ガイド**と、
+**手・布・袖・肩の縫い目・裾の insets**、そして**正面の1つが持つ頭の ground** である。
+**カードは「情報が mood に勝つ」と言う**——その情報を、`s02` では手が、`s01`・`s03`・`s04` では
+後ろ姿の輪郭が負う。⚠️ **文字は持たない**（`bible` の「読み取れる文字は無い」）。
+**callout は書かず、insets が仕様になる。**
 
 ## ⚠️ カード2枚が食い違う1点と、どちらを採るか
 
@@ -96,3 +116,5 @@ no human face, no head turned toward the camera, no front view, no profile view,
    **手が彼女のものであることを運ぶのはこの1枚だけである。**
    ⚠️ **`s02` は `body_parts: {hand: 1}` を宣言している**——ゆえに §6 の行は
    `REF_CHARACTER` だけでなく、**手が1本であることの出所**でもある。
+4. ⚠️ **顔が出来ても、4本の §16 は 1文字も変えない。** `No close-up of the face` は残る——
+   **参照に顔が在ることは、画に顔が出ることではない。**
