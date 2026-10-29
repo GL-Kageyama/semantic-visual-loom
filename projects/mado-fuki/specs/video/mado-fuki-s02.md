@@ -212,7 +212,7 @@ until the pane fills the frame. Do not explain the room. The band is formal beau
 
 ## Master Prompt
 
-An 8-second continuous take (16:9) of a fogged window in an empty room by the sea at dawn, one clip. **She is the only person in the frame** — only her right hand and forearm are in it. Beats, deliberately uneven: [0-2s] a grey cloth enters and presses against white condensation; [2-5s] the cloth slides and leaves a band where the fog is gone, and dawn light pours through the band into the room; [5-8s] the hand stops, and the band is bright and shows nothing but light. The glass is the subject: the band is an opening, not a view. No close-up of a face, no second person, no legible sea, no readable text, no artificial light source.
+An 8-second continuous take (16:9) of a fogged window in an empty room by the sea at dawn, one clip. **She is the only person in the frame** — **1 hand in the frame**, only her right hand and forearm are in it. Beats, deliberately uneven: [0-2s] a grey cloth enters and presses against white condensation; [2-5s] the cloth slides and leaves a band where the fog is gone, and dawn light pours through the band into the room; [5-8s] the hand stops, and the band is bright and shows nothing but light. The glass is the subject: the band is an opening, not a view. No close-up of a face, no second person, no legible sea, no readable text, no artificial light source.
 
 ## Visual Prompt
 
@@ -232,7 +232,7 @@ The language of this work is Japanese — Japanese is the language of this work 
 
 ## Negative Prompt
 
-no close-up of a face, no second person, no readable text, no artificial light source, no boats, no islands, no buildings beyond the glass, no handheld wobble, no cut, no dissolve, no flat TV lighting, no snapshot look, no pure cartoon color, no CGI, no illustration, no watermark, no on-screen subtitles, no background music
+no close-up of a face, no second person, no second hand, no readable text, no artificial light source, no boats, no islands, no buildings beyond the glass, no handheld wobble, no cut, no dissolve, no flat TV lighting, no snapshot look, no pure cartoon color, no CGI, no illustration, no watermark, no on-screen subtitles, no background music
 
 ## Style Motion
 
