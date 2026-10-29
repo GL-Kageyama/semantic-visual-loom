@@ -117,11 +117,32 @@ python3 engine/shot/look.py --light --kind 自然 --function 設定
 python3 engine/shot/look.py --light --id 038
 ```
 
-⚠️ **`--light` is required, and so is one filter** — a command with no filter would print all
+⚠️ **An axis is required, and so is one filter** — a command with no filter would print all
 100 entries and look like an answer. ⚠️ **Light names are nouns**, so `L56` matches them without
 inflection — §13 carries the `en` line as written, and a paraphrase is invisible to it. ⚠️ **Every
 entry is `status: draft`** — the mapping is the designer's, applied from general lighting
 practice, and **a work's use wins.**
+
+## The composition lookup
+
+`engine/shot/look.py --composition` reads the composition catalog
+(`references/composition/index.yaml`) with the same filters — and prints **the line §18
+`Camera Prompt` carries**, because there is no composition section in §1–20: `L58` reads the
+camera slot, by a different question.
+
+```bash
+python3 engine/shot/look.py --composition --role 情景
+python3 engine/shot/look.py --composition 三分割
+```
+
+⚠️ **A line printed as `en: —` is a `twin`** — one technique the camera catalog also holds.
+The composition entry carries **no line**, the camera entry does, and `L54` reads it there.
+**The name is the same technique under two numbers** — living in both catalogs silently is
+what `L57` refuses; **a declared twin is fine.**
+
+⚠️ **Two entries carry `population_hint`** — `079` 一つだけの構図 (`one`) and `080` 群衆の構図
+(`many`) — and **their names decide how many people the frame may hold**, so `L58` reads them
+against the shot's `population`.
 
 ## What Reads It
 

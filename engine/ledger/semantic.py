@@ -111,6 +111,7 @@ import re
 from pathlib import Path
 
 import camera
+import composition
 import grammars
 import lighting
 import rolemap
@@ -4537,6 +4538,26 @@ LIGHT_POSITIONS = CAMERA_POSITIONS
 LIGHT_CONFIDENCE = CAMERA_CONFIDENCE
 LIGHT_STATUS = CAMERA_STATUS
 
+# ---------------------------------------------------------------- 構図——§10 に節が無い軸
+
+#: 原図のページ割り（4族）。**目の付け方が違う4つを、ページが分けている。**
+COMPOSITION_FAMILIES = ("基本の配置", "視点と切り取り", "奥行きと見せ方", "関係と強調")
+
+#: 原図の副題が名乗る3つ。⚠️ **光の `kind` とは別の問いである**——
+#: あちらは「誰が作るか」、こちらは「**その名が何を指すか**」。
+COMPOSITION_KINDS = ("構図", "画角", "配置")
+
+#: `directing.job`——構図論の一般論の8つの仕事。**sVL の `function` ではない。**
+#: `function` は「場面のどこで」、こちらは「その構図が目に何をするか」——**軸が違う。**
+COMPOSITION_JOBS = ("焦点", "読み順", "奥行き", "均衡", "リズム", "関係", "尺度", "様式")
+
+#: 画面の人数を名が決めてしまう**2件だけ**が持つ欄。
+COMPOSITION_HINTS = ("one", "many")
+
+COMPOSITION_POSITIONS = CAMERA_POSITIONS
+COMPOSITION_CONFIDENCE = CAMERA_CONFIDENCE
+COMPOSITION_STATUS = CAMERA_STATUS
+
 
 def check_lighting_catalog(project, repo_root=None):
     """L55 — 光の演出の目録が、この基盤の語彙に引けるか。
@@ -4807,6 +4828,304 @@ def check_lighting_use(project, repo_root=None):
                            "**この層には、その区別がつかない。**"
                            "⚠️ **言い換え（`afternoon light` と書いて `Afternoon` を名指さない）は"
                            "当たらない**——目録の句をそのまま書くこと。",
+                           severity="note"))
+    return out
+
+
+def check_composition_catalog(project, repo_root=None):
+    """L57 — 構図の目録が、この基盤の語彙に引けるか。
+
+    ⚠️ **なぜ要るか。** `L53`・`L55` と同じ理由である。加えてこの軸には
+    **二重所有**という固有の危険がある——同じ技法をカメラの目録と構図の目録が
+    持てば、**片方を直したとき、もう片方が腐る。** 重なりは29件あり、
+    **これは欠陥ではない**（カメラの一覧の 026–050 と 064–075 は、もともと構図の項目である）。
+
+    ⚠️ **`en` の重複を禁じる規則ではない。** 門は2つである——
+      * **`twin` を持つ項目は `en` を持たず、`en` を持つ項目は `twin` を持たない**
+        （両方向に閉じる）。
+      * **`twin` を持たない項目の `en` は、カメラの目録に載ってはならない。**
+        ⚠️ これが無いと、**黙って二重に住む**ことができる。
+
+    ⚠️ **見ていないもの。** `roles`・`functions`・`grammars` の当てはめが正しいか
+    （目録は `draft` であり、作品が勝つ）、`kind` の判断、`physical` の質。
+    """
+
+    def note(msg, count=""):
+        out.append(finding("L57", count, msg, severity="note"))
+
+    out = []
+    root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
+    entries, where, problem = composition.catalog(root)
+
+    if problem == "missing":
+        note(f"構図の目録が**無い**——探した範囲: {where}。**この層は1件も照合していない。**")
+        return out
+    if problem == "unreadable":
+        note(f"構図の目録が**読めない**——{where}。**読めないことを、正しいと言わない。**")
+        return out
+    if problem == "malformed":
+        note(f"構図の目録の**形が違う**——{where}。"
+             "`techniques:` が並びで、各項が一意の `id` を持つこと。")
+        return out
+    if not entries:
+        note("構図の目録が**空である**——**1件も照合していない。**")
+        return out
+
+    camera_entries, camera_where, camera_problem = camera.catalog(root)
+    if camera_problem:
+        note(f"カメラの目録が読めないので、`twin` の行き先と `en` の重なりは"
+             f"**照合していない**——{camera_where}。")
+        camera_entries = {}
+    camera_en = {p.strip().lower()
+                 for item in camera_entries.values()
+                 for p in (item.get("en") or [])
+                 if isinstance(p, str)}
+
+    grammar_entries, grammar_where, grammar_problem = grammars.catalog(root)
+    if grammar_problem:
+        note(f"文法の目録が読めないので、`grammars` は**照合していない**——{grammar_where}。")
+
+    twin_count = 0
+    for key, item in entries.items():
+        sid = str(item.get("id") or key)
+
+        def bad(msg, sid=sid):
+            out.append(finding("L57", sid, msg))
+
+        if not re.fullmatch(r"\d{3}", sid):
+            bad(f"`id` は3桁の文字列であること（いまは `{sid}`）。")
+        if not isinstance(item.get("name"), str) or not item["name"].strip():
+            bad("`name` が空である。")
+        if item.get("family") not in COMPOSITION_FAMILIES:
+            bad(f"`family` の `{item.get('family')}` は "
+                f"{'／'.join(COMPOSITION_FAMILIES)} のどれでもない。")
+        if item.get("kind") not in COMPOSITION_KINDS:
+            bad(f"`kind` の `{item.get('kind')}` は "
+                f"{'／'.join(COMPOSITION_KINDS)} のどれでもない。")
+
+        roles = item.get("roles")
+        if not isinstance(roles, list) or not roles:
+            bad("`roles` が空である——**使える役割の集合**を1つ以上書くこと。")
+        else:
+            for r in roles:
+                if r not in rolemap.ROLES:
+                    bad(f"`roles` の `{r}` は種別の目録に無い。")
+
+        funcs = item.get("functions")
+        if not isinstance(funcs, list) or not funcs:
+            bad("`functions` が空である。")
+        else:
+            for f in funcs:
+                if f not in specmap.DRAMATIC_FUNCTION_EN:
+                    bad(f"`functions` の `{f}` は劇的関数の enum に無い。")
+
+        grams = item.get("grammars")
+        if not isinstance(grams, list):
+            bad("`grammars` が並びでない（0枚なら `[]`）。")
+        elif not grammar_problem:
+            for g in grams:
+                if not isinstance(g, dict):
+                    bad("`grammars` の項が辞書でない。")
+                    continue
+                card = g.get("card")
+                if card not in grammar_entries:
+                    bad(f"`grammars` の `{card}` は文法の目録に無い。")
+                if g.get("confidence") not in COMPOSITION_CONFIDENCE:
+                    bad(f"`grammars` の `{card}` の確度 `{g.get('confidence')}` は"
+                        "◎・○・△のどれでもない。")
+
+        if "population_hint" in item:
+            if item["population_hint"] not in COMPOSITION_HINTS:
+                bad(f"`population_hint` の `{item['population_hint']}` は "
+                    f"{'／'.join(COMPOSITION_HINTS)} のどちらでもない。")
+
+        d = item.get("directing")
+        if not isinstance(d, dict):
+            bad("`directing` が辞書でない。")
+        else:
+            job = d.get("job")
+            if not isinstance(job, list) or not job:
+                bad("`directing.job` が空である。")
+            else:
+                for j in job:
+                    if j not in COMPOSITION_JOBS:
+                        bad(f"`directing.job` の `{j}` は8つの仕事に無い。")
+            pos = d.get("position")
+            if not isinstance(pos, list) or not pos:
+                bad("`directing.position` が空である。")
+            else:
+                for p in pos:
+                    if p not in COMPOSITION_POSITIONS:
+                        bad(f"`directing.position` の `{p}` は場面の位置に無い。")
+            pairs = d.get("pairs_with")
+            if (not isinstance(pairs, list) or not pairs
+                    or any(not isinstance(x, str) or not x.strip() for x in pairs)):
+                bad("`directing.pairs_with` が空である。")
+
+        if not isinstance(item.get("source"), str) or not item["source"].strip():
+            bad("`source` が空である。")
+        if item.get("status") not in COMPOSITION_STATUS:
+            bad(f"`status` の `{item.get('status')}` は "
+                f"{'／'.join(COMPOSITION_STATUS)} のどれでもない。")
+
+        en = item.get("en")
+        twin = item.get("twin")
+        if twin is not None:
+            twin_count += 1
+            if en:
+                bad("`twin` を持つ項目が `en` も持っている——"
+                    "**句を二重に持たせない**（片方を直すともう片方が腐る）。")
+            if not isinstance(twin, dict):
+                bad("`twin` が辞書でない。")
+            else:
+                if twin.get("catalog") != "camera":
+                    bad(f"`twin.catalog` の `{twin.get('catalog')}` は `camera` でない——"
+                        "いま二重所有を宣言できるのはカメラの目録だけである。")
+                if camera_entries and str(twin.get("id")) not in camera_entries:
+                    bad(f"`twin` の行き先 `{twin.get('id')}` がカメラの目録に無い。")
+        else:
+            if (not isinstance(en, list) or not en
+                    or any(not isinstance(x, str) or not x.strip() for x in en)):
+                bad("`en` が空である——生成へ渡る句が無い（二重所有なら `twin` を書く）。")
+            elif camera_entries:
+                shared = sorted({x.strip() for x in en if x.strip().lower() in camera_en})
+                if shared:
+                    bad("`en` の句がカメラの目録にも載っている"
+                        f"（{'／'.join('`' + s + '`' for s in shared)}）——"
+                        "**黙って二重に住んでいる。** どちらかが `twin` を書くこと。")
+
+    if not any(f["severity"] != "note" for f in out):
+        fams = collections.Counter(i.get("family") for i in entries.values())
+        note(f"構図の目録 {len(entries)} 件を照合した。"
+             f"うち **{twin_count} 件が `twin`**（カメラの目録が句を持つ）。"
+             f"族の内訳は {'・'.join(f'{k}{v}' for k, v in fams.most_common())}。"
+             "⚠️ **この層は作品を見ていない**——"
+             "構図の選択が適切かは、まだ誰も見ていない。",
+             f"{len(entries)}件")
+    return out
+
+
+def check_composition_use(project, repo_root=None):
+    """L58 — **§18 `Camera Prompt` が名乗る構図を、目録が引けるか。**
+
+    ⚠️ **なぜ §18 なのか。** §1–20 に**構図の節が無い**。§10 はカメラ言語であり、
+    フレーミングはその一部である——**新しい節を作らない**（作れば `L11`/`L12` の
+    閉じ方が動き、節の数が変わる）。**`L54` と同じスロットを、別の問いで読む**——
+    あちらは「どう動くか」、こちらは「どう切り取るか」。
+
+    ⚠️ **違反は1つだけである。** `population_hint` を持つ2件（`079` 一つだけの構図・
+    `080` 群衆の構図）を名乗ったショットが、**記録の `population` と食い違う**とき。
+    **名が人数を決めてしまう2件であり、記録と名は同じことを言わねばならない。**
+    ⚠️ **`population` を書いていない記録は註であって違反ではない**（`L51` と同じ扱い）。
+
+    ⚠️ **見ていないもの。** 句が無いショットの構図が「悪い」か、選びが場面に適切か、
+    `twin` の項目（句を持たない——`L54` が読む）。
+    """
+    out = []
+    root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
+    entries, where, problem = composition.catalog(root)
+    if problem or not entries:
+        out.append(finding("L58", "",
+                           "構図の目録が読めないので、**この層は1本も照合していない**"
+                           "（目録の側は `L57` が言う）。",
+                           severity="note"))
+        return out
+
+    seen = 0
+    empty = []
+    named = {}
+    unmatched = []
+    hinted = 0          # `population_hint` を持つ構図を名乗ったショット
+    blank = []          # 名乗ったが、記録に `population` が無いショット
+    for s in project.order():
+        shot = project.shots[s]
+        src = _spec_of(shot, "video")
+        if not src:
+            continue
+        p = project.root / src
+        if not p.is_file():
+            continue
+        slot = _slot_body(p, "Camera Prompt")
+        if not slot.strip():
+            empty.append(s)
+            continue
+        seen += 1
+        hits = _named_techniques(slot, entries, inflect=False)
+        if not hits:
+            unmatched.append(s)
+            continue
+        for tid, (item, _phrase) in hits.items():
+            named.setdefault(tid, set()).add(s)
+            hint = item.get("population_hint")
+            if not hint:
+                continue
+            hinted += 1
+            pop = shot.get("population")
+            if not isinstance(pop, int):
+                blank.append(s)
+                continue
+            if hint == "one" and pop > 1:
+                out.append(finding(
+                    "L58", s,
+                    f"§18 `Camera Prompt` が `{tid}`（{item.get('name')}——"
+                    f"`population_hint: one`）を名乗っているのに、記録の "
+                    f"`population` は **{pop}** である。**名が「ひとつ」と言い、"
+                    "記録が複数と言っている。** ⚠️ どちらかを直すこと——"
+                    "目録は `draft` ゆえ、作品の意図が正しければ目録の側を直す。"))
+            elif hint == "many" and pop < 2:
+                out.append(finding(
+                    "L58", s,
+                    f"§18 `Camera Prompt` が `{tid}`（{item.get('name')}——"
+                    f"`population_hint: many`）を名乗っているのに、記録の "
+                    f"`population` は **{pop}** である。**名が「多数」と言い、"
+                    "記録が1人と言っている。** ⚠️ どちらかを直すこと——"
+                    "目録は `draft` ゆえ、作品の意図が正しければ目録の側を直す。"))
+
+    if not seen and not empty:
+        out.append(finding("L58", "",
+                           "`Camera Prompt` に中身を持つ動画の仕様が1本も無い——"
+                           "**この層は作品を見ていない。**",
+                           severity="note"))
+        return out
+    if seen:
+        out.append(finding("L58", f"{seen}本",
+                           f"`Camera Prompt` に中身を持つ動画の仕様を {seen} 本読んだ。"
+                           "⚠️ **この層が見るのは、目録の `en` の句が在るかと、"
+                           "`population_hint` と記録の `population` の一致だけである。**",
+                           severity="note"))
+    if named:
+        listing = "・".join(f"`{tid}` {entries[tid].get('name')}（{len(shots)}本）"
+                            for tid, shots in sorted(named.items()))
+        out.append(finding("L58", f"{len(named)}件",
+                           f"§18 が目録の構図を名指した——{listing}。"
+                           "⚠️ **`twin` の項目は句を持たないので、ここには現れない**"
+                           "（カメラの側の `L54` が読む）。",
+                           severity="note"))
+    if unmatched:
+        sample = "／".join(f"`{x}`" for x in unmatched[:4])
+        more = "…" if len(unmatched) > 4 else ""
+        out.append(finding("L58", f"{len(unmatched)}本",
+                           f"{len(unmatched)}本の `Camera Prompt` は、構図の目録のどの `en` にも"
+                           f"当たらない（{sample}{more}）。"
+                           "⚠️ **構図を書いていないか、目録に無い構図である**——"
+                           "**この層には、その区別がつかない。**"
+                           "⚠️ **言い換えは当たらない**——目録の句をそのまま書くこと。",
+                           severity="note"))
+    if empty:
+        sample = "／".join(f"`{x}`" for x in empty[:4])
+        more = "…" if len(empty) > 4 else ""
+        out.append(finding("L58", f"{len(empty)}本",
+                           f"{len(empty)}本の動画の仕様は `Camera Prompt` に中身が無い"
+                           f"（{sample}{more}）。⚠️ **スロットの側は `L17` が言う。**",
+                           severity="note"))
+    if blank:
+        sample = "／".join(f"`{x}`" for x in blank[:4])
+        more = "…" if len(blank) > 4 else ""
+        out.append(finding("L58", f"{len(blank)}本",
+                           f"{len(blank)}本は人数を名乗る構図を書いているのに、"
+                           f"記録に `population` が無い（{sample}{more}）。"
+                           "⚠️ **違反ではない**——`L51` と同じ空白である。"
+                           "**だが、この照合はその分だけ空である。**",
                            severity="note"))
     return out
 
@@ -6996,6 +7315,12 @@ def run(project, schema_dir=None, repo_root=None):
     # ⚠️ **`L56` は `L55` の直後に置く。** あちらは目録の形、こちらは
     #    **作品の §13 を目録へ当てる**——**同じ目録の表と裏である。**
     out += check_lighting_use(project, repo_root=repo_root)
+    # ⚠️ **構図も同じ対で置く。** `L57` は目録の形、`L58` は**作品の §18
+    #    `Camera Prompt` を、カメラとは別の問いで読む**（あちらは「どう動くか」、
+    #    こちらは「どう切り取るか」）。**同じスロットを二層が読むのは意図である。**
+    #    ⚠️ **`CHECKS_SHOT` には入れない**（`repo_root` を渡す席が無い）。
+    out += check_composition_catalog(project, repo_root=repo_root)
+    out += check_composition_use(project, repo_root=repo_root)
     out += check_mode_demands(project)
     # ⚠️ **曲を読む2層は隣に置く。** 同じ `bible.song` と `ledger.song_coverage` を読み、
     #    相手だけが違う——あちらは尺、こちらは覆い。**離すと、片方だけが直される。**

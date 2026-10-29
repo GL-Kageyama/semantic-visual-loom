@@ -85,6 +85,8 @@ in order to fire on "`before` and `after` are the same" — but **JSON Schema ca
 | **L54** | **§18 says the camera holds still and names a move that travels** — the catalog's `en` lines are read against `Camera Prompt`; ⚠️ **that contradiction is the only violation**, and a prompt that uses no catalog line is a note | same |
 | **L55** | **A lighting technique does not resolve against this foundation's vocabulary** — `kind`, `roles`, `functions`, `grammars.card` and `directing` for each of the 100 entries. ⚠️ **It reads the list, not a work**; `name` is **not** required to be unique | "L55 — the lighting catalog" below |
 | **L56** | **§13 `LIGHTING` names no light the catalog knows** — the catalog's `en` lines are read against §13, **without inflection**. ⚠️ **It has no violation**: every outcome is a note | same |
+| **L57** | **A composition technique does not resolve against this foundation's vocabulary, or one technique lives in two catalogs without saying so** — `family`, `kind`, `roles`, `functions`, `grammars.card` and `directing` for each of the 100 entries, plus the two doors a twin opens: **a `twin` entry may not carry `en` (nor an `en` a twin)**, its target must exist in the camera catalog, and **an `en` line that also lives in the camera catalog is an undeclared second home** | "L57 — the composition catalog" below |
+| **L58** | **§18 names a composition whose name decides the headcount, and the record disagrees** — `079` 一つだけの構図 (`one`) and `080` 群衆の構図 (`many`) against the shot's `population`. ⚠️ **That contradiction is the only violation**; a prompt that matches no catalog line, or a record with no `population`, is a note | same |
 
 **L2, L3 and L4 are transplants.** Applied to all 57 segments of Gozen-niji,
 a checker that scored **recall 2/2 and 0 false positives** went in just as it was.
@@ -1525,6 +1527,43 @@ catalog's `en` lines.
   "used the word," **so it does not judge it**; the note names the shot and the entry, so that
   someone looks at that shot.
 
+### L57 — the composition catalog resolves against the vocabulary, and closes both doors
+
+**One hundred compositions stand in `references/composition/index.yaml`.** The shape check is
+`L53`'s and `L55`'s — `family` against the four page groups, `kind` against `構図`/`画角`/`配置`,
+`roles` against `rolemap.ROLES`, `functions` against the schema's enum, `grammars.card` against
+the grammar registry, `directing` against its own shapes. **What is new is the pair of doors
+that comes from two catalogs holding one technique.**
+
+- ⚠️ **Twenty-nine entries are `twin`, and this is not a defect.** The camera catalog's 026–050
+  and 064–075 **were compositions first.** The danger is not the overlap — it is **one
+  technique with a line in two places**, where fixing one leaves the other stale.
+- ⚠️ **The doors close in both directions.** A `twin` entry carries no `en`; an entry with `en`
+  carries no twin. Its target must exist in the camera catalog. And **an `en` line that also
+  appears among the camera catalog's `en` lines is a second home nobody declared** — the rule
+  is **not** "duplicate lines are forbidden", it is **"the duplicate must be declared".**
+- ⚠️ **`kind` here is a different question from light's.** Light's `kind` says who makes the
+  light; this one says what the name names. **Same key, read in each layer's own vocabulary.**
+- ⚠️ **When the camera catalog cannot be read, the twin targets and the line overlap are
+  reported as uncompared** — the note says so, and the shape check still runs.
+
+### L58 — §18 `Camera Prompt` is read against the composition catalog
+
+**There is no composition section in §1–20.** `L58` therefore reads **the same slot as `L54`**
+— §18 `Camera Prompt` — **by a different question**: `L54` asks how the camera moves, `L58`
+asks how the frame is cut. **Two layers reading one slot is deliberate.**
+
+- ⚠️ **One violation only.** Two entries carry `population_hint` — `079` 一つだけの構図
+  (`one`) and `080` 群衆の構図 (`many`) — because **their names decide how many people the
+  frame may hold.** A shot that names one of them while its record's `population` says
+  otherwise **is a contradiction between the name and the record**, and either may be wrong
+  (the catalog is `draft`; **the work wins, and the catalog is corrected**).
+- ⚠️ **A record with no `population` is a note** — the same blank `L51` leaves as a note.
+  The note says **how much of this comparison is empty.**
+- ⚠️ **It reads presence, not quality.** Whether a chosen composition fits its scene is not a
+  question this layer asks; a prompt matching no catalog line is a note, and that count is
+  the measure of adoption.
+
 ### ⚠️ Firing Against a Running Artifact
 
 | Check | Ukebi V2 (30 takes) | What it is saying |
@@ -1722,7 +1761,7 @@ What it can say is —
 | **Guarantees** | **The song's length adds up** — the sections reach `song.duration`, and each section's shots reach that section. ⚠️ **Only for a work naming the song as its time source** (`bible.time_source: song`) | **L34** |
 | **Guarantees** | **Every sung line is answered by a shot, and every stretch where the song says nothing has an owner** — ⚠️ **among the shots the record lists.** Whether the picture says the same thing as the lyric is not measured | **L36** |
 | **Guarantees** | **The beats tile the shot's `duration`** — from 0 to the end, with no gap and no overlap. ⚠️ **Whether the beats are well placed is not measured** | **L37** |
-| **Guarantees** | **It is not broken.** L0–L56 fire before generation, and everything that fired can be explained. ⚠️ **`L35` is reserved and unwritten** — **56 layers across 57 codes: `L34`/`L36` speak only where a song exists, `L38` only where a video specification does, `L40`–`L50` only where a work writes dramaturgy or names a grammar, `L51` only where a shot declares `population`, `L52` only where a shot declares `body_parts`, `L53` only where the camera catalog can be opened, `L54` only where a `Camera Prompt` has a body, `L55` only where the lighting catalog can be opened, and `L56` only where §13 `LIGHTING` has a body** | all |
+| **Guarantees** | **It is not broken.** L0–L58 fire before generation, and everything that fired can be explained. ⚠️ **`L35` is reserved and unwritten** — **58 layers across 59 codes: `L34`/`L36` speak only where a song exists, `L38` only where a video specification does, `L40`–`L50` only where a work writes dramaturgy or names a grammar, `L51` only where a shot declares `population`, `L52` only where a shot declares `body_parts`, `L53` only where the camera catalog can be opened, `L54` only where a `Camera Prompt` has a body, `L55` only where the lighting catalog can be opened, `L56` only where §13 `LIGHTING` has a body, `L57` only where the composition catalog can be opened, and `L58` only where a `Camera Prompt` has a body** | all |
 | **Does not guarantee** | **That `song.duration` is the real length of the file `song.master` names** — no layer opens the audio | —— |
 | **Does not guarantee** | **That the generator draws the aim.** | —— |
 | **Does not guarantee** | **That a still shot's §11 really stops the subject.** | —— |

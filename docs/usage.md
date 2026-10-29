@@ -43,10 +43,14 @@ python3 engine/shot/print_spec.py projects/hitosara --shot hitosara-ch01-seg04
 python3 engine/shot/camera.py --role 情景 --motion 停止
 python3 engine/shot/camera.py --id 007
 
-# the look-up — the lighting catalog, by kind, role, function or job. It writes nothing
+# the look-up — the lighting or composition catalog, by kind, role, function or job.
+# It writes nothing
 python3 engine/shot/look.py --light --role 情景
 python3 engine/shot/look.py --light --kind 自然 --function 設定
 python3 engine/shot/look.py --light --id 055
+python3 engine/shot/look.py --composition --role 情景
+python3 engine/shot/look.py --composition 三分割
+python3 engine/shot/look.py --light ゴールデン --composition 三分割
 
 # the repository's own document check — not used to make a work
 python3 tools/check_i18n.py                                # the document mirrors
@@ -86,18 +90,21 @@ the generator.
 
 | flag | |
 |---|---|
-| `--light` | read the lighting catalog (`references/lighting/`). **The only axis so far** — `--style` and `--composition` arrive with their own catalogs |
-| `--kind` | who makes the light: `灯` · `自然` · `光学` · `編集` |
-| `--role` | a `role` the light can serve (one of the fifteen) |
+| `--light` | read the lighting catalog (`references/lighting/`). **Give it a name** (`--light ゴールデン`) and it filters by it |
+| `--composition` | read the composition catalog (`references/composition/`), same way. `--style` arrives with its own catalog |
+| `--kind` | **the axis's own vocabulary**: for light, who makes it (`灯` · `自然` · `光学` · `編集`); for composition, what the name names (`構図` · `画角` · `配置`) |
+| `--role` | a `role` the technique can serve (one of the fifteen) |
 | `--function` | a dramatic function (`設定`, `様式美`, …) |
-| `--job` | one of the eight directing jobs for light (`位置づけ`, `立体`, …) |
+| `--job` | one of the eight directing jobs — ⚠️ **the two axes have different vocabularies** |
 | `--position` | `頭` · `中` · `尾` · `つなぎ` · `全編` |
 | `--id` / `--name` | one technique by its number or its Japanese name |
 
-**Every filter given must hold**; at least one is required. ⚠️ **The `en` line is what §13
-carries** — and `L56` matches it **without inflecting the head word**, because light names
-are nouns. ⚠️ **A filter that matches nothing is not an empty catalog**: the tool says which
-of the two it is.
+**Every filter given must hold**; at least one is required, and **an axis on its own is not
+a filter** — the tool asks for one rather than printing all 100. ⚠️ **The `en` line is what
+§13 or §18 carries** — and `L56` matches it **without inflecting the head word**, because
+light names are nouns. ⚠️ **A filter that matches nothing is not an empty catalog**: the tool
+says which of the two it is. ⚠️ **A composition entry printed with `en: —` is a `twin`** —
+the line lives in the camera catalog, and `L54` reads it there.
 
 ⚠️ **`check.py` and `print_spec.py` are not alternatives—they cover disjoint ground.**
 **A line `print_spec.py` prints is a line that goes silent the moment you copy it**
@@ -269,9 +276,9 @@ The counts behind that are in `HISTORY.md`.
 
 ## The layers
 
-The check is **56 layers, `L0`–`L56`**, plus schema-shape validation.
-⚠️ **`L35` is reserved and unwritten**, so **the codes skip a number** — `L0`–`L56` is 57 codes and
-**56 layers.** ⚠️ **`L34` and `L36` read the song**, and a work that does not name the song as its
+The check is **58 layers, `L0`–`L58`**, plus schema-shape validation.
+⚠️ **`L35` is reserved and unwritten**, so **the codes skip a number** — `L0`–`L58` is 59 codes and
+**58 layers.** ⚠️ **`L34` and `L36` read the song**, and a work that does not name the song as its
 time source **is told they saw nothing** — **they are not silent about it.**
 ⚠️ **`L37` reads the inside of a shot** — whether its beats tile its `duration` — and **it reads
 every work, whether or not a song exists.** ⚠️ **`L38` reads the head of a video specification** —
@@ -304,6 +311,17 @@ Prompt` never carries** — a note too: the catalog's `en` lines are ordinary no
 `Direct sun`), and prose uses them without naming the technique. ⚠️ **It reads §13 without
 inflecting the head word**, because light names are nouns — `Bloom` must not match
 `the source blooms`.
+⚠️ **`L57` reads the composition catalog's shape** — each `family`, `kind`, `role`, function
+and grammar card must resolve — **and closes the two doors that come with two catalogs holding
+one technique**: a `twin` entry must carry no `en` (and an `en` no twin), its target must exist
+in the camera catalog, and **a composition line that also lives in the camera catalog is a
+second home nobody declared.** 29 entries are twins — **that overlap is a fact of the sources,
+not a defect.** ⚠️ **`L58` reads §18's `Camera Prompt` against those `en` lines** — the same
+slot as `L54`, by a different question — and **fires on one thing only**: a shot that names
+`079` 一つだけの構図 or `080` 群衆の構図, whose name decides how many people the frame holds,
+while the record's `population` says otherwise. ⚠️ **A record with no `population` is a note**
+— the same blank `L51` leaves as a note. **How many prompts matched a composition is the
+measure of adoption.**
 **A work that writes none of these is not failing them** — the notes say
 how many shots were looked at. What each one reads — and does not read — is in
 [`docs/dramaturgy.md`](dramaturgy.md), [`docs/cards.md`](cards.md) and the layer index in

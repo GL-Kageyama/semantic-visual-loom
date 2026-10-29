@@ -195,6 +195,60 @@ the catalog's `en` lines** — the first layer in this repository to open §13 a
 `light-as-actor`, is `provisional` in the grammar registry. **The notes say how many entries
 cite it** — a provisional card cited from a draft list is still not canon.
 
+## The composition registry
+
+`references/composition/index.yaml` **is the list of compositions, and it is the list the
+checks read.** It answers a third question: the camera list says **how the camera moves**, the
+lighting list says **who makes the light**, and this one says **what the frame is cut to** — 100
+techniques, each carrying the English line (or a `twin`), the family, the kind, the roles it can
+serve, the functions it leans toward, the grammar it commonly pairs with, and the directing job.
+
+```text
+- id: "079"                              # the source list's number, normalised to three digits
+  name: 一つだけの構図
+  en: [isolated subject]                 # the line §18 `Camera Prompt` is built from
+  source: "79"
+  family: 関係と強調                      # 基本の配置 · 視点と切り取り · 奥行きと見せ方 · 関係と強調
+  kind: 配置                             # 構図 · 画角 · 配置 — what the name names
+  roles: [様式美, 余白]                   # a set, not a choice
+  functions: [余韻, 決断]
+  grammars: []
+  population_hint: one                   # only two entries carry this
+  directing: {job: [焦点, 尺度], pairs_with: [群衆], position: [中]}
+  physical: 被写体を…                    # the card's own description, verbatim
+  status: draft
+```
+
+⚠️ **`kind` is the pillar here, and it is not light's `kind`.** Light's `kind` says **who makes
+the light**; this one says **what the name names** — `構図` (51), `画角` (24), `配置` (25). **The
+same key, read by each layer in its own vocabulary.**
+
+⚠️ **Twenty-nine entries are `twin`, and a twin holds no `en`.** The camera list's 026–050 and
+064–075 **were compositions first** — the overlap is a fact of the sources, not a defect.
+**The line lives in exactly one catalog**, and `L57` closes both directions: a `twin` entry
+carries no `en`, an `en` no twin, and a composition line that is also a camera line is
+**a second home nobody declared.**
+
+⚠️ **`family` is the source's page split** — four groups of 25. It is not a judgment about the
+technique; it is where the card sits.
+
+⚠️ **`population_hint` is held by two entries only** — `079` 一つだけの構図 (`one`) and `080`
+群衆の構図 (`many`). **Their names decide how many people the frame may hold**, so `L58` reads
+them against the shot's `population`. ⚠️ **A record without `population` is a note, not a
+violation** — the same blank `L51` treats the same way.
+
+⚠️ **`physical` is present here and absent from light.** The composition cards carry a
+description line; the lighting cards carry a name and an English name and nothing else. **A
+field follows its source.**
+
+⚠️ **`L57` reads the whole list and judges none of it. `L58` reads §18 `Camera Prompt`** —
+there is no composition section in §1–20, so it reads **the same slot as `L54`, by a different
+question**: `L54` asks how the camera moves, `L58` asks how the frame is cut.
+
+⚠️ **Every entry is `status: draft`**, and the roles and functions were applied from general
+composition theory — **not measured against a work.** **When a work's use disagrees, the work
+wins.**
+
 ## The environment variables
 
 | layer | variable | |
@@ -204,6 +258,7 @@ cite it** — a provisional card cited from a draft list is still not canon.
 | registry | `SVL_GRAMMARS_DIR` | where `index.yaml` is — **overlaid, never replaced**: this repository's own `references/grammars/` remains reachable |
 | camera | `SVL_CAMERA_DIR` | where the technique list is — **overlaid, never replaced**: this repository's own `references/camera/` remains reachable |
 | light | `SVL_LIGHTING_DIR` | where the lighting list is — **overlaid, never replaced**: this repository's own `references/lighting/` remains reachable |
+| composition | `SVL_COMPOSITION_DIR` | where the composition list is — **overlaid, never replaced**: this repository's own `references/composition/` remains reachable |
 
 ⚠️ **Each layer reads its own variable.** Pointing at a style directory **does not move the
 format layer**—and **the converse holds too.** *A naming that is not read must not look like
@@ -278,11 +333,16 @@ name would have to lie about the other route.**
 | `L54` | §18 `Camera Prompt` and the catalog's `en` lines | a whole-take hold beside a technique whose `travels` is true. ⚠️ **a prompt that uses no catalog line is a note** |
 | `L55` | the lighting catalog and this foundation's vocabulary | a `kind`, `role`, function, grammar card or shape that does not resolve; ⚠️ **a catalog that cannot be opened is a note** |
 | `L56` | §13 `LIGHTING` and the lighting catalog's `en` lines | nothing — **every outcome is a note**: how many specifications carry §13, which lights were named, how many named none, **and which shots name a light that §18's `Visual Prompt` never carries** |
+| `L57` | the composition catalog, the camera catalog and this foundation's vocabulary | a `family`, `kind`, `role`, function, grammar card or shape that does not resolve; ⚠️ **a catalog that cannot be opened is a note**. The two extra doors: a `twin` entry carrying `en` (or the reverse), a `twin` pointing at no camera entry, **and an `en` line that also lives in the camera catalog** |
+| `L58` | §18 `Camera Prompt` and the composition catalog's `en` lines | **one**: a `population_hint` entry named beside a shot record whose `population` contradicts it. ⚠️ **everything else is a note** — and a record with no `population` is one of those notes |
 
 ⚠️ **`L53` and `L54` are neighbours the other way round**—**`L53` reads the catalog alone,
 `L54` reads a work against it.** **Neither judges whether a move is right for a shot.**
 ⚠️ **`L55` and `L56` are the same pair for light**, with one difference in the direction of
 reading: **`L54` reads §18, `L56` reads §13** — and §13 had no reader at all before `L56`.
+⚠️ **`L57` and `L58` are the same pair again for composition** — with the light pair's shape,
+not the camera pair's: **`L58` reads §18 `Camera Prompt`, the same slot as `L54`**, by a
+different question. **Two layers reading one slot is deliberate** — a shot both moves and is cut.
 
 ⚠️ **`L31`, `L32`, `L42`, `L45` and `L46` are neighbours on purpose**—**they read the same §6
 and the same registry, and differ only in the key.** Separated, one of them gets fixed and the

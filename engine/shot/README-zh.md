@@ -107,10 +107,29 @@ python3 engine/shot/look.py --light --kind 自然 --function 設定
 python3 engine/shot/look.py --light --id 038
 ```
 
-⚠️ **必须带 `--light`，也必须带一个筛选条件**——不带筛选的调用会打印 100 条，
+⚠️ **必须带轴，也必须带一个筛选条件**——不带筛选的调用会打印 100 条，
 **看起来像个答案。** ⚠️ **光的名字是名词**——`L56` 不允许变位。§13 原样运 `en` 行，
 **换一种说法就命不中。** ⚠️ **每一条都是 `status: draft`**——套用是设计者做的，
 从一般照明作法起的——**作品的用法赢。**
+
+## 怎么引构图
+
+`engine/shot/look.py --composition` 读构图目录（`references/composition/index.yaml`），
+用同样的筛选条件，并带上**§18 `Camera Prompt` 要运的句子**——§1–20 没有构图的节，
+`L58` 读的是摄像机的槽，只换了问题。
+
+```bash
+python3 engine/shot/look.py --composition --role 情景
+python3 engine/shot/look.py --composition 三分割
+```
+
+⚠️ **打成 `en: —` 的项是 `twin`**——摄像机目录也持有同一个技法。
+**构图的项不带句子，摄像机的项带，`L54` 在那边读。**
+**同一个技法有两个编号**——不声不响住在两边，`L57` 不许；**声明过的 `twin` 没问题。**
+
+⚠️ **只有两项带 `population_hint`**——`079` 一つだけの構図（`one`）与 `080` 群衆の構図
+（`many`）——**它们的名字决定了画面能放几个人**，所以 `L58` 把它们对着镜头的
+`population` 读。
 
 ## 谁在读它
 

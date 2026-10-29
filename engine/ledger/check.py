@@ -2007,6 +2007,183 @@ def _self_test():
         if not _ok:
             print(f"        {_got[:88]}")
 
+    # ---- L57（構図の目録が、この基盤の語彙に引けるか）
+    #     ⚠️ **この軸には固有の門が2つある。** `twin` を持つ項目は `en` を持たず、
+    #        `twin` を持たない項目の `en` はカメラの目録に載ってはならない
+    #        ——**片方を直したとき、もう片方が腐るのを防ぐ。**
+    #     ⚠️ **カメラの目録も一時ディレクトリに置く。** 実物を読ませると、
+    #        検査が「いまリポジトリにある句」に依存する——**器を、器で検査する。**
+    print("\n=== 自己検査 — 構図の目録\n")
+
+    def comp_entry(**kw):
+        e = {"id": "001", "name": "三分割構図", "en": ["rule of thirds"],
+             "family": "基本の配置", "kind": "構図",
+             "roles": ["様式美"], "functions": ["設定"], "grammars": [],
+             "directing": {"job": ["焦点"], "pairs_with": ["中央構図"],
+                           "position": ["中"]},
+             "source": "1", "status": "draft"}
+        e.update(kw)
+        return e
+
+    _CAM_CENTRAL = {"id": "065", "name": "中央構図", "en": ["central framing"]}
+
+    def comp_catalog_case(label, entries, want, fragment, *, write=True,
+                          camera=None):
+        d = _P(tempfile.mkdtemp())
+        if write:
+            text = yaml.safe_dump({"version": 1, "techniques": entries},
+                                  allow_unicode=True, sort_keys=False)
+            (d / "index.yaml").write_text(text, encoding="utf-8")
+        cd = _P(tempfile.mkdtemp())
+        cam = camera if camera is not None else [_CAM_CENTRAL]
+        text = yaml.safe_dump({"version": 1, "techniques": cam},
+                              allow_unicode=True, sort_keys=False)
+        (cd / "index.yaml").write_text(text, encoding="utf-8")
+        envs = [(semantic.composition.COMPOSITION_ENV, d),
+                (semantic.camera.CAMERA_ENV, cd)]
+        keep = [(k, _os.environ.get(k)) for k, _ in envs]
+        for k, v in envs:
+            _os.environ[k] = str(v)
+        try:
+            got = semantic.check_composition_catalog(_CamProj(d, {}),
+                                                     repo_root=d)
+        finally:
+            for k, v in keep:
+                if v is None:
+                    _os.environ.pop(k, None)
+                else:
+                    _os.environ[k] = v
+        v = [f for f in got if f["severity"] != "note"]
+        nts = [f for f in got if f["severity"] == "note"]
+        ok = (bool(v) == want
+              and (not want or any(fragment in f["message"] for f in v))
+              and (want or any(fragment in f["message"] for f in nts)))
+        return label, ok, (v[0]["message"] if v
+                           else (nts[0]["message"] if nts else "（何も出ない）"))
+
+    _TWIN = {"catalog": "camera", "id": "065"}
+
+    for _label, _ok, _got in [
+        comp_catalog_case("L57 句を持つ項目は通る（註）",
+                          [comp_entry()], False, "照合した"),
+        # ⚠️ **二重所有の正しい形。** `en` を持たず、行き先だけを持つ。
+        comp_catalog_case("L57 `twin` を持つ項目は `en` を持たない（註）",
+                          [comp_entry(id="026", name="中央構図", en=[], twin=_TWIN)],
+                          False, "`twin`"),
+        comp_catalog_case("L57 `kind` が3つに無い",
+                          [comp_entry(kind="照明")], True, "どれでもない"),
+        comp_catalog_case("L57 `family` が4つに無い",
+                          [comp_entry(family="その他")], True, "どれでもない"),
+        comp_catalog_case("L57 生成へ渡る句が無い（`twin` でもない）",
+                          [comp_entry(en=[])], True, "`en`"),
+        # ⚠️ **両方向に閉じる。** `twin` と `en` を両方持てば、どちらが正か決まらない。
+        comp_catalog_case("L57 `twin` と `en` を両方持つ",
+                          [comp_entry(id="026", name="中央構図",
+                                      twin=_TWIN)], True, "句を二重に持たせない"),
+        comp_catalog_case("L57 `twin` の行き先がカメラの目録に無い",
+                          [comp_entry(id="026", name="中央構図", en=[],
+                                      twin={"catalog": "camera", "id": "999"})],
+                          True, "行き先"),
+        # ⚠️ **これが無いと、黙って二重に住める。** 重なり29件は `twin` で宣言する。
+        comp_catalog_case("L57 `en` がカメラの目録にも載っている",
+                          [comp_entry(en=["central framing"])],
+                          True, "黙って二重に住んでいる"),
+        comp_catalog_case("L57 人数の註が2つに無い",
+                          [comp_entry(population_hint="some")],
+                          True, "どちらでもない"),
+        comp_catalog_case("L57 目録が無い＝確かめられない",
+                          [], False, "無い", write=False),
+        comp_catalog_case("L57 目録が空＝1件も照合していない",
+                          [], False, "空である"),
+        comp_catalog_case("L57 同じ id が2度ある＝形が違う",
+                          [comp_entry(), comp_entry()], False, "形が違う"),
+    ]:
+        n += 1
+        bad += not _ok
+        print(f"    {_label:<50}{'':>10}  {'期待どおり' if _ok else '⚠️ 期待と違う'}")
+        if not _ok:
+            print(f"        {_got[:88]}")
+
+    # ---- L58（§18 `Camera Prompt` が名乗る構図を、目録が引けるか）
+    print("\n=== 自己検査 — 作品の §18 を構図の目録へ当てる\n")
+
+    def comp_use_case(label, entries, slot, want, fragment, *, population=None,
+                      write=True):
+        d = _P(tempfile.mkdtemp())
+        if write:
+            text = yaml.safe_dump({"version": 1, "techniques": entries},
+                                  allow_unicode=True, sort_keys=False)
+            (d / "index.yaml").write_text(text, encoding="utf-8")
+        if slot is None:
+            spec = "## 18. WAN 3.0\n\n本文\n"
+        else:
+            spec = f"## 18. WAN 3.0\n\n### Camera Prompt\n\n{slot}\n"
+        (d / "s01.md").write_text(spec, encoding="utf-8")
+        shot = {"shot": "s01", "spec": "s01.md"}
+        if population is not None:
+            shot["population"] = population
+        proj = _CamProj(d, {"s01": shot})
+        env = semantic.composition.COMPOSITION_ENV
+        keep = _os.environ.get(env)
+        _os.environ[env] = str(d)
+        try:
+            got = semantic.check_composition_use(proj, repo_root=d)
+        finally:
+            if keep is None:
+                _os.environ.pop(env, None)
+            else:
+                _os.environ[env] = keep
+        v = [f for f in got if f["severity"] != "note"]
+        nts = [f for f in got if f["severity"] == "note"]
+        ok = (bool(v) == want
+              and (not want or any(fragment in f["message"] for f in v))
+              and (want or any(fragment in f["message"] for f in nts)))
+        return label, ok, (v[0]["message"] if v
+                           else (nts[0]["message"] if nts else "（何も出ない）"))
+
+    _ONE = comp_entry(id="079", name="一つだけの構図", en=["isolated subject"],
+                      population_hint="one")
+    _MANY = comp_entry(id="080", name="群衆の構図", en=["crowd composition"],
+                       population_hint="many")
+
+    for _label, _ok, _got in [
+        comp_use_case("L58 §18 が構図を名指した（註）",
+                      [comp_entry()], "A frame on rule of thirds.", False,
+                      "名指した"),
+        # ⚠️ **名が人数を決めてしまう2件。** 記録と名は同じことを言わねばならない。
+        comp_use_case("L58 「一つだけ」を名乗るのに population が3",
+                      [_ONE], "An isolated subject on the sand.", True,
+                      "ひとつ", population=3),
+        comp_use_case("L58 「一つだけ」と population 1 は合う（鳴らない）",
+                      [_ONE], "An isolated subject on the sand.", False,
+                      "名指した", population=1),
+        comp_use_case("L58 「群衆」を名乗るのに population が1",
+                      [_MANY], "A crowd composition in the square.", True,
+                      "多数", population=1),
+        comp_use_case("L58 「群衆」と population 2 は合う（鳴らない）",
+                      [_MANY], "A crowd composition in the square.", False,
+                      "名指した", population=2),
+        # ⚠️ **書いていない記録は註であって違反ではない**（`L51` と同じ空白）。
+        comp_use_case("L58 人数の記録が無い（註）",
+                      [_ONE], "An isolated subject on the sand.", False,
+                      "`population` が無い"),
+        comp_use_case("L58 言い換えは当たらない（註）",
+                      [comp_entry()], "One third of the way in.", False,
+                      "当たらない"),
+        comp_use_case("L58 `Camera Prompt` が空である（註）",
+                      [comp_entry()], "", False, "中身が無い"),
+        comp_use_case("L58 `Camera Prompt` を持たない仕様（註）",
+                      [comp_entry()], None, False, "中身が無い"),
+        comp_use_case("L58 目録が読めない＝1本も照合していない",
+                      [], "A frame on rule of thirds.", False,
+                      "1本も照合していない", write=False),
+    ]:
+        n += 1
+        bad += not _ok
+        print(f"    {_label:<50}{'':>10}  {'期待どおり' if _ok else '⚠️ 期待と違う'}")
+        if not _ok:
+            print(f"        {_got[:88]}")
+
     def run1(label, fn, proj, want, fragment, note=None):
         """⚠️ **註も読む。** 註が出ないことも「違反0件」に見えるからである。"""
         nonlocal n, bad

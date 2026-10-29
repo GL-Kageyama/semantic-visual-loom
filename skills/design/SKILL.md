@@ -159,8 +159,21 @@ because `L3` and `L4` read the beat body, not only the field.**
    ⚠️ **A light named in §13 that never reaches §18's `Visual Prompt` is reported as a note,
    not a violation** — the catalog's `en` lines are ordinary nouns (`Dawn`, `Direct sun`), and
    prose uses them without naming the technique. **Read the note and look at the shot.**
+   ⚠️ **The framing has its own names.** [`references/composition/index.yaml`](../../references/composition/index.yaml)
+   — 100 compositions, each with the English line §18 `Camera Prompt` carries, its `family`
+   (the source's four page groups), its `kind` (構図／画角／配置 — what the name names), and the
+   roles and functions it can serve. **There is no composition section in §1–20** — the line
+   goes into §18 `Camera Prompt`, and `L58` reads it there, the same slot `L54` reads by a
+   different question. Ask the catalog by anything but the name:
+   `python3 engine/shot/look.py --composition --role 情景` · `--composition --id 079`.
+   ⚠️ **A line printed as `en: —` is a `twin`** — the camera catalog holds the same technique
+   and the line; **do not write a second line into the composition catalog** (`L57` refuses
+   an undeclared second home, and a declared one is fine).
+   ⚠️ **`079` 一つだけの構図 and `080` 群衆の構図 decide the headcount** — naming one binds the
+   shot's `population`, and `L58` **fires** when the record disagrees.
    **Fires if wrong:** `L33` (a gesture the card offers, negated in §18's `Camera Prompt`) ·
-   `L17` (the slot itself) · `L20` (`Style Motion`'s destination).
+   `L17` (the slot itself) · `L20` (`Style Motion`'s destination) · `L58` (a composition whose
+   name says one and a record that says many).
    ⚠️ **Nothing reads §9's `## Blocking`, and nothing reads §13's events as events** — `L56`
    counts the names, not the doing. **The stage picture is unmeasured. A hole, recorded as one.**
 8. **The video specification, §1–20** — in `specmap.SPEC_SECTIONS`' order, all twenty. Write
