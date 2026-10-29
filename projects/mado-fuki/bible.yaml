@@ -1,0 +1,86 @@
+# 作品台帳 — 『窓を拭く』（mado-fuki）
+#
+# ⚠️ **この作品は、四つの技法の目録（カメラ・光・構図・画風）を
+#    一つの作品の中で引いてみるためのサンプルである。**
+#    4ショット。**1本ごとに主役の軸が違う。**
+#
+#    | ショット | 主に引く目録 | 何を名指すか |
+#    |---|---|---|
+#    | `s01` | 光・構図 | `Dawn`・`Window light`・`Soft light` ／ 一点透視 |
+#    | `s02` | カメラ | `push in slowly`（`003` ドリーイン） |
+#    | `s03` | 構図（＋カメラ） | `isolated subject`（`079` 一つだけの構図）／ `005` トラッキング |
+#    | `s04` | 四つとも | `pull back slowly`・`Golden hour`・`God rays`・`low horizon` |
+#
+#    ⚠️ **画風は全編で一つである**——`cinematic-still`（目録 `093` シネマティック、
+#       媒材 写真・映像、カードあり）。**画風はショットの軸ではない。**
+#    ⚠️ **`s01` はカメラの目録を引かない。** 三脚を据えて動かさない1本であり、
+#       **引かないことも記録である**（`L54` の註が「当たらない1本」と言う）。
+#
+# ⚠️ **走らせ方。** リポジトリの直下から
+#    `SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles` を張って走らせる。
+#    ⚠️ **`SVL_STYLES_DIR` を張らないと、画風のカードの棚が隣の基盤になる**
+#       ——カード `cinematic-still` はこのリポジトリの `references/styles/` に在る。
+
+project: mado-fuki
+
+bible:
+  # ⚠️ **目録 `093` の `card` と同じ名である**（`references/styles/index.yaml`）。
+  #    `L31` は家と §6 が同じ名を指すかを見、`L32` はその名でカードが開けるかを見る。
+  style: cinematic-still
+
+  # ⚠️ **発話は無い（§14）。それでも宣言する。**
+  #    **空欄は中立ではない**——生成器は、指定されなければ自分の既定で喋る。
+  language: Japanese
+
+  world:
+    concept: >-
+      海辺の部屋。夜明け。窓が一枚だけ在り、塩と結露で曇っている。
+      女が一人、布でそれを拭いている。**海は最初のコマからそこに在り、見えない。**
+      **この作品で起きることは、ガラスが透くという1つだけである。**
+
+    rules:
+      - "**ガラスが主語である。** 海は最初から在る——見えないだけである。"
+      - "**人は一人だけである。** 彼女の顔は主役にならない。手と背中が主役である。"
+      - "**光は窓から来る。** 窓の外の太陽だけが光源であり、人工の灯りは無い。"
+      - "**何も説明されない。** 誰がこの部屋を空にしたのかは、最後まで言われない。"
+      - "**超常は起こらない。** ガラスが透けるのは、拭いたからである。"
+      - "**読み取れる文字は無い。**"
+
+    visual_language:
+      art_direction: >-
+        Cinematic still. One frame of a film: anamorphic optics with subtle oval
+        bokeh and a gentle flare, shallow depth of field, the background as
+        atmosphere. A cold graded interior — teal shadow, salt-white glass — against
+        a warm horizon line of amber. Motivated lighting from the window only.
+        Letterboxed composition inside a 16:9 frame.
+
+      era: >-
+        Contemporary. Nothing in the frame dates it beyond the room itself.
+
+  constants:
+    video:
+      aspect: "16:9"
+      resolution: "1920x1080"
+      frame_rate: "24fps"
+      orientation: "Landscape"
+
+    # ⚠️ **以下はこの作品の定数である。** §1–20 に欄が無い（`自前`）——
+    #    生成へは渡らない。**渡らないことは、落ちることではない。**
+    窓: "**一枚だけ。** 枠は白く、ガラスは下半分が曇っている。"
+    海: "**最初から在る。** 見えないのは、ガラスが曇っているからだけである。"
+
+  negative_base:
+    - no watermark
+    - no on-screen subtitles
+    - no background music
+    # ---- 様式（様式カード `cinematic-still` の `## Negative` から）
+    - no flat TV lighting
+    - no snapshot look
+    - no pure cartoon color
+    - no CGI
+    - no illustration
+    # ---- この作品の禁止（§16 MUST NOT）
+    # ⚠️ **この作品に人は一人しか居ない。** 空欄は中立ではない。
+    - no second person
+    - no readable text
+    - no artificial light source

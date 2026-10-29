@@ -121,17 +121,19 @@ semantic-visual-loom/
 ├── docs/            # 用法，以及更深入的解说（cards / dramaturgy / routes）
 ├── skills/          # Skill——分解、direction（①之中）、设计、staging（②之中）、台账、镜头、review（④之后）
 ├── tools/           # 检查（i18n 的镜像）
-├── references/      # 这一侧的卡片——formats/（video-spec 与文法）与 styles/（sumi-e），
-│                    #   以及检查所读的两份目录——grammars/ 与 camera/（100 个技法）
+├── references/      # 这一侧的卡片——formats/（video-spec 与文法卡）与 styles/（16 张画风卡），
+│                    #   以及检查所读的目录——grammars/ 与 camera/、lighting/、composition/（各 100 个技法）。
+│                    #   styles/ 的目录就放在卡片的架子上
 ├── assets/          # 仓库的脸（README 的 hero）
 └── projects/        # 每部作品的实体
 ```
 
 **⚠️ `projects/` 里同居着两种东西**——**生的规格书**（Ukebi 与 Gozen-niji 的 §1–20，
 就那样留着）与**结构化的记录**（`bible.yaml` / `ledger.yaml` / `shots/`；
-**十七本**——`drama-pilot`、`grammar-*` 的七个实验作、`habits`、`habits-mv`、
-`habits-promo-chinatsu`、`hakuchizu`、`hitosara`、`ippitsu`、`migenzo`、`odyssey`，以及
-`ukebi/ukebi-v2`）。
+**十九本**——`drama-pilot`、`grammar-*` 的七个实验作、`habits`、`habits-mv`、
+`habits-promo-chinatsu`、`hakuchizu`、`hitosara`、`hitosara-ab`、`ippitsu`、`mado-fuki`、
+`migenzo`、`odyssey`，以及 `ukebi/ukebi-v2`）。`mado-fuki` 是把四份目录
+——摄影机、光、构图、画风——全部引用的样本。
 ⚠️ **所有作品都带着自己的 `bible.yaml` 和 `ledger.yaml`，作品不抱着作品**
 ——而这正是它要紧的理由：**`check.py` 不递归**，所以
 **作品抱着作品时，跑父目录也读不到。** `L29` 会点名没有被读到的作品。

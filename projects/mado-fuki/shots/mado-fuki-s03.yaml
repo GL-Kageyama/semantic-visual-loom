@@ -1,0 +1,82 @@
+# 第三ショット / 運動 / motion —— 拭き進み、海が像を結ぶ
+#
+# ⚠️ **このショットは構図の目録を引く。** `isolated subject`（`079` 一つだけの構図、
+#    `population_hint: one`）——ゆえに**記録の `population` は 1 である**（`L58` が見る）。
+# ⚠️ **カメラは `005 トラッキング`**（`tracking shot, camera moves sideways with the subject`、
+#    `travels: true`、`roles` に `運動` が在る）。
+# ⚠️ **この1本が、この作品の転換点である**（`dramaturgy.acts[0].turn`）。
+
+shot: mado-fuki-s03
+spec: specs/video/mado-fuki-s03.md
+
+aim: >-
+  **拭くことで、世界が像を結ぶ。** 帯が面になり、曇りが消えていく——
+  観客が初めて、窓の向こうに**海**を見る。**誰もそれについて何も言わない。**
+
+unit:
+  before: "ガラスには一条の帯だけが拭かれ、ほかは曇ったままである。"
+  after: "**ガラスの大半が透け、向こうに海と、低い太陽が像を結んでいる。**"
+
+role: 運動
+place: 海辺の部屋
+time: 夜明け
+mode: motion
+duration: 8s
+population: 1
+
+motion:
+  subject: ガラスを拭き進む女と、透けていく窓
+  quality: >-
+    **一定の速さで、端から端へ。** 布の通った所から曇りが消え、消えた所に海が現れる。
+    彼女は歩く——**カメラは彼女と並んで横へ動く。**
+  law: >-
+    Cinematic still の物理。**光源は窓の外の太陽だけ。** 横移動は据えられた台車の重さで動き、
+    揺れない。**ピントはガラス面に残り、海はまだ少し柔らかい。**
+
+beats:
+  - range: 0-3s
+    density: dense
+    what: "布が帯を広げる。**曇りが削られ、その下から色が現れる**——灰色ではなく、青と橙。"
+    intensity: 4
+    audience: "**色が在った。** 白いだけだと思っていた。"
+  - range: 3-6s
+    density: dense
+    what: >-
+      窓の下端から上へ。**海が像を結ぶ。** 低い太陽が水面に一本の道を作っている。
+      女は窓に沿って横へ歩き、カメラも横へ動く——**窓が一枚、開いていく。**
+    intensity: 6
+    audience: "**海だ。** ずっと、ここに在った。"
+  - range: 6-8s
+    density: held
+    what: >-
+      布が止まる。**ガラスはもう何も隠していない。** 女は窓の端に立ち、
+      海を見ている——**顔は枠に入らない。**
+    intensity: 5
+    audience: "**見てしまった。** 彼女は、まだこの部屋に居る。"
+
+reference_set: []
+attached: []
+
+forbidden_set:
+  - 女の顔の寄り
+  - もう一人の人間
+  - 泣く演技
+  - 読み取れる文字
+  - 人工の光源
+  - 窓枠の外の地形（島・船・建物）
+
+disclosure_state:
+  ガラス.透け: 海が見え始める
+  海.見え: 見えている
+
+dramatic:
+  function: 発見
+  value:
+    from: 隠す
+    to: 見える
+    stake: "この部屋に、彼女が居られるかどうか"
+  audience:
+    feel: "**安堵と、わずかな後ろめたさ。** 見ないでいられたものを、見てしまった。"
+    expect: "彼女は窓の前で立ち尽くすのだろう。"
+    know: "**窓の向こうに海が在った。** それは最初から在った。"
+  button: "**透けた窓と、その前に立つ後ろ姿**——顔は見えない。"

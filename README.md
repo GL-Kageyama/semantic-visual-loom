@@ -123,17 +123,19 @@ semantic-visual-loom/
 ├── docs/            # usage, and the deep dives (cards / dramaturgy / routes)
 ├── skills/          # the skills — breakdown, direction (inside ①), design, staging (inside ②), ledger, shot, review (after ④)
 ├── tools/           # checks (i18n mirrors)
-├── references/      # this side's own cards — formats/ (video-spec + the grammars) and styles/ (sumi-e),
-│                    #   and the two registries the checks read — grammars/ and camera/ (100 techniques)
+├── references/      # this side's own cards — formats/ (video-spec + the grammar cards) and styles/ (16 style cards),
+│                    #   and the registries the checks read — grammars/ plus camera/, lighting/ and composition/
+│                    #   (100 techniques each); the style registry sits on the card shelf, beside the cards
 ├── assets/          # the repository's face (the README hero)
 └── projects/        # the substance of each work
 ```
 
 **⚠️ Two kinds live side by side in `projects/`**—**raw specification trees** (§1–20 of Ukebi and
 Gozen Niji, left as they are) and **structured records** (`bible.yaml` / `ledger.yaml` / `shots/`;
-**seventeen** of them—`drama-pilot`, the seven `grammar-*` pilot works, `habits`, `habits-mv`,
-`habits-promo-chinatsu`, `hakuchizu`, `hitosara`, `ippitsu`, `migenzo`, `odyssey`, and
-`ukebi/ukebi-v2`).
+**nineteen** of them—`drama-pilot`, the seven `grammar-*` pilot works, `habits`, `habits-mv`,
+`habits-promo-chinatsu`, `hakuchizu`, `hitosara`, `hitosara-ab`, `ippitsu`, `mado-fuki`,
+`migenzo`, `odyssey`, and `ukebi/ukebi-v2`). `mado-fuki` is the sample that draws on all four
+registries—camera, lighting, composition and style.
 ⚠️ **Every work carries its own `bible.yaml` and `ledger.yaml`, and a work does not hold a work**
 —and this is why that matters: **`check.py` does not recurse**, so **a work held by a work is not
 read by a run over its parent.** `L29` names the works a run does not read.

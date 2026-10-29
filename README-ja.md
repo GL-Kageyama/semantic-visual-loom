@@ -122,17 +122,19 @@ semantic-visual-loom/
 ├── docs/            # 使い方と、踏み込んだ解説（cards / dramaturgy / routes）
 ├── skills/          # Skill——分解・direction（①の中）・設計・staging（②の中）・台帳・ショット・review（④の後）
 ├── tools/           # 検査（i18n のミラー）
-├── references/      # こちら側のカード——formats/（video-spec と文法）と styles/（sumi-e）、
-│                    #   そして検査が読む2つの目録——grammars/ と camera/（100の技法）
+├── references/      # こちら側のカード——formats/（video-spec と文法カード）と styles/（画風カード16枚）、
+│                    #   そして検査が読む目録——grammars/ と camera/・lighting/・composition/（各100の技法）。
+│                    #   styles/ の目録はカードの棚に同居している
 ├── assets/          # リポジトリの顔（README の hero）
 └── projects/        # 作品ごとの実体
 ```
 
 **⚠️ `projects/` には2種類が同居している**——**生の仕様書**（受け火・午前二時の §1–20。
 そのまま残してある）と、**構造化した記録**（`bible.yaml` / `ledger.yaml` / `shots/`。
-**17本**である——`drama-pilot`、`grammar-*` の実験作7本、`habits`・`habits-mv`・
-`habits-promo-chinatsu`・`hakuchizu`・`hitosara`・`ippitsu`・`migenzo`・`odyssey`、そして
-`ukebi/ukebi-v2`）。
+**19本**である——`drama-pilot`、`grammar-*` の実験作7本、`habits`・`habits-mv`・
+`habits-promo-chinatsu`・`hakuchizu`・`hitosara`・`hitosara-ab`・`ippitsu`・`mado-fuki`・
+`migenzo`・`odyssey`、そして `ukebi/ukebi-v2`）。`mado-fuki` は四つの目録
+——カメラ・光・構図・画風——を全部引く見本である。
 ⚠️ **すべての作品は自分の `bible.yaml` と `ledger.yaml` を持ち、作品は作品を抱えない**
 ——そしてこれが効く理由である：**`check.py` は再帰しない**ので、
 **作品が作品を抱えていると、親を走らせても読まれない。** `L29` が、
