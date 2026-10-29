@@ -88,6 +88,21 @@ python3 engine/shot/print_spec.py projects/<project> --shot <id>  # 1本だけ
 ⚠️ **作品定数は3箇所へ手で写されていた**——§1、§19 の `Output:` 行、（受け火では）
 `series-constants.md`。そして**写しは既にずれ始めている。**
 
+## カメラの引き方
+
+`engine/shot/camera.py` はカメラの目録（`references/camera/index.yaml`）を読み、
+**役割・運動・演出上の仕事・位置に合う技法**を、§18 が受け取る `en` の行つきで刷る。
+
+```bash
+python3 engine/shot/camera.py --role 情景 --motion 停止
+python3 engine/shot/camera.py --id 007
+```
+
+⚠️ **刷るのは目録であって、決定ではない。** `roles` は担える仕事の集合であり、
+**どれなのかはショットの `role` が決める。** ⚠️ **全件が `status: draft`**——一般論の
+映画作法から当てたもので、測られていない——**作品の使い方が勝つ。** ⚠️ **生成器へ渡るのは
+`en` の行であり、和名ではない。**
+
 ## これを読む者
 
 - **`L26`** —— `bible.constants.video` と §1 の4行を突き合わせる

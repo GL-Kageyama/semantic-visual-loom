@@ -4334,6 +4334,183 @@ def check_camera_catalog(project, repo_root=None):
     return out
 
 
+# ---------------------------------------------------------------- 層G 目録を作品へ当てる
+
+#: 「カメラは動かない」と**言い切る**形。⚠️ **否定の語ではない。**
+#: 「no push」は1つの動きを禁じただけであり、「holds still for the whole」は
+#: **そのショット全体の宣言**である。`L54` が衝突を見るのは、後者だけである。
+CAMERA_HOLD = re.compile(
+    r"\b(?:the camera|it)\s+(?:holds?|stays?|remains?)\s+still\s+"
+    r"(?:for\s+the\s+whole|throughout)\b"
+    r"|\b(?:the camera|it)\s+never\s+moves\b"
+    r"|\blocked[- ]off\s+(?:for\s+the\s+whole|throughout)\b",
+    re.I)
+
+#: 辞退の言い方。**禁じてはいない**——「様式は許すが、このショットは使わない」。
+#: ⚠️ **辞退を「使った」と数えない。**
+CAMERA_DECLINE = re.compile(
+    r"\bspends?\s+(?:none|neither)\b|\bdoes\s+not\s+spend\b|\bspends\s+no\b", re.I)
+
+#: 文の切れ目。⚠️ **辞退は文の中で言われる**（「…; this shot spends none」）ので、
+#: 節ではなく**文**で見る——`CAMERA_CLAUSE_SPLIT` は `—` でも切るため、
+#: 辞退の句が別の節へ落ちる。
+SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+|\n")
+
+
+def _sentence_around(text, start, end):
+    """`start:end` を含む**文**を丸ごと返す。"""
+    left = 0
+    for m in SENTENCE_SPLIT.finditer(text, 0, start):
+        left = m.end()
+    m = SENTENCE_SPLIT.search(text, end)
+    right = m.start() if m else len(text)
+    return text[left:right]
+
+
+def _camera_phrase_regex(phrase):
+    """目録の句を、**英文の活用を1つだけ許す**正規表現へ。
+
+    ⚠️ **先頭の語にだけ `-s/-es/-ed/-ing` を許す。** 目録は `push in slowly` と
+    原形で置き、§18 は `pushes in slowly` と書く——**その差で当たらなくなるのは、
+    検査ではなく綴りの都合である。** 語幹の一致以上は許さない（言い換えは探さない）。
+    """
+    words = phrase.split()
+    head = re.escape(words[0]) + r"(?:s|es|ed|ing)?"
+    tail = r"\s+".join(re.escape(w) for w in words[1:])
+    return re.compile(r"\b" + head + (r"\s+" + tail if tail else "") + r"\b", re.I)
+
+
+def _clause_prefix(text, start):
+    """`start` の手前、**同じ節の中**だけを返す（否定は節の中でだけ数える）。"""
+    left = 0
+    for sep in CAMERA_CLAUSE_SPLIT.finditer(text, 0, start):
+        left = sep.end()
+    return text[left:start]
+
+
+def _camera_techniques(text, entries):
+    """§18 の本文が名乗る技法。`{id: (項目, 句)}` を返す。
+
+    ⚠️ **言い換えを探さない。** 目録の `en` の句が**在るか**だけを見る——
+    意味の近さを測る層ではない（`aim` の自由文を読まないのと同じ規律）。
+    ⚠️ **否定された句は数えない**（`no push in` は、押していない）。
+    ⚠️ **辞退された句も数えない**（`…; this shot spends none`）。
+    """
+    found = {}
+    for key, item in entries.items():
+        for phrase in item.get("en") or []:
+            if not isinstance(phrase, str) or not phrase.strip():
+                continue
+            occurrences = list(_camera_phrase_regex(phrase).finditer(text))
+            if not occurrences:
+                continue
+            allowed = [m for m in occurrences
+                       if not CAMERA_NEGATORS.search(_clause_prefix(text, m.start()))]
+            if not allowed:
+                continue
+            if all(CAMERA_DECLINE.search(_sentence_around(text, m.start(), m.end()))
+                   for m in allowed):
+                continue
+            found[str(item.get("id") or key)] = (item, phrase)
+            break
+    return found
+
+
+def check_camera_use(project, repo_root=None):
+    """L54 — **§18 が名乗る技法を、目録が引けるか。**
+
+    ⚠️ **なぜ要るか。** `L53` は目録の**形**を見るが、**作品を見ていない**——
+    目録と作品を繋ぐ手が無ければ、100件は地図のまま腐りうる。この層は
+    **§18 `Camera Prompt` に目録の `en` の句が現れたとき**、それを技法として名指す。
+
+    ⚠️ **違反は1つだけである。** カメラは動かないと言い切ったショットが、
+    `travels: true` の技法を名乗ったとき——**同じスロットの中で、宣言と選択が
+    食い違っている。** それ以外は註で通す（目録は `draft` であり、
+    **作品の使い方が勝つ**）。
+
+    ⚠️ **見ていないもの。** 句が無いショットの動きが「悪い」か（目録に無い動きは
+    正しいことがある）、`roles` の当てはめが正しいか、技法の選びが場面に適切か。
+    """
+    out = []
+    root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
+    entries, where, problem = camera.catalog(root)
+    if problem or not entries:
+        out.append(finding("L54", "",
+                           "カメラの目録が読めないので、**この層は1本も照合していない**"
+                           "（目録の側は `L53` が言う）。",
+                           severity="note"))
+        return out
+
+    seen = 0
+    named = {}          # 技法 id -> 名乗ったショット
+    unmatched = []
+    role_gap = []       # (ショット, 技法 id, role)
+    for s in project.order():
+        shot = project.shots[s]
+        src = _spec_of(shot, "video")
+        if not src:
+            continue
+        p = project.root / src
+        if not p.is_file():
+            continue
+        slot = _slot_body(p, "Camera Prompt")
+        if not slot.strip():
+            continue                     # L17 が「スロットが無い」と言う
+        seen += 1
+        hits = _camera_techniques(slot, entries)
+        if not hits:
+            unmatched.append(s)
+            continue
+        holds = bool(CAMERA_HOLD.search(slot))
+        base = str(shot.get("role") or "").split("（")[0].strip()
+        for tid, (item, phrase) in hits.items():
+            named.setdefault(tid, set()).add(s)
+            roles = item.get("roles") or []
+            if base and roles and base not in roles:
+                role_gap.append((s, tid, base))
+            if holds and item.get("travels") is True:
+                out.append(finding(
+                    "L54", s,
+                    f"§18 `Camera Prompt` が**カメラは動かないと言い切っている**のに、"
+                    f"目録の `{tid}`（{item.get('name')}／`{phrase}`）は "
+                    "`travels: true` である。**動かないカメラが、動く技法を名乗っている。**"
+                    "⚠️ **どちらかを直す**——目録は `draft` ゆえ、"
+                    "**作品の意図が正しければ、目録の側を直す。**"))
+
+    if not seen:
+        out.append(finding("L54", "",
+                           "`Camera Prompt` に中身を持つ動画の仕様が1本も無い——"
+                           "**この層は作品を見ていない。**",
+                           severity="note"))
+        return out
+    if named:
+        listing = "・".join(f"`{tid}` {entries[tid].get('name')}（{len(shots)}本）"
+                            for tid, shots in sorted(named.items()))
+        out.append(finding("L54", f"{len(named)}件",
+                           f"§18 が目録の技法を名乗った——{listing}。"
+                           "⚠️ **この層は句が在るかだけを見ており、"
+                           "その選びが場面に正しいかは見ない。**",
+                           severity="note"))
+    if unmatched:
+        sample = "／".join(f"`{x}`" for x in unmatched[:4])
+        more = "…" if len(unmatched) > 4 else ""
+        out.append(finding("L54", f"{len(unmatched)}本",
+                           f"{len(unmatched)}本の `Camera Prompt` は、目録のどの `en` にも"
+                           f"当たらない（{sample}{more}）。"
+                           "⚠️ **目録を引いていないか、目録に無い動きである**——"
+                           "**この層には、その区別がつかない。**",
+                           severity="note"))
+    if role_gap:
+        sample = "／".join(f"`{s}` {tid}→{base}" for s, tid, base in role_gap[:3])
+        more = "…" if len(role_gap) > 3 else ""
+        out.append(finding("L54", f"{len(role_gap)}件",
+                           "目録の `roles` に無い `role` のショットが、その技法を名乗っている"
+                           f"（{sample}{more}）。⚠️ **目録は草案であり、作品が勝つ**——"
+                           "**食い違ったら目録を直す。**",
+                           severity="note"))
+    return out
+
+
 # ---------------------------------------------------------------- 曲が時間の主であるとき
 
 #: `bible.time_source` の語彙。**語彙を持つのは、それを読む者である**——
@@ -6508,6 +6685,10 @@ def run(project, schema_dir=None, repo_root=None):
     #    ⚠️ **`CHECKS_SHOT` には入れない。** あれは `fn(shot)` であり、
     #    目録の置き場を知らない（`repo_root` を渡す席が無い）。
     out += check_camera_catalog(project, repo_root=repo_root)
+    # ⚠️ **`L53` の直後に置く。** あちらは目録の形を読み、こちらは
+    #    **作品の §18 を目録へ当てる**——**同じ目録の表と裏である。**
+    #    ⚠️ **`CHECKS_SHOT` には入れない**（`repo_root` を渡す席が無い）。
+    out += check_camera_use(project, repo_root=repo_root)
     out += check_mode_demands(project)
     # ⚠️ **曲を読む2層は隣に置く。** 同じ `bible.song` と `ledger.song_coverage` を読み、
     #    相手だけが違う——あちらは尺、こちらは覆い。**離すと、片方だけが直される。**

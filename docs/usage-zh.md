@@ -12,15 +12,19 @@
 
 ## 需要什么
 
-`python3` 和 PyYAML。**没有安装步骤。**
+`python3`，以及 **PyYAML 和 jsonschema**。**没有安装步骤。**
 
 ```bash
-python3 -m pip install --user pyyaml
+python3 -m pip install --user pyyaml jsonschema
 ```
+
+⚠️ **在 Homebrew 的 Python（PEP 668）上 `pip` 会拒绝它**——把
+`--break-system-packages` 和 `--user` 一起传进去。写入的是用户站点，
+**不碰 Homebrew 的树。**
 
 ## 命令
 
-**命令有 3 个**——**做作品的 2 个，以及维护仓库的 1 个。**
+**命令有 4 个**——**做作品的 3 个，以及维护仓库的 1 个。**
 
 ```bash
 # 检查器——在规格阶段触发矛盾
@@ -31,6 +35,10 @@ python3 engine/ledger/check.py projects/ukebi/ukebi-v2     # Ukebi V2
 # 打印器——规格中可以导出的行。什么都不写
 python3 engine/shot/print_spec.py projects/hitosara
 python3 engine/shot/print_spec.py projects/hitosara --shot hitosara-ch01-seg04
+
+# 摄像机目录——引出适合某个角色或某种运动的技法。什么都不写
+python3 engine/shot/camera.py --role 情景 --motion 停止
+python3 engine/shot/camera.py --id 007
 
 # 仓库自身的文档检查——不用来做作品
 python3 tools/check_i18n.py                                # 文档的镜像
@@ -51,7 +59,21 @@ python3 tools/check_i18n.py                                # 文档的镜像
 | （位置参数） | 项目目录的路径。 |
 | `--shot` | 只打印一个镜头。 |
 
-⚠️ **两者不是二选一——它们覆盖的范围不一样。**
+**`engine/shot/camera.py`**
+
+| 参数 | |
+|---|---|
+| `--role` | 这个动作能担的 `role`（十五种之一） |
+| `--motion` | `MOTION_PATTERNS` 之一（`停止`、`カメラのみ`……） |
+| `--job` | 演出上的差事（八者之一。`確立`、`焦点`……） |
+| `--position` | `頭`、`中`、`尾`、`つなぎ`、`全編` |
+| `--id` / `--name` | 用编号或日文名取一个 |
+
+**给的条件必须全部满足**；至少要给一个。⚠️ **它打印的是目录，不是决定**——
+`roles` 是能担的差事的集合，**到底是哪一件，由镜头决定。**
+⚠️ **§18 带走的是 `en` 这一行**；日文名不会交给生成器。
+
+⚠️ **`check.py` 与 `print_spec.py` 不是二选一——它们覆盖的范围不一样。**
 **`print_spec.py` 打印的行，是抄下去的瞬间就会沉默的行**（所以每一行都会报出它让谁沉默）。
 **也就是说，`check.py` 报告不了那些行。** 反过来，**`check.py` 触发的东西，正是
 `print_spec.py` 拒绝导出的东西。**
@@ -211,9 +233,9 @@ projects/<name>/
 
 ## 层
 
-检查由**52 层，`L0`–`L52`**，以及模式（schema）的形状验证构成。
-⚠️ **`L35` 是预约，尚未写出**——所以**号码跳过一个。** `L0`–`L52` 是 53 个号码，
-**52 层。** ⚠️ **`L34` 与 `L36` 读曲**——没有指名曲为时间之主的作品会被告知
+检查由**54 层，`L0`–`L54`**，以及模式（schema）的形状验证构成。
+⚠️ **`L35` 是预约，尚未写出**——所以**号码跳过一个。** `L0`–`L54` 是 55 个号码，
+**54 层。** ⚠️ **`L34` 与 `L36` 读曲**——没有指名曲为时间之主的作品会被告知
 **「什么都没看见」**——**它们并没有沉默。**
 ⚠️ **`L37` 读镜头的内侧**——节拍是否铺满 `duration`——而且
 **无论有没有曲，它都读每一部作品。** ⚠️ **`L38` 读影片规格的读口**——
@@ -229,7 +251,11 @@ projects/<name>/
 ⚠️ **`L51` 把镜头的 `population` 对着 §18 读**——数变成 `Master Prompt` 里的点名与
 `Negative Prompt` 里的副本，两个方向都读——而**不声明人数的镜头会被告知「什么都没读到」。** ⚠️ **`L52` 读镜头的 `body_parts`**——画面装下身体的哪些部分、各几个——对着每个部位
 同样的两句，以及对着 `population`：**人数数的是身体，这个字段来自的失败发生在肢体上。**
-**一条都不写的作品，并没有落在这几层上**——
+⚠️ **`L53` 读摄像机目录的形状**——`motion_pattern`、`role`、函数与文法卡片是否都能引到词汇——
+而**`L54` 把 §18 的 `Camera Prompt` 对着目录的 `en` 行读。**
+⚠️ **`L54` 只为一件事报警**：镜头一面说「摄像机整段不动」，一面又点名了一个
+`travels` 为真的动作。**一行目录句子都没用到的作品，会被告知「一个都没对上」**——
+**那条注就是使用程度的实测**，不是缺陷。**一条都不写的作品，并没有落在这几层上**——
 注会说出看过的镜头数。每一层读什么、不读什么，在
 [`docs/dramaturgy-zh.md`](dramaturgy-zh.md) 与 [`docs/cards-zh.md`](cards-zh.md)，
 以及 [`engine/ledger/README-zh.md`](../engine/ledger/README-zh.md) 的层目录里。

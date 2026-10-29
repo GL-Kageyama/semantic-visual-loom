@@ -229,6 +229,11 @@ name would have to lie about the other route.**
 | `L42` | §6 `REF_FORMAT`, the grammar registry, `dramaturgy.set_pieces` | the named grammar is not in the registry; a section it declares `written_into` is missing or empty; §18 names a route not in its `routes`; a set piece's `format` is not the §6 name |
 | `L45` | the registry's `negative_conflicts` and §18 `Negative Prompt` | the specification names a grammar and its own `Negative Prompt` forbids that grammar's essential move |
 | `L46` | `aim`'s `grammar: <name>` prefix and the registry | `aim` claims a grammar the registry does not hold |
+| `L53` | the camera catalog and this foundation's vocabulary | a `motion_pattern`, `role`, function, grammar card or shape that does not resolve; ⚠️ **a catalog that cannot be opened is a note** |
+| `L54` | §18 `Camera Prompt` and the catalog's `en` lines | a whole-take hold beside a technique whose `travels` is true. ⚠️ **a prompt that uses no catalog line is a note** |
+
+⚠️ **`L53` and `L54` are neighbours the other way round**—**`L53` reads the catalog alone,
+`L54` reads a work against it.** **Neither judges whether a move is right for a shot.**
 
 ⚠️ **`L31`, `L32`, `L42`, `L45` and `L46` are neighbours on purpose**—**they read the same §6
 and the same registry, and differ only in the key.** Separated, one of them gets fixed and the

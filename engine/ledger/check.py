@@ -1755,6 +1755,76 @@ def _self_test():
         if not _ok:
             print(f"        {_got[:88]}")
 
+    # ---- L54（§18 が名乗る技法を、目録が引けるか）
+    #     ⚠️ **仕様の骨だけを作る。** `_slot_body` が読むのは §18 の小節であり、
+    #        仕様の他の19節はこの層の相手ではない。
+    print("\n=== 自己検査 — 目録を作品へ当てる\n")
+
+    class _CamProj:
+        def __init__(self, root, shots):
+            self.root, self.shots = root, shots
+
+        def order(self):
+            return sorted(self.shots)
+
+    def cam_use_case(label, entries, slot, want, fragment, *,
+                     role="情景", write=True):
+        d = _P(tempfile.mkdtemp())
+        if write:
+            text = yaml.safe_dump({"version": 1, "techniques": entries},
+                                  allow_unicode=True, sort_keys=False)
+            (d / "index.yaml").write_text(text, encoding="utf-8")
+        spec = f"## 18. WAN 3.0\n\n### Camera Prompt\n\n{slot}\n"
+        (d / "s01.md").write_text(spec, encoding="utf-8")
+        proj = _CamProj(d, {"s01": {"shot": "s01", "role": role, "spec": "s01.md"}})
+        env = semantic.camera.CAMERA_ENV
+        keep = _os.environ.get(env)
+        _os.environ[env] = str(d)
+        try:
+            got = semantic.check_camera_use(proj, repo_root=d)
+        finally:
+            if keep is None:
+                _os.environ.pop(env, None)
+            else:
+                _os.environ[env] = keep
+        v = [f for f in got if f["severity"] != "note"]
+        nts = [f for f in got if f["severity"] == "note"]
+        ok = (bool(v) == want
+              and (not want or any(fragment in f["message"] for f in v))
+              and (want or any(fragment in f["message"] for f in nts)))
+        return label, ok, (v[0]["message"] if v
+                           else (nts[0]["message"] if nts else "（何も出ない）"))
+
+    _push = cam_entry(id="003", name="ドリーイン", en=["push in slowly"])
+    _crane = cam_entry(id="007", name="クレーンアップ", en=["crane up"],
+                       travels=True, roles=["開示", "情景"])
+
+    for _label, _ok, _got in [
+        cam_use_case("L54 目録の句を名乗る（鳴ってはならない）",
+                     [_push], "The camera pushes in slowly.", False, "名乗った"),
+        # ⚠️ **同じスロットが、動かないと言い切り、動く技法を名乗っている。**
+        cam_use_case("L54 動かないと言い切ったのに動く技法を名乗る",
+                     [_crane], "The camera holds still for the whole six seconds, "
+                     "then crane up.", True, "動く技法を名乗っている"),
+        cam_use_case("L54 否定された句は数えない",
+                     [_push], "no push in slowly", False, "当たらない"),
+        # ⚠️ **辞退は「使った」ではない。** 様式は許すが、このショットは使わない。
+        cam_use_case("L54 辞退された句は数えない",
+                     [_push], "The style allows push in slowly; this shot spends none.",
+                     False, "当たらない"),
+        cam_use_case("L54 目録の `roles` に無い `role`（註）",
+                     [_push], "The camera pushes in slowly.", False, "作品が勝つ",
+                     role="焦点"),
+        cam_use_case("L54 目録が読めない＝1本も照合していない",
+                     [], "The camera pushes in slowly.", False,
+                     "1本も照合していない", write=False),
+    ]:
+        n += 1
+        bad += not _ok
+        print(f"    {_label:<50}{'':>10}  {'期待どおり' if _ok else '⚠️ 期待と違う'}")
+        if not _ok:
+            print(f"        {_got[:88]}")
+
     def run1(label, fn, proj, want, fragment, note=None):
         """⚠️ **註も読む。** 註が出ないことも「違反0件」に見えるからである。"""
         nonlocal n, bad

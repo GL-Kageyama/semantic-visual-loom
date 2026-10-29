@@ -81,6 +81,8 @@ in order to fire on "`before` and `after` are the same" — but **JSON Schema ca
 | **L50** | **`tempo` disagrees with the shots' `duration`**, or a flat rhythm carries no `flat: true` and `note` | same |
 | **L51** | **The count a shot declares never reaches the strings** — `population` against §18 `Master Prompt` (the naming) and `Negative Prompt` (its copy), in both directions | "L51 — how many people are in the frame" below |
 | **L52** | **The parts a shot declares never reach the strings, or contradict its own headcount** — `body_parts` against §18 (the same two sentences per part) and against `population` (one body has two hands) | "L52 — which parts of the body are in the frame" below |
+| **L53** | **A camera technique does not resolve against this foundation's vocabulary** — `motion_pattern`, `roles`, `functions`, `grammars.card`, `travels`, `physical` and `directing` for each of the 100 entries. ⚠️ **It reads the list, not a work** | "L53 — the camera catalog" below |
+| **L54** | **§18 says the camera holds still and names a move that travels** — the catalog's `en` lines are read against `Camera Prompt`; ⚠️ **that contradiction is the only violation**, and a prompt that uses no catalog line is a note | same |
 
 **L2, L3 and L4 are transplants.** Applied to all 57 segments of Gozen-niji,
 a checker that scored **recall 2/2 and 0 false positives** went in just as it was.
@@ -1443,6 +1445,39 @@ the failure happened in a limb.** ⚠️ **`L51` reports that take as green.**
   needs only `population` — **the part field is for the frame that holds a part.** Nothing is
   backfilled.
 
+### L53 — the camera catalog resolves against the vocabulary
+
+**One hundred techniques stand in `references/camera/index.yaml`, and every value in the list
+must be a name this foundation already knows.** `motion_pattern` against `rolemap.MOTION_PATTERNS`
+(compound names are tried whole before they are split — `機械・乗物` contains the separator),
+`roles` against `rolemap.ROLES`, `functions` against the schema's enum, `grammars.card` against
+the grammar registry, and `travels`/`physical`/`directing` against their own shapes.
+
+- ⚠️ **It reads the catalog, not a work.** The note says `100 件を照合した。この層は作品を見ていない`
+  — **a catalog that resolves is not a catalog whose choices are right.**
+- ⚠️ **Every entry is `status: draft`.** The mapping was applied from general film practice and
+  has not been measured; **a work's use wins, and the catalog is corrected.**
+- ⚠️ **A missing, unreadable or malformed catalog is a note, not a pass** — the same three-way
+  distinction as `L42`: *could not verify* is not *verified*.
+
+### L54 — §18 is read against the catalog
+
+**`Camera Prompt` is matched against the catalog's `en` lines, and the one violation is a
+contradiction inside the same slot: a whole-take hold beside a technique whose `travels` is true.**
+Pans, tilts and zooms are `travels: false` (they turn or reframe without moving the camera), but a
+crane, a dolly or a truck moves the camera — **a shot that says `holds still for the whole` and
+names one of those has said two things that cannot both be done.**
+
+- ⚠️ **Negated and declined mentions do not count as use.** `no push in` forbids the move; *the
+  style allows a dolly; this shot spends none* declines it. Both are skipped.
+- ⚠️ **A prompt that uses none of the catalog's lines is a note, not a failure.** The note is
+  **the measure of adoption** — the catalog was published after these specifications were
+  written, and the count is how the author sees whether the handover has started.
+- ⚠️ **It reads the presence of a line, not the quality of the choice.** A match whose `role` is
+  not among the entry's `roles` is a note — **the work wins; the catalog is corrected.**
+- ⚠️ **It needs the catalog to be readable**; when it is not, the note says this layer read
+  nothing (`L53` speaks about the catalog itself).
+
 ### ⚠️ Firing Against a Running Artifact
 
 | Check | Ukebi V2 (30 takes) | What it is saying |
@@ -1640,7 +1675,7 @@ What it can say is —
 | **Guarantees** | **The song's length adds up** — the sections reach `song.duration`, and each section's shots reach that section. ⚠️ **Only for a work naming the song as its time source** (`bible.time_source: song`) | **L34** |
 | **Guarantees** | **Every sung line is answered by a shot, and every stretch where the song says nothing has an owner** — ⚠️ **among the shots the record lists.** Whether the picture says the same thing as the lyric is not measured | **L36** |
 | **Guarantees** | **The beats tile the shot's `duration`** — from 0 to the end, with no gap and no overlap. ⚠️ **Whether the beats are well placed is not measured** | **L37** |
-| **Guarantees** | **It is not broken.** L0–L52 fire before generation, and everything that fired can be explained. ⚠️ **`L35` is reserved and unwritten** — **52 layers across 53 codes: `L34`/`L36` speak only where a song exists, `L38` only where a video specification does, `L40`–`L50` only where a work writes dramaturgy or names a grammar, `L51` only where a shot declares `population`, and `L52` only where a shot declares `body_parts`** | all |
+| **Guarantees** | **It is not broken.** L0–L54 fire before generation, and everything that fired can be explained. ⚠️ **`L35` is reserved and unwritten** — **54 layers across 55 codes: `L34`/`L36` speak only where a song exists, `L38` only where a video specification does, `L40`–`L50` only where a work writes dramaturgy or names a grammar, `L51` only where a shot declares `population`, `L52` only where a shot declares `body_parts`, `L53` only where the camera catalog can be opened, and `L54` only where a `Camera Prompt` has a body** | all |
 | **Does not guarantee** | **That `song.duration` is the real length of the file `song.master` names** — no layer opens the audio | —— |
 | **Does not guarantee** | **That the generator draws the aim.** | —— |
 | **Does not guarantee** | **That a still shot's §11 really stops the subject.** | —— |

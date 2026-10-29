@@ -14,15 +14,19 @@ specification **whose value is already forced.**
 
 ## Requirements
 
-`python3` and PyYAML. **There is no install step.**
+`python3`, **PyYAML and jsonschema**. **There is no install step.**
 
 ```bash
-python3 -m pip install --user pyyaml
+python3 -m pip install --user pyyaml jsonschema
 ```
+
+⚠️ **On a Homebrew Python (PEP 668) `pip` refuses that** — pass
+`--break-system-packages` **together with `--user`**, which writes to your user site and
+**leaves the Homebrew tree alone.**
 
 ## The commands
 
-**Three commands ship here**—**two for making a work, one for maintaining the
+**Four commands ship here**—**three for making a work, one for maintaining the
 repository.**
 
 ```bash
@@ -34,6 +38,10 @@ python3 engine/ledger/check.py projects/ukebi/ukebi-v2     # Ukebi V2
 # the printer — the lines of a specification that can be derived. It writes nothing
 python3 engine/shot/print_spec.py projects/hitosara
 python3 engine/shot/print_spec.py projects/hitosara --shot hitosara-ch01-seg04
+
+# the camera catalog — which techniques fit a role or a motion. It writes nothing
+python3 engine/shot/camera.py --role 情景 --motion 停止
+python3 engine/shot/camera.py --id 007
 
 # the repository's own document check — not used to make a work
 python3 tools/check_i18n.py                                # the document mirrors
@@ -54,7 +62,22 @@ python3 tools/check_i18n.py                                # the document mirror
 | *(positional)* | the path to a project directory. |
 | `--shot` | print one shot only. |
 
-⚠️ **The two are not alternatives—they cover disjoint ground.**
+**`engine/shot/camera.py`**
+
+| flag | |
+|---|---|
+| `--role` | a `role` the move can serve (one of the fifteen) |
+| `--motion` | one of `MOTION_PATTERNS` (`停止`, `カメラのみ`, …) |
+| `--job` | one of the eight directing jobs (`確立`, `焦点`, …) |
+| `--position` | `頭` · `中` · `尾` · `つなぎ` · `全編` |
+| `--id` / `--name` | one technique by its number or its Japanese name |
+
+**Every filter given must hold**; at least one is required. ⚠️ **It prints the catalog,
+not a decision** — `roles` is the set of jobs a move *can* serve, and **the shot decides
+which one.** ⚠️ **The `en` line is what §18 carries**; the Japanese name never reaches
+the generator.
+
+⚠️ **`check.py` and `print_spec.py` are not alternatives—they cover disjoint ground.**
 **A line `print_spec.py` prints is a line that goes silent the moment you copy it**
 (that is why each printed line names the check it silences). **So `check.py` can never
 report those lines.** Conversely, **everything `check.py` fires on is something
@@ -224,9 +247,9 @@ The counts behind that are in `HISTORY.md`.
 
 ## The layers
 
-The check is **52 layers, `L0`–`L52`**, plus schema-shape validation.
-⚠️ **`L35` is reserved and unwritten**, so **the codes skip a number** — `L0`–`L52` is 53 codes and
-**52 layers.** ⚠️ **`L34` and `L36` read the song**, and a work that does not name the song as its
+The check is **54 layers, `L0`–`L54`**, plus schema-shape validation.
+⚠️ **`L35` is reserved and unwritten**, so **the codes skip a number** — `L0`–`L54` is 55 codes and
+**54 layers.** ⚠️ **`L34` and `L36` read the song**, and a work that does not name the song as its
 time source **is told they saw nothing** — **they are not silent about it.**
 ⚠️ **`L37` reads the inside of a shot** — whether its beats tile its `duration` — and **it reads
 every work, whether or not a song exists.** ⚠️ **`L38` reads the head of a video specification** —
@@ -244,7 +267,13 @@ opens with `grammar:`. ⚠️ **`L48`–`L50` read a sequence against its own sh
 that declares no count is told nothing was read.** ⚠️ **`L52` reads a shot's `body_parts`** —
 which parts of the body the frame holds, and how many — against the same two sentences per
 part, and against `population`: **a count of people counts bodies, and the failure this field
-came from happened in a limb.** **A work that writes none of these is not failing them** — the notes say
+came from happened in a limb.**
+⚠️ **`L53` reads the camera catalog's shape** — every `motion_pattern`, `role`, function and
+grammar card must resolve against the vocabulary — and **`L54` reads §18's `Camera Prompt`
+against the catalog's `en` lines.** ⚠️ **`L54` fires on one thing only**: a shot that says
+the camera holds still for the whole take and also names a move whose `travels` is true.
+**A work whose prompts use none of the catalog's lines is told it matched none** — and
+**that note is the measure of adoption**, not a defect. **A work that writes none of these is not failing them** — the notes say
 how many shots were looked at. What each one reads — and does not read — is in
 [`docs/dramaturgy.md`](dramaturgy.md), [`docs/cards.md`](cards.md) and the layer index in
 [`engine/ledger/README.md`](../engine/ledger/README.md).

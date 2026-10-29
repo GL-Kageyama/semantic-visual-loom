@@ -210,6 +210,11 @@ SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles \
 | `L42` | §6 `REF_FORMAT`、文法目录、`dramaturgy.set_pieces` | 名号的文法不在目录里；它声明 `written_into` 的节不存在或为空；§18 名号了不在它 `routes` 里的路径；见场（set piece）的 `format` 与 §6 的名不同 |
 | `L45` | 目录的 `negative_conflicts` 与 §18 `Negative Prompt` | 规格名号了文法，而它自己的 `Negative Prompt` 禁掉了那个文法的核心动作 |
 | `L46` | `aim` 的 `grammar: <name>` 前缀与目录 | `aim` 名号了目录里没有的文法 |
+| `L53` | 摄像机目录与这个基盘的词汇 | `motion_pattern`、`role`、函数、文法卡片、形状引不到。⚠️ **目录打不开是注** |
+| `L54` | §18 `Camera Prompt` 与目录的 `en` 行 | 一面说整段不动，一面点名了 `travels` 为真的技法。⚠️ **没用目录句子的提示词是注** |
+
+⚠️ **`L53` 与 `L54` 是反方向的邻居**——**`L53` 只读目录，`L54` 把作品对着目录读。**
+**两者都不裁动作对这个镜头合不合适。**
 
 ⚠️ **`L31`、`L32`、`L42`、`L45`、`L46` 相邻是有意的**——**它们读同一个 §6 和同一个目录，
 只差一个键。** 分开摆，就会修了一个、忘了其余。

@@ -90,6 +90,22 @@ held §1's constants **by hand for all 12 takes**, and `schemas/bible.schema.jso
 ⚠️ **The work constants were copied by hand into three places**: §1, §19's `Output:`
 line, and (in Ukebi) `series-constants.md`. And the copies are already drifting.
 
+## The camera lookup
+
+`engine/shot/camera.py` reads the camera catalog (`references/camera/index.yaml`) and prints
+**the techniques that fit a role, a motion, a directing job or a position** — each with the
+`en` line that §18 takes.
+
+```bash
+python3 engine/shot/camera.py --role 情景 --motion 停止
+python3 engine/shot/camera.py --id 007
+```
+
+⚠️ **It prints the catalog, not a decision.** `roles` is the set of jobs a move can serve;
+**the shot's `role` decides which.** ⚠️ **Every entry is `status: draft`** — applied from
+general film practice, not measured — and **a work's use wins.** ⚠️ **The Japanese name never
+reaches the generator; the `en` line does.**
+
 ## What Reads It
 
 - **`L26`** — `bible.constants.video` against §1's four lines

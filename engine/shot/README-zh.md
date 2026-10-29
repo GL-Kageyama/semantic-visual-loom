@@ -83,6 +83,20 @@ python3 engine/shot/print_spec.py projects/<project> --shot <id>  # 只打印一
 ⚠️ **作品常数曾被手抄到三处**：§1、§19 的 `Output:` 行，以及（在受け火中）
 `series-constants.md`。而这些抄本**已经开始漂移。**
 
+## 怎么引摄像机
+
+`engine/shot/camera.py` 读摄像机目录（`references/camera/index.yaml`），打印
+**适合某个角色、运动、演出差事或位置的技法**，并带上 §18 要接走的 `en` 行。
+
+```bash
+python3 engine/shot/camera.py --role 情景 --motion 停止
+python3 engine/shot/camera.py --id 007
+```
+
+⚠️ **它打印的是目录，不是决定。** `roles` 是能担的差事的集合，
+**到底是哪一件，由镜头的 `role` 决定。** ⚠️ **每一条都是 `status: draft`**——从一般性的
+电影作法套上去的，没有量过——**作品的用法赢。** ⚠️ **交给生成器的是 `en` 这一行，不是日文名。**
+
 ## 谁在读它
 
 - **`L26`** —— 把 `bible.constants.video` 与 §1 的四行对照

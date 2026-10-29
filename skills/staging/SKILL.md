@@ -119,6 +119,11 @@ measured against any work's own shots**; when a work's use disagrees, **the work
 catalog is corrected.** Take the chosen entry's `en` line into §10, and derive §18 from it —
 **the technique's name is not handed to the generator; its English line is.**
 
+**Ask the catalog by role and motion** — `python3 engine/shot/camera.py --role 情景 --motion 停止`
+prints the entries that can serve that job, each with its `en` line. ⚠️ **It prints the
+catalog, not a decision**; narrow it by `--job` or `--position` once the shot's place in the
+scene is decided.
+
 **6. How many camera events — in the policy's own vocabulary.** The unit of the shot is
 **one change** — and one change is **one camera event**
 ([`CLAUDE.md`](../../CLAUDE.md), Fixed Policy). §10's `Camera Events:` line carries each event
