@@ -111,6 +111,16 @@ and the foundation **reads the records**. ⚠️ **`L25` does not open `media/`*
 **a discrepancy between the record and the actual object does not fire.**
 ⚠️ **Zero violations is not "correct."** Read the notes, and read the range that is not checked.
 
+⚠️ **Attach a reference image of the person and of the space when you generate.** A record fixes
+**what the work says**; **it does not fix what the picture looks like.** Measured on
+`projects/mado-fuki`—**four clips out of four records whose cards matched, and the room is a
+different room in each**: the window changes shape and height, the floor goes from cold grey to
+warm boards, the ladder and the bucket come and go, and **the person is held to no sheet at all.**
+**Put the person in `ledger.yaml` (`characters.<name>.identity`) and the space in
+`locations.<name>.base`, and attach both at generation the way the style card is attached**
+(`REF_CHARACTER` / `REF_LOCATION`, carried into §19 `References`). ⚠️ **What no reference names,
+the generator fills with its own default—and it fills it afresh in every clip.**
+
 ## Structure
 
 **What exists**
