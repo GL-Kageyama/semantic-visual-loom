@@ -2184,6 +2184,103 @@ def _self_test():
         if not _ok:
             print(f"        {_got[:88]}")
 
+    # ---- L59（画風の目録が、この基盤の語彙に引けるか）
+    print("\n=== 自己検査 — 画風の目録が引けるか\n")
+
+    def style_entry(**kw):
+        e = {"id": "001", "name": "水彩画", "source": "01",
+             "en": ["watercolor painting, transparent washes"],
+             "family": "絵画・伝統の表現", "star": 3, "medium": "手描き",
+             "card": "watercolor", "status": "draft"}
+        e.update(kw)
+        return e
+
+    def style_catalog_case(label, entries, want, fragment, *, write=True,
+                           cards=()):
+        """⚠️ **`repo_root` を仮の根にする。** そうしないと、隣の
+        `distill-essence-engine` の55枚が棚に混ざり、**被覆の数が機械ごとに動く**
+        （仮の根の隣には何も無い——**棚はこの1つだけになる**）。"""
+        d = _P(tempfile.mkdtemp())
+        if write:
+            text = yaml.safe_dump({"version": 1, "techniques": entries},
+                                  allow_unicode=True, sort_keys=False)
+            (d / "index.yaml").write_text(text, encoding="utf-8")
+        for name in cards:
+            (d / f"{name}.md").write_text("# 様式カード\n", encoding="utf-8")
+        env = semantic.styles.STYLES_ENV
+        keep = _os.environ.get(env)
+        _os.environ[env] = str(d)
+        try:
+            got = semantic.check_style_catalog(_CamProj(d, {}), repo_root=d)
+        finally:
+            if keep is None:
+                _os.environ.pop(env, None)
+            else:
+                _os.environ[env] = keep
+        v = [f for f in got if f["severity"] != "note"]
+        nts = [f for f in got if f["severity"] == "note"]
+        ok = (bool(v) == want
+              and (not want or any(fragment in f["message"] for f in v))
+              and (want or any(fragment in f["message"] for f in nts)))
+        return label, ok, (v[0]["message"] if v
+                           else (nts[0]["message"] if nts else "（何も出ない）"))
+
+    for _label, _ok, _got in [
+        style_catalog_case("L59 正しい項目は通る（註）",
+                           [style_entry()], False, "照合した", cards=("watercolor",)),
+        style_catalog_case("L59 `id` が3桁でない",
+                           [style_entry(id="1")], True, "3桁"),
+        style_catalog_case("L59 `name` が空である",
+                           [style_entry(name="  ")], True, "`name` が空"),
+        style_catalog_case("L59 `family` が4つに無い",
+                           [style_entry(family="日本画")], True, "どれでもない"),
+        style_catalog_case("L59 `star` が範囲の外",
+                           [style_entry(star=4)], True, "1・2・3"),
+        # ⚠️ **数として読む。** `"3"` は文字列であり、★の数ではない。
+        style_catalog_case("L59 `star` が文字列である",
+                           [style_entry(star="3")], True, "1・2・3"),
+        style_catalog_case("L59 `medium` が空である",
+                           [style_entry(medium=" ")], True, "媒材はこの軸の柱"),
+        style_catalog_case("L59 `medium` の頭が語彙に無い",
+                           [style_entry(medium="撮影（デジタル）")], True,
+                           "撮影"),
+        # ⚠️ **頭で見る。** `手描き（油）` は `手描き`——**括弧は媒材を変えない。**
+        style_catalog_case("L59 `medium` の括弧は頭を変えない（註）",
+                           [style_entry(medium="手描き（油）")], False, "照合した"),
+        style_catalog_case("L59 `en` が空である",
+                           [style_entry(en=[])], True, "生成へ渡る句が無い"),
+        style_catalog_case("L59 `card` と `near_card` を同時に持つ",
+                           [style_entry(near_card={"id": "gouache-abstract",
+                                                   "gap": "抽象に限定"})],
+                           True, "同じとも隣とも"),
+        style_catalog_case("L59 `near_card.gap` が空である",
+                           [style_entry(card=None,
+                                        near_card={"id": "gouache-abstract",
+                                                   "gap": " "})],
+                           True, "ずれの言葉"),
+        style_catalog_case("L59 `card` がカードの名でない",
+                           [style_entry(card="Watercolor")], True,
+                           "カードの名"),
+        # ⚠️ **カードの不在は違反ではない。** カードはこのリポジトリの外に在り、
+        #    clone した人には見えない——**見えないものを違反と呼ばない。**
+        style_catalog_case("L59 指すカードが棚に無い（註であって違反でない）",
+                           [style_entry(card="ukeiyo-e")], False, "見えない",
+                           cards=("watercolor",)),
+        # ⚠️ **被覆の註。** 棚に在るのに、目録が名を知らないカード。
+        style_catalog_case("L59 目録が知らないカードを名指す（註）",
+                           [style_entry()], False, "`sumi-e`",
+                           cards=("watercolor", "sumi-e")),
+        style_catalog_case("L59 目録が空である",
+                           [], False, "空である", cards=("watercolor",)),
+        style_catalog_case("L59 目録が無い",
+                           [], False, "1件も照合していない", write=False),
+    ]:
+        n += 1
+        bad += not _ok
+        print(f"    {_label:<50}{'':>10}  {'期待どおり' if _ok else '⚠️ 期待と違う'}")
+        if not _ok:
+            print(f"        {_got[:88]}")
+
     def run1(label, fn, proj, want, fragment, note=None):
         """⚠️ **註も読む。** 註が出ないことも「違反0件」に見えるからである。"""
         nonlocal n, bad

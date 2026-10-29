@@ -171,9 +171,18 @@ because `L3` and `L4` read the beat body, not only the field.**
    an undeclared second home, and a declared one is fine).
    ⚠️ **`079` 一つだけの構図 and `080` 群衆の構図 decide the headcount** — naming one binds the
    shot's `population`, and `L58` **fires** when the record disagrees.
+   ⚠️ **The picture itself has a name.** [`references/styles/index.yaml`](../../references/styles/index.yaml)
+   — 100 style names, each with **the English line the generator receives**, its `medium`
+   (read at the head — `手描き` covers `手描き（油）`), how far the name travels in English
+   (`star`), and `card` where a style card **is the same thing**. ⚠️ **62 of the 100 have
+   neither a card nor a neighbour** — **a name without a card is still usable**, because the
+   `en` line is the sentence. Ask: `python3 engine/shot/look.py --style --medium 手描き --star 3`
+   · `--style 水彩`. ⚠️ **`bible.style` and §6 `REF_STYLE` must name the same thing** —
+   `L31` compares the two sides, and `L32` opens the card the name points at.
    **Fires if wrong:** `L33` (a gesture the card offers, negated in §18's `Camera Prompt`) ·
    `L17` (the slot itself) · `L20` (`Style Motion`'s destination) · `L58` (a composition whose
-   name says one and a record that says many).
+   name says one and a record that says many) · **`L59` (the style list's own shape** — ⚠️ **it
+   reads the list and never a shot**, so it cannot tell you the style was the wrong choice).
    ⚠️ **Nothing reads §9's `## Blocking`, and nothing reads §13's events as events** — `L56`
    counts the names, not the doing. **The stage picture is unmeasured. A hole, recorded as one.**
 8. **The video specification, §1–20** — in `specmap.SPEC_SECTIONS`' order, all twenty. Write

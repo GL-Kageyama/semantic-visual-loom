@@ -249,12 +249,66 @@ question**: `L54` asks how the camera moves, `L58` asks how the frame is cut.
 composition theory — **not measured against a work.** **When a work's use disagrees, the work
 wins.**
 
+## The style registry
+
+`references/styles/index.yaml` **is the list of 100 style names.** It answers the plane the
+other three never touch: not how the camera moves, not who makes the light, not how the frame
+is cut — **what the picture is made of.** Each entry carries the English line, the chapter it
+belongs to, the medium, how far the name travels in English, and **which style card, if any, it
+is the same thing as.**
+
+```text
+- id: "001"
+  name: 水彩画
+  source: "01"                            # the source's own digits: 01–25 two, 026–100 three
+  en: [watercolor painting, transparent washes, the white of the paper as the light]
+  family: 絵画・伝統の表現                 # four chapters of 25: 絵画・伝統の表現 ·
+                                          # 線画・版画・手描き · イラスト・グラフィック · 立体・素材・世界観
+  star: 3                                 # how far the name travels in English (3 furthest)
+  medium: 手描き                           # 手描き · 版 · 写真 · デジタル · 立体 · 複合 · 任意
+  card: watercolor                        # the card that is the same thing — or null
+  status: draft
+- id: "004"                               # ガッシュ
+  card: null
+  near_card: {id: gouache-abstract, gap: カードは**抽象**に限定。100選は媒材全般}
+```
+
+⚠️ **`medium` is read at its head.** `手描き（油）` is `手描き`; `版または手描き` is `版` —
+**a bracket does not change the medium.** The vocabulary is seven words: **the six a style
+card's `Medium` already uses** (`手描き` `版` `写真` `デジタル` `立体` `複合`) **plus `任意`**,
+which two names carry because the source says their medium is not decided (`098`
+レトロフューチャー, `100` ドリーミー). ⚠️ **`任意` is not a blank** — a blank is a word outside
+the vocabulary, `任意` is a word inside it.
+
+⚠️ **`star` is the anatomy's judgment of how far the name travels in English** — 47 threes, 48
+twos, 5 ones. **It is a reading, not a measurement.** `L59` checks the range and nothing else.
+
+⚠️ **`card` names the style card that is the same thing, and 21 entries have one.** 17 more
+carry `near_card` — **a neighbour, with the difference written down** — and **the remaining 62
+are names with no card at all.** ⚠️ **That is not a defect.** A name is not a card, but **a name
+without a card is still usable**: the `en` line is the sentence the generator receives. `L59`
+keeps the two apart — **a card that cannot be opened is a note**, because the cards live outside
+this repository and a clone does not have them.
+
+⚠️ **The cards and the list are not one to one.** The shelves a work can reach hold **56
+distinct cards** (16 in this repository's `references/styles/`, 55 beside it — 15 of them the
+same names). **29 are named by this list and 27 are not.** `L59` reports the coverage — **how
+many cards it saw, and which are unnamed** — and judges none of it.
+
+⚠️ **`L59` is the only layer for this axis, and it reads no work.** `L20` (the card's
+existence), `L31` (the home and §6 name the same style) and `L32` (§6's `REF_STYLE` resolves)
+**already read style.** A fourth reader would mean **fix one and the other rots** — the same
+reason a `twin` is closed both ways.
+
+⚠️ **Every entry is `status: draft`**, and the anatomy's readings are **not measured against a
+work.** **When a work's use disagrees, the work wins.**
+
 ## The environment variables
 
 | layer | variable | |
 |---|---|---|
 | format | `SVL_FORMATS_DIR` | where the format cards are |
-| style | `SVL_STYLES_DIR` | where the style cards are |
+| style | `SVL_STYLES_DIR` | where the style cards are — **and the style list with them** (`index.yaml` sits on the same shelf; **one variable, because it is one axis**) |
 | registry | `SVL_GRAMMARS_DIR` | where `index.yaml` is — **overlaid, never replaced**: this repository's own `references/grammars/` remains reachable |
 | camera | `SVL_CAMERA_DIR` | where the technique list is — **overlaid, never replaced**: this repository's own `references/camera/` remains reachable |
 | light | `SVL_LIGHTING_DIR` | where the lighting list is — **overlaid, never replaced**: this repository's own `references/lighting/` remains reachable |
@@ -335,6 +389,7 @@ name would have to lie about the other route.**
 | `L56` | §13 `LIGHTING` and the lighting catalog's `en` lines | nothing — **every outcome is a note**: how many specifications carry §13, which lights were named, how many named none, **and which shots name a light that §18's `Visual Prompt` never carries** |
 | `L57` | the composition catalog, the camera catalog and this foundation's vocabulary | a `family`, `kind`, `role`, function, grammar card or shape that does not resolve; ⚠️ **a catalog that cannot be opened is a note**. The two extra doors: a `twin` entry carrying `en` (or the reverse), a `twin` pointing at no camera entry, **and an `en` line that also lives in the camera catalog** |
 | `L58` | §18 `Camera Prompt` and the composition catalog's `en` lines | **one**: a `population_hint` entry named beside a shot record whose `population` contradicts it. ⚠️ **everything else is a note** — and a record with no `population` is one of those notes |
+| `L59` | the style catalog and the style cards on every reachable shelf | a `family`, `star`, `medium` head, card name or shape that does not resolve; a `card` and a `near_card` on the same entry. ⚠️ **a catalog or a card that cannot be opened is a note** — and so is **every card the list never names** |
 
 ⚠️ **`L53` and `L54` are neighbours the other way round**—**`L53` reads the catalog alone,
 `L54` reads a work against it.** **Neither judges whether a move is right for a shot.**
@@ -343,6 +398,10 @@ reading: **`L54` reads §18, `L56` reads §13** — and §13 had no reader at al
 ⚠️ **`L57` and `L58` are the same pair again for composition** — with the light pair's shape,
 not the camera pair's: **`L58` reads §18 `Camera Prompt`, the same slot as `L54`**, by a
 different question. **Two layers reading one slot is deliberate** — a shot both moves and is cut.
+⚠️ **`L59` is the one that has no partner** — and that is the decision, not an omission: the
+axis is **a list, not a work**, because **`L20`, `L31` and `L32` already read style from the
+work's side.** **Do not add a fourth reader of the same card** — the failure of two homes is
+the failure of two readers.
 
 ⚠️ **`L31`, `L32`, `L42`, `L45` and `L46` are neighbours on purpose**—**they read the same §6
 and the same registry, and differ only in the key.** Separated, one of them gets fixed and the

@@ -1564,6 +1564,33 @@ asks how the frame is cut. **Two layers reading one slot is deliberate.**
   question this layer asks; a prompt matching no catalog line is a note, and that count is
   the measure of adoption.
 
+### L59 — the style catalog resolves, and reports its coverage
+
+**`references/styles/index.yaml` is the list of 100 style names** — **not a card.** The cards
+are `.md` files on the same shelf (16 here, 55 beside this repository), and **the list names
+which of them, if any, is the same thing.**
+
+- **What is a violation.** An `id` that is not three digits; an empty `name`; a `family`
+  outside the four chapters; a `star` outside `1`–`3` (and `"3"` is a string, not a count); an
+  empty `medium`, or a head outside the seven words; an empty `en`; a **`card` and a
+  `near_card` on the same entry** (that is claiming both *the same* and *a neighbour*); a
+  `near_card` with no `gap`; a card name that is not a slug. Nothing else.
+- ⚠️ **`medium` is read at its head** — `手描き（油）` is `手描き`, `版または手描き` is `版`.
+  **The bracket does not change the medium**, and a check that compared the whole string would
+  turn one medium into forty spellings. ⚠️ **`任意` is in the vocabulary** — two names carry it
+  because the source says their medium is undecided. **A blank is outside the vocabulary; this
+  is inside it.**
+- ⚠️ **A card that cannot be opened is a note.** The cards live outside this repository; a
+  clone does not have them. **Do not turn "I cannot see it" into "it is not there."**
+- ⚠️ **The coverage is a note too** — how many cards the reachable shelves hold, how many the
+  list names, **and which are unnamed.** ⚠️ **A name without a card is still a name**: the `en`
+  line is the sentence the generator receives. **The two are not one to one, and the note says
+  so without calling either side wrong.**
+- ⚠️ **`L59` reads no work, and that is the decision.** `L20` (the card exists), `L31` (home and
+  §6 agree) and `L32` (§6's `REF_STYLE` resolves) **already read style from the work's side.**
+  **A fourth reader of one card means fixing one and rotting the other** — the same reason a
+  `twin` is closed in both directions. **Do not add one.**
+
 ### ⚠️ Firing Against a Running Artifact
 
 | Check | Ukebi V2 (30 takes) | What it is saying |
@@ -1761,7 +1788,7 @@ What it can say is —
 | **Guarantees** | **The song's length adds up** — the sections reach `song.duration`, and each section's shots reach that section. ⚠️ **Only for a work naming the song as its time source** (`bible.time_source: song`) | **L34** |
 | **Guarantees** | **Every sung line is answered by a shot, and every stretch where the song says nothing has an owner** — ⚠️ **among the shots the record lists.** Whether the picture says the same thing as the lyric is not measured | **L36** |
 | **Guarantees** | **The beats tile the shot's `duration`** — from 0 to the end, with no gap and no overlap. ⚠️ **Whether the beats are well placed is not measured** | **L37** |
-| **Guarantees** | **It is not broken.** L0–L58 fire before generation, and everything that fired can be explained. ⚠️ **`L35` is reserved and unwritten** — **58 layers across 59 codes: `L34`/`L36` speak only where a song exists, `L38` only where a video specification does, `L40`–`L50` only where a work writes dramaturgy or names a grammar, `L51` only where a shot declares `population`, `L52` only where a shot declares `body_parts`, `L53` only where the camera catalog can be opened, `L54` only where a `Camera Prompt` has a body, `L55` only where the lighting catalog can be opened, `L56` only where §13 `LIGHTING` has a body, `L57` only where the composition catalog can be opened, and `L58` only where a `Camera Prompt` has a body** | all |
+| **Guarantees** | **It is not broken.** L0–L59 fire before generation, and everything that fired can be explained. ⚠️ **`L35` is reserved and unwritten** — **59 layers across 60 codes: `L34`/`L36` speak only where a song exists, `L38` only where a video specification does, `L40`–`L50` only where a work writes dramaturgy or names a grammar, `L51` only where a shot declares `population`, `L52` only where a shot declares `body_parts`, `L53` only where the camera catalog can be opened, `L54` only where a `Camera Prompt` has a body, `L55` only where the lighting catalog can be opened, `L56` only where §13 `LIGHTING` has a body, `L57` only where the composition catalog can be opened, `L58` only where a `Camera Prompt` has a body, and `L59` only where the style catalog can be opened** | all |
 | **Does not guarantee** | **That `song.duration` is the real length of the file `song.master` names** — no layer opens the audio | —— |
 | **Does not guarantee** | **That the generator draws the aim.** | —— |
 | **Does not guarantee** | **That a still shot's §11 really stops the subject.** | —— |

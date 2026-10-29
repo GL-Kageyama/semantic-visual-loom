@@ -144,6 +144,28 @@ what `L57` refuses; **a declared twin is fine.**
 (`many`) — and **their names decide how many people the frame may hold**, so `L58` reads them
 against the shot's `population`.
 
+## The style lookup
+
+`engine/shot/look.py --style` reads the style catalog (`references/styles/index.yaml`) — **100
+names, and the English line each one hands to the generator.** It has **its own filters**,
+because style has its own columns: `--medium` (the head of the medium — `手描き` reaches
+`手描き（油）`), `--star` (how far the name travels in English), `--family` (the chapter).
+
+```bash
+python3 engine/shot/look.py --style --medium 手描き --star 3
+python3 engine/shot/look.py --style 水彩
+```
+
+⚠️ **A filter an axis does not have is refused, not ignored.** Style has no `--role`; light has
+no `--medium`. Ignoring it would print zero hits, and **zero reads as "there is no such
+technique"** when the truth is **"that axis has no such column."**
+
+⚠️ **A line printed as `card: —` is a name no style card holds** — 62 of the 100 are like
+that, and **they are still usable**: the `en` line is the sentence. Where a card exists,
+`card: <slug>` names it; where the neighbour is what the source means, `near_card` names it
+**with the difference written down.** ⚠️ **The two are not the same claim** — `L59` refuses an
+entry that makes both.
+
 ## What Reads It
 
 - **`L26`** — `bible.constants.video` against §1's four lines

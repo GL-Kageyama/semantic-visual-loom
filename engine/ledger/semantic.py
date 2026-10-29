@@ -117,6 +117,7 @@ import lighting
 import rolemap
 import specdoc
 import specmap
+import styles
 
 # ---------------------------------------------------------------- 層C 空の検査
 
@@ -5130,6 +5131,200 @@ def check_composition_use(project, repo_root=None):
     return out
 
 
+# ---------------------------------------------------------------- 画風——媒材が名前になっている軸
+
+#: 原図の章の名（4族）。**目の付け方が違う4つを、ページが分けている。**
+#: ⚠️ **光の `kind`・構図の `kind` と同じ鍵（`family`）だが、問いが違う。**
+STYLE_FAMILIES = ("絵画・伝統の表現", "線画・版画・手描き",
+                  "イラスト・グラフィック", "立体・素材・世界観")
+
+#: `medium` の頭の語。**様式カードの `Medium` と同じ6つ**に、この目録の7つ目
+#: **`任意`**（098 レトロフューチャー・100 ドリーミー——**媒材を決めない名**）を足す。
+#: ⚠️ **頭で見る。** `手描き（油）` は `手描き`、`版または手描き` は `版` である。
+#: ⚠️ **`媒材=任意` は空欄ではない**——空欄は語彙に無い、`任意` は語彙に在る。
+STYLE_MEDIUM_HEADS = ("手描き", "版", "写真", "デジタル", "立体", "複合", "任意")
+
+#: `star`——解剖が付けた「名前の通りやすさ」（3が最も通る）。**門は範囲だけである。**
+STYLE_STARS = (1, 2, 3)
+
+#: 様式カードの名（slug）。⚠️ **大文字と空白を受ける形にしない**——カードのファイル名である。
+STYLE_SLUG = re.compile(r"[a-z0-9][a-z0-9-]*\Z")
+
+STYLE_STATUS = CAMERA_STATUS
+
+
+def _style_medium_head(text):
+    """`媒材` の頭の語。`（`・`・` の前、`または` の前まで。⚠️ **語を足さずに切る。**"""
+    if not isinstance(text, str):
+        return ""
+    head = re.split(r"[（・]", text, maxsplit=1)[0]
+    return head.split("または", 1)[0].strip()
+
+
+def check_style_catalog(project, repo_root=None):
+    """L59 — 画風の目録が、この基盤の語彙に引けるか。
+
+    ⚠️ **なぜ要るか。** `L53`・`L55`・`L57` と同じ理由である。加えてこの軸には
+    固有の危険が2つある——
+
+    * **名前が媒材そのものである**（`水彩画`・`油彩画`）。ゆえに `medium` を語彙で見る。
+      ⚠️ **語彙は頭で見る。** `手描き（油）` を `手描き（油）` のまま照合すれば、
+      **同じ媒材が43の書き方で43の語になる。**
+    * **目録の大半がカードを持たない**（100件のうちカードを持つのは21件、隣を持つのは17件、
+      **残る62件は名前だけである**）。⚠️ **これは欠陥ではない。** 名前が在ることは
+      カードが在ることではなく、**カードが無いことは使えないことでもない。**
+
+    ⚠️ **カードの不在は違反ではない。** `card`・`near_card` が指す先が開けなくても、
+    この層は**註**を出す。カードはこのリポジトリの外（`distill-essence-engine`）に在り、
+    **clone した人には見えない**——見えないものを違反と呼ばない（`L20`・`L32` と同じ）。
+    ⚠️ **加えて被覆の註を出す**——**棚にカードが在るのに、目録がその名を知らない**とき。
+    100の名前と56枚のカードは1対1ではない（**名前を持たないカードが27枚ある**）。
+
+    ⚠️ **見ていないもの。** `star` の見立てが当たっているか、`en` の句が絵を作るか、
+    画風の選択が作品に適切か（**この層は作品を見ていない**）。
+    """
+
+    def note(msg, count=""):
+        out.append(finding("L59", count, msg, severity="note"))
+
+    out = []
+    root = Path(repo_root) if repo_root else Path(__file__).resolve().parents[2]
+    entries, where, problem = styles.catalog(root)
+
+    if problem == "missing":
+        note(f"画風の目録が**無い**——探した範囲: {where}。**この層は1件も照合していない。**")
+        return out
+    if problem == "unreadable":
+        note(f"画風の目録が**読めない**——{where}。**読めないことを、正しいと言わない。**")
+        return out
+    if problem == "malformed":
+        note(f"画風の目録の**形が違う**——{where}。"
+             "`techniques:` が並びで、各項が一意の `id` を持つこと。")
+        return out
+    if not entries:
+        note("画風の目録が**空である**——**1件も照合していない。**")
+        return out
+
+    # --- カードの棚。⚠️ **`L20` が読む棚と、目録が住む棚の両方である。**
+    #     「指してもいない棚のカード」は `L20` には見えないが、**目録にとっては
+    #     すぐ隣のカードである**——片方だけ数えると、被覆の数が置き場の選び方で動く。
+    card_dirs = []
+    seen = set()
+    for d in list(_cards_dirs(root, "style")) + list(styles._dirs(root)):
+        try:
+            key = d.resolve()
+        except OSError:
+            key = d
+        if key in seen:
+            continue
+        seen.add(key)
+        card_dirs.append(d)
+    cards = set()
+    for d in card_dirs:
+        if d.is_dir():
+            cards |= {p.stem for p in d.glob("*.md") if p.is_file()}
+
+    unopened = []          # 指す先のカードが開けない（註）
+    covered = set()        # 目録が名を知っているカード
+    with_card = 0
+    with_near = 0
+    for key, item in entries.items():
+        sid = str(item.get("id") or key)
+
+        def bad(msg, sid=sid):
+            out.append(finding("L59", sid, msg))
+
+        if not re.fullmatch(r"\d{3}", sid):
+            bad(f"`id` は3桁の文字列であること（いまは `{sid}`）。")
+        if not isinstance(item.get("name"), str) or not item["name"].strip():
+            bad("`name` が空である。")
+        if item.get("family") not in STYLE_FAMILIES:
+            bad(f"`family` の `{item.get('family')}` は "
+                f"{'／'.join(STYLE_FAMILIES)} のどれでもない。")
+        if type(item.get("star")) is not int or item["star"] not in STYLE_STARS:
+            bad(f"`star` は 1・2・3 の整数であること（いまは `{item.get('star')}`）。")
+
+        med = item.get("medium")
+        if not isinstance(med, str) or not med.strip():
+            bad("`medium` が空である——**媒材はこの軸の柱である。**")
+        else:
+            head = _style_medium_head(med)
+            if head not in STYLE_MEDIUM_HEADS:
+                bad(f"`medium` の頭の語 `{head}` は "
+                    f"{'／'.join(STYLE_MEDIUM_HEADS)} のどれでもない"
+                    f"（`{med}`）。")
+
+        en = item.get("en")
+        if (not isinstance(en, list) or not en
+                or any(not isinstance(x, str) or not x.strip() for x in en)):
+            bad("`en` が空である——生成へ渡る句が無い。")
+
+        card = item.get("card")
+        near = item.get("near_card")
+        if card is not None and near is not None:
+            bad("`card` と `near_card` を同時に持っている——"
+                "**同じとも隣とも名乗っている。** どちらか1つにすること。")
+        for label, slug in (("card", card),
+                            ("near_card.id", near.get("id") if isinstance(near, dict) else None)):
+            if slug is None:
+                continue
+            if not isinstance(slug, str) or not STYLE_SLUG.match(slug):
+                bad(f"`{label}` の `{slug}` はカードの名（小文字とハイフン）でない。")
+                continue
+            covered.add(slug)
+            if cards and slug not in cards:
+                unopened.append(slug)
+        if card is not None:
+            with_card += 1
+        if near is not None:
+            with_near += 1
+            if not isinstance(near, dict):
+                bad("`near_card` が辞書でない。")
+            elif not isinstance(near.get("gap"), str) or not near["gap"].strip():
+                bad("`near_card.gap` が空である——**隣であることを、ずれの言葉で書くこと。**")
+
+        if not isinstance(item.get("source"), str) or not item["source"].strip():
+            bad("`source` が空である。")
+        if item.get("status") not in STYLE_STATUS:
+            bad(f"`status` の `{item.get('status')}` は "
+                f"{'／'.join(STYLE_STATUS)} のどれでもない。")
+
+    if unopened:
+        listing = "／".join(f"`{s}`" for s in sorted(set(unopened)))
+        note(f"{len(set(unopened))} 件が指すカードを、見える棚で開けない——{listing}。"
+             "⚠️ **違反ではない。** カードはこのリポジトリの外に在り、"
+             "clone した人には見えない。**「無い」ではなく「見えない」である。**")
+    elif not cards:
+        note("様式カードの棚が1つも無い——**指す先のカードは1枚も照合していない。**")
+
+    if cards:
+        unnamed = sorted(cards - covered)
+        note(f"様式カードを {len(cards)} 枚見た（棚 {len(card_dirs)} 箇所）。"
+             f"うち目録が名を知っているのは **{len(cards & covered)} 枚**、"
+             f"**知らないのが {len(unnamed)} 枚**。"
+             f"⚠️ **名前とカードは1対1ではない**——目録の名のほうが多く（{len(entries)}）、"
+             "カードは目録の外にも増える。"
+             + (f" 名を知らない側: {'／'.join('`' + s + '`' for s in unnamed[:6])}"
+                + ("…" if len(unnamed) > 6 else "") + "。" if unnamed else ""),
+             f"{len(cards)}枚")
+
+    if not any(f["severity"] != "note" for f in out):
+        stars = collections.Counter(i.get("star") for i in entries.values())
+        heads = collections.Counter(_style_medium_head(i.get("medium"))
+                                    for i in entries.values())
+        fams = collections.Counter(i.get("family") for i in entries.values())
+        note(f"画風の目録 {len(entries)} 件を照合した。"
+             f"★は {'・'.join(f'{k}が{v}' for k, v in sorted(stars.items(), reverse=True))}、"
+             f"媒材の頭は {'・'.join(f'{k}{v}' for k, v in heads.most_common())}。"
+             f"カードを持つのは **{with_card} 件**、隣を持つのは **{with_near} 件**、"
+             f"**残る {len(entries) - with_card - with_near} 件は名前だけである。**"
+             f"族は {'・'.join(f'{k}{v}' for k, v in fams.most_common())}。"
+             "⚠️ **この層は作品を見ていない**——"
+             "画風の選択が適切かは、まだ誰も見ていない。",
+             f"{len(entries)}件")
+    return out
+
+
 # ---------------------------------------------------------------- 曲が時間の主であるとき
 
 #: `bible.time_source` の語彙。**語彙を持つのは、それを読む者である**——
@@ -7321,6 +7516,11 @@ def run(project, schema_dir=None, repo_root=None):
     #    ⚠️ **`CHECKS_SHOT` には入れない**（`repo_root` を渡す席が無い）。
     out += check_composition_catalog(project, repo_root=repo_root)
     out += check_composition_use(project, repo_root=repo_root)
+    # ⚠️ **画風は目録だけを置く**——**作品の層を作らない。** `L20`（カードの存在）・
+    #    `L31`（文法台帳）・`L32`（`REF_STYLE` の行き先）が**すでに様式を読んでいる**。
+    #    ⚠️ **同じことを2つの層に見せない**——第4の読み手を足せば、
+    #    **片方を直したとき、もう片方が腐る**（`twin` を禁じたのと同じ心持）。
+    out += check_style_catalog(project, repo_root=repo_root)
     out += check_mode_demands(project)
     # ⚠️ **曲を読む2層は隣に置く。** 同じ `bible.song` と `ledger.song_coverage` を読み、
     #    相手だけが違う——あちらは尺、こちらは覆い。**離すと、片方だけが直される。**

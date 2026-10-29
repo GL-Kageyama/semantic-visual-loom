@@ -131,6 +131,26 @@ python3 engine/shot/look.py --composition 三分割
 （`many`）——**它们的名字决定了画面能放几个人**，所以 `L58` 把它们对着镜头的
 `population` 读。
 
+## 怎么引画风
+
+`engine/shot/look.py --style` 读画风目录（`references/styles/index.yaml`）——
+**100 个名字，以及各自交给生成器的英文句。** 筛选用**这个轴自己的列**：
+`--medium`（媒材的开头——`手描き` 够得着 `手描き（油）`）、`--star`（名字在英语里走得多远）、
+`--family`（章）。
+
+```bash
+python3 engine/shot/look.py --style --medium 手描き --star 3
+python3 engine/shot/look.py --style 水彩
+```
+
+⚠️ **轴没有的筛选会被拒绝，而不是被无视。** 画风没有 `--role`，光没有 `--medium`。
+无视就会打出 0 条，而 **0 条会被读成「没有这个技法」**——其实是**「这个轴没有这一栏」**。
+
+⚠️ **打成 `card: —` 的项，是没有一张样式卡片持有它的名字**——100 项里有 62 项如此，
+**照样能用**：`en` 那一行就是句子。有卡片时 `card: <slug>` 说它的名字；
+原图指的是邻居时，`near_card` **写明差在哪里**地说它的名字。
+⚠️ **两者不是同一个主张**——同时写了两边的项，`L59` 会拒绝。
+
 ## 谁在读它
 
 - **`L26`** —— 把 `bible.constants.video` 与 §1 的四行对照

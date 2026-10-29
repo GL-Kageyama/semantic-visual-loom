@@ -1,0 +1,1096 @@
+# 画風の目録 — 機械が読む一覧
+#
+# ⚠️ **これは検査（`L59`）のための目録であり、カードではない。** 様式カードは
+#    `references/styles/*.md`（このリポジトリ）と隣の `distill-essence-engine` に在る。
+#    ここに並ぶのは**名前**であって、絵の作り方の指示ではない。
+#
+# ⚠️ **出所。** 100項目は「AI画風の名前 100選」のカード4枚を書き起こしたもの。
+#    `name` は転記から、`en` と `medium` と `star` は解剖（`画風100選_解剖.md`）から写した。
+#    `en` は解剖の `EN:` の行の逐語である——**生成器へ貼る句**であり、名前ではない。
+#
+# ⚠️ **`family` は原図の章の名である**（絵画・伝統の表現 001–025／線画・版画・手描き 026–050／
+#    イラスト・グラフィック 051–075／立体・素材・世界観 076–100）。25件ずつ4章。
+#
+# ⚠️ **`star` は解剖が付けた「名前の通りやすさ」である**（3が最も通る）。
+#    3＝媒材名として英語に定着、2＝語はあるが曖昧、1＝英語に同じ言い方が無い。
+#    ⚠️ **これは生成の実測ではなく、解剖の見立てである。**
+#
+# ⚠️ **`medium` は解剖の `分解:` の「媒材」を逐語で持つ。** 語彙は頭の語で見る——
+#    `（`・`・`・`または` より前が **手描き／版／写真／デジタル／立体／複合／任意** の
+#    どれかであること。⚠️ **頭の6つは様式カードの `Medium` と同じ語彙である**
+#    （同じことを2つの語で言わない）。⚠️ **`任意` はこの目録の7つ目**——
+#    098 レトロフューチャーと 100 ドリーミーは**媒材を決めない名**であり、
+#    解剖がそう書いている（`媒材=任意`）。**空欄ではない。**
+#
+# ⚠️ **`card` は「同じものを指す様式カード」である**（解剖 §5 の「直」21件）。
+#    無ければ `null`——**100件のうちの62件がカードを持たない。これは欠陥ではない。**
+#    名前が在ることはカードが在ることではないが、**カードが無いことは使えないことでもない。**
+#    ⚠️ **`near_card` は「隣の技法」である**（「近」17件）。`gap` に解剖が書いたずれを持つ
+#    ——**同じものではない。** `card` に入れない（入れると同一だと名乗ることになる）。
+#
+# ⚠️ **`source` は原図の番号を逐語で残す。** 1〜25 は2桁、26〜100 は3桁（`01`〜`100`）。
+#
+# ⚠️ **`status: draft` は全件である。** 見立てであり、作品の実測ではない。
+
+version: 1
+techniques:
+- id: '001'
+  name: 水彩画
+  source: '01'
+  en:
+  - watercolor painting, transparent washes, the white of the paper as the light
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 手描き
+  card: watercolor
+  status: draft
+- id: '002'
+  name: 油彩画
+  source: '02'
+  en:
+  - oil painting, thick impasto, visible brushwork, canvas texture
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 手描き
+  card: oil-painting
+  status: draft
+- id: '003'
+  name: アクリル画
+  source: '03'
+  en:
+  - acrylic painting, flat opaque color, crisp edges
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 手描き
+  card: null
+  status: draft
+- id: '004'
+  name: ガッシュ
+  source: '04'
+  en:
+  - gouache, matte opaque color, flat even areas, dry brush edges
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 手描き
+  card: null
+  near_card:
+    id: gouache-abstract
+    gap: カードは**抽象**に限定。100選は媒材全般
+  status: draft
+- id: '005'
+  name: パステル画
+  source: '05'
+  en:
+  - pastel drawing, soft powdery texture, blended color, toned paper
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 手描き
+  card: pastel
+  status: draft
+- id: '006'
+  name: 墨絵
+  source: '06'
+  en:
+  - sumi-e ink wash, black ink on paper, graded washes, large empty space
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 手描き
+  card: sumi-e
+  status: draft
+- id: '007'
+  name: 日本画
+  source: '07'
+  en:
+  - nihonga, mineral pigment on paper, fine outlines, soft flat color
+  family: 絵画・伝統の表現
+  star: 2
+  medium: 手描き
+  card: null
+  status: draft
+- id: 008
+  name: 浮世絵
+  source: 08
+  en:
+  - ukiyo-e woodblock print, flat color planes, bold outlines, indigo and ochre
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 版
+  card: null
+  near_card:
+    id: mokuhanga
+    gap: カードは**技法名**、100選は**様式名**
+  status: draft
+- id: 009
+  name: 水墨淡彩
+  source: 09
+  en:
+  - ink line with light color washes, sparse tint over ink drawing
+  family: 絵画・伝統の表現
+  star: 2
+  medium: 手描き
+  card: null
+  near_card:
+    id: sumi-e
+    gap: カードは墨だけ。100選は淡彩あり
+  status: draft
+- id: '010'
+  name: 水彩色鉛筆
+  source: '10'
+  en:
+  - watercolor pencil, pencil lines softened by water, visible drawn strokes
+  family: 絵画・伝統の表現
+  star: 2
+  medium: 手描き
+  card: null
+  near_card:
+    id: watercolor
+    gap: カードに**鉛筆線**が無い
+  status: draft
+- id: '011'
+  name: 印象派風
+  source: '11'
+  en:
+  - impressionist oil painting, visible short brushstrokes, dappled light, broken
+    color
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 手描き
+  card: null
+  status: draft
+- id: '012'
+  name: 点描画
+  source: '12'
+  en:
+  - pointillism, pure dots of color placed side by side, optical mixing
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 手描き
+  card: null
+  status: draft
+- id: '013'
+  name: キュビスム
+  source: '13'
+  en:
+  - cubism, the subject broken into planes, multiple viewpoints at once
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 手描き
+  card: null
+  status: draft
+- id: '014'
+  name: シュルレアリスム
+  source: '14'
+  en:
+  - surrealism, photorealistic rendering of an impossible scene, dreamlike juxtaposition
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 手描き
+  card: null
+  status: draft
+- id: '015'
+  name: フォーヴィスム
+  source: '15'
+  en:
+  - fauvism, non-naturalistic saturated color, bold flat color, visible brushwork
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 手描き
+  card: null
+  status: draft
+- id: '016'
+  name: 表現主義
+  source: '16'
+  en:
+  - expressionism, distorted forms, harsh color, agitated brushwork
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 手描き
+  card: null
+  status: draft
+- id: '017'
+  name: 写実絵画
+  source: '17'
+  en:
+  - realist painting, accurate proportions, natural light, visible but restrained
+    brushwork
+  family: 絵画・伝統の表現
+  star: 2
+  medium: 手描き
+  card: null
+  status: draft
+- id: 018
+  name: バロック絵画風
+  source: '18'
+  en:
+  - baroque oil painting, dramatic chiaroscuro, a single strong light source, deep
+    shadow
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 手描き（油）／ 道具=刷毛
+  card: null
+  status: draft
+- id: 019
+  name: ロココ絵画風
+  source: '19'
+  en:
+  - rococo painting, soft pastel palette, delicate curves, gentle light
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 手描き（油）／ 道具=刷毛
+  card: null
+  status: draft
+- id: '020'
+  name: アール・ヌーヴォー
+  source: '20'
+  en:
+  - art nouveau, sinuous organic curves, floral ornament, flat decorative color
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 版または手描き
+  card: art-nouveau
+  status: draft
+- id: '021'
+  name: フレスコ画
+  source: '21'
+  en:
+  - fresco, pigment on wet plaster, matte chalky surface, earth colors
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 手描き（壁）／ 道具=漆喰と顔料
+  card: null
+  status: draft
+- id: '022'
+  name: テンペラ画
+  source: '22'
+  en:
+  - tempera painting, fine parallel hatching, matte egg-based color, gold ground
+  family: 絵画・伝統の表現
+  star: 2
+  medium: 手描き
+  card: null
+  status: draft
+- id: '023'
+  name: インパスト
+  source: '23'
+  en:
+  - impasto, thick raised paint, palette knife, the paint casting its own shadows
+  family: 絵画・伝統の表現
+  star: 2
+  medium: 手描き（油またはアクリル）／ 道具=刷毛・ナイフ
+  card: null
+  status: draft
+- id: '024'
+  name: グリザイユ
+  source: '24'
+  en:
+  - grisaille, monochrome grey underpainting, full tonal range in grey only
+  family: 絵画・伝統の表現
+  star: 3
+  medium: 手描き
+  card: null
+  status: draft
+- id: '025'
+  name: 金箔絵画風
+  source: '25'
+  en:
+  - gold leaf, burnished gold ground, the gold catching light, visible leaf seams
+  family: 絵画・伝統の表現
+  star: 2
+  medium: 手描き（装飾）／ 道具=箔と膠
+  card: null
+  status: draft
+- id: '026'
+  name: 鉛筆デッサン
+  source: '026'
+  en:
+  - pencil drawing, graphite on textured paper, visible hatching, soft grey tones
+  family: 線画・版画・手描き
+  star: 3
+  medium: 手描き
+  card: pencil
+  status: draft
+- id: '027'
+  name: 木炭デッサン
+  source: '027'
+  en:
+  - charcoal drawing, deep blacks, soft smudged edges, coarse paper
+  family: 線画・版画・手描き
+  star: 3
+  medium: 手描き
+  card: charcoal
+  status: draft
+- id: 028
+  name: ペン画
+  source: 028
+  en:
+  - pen and ink drawing, fine black line, hatching and stippling, white paper
+  family: 線画・版画・手描き
+  star: 3
+  medium: 手描き
+  card: null
+  status: draft
+- id: 029
+  name: ボールペン画
+  source: 029
+  en:
+  - ballpoint pen drawing, uniform thin blue-black line, density built by layering
+  family: 線画・版画・手描き
+  star: 2
+  medium: 手描き
+  card: null
+  status: draft
+- id: '030'
+  name: 色鉛筆画
+  source: '030'
+  en:
+  - colored pencil, layered colored strokes, paper showing through, soft grain
+  family: 線画・版画・手描き
+  star: 2
+  medium: 手描き
+  card: null
+  status: draft
+- id: '031'
+  name: クレヨン画
+  source: '031'
+  en:
+  - crayon drawing, waxy thick strokes, uneven coverage, paper texture showing
+  family: 線画・版画・手描き
+  star: 2
+  medium: 手描き
+  card: null
+  status: draft
+- id: '032'
+  name: オイルパステル
+  source: '032'
+  en:
+  - oil pastel, dense creamy color, heavy blending, no paper grain showing
+  family: 線画・版画・手描き
+  star: 2
+  medium: 手描き
+  card: null
+  near_card:
+    id: pastel
+    gap: カードは乾いた粉。100選は油
+  status: draft
+- id: '033'
+  name: チョークアート
+  source: '033'
+  en:
+  - chalk art on a blackboard, bright chalk on black, powdery edges
+  family: 線画・版画・手描き
+  star: 2
+  medium: 手描き
+  card: null
+  status: draft
+- id: '034'
+  name: 筆ペン画
+  source: '034'
+  en:
+  - brush pen drawing, a single ink line that swells and tapers
+  family: 線画・版画・手描き
+  star: 2
+  medium: 手描き
+  card: null
+  near_card:
+    id: sketch-broadstroke
+    gap: カードは太い一筆。100選は筆ペン
+  status: draft
+- id: '035'
+  name: 一筆描き
+  source: '035'
+  en:
+  - continuous line drawing, one unbroken line, no shading
+  family: 線画・版画・手描き
+  star: 2
+  medium: 手描き
+  card: null
+  status: draft
+- id: '036'
+  name: 輪郭線画
+  source: '036'
+  en:
+  - contour drawing, outline only, no interior shading, uniform line weight
+  family: 線画・版画・手描き
+  star: 2
+  medium: 手描き
+  card: null
+  status: draft
+- id: '037'
+  name: クロスハッチング
+  source: '037'
+  en:
+  - cross-hatching, parallel lines crossed at an angle, density as shadow
+  family: 線画・版画・手描き
+  star: 3
+  medium: 手描き
+  card: null
+  status: draft
+- id: 038
+  name: スティップリング
+  source: 038
+  en:
+  - stippling, many small dots, dot density as shadow, no lines
+  family: 線画・版画・手描き
+  star: 3
+  medium: 手描き
+  card: null
+  status: draft
+- id: 039
+  name: スクラッチアート
+  source: 039
+  en:
+  - scratchboard, white lines scratched into a black inked surface
+  family: 線画・版画・手描き
+  star: 2
+  medium: 手描き（引っ掻き）／ 道具=刃
+  card: null
+  status: draft
+- id: '040'
+  name: シルエットアート
+  source: '040'
+  en:
+  - silhouette, a solid black shape against a plain light ground, no interior detail
+  family: 線画・版画・手描き
+  star: 2
+  medium: 手描き
+  card: null
+  status: draft
+- id: '041'
+  name: 木版画
+  source: '041'
+  en:
+  - woodcut print, bold gouged lines, wood grain, flat black ink on paper
+  family: 線画・版画・手描き
+  star: 3
+  medium: 版
+  card: mokuhanga
+  status: draft
+- id: '042'
+  name: リノカット
+  source: '042'
+  en:
+  - linocut print, bold simple shapes, no wood grain, flat ink
+  family: 線画・版画・手描き
+  star: 3
+  medium: 版
+  card: linocut
+  status: draft
+- id: '043'
+  name: 銅版画風
+  source: '043'
+  en:
+  - etching, fine dense engraved lines, plate mark, ink in the incised lines
+  family: 線画・版画・手描き
+  star: 3
+  medium: 版
+  card: copperplate-engraving
+  status: draft
+- id: '044'
+  name: リトグラフ
+  source: '044'
+  en:
+  - lithograph, soft grainy crayon texture, flat ink, slightly uneven edges
+  family: 線画・版画・手描き
+  star: 2
+  medium: 版
+  card: null
+  status: draft
+- id: '045'
+  name: シルクスクリーン
+  source: '045'
+  en:
+  - screen print, flat spot colors, hard edges, slight misregistration
+  family: 線画・版画・手描き
+  star: 2
+  medium: 版
+  card: null
+  status: draft
+- id: '046'
+  name: リソグラフ
+  source: '046'
+  en:
+  - risograph print, limited fluorescent spot colors, visible grain, misregistration
+  family: 線画・版画・手描き
+  star: 3
+  medium: 版（デジタル孔版）／ 道具=インク
+  card: risograph
+  status: draft
+- id: '047'
+  name: モノタイプ
+  source: '047'
+  en:
+  - monotype print, one-off impression, soft blurred edges, ink residue
+  family: 線画・版画・手描き
+  star: 2
+  medium: 版
+  card: null
+  status: draft
+- id: 048
+  name: スタンプアート
+  source: 048
+  en:
+  - rubber stamp print, repeated impressions, hard edges, uneven ink coverage
+  family: 線画・版画・手描き
+  star: 2
+  medium: 版（手押し）／ 道具=スタンプ
+  card: null
+  status: draft
+- id: 049
+  name: 消しゴムはんこ風
+  source: 049
+  en:
+  - hand-carved eraser stamp, rough cut edges, uneven ink, naive simple shape
+  family: 線画・版画・手描き
+  star: 1
+  medium: 版（手彫り）／ 道具=消しゴムと彫刻刀
+  card: null
+  status: draft
+- id: '050'
+  name: ドライブラシ
+  source: '050'
+  en:
+  - dry brush, broken streaky strokes, paint catching only the paper's ridges
+  family: 線画・版画・手描き
+  star: 2
+  medium: 手描き
+  card: null
+  near_card:
+    id: sketch-broadstroke
+    gap: 同じく、かすれの指定が無い
+  status: draft
+- id: '051'
+  name: フラットイラスト
+  source: '051'
+  en:
+  - flat illustration, solid flat color shapes, no gradients, no shading
+  family: イラスト・グラフィック
+  star: 2
+  medium: デジタル
+  card: null
+  near_card:
+    id: flat-comic
+    gap: カードは**コミック**寄り
+  status: draft
+- id: '052'
+  name: ベクターアート
+  source: '052'
+  en:
+  - vector art, clean smooth curves, uniform line weight, solid fills
+  family: イラスト・グラフィック
+  star: 2
+  medium: デジタル
+  card: null
+  near_card:
+    id: bauhaus-vector
+    gap: カードは**バウハウス**限定
+  status: draft
+- id: '053'
+  name: ミニマルイラスト
+  source: '053'
+  en:
+  - minimal illustration, very few elements, large empty areas, simple shapes
+  family: イラスト・グラフィック
+  star: 2
+  medium: デジタル
+  card: null
+  status: draft
+- id: '054'
+  name: 幾何学アート
+  source: '054'
+  en:
+  - geometric art, built from circles triangles and squares, flat color
+  family: イラスト・グラフィック
+  star: 2
+  medium: デジタルまたは手描き
+  card: null
+  near_card:
+    id: geometric-construction
+    gap: カードは**定規とコンパス**の作図
+  status: draft
+- id: '055'
+  name: ラインアート
+  source: '055'
+  en:
+  - line art, uniform single-weight lines, no fill, white background
+  family: イラスト・グラフィック
+  star: 2
+  medium: 手描きまたはデジタル
+  card: line-art
+  status: draft
+- id: '056'
+  name: ポップアート
+  source: '056'
+  en:
+  - pop art, bold flat primary colors, thick black outlines, comic-print dots
+  family: イラスト・グラフィック
+  star: 3
+  medium: 版（印刷）／ 道具=スクリーン
+  card: null
+  status: draft
+- id: '057'
+  name: ハーフトーン
+  source: '057'
+  en:
+  - halftone print, a regular grid of dots, dots larger in shadow
+  family: イラスト・グラフィック
+  star: 2
+  medium: 版（印刷）／ 道具=網点
+  card: null
+  near_card:
+    id: manga-halftone
+    gap: カードは**マンガのトーン**
+  status: draft
+- id: 058
+  name: アール・デコ
+  source: 058
+  en:
+  - art deco, geometric ornament, stepped symmetry, gold and black
+  family: イラスト・グラフィック
+  star: 3
+  medium: 版またはデジタル
+  card: art-deco
+  status: draft
+- id: 059
+  name: バウハウス風
+  source: 059
+  en:
+  - bauhaus, primary colors, circle square and triangle, asymmetric balance, sans-serif
+  family: イラスト・グラフィック
+  star: 3
+  medium: デジタル（または版）／ 道具=定規とコンパス
+  card: bauhaus-vector
+  status: draft
+- id: '060'
+  name: サイケデリック
+  source: '060'
+  en:
+  - psychedelic art, swirling warped forms, saturated complementary colors, poster
+    lettering
+  family: イラスト・グラフィック
+  star: 3
+  medium: 手描き・版
+  card: null
+  status: draft
+- id: '061'
+  name: レトロポスター風
+  source: '061'
+  en:
+  - retro poster, mid-century print, limited palette, slight paper yellowing
+  family: イラスト・グラフィック
+  star: 2
+  medium: 版（印刷）／ 道具=任意
+  card: null
+  status: draft
+- id: '062'
+  name: コミック風
+  source: '062'
+  en:
+  - american comic book art, bold black outlines, flat color, halftone shading
+  family: イラスト・グラフィック
+  star: 2
+  medium: 版（印刷）／ 道具=インクと網点
+  card: null
+  near_card:
+    id: flat-comic
+    gap: カードは**フラット**限定
+  status: draft
+- id: '063'
+  name: マンガ風
+  source: '063'
+  en:
+  - manga style, black and white, screentone shading, fine expressive linework
+  family: イラスト・グラフィック
+  star: 3
+  medium: デジタル（または手描き）／ 道具=ペンとスクリーントーン
+  card: manga-ink
+  status: draft
+- id: '064'
+  name: セルアニメ風
+  source: '064'
+  en:
+  - cel animation style, flat color, two-tone hard-edged shadow, clean uniform outlines
+  family: イラスト・グラフィック
+  star: 3
+  medium: デジタル（セル画の模倣）／ 道具=塗り分け
+  card: cel-shade
+  status: draft
+- id: '065'
+  name: 絵本風
+  source: '065'
+  en:
+  - children's picture book illustration, soft watercolor, gentle outlines, warm simple
+    shapes
+  family: イラスト・グラフィック
+  star: 2
+  medium: 手描き（水彩・ガッシュ）／ 道具=筆
+  card: null
+  status: draft
+- id: '066'
+  name: デフォルメキャラ
+  source: '066'
+  en:
+  - chibi character, oversized head, tiny body, simplified features
+  family: イラスト・グラフィック
+  star: 2
+  medium: デジタル
+  card: null
+  near_card:
+    id: soft-flat-mascot
+    gap: カードは**マスコット**寄り
+  status: draft
+- id: '067'
+  name: カートゥーン
+  source: '067'
+  en:
+  - cartoon, exaggerated proportions, bold outlines, simple background
+  family: イラスト・グラフィック
+  star: 2
+  medium: デジタルまたは手描き
+  card: null
+  status: draft
+- id: 068
+  name: 落書き風
+  source: 068
+  en:
+  - doodle art, casual freehand pen lines, repeated little motifs, white background
+  family: イラスト・グラフィック
+  star: 2
+  medium: 手描き
+  card: null
+  status: draft
+- id: 069
+  name: ステッカー風
+  source: 069
+  en:
+  - sticker art, thick white die-cut border, flat bold color, simple silhouette
+  family: イラスト・グラフィック
+  star: 2
+  medium: デジタル
+  card: null
+  status: draft
+- id: '070'
+  name: ピクセルアート
+  source: '070'
+  en:
+  - pixel art, visible square pixels, limited palette, 16-bit style
+  family: イラスト・グラフィック
+  star: 3
+  medium: デジタル
+  card: pixel
+  status: draft
+- id: '071'
+  name: アイソメトリック
+  source: '071'
+  en:
+  - isometric illustration, 30-degree axonometric grid, no perspective convergence
+  family: イラスト・グラフィック
+  star: 3
+  medium: デジタル
+  card: isometric
+  status: draft
+- id: '072'
+  name: ペーパーカット
+  source: '072'
+  en:
+  - paper cut art, layered cut paper, visible paper edges, soft drop shadows between
+    layers
+  family: イラスト・グラフィック
+  star: 3
+  medium: 立体（紙）／ 道具=鋏と紙
+  card: paper-cut
+  status: draft
+- id: '073'
+  name: コラージュ
+  source: '073'
+  en:
+  - collage, cut-out fragments from different sources, visible torn edges, mismatched
+    scale
+  family: イラスト・グラフィック
+  star: 3
+  medium: 複合
+  card: null
+  status: draft
+- id: '074'
+  name: モザイクアート
+  source: '074'
+  en:
+  - mosaic, small tesserae tiles, visible grout lines, slightly uneven surface
+  family: イラスト・グラフィック
+  star: 3
+  medium: 立体（タイル）／ 道具=小片
+  card: null
+  status: draft
+- id: '075'
+  name: タイポグラフィアート
+  source: '075'
+  en:
+  - typographic art, the subject built from letters, dense type of varied weights
+  family: イラスト・グラフィック
+  star: 2
+  medium: デジタル
+  card: null
+  status: draft
+- id: '076'
+  name: クレイアート
+  source: '076'
+  en:
+  - clay art, hand-sculpted, visible fingerprints, matte clay surface
+  family: 立体・素材・世界観
+  star: 2
+  medium: 立体
+  card: null
+  status: draft
+- id: '077'
+  name: フェルトアート
+  source: '077'
+  en:
+  - felt art, fuzzy wool fibers, soft matted surface, stitched details
+  family: 立体・素材・世界観
+  star: 2
+  medium: 立体（繊維）／ 道具=針
+  card: null
+  status: draft
+- id: 078
+  name: 刺繍風
+  source: 078
+  en:
+  - embroidery, visible stitched threads, satin stitch filling, fabric ground
+  family: 立体・素材・世界観
+  star: 2
+  medium: 立体（糸）／ 道具=針と糸
+  card: null
+  status: draft
+- id: 079
+  name: 編み物風
+  source: 079
+  en:
+  - knitted art, visible knit stitches, chunky wool yarn, soft irregular surface
+  family: 立体・素材・世界観
+  star: 2
+  medium: 立体（毛糸）／ 道具=編み針
+  card: null
+  status: draft
+- id: 080
+  name: 折り紙風
+  source: 080
+  en:
+  - origami, folded paper, sharp creases, flat polygonal facets, no cutting
+  family: 立体・素材・世界観
+  star: 3
+  medium: 立体（紙）／ 道具=折る
+  card: null
+  status: draft
+- id: 081
+  name: 切り絵の影絵風
+  source: 081
+  en:
+  - paper silhouette, black cut-paper shapes, layered, lit from behind
+  family: 立体・素材・世界観
+  star: 1
+  medium: 立体（紙）／ 道具=切る
+  card: null
+  near_card:
+    id: paper-cut
+    gap: カードは**層**、100選は**シルエット**
+  status: draft
+- id: 082
+  name: ステンドグラス
+  source: 082
+  en:
+  - stained glass, colored glass panes, thick black lead lines, light transmitted
+    through
+  family: 立体・素材・世界観
+  star: 3
+  medium: 立体（ガラス）／ 道具=鉛の桟
+  card: stained-glass
+  status: draft
+- id: 083
+  name: 陶器風
+  source: 083
+  en:
+  - ceramic, glazed pottery, glossy glaze pooling, rounded thrown form
+  family: 立体・素材・世界観
+  star: 2
+  medium: 立体（陶）／ 道具=轆轤と釉
+  card: null
+  status: draft
+- id: 084
+  name: 木彫り風
+  source: 084
+  en:
+  - wood carving, chisel marks, visible wood grain, unfinished matte surface
+  family: 立体・素材・世界観
+  star: 2
+  medium: 立体（木）／ 道具=鑿
+  card: null
+  status: draft
+- id: 085
+  name: 石彫り風
+  source: 085
+  en:
+  - stone sculpture, carved stone, coarse granular surface, cool grey
+  family: 立体・素材・世界観
+  star: 2
+  medium: 立体（石）／ 道具=鑿
+  card: null
+  status: draft
+- id: 086
+  name: ローポリ
+  source: 086
+  en:
+  - low poly 3D, the form built from a small number of flat polygons, visible facets
+  family: 立体・素材・世界観
+  star: 2
+  medium: デジタル（3D）／ 道具=多角形
+  card: null
+  near_card:
+    id: ps1-polygon
+    gap: カードは**PS1の質感**限定
+  status: draft
+- id: 087
+  name: ボクセルアート
+  source: 087
+  en:
+  - voxel art, built from small cubes, visible cube grid, isometric or 3D render
+  family: 立体・素材・世界観
+  star: 3
+  medium: デジタル（3D）／ 道具=立方体
+  card: null
+  near_card:
+    id: pixel
+    gap: カードは**2D**
+  status: draft
+- id: 088
+  name: 3Dトイ風
+  source: 088
+  en:
+  - 3D toy render, soft plastic material, smooth rounded shapes, soft studio lighting
+  family: 立体・素材・世界観
+  star: 1
+  medium: デジタル（3D）／ 道具=レンダラ
+  card: null
+  status: draft
+- id: 089
+  name: ミニチュア風
+  source: 089
+  en:
+  - miniature model, tiny scale, shallow depth of field, tilt-shift
+  family: 立体・素材・世界観
+  star: 1
+  medium: 立体（模型）／ 道具=任意
+  card: null
+  status: draft
+- id: 090
+  name: ジオラマ風
+  source: 090
+  en:
+  - diorama, a scene inside a box, visible frame edges, small scale
+  family: 立体・素材・世界観
+  star: 2
+  medium: 立体（模型）／ 道具=任意
+  card: null
+  status: draft
+- id: 091
+  name: ペーパークラフト
+  source: 091
+  en:
+  - papercraft, assembled from printed paper, visible fold and tab seams, matte paper
+  family: 立体・素材・世界観
+  star: 2
+  medium: 立体（紙）／ 道具=印刷と糊
+  card: null
+  status: draft
+- id: 092
+  name: フォトリアル
+  source: 092
+  en:
+  - photorealistic, indistinguishable from a photograph, lens-accurate detail
+  family: 立体・素材・世界観
+  star: 3
+  medium: デジタル（描画）／ 道具=任意
+  card: null
+  status: draft
+- id: 093
+  name: シネマティック
+  source: 093
+  en:
+  - cinematic still, anamorphic lens, shallow depth of field, graded color, letterbox
+  family: 立体・素材・世界観
+  star: 3
+  medium: 写真・映像
+  card: cinematic-still
+  status: draft
+- id: 094
+  name: フィルム写真風
+  source: 094
+  en:
+  - 35mm film photograph, visible grain, halation, slightly faded color
+  family: 立体・素材・世界観
+  star: 2
+  medium: 写真
+  card: null
+  near_card:
+    id: film-noir
+    gap: カードは**ジャンル**（ノワール）、100選は**媒材**
+  status: draft
+- id: 095
+  name: シアノタイプ
+  source: 095
+  en:
+  - cyanotype, prussian blue and white, sun-exposed silhouette, matte paper
+  family: 立体・素材・世界観
+  star: 3
+  medium: 写真（日光写真）／ 道具=感光紙と太陽
+  card: null
+  status: draft
+- id: 096
+  name: サイバーパンク
+  source: 096
+  en:
+  - cyberpunk, neon signage, rain-slicked streets, dense city at night, magenta and
+    cyan
+  family: 立体・素材・世界観
+  star: 3
+  medium: デジタル
+  card: null
+  status: draft
+- id: 097
+  name: スチームパンク
+  source: 097
+  en:
+  - steampunk, brass gears, rivets, steam pipes, sepia and copper tones
+  family: 立体・素材・世界観
+  star: 3
+  medium: 複合
+  card: null
+  status: draft
+- id: 098
+  name: レトロフューチャー
+  source: 098
+  en:
+  - retrofuturism, the future as imagined in the 1960s, chrome and curves, optimistic
+  family: 立体・素材・世界観
+  star: 3
+  medium: 任意
+  card: null
+  status: draft
+- id: 099
+  name: ファンタジーアート
+  source: 099
+  en:
+  - fantasy art, epic scale, dramatic light, painterly detail, magical atmosphere
+  family: 立体・素材・世界観
+  star: 2
+  medium: 手描き（油・デジタル）／ 道具=刷毛
+  card: null
+  status: draft
+- id: '100'
+  name: ドリーミー
+  source: '100'
+  en:
+  - dreamy, soft focus, diffused pastel light, low contrast, glowing haze
+  family: 立体・素材・世界観
+  star: 1
+  medium: 任意
+  card: null
+  status: draft
