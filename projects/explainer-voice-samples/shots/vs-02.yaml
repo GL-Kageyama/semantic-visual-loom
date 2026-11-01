@@ -1,0 +1,67 @@
+# 第二候補 / 対話 / motion —— ミライB（27歳・落ち着き、低くしない）
+#
+# ⚠️ **ミライAとの違いは人物と声だけである。** 台詞・尺・ビート・構図・光・カメラは同じ。
+#    **違う条件で録った声は、比較にならない。**
+
+shot: vs-02
+spec: specs/video/vs-02-mirai-calm.md
+
+unit:
+  before: "**試聴室は静かである。** 話者は口を閉じ、枠の中央に立っている。"
+  after: "**台詞が一度読み終えられ、部屋が静かに戻っている。** 話者は同じ場所に立っている。"
+
+role: 対話
+effect: 声
+place: 試聴室
+time: 時刻を持たない
+mode: motion
+duration: 10s
+population: 1
+
+motion:
+  subject: ミライ
+  quality: >-
+    喋るために口が開き、顎が小さく動き、息が入る。**立ち位置は変えない。**
+    肩と胸は呼吸のぶんだけ動き、髪は遅れてついてくる。
+  law: >-
+    luminous-anime の物理。**空気が主役である**——話者が止まっても、
+    光の中の塵と、髪の遅れと、呼吸は動き続ける。
+
+beats:
+  - range: 0-1s
+    density: sparse
+    what: "**口を閉じている。** 一度、息を吸う。まだ言葉は無い。"
+  - range: 1-5.6s
+    density: dense
+    what: "**最初の文を喋る。** 口と顎が動き、視線はカメラへ。"
+  - range: 5.6-6.4s
+    density: held
+    what: "**息継ぎ。** 口が閉じ、目だけが少し動く。**言葉は無い。**"
+  - range: 6.4-9.4s
+    density: dense
+    what: "**二つ目の文を喋る。** 語尾で一度、息が抜ける。"
+  - range: 9.4-10s
+    density: sparse
+    what: "**口が閉じ、静けさに戻る。** 何も足さない。"
+
+reference_set: []
+attached: []
+
+forbidden_set:
+  - 二つ目の人影
+  - 聞き手
+  - 読み取れる文字
+  - 字幕
+  - 音楽
+  - カメラの移動
+  - 立ち上がる・歩く
+  - 手を振る
+  - ウインク
+  - 投げキス
+  - 低い胸声
+
+disclosure_state:
+  声.候補: ミライB
+
+sound:
+  scene_ref: explainer-voice-samples-vs-02

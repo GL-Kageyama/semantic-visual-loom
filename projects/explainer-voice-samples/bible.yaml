@@ -1,0 +1,90 @@
+# 作品台帳 — 声の試聴（explainer-voice-samples）
+#
+# ⚠️ **これは作品ではない。標本である。**
+#    解説動画『脆弱性とサイバー攻撃』の二人の声が決まらないので、
+#    **参照音声の候補を WAN 3.0 で作る**ための4本である。
+#    1本＝1候補。声だけを取り出して `references/` へ置き、
+#    `semantic-audio-loom` の経路A（参照 timbre）へ渡す。
+#
+# ⚠️ **4本は、声以外を揃えてある。** 台詞・尺・ビート・構図・光・カメラを
+#    同一にして、**§3 の人物と §14 の声だけを変える**——
+#    違う条件で録った声を並べても、音色の比較にならない。
+#
+# ⚠️ **外見は本番のキャラクターシートではない。** この試聴には `key_image` を
+#    添えない（`reference_set: []`）。**顔を決めるのが目的ではない**からである。
+#    ⚠️ 本番の絵は `資料/03_実行準備用構想/解説動画の作成_構想/キャラ/` に在り、
+#    このリポジトリの外である。
+#
+# ⚠️ **走らせ方。** リポジトリの直下から
+#    `SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=../distill-essence-engine/references/styles`
+#    を張って `python3 engine/ledger/check.py projects/explainer-voice-samples`。
+
+project: explainer-voice-samples
+
+bible:
+  # ⚠️ **様式は本番と同じ `luminous-anime`。** 声の比較に絵は要らないが、
+  #    絵が変われば録れる声も変わるので、本番の絵の家に揃える。
+  style: luminous-anime
+
+  # ⚠️ **発話のある作品である。** 言語を名指しする——**空欄は中立ではない**
+  #    （実測: 発話のある動画に中国語の字幕が焼かれた）。
+  language: Japanese
+
+  world:
+    concept: >-
+      窓の無い、静かな試聴室。壁は暖かい灰色で、家具は無い。
+      **この部屋には時計も、書かれた物も、二つ目の人影も無い**——
+      あるのは、枠の前に居る一人と、その声だけである。
+
+    rules:
+      - "**声以外を揃える。** 4本は台詞・尺・ビート・構図・光が同じで、人物と声だけが違う。"
+      - "**一人だけである。** 話者は枠の中に一人。聞き手も、後ろ姿も、影も映さない。"
+      - "**一度だけ喋る。** 台詞はこの10秒の中で一度読み切られ、繰り返さない。"
+      - "**音楽は無い。** 下地も、和音も、節回しも無い。声と部屋の音だけである。"
+      - "**文字は無い。** 字幕も、題も、話者の名も、画面に出ない。"
+      - "**切らない。** この10秒は一本の連続したテイクである。"
+      - "**終わりは沈黙である。** 最後の語のあと、部屋が静かに戻って終わる。"
+
+    visual_language:
+      art_direction: >-
+        Luminous realist anime, held still: a single figure against a plain warm-grey
+        wall, the light doing the work and the set doing nothing. **Low visual density** —
+        generous empty space above the shoulders, no furniture, no props, no window.
+        The palette is the wall's grey, the skin's warmth, and one cool accent on the
+        clothing; **no third hue competes with the face.**
+
+      era: >-
+        None. Nothing in the frame dates it.
+
+  constants:
+    video:
+      aspect: "16:9"
+      resolution: "1920x1080"
+      frame_rate: "24fps"
+      orientation: "Landscape"
+
+  # ⚠️ **`L21` は §18 `Negative Prompt` がこの全部を覆っているかを見る。**
+  #    相手は §18 であって §16 ではない。
+  negative_base:
+    - no watermark
+    - no on-screen subtitles
+    - no background music
+    # ---- 様式（様式カード `luminous-anime` の `## Negative` から）
+    - not photorealistic
+    - no 3D render
+    - no muted desaturated palette
+    - no flat gradient sky
+    - no grain
+    - no painterly brush strokes
+    - no photographic faces
+    # ---- この試聴の禁止（§16 MUST NOT）
+    - no second person
+    - no listener in frame
+    - no readable text
+    - no caption
+    - no music bed
+    - no room reverb tail
+    - no second voice
+    - no whisper
+    - no cut
+    - no lip-sync drift

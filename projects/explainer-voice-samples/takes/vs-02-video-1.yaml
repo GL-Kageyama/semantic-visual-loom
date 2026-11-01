@@ -1,0 +1,33 @@
+# vs-02 / 動画 / 1 — 10.0s / 30fps / 300 フレーム — **採らなかった。** 参照は `references/gen_female_steady.wav`（0.78–9.79s / 9.01s）。
+#    実測: mean −17.5 dB / max −0.5 dB。
+#
+# ⛔ **解像度とフレームレートが仕様と食い違っている。** §1 は `1920x1080` / `24fps`、
+#    戻ってきたのは `854x480` / `30fps` である。**尺（10.0s）だけが一致した。**
+#    ⚠️ **`L25` がこの4本で鳴る**——**鳴るのが正しい**（仕様と実物を比べる唯一の場所）。
+#
+# ⚠️ **音声は AAC 44.1kHz stereo**。参照は 24kHz mono PCM16 に落として保存した。
+# ⚠️ **`provider.model` は宣言であって実測ではない。** このリポジトリは、
+#    モデル名をファイルから確かめていない。
+# ⚠️ **仕様に版の欄が無い**——ゆえに `source_version` を書けない（凍結できていない）。
+take:
+  shot: vs-02
+  kind: video
+  index: 1
+  file: "2_6736eb14-f241-403c-882b-91f5bf0dc89d.mp4"
+  provider:
+    model: WAN 3.0
+  params:
+    seed: null
+    duration: 10
+    aspect: "16:9"
+    references: []
+    source: specs/video/vs-02-mirai-calm.md
+  verdict:
+    machine:
+      measured:
+        width: 854
+        height: 480
+        frame_rate: 30
+        frames: 300
+        duration: 10.0
+        audio: true

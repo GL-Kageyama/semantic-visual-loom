@@ -1,0 +1,76 @@
+# 第四候補 / 対話 / motion —— ミラボB（さらに高く軽い、呼ばれて嬉しい声）
+#
+# ⚠️ **機体は第三候補と同じである。** 殻も画面も線も高さも同じで、
+#    **違うのは声だけ**——絵が違えば声の比較にならない。
+#
+# ⚠️ **人数は身体を数える。** 枠に映るのは機体1台で、**人は一人も居ない**。
+#    ゆえに `population: 0` であり、§18 には `no one in the frame` が入る。
+
+shot: vs-04
+spec: specs/video/vs-04-mirabo-bright.md
+
+aim: >-
+  **ミラボの参照音声の第二候補を、WAN 3.0 で1本作る。** 声だけを取り出して
+  `references/` へ置き、`semantic-audio-loom` の経路Aへ渡す。
+  ⚠️ **この試聴が裁くのは声だけである。** 機体の造形も、絵も裁かない。
+
+unit:
+  before: "**試聴室は静かである。** 機体は宙に浮いたまま、口の線を閉じている。"
+  after: "**台詞が一度読み終えられ、部屋が静かに戻っている。** 機体は同じ高さに浮いている。"
+
+role: 対話
+effect: 声
+place: 試聴室
+time: 時刻を持たない
+mode: motion
+duration: 10s
+population: 0
+
+motion:
+  subject: ミラボ
+  quality: >-
+    口の線が言葉のぶんだけ伸び縮みし、画面の光がわずかに強まる。
+    **機体は同じ高さに浮いたまま**、呼吸のような上下だけがある。
+  law: >-
+    luminous-anime の物理。**空気が主役である**——機体が止まっても、
+    光の中の塵と、機体の下の淡い照り返しは動き続ける。
+
+beats:
+  - range: 0-1s
+    density: sparse
+    what: "**口の線は閉じている。** 画面の光が一度、ゆっくり明るくなる。"
+  - range: 1-5.6s
+    density: dense
+    what: "**最初の文を喋る。** 口の線が言葉に合わせて伸び縮みする。"
+  - range: 5.6-6.4s
+    density: held
+    what: "**息継ぎに当たる間。** 線が一度だけ閉じ、光が落ち着く。"
+  - range: 6.4-9.4s
+    density: dense
+    what: "**二つ目の文を喋る。** 三つの語で線が三度、区切る。"
+  - range: 9.4-10s
+    density: sparse
+    what: "**線が閉じ、静けさに戻る。** 何も足さない。"
+
+reference_set: []
+attached: []
+
+forbidden_set:
+  - 人間
+  - 二つ目の人影
+  - 聞き手
+  - 読み取れる文字
+  - 字幕
+  - 音楽
+  - カメラの移動
+  - 手足
+  - 目玉
+  - 着ぐるみ
+  - 子供の声
+  - 歌うような抑揚
+
+disclosure_state:
+  声.候補: ミラボB
+
+sound:
+  scene_ref: explainer-voice-samples-vs-04
