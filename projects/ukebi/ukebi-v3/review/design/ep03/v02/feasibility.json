@@ -1,0 +1,59 @@
+{
+  "seat": "feasibility",
+  "criteria": {
+    "C1": 62,
+    "C2": 67,
+    "C3": 66,
+    "C4": 70,
+    "C5": 42,
+    "C6": 72
+  },
+  "primary_score": 63,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "ep03.md:150-151 vs 採用表.md:72 (scene ep03)",
+      "what": "s14b reuses the ep03 scene board, and the design asserts its standing edge is visible (「折れた縁が立つ・表紙が閉じない」が見えるので使える) — but the adoption table says 折れ目は讀めない (the fold is not legible), and the design's own preceding sentence says the same. The standing edge is the fold; if it is illegible, s14b's key_image cannot carry its defining visual.",
+      "why": "The two reuse slots are what make the count 25-new-bakes rather than 27. One of the two (s14b) rests on an adopted image the source of truth says does not contain the required content. The count is fixed on paper, not as a plan.",
+      "fix": "Either bake a corrected ep03 scene board with a legible folded edge, or move s14b to a new key_image (count becomes 26 new bakes). Do not ship s14b on the current board."
+    },
+    {
+      "where": "ep03.md:91 vs 採用表.md:72",
+      "what": "s09 (「初頁が白く、跡が無い」 — first page white with no mark) reuses the scene board, which the adoption table describes as 白頁とペン先の跡 (white page AND pen-tip mark).",
+      "why": "s09's whole disclosure point is the absence of a mark; a key_image showing a pen-tip mark would contradict the shot. The design handles the fold for s09 but never addresses the mark.",
+      "fix": "Confirm the pen-tip mark sits on a non-first page and is out of frame, or bake a dedicated s09 key_image (a white first page, no mark)."
+    },
+    {
+      "where": "ep03.md:136; PLAN.md:216-217 (0-j)",
+      "what": "The crossing location has no image — base is intent-only, because the adopted art-board-crossing conflicts with the ledger (paving vs gravel/soil, plain arm vs banded arm, lit lamp vs no lamp).",
+      "why": "In a WAN pilot where every shot's key_image carries the place, 28 key_images will each render the crossing independently from prose geography + one-lamp-cel + fire block. Gravel texture, barrier bands, and no-lamp can drift shot to shot and read as discontinuity across the cut. Declared and acceptable, but it is the top continuity risk of the pilot.",
+      "fix": "Anchor the 25 new key_images with one consistent adopted scene board (e.g. ep03, or ep01) as a crossing-appearance reference, or bake a corrected crossing board before the pilot instead of after."
+    },
+    {
+      "where": "ep03.md:126,165 (未決 #3); PLAN.md:375",
+      "what": "The fold (折れ目) has no ledger key and no adopted image. It is used as a disclosure attribute (初頁.折れ目) and drives s11/s12/s13/s14b/s15, but its ledger entry is still a proposal to the author, and its only adopted depiction is declared illegible.",
+      "why": "The continuity vocabulary must exist before ③ derives reference_set/forbidden_set. Until the ledger has the fold, the s11-s15 derivation cannot name it, and the two fold macros are bakes of a state the ledger does not know. This is declared, but it is load-bearing and unresolved.",
+      "fix": "Get the author's ruling on the ledger line (「初頁の縁が片側だけ内側へ折れている。跡ではない」) before the ③ pass, not after."
+    },
+    {
+      "where": "ep03.md:159-160; PLAN.md:255-256 (0-l-1)",
+      "what": "one-lamp-cel still lacks ## Motion character; the design declares a work-level motion constant and records the empty slot as a declared remainder (L20 will still fire).",
+      "why": "This is the lawful 'record why the slot is empty' path the design SKILL permits — it is a declared remainder, not a hole. The work constant lands in §11/§18 Motion Prompt, not in the Style Motion slot, so L20 stays red by design.",
+      "fix": "Keep it as a recorded, expected L20 violation in the ledger/plan (not only prose) so a later reader does not chase it as a defect."
+    },
+    {
+      "where": "ep03.md:45",
+      "what": "s03 is declared population 0 + body_parts {hand: 1}, but the shot text shows インクの染みた指・擦り切れた袖 (finger and a worn sleeve). A sleeve implies an arm segment in frame.",
+      "why": "Minor; the decision is made, but {hand:1} may undercount what the frame holds. Not a blocker — refine at design time against the BODY_PARTS vocabulary (arm vs hand vs finger).",
+      "fix": "At ② staging, confirm whether the frame holds hand only or hand+arm, and set body_parts accordingly."
+    },
+    {
+      "where": "ep03.md:144-148; PLAN.md:227-229",
+      "what": "Arithmetic verified: 28 attachments = 2 reuse (s09, s14b) + 2 fold macros (s11, s12/s13 shared) + 23 new + 1 shared-s13 = 28 shots; 25 new bakes = 23 + 2 fold. Sum of durations = 420s (7:00). This part is internally consistent.",
+      "why": "Positive check — the count and timing add up. The 25-new-bake load is heavy but comparable to the 31 already baked in the sibling project, so it is feasible, not absurd.",
+      "fix": "None; but note the count's reliability depends on findings 1-2 (the reuse slots)."
+    }
+  ],
+  "note": "The revised pilot is fundamentally feasible: single place/time, population decided per shot, all durations ≤30s (M01 split 18+18), and the checker's 6 violations are correctly understood and sequenced bible→ledger→breakdown. Two concrete gaps keep it out of the rare band: the ep03 scene board is reused for s14b (whose standing edge the adoption table says is not legible) and for s09 (which must show no mark but the board shows one), so the 25-new-bake count is not actually fixed until those two slots are re-baked or the board is corrected. The intent-only crossing base and the not-yet-in-ledger fold are declared remainders, not holes, but both are load-bearing continuity risks that should be closed before generation."
+}

@@ -1,0 +1,59 @@
+{
+  "seat": "continuity",
+  "criteria": {
+    "C1": 66,
+    "C2": 55,
+    "C3": 72,
+    "C4": 62,
+    "C5": 52,
+    "C6": 58
+  },
+  "primary_score": 61,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "PLAN.md 0-j「火は二つある」 vs 台帳/舞台装置/魂火.md:3",
+      "what": "PLAN 0-j fixes 魂火=残る火/ゲストの火=送られる火 and sweeps「ゲストの魂火」(第2話), but 魂火.md's role line still labels 魂火 as「送る火」.",
+      "why": "「送る火」(active) collides with「送られる火」(passive) and with the character 送り火; 台帳 is the source that bible.yaml/ledger.yaml copies, so the old label flows into the ledger unreconciled.",
+      "fix": "Change 魂火.md role「送る火」→「残る火」, or record the sweep in 0-j alongside the「ゲストの魂火」fix."
+    },
+    {
+      "where": "ep03.md 原作の食い違い #3 / PLAN 0-l-12 / 台帳/舞台装置/台帳.md",
+      "what": "The fold is declared as plant (ep03 S11 form_only) and payoff (ep09 S13, design 伏線「片方だけの形」), meaning withheld — but 台帳.md (the prop's canonical file) has no fold entry; the 形 spec (幅=指の半分, 古い, 跡ではない) lives only in ショット表_第3話 S09.",
+      "why": "Plant/payoff/withholding are sufficient, but the 形's canonical home is missing; 台帳.appearance copied into ledger.yaml will lack the fold, so the payoff's visual anchor is sourced only from a shot table, not the ledger.",
+      "fix": "Author approves the proposed one line「初頁の縁が片側だけ内側へ折れている。跡ではない」into 台帳.md."
+    },
+    {
+      "where": "ep03.md key_image の枚数 / 参照画像 (lines 144, 150-151)",
+      "what": "The single existing 場面 ep03 board is reused for s09 (白頁, fold must be absent) AND s14b (折れた縁が立つ・表紙が閉じない), while line 150 says the board cannot read the fold yet line 151 says it shows the fold-edge standing.",
+      "why": "One key_image cannot be both fold-absent and fold-standing; if the board shows the fold, s09's form_only 白頁 is violated, and if it does not, s14b's「閉じない」loses its visible cause. A new tension introduced by the v02 s09/s11 split.",
+      "fix": "Reuse 場面 ep03 for s09 only; bake a new s14b close-up showing the standing fold, or specify the crop that separates them."
+    },
+    {
+      "where": "ep07.md 未決 #1 / ep03.md 食い違い #4,#5 / 台帳/README.md 花 登場=1,4,5,6,8,9,10",
+      "what": "花's presence: ep1 resolved (design's absent wins, README「1」=直す候補), but ep7 remains open — README omits 7 while design and ep07.md have 花 present (S09–S18 population 2).",
+      "why": "Presence/population cannot fully hold while README lists 1 and omits 7; ep07.md's own population table already commits 花 to 2 bodies, so only the README correction is pending, tied to the 判の押し手 ruling.",
+      "fix": "One combined ruling: 判の押し手 + 花 ep7 在, then correct README to 1?→(absent) and add 7."
+    },
+    {
+      "where": "ep03.md 食い違い #2 / index.md ep3 row / 台帳/記憶.md",
+      "what": "v02 declares M行 2:06 / 承の区画 2:30, but index.md still reads 机と頁（2:30）and 記憶.md/design.md still carry 2:30 without a note.",
+      "why": "The reconciliation exists only in ep03.md; the derived-copy sources (index, 記憶.md) still read 2:30, so the number will drift again when ledger.yaml is built. The arithmetic is correct (M01–M04=126s; 承=1:30–4:00=2:30).",
+      "fix": "Update index.md ep3 記憶 to「机と頁（M行2:06／承2:30）」and add a one-line note to 記憶.md."
+    },
+    {
+      "where": "ep03.md 食い違い #1",
+      "what": "S07 止まる/動く recorded as ショット表 vs 散文, but the 散文 side is not pinned to a file/line.",
+      "why": "Both coordinates are met only loosely here (散文 left unnamed in the table), unlike the 判 row in ep07 which names 判.md/draft_07/ショット表 S14.",
+      "fix": "Cite draft_03_綴じる.md with its line for the「指が動く」side."
+    },
+    {
+      "where": "PLAN 0-k vs design.md 語り (lines 24-28)",
+      "what": "PLAN declares ep10's closing two lines as「第三の声」resolving design's「語り2種」, but design.md 語り still says「残す語りは2種だけ」and the framing「定型句の回収」is loose (the closing lines are not the 定型句).",
+      "why": "The resolution is declared and no early reveal occurs (S31/S32 sit in ep10), but the declaration lives only in PLAN/ep10 — design's source text still claims 2種, so the third voice is an amendment, not a reconciliation.",
+      "fix": "Record the third voice in design.md 語り (or mark design's「2種」superseded by PLAN 0-k)."
+    }
+  ],
+  "note": "The core holds: ep3 S09/S11 as form_only matches design's two 伏線 rows (跡なし / 片方だけの形), disclosure order has no early reveal, and the 2:06/2:30 memory reconciliation is arithmetically true (M01–M04=126s, 承=1:30–4:00). Two holes remain open: the source 台帳 files still say 魂火=「送る火」and memory=2:30, and one 場面 ep03 board is reused for s09 (fold absent) and s14b (fold standing) — opposite requirements on one image. 花 ep1 is resolved-declared; ep7 presence is still tied to the 判 ruling."
+}

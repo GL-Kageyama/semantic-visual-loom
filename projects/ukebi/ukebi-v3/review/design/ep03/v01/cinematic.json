@@ -1,0 +1,38 @@
+{
+  "seat": "cinematic",
+  "primary_score": 63,
+  "critical": false,
+  "findings": [
+    {
+      "where": "PLAN.md §0-g / §0-l-1 (and ep03.md has no per-episode Motion ruling)",
+      "what": "The work's Motion character is a declared hole: `one-lamp-cel` has no `## Motion character`, L20 fires (\"Style Motion present but empty\"), and the fix is parked as the author's decision. The only motion rule that exists is a proposed sentence in 0-g (limited animation, 指・まぶた・息 only, camera low and nearly still, fire alone wavers, no motion-blur/speed-lines).",
+      "why": "sVL's own fixed policy names motion as the cross-cutting ground of film (\"motion is the ground, stillness is the special case\"). Light, camera and sound are all decided, but the film-wide motion grammar is only proposed, so a fresh executor has per-shot gestures (指が上がる、触れて止まる) with no committed law of what moves vs what holds. This is the one axis that keeps the package from being shootable without guessing.",
+      "fix": "Author decides whether to add Motion character to the distill card (its property, so sVL cannot write it); until stamped, record the hole per shot so L20 is a known remainder, not silence."
+    },
+    {
+      "where": "ep03.md 未決 1-2, 参照画像 (\"折れ目は畫では讀めない\") and prompt.md line 9 (\"折れ目は讀めない\")",
+      "what": "The episode's own stated linchpin — \"この話の成否は折れ目に掛かる\" — cannot be read in the scene board still, and its carrier (re-burn a close-up key_image vs hold the fold in §9/§18 text) is left undecided. The half-finger fold width is already measured, but no shot has a decided image for it.",
+      "why": "The single most load-bearing visual of the pilot (the blank first page's inward fold, the standing edge that stops the ledger from closing flat) is the one image the design has not shot. Every other set-piece form is decided (white page, charred pen-tip rim, half-closed ledger); the fold alone is a promise with no picture.",
+      "fix": "Decide the fold's carrier: a macro close-up key_image of the folded edge (the width is already fixed at 指の半分, so it is shootable) or holding it in the S09/S11 shot text. Do not ship the pilot with the linchpin as an open question."
+    },
+    {
+      "where": "ep03.md header \"記憶: 机と頁（2:30）\" and 記憶.md length table vs ショット表_第3話.md M01–M04",
+      "what": "The memory is declared as 2:30 in three places (design 話の表, 記憶.md, ep03.md header), but the cut M01–M04 sums to 2:06 (1:44–3:50; 36+30+30+30s). The 承 block itself is exactly 2:30 (S06 press + M + S07 cut), so the four-act shape holds; it is the memory proper that runs 24s short of its own ledger.",
+      "why": "A fresh executor reading the shot table gets 2:06 of memory; reading the ledger gets 2:30. The shape the question asks about (memory's 2:30) is preserved only at the block level, not in the M-shots the ledger names.",
+      "fix": "Reconcile: either count the S07 exit (\"記憶が切れる\") into the memory so it totals 2:16/2:30, or correct the 2:30 label to the measured 2:06. The 起 1:30 / 承 2:30 / 転 2:00 / 結 1:00 block shape is correct and should stay."
+    },
+    {
+      "where": "ep03.md 未決 2 vs ショット表_第3話.md S09",
+      "what": "未決 2 flags that putting the blank first page AND the fold in one shot makes two changes (\"知る\" + \"見る\") and floats moving the fold to S11, but the committed shot table still lists S09 as carrying both (\"白い。跡が無い。縁の片方だけが内側へ折れている\").",
+      "why": "The design's own one-change rule (one shot = one change) is contradicted by its committed table on the exact shot that carries the disclosure. The turn at the first page is otherwise correctly placed (S09 sits inside 転 4:00–6:00, with the stop at S13), but S09 loads two discoveries into one shot.",
+      "fix": "Resolve the open note: either split S09 (S09 = blank page only; fold moves to S11 \"触れて止まる\") or formally rule that blank + fold are one perception and keep them together. Leave no live contradiction between 未決 and the table."
+    },
+    {
+      "where": "ショット表_第3話.md S13 (\"紙が震える\")",
+      "what": "\"白い頁は白いまま...紙が震える。指は折れ目の上で止まる\" — the trembling paper is the one beat that reads as the conventional anime gesture of an inanimate object trembling with unspoken feeling, slightly against the design's own restraint (no speed-lines, no onomatopoeia, no named emotion).",
+      "why": "It is the only shot where the emotion is externalized onto an object rather than held in the held/moving frame (S07/S13's 無音, S11/S15's 触れて止まる do the work more honestly). It is not fatal, but it is the one generic/sentimental beat in an otherwise disciplined set.",
+      "fix": "Watch S13 in the cut: if the paper's tremor is needed, tie it to a real cause (the paper is dry and thin, it moves as the page settles) rather than to the character's feeling; otherwise keep the silence and the stopped finger as the image."
+    }
+  ],
+  "note": "The package is a real film, not an inert shot list: light (one pale fire, no bloom/flare, long shadows, wet rail/gravel doubling the light once, memory half-transparent with edges eaten by fire and the crossing kept at the frame edge), camera (low, nearly still, 寄り/引き only), sound (the paper's かさり as the only near sound, silence at the two holds, fire silent, 「読んで」 unsubtitled), and the set piece (blank first page, half-finger fold, charred pen-tip, ledger that will not close flat) are all decided and measured. The block shape 起 1:30 / 承 2:30 / 転 2:00 / 結 1:00 is preserved exactly. What holds it at 63 rather than 65-plus: motion is a declared hole (L20, empty card), the fold — the episode's own linchpin — has no decided image, and the memory runs 2:06 against a declared 2:30."
+}

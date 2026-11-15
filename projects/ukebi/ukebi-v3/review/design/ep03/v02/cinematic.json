@@ -1,0 +1,65 @@
+{
+  "seat": "cinematic",
+  "criteria": {
+    "C1": 63,
+    "C2": 62,
+    "C3": 65,
+    "C4": 68,
+    "C5": 55,
+    "C6": 64
+  },
+  "primary_score": 63,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "ep03.md:76 (s04b)",
+      "what": "s04b's after is a voice plus the internal fact 「彼は覚えない」 with no visible image change; it is a held frame of the stopped fire.",
+      "why": "Breaks the design's own rule (ep03.md:67-68) that before/after be written as a screen-visible difference, not a negation or cognition. It is the first inert hold.",
+      "fix": "Give s04b a visible micro-event: the fire wavers once as the voice passes, and his eyelid does not move."
+    },
+    {
+      "where": "ep03.md:81 (m01b) and :92 (s10)",
+      "what": "「ランプが無いと分かる」 and 「字でないと確かめる」 name a realization, not a picture.",
+      "why": "Same self-rule violation: cognition, not an image the camera can hold.",
+      "fix": "Write the visible form: the window holds black past where the fire's light ends; pages 2-3 show burn shapes that stay formless, never resolving into lettering."
+    },
+    {
+      "where": "ep03.md:125 vs 台帳/舞台装置/記憶.md:20 and index.md:13",
+      "what": "The 2:06 vs 2:30 gap is re-framed as 「台帳の2:30は区画の長さ」 rather than corrected; index.md still lists 机と頁（2:30） and the ledger still says 2:30.",
+      "why": "記憶.md's 長さ column is unambiguously memory length, and 2:30 is simply the 承 block mislabeled. The re-framing grants the ledger correctness by moving its referent, which is a softer claim than the truth. Block shape itself is preserved exactly (90/150/120/60).",
+      "fix": "State it as a ledger error: memory = 2:06, and 2:30 was the 承 block; update 記憶.md and index.md to 2:06 or add an explicit 区画 note."
+    },
+    {
+      "where": "ep03.md:91,150 (s09 key_image) vs prompt.md:40",
+      "what": "s09 (fold withheld) reuses the 「場面 ep03」 scene board, whose merged prompt explicitly draws the folded edge; the withholding rests on the baked board 「折れ目は讀めない」 rather than a declared exclusion.",
+      "why": "If a future bake renders the fold, s09 leaks the reveal and the s11 discovery collapses.",
+      "fix": "Declare that s09's frame crops the fold out, or bake a dedicated blank-page key_image for s09."
+    },
+    {
+      "where": "ep03.md:153-160 (運動) and table header :70-71",
+      "what": "Motion is a work constant with no per-shot motion column; per-shot motion is deferred (「§1–20 はまだ書かない」), and the grammar reads as prohibitions (no blur/speed lines/body movement).",
+      "why": "C5 wants motion decided or declared per shot. Here it is a uniform constant: the before/after gives each shot a change, but not a motion treatment (mover, hold length, tempo), and it does not vary by shot.",
+      "fix": "Add a per-shot motion note at least for the s09-s13 cluster, where five consecutive shots are 20-second holds."
+    },
+    {
+      "where": "ep03.md:70-101 (durations)",
+      "what": "16 of 28 shots are exactly 10s or 20s; the 転 block runs 18/22/20/20/20/20.",
+      "why": "Durations are inherited from the source's even 20-second time-slices, not composed as a held/moving rhythm, so the emotional climax is metronomic.",
+      "fix": "Re-time the 転 block's holds deliberately: a shorter blank in s09, the longest hold in s12 for the unsubtitled voice."
+    },
+    {
+      "where": "ep03.md:70-71 (breakdown table) vs ショット表_第3話.md 音・声 column",
+      "what": "The 28-shot breakdown drops the per-shot 音・声 column, so split shots inherit sound implicitly (S04's 「声。風。」 splits into s04a/s04b without explicit reassignment).",
+      "why": "C6's sound-as-image grammar is strong (silent fire, unsubtitled 読んで, sound marking the memory boundary), but it is not carried per shot into the generation breakdown.",
+      "fix": "Carry the sound column forward and assign each split shot its own sound."
+    },
+    {
+      "where": "ep03.md:115 (s13 「紙の震えは採らない」)",
+      "what": "Removing the paper tremble is a gain.",
+      "why": "The source's 「頁は読んでほしいと震えている」 is an anthropomorphic literary tremble that would read as object-horror on screen; the revision converts it to a gesture (hand moves to read, then stops) plus dry paper barely moving under its own weight, which is filmable and consistent with the work's restraint.",
+      "fix": "None."
+    }
+  ],
+  "note": "The 28-shot cut delivers specific images and preserves the four-act block exactly (90/150/120/60 = 7:00). The fold set piece is the strongest revision: withholding it in s09 and revealing it on the finger's touch in s11 splits knowing from seeing and is genuinely stronger than the source's one-shot. Light and sound are the most developed grammars and act inside the frame, while motion stays a uniform, prohibition-heavy constant that is neither varied per shot nor given a per-shot tempo. The two sound-hold shots (s04b, s12) and the metronomic 10/20-second duration grid are the main remaining inertness risks."
+}

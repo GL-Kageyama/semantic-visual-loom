@@ -1,0 +1,53 @@
+{
+  "seat": "cinematic",
+  "criteria": {
+    "C1": 65,
+    "C2": 62,
+    "C3": 64,
+    "C4": 66,
+    "C5": 60,
+    "C6": 60
+  },
+  "primary_score": 63,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "ep03.md:76 (仮ショット割り s03) vs ep03.md:46 (人数表 s03)",
+      "what": "s03's 人 column in the shot table says 0, but the 人数 table assigns population 1 with body_parts {hand:1} ('火の内側にフミの手。体の一部が画にあるので人口は1').",
+      "why": "The two tables contradict on the only body-part shot. The 人数 table's reasoning is correct under L52 arithmetic (a visible hand = one body ≥ 1); the shot table's 0 is the transcription error and will fire L51/L52 at breakdown.",
+      "fix": "Set s03 人=1 in the shot table and carry body_parts {hand:1} (and {hand:1, arm:1} if the sleeve shows) into the shot record."
+    },
+    {
+      "where": "台帳/舞台装置/記憶.md:21",
+      "what": "The 記憶 length table still lists ep3 as '机と頁 | 2:30', while the v04 decision (ep03.md fix #2, PLAN 0-l-7) is M rows 2:06 / 承 block 2:30, with the 台帳 to be corrected to 2:06.",
+      "why": "The file is stale relative to the recorded, author-approved decision. The 2:06 vs 2:30 distinction is now a deliberate and correct split (M alone vs S06+M+S07), but the source table still shows the old number.",
+      "fix": "Apply the 2:06 change to the 台帳 table (or annotate that the table's 2:30 means the 承 block, matching design.md's 話の表)."
+    },
+    {
+      "where": "ep03.md:171 (運動・作品定数) vs m02a/m03c/m04b",
+      "what": "The work motion constant says '指・まぶた・息だけが動く。体は動かない', but memory shots specify fuller guest movement — m02a (ペンを動かす), m03c (顔が上がり), m04b (頁へ手を伸ばす).",
+      "why": "The constant is written as a blanket rule but is silently overridden in memory, where the 台帳/記憶.md own rule ('器官が動いた瞬間に切る') presupposes the guest's working motion. Unreconciled, the two statements conflict at generation.",
+      "fix": "State explicitly that the limited-motion constant binds the present/送り火, and memory shots permit the guest's one-event working motion (writing, raising the face, reaching), cut at the organ's movement."
+    },
+    {
+      "where": "ep03.md:96 (s12) vs ep03.md:78 (s04b)",
+      "what": "s04b gives its voice a visible carrier ('フミ' → 火が一度だけ揺れる, 運動=火の揺れ), but s12's voice '読んで' has no visual event — 運動=止め, finger static, and the design rejected '紙の震え' for s13.",
+      "why": "'Sound as image' is satisfied almost everywhere, but the episode's second voice lands on a dead-still close-up with no visible response, so it reads as a sound pasted over a hold rather than a sound with an image.",
+      "fix": "Either give s12 a minimal carrier (the fold catching a shift of the fire's light, or the finger's shadow moving) or record 'stillness is the carrier' as an explicit decision, as was done for s04b."
+    },
+    {
+      "where": "ep03.md:72-101 (運動 column)",
+      "what": "The motion column values are categorical and near-uniform — '送り' repeats ~14 times — so the field itself does not distinguish shots; the actual motion lives only in the 前→後 text.",
+      "why": "Presence of a motion treatment per shot is fixed (all 28 have one), but the motion axis is not self-contained as a generation spec; a downstream reader of only the 運動 column gets no per-shot motion.",
+      "fix": "Carry the specific motion phrase into the field (e.g. s02 '火が低く漂い込む' rather than '送り') so the motion axis stands alone."
+    },
+    {
+      "where": "ep03.md:93 (s09) vs 草稿/draft_03_綴じる.md:35-37",
+      "what": "The design hides the fold in s09 ('白頁だけ', fold first visible at s11 when touched), but the prose shows the fold immediately after the blank page, and a half-finger-width inward fold would be physically visible in a full-page view.",
+      "why": "Recorded as a deliberate re-placement (fix #9), so it is a disclosure choice, not an error — but the fold's invisibility in the blank-page shot is a physics/disclosure fudge to watch at key_image generation.",
+      "fix": "Keep the re-placement, but verify at generation that the s09 white page is framed so the folded edge is not incidentally visible (angle/crop), or accept and record the fold as faintly present."
+    }
+  ],
+  "note": "The v04 fixes are all present and the table is now complete: every one of the 28 shots carries a before→after image, a sound, and a motion value, and the shape sums exactly to 起 90s / 承 150s / 転 120s / 結 60s (420s). The fold chain — s09 blank, s11 fold-by-touch, s12 voice, s13 refusal, s14b not-flat, s15 press — reads as a real film, accumulating the fold through touch, voice, and refusal. Two small lags remain (s03's 0-vs-1 count and the stale 2:30 in 台帳/記憶.md) plus a thin motion vocabulary; none breaks a criterion, so nothing is critical."
+}

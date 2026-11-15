@@ -1,0 +1,44 @@
+{
+  "seat": "continuity",
+  "primary_score": 65,
+  "critical": false,
+  "findings": [
+    {
+      "where": "台帳/README.md 人物表「花 … 1,4,5,6,8,9,10」 vs design.md 人物/花 変化弧「不在（第1話）→ 席に姿（第4話）」",
+      "what": "花's appearance list says she appears in episode 1, but the design says she is absent in episode 1 and first takes a seat in episode 4.",
+      "why": "台帳/舞台装置/台帳.md「第4話まで誰も座ったことがない。第4話で花が座る」and design 伏線「喉の奥の留まり…第10話まで正体は伏せる」both agree with 不在(第1話), so the README's 登場 entry '1' is the wrong side. A fresh executor reading the README would place 花 in ep1 and break the disclosure (throat's lodged thing, identity withheld).",
+      "fix": "Remove '1' from 花's 登場 in 台帳/README.md, or re-declare ep1 as a non-appearance seed (喉の留まり) rather than an appearance."
+    },
+    {
+      "where": "台帳/README.md 花 登場「1,4,5,6,8,9,10」(no 7) vs design.md 各話のビート 第7話「判が押される。押されたのは花の額でなく、彼の額」＋伏線註「彼が第7話に判を渡すために差し出す」",
+      "what": "The design implies 花 is present in episode 7 (the seal is aimed at her forehead, he hands her the seal), but 台帳 README omits episode 7 from 花's 登場.",
+      "why": "This is the twin of the known seal-presser contradiction (PLAN 0-l-8: 台帳 says 送り火 presses himself, draft/shot table say 花 presses). Whichever side the author rules, 花's presence in ep7 has to be declared; today the two sources disagree on whether she is even there.",
+      "fix": "Resolve together with PLAN 0-l-8: if 花 is present in ep7, add 7 to 登場; if absent, the ep7 beat「花の額でなく」must be reworded."
+    },
+    {
+      "where": "台帳/舞台装置/台帳.md 印表・「最初の頁は空のまま」 vs ep03.md 開示 S09「初頁.折れ目」＋ショット表_第3話 S09/S14/S15＋PLAN 0-c「折れ目」",
+      "what": "The first-page fold (折れ目) is a cross-episode state change of the 台帳 prop (planted ep3, paid off ep9) but is not declared in the authoritative device ledger. design 視覚の規則 文字「最初の頁には、跡すらない」superficially forbids it; only the shot table resolves that (「跡ではない。紙の癖として置く」).",
+      "why": "A fresh executor building props.台帳.appearance / bible.constants from 台帳.md alone (per PLAN steps 1-2) would emit a blank first page with no fold, missing the pilot's stated crux (ep03.md 未決「この話の成否は折れ目に掛かる」).",
+      "fix": "Write the first-page fold into 台帳.md (形 or 印 section) and reconcile「跡すらない」with「折れ目は跡でない」so the plant lives in the single authoritative source."
+    },
+    {
+      "where": "design.md 開示の順序 (1,4,6,7,9,10) vs episodes/index.md 開示の変化点 (1,3,4,6,7,9,10)",
+      "what": "ep3 S09 (初頁に跡が無い＋折れ目) is listed as a disclosure change point in index.md but is absent from design's 開示の順序.",
+      "why": "design classifies ep3 as 伏線 (foreshadowing), index merges it into 開示. The substance is consistent (meaning withheld until ep9), but the two canonical lists disagree on whether ep3 is a disclosure point, which can mislead the disclosure-ledger derivation.",
+      "fix": "Either add ep3 to design 開示の順序, or annotate in index.md that ep3 S09 is 伏線 (plant), not 開示 (reveal)."
+    },
+    {
+      "where": "台帳/舞台装置/魂火.md「送る火」 vs PLAN.md 0-j「送られる火＝ゲストの魂／残る火＝魂火」 vs design.md 視覚の規則 光「火は話ごとに小さい」",
+      "what": "One entity (魂火) is labeled three ways across files (送る火 in 魂火.md, 残る火 in PLAN 0-j, and the shrinking「火」in design is unnamed), while the guest's fire is 送られる火. The two-fires distinction itself holds, but the naming is scattered.",
+      "why": "A fresh executor could conflate 魂火 (送る火 = the fire that sends/remains) with the guest's fire (送られる火 = the fire that is sent), or read design's shrinking「火」as the guest fire. The distinction is correct but not pinned to one term.",
+      "fix": "Fix a single term for 魂火 (the remaining/sending fire) across 魂火.md, PLAN 0-j, and design 光, and name the shrinking fire explicitly as 魂火."
+    },
+    {
+      "where": "design.md 語り「残す語りは2種だけ」(定型句9回＋該当なし1回) vs 各話のビート 第10話「声が一行を言う。「彼は＿＿＿に受け取られた。」「受け火は、あなただった。」」",
+      "what": "The design declares only two kinds of narration remain, but episode 10 adds a third kind (the final pronouncement lines), which the 2種 rule does not cover.",
+      "why": "Minor, but checkable: 定型句 count (9, ep1-9) and 花's 台詞 (4: ep5/6/8/10) are both internally consistent across design/PLAN, yet the 語り「2種だけ」is contradicted by ep10's closing lines.",
+      "fix": "Amend design 語り to name ep10's closing lines as a declared third narration (the payoff), or fold them into the 定型句's payoff rather than a separate kind."
+    }
+  ],
+  "note": "The pilot answers its own continuity: the mark table holds across design 話の表, index, and 台帳 印 (2=足跡,3=ペン先,4=小さな丸,5=上げた両手,6/9=増えない,7=伏せた目/二本の弧,8=折った紙; 6 marks + blank first page by ep10), the fire stages hold (握り拳→縮む→炭(ep9)→消える(ep10)→白頁) with the two-fires distinction sound but multiply named, and ep3 S09 correctly plants the blank first page + fold while withholding the ep9 半身 meaning. The gaps are undeclared, not design-fatal: 花's appearance list contradicts the design on ep1 and ep7, and the fold (the pilot's crux) is missing from the authoritative 台帳.md. None of these change ep3's cut, references, or the source's meaning, so critical is false."
+}

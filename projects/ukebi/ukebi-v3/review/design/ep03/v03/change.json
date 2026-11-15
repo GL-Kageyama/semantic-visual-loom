@@ -1,0 +1,53 @@
+{
+  "seat": "change",
+  "criteria": {
+    "C1": 66,
+    "C2": 66,
+    "C3": 62,
+    "C4": 62,
+    "C5": 62,
+    "C6": 68
+  },
+  "primary_score": 64,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "ep03.md:93,96 vs 草稿/ショット表_第3話.md:39,42",
+      "what": "s09 is re-timed 22s→18s and s12 20s→24s (4s moved across the two rows), stated only as '転の尺は等間隔にしない' in the 運動 note (line 169).",
+      "why": "A per-row duration deviation from the source is not recorded in the 原作の食い違い table, so a later reader cannot tell the source said S09=22s/S12=20s. The 転 total (120s) is preserved, but the deviation is invisible.",
+      "fix": "Add a row to 食い違い noting S09 22s→18s / S12 20s→24s, or annotate line 169 with the source seconds."
+    },
+    {
+      "where": "ep03.md:93",
+      "what": "s09's before is '初頁をめくる' (an action), not a state; after '初頁が白い' is positive but doesn't itself express the reveal.",
+      "why": "Every other row is a state→state pair; '初頁をめくる' is the change itself, so the before/after isn't a clean visible-difference pair. '白い' is a correct positive replacement for '跡が無い' but carries the difference only by contrast with s08's mark.",
+      "fix": "Rewrite before as a state, e.g. '初頁は伏せられている → 初頁が白い'."
+    },
+    {
+      "where": "ep03.md:100",
+      "what": "s15's after still carries a no-change tail: '指で押さえるが、折れ目は立ったまま、指が止まる' — '折れ目は立ったまま' appears in both before and after, so the crease isn't the change.",
+      "why": "v03 improved the negation ('戻らない'→'立ったまま', positive posture), but the crease's non-flattening remains a no-change clause. The visible change (finger presses and stops) is present, so C3 passes, but the tail muddies 'one change'.",
+      "fix": "Fold the non-flattening into the gesture, e.g. '指が折れ目を押さえ、折れ目の高さで指が止まる'."
+    },
+    {
+      "where": "ep03.md:83,110-111",
+      "what": "M01 is a static row in 草稿 (desk / dark window / paper bundles); m01b's cut is an invented camera event ('カメラが窓へ振る') not present in the source.",
+      "why": "The cut rule claims '尺(36s→30s以下)は結果であって、切る理由ではない', but the second 'change' is manufactured to justify a two-way cut whose real driver is the 30s WAN limit. It's the only static row cut into two.",
+      "fix": "State the driver honestly: M01 is cut to satisfy the 30s ceiling, with the camera-pan-to-window chosen as the second change (a legal camera event)."
+    },
+    {
+      "where": "ep03.md:78",
+      "what": "s04b's motion column reads '止め＋火の揺れ', but s04b's own before/after is '無音 → 声が一度鳴り、火が一度だけ揺れる' (one change).",
+      "why": "'止め' bleeds in from s04a ('火が彼の前で止まる') and muddies the cut boundary; s04b's motion should be the sway alone.",
+      "fix": "Motion column '火の揺れ' only."
+    },
+    {
+      "where": "ep03.md:101,122",
+      "what": "s16's 定型句 voice is not counted as a change, while s04b/s12 count voice as '一つの変化'.",
+      "why": "The stated principle (voice counts when it is the shot's sole change, not when it overlaps the pull-back) is explicit and defensible, but the asymmetry is load-bearing for the ending line 'この魂は、まだ誰にも名付けられていない。' riding the camera pull. A strict 'voice is a change' reading would cut s16 in two.",
+      "fix": "None required (ruled); consider making the s04b/s12-vs-s16 distinction a named rule in 切る規則 rather than only in the header note."
+    }
+  ],
+  "note": "The v03 revision does its headline job: negation tails are gone from s04b/m02a/s09/s10, all 28 shots carry filled 音 and 運動 columns, the multi-change set {S04,S05,M01,M02,M03,M04,S14} is complete and every cut point is named, and the count is honestly a result of cutting rather than a prediction. Remaining issues are wording- and bookkeeping-level: s09's before is an action not a state, s15/s16 keep 'まま' (remains) tails, M01's second cut is an invented camera pan whose real driver (36s→30s) the design denies, and the S09→S12 timing rebalance is stated but never logged as a source discrepancy. None of these breaks a must; the design sits at the top of 'works'."
+}

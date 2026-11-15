@@ -86,6 +86,9 @@ DOCS = (
     #    **段ではないものが `DOCS` に並ぶのは、`staging` と同じ理由である**: 外に出せば、
     #    外に出したこと自体が見えなくなる。
     "skills/review/SKILL.md",
+    # ⚠️ **`design-review` は①の前の門である**——④の後の `review` とは別の対象を読む。
+    #    段ではないが、`staging` / `review` と同じ理由で `DOCS` に並べる。
+    "skills/design-review/SKILL.md",
 )
 
 #: ミラーの言語接尾辞。**正典は英語なので `en` は無い。**

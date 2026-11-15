@@ -1,0 +1,35 @@
+{
+  "seat": "feasibility",
+  "criteria": {
+    "C1": 62,
+    "C2": 63,
+    "C3": 55,
+    "C4": 66,
+    "C5": 50,
+    "C6": 52
+  },
+  "primary_score": 58,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "episodes/ep03.md:99 and :158-159 (key_image=場面 ep03 for s14b) vs _shared/採用表.md:72 (row 27)",
+      "what": "s14b reuses the existing ep03 scene board, and the design claims it shows「半ば閉じた台帳・折れた縁が立つ」。",
+      "why": "採用表 describes the ep03 board as「白頁とペン先の跡。折れ目は讀めない」— the standing fold is NOT in the board, and the board still carries the pen-tip mark on the white first page that the v03 revision removed. A key_image without the standing fold cannot pin s14b's change (「折れた縁が立ち、表紙が浮いたまま」); the reuse is unsupported and the design's rationale misdescribes the asset.",
+      "fix": "Bake a new s14b key (half-closed ledger, folded edge standing), or keep the reuse but declare it an accepted gap and stop claiming the board already shows the standing fold."
+    },
+    {
+      "where": "episodes/ep03.md:46 (人数 table, s03 row)",
+      "what": "s03 declares population 0 with body_parts {hand:1}.",
+      "why": "A hand/finger is part of a body. L52's arithmetic (one body has two hands) reads population 0 as headcount 0, which cannot hold hand 1; the emitted sentences would be「no one in the frame」+「1 hand in the frame」— contradictory, and inconsistent with m02a–m04b declaring the same body (フミ) as population 1. This is not acknowledged anywhere as a residual.",
+      "fix": "Set s03 population to 1 (+ hand 1), or record population 0 as a deliberate flash-image convention and note that L51/L52 will fire; resolve before stage ②."
+    },
+    {
+      "where": "episodes/ep03.md:143 (踏切.base/.geography = 画像なし。意図だけ) / PLAN.md 0-j",
+      "what": "The crossing has no location reference image; appearance rides on prose across 26 new bakes.",
+      "why": "No pinning location image means the three fix-points (砂利と土 / 白黒の帯の腕木 / 灯なし) must be restated in every key_image prompt — the「写しは黙ってずれる」risk the PLAN itself names. Declared and deliberate, but a pilot-wide consistency risk.",
+      "fix": "Accepted as deliberate (corrected board is post-pilot); ensure the three fix-points are written verbatim into each key_image prompt, not summarized."
+    }
+  ],
+  "note": "Arithmetic checks out: 28 shots = 28 attachments = 27 distinct images = 26 new bakes (24 + 2 fold) + 1 reuse (s14b), and durations sum to 420s (7:00) matching the four-act split. The dedicated s09 white-page key does solve the pen-tip-mark problem; Fumi's 4-view sheet, the crossing base (intent-only), the 30s limit (M01 cut to 18+18), and the Motion-character remainder (L20, declared) are all handled. The two open defects are the unsupported s14b board reuse and the s03 population 0 + hand 1 tension; 26 new bakes is operationally feasible (the author already produced 31) but carries drift risk without a location base."
+}

@@ -1,0 +1,47 @@
+{
+  "seat": "feasibility",
+  "criteria": {
+    "C1": 68,
+    "C2": 67,
+    "C3": 58,
+    "C4": 68,
+    "C5": 65,
+    "C6": 66
+  },
+  "primary_score": 65,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "episodes/ep03.md: 仮ショット割り s03 row vs 人数 table s03 row",
+      "what": "s03 head-count is 0 in the shot table but population 1 + {hand:1} in the 人数 table",
+      "why": "the v04 fix set s03 = population 1 + hand 1 (L52 arithmetic), but the 仮ショット割り '人' column still reads 0; a breakdown that trusts the shot table would write population 0 and contradict L52",
+      "fix": "set 仮ショット割り s03 人 to 1 (or annotate it) to match the 人数 table"
+    },
+    {
+      "where": "episodes/ep03.md: 参照画像 table, 踏切.base/.geography row",
+      "what": "the crossing has no base image; all 27 key_images must re-derive the crossing from text alone",
+      "why": "the three verbatim fix-points (砂利と土・白黒の帯・灯なし) cover only the three known contradictions; rail height, barrier-arm shape, low camera, and wet ballast consistency across 27 independent generations is unproven without a reference plate",
+      "fix": "keep it as a declared residual risk, not a blocker; verify crossing consistency after the first batch and prioritize the post-pilot corrected board"
+    },
+    {
+      "where": "episodes/ep03.md: 参照画像 table, 台帳.appearance row + 食い違い #3",
+      "what": "the 台帳 reference content includes the 折れ目 line, which is not yet in the ledger",
+      "why": "食い違い #3 declares the one-line addition to 台帳/舞台装置/台帳.md (著者承認) but it does not exist yet; known_keys() derives from the ledger, so reference_set for 台帳 cannot carry the fold until the edit lands",
+      "fix": "apply the 台帳.md one-line addition before stage ③ derives reference_set"
+    },
+    {
+      "where": "episodes/ep03.md: 人数 table, s16 row",
+      "what": "s16 引き population is 1 with a pending 0 option (未決 #3)",
+      "why": "acceptable as a declared residual, but population drives the two §18 sentences, so it must be closed before ② writes §18",
+      "fix": "close s16 population (1 or 0) at cut time, before writing the §18 population phrases"
+    },
+    {
+      "where": "episodes/ep03.md: key_image 枚数 + 仮ショット割り",
+      "what": "arithmetic verified: 28 shots / 420s; 28 attachments = 27 distinct bakes (25 new + 2 fold, s12/s13 shared); 0 reuse; M行 2:06; 承 2:30; 転 held at 120s; s14b is a new key; L52 for s03 holds (hand:1 ≤ 2 for one body)",
+      "why": "confirms every v04 count claim is internally consistent",
+      "fix": "none — record only"
+    }
+  ],
+  "note": "All arithmetic verifies: 28 shots sum to 420s, M-lines 2:06, 承 2:30, 転 held at 120s (s09 −4s / s12 +4s), and 28 attachments = 27 distinct bakes (25 new + 2 fold, s12/s13 shared) with 0 reuse; s14b is correctly a new key and L52 for s03 holds (one body, one hand). The single internal contradiction is s03's head-count, where the 仮ショット割り table still reads 0 against the 人数 table's population 1 + hand 1. The 27-bake load is feasible as the declared one-key-per-shot policy; the real residual risk is crossing consistency across 27 text-only generations with no base image, which is declared and mitigated but unproven."
+}
