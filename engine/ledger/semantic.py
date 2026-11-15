@@ -344,7 +344,14 @@ def check_attached(shot):
 
 
 def check_keys_known(project, shot):
-    """L8 — 台帳に無いキーを引いていないか。**引けないキーは、存在しないものを固定しようとしている。**"""
+    """L8 — 台帳に無いキーを引いていないか。**引けないキーは、存在しないものを固定しようとしている。**
+
+    ⚠️ **`cast` は別の語彙である。** `reference_set` / `attached` は台帳の参照キー
+    （`C.identity`・`L.base`・`P.appearance`）を引くが、`cast` は**人物の裸の名**だけを引く。
+    場所や道具の名を `cast` に書けば、それは「誰が映るか」ではなく別のことを言っている。
+    ⚠️ **そして `cast` は `population` と突き合わされる。** 名の数が人数を超えること、
+    `population: 0` なのに名が在ることは、どちらも**同時に真になれない**。
+    """
     known = project.known_keys()
     out = []
     for name, keys in (("reference_set", shot.get("reference_set") or []),
@@ -354,6 +361,26 @@ def check_keys_known(project, shot):
                 out.append(finding("L8", shot["shot"],
                                    f"{name} の {k!r} が台帳に無い。"
                                    f"台帳にあるのは: {', '.join(sorted(known)) or '（無し）'}"))
+
+    cast = shot.get("cast")
+    if isinstance(cast, list) and cast:
+        chars = set((project.ledger.get("characters") or {}).keys())
+        for k in cast:
+            if k not in chars:
+                out.append(finding("L8", shot["shot"],
+                                   f"cast の {k!r} が台帳の characters に無い。"
+                                   f"人物にあるのは: {', '.join(sorted(chars)) or '（無し）'}"))
+        pop = shot.get("population")
+        if isinstance(pop, int):
+            if pop == 0:
+                out.append(finding("L8", shot["shot"],
+                                   f"cast に {', '.join(map(str, cast))} が居るが、"
+                                   "population は 0 である。**両方は同時に真になれない。**"))
+            elif len(cast) > pop:
+                out.append(finding("L8", shot["shot"],
+                                   f"cast が {len(cast)}人（{', '.join(map(str, cast))}）だが、"
+                                   f"population は {pop} である。"
+                                   "population は**同時に映る最大の人数**である。"))
     return out
 
 

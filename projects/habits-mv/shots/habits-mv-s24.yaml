@@ -118,3 +118,10 @@ disclosure_state:
   宛名票の一行.いちばん古い一枚: present
   鍵に付いた預かり札.宛先: absent
   名札の予備.着けられた: absent
+
+# cast（2026-11-16 試し書き）: `unit` と `beats` の身体と、`reference_set` の
+#   人物 identity から読んだ。**絵が在ってから書いた説明である。**
+#   根拠: 二つの手と二つの顔（`beats` がそれぞれの人物を名指す）。
+cast:
+  - 秋山誠
+  - 前田亮太

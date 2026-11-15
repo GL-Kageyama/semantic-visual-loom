@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.0.0 | canonical: engine/shot/README.md | translated: 2026-09-14 -->
+<!-- i18n-version: 1.1.0 | canonical: engine/shot/README.md | translated: 2026-11-16 -->
 
 **Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
 
@@ -13,6 +13,33 @@ python3 engine/shot/print_spec.py projects/<project> --shot <id>  # 1本だけ
 ```
 
 ⚠️ **刷られた行を貼るのは、著者である。** この道具は、強制されるものだけを示す。
+
+## 概要——何を作るか、どこまで作ったか
+
+```bash
+python3 engine/shot/overview.py projects/<project>               # 作品まるごと
+python3 engine/shot/overview.py projects/<project> --no-changes  # 変化の散文を除く
+```
+
+**作品を読むための1枚。** 何であるか（`bible` ＋ `dramaturgy`）・各段の現在地・幕と
+シーケンス・ショットの列（人物と各ショットの変化を含む。`unit.before` → `unit.after`）・曲の区切り・
+止まっているところ・**この1枚が言っていないこと。**
+
+⚠️ **数えるのは記録だけである。** `media/` は開かない——だから**標本が在るか**は言えない。
+言えるのは**テイクとして記録されたか**だけである。**置いたことは、記録したことではない。**
+
+⚠️ **尺は `shot.duration`（意図）であって、生成物の実測ではない。**
+
+⚠️ **`specs/board/` は記録から引けない。** この1枚は紙の数を数え、
+**どのショットの紙かは言えない**と申告する。
+
+⚠️ **`adopted` の欄が無いことは、却下ではない。** この1枚は採用／却下／未裁定を分けて刷る。
+
+⚠️ **無い部分は、無いと刷る。** 値が入る場所に `**欠落**（在処）` を刷る——
+**データが無いからといって、節が消えることはない。** ⚠️ **欠落は欠陥ではない**——
+不在が決定のこともある。この1枚は在処を名指すだけで、理由を読まない。
+
+⚠️ **この道具は、何も決めない。** 導出した1枚を刷るだけで、保存するかは著者が決める。
 
 ## 刷るもの
 

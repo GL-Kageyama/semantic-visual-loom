@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.0.0 | canonical: schemas/README.md | translated: 2026-09-14 -->
+<!-- i18n-version: 1.1.0 | canonical: schemas/README.md | translated: 2026-11-16 -->
 
 **Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
 
@@ -37,7 +37,7 @@ copy in `Negative Prompt`. ⚠️ **A shot whose frame holds only part of a body
 keyed by `specmap.BODY_PARTS` — because **a count of people counts bodies**, and a measured
 failure happened in a limb: a hands-only shot came back with a third hand while its
 `population` was correct. The same two sentences are derived per part, and `L52` also reads
-the arithmetic between the two declarations. ⚠️ **One field was added in the same change as
+the arithmetic between the two declarations. ⚠️ **A shot that shows people declares `cast`** — the bare keys of `ledger.characters`. **`reference_set` is not a cast list**: measured, `mado-fuki` has `population: 1` in all four shots while its `reference_set` is empty in all four, and `migenzo`'s character appears in many shots but is named in only five of thirteen. **An empty `[]` means "no one"; an absent field means "not declared."** `L8` checks the names against the ledger and against `population`. ⚠️ **One field was added in the same change as
 the schema property, or it would have been a lie**: every new top-level record field must carry
 a `specmap.FIELD_SOURCE` and `FIELD_DESTINATION` entry, because `L12` and `L19` walk the
 schema's properties. `dramatic` goes to the new destination **`direction`** — **not to a

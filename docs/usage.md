@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.3.0 | canonical: docs/usage.md | translated: 2026-09-30 -->
+<!-- i18n-version: 1.4.0 | canonical: docs/usage.md | translated: 2026-11-16 -->
 
 **Language:** [English](usage.md) | [日本語](usage-ja.md) | [中文](usage-zh.md)
 
@@ -26,8 +26,7 @@ python3 -m pip install --user pyyaml jsonschema
 
 ## The commands
 
-**Four commands ship here**—**three for making a work, one for maintaining the
-repository.**
+**Six commands ship here**—**five for a work, one for maintaining the repository.**
 
 ```bash
 # the checker — fires contradictions at the specification stage
@@ -53,6 +52,10 @@ python3 engine/shot/look.py --composition 三分割
 python3 engine/shot/look.py --light ゴールデン --composition 三分割
 python3 engine/shot/look.py --style --medium 手描き --star 3
 python3 engine/shot/look.py --style 水彩
+
+# the overview — what the work is, and how far it got. It writes nothing
+python3 engine/shot/overview.py projects/hitosara
+python3 engine/shot/overview.py projects/hitosara --no-changes
 
 # the repository's own document check — not used to make a work
 python3 tools/check_i18n.py                                # the document mirrors
@@ -117,6 +120,19 @@ says which of the two it is. ⚠️ **A composition entry printed with `en: —`
 the line lives in the camera catalog, and `L54` reads it there. ⚠️ **A style entry printed
 with `card: —` is a name no style card holds** — **the name is still usable**: the `en` line
 is the sentence, and `L59` reports how many cards the list never names.
+
+**`engine/shot/overview.py`**
+
+| flag | |
+|---|---|
+| *(positional)* | the path to a project directory. |
+| `--no-changes` | do not print the change column (`unit.before` → `unit.after`). |
+
+**It counts the records only.** It does not open `media/`—so it cannot say whether a
+sample exists, only whether a take records one. **Durations are `shot.duration` (intent),
+not measurements of generated film.** ⚠️ **It decides nothing**: it prints a derived
+sheet, and saving it is the author's act. What it prints, and what it cannot say, is in
+[`engine/shot/README.md`](../engine/shot/README.md).
 
 ⚠️ **`check.py` and `print_spec.py` are not alternatives—they cover disjoint ground.**
 **A line `print_spec.py` prints is a line that goes silent the moment you copy it**

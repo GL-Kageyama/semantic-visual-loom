@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.0.0 | canonical: engine/shot/README.md | translated: 2026-09-14 -->
+<!-- i18n-version: 1.1.0 | canonical: engine/shot/README.md | translated: 2026-11-16 -->
 
 **Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
 
@@ -13,6 +13,33 @@ python3 engine/shot/print_spec.py projects/<project> --shot <id>  # 只打印一
 ```
 
 ⚠️ **把打印出来的行贴上去，是作者的行为。** 这个工具只显示被强制的东西。
+
+## 概要——做什么、做到哪里
+
+```bash
+python3 engine/shot/overview.py projects/<project>               # 整个作品
+python3 engine/shot/overview.py projects/<project> --no-changes  # 不打印变化的散文
+```
+
+**用来读一个作品的一张。** 它是什么（`bible` ＋ `dramaturgy`）·各阶段的当前状态·
+幕与序列·镜头列表（含人物与每个镜头的变化。`unit.before` → `unit.after`）·曲的分段·
+停在哪里·**这张没有说什么。**
+
+⚠️ **只数记录。** 它不打开 `media/`——所以它说不出**样本是否存在**，只能说出
+**是否作为 take 被记录**。**放下文件，不等于记录。**
+
+⚠️ **尺是 `shot.duration`（意图），不是生成物的实测。**
+
+⚠️ **`specs/board/` 无法从记录中引出。** 这张只数纸张的数量，并声明
+**说不出哪张纸属于哪个镜头。**
+
+⚠️ **没有 `adopted` 栏，不是否决。** 这张把采用／否决／未裁定分开打印。
+
+⚠️ **缺失的部分，就打印为缺失。** 在本该有值的位置打印 `**欠落**（出处）`——
+**不会因为数据缺失就让一节消失。** ⚠️ **缺失不是缺陷**——不在有时是决定。
+这张只指出出处，不读理由。
+
+⚠️ **这个工具什么都不决定。** 它只打印导出的那一张；是否保存，由作者决定。
 
 ## 它打印什么
 

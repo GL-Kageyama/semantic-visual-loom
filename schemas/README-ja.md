@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.0.0 | canonical: schemas/README.md | translated: 2026-09-14 -->
+<!-- i18n-version: 1.1.0 | canonical: schemas/README.md | translated: 2026-11-16 -->
 
 **Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
 
@@ -36,7 +36,12 @@
 `Negative Prompt` の写しである。 ⚠️ **枠が身体の一部しか写さないショットは、`body_parts` を宣言する**——`{部位: 数}` で、
 鍵は `specmap.BODY_PARTS`——**人数は身体を数える**からであり、実測の失敗は肢で起きた：
 手だけのショットに、`population` が正しいまま3本目の手が戻ってきた。
-同じ2句が部位ごとに導かれ、`L52` は2つの宣言の間の算術も読む。⚠️ **欄はスキーマの property と同じ変更で
+同じ2句が部位ごとに導かれ、`L52` は2つの宣言の間の算術も読む。
+⚠️ **人が映るショットは `cast` を宣言する**——台帳の `characters` の裸のキーである。
+**`reference_set` は出演の一覧ではない**——実測: `mado-fuki` は4本とも `population: 1` で
+女が映るのに、`reference_set` は4本とも空であり、`migenzo` の絹は多くのショットに居るが、
+名指しは13本のうち5本だけである。**空の `[]` は「誰も居ない」、欄が無いのは「宣言していない」。**
+`L8` が名を台帳と `population` に照らす。⚠️ **欄はスキーマの property と同じ変更で
 足した。でなければ嘘になった**——最上位の記録の欄はすべて `specmap.FIELD_SOURCE` と
 `FIELD_DESTINATION` を持たねばならず、`L12` と `L19` はスキーマの property を走査するからである。
 `dramatic` の行き先は新しい種別 **`direction`** であり——**`prompt:` のスロットではない**。

@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.0.0 | canonical: schemas/README.md | translated: 2026-09-14 -->
+<!-- i18n-version: 1.1.0 | canonical: schemas/README.md | translated: 2026-11-16 -->
 
 **Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
 
@@ -36,6 +36,11 @@
 `specmap.BODY_PARTS`——因为**人数数的是身体**，而实测的失败发生在肢体上：
 一个只有手的镜头在 `population` 正确的情况下带回了第三只手。
 同样的两句按部位导出，而 `L52` 还读两个声明之间的算术。
+⚠️ **有人物出现的镜头要声明 `cast`**——台账 `characters` 的裸键。
+**`reference_set` 不是出演名单**——实测：`mado-fuki` 四本都是 `population: 1`、画面里有女，
+但四本的 `reference_set` 都是空的；`migenzo` 的绢出现在许多镜头里，
+十三本中却只有五本点名。**空的 `[]` 是「没有人」，没有栏是「没有声明」。**
+`L8` 把名字照向台账与 `population`。
 ⚠️ **字段与 schema 的 property 在同一次改动里加入。
 否则就成了谎言**——每一处顶层的记录字段都必须带 `specmap.FIELD_SOURCE` 与
 `FIELD_DESTINATION`，因为 `L12` 与 `L19` 会对 schema 的 property 做遍历。

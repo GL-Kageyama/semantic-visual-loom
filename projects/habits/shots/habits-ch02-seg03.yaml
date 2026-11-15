@@ -156,3 +156,8 @@ attached:
 #       **別の主張**になる（`L7` の註）。
 disclosure_state:
   宛名票の一行.いちばん上の行: present
+
+# cast（2026-11-16 既存への適用）: 根拠——`reference_set` の人物ただ1人と、`unit`/`beats` の手・目・口。
+#   ⚠️ 遡って書いた説明である（`population` と同じ規律では、本来は宣言時に書く）。
+cast:
+  - 暮林蒼

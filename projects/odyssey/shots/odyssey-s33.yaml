@@ -134,3 +134,8 @@ disclosure_state:
   女神.差し出し: present
   沈んだ者たち: present
   男.名: absent
+
+# cast（2026-11-16 既存への適用）: 根拠——`unit`/`beats` が「男」を名指す。
+#   ⚠️ 遡って書いた説明である（`population` と同じ規律では、本来は宣言時に書く）。
+cast:
+  - 男

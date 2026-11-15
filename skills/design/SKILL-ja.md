@@ -4,7 +4,7 @@ description: 'semantic-visual-loom の②設計——ショットを演出し、
 argument-hint: '（任意）プロジェクト名、または演出するショット。例: /semantic-visual-loom:design hitosara'
 ---
 
-<!-- i18n-version: 1.2.0 | canonical: skills/design/SKILL.md | translated: 2026-09-30 -->
+<!-- i18n-version: 1.3.0 | canonical: skills/design/SKILL.md | translated: 2026-11-16 -->
 
 **Language:** [English](SKILL.md) | [日本語](SKILL-ja.md) | [中文](SKILL-zh.md)
 
@@ -120,6 +120,12 @@ argument-hint: '（任意）プロジェクト名、または演出するショ�
    ⚠️ **枠が全身を写すなら `body_parts` は要らない**、そして遡って埋めない。
    **間違えると鳴る:** `L52`（未登録の部位、名指しが無い、宣言より少ない数を禁じる写し、
    または人数が支えられない数）。
+   ⚠️ **そして、枠に誰が映るかを言う——`cast`**（台帳の `characters` の裸のキー。
+   `[女]`、`[絹, 娘]`）。⚠️ **`reference_set` を代用しない**——あれは「何を固定したか」である。
+   実測: `mado-fuki` は4本とも `population: 1` で女が映るのに `reference_set` は4本とも空、
+   `migenzo` の絹は多くのショットに居るが、名指しは13本のうち5本だけである。
+   **空の `[]` は「誰も居ない」、欄が無いのは「宣言していない」。** ⚠️ **遡って埋めない。**
+   **間違えると鳴る:** `L8`（台帳に無い名、または `population` との食い違い）。
 7. **ミザンセーヌ——舞台絵（§9 `## Blocking`）、光（§13）、カメラ（§10）、
    そして §18 の `Camera Prompt` への受け渡し。**
    ⚠️ **この段には専用の文書が在る: [`skills/staging/SKILL.md`](../staging/SKILL-ja.md)。**

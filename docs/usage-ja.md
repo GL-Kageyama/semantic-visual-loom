@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.3.0 | canonical: docs/usage.md | translated: 2026-09-30 -->
+<!-- i18n-version: 1.4.0 | canonical: docs/usage.md | translated: 2026-11-16 -->
 
 **Language:** [English](usage.md) | [日本語](usage-ja.md) | [中文](usage-zh.md)
 
@@ -24,7 +24,7 @@ python3 -m pip install --user pyyaml jsonschema
 
 ## コマンド
 
-**コマンドは4つある**——**作品を作るための3つと、リポジトリを保つための1つである。**
+**コマンドは6つある**——**作品のための5つと、リポジトリを保つための1つである。**
 
 ```bash
 # 検査器——仕様の段で矛盾を鳴らす
@@ -49,6 +49,10 @@ python3 engine/shot/look.py --composition 三分割
 python3 engine/shot/look.py --light ゴールデン --composition 三分割
 python3 engine/shot/look.py --style --medium 手描き --star 3
 python3 engine/shot/look.py --style 水彩
+
+# 概要——何を作るか、どこまで作ったか。何も書かない
+python3 engine/shot/overview.py projects/hitosara
+python3 engine/shot/overview.py projects/hitosara --no-changes
 
 # リポジトリ自身の文書検査——作品を作るのには使わない
 python3 tools/check_i18n.py                                # 文書のミラー
@@ -113,6 +117,19 @@ python3 tools/check_i18n.py                                # 文書のミラー
 ⚠️ **`card: —` と刷られた画風は、どのカードも持たない名である**——**その名も使える**：
 `en` の行が句であり、一覧が名を知らないカードが何枚あるかは `L59` が報告する。
 ⚠️ **`en: —` と刷られた構図は `twin` である**——句はカメラの目録に在り、`L54` がそちらで読む。
+
+**`engine/shot/overview.py`**
+
+| 引数 | |
+|---|---|
+| （位置引数） | プロジェクトのディレクトリのパス。 |
+| `--no-changes` | 変化の列（`unit.before` → `unit.after`）を刷らない。 |
+
+**数えるのは記録だけである。** `media/` は開かない——だから**標本が在るか**は言えない。
+言えるのは**テイクとして記録されたか**だけである。**尺は `shot.duration`（意図）であって、
+生成物の実測ではない。** ⚠️ **この道具は何も決めない**——導出した1枚を刷るだけで、
+保存するかは著者が決める。何を刷り、何を言えないかは
+[`engine/shot/README.md`](../engine/shot/README-ja.md) に在る。
 
 ⚠️ **`check.py` と `print_spec.py` は択一ではない——覆っている範囲が食い違っている。**
 **`print_spec.py` が刷る行は、写した瞬間に黙る行である**（だから刷られた各行は、

@@ -4,7 +4,7 @@ description: 'Stage ② of semantic-visual-loom — stage a shot, and specify it
 argument-hint: '(optional) the project name, or the shot to stage. e.g. /semantic-visual-loom:design hitosara'
 ---
 
-<!-- i18n-version: 1.2.0 | canonical: skills/design/SKILL.md | translated: 2026-09-30 -->
+<!-- i18n-version: 1.3.0 | canonical: skills/design/SKILL.md | translated: 2026-11-16 -->
 
 **Language:** [English](SKILL.md) | [日本語](SKILL-ja.md) | [中文](SKILL-zh.md)
 
@@ -130,6 +130,13 @@ because `L3` and `L4` read the beat body, not only the field.**
    holds the whole body needs no `body_parts`**, and nothing is backfilled.
    **Fires if wrong:** `L52` (an unregistered part, the naming missing, a copy that forbids
    fewer than declared, or a count the headcount cannot hold).
+   ⚠️ **And say who is in the frame — `cast`**, the bare keys of `ledger.characters`
+   (`[女]`, `[絹, 娘]`). ⚠️ **`reference_set` is not a cast list**: measured, `mado-fuki` has
+   `population: 1` in all four shots while its `reference_set` is empty in all four;
+   `migenzo`'s character appears in many shots but is named in only five of thirteen.
+   **An empty `[]` means nobody; an absent field means undeclared.** ⚠️ **Do not backfill it.**
+   **Fires if wrong:** `L8` (a name not in the ledger, or a cast that disagrees with
+   `population`).
 7. **Mise-en-scène — the stage picture (§9 `## Blocking`), the light (§13), the camera (§10),
    and the handover into §18's `Camera Prompt`.**
    ⚠️ **This step has its own document: [`skills/staging/SKILL.md`](../staging/SKILL.md).**

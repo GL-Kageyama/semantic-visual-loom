@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.3.0 | canonical: engine/ledger/README.md | translated: 2026-09-30 -->
+<!-- i18n-version: 1.4.0 | canonical: engine/ledger/README.md | translated: 2026-11-16 -->
 
 **Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
 
@@ -37,7 +37,7 @@ in order to fire on "`before` and `after` are the same" — but **JSON Schema ca
 | **L6** | `reference_set` (intent) contradicts `attached` (actual) | measurement of Ukebi V1 |
 | **L7a** | **Too early a disclosure** — a shot before the declared change point already holds that value | flower contamination |
 | **L7b** | **The ledger did not predict it** — at the change-point shot, the state has not actually changed | Checker No. 2, question 1 |
-| **L8** | The reference set pulls a key that is not in the ledger | §2.3 |
+| **L8** | The reference set or `cast` pulls a key that is not in the ledger (and `cast` disagrees with `population`) | §2.3 |
 | **L9** | **The disclosure check is empty** — every transition the record holds matches a declared position in the ledger | "Firing When a Check Is Empty" below |
 | **L10** | **Does a disclosure change point appear in the text that reaches the model (§18)?** | "The Other Party Is §18, Not §16" below |
 | **L11** | The specification's sections are not as the registry (§1–20) says. ⚠️ **It also fires when the registry itself is short** | "The Mapping Is a Registry, Not Prose" below |

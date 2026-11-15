@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.3.0 | canonical: docs/usage.md | translated: 2026-09-30 -->
+<!-- i18n-version: 1.4.0 | canonical: docs/usage.md | translated: 2026-11-16 -->
 
 **Language:** [English](usage.md) | [日本語](usage-ja.md) | [中文](usage-zh.md)
 
@@ -24,7 +24,7 @@ python3 -m pip install --user pyyaml jsonschema
 
 ## 命令
 
-**命令有 4 个**——**做作品的 3 个，以及维护仓库的 1 个。**
+**命令有 6 个**——**为作品的 5 个，以及维护仓库的 1 个。**
 
 ```bash
 # 检查器——在规格阶段触发矛盾
@@ -49,6 +49,10 @@ python3 engine/shot/look.py --composition 三分割
 python3 engine/shot/look.py --light ゴールデン --composition 三分割
 python3 engine/shot/look.py --style --medium 手描き --star 3
 python3 engine/shot/look.py --style 水彩
+
+# 概要——做什么、做到哪里。什么都不写
+python3 engine/shot/overview.py projects/hitosara
+python3 engine/shot/overview.py projects/hitosara --no-changes
 
 # 仓库自身的文档检查——不用来做作品
 python3 tools/check_i18n.py                                # 文档的镜像
@@ -113,6 +117,19 @@ python3 tools/check_i18n.py                                # 文档的镜像
 ⚠️ **打上 `card: —` 的画风，是没有一张卡片持有它的名字**——**那个名字照样能用**：
 `en` 那一行就是句子；一览不认得名字的卡片有几张，由 `L59` 报告。
 ⚠️ **打成 `en: —` 的构图是 `twin`**——句子在摄像机目录里，`L54` 在那边读它。
+
+**`engine/shot/overview.py`**
+
+| 参数 | |
+|---|---|
+| （位置参数） | 项目目录的路径。 |
+| `--no-changes` | 不打印变化列（`unit.before` → `unit.after`）。 |
+
+**只数记录。** 它不打开 `media/`——所以它说不出**样本是否存在**，只能说出
+**是否作为 take 被记录**。**尺是 `shot.duration`（意图），不是生成物的实测。**
+⚠️ **这个工具什么都不决定**——只打印导出的一张；是否保存，由作者决定。
+它打印什么、说不出什么，在
+[`engine/shot/README.md`](../engine/shot/README-zh.md) 里。
 
 ⚠️ **`check.py` 与 `print_spec.py` 不是二选一——它们覆盖的范围不一样。**
 **`print_spec.py` 打印的行，是抄下去的瞬间就会沉默的行**（所以每一行都会报出它让谁沉默）。

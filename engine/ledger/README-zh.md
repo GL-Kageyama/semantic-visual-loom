@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.3.0 | canonical: engine/ledger/README.md | translated: 2026-09-30 -->
+<!-- i18n-version: 1.4.0 | canonical: engine/ledger/README.md | translated: 2026-11-16 -->
 
 **Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
 
@@ -37,7 +37,7 @@ python3 engine/ledger/check.py --self-test          # 确认检查确实会触�
 | **L6** | `reference_set`（意图）与 `attached`（实际）相矛盾 | Ukebi V1 的实测 |
 | **L7a** | **开示过早**——声明的变化点之前的镜头已经持有那个值 | 花的混入 |
 | **L7b** | **台账没有预测到**——在变化点的镜头上，状态实际并没有改变 | 检查器第 2 号 问题 1 |
-| **L8** | 参照集合拉取了台账里没有的键 | §2.3 |
+| **L8** | 参照集合或 `cast` 拉取了台账里没有的键（以及 `cast` 与 `population` 的矛盾） | §2.3 |
 | **L9** | **开示的检查为空**——记录持有的每一个迁移都与台账的声明位置一致 | 下文「检查为空时触发」 |
 | **L10** | **开示的变化点是否出现在抵达模型的文本（§18）里？** | 下文「对方是 §18，不是 §16」 |
 | **L11** | 规格的各节与目录（§1–20）所说的不一致。⚠️ **目录本身很短时也会触发** | 下文「对应关系是目录，不是散文」 |

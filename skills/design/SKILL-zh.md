@@ -4,7 +4,7 @@ description: 'semantic-visual-loom 的②设计——给镜头做演出，并把
 argument-hint: '（任意）项目名，或要演出的镜头。例: /semantic-visual-loom:design hitosara'
 ---
 
-<!-- i18n-version: 1.2.0 | canonical: skills/design/SKILL.md | translated: 2026-09-30 -->
+<!-- i18n-version: 1.3.0 | canonical: skills/design/SKILL.md | translated: 2026-11-16 -->
 
 **Language:** [English](SKILL.md) | [日本語](SKILL-ja.md) | [中文](SKILL-zh.md)
 
@@ -118,6 +118,11 @@ argument-hint: '（任意）项目名，或要演出的镜头。例: /semantic-v
    ⚠️ **装得下全身的画面不需要 `body_parts`**，而且不回头补。
    **弄错了会响:** `L52`（未登记的部位、点名缺失、副本禁掉的少于声明、
    或人数撑不住的数）。
+   ⚠️ **还要说出画面里是谁——`cast`**（台账 `characters` 的裸键。`[女]`、`[絹, 娘]`）。
+   ⚠️ **不要用 `reference_set` 代替**——它是「固定了什么」。实测：`mado-fuki` 四本都是
+   `population: 1`、画面里有女，但四本的 `reference_set` 都是空的；`migenzo` 的绢出现在
+   许多镜头里，十三本中却只有五本点名。**空的 `[]` 是「没有人」，没有栏是「没有声明」。**
+   ⚠️ **不回头补。** **弄错了会响:** `L8`（台账里没有的名字，或与 `population` 的矛盾）。
 7. **场面调度——舞台画面（§9 `## Blocking`）、光（§13）、摄像机（§10），
    以及往 §18 的 `Camera Prompt` 的交接。**
    ⚠️ **这一步有专用文书: [`skills/staging/SKILL.md`](../staging/SKILL-zh.md)。**

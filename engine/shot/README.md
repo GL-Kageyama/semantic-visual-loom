@@ -1,4 +1,4 @@
-<!-- i18n-version: 1.0.0 | canonical: engine/shot/README.md | translated: 2026-09-14 -->
+<!-- i18n-version: 1.1.0 | canonical: engine/shot/README.md | translated: 2026-11-16 -->
 
 **Language:** [English](README.md) | [日本語](README-ja.md) | [中文](README-zh.md)
 
@@ -14,6 +14,35 @@ python3 engine/shot/print_spec.py projects/<project> --shot <id>  # one shot
 ```
 
 ⚠️ **Pasting what it prints is the author's act.** The tool only shows what is forced.
+
+## The overview — what the work is, and how far it got
+
+```bash
+python3 engine/shot/overview.py projects/<project>               # the whole work
+python3 engine/shot/overview.py projects/<project> --no-changes  # without the unit prose
+```
+
+**One sheet for reading a work.** What it is (bible + `dramaturgy`) · where each stage
+stands · acts and sequences · the shot list with cast and each shot's change (`unit.before` →
+`unit.after`) · the song's sections · where it has stopped · what the sheet does not say.
+
+⚠️ **It counts the records only.** It does **not** open `media/`—so it cannot say whether a
+sample exists, only whether a take records one. **Placing a file is not recording it.**
+
+⚠️ **Durations are `shot.duration` (intent), not measurements of generated film.**
+
+⚠️ **`specs/board/` cannot be reached from the record.** The sheet counts the files and says
+that it cannot say which shot each one belongs to.
+
+⚠️ **An absent `adopted` is not a rejection.** The sheet separates adopted / rejected /
+undecided, and says so.
+
+⚠️ **A missing part is printed as a missing part.** Where a value would be, the sheet
+prints `**欠落**（path）`—**a section does not disappear because its data is absent.**
+⚠️ **Absence is not a defect**—it can be a decision. The sheet names the place and does
+not read the reason.
+
+⚠️ **It decides nothing.** It prints a derived sheet; saving it is the author's act.
 
 ## What It Prints
 

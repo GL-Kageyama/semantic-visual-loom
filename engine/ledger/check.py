@@ -446,6 +446,12 @@ def _self_test():
         ("L8 台帳に無いキー",
          [s("p-ch01-seg01", reference_set=["NOPE.sheet"], attached=["NOPE.sheet"])],
          []),
+        ("L8 cast に台帳に無い人物",
+         [s("p-ch01-seg01", cast=["NOPE"])],
+         []),
+        ("L8 cast と population が食い違う",
+         [s("p-ch01-seg01", cast=["HANA"], population=0)],
+         []),
     ]
     print(f"    {'検査':<28}{'鳴った件数':>10}  判定")
     for label, shots, disc in ledger_cases:
@@ -470,6 +476,16 @@ def _self_test():
     for f in gf:
         print(f"        {f['code']}  {f['message'][:88]}")
     bad += bool(gf)
+
+    # cast が正しい例は鳴ってはならない——**名と人数が合っている**
+    ok_cast = proj([s("p-ch01-seg01", cast=["HANA"], population=1)], [])
+    cf = [f for sh in ok_cast.order()
+          for f in semantic.check_keys_known(ok_cast, ok_cast.shots[sh])]
+    print(f"\n    {'正しい cast（鳴ってはならない）':<28}{len(cf):>10}  "
+          f"{'鳴らなかった' if not cf else '⚠️ 誤検出'}")
+    for f in cf:
+        print(f"        {f['code']}  {f['message'][:88]}")
+    bad += bool(cf)
 
     # ---- L9（検査が空であることの検査）は、他とは逆に「鳴るのが期待」の場合がある
     print("\n=== 自己検査 — 検査が空でないか\n")
