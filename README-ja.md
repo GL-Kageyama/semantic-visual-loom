@@ -98,7 +98,7 @@ SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles \
 
 ```bash
 python3 engine/ledger/check.py projects/hitosara         # デモ「一皿ができるまで」
-python3 engine/ledger/check.py projects/ukebi/ukebi-v2   # 受け火 V2
+python3 engine/ledger/check.py projects/ukebi/_archive/ukebi-v2   # 受け火 V2（保管）
 python3 engine/ledger/check.py --self-test               # 検査器が鳴るか
 python3 engine/shot/print_spec.py projects/hitosara      # 値が強制されている行を刷る
 ```
@@ -139,10 +139,12 @@ semantic-visual-loom/
 ```
 
 **⚠️ `projects/` には2種類が同居している**——**生の仕様書**（受け火・午前二時の §1–20。
-そのまま残してある）と、**構造化した記録**（`bible.yaml` / `ledger.yaml` / `shots/`。
-**19本**である——`drama-pilot`、`grammar-*` の実験作7本、`habits`・`habits-mv`・
-`habits-promo-chinatsu`・`hakuchizu`・`hitosara`・`hitosara-ab`・`ippitsu`・`mado-fuki`・
-`migenzo`・`odyssey`、そして `ukebi/ukebi-v2`）。`mado-fuki` は四つの目録
+受け火の側は `projects/ukebi/_archive/` に保管）と、**構造化した記録**
+（`bible.yaml` / `ledger.yaml` / `shots/`。**19本**である——`drama-pilot`、`grammar-*` の
+実験作7本、`habits`・`habits-mv`・`habits-promo-chinatsu`・`hakuchizu`・`hitosara`・
+`hitosara-ab`・`ippitsu`・`mado-fuki`・`migenzo`・`odyssey`、そして
+`ukebi/_archive/ukebi-v2`）。`projects/ukebi/ukebi-v3` は準備中（README のみ）。
+`mado-fuki` は四つの目録
 ——カメラ・光・構図・画風——を全部引く見本である。
 ⚠️ **すべての作品は自分の `bible.yaml` と `ledger.yaml` を持ち、作品は作品を抱えない**
 ——そしてこれが効く理由である：**`check.py` は再帰しない**ので、

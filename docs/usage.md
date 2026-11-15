@@ -33,7 +33,7 @@ repository.**
 # the checker — fires contradictions at the specification stage
 python3 engine/ledger/check.py --self-test                 # does the checker fire at all
 python3 engine/ledger/check.py projects/hitosara           # pre-flight verification for one project
-python3 engine/ledger/check.py projects/ukebi/ukebi-v2     # Ukebi V2
+python3 engine/ledger/check.py projects/ukebi/_archive/ukebi-v2     # Ukebi V2
 
 # the printer — the lines of a specification that can be derived. It writes nothing
 python3 engine/shot/print_spec.py projects/hitosara

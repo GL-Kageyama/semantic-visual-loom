@@ -30,7 +30,7 @@ python3 -m pip install --user pyyaml jsonschema
 # 検査器——仕様の段で矛盾を鳴らす
 python3 engine/ledger/check.py --self-test                 # 検査器が鳴るかどうか
 python3 engine/ledger/check.py projects/hitosara           # 1つのプロジェクトの事前検証
-python3 engine/ledger/check.py projects/ukebi/ukebi-v2     # 受け火 V2
+python3 engine/ledger/check.py projects/ukebi/_archive/ukebi-v2     # 受け火 V2
 
 # 刷る者——仕様のうち、導出できる行。何も書かない
 python3 engine/shot/print_spec.py projects/hitosara

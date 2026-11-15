@@ -97,7 +97,7 @@ SVL_FORMATS_DIR=references/formats SVL_STYLES_DIR=references/styles \
 
 ```bash
 python3 engine/ledger/check.py projects/hitosara         # 演示「Until One Plate Is Made」
-python3 engine/ledger/check.py projects/ukebi/ukebi-v2   # Ukebi V2
+python3 engine/ledger/check.py projects/ukebi/_archive/ukebi-v2   # Ukebi V2（归档）
 python3 engine/ledger/check.py --self-test               # 检查器会不会报警
 python3 engine/shot/print_spec.py projects/hitosara      # 打印值已被强制的行
 ```
@@ -137,11 +137,13 @@ semantic-visual-loom/
 └── projects/        # 每部作品的实体
 ```
 
-**⚠️ `projects/` 里同居着两种东西**——**生的规格书**（Ukebi 与 Gozen-niji 的 §1–20，
-就那样留着）与**结构化的记录**（`bible.yaml` / `ledger.yaml` / `shots/`；
-**十九本**——`drama-pilot`、`grammar-*` 的七个实验作、`habits`、`habits-mv`、
-`habits-promo-chinatsu`、`hakuchizu`、`hitosara`、`hitosara-ab`、`ippitsu`、`mado-fuki`、
-`migenzo`、`odyssey`，以及 `ukebi/ukebi-v2`）。`mado-fuki` 是把四份目录
+**⚠️ `projects/` 里同居着两种东西**——**生的规格书**（Ukebi 与 Gozen-niji 的 §1–20；
+Ukebi 的一侧归档在 `projects/ukebi/_archive/`）与**结构化的记录**
+（`bible.yaml` / `ledger.yaml` / `shots/`；**十九本**——`drama-pilot`、`grammar-*` 的七个
+实验作、`habits`、`habits-mv`、`habits-promo-chinatsu`、`hakuchizu`、`hitosara`、
+`hitosara-ab`、`ippitsu`、`mado-fuki`、`migenzo`、`odyssey`，以及
+`ukebi/_archive/ukebi-v2`）。`projects/ukebi/ukebi-v3` 正在准备（仅 README）。
+`mado-fuki` 是把四份目录
 ——摄影机、光、构图、画风——全部引用的样本。
 ⚠️ **所有作品都带着自己的 `bible.yaml` 和 `ledger.yaml`，作品不抱着作品**
 ——而这正是它要紧的理由：**`check.py` 不递归**，所以

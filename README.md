@@ -97,7 +97,7 @@ nothing until ② is on disk**: a shot record requires `duration`, which ② dec
 
 ```bash
 python3 engine/ledger/check.py projects/hitosara         # demo "until one plate is made"
-python3 engine/ledger/check.py projects/ukebi/ukebi-v2   # Ukebi V2
+python3 engine/ledger/check.py projects/ukebi/_archive/ukebi-v2   # Ukebi V2 (archived)
 python3 engine/ledger/check.py --self-test               # does the checker fire
 python3 engine/shot/print_spec.py projects/hitosara      # the lines of a spec whose value is forced
 ```
@@ -141,10 +141,11 @@ semantic-visual-loom/
 ```
 
 **⚠️ Two kinds live side by side in `projects/`**—**raw specification trees** (§1–20 of Ukebi and
-Gozen Niji, left as they are) and **structured records** (`bible.yaml` / `ledger.yaml` / `shots/`;
-**nineteen** of them—`drama-pilot`, the seven `grammar-*` pilot works, `habits`, `habits-mv`,
-`habits-promo-chinatsu`, `hakuchizu`, `hitosara`, `hitosara-ab`, `ippitsu`, `mado-fuki`,
-`migenzo`, `odyssey`, and `ukebi/ukebi-v2`). `mado-fuki` is the sample that draws on all four
+Gozen Niji; Ukebi's are archived under `projects/ukebi/_archive/`) and **structured records**
+(`bible.yaml` / `ledger.yaml` / `shots/`; **nineteen** of them—`drama-pilot`, the seven
+`grammar-*` pilot works, `habits`, `habits-mv`, `habits-promo-chinatsu`, `hakuchizu`, `hitosara`,
+`hitosara-ab`, `ippitsu`, `mado-fuki`, `migenzo`, `odyssey`, and `ukebi/_archive/ukebi-v2`).
+`projects/ukebi/ukebi-v3` is in preparation (README only). `mado-fuki` is the sample that draws on all four
 registries—camera, lighting, composition and style.
 ⚠️ **Every work carries its own `bible.yaml` and `ledger.yaml`, and a work does not hold a work**
 —and this is why that matters: **`check.py` does not recurse**, so **a work held by a work is not

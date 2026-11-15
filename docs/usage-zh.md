@@ -30,7 +30,7 @@ python3 -m pip install --user pyyaml jsonschema
 # 检查器——在规格阶段触发矛盾
 python3 engine/ledger/check.py --self-test                 # 检查器到底会不会报警
 python3 engine/ledger/check.py projects/hitosara           # 对一个项目做事前验证
-python3 engine/ledger/check.py projects/ukebi/ukebi-v2     # Ukebi V2
+python3 engine/ledger/check.py projects/ukebi/_archive/ukebi-v2     # Ukebi V2
 
 # 打印器——规格中可以导出的行。什么都不写
 python3 engine/shot/print_spec.py projects/hitosara
