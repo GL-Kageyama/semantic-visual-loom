@@ -1,0 +1,59 @@
+{
+  "seat": "feasibility",
+  "criteria": {
+    "C1": 68,
+    "C2": 65,
+    "C3": 62,
+    "C4": 72,
+    "C5": 68,
+    "C6": 66
+  },
+  "primary_score": 67,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "PLAN.md:195 vs ep01.md:40",
+      "what": "PLAN §0-i says the S02/S19 feet-POV is population 0 + body_parts {foot:2}; ep01 says population 1 + {foot:2}.",
+      "why": "L52 reads the arithmetic 'one body has two feet' — a headcount of 0 cannot hold 2 feet, so PLAN's value is checker-invalid and ep01's value is the correct one. But the common design (PLAN) and the episode design now contradict, and other episodes cite PLAN.",
+      "fix": "Correct PLAN.md §0-i to '1 + body_parts {foot:2}' so the common design matches ep01 and L52; the '0 (POVで足元を映さない)' parenthetical should name the case where no feet are shown."
+    },
+    {
+      "where": "ep01.md:40 (人数 table), ep01.md:33 (場所・時刻)",
+      "what": "s02/s19 declare population 1 (the viewer's feet) but the viewer is not one of the 8 ledger characters, and no cast key for 'the viewer' exists.",
+      "why": "design SKILL step 6 requires cast = bare keys of ledger.characters and L8 fires on a cast that disagrees with population. cast:[] contradicts population 1; naming 送り火 is wrong (not yet in frame at s02). The second-person POV turns the viewer into a counted body with no character key.",
+      "fix": "Decide before ② how the viewer's body is represented: add a viewer/あなた entry to ledger.characters for these two POV shots, or record the cast gap as a declared hole. The 共通設計 does not cover it."
+    },
+    {
+      "where": "ep01.md:33 (カメラは視聴者の目), ep01.md 仮ショット割り s02/s19",
+      "what": "The key_image for the two POV shots must be a first-person still (two feet over wet gravel, puddle reflecting black sky), and the design never states this.",
+      "why": "WAN 3.0 accepts any still as key_image, so the route is compatible — but if the baked key_image defaults to a third-person shot of someone's feet, the second-person premise breaks and the video contradicts the shot record.",
+      "fix": "In the s02/s19 key_image spec write explicitly 'first-person view, looking down; only the two feet, nothing above the ankles, no second person' so the POV survives into the still."
+    },
+    {
+      "where": "ep01.md:117 (参照画像), ukebi-anime-scene-ep01/prompt.md",
+      "what": "Not using the ep01 scene board for the empty crossing (s01-s06) is correct; the design's label '雨/火/男' is imprecise.",
+      "why": "The adopted board #18 (採用表 ✅) shows 送り火 standing with the fire, and its own merged prompt says 'No rain falls' — the '雨夜' is only the filename; the crossing is wet, not rainy. s01-s06 need neither man nor fire, so reuse would leak them.",
+      "fix": "Keep the decision; reword '雨' to '濡れ' (wet) so the reason matches the board's actual spec."
+    },
+    {
+      "where": "ep01.md:115 (参照画像 台帳.appearance)",
+      "what": "The 台帳 reference (#12 prop-sheet-台帳) is a closed dark-bound book, but s12b/s12c show pages being turned and the fire pressed onto the page.",
+      "why": "A closed-book design sheet will not fix the open-book key_images; the open state has no matching reference and must be carried by the s12b/s12c key_images alone.",
+      "fix": "Note that s12b/s12c bake the open-page state without a reference, or bake an open-page prop reference first."
+    },
+    {
+      "where": "ep01.md:121 (key_image の枚数), PLAN.md 0-h",
+      "what": "27 new key_images for a 5-minute episode (300s/27 ≈ 11.1s per shot), 0 reuse of the 31 existing images.",
+      "why": "This is the WAN route's fixed cost (1 shot 1 key_image) and is denser than the pilot (ep03 = 27 new over 7 min). Feasible, but it is 27 generations + selection before any video.",
+      "fix": "Accept as the route's cost; sequence the bakes in shot order so the empty-crossing key_images (s01-s06) can serve as shared base plates if frames repeat."
+    },
+    {
+      "where": "PLAN.md:154-162, ep01.md:124-129 (運動)",
+      "what": "one-lamp-cel has no ## Motion character, so L20 fires ('Style Motion present but empty'); the design holds motion as a work constant and records the gap.",
+      "why": "Correctly understood/sequenced (C6), but the slot stays empty and L20 fires on all 27 shots until the author rules on adding Motion character to the distill card.",
+      "fix": "Get the author's ruling on adding Motion character to one-lamp-cel before ②, or accept L20 as a recorded retention across the episode."
+    }
+  ],
+  "note": "The design is arithmetic-consistent: 27 shots sum to exactly 300s, and every S-row split (S12→3, S14→3, S15→2, S16→2) sums to its source duration. Population, body_parts, place/time and the key_image count (27 new, 0 reuse) are all decided and correct per the checker. The real risks are two POV-specific items — the PLAN/ep01 population contradiction (PLAN says 0, ep01 correctly says 1) and the viewer's body having no cast key in the 8-character ledger — both resolvable before ② writes the records; the scene-board non-use decision is correct."
+}

@@ -1,0 +1,53 @@
+{
+  "seat": "cinematic",
+  "criteria": {
+    "C1": 60,
+    "C2": 68,
+    "C3": 66,
+    "C4": 55,
+    "C5": 62,
+    "C6": 66
+  },
+  "primary_score": 63,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "草稿/ショット表_第1話.md S03–S05 ／ ep01.md s03–s05 (lines 63–66)",
+      "what": "The 起 block shows lit imagery — 「レールの錆だけが赤い」(s03), 「腕木の影が線路に落ちる」(s04), 「水滴が…光を受ける」(s05) — before any fire exists (fire arrives s07).",
+      "why": "魂火.md calls the soul-fire 「境の唯一の光源」and 踏切.md says 「境の明るさは火だけが作る」. Six establishing shots therefore describe color, cast shadow, and light-catching drops with no declared source — a direct contradiction with the stated light grammar, and it is not flagged anywhere in ep01.md.",
+      "fix": "Declare the 起 lighting explicitly: either the approaching fire's distant glow already lights the crossing from s01 (then say so and keep the red/shadow), or reduce s01–s06 to near-black monochrome (no rust red, no shadow, no light-catching) until the fire enters at s07."
+    },
+    {
+      "where": "ep01.md s06 (line 66) ／ ショット表_第1話.md S06",
+      "what": "The shot's change is 「カメラがわずかに前へ出て、渡れないことを示す」— a slight forward dolly assigned the meaning 'you cannot cross'.",
+      "why": "A camera move cannot carry an abstract prohibition; this is a label, not an image, and the weakest of the six establishing shots. It is the clearest C1 failure in the cut.",
+      "fix": "Anchor the dolly to a concrete obstacle (e.g., the near rail fills the frame and stops — the rail as barrier), or fold s06 into s05 and keep only five establishing shots."
+    },
+    {
+      "where": "ep01.md s09 (line 69) ／ 未決#4 (line 137) ／ ショット表 S09",
+      "what": "The three layers 「生まれて・生きて・死んだ」 are to be shown as light with no body and no scenes, but no visual form is given.",
+      "why": "It is named as a decision ('three layers, no body') yet the image is unresolved — the design admits this in 未決#4. 'Three layers of born/lived/died' is a concept, not a specific image, so this disclosure-adjacent shot is the second C1 gap.",
+      "fix": "Decide the form before shooting: e.g., three value depths inside the flame (pale blue-white / warm fading / dark core) or three vertical bands, and write it into the shot record. Otherwise mark s09 as an intentional abstract cut and accept the generator will supply its own body."
+    },
+    {
+      "where": "PLAN.md 0-i (line 195) vs ep01.md 人数 (lines 40, 44)",
+      "what": "PLAN assigns the feet-POV shots (S02/S19) population 0 + body_parts {foot:2}, while ep01.md assigns population 1 + foot:2 (citing L52).",
+      "why": "Per sVL fixed policy (a visible body part is part of one body; L52 checks arithmetic against population), ep01 is correct and PLAN is wrong. This is an internal contradiction between the common design and the episode design that will be copied into the shot records.",
+      "fix": "Correct PLAN 0-i to population 1 for the feet-POV shots (population 0 is only for frames that show no body at all)."
+    },
+    {
+      "where": "ep01.md 運動 (lines 124–129) vs 仮ショット割り 運動 column (lines 61–87)",
+      "what": "The motion constant says 「カメラは低く、ほぼ動かない。寄りと引きだけ」, but the table declares 送り（線路沿い）, チルト, 前進, 見下ろし across the establishing shots.",
+      "why": "The constant and the per-shot motions disagree; the opening block rests almost entirely on camera moves that the constant excludes. Minor, but it will surface as an L16/L38 inconsistency at breakdown time.",
+      "fix": "Either widen the constant to name the allowed camera events (送り along rails, tilt, forward dolly, look-down), or drop those moves from the 起 block and rely on light/air/water for change."
+    },
+    {
+      "where": "ep01.md header (line 5) ゲスト: なし",
+      "what": "The header says no guest, but the entire episode processes a fire that is 「誰かの時間…生まれて、生きて、死んだ」— an unnamed soul with no name and no memory.",
+      "why": "'ゲスト: なし' is technically true (no guest character), but it hides that the episode's subject is a guest-fire; a reader of the design may think the ritual is shown on nothing.",
+      "fix": "Add one line: ゲストなし＝名も記憶も持たない無名の魂。火は客の火である（第1話の火だけは名を持たない）。"
+    }
+  ],
+  "note": "The 27-shot cut is a film in shape: the five-minute block is arithmetic-exact (80/80/80/60 = 300s), the eight-organ pass is cleanly cut into nine shots (手 1, 指 2, 喉, 腕, 耳, 目, 声, 背), and the throat disclosure (s13, 16s, side-on, face out of frame) plus the 定型句 landing in s21 are precisely placed. The strongest, rarest parts are the second-person POV device (feet in s02/s19, never the face, 'この魂' not 'あなた') and the sound grammar (silent fire, distant rails, near breath, the wind stopping as a beat). The opening is the weak point: six establishing shots of a crossing that, by the world's own law, has no light until the fire arrives, so the 起 block risks being 80 seconds of unlit, camera-event-only filler."
+}

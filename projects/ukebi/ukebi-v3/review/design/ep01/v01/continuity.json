@@ -1,0 +1,53 @@
+{
+  "seat": "continuity",
+  "criteria": {
+    "C1": 40,
+    "C2": 70,
+    "C3": 70,
+    "C4": 48,
+    "C5": 40,
+    "C6": 55
+  },
+  "primary_score": 54,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "PLAN.md:194-196 (0-i) vs ep01.md:40,44 (人数表 s02/s19)",
+      "what": "PLAN.md 0-i declares the foot-POV (第1話 S02/S19) as population 0 + body_parts {foot:2}; ep01.md declares the same shots population 1 + {foot:2}, with the reason '体の一部が画にあるので人口1（L52）'.",
+      "why": "L52 arithmetic (one body has two feet) requires population >= 1 for foot:2. PLAN.md's '0' also contradicts its own parenthetical ('0 = 火だけ・POVで足元を映さない'). ep01.md is correct; PLAN.md 0-i is stale/erroneous and the disagreement is recorded nowhere.",
+      "fix": "Correct PLAN.md 0-i to '1 + body_parts: {foot:2}', and record the discrepancy (either as a PLAN revision or in ep01's 食い違い) so the common design and the episode design stop disagreeing silently."
+    },
+    {
+      "where": "ep01.md 改稿:20 ('客の火') vs 仮ショット割り s07-s17 (generic '火'), no 魂火 mention anywhere in ep01.md",
+      "what": "The arriving fire is a nameless guest fire (ゲスト: なし) but the formal design never names it ゲストの火; the 魂火 (送り火's own remaining fire, the sole light source per 魂火.md) is never declared present or absent in ep1.",
+      "why": "PLAN 0-j mandates '火は二つある。名前を一つに固定する'; ep03.md records the naming resolution (食い違い #6: 魂火.md「送る火」→魂火(残る側)、「ゲストの魂火」→ゲストの火), but ep01 does not carry it. This leaves '光は魂火ひとつ' ambiguous against the arriving fire lighting the 踏切 in s03-s10.",
+      "fix": "Declare in ep01 that the arriving fire is ゲストの火 (anonymous, no guest identity), and state whether the 魂火 (on his palm) appears or is absent in ep1's frames."
+    },
+    {
+      "where": "魂火.md:10 ('最初は握り拳ほど。第2話から少しずつ縮む') vs ep01.md (no fire-size row)",
+      "what": "The fire-size table's ep1 row (握り拳) lives in the 台帳 but is never carried into ep01's design; PLAN 0-j says the 火の段 table goes to bible.constants, but ep01 does not source its row.",
+      "why": "The 魂火's initial 握り拳 size and the ゲストの火's '小さい' size are both invisible in ep01, so the bible.constants ep1 row has no episode-design declaration to draw from.",
+      "fix": "Add a fire-size line to ep01 (魂火 = 握り拳; ゲストの火 = 小さい) so the episode design and the bible.constants table share the same source."
+    },
+    {
+      "where": "ep01.md 原作の食い違い #1 vs 台帳/人物/花.md:36 ('第1話は不在。席だけが空いている。人影も無い。')",
+      "what": "The recording cites README's '1' against design's 不在, but 花.md (the authoritative per-file source) also says 第1話不在. README's '1' is the sole outlier, not a design-vs-台帳 dispute.",
+      "why": "C4 asks for both coordinates; the decisive coordinate (人物/花.md) is omitted, so the fix ('台帳の1は直す候補') is grounded only in design when 花.md already confirms absence.",
+      "fix": "Amend #1 to cite 人物/花.md「第1話は不在」as the confirming coordinate, and record the fix as README-only ('1'を落とす)."
+    },
+    {
+      "where": "design.md:54 (話の表 台帳の印=0) vs ショット表_第1話.md:7 ('印：数えない（火の形は紙へ移る）') / ep01.md:7 / index.md:12",
+      "what": "'0' (design) vs '数えない' (草稿/ep01/index). The 草稿 says the fire's shape transfers to paper but is not counted as a 印; 台帳.md 印表 has no ep1 row (consistent with no persistent mark).",
+      "why": "'0' reads as 'nothing happens', while '数えない' preserves that a shape transfers to paper but is not a persistent 印. The distinction is unrecorded.",
+      "fix": "Note in ep01 食い違い that design.md's '0' is read as '数えない（火の形は紙へ移るが、印にしない）'."
+    },
+    {
+      "where": "ep01.md 食い違い #2 vs design.md:201 ('話ごとに違う光が一瞬だけ見える') / ショット表 S16:42 ('白い光')",
+      "what": "design.md says '光' (light), not '白い光'; the whiteness comes from the 草稿, not design. The recording says only the color of the white is missing, but design does not establish whiteness either.",
+      "why": "Minor overstatement; the decision (第1話=冷たい白) is sound, but the recording misattributes the base '白' to design.",
+      "fix": "Reword to '彼方の光の色（白）は design に無い（design は「話ごとに違う光」とのみ）'."
+    }
+  ],
+  "note": "第1話の喉の留まりの伏線は正しく張られ、第4話の花の席への回収と意味の隠蔽（正体は言わない）が宣言されている。印（数えない）と定型句も保持され、開示順に早出しは無い。弱いのは二点——PLAN.md 0-i が足元POVを人口0と書き ep01 の人口1（L52 に正しい）と記録なしで衝突していることと、ep1 の火がゲストの火／魂火のどちらとも名指されず、握り拳の大きさも設計に載っていないこと。いずれも必須項目が31未満になる水準ではなく、critical ではない。"
+}

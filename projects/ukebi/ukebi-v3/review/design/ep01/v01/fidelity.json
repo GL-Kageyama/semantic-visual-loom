@@ -1,0 +1,47 @@
+{
+  "seat": "fidelity",
+  "criteria": {
+    "C1": 80,
+    "C2": 78,
+    "C3": 80,
+    "C4": 80,
+    "C5": 78,
+    "C6": 76
+  },
+  "primary_score": 78,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "PLAN.md §0-i vs ep01.md 人数 table (s02/s19)",
+      "what": "PLAN 0-i states the feet-POV is population 0 + body_parts {foot:2}; ep01 sets population 1 + {foot:2}.",
+      "why": "sVL policy (CLAUDE.md) counts bodies and L52 checks arithmetic against population (2 feet = 1 body), so 0+foot2 is arithmetically invalid and contradicts PLAN's own '人数は体を数える'. ep01's 1+foot2 is the checker-compliant, faithful formalization of the source's '自分の足元'.",
+      "fix": "Correct PLAN.md 0-i to 1 + {foot:2} to match ep01 and the sVL policy; keep ep01 as is."
+    },
+    {
+      "where": "ep01.md 運動（作品定数）",
+      "what": "'指・まぶた・息だけが動く。体は動かない' contradicts the eight-organ pass (s12a 手・s13 喉・s14a 腕・s15b 背 all move).",
+      "why": "Inherited from PLAN 0-g's style-card Motion character, but read at episode level it forbids the very organ movements that are the episode's content; a generator handed this could freeze the scooping hand.",
+      "fix": "Clarify that the limited-animation style governs idle motion and the eight organs are the deliberate moving exception (one organ per shot)."
+    },
+    {
+      "where": "ep01.md 運動（作品定数）vs 仮ショット割り 運動 column",
+      "what": "'寄りと引きだけ' is contradicted by the column's 送り (track), チルト (s04), 前進 (s06), 見下ろし (s02), and by '止めと送り' itself.",
+      "why": "The camera-move vocabulary actually used exceeds 'only push-in/pull-back' — an internal contradiction inside the same section.",
+      "fix": "Replace '寄りと引きだけ' with the actual allowed moves (寄り・引き・送り・チルト・前進・見下ろし) or drop it and keep only 'カメラは低く、ほぼ動かない'."
+    },
+    {
+      "where": "ep01.md 仮ショット割り s13 vs ショット表_第1話.md S13/検証2",
+      "what": "The shot-level '喉の横から。顔は画面に入れない' and the asymmetry '視聴者は見る。送り火は見ない' are softened to the general '送り火の正面アップは取らない'.",
+      "why": "Face-out-of-frame for S13 and the viewer-sees/送り火-doesn't asymmetry are the episode's core (検証3: 'この非対称が第1話の全部'); a 'no frontal closeup' rule still permits a profile that includes the face.",
+      "fix": "Carry '喉の横から、顔を画面に入れない' and '視聴者は見る・送り火は見ない' explicitly into s13."
+    },
+    {
+      "where": "ep01.md 切る規則 / 仮ショット割り s12b, s12c",
+      "what": "指 spans two shots (s12b 頁をめくる, s12c 火を押す), so '八つを一度ずつ' is loosely 9 organ-shots for 8 organs.",
+      "why": "Faithful to the draft (指 does two distinct actions, correctly cut by one-change), but the 'once each' wording is slightly off.",
+      "fix": "Optionally note 指 spans two shots; no content change required."
+    }
+  ],
+  "note": "This is a clean, source-traceable v01 cut: every one of the 27 shots maps to a ショット表 row, the 300-second beat timing sums exactly, the throat's burn is kept distinct from the guest's fire, 花's absence is resolved against 台帳/README, and s02/s19 population 1+foot2 is the checker-correct formalization (PLAN's 0+foot2 is the error). No must criterion falls below 31, so no cap. The remaining issues are internal-consistency in the 運動 section and a few shot-level instructions (s13 face-out-of-frame) softened from the source."
+}
