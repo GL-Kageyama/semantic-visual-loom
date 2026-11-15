@@ -1,0 +1,59 @@
+{
+  "seat": "cinematic",
+  "criteria": {
+    "C1": 66,
+    "C2": 73,
+    "C3": 64,
+    "C4": 68,
+    "C5": 54,
+    "C6": 67
+  },
+  "primary_score": 65,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "episodes/ep02.md:90 (s16)",
+      "what": "The s16 shot description '足跡の焦げ跡が一対増え、縁だけ赤い' drops '片方だけ薄い', which is present in the episode header (ep02.md:8), the reference note (ep02.md:122), and the prose (draft_02:65).",
+      "why": "'片方だけ薄い' is the 片方だけの形 foreshadow (薄い足跡 → 第9話 花=半身, design.md 伏線表). The detail survives in header/reference but not in the per-shot image handed to generation, so it can be lost.",
+      "fix": "Restore it into s16's 前→後, e.g. '足跡の焦げ跡が一対増え、片方だけ薄く、縁だけ赤い'."
+    },
+    {
+      "where": "episodes/ep02.md:83-84 (s11/s12) vs 草稿/第2話_送る_試作.md:45-46",
+      "what": "s11 音=遠いレール and s12 音=無音, but the 試作 has S11=無音 and S12=風 — the two values appear swapped, and the design claims 'ショット表は試作のまま' (ep02.md:19).",
+      "why": "The climactic s11 (fire touches the dry white light) was silent in the 試作; the swap is unrecorded and looks accidental, weakening the strongest moment and contradicting the 'unchanged' claim.",
+      "fix": "Either restore 無音 at s11 / 風 at s12 to match the 試作, or record the swap as a deliberate ruling."
+    },
+    {
+      "where": "episodes/ep02.md:64-92 (運動 column) + ep02.md:134-139 (運動作品定数)",
+      "what": "The 運動 column uses '送り' for both a camera dolly and the episode's sending gesture, and '止め' shots still carry subject changes (s02 light flash, s08 hand closes, s11 fire touches, m02 pot tilts).",
+      "why": "A generator cannot tell camera-dolly from sending-gesture, and 'still camera' shots conceal a required change; motion is declared but not decided per shot.",
+      "fix": "Split per-shot motion into camera (引き/寄り/送り/止め) and change-kind (光/空気/水面/カメラ/器官), or restrict '送り' to camera-dolly and name the change-kind separately."
+    },
+    {
+      "where": "episodes/ep02.md:72,73,90 (s06/s07/s16)",
+      "what": "切る規則 splits S05/M05/S13/S15 but leaves compound changes uncut: s06 '掌が開き・火が上がり・指の腹が包む' (three gestures), s07 '色が寄り・像が結ぶ' (two), s16 '跡が増え・縁だけ赤い' (two).",
+      "why": "PLAN 0-d requires one change per shot; these lines hold 2-3 changes, so 'one change' is not fully honored.",
+      "fix": "Cut these further or declare each as one compound change (the receiving; the mark appearing) with a written reason."
+    },
+    {
+      "where": "episodes/ep02.md:110 (#2) and ep02.md:145 (未決 #2)",
+      "what": "The pot (壺) has a specified form (窄口・無地・空) but is held in サチ.identity, not a prop key; whether to make it a 物の鍵 is left undecided.",
+      "why": "C3's set piece is specified but its home is split across identity and prompt.md, so it has no single ledger record.",
+      "fix": "Decide 壺 as a prop key (appearance + negative) or confirm the identity-home before breakdown-to-ledger."
+    },
+    {
+      "where": "episodes/ep02.md:74 (m01) vs 台帳/舞台装置/記憶.md:34",
+      "what": "m01 音=風・足音 lists two place sounds against 記憶.md '息と、その場の音ひとつ'.",
+      "why": "Wind is an ambient bed and footsteps an event, so it is defensible, but it exceeds the letter of the memory sound rule.",
+      "fix": "Annotate wind as an ambient bed, or reduce m01 to 足音."
+    },
+    {
+      "where": "episodes/ep02.md:66-67 (s01/s02) vs 台帳/舞台装置/踏切.md:9 and 台帳/舞台装置/魂火.md",
+      "what": "The opening shots are population 0 with no fire present, yet 踏切.md fixes 'レールの上面だけ光る' (wet shine); the shot table resolves to '濡れた砂利が闇を返す' but the new s01/s02 key_images' light handling is unspecified.",
+      "why": "If wet surfaces glint in the opening, an implied source violates '光は魂火ひとつ'; the shots are specific, but their darkness is not pinned.",
+      "fix": "Specify s01/s02 as near-total darkness (no glint) or declare the wet reflectivity non-illuminating in the new key_images."
+    }
+  ],
+  "note": "The 27-shot cut is a film: the block shape is arithmetically exact (起90/承150/転120/結60) and the memory is exactly 2:00 (m01–m05b=120s). Light and sound grammars are specific and coherent — one fire light, no fire sound, the pot's single dry clink, the boundary's flat low voice. Weakest is C5: motion is declared per shot but the 送り column conflates camera dolly with the sending gesture, and several 止め shots still carry uncut changes. Two things risk loss in the shot record: s16 drops the faint-one footprint (片方だけ薄い, the 半身 foreshadow), and s11/s12 sounds appear swapped from the 試作 without a ruling."
+}

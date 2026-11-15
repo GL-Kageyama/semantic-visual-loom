@@ -1,0 +1,41 @@
+{
+  "seat": "fidelity",
+  "criteria": {
+    "C1": 80,
+    "C2": 80,
+    "C3": 74,
+    "C4": 76,
+    "C5": 80,
+    "C6": 72
+  },
+  "primary_score": 77,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "episodes/ep02.md:160 (運動 section)",
+      "what": "「s06/s07/s16 は一つの複合変化（受け取る／記憶が開く／跡が増える）。分割しない理由をここに書く。」",
+      "why": "Contradicts the breakdown itself: S06 is cut into s06a/b/c (lines 78-80, 112), so s06 is not kept as one composite change. The '分割しない理由' sentence is also an unfilled placeholder — no reason is ever written. This is a leftover from v01 that survived into v02.",
+      "fix": "Rewrite line 160 to match the breakdown (s07/s16 are single shots; s06 is split because it holds three changes) and delete or fill the placeholder sentence."
+    },
+    {
+      "where": "draft_02_送る.md:41 vs ep02.md:20,118",
+      "what": "The 畳んだ declaration lists only three folded prose lines (道が緩く曲がる:33／壺の口を覆う:37／閉じて両手で抱える:69), but draft line 41「もう一度、足が出る。一歩。二歩。三歩目で止まる。」is also folded out of the shot breakdown without being declared.",
+      "why": "The memory's final resignation beat — she takes three more steps toward the unreachable shadow and stops — is dropped; m05a「彼女が立ち止まる」covers only the first stop (draft line 39), not this second one. Since the prose is canonical, an undeclared beat drop is a fidelity gap under C6.",
+      "fix": "Either fold the three-steps-then-stop into the m05 cut, or add line 41 to the 畳んだ list."
+    },
+    {
+      "where": "ep02.md:117 vs :84-85",
+      "what": "「記憶の音は一度に一つ」is under-specified. m04 lists「足音・息」(two sounds) and m03 lists「風」despite the same note demoting wind to environmental floor.",
+      "why": "The canonical rule (台帳/記憶.md「息と、その場の音ひとつ」) allows breath + one ambient, so m04 is source-consistent but reads as violating the design's own「一度に一つ」shorthand; m03's「風」is labeled floor elsewhere, leaving its memory-sound status ambiguous.",
+      "fix": "Rewrite as「息を除いて、その場の音は一度に一つ。風は床で数えない」and make m03's sound column unambiguous."
+    },
+    {
+      "where": "ep02.md:77 (s05b)",
+      "what": "s05b lists「布」as its sound.",
+      "why": "Cloth is not among the allowed effects — design 禁止「効果音は頁・息・火・遮断機だけ」and 踏切.md 音「レール・風・砂利・頁・遮断機」. It is a new sound introduced without declaration.",
+      "fix": "Replace with a sourced sound (息 or 砂利) or declare the cloth sound as a deliberate addition."
+    }
+  ],
+  "note": "v02 correctly lands all ten named fixes (土の色 in s07, サチ in s04b, 片方だけ薄い in s16, m01 wind demoted to floor, the four rulings, 壺 as a declared prop, the shoe override via key_image, 手・送る, and the 定型句). What remains is one internal contradiction — the 運動 section still asserts s06/s07/s16 are one composite change 'not split' while the breakdown splits S06 into three and the '分割しない理由' placeholder is empty — plus an under-declared fold (draft line 41, 三歩目で止まる, dropped from the memory unlisted) and an under-specified '一度に一つ' memory-sound rule. None of these pull a must below 31, so the design works."
+}

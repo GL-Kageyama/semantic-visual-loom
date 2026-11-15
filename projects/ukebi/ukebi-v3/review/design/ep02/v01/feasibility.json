@@ -1,0 +1,53 @@
+{
+  "seat": "feasibility",
+  "criteria": {
+    "C1": 58,
+    "C2": 66,
+    "C3": 40,
+    "C4": 68,
+    "C5": 52,
+    "C6": 62
+  },
+  "primary_score": 58,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "episodes/ep02.md 仮ショット割り s05a / key_image の枚数 / 参照画像; ukebi-anime-scene-ep02/prompt.md 版2",
+      "what": "s05a is assigned the adopted scene ep02 board as its key_image (the single reuse), but that board stages サチ as a body facing 送り火 across the rails with the fist-sized soul-fire in his palm ('held in the open palm of his hand'). s05a is population 1 where サチ is a small guest fire floating low that stops inside the crossing and is reflected in a puddle.",
+      "why": "The board teaches WAN two bodies, the wrong fire (魂火 in the palm, not ゲストの火 stopping), and the wrong beat — so the key_image contradicts the shot's own population declaration and before→after change. The design already suspects this (未決 #3 '焼く前に見る') but still counts it as the reuse.",
+      "fix": "Bake s05a as a 27th new key_image (small fire stopping inside the crossing, reflected in a puddle, 送り火 body only), or bake a dedicated s05a board. Do not count scene ep02 as reuse until its composition is verified against s05a."
+    },
+    {
+      "where": "episodes/ep02.md 原作の食い違い #1 / 参照画像 / 未決 #1; _shared/採用表.md #6",
+      "what": "サチ's adopted character sheet (版2) still shows 草履形 shoes while 台帳 says 布の履き物 and the scene ep02 merged prompt says 'cloth shoes'. The design adopts 台帳 (布) but leaves whether to rebake the sheet 未決.",
+      "why": "The sheet is the identity reference for all six memory shots (m01–m05b), so 草履 leaks into their key_images and breaks cloth-shoe continuity against both 台帳 and the scene board.",
+      "fix": "Decide before baking the memory shots: bake a corrected 布-shoe sheet (recommended) or declare the sheet's footwear is overridden by the key_image prompt, and record the decision in the ledger — not only as an open question."
+    },
+    {
+      "where": "episodes/ep02.md 人数 section (population table only)",
+      "what": "body_parts is never declared. s05b, s06, s14, s15a, s15b, s17 are hand/finger frames and m04 is a feet frame; PLAN 0-i requires {hand: 2} / {foot: 2} for such shots.",
+      "why": "A hands-only frame with population:1 has measured as a 'third hand' (L52). These shots are exposed because no body_parts decision exists — the population table (0/1/1) is decided, but the body-part half is absent.",
+      "fix": "In the breakdown, mark which shots are body-part frames and declare body_parts per shot, or state explicitly that these are full-body frames so the omission is a decision rather than a blank."
+    },
+    {
+      "where": "episodes/ep02.md 原作の食い違い #2 / 未決 #2",
+      "what": "The pot (壺) is not a 台帳 物 key; the design folds it into サチ's identity as a held item, but the ledger's key families give a character no held-prop slot.",
+      "why": "The pot's appearance (窄口・無地・空) has no machine-readable home, so it rides on per-shot prose and can drift across m01/m02/m05b.",
+      "fix": "Either add 壺 to props (appearance + negative) or record that its appearance is carried per-shot in §5/§18. Close 未決 #2 before baking the memory shots."
+    },
+    {
+      "where": "PLAN.md 0-g / 0-l-1; references/styles/one-lamp-cel.md",
+      "what": "one-lamp-cel has no ## Motion character, so every shot's Style Motion slot is empty and L20 fires across all 27 shots. Recorded as a declared remainder pending the author's decision.",
+      "why": "The route and style are otherwise decided, but the checker stays red on L20 until either the distill card gains a Motion character or the empty slot is accepted as a hole.",
+      "fix": "Author decides (the recommended Motion character text already sits in PLAN 0-g-1); sequence that decision before ② writes §18 for the shots."
+    },
+    {
+      "where": "episodes/ep02.md 切る規則 (記憶の区画 line)",
+      "what": "'記憶の区画は 1:30–4:00（S06＋S07＋M＝150秒＝2:30）。M行は 2:00' labels the 承 span as the memory block; the M rows themselves sum to 120s = 2:00 and are correct.",
+      "why": "The numbers are right but the wording invites reading memory as 2:30, which would later mis-parse the 台帳's 2:00.",
+      "fix": "Reword: 承 is 1:30–4:00 (2:30), of which 記憶 (M rows) is 2:00–4:00 (2:00)."
+    }
+  ],
+  "note": "Counts are correct and internally consistent: 23 rows cut to 27 shots, 27 key_images = 26 new + 1 reuse, and the memory M rows sum to exactly 2:00. The single reuse is the weakest point — the adopted scene ep02 board stages サチ as a body with the fist-sized soul-fire in the palm, so it does not support s05a (fire stopping inside the crossing, reflected in a puddle, population 1); as designed the bake load is effectively 27 new. Place/time are clean and the crossing base and Motion character are recorded holes, but body_parts is undeclared and サチ's shoe contradiction is left 未決, so the hand/foot shots and all memory shots stay exposed until those two are closed."
+}

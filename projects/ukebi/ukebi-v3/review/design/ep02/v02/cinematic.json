@@ -1,0 +1,53 @@
+{
+  "seat": "cinematic",
+  "criteria": {
+    "C1": 72,
+    "C2": 82,
+    "C3": 70,
+    "C4": 66,
+    "C5": 72,
+    "C6": 68
+  },
+  "primary_score": 72,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "episodes/ep02.md:75 (s04b)",
+      "what": "The only shot whose image reads as a label — 火の内側は暗い — with the change carried by a sound (the name サチ).",
+      "why": "An 8s key_image of \"dark fire interior\" under-specifies what is in frame; the prose (draft_02_送る.md:15,17) already names the concrete interior (歩き続けた足・乾いた喉・届かなかった場所).",
+      "fix": "Pull that concrete interior into s04b's 前→後 or key_image spec so the frame is not just darkness + a name."
+    },
+    {
+      "where": "episodes/ep02.md:59-60,76 (s05a); 台帳/舞台装置/魂火.md",
+      "what": "Guest fire is 土の色 and the law is 光は魂火ひとつ, yet s05a has it 水たまりに映る (a reflection implies illumination).",
+      "why": "The light grammar is specific but the guest fire's light-casting nature is left ambiguous — does it light its surroundings or only itself?",
+      "fix": "Declare one line: the guest fire is self-luminous but does not light the scene; the puddle reflection is its own contained glow."
+    },
+    {
+      "where": "episodes/ep02.md:43,60",
+      "what": "s01/s02 are ほぼ全暗 while 魂火.md fixes the soul-fire as always on his palm, shrinking each episode; s03 shoots his back dark.",
+      "why": "If the palm-fire is on screen the crossing cannot be near-dark; if it is off-frame the darkness holds, but this is never said.",
+      "fix": "Add one line that in 起/承 the soul-fire is present but off-frame / back-to-camera, so both the darkness and \"s12 以降に残る\" hold."
+    },
+    {
+      "where": "episodes/ep02.md:156-157",
+      "what": "作品定数 says the camera ほぼ動かない, but 20 of 34 shots carry a camera move (送り/寄り/引き).",
+      "why": "The v02 fix declares 送り = dolly and 寄り・引き・送りを許す, yet a 59% camera-move ratio contradicts the ほぼ qualifier.",
+      "fix": "Drop ほぼ動かない and keep カメラは低く、動きは寄り・引き・送りに限る, or reduce dolly shots so ほぼ is true."
+    },
+    {
+      "where": "episodes/ep02.md:160 vs 112",
+      "what": "運動 says s06/s07/s16 are one compound change, 分割しない理由をここに書く, but 切る規則 splits S06 into s06a/b/c.",
+      "why": "The sentence claims non-splitting for a shot that was in fact split.",
+      "fix": "Reword to separate s07/s16 (kept whole, reason given) from s06 (split into its three changes)."
+    },
+    {
+      "where": "episodes/ep02.md:142",
+      "what": "踏切.base is 画像なし・意図だけ, so the crossing's rich form in 台帳/踏切.md must be re-derived by each of 34 new key_images.",
+      "why": "The form is specific on paper but has no frozen frame, so continuity can drift across the episode.",
+      "fix": "After the first 2-3 key_images are adopted, freeze one crossing frame as the location reference (the PLAN's ポストパイロット asset) and attach it to the remaining shots."
+    }
+  ],
+  "note": "The v02 cut is a film: 34 single-change shots over 420s with the block shape (起90/承150/転120/結60) and the 2:00 memory preserved exactly, and every shot carries a decided motion plus a specific diegetic sound. The two-fire color split (earth guest fire vs blue-white soul-fire) and the silence at the climactic touch are real cinematic decisions. What remains is production-level, not structural: the crossing has no frozen reference frame, s04b's image is thin, and the guest fire's light-casting nature is one sentence short of coherent."
+}

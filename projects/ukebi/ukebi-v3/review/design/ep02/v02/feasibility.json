@@ -1,0 +1,41 @@
+{
+  "seat": "feasibility",
+  "criteria": {
+    "C1": 60,
+    "C2": 62,
+    "C3": 48,
+    "C4": 65,
+    "C5": 60,
+    "C6": 62
+  },
+  "primary_score": 60,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "episodes/ep02.md「人数」body_parts hand list (line 55)",
+      "what": "s08c and s09b are palm shots but are missing from the {hand:1} declaration.",
+      "why": "Their 前→後 is 「火は掌の上 → 火が掌に圧される」(s08c) and 「火は掌の上 → 火が細く伸びる」(s09b) — the palm is the frame. A hand-only shot without body_parts reproduces the measured third-hand / wrong-hand failure that L52 reads.",
+      "fix": "Add s08c and s09b to the {hand:1} list (and check m02/m05b for close-up frames)."
+    },
+    {
+      "where": "episodes/ep02.md「原作の食い違い」#1 /「参照画像」#1",
+      "what": "Sachi's shoes are overridden by the key_image prompt while the 草履形 character sheet stays attached as サチ.identity.",
+      "why": "ledger SKILL step 8 records the measurement that a reference sheet declares its own wardrobe and the clothing in the reference image wins over the text — so the prompt override will likely lose to the sheet. The v02 fix as stated contradicts the measured rule.",
+      "fix": "Re-bake the サチ sheet with cloth shoes (the design already lists it as 焼き直し候補) instead of overriding via text; keep the override only as a stopgap with the author's ruling."
+    },
+    {
+      "where": "episodes/ep02.md「原作の食い違い」#2 /「参照画像」壺 row",
+      "what": "壺 appearance is only 窄口・無地・空, negative only `no water`, with no reference image.",
+      "why": "Three shots (m01/m02/m05b) pin this prop text-only, and the appearance drops material, color, one-hand scale, and the source's own 紐 (wrist cord, 試作 M01「紐が手首に食い込む」). For a prop that carries the memory's central gesture, 窄口・無地・空 is under-specified for visual continuity across generations.",
+      "fix": "Add material/color/one-hand scale and the cord to 壺.appearance, or burn a prop sheet like 台帳/秤/判."
+    },
+    {
+      "where": "PLAN.md 0-j / ep02「key_image の枚数」",
+      "what": "34 all-new key_images, 0 reuse, with 踏切.base intent-only (no image).",
+      "why": "No shot exceeds 30s (max m03=26s), so the WAN load is feasible — but every crossing-bearing key_image must re-establish gravel/earth, two rails, black-white barrier bands, and no-lamp/sign/signal from text alone, with no base plate to pin, across 34 independent bakes.",
+      "fix": "Acceptable as declared; consider baking a corrected crossing plate as the first asset so the remaining key_images can pin against it and cut the text-only geography risk."
+    }
+  ],
+  "note": "The design is works-level: reference keys are all real or declared-missing, place/time are single and memory is correctly not a location, and the 34-bake WAN load is feasible with no shot over 30s. The Motion character remainder and the expected per-stage checker red are understood and sequenced, not papered over. Two real gaps survive v02: the s08c/s09b palm shots missing from body_parts, and the Sachi shoe override that contradicts the measured 'reference wardrobe wins over text' rule. The 壺 is functional (empty/no-water is the point) but under-specified for a three-shot prop with no image."
+}
