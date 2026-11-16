@@ -1,0 +1,16 @@
+{
+  "seat": "feasibility",
+  "criteria": {"C1": 84, "C2": 80, "C3": 50, "C4": 86, "C5": 60, "C6": 84},
+  "primary_score": 74,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {"where": "ep10 s17・s19–s23", "what": "二人写しで片方の部位だけを宣言。", "why": "L52。", "fix": "両方の部位か、枠外へ。"},
+    {"where": "ep10 s13b", "what": "手2に指1。", "why": "肯定の句が食い違う。", "fix": "hand 2 だけに。"},
+    {"where": "ep10 画像仕様", "what": "DIRECTION は one-lamp-cel の Environment variables に無い。", "why": "L22 が36枚で鳴る。", "fix": "LIGHT に畳むか著者が足す。"},
+    {"where": "ep10 画像仕様", "what": "REF_FORMAT/REF_STYLE の名乗り行が無い。", "why": "L22。", "fix": "各仕様に足す。"},
+    {"where": "ep10 火 s29", "what": "位置3と5→なしが食い違う。", "why": "番号。", "fix": "5→なしへ。"},
+    {"where": "ep10 火 3–5", "what": "英語句が fire.md に無い。", "why": "3枚が焼けない。", "fix": "著者が足すか、閉じる。"}
+  ],
+  "note": "31枚・36本・600秒・36/36/0・ep03 の28/27 は合う。下げるのは二人写しの部位、画像仕様の欄と名乗り、火の句。"
+}
