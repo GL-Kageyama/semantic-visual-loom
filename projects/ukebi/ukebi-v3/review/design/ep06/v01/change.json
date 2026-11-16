@@ -1,0 +1,53 @@
+{
+  "seat": "change",
+  "criteria": {
+    "C1": 75,
+    "C2": 68,
+    "C3": 35,
+    "C4": 28,
+    "C5": 68,
+    "C6": 72
+  },
+  "primary_score": 40,
+  "must_below_31": ["C4"],
+  "critical": false,
+  "findings": [
+    {
+      "where": "ep06.md:68 (s10)・:79 (s20)",
+      "what": "Identical before/after, negation-only: 「針は真上 → 針は真上のまま」. The 切る規則 says 「光かカメラで保持する」 but does not choose one carrier.",
+      "why": "before and after are the same state; L1 fires when unit.before == unit.after.",
+      "fix": "Choose ONE carrier (fire-flicker on the brass, or a slow camera push/pull) and write it into before/after."
+    },
+    {
+      "where": "ep06.md:65 (s07) vs :89 (切る規則)",
+      "what": "The stated unit 「沈むはずの重さが載る → 皿は動かない」 is not implemented; the table writes 「皿は水平 → 皿は動かず」 — the loaded weight is never in the before.",
+      "why": "The contrast is absent; the row reads negation-only.",
+      "fix": "Put the loaded weight in the before (「花の重さが皿に載る → 皿は動かない」) or carry it with a chosen light/camera event."
+    },
+    {
+      "where": "ep06.md:74 (s16)",
+      "what": "The change is internal (「初めて自分の重さを知る」).",
+      "why": "知る is not visible on screen.",
+      "fix": "Reframe as the visible carrier (the pulse under the finger, the shoulder lowering)."
+    },
+    {
+      "where": "ep06.md 人数表 vs 仮ショット割り",
+      "what": "The summary says s05a〜s22 = 2, but the column has s10=0, s20=0, s08/s09/s11/s16/s19a/s19b=1. s10=0 is wrong (花 is on the pan s06–s13); s20=0 is wrong (both present).",
+      "why": "Two tables are two sources of truth.",
+      "fix": "Set s10 to 1 or 2 and s20 to 2, and rewrite the summary to the real ranges."
+    },
+    {
+      "where": "ep06.md s05a key_image=新規 vs 参照/枚数",
+      "what": "The shot table lists s05a as 新規, but the 参照 and 枚数 tables reuse 場面 ep06 for s05a.",
+      "why": "Two classifications for one shot.",
+      "fix": "Mark s05a 新規 and move the reuse to s07 (花 on the pan), recompute 1 reuse / 24 new."
+    },
+    {
+      "where": "ep06.md:71 (s13)",
+      "what": "s13 holds descend + ring + no-mark in one shot.",
+      "why": "Descend and the ring are one gesture; the no-mark is a negation/state.",
+      "fix": "State that descend causes the ring and the no-mark is the simultaneous point, or split."
+    }
+  ],
+  "note": "22 rows cut to 25 shots correctly: S05→3, S19→2, durations 420s. s04-as-sound, s12/s17-as-voice, s05c の「赤くならない」are handled. The gap is the stillness rows: s10/s20 have before==after, s07's unit is not implemented, and no single carrier is chosen — C4 28 caps the seat at 40."
+}

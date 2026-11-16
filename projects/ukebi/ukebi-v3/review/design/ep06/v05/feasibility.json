@@ -1,0 +1,17 @@
+{
+  "seat": "feasibility",
+  "criteria": {"C1": 79, "C2": 66, "C3": 63, "C4": 87, "C5": 83, "C6": 72},
+  "primary_score": 75,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {"where": "PLAN 0-h", "what": "orientation を landscape と書くが、既存作は Landscape。L26 は大小を区別する。", "why": "全25本で L26 が鳴る。", "fix": "Landscape に。"},
+    {"where": "ep06 s18", "what": "「二人の上体が枠にある（体ごと）」と body_parts 空が矛盾し、指も枠にある。", "why": "L52 が部位を読めない。", "fix": "部位を宣言するか全身の画に。"},
+    {"where": "ep06 s09", "what": "{head:1,torso:1,shoulder:2} だが、理由も画も頭を入れていない。", "why": "枠に無い頭の句を頼む。", "fix": "頭を枠に入れると書くか head を落とす。"},
+    {"where": "ep06 s15/s16", "what": "彼の手首を数えない。wrist は語彙に無く、arm はある。", "why": "手首・前腕が増えても緑になる。", "fix": "arm:1 で宣言するか wrist を語彙へ。"},
+    {"where": "ep06 s09 条件", "what": "「胸が止まるは条件へ」と注記するが条件欄に無い。", "why": "差か条件か決まらない。", "fix": "条件へ足す。"},
+    {"where": "ep06 #4", "what": "魂火.md:26 は空行。", "why": "座標が割れる。", "fix": ":27 へ。"},
+    {"where": "ep06 参照表", "what": "魂火は唯一の光源なのに appearance の行が無い。", "why": "火の見た目の置き場が無い。", "fix": "画像なし・block 逐語の行を足す。"}
+  ],
+  "note": "人数25行は埋まり、算術は通り、25/25 と ep03 の 28/27 も合う。L20 の書き方もカードと一致。残るは orientation の綴り、s18/s09 の部位、手首、魂火の行。"
+}

@@ -1,0 +1,15 @@
+{
+  "seat": "feasibility",
+  "criteria": {"C1": 82, "C2": 62, "C3": 60, "C4": 88, "C5": 82, "C6": 64},
+  "primary_score": 73,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {"where": "ep06 s09/s15/s18", "what": "s09 は肩が下りるのに shoulder が無い。s15 は指の腹なのに finger が無い。s18 は二人の寄りだが部位が無い。", "why": "L52 は宣言された部位しか読まない。", "fix": "s09 に肩2、s15 に指1、s18 は体が枠にある構図か部位を宣言。"},
+    {"where": "ep06 L20 の保留", "what": "「Style Motion をカードの現在値で埋める」と書くが、カードに見出しが無く値が無い。", "why": "L20 は枠の源が空だから鳴る。", "fix": "枠は在るが空と書く。運動は作品定数と Motion Prompt が運ぶ。"},
+    {"where": "PLAN §3 bible.constants", "what": "映像の四定数（aspect/resolution/frame rate/orientation）が無い。", "why": "経路の要件が設計に無い。", "fix": "bible.constants.video に四つ。"},
+    {"where": "ep03 M01 の切る理由", "what": "30 秒の上限を理由にするが、カードは尺可変。", "why": "古い上限。", "fix": "二つの変化を理由に書き直す。"},
+    {"where": "PLAN 0-j", "what": "立ち絵を identity へ自動で割り当てるが、第6話は火の大きさを理由に外す。", "why": "PLAN だけ読む実行者が立ち絵を付ける。", "fix": "話ごとの候補とし、第6話の例外を 0-j に書く。"}
+  ],
+  "note": "identity の鍵は実在し、人数の列は一致し、枚数は 25/25/0。下げるのは部位の抜け（s09/s15/s18）、カードに無い値を埋めるとする L20 の書き方、映像の四定数の不在。"
+}

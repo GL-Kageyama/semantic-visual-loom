@@ -1,0 +1,47 @@
+{
+  "seat": "feasibility",
+  "criteria": {
+    "C1": 65,
+    "C2": 60,
+    "C3": 40,
+    "C4": 68,
+    "C5": 52,
+    "C6": 45
+  },
+  "primary_score": 55,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "ep06.md 人数表 vs 仮ショット割り",
+      "what": "The summary table declares 's05a〜s22 = population 2', but the shot column assigns 1 to s08, s09, s11, s16, s19a, s19b and 0 to s10, s20. Eight shots contradict the summary.",
+      "why": "Two tables in one document are two sources of truth; the records will disagree.",
+      "fix": "Rewrite the summary to the real ranges (s05a–s07, s12–s15, s17–s18, s21–s22 = 2; s08/09/11/16/19a/b = 1; s10/20 = 0), or drop it and point at the column."
+    },
+    {
+      "where": "ep06.md s03/s04/s08 (耳の寄り), s15 (指の腹/手首)",
+      "what": "Close-ups holding only part of a body declare no body_parts, and 'ear' is not in specmap.BODY_PARTS.",
+      "why": "A partial body must declare body_parts (L52); the ear shots have no registered part word.",
+      "fix": "Declare {head}/{face} for the ear shots, {hand}/{finger} for s15, and record the missing 'ear' token as a hole."
+    },
+    {
+      "where": "ep06.md key_image (114)・未決#2 vs scene ep06 prompt",
+      "what": "The ep06 board is assigned to s05a (花 coming), but the board depicts 花 already standing on the near pan being weighed — that is s06/s07.",
+      "why": "The reuse does not support the shot it is pinned to; 未決#2 flags it as 'look before baking', but the mismatch is content-level (one beat later).",
+      "fix": "Retarget the reuse to s06 or s07 and burn a new s05a, or drop the reuse; recompute the count (25 new / 24 attached)."
+    },
+    {
+      "where": "ep06.md 参照 秤.appearance",
+      "what": "The scale is referenced by prop sheet #13 (cel-shade), while all 25 key_images are one-lamp-cel; the scale is on-screen in ~12 shots and must be re-rendered from a cel-shade sheet.",
+      "why": "This is the consistency risk inside the 24-new load; no one-lamp-cel appearance asset.",
+      "fix": "Paste a one-lamp-cel appearance line for the scale into each scale shot's prompt, and check the plate before batch-burning."
+    },
+    {
+      "where": "ep06.md 運動・未決#3",
+      "what": "one-lamp-cel has no Motion character; L20 fires on all 25 shots.",
+      "why": "A declared residual, understood and sequenced.",
+      "fix": "Get the author's ruling before staging, or record L20 per shot."
+    }
+  ],
+  "note": "ep06 is a clean no-memory episode with a single place/time and a fixed 25-shot cut; 24 new key_images is feasible. The blocking defects are internal consistency: the population summary contradicts the shot column, body_parts are undecided for the close-ups (and 'ear' is not in the vocabulary), and the s05a reuse is a one-beat content mismatch."
+}
