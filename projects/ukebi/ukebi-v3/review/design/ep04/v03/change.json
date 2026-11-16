@@ -1,0 +1,35 @@
+{
+  "seat": "change",
+  "criteria": {
+    "C1": 70,
+    "C2": 45,
+    "C3": 48,
+    "C4": 68,
+    "C5": 45,
+    "C6": 68
+  },
+  "primary_score": 57,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "episodes/ep04.md:84 (s11 row)",
+      "what": "s11 is an uncut multi-change row: before '彼女の手は膝の上に無い' → after '手が膝に置かれ、魂火が二人のあいだに低く浮いて下から照らす' carries two changes (hand placed on knee + soul-fire floats/lights) with no cut point, and s11 is absent from 切る規則.",
+      "why": "The source S11 reads '彼女の手は膝の上。火が下から照らす' and the draft already places the hand on the knee at S10, so '手は膝の上に無い' is a fabricated negation-only before that contradicts the source; the 'floating' half also contradicts the 火 section (line 54 '浮かせない').",
+      "fix": "Drop the hand change; make s11's single change the fire lighting from below, and reconcile '浮く' with the fire rule."
+    },
+    {
+      "where": "episodes/ep04.md:54 vs :84 and :105",
+      "what": "The soul-fire's ep4 behavior is fixed twice in opposite ways: line 54 '魂火は送り火の掌…浮かせない' vs line 84 '魂火が二人のあいだに低く浮いて' and line 105 '魂火は s10b 以降、二人のあいだに浮く'.",
+      "why": "s10b's key says '掌の魂火' (palm), matching line 54, so the floating from s11 onward is an unexplained transition that will produce inconsistent generations for a fixed prop across s10b–s18.",
+      "fix": "Pick one and edit the other: keep the fire on the palm or permit a low offering between the two. One-line reconciliation."
+    },
+    {
+      "where": "episodes/ep04.md:72 (s03 row)",
+      "what": "The after text '内側に、抱かれた形の片腕と、名の前の息が開く' attaches 開く to 片腕 and 息, while the cut rule correctly names the change as '火の内側が開き、子の形が現れる'.",
+      "why": "The single change is named in the cut rule, but the row's grammar still reads as two subjects opening and '息が開く' is not a visible difference.",
+      "fix": "Rewrite the after to '内側が開き、抱かれた形の片腕と名の前の息が現れる' so the verb lands on the interior."
+    }
+  ],
+  "note": "Five of the six v03 fixes landed (s03's change named, s16's pull, s07 positive, s04's parenthetical gone, s10b new key); 22 shots sum to 420s. One uncut multi-change row remains, s11, whose hand change is fabricated and whose floating contradicts the fire rule; the same floating/palm contradiction recurs at line 105."
+}

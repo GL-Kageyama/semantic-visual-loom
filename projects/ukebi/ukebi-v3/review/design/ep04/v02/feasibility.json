@@ -1,0 +1,35 @@
+{
+  "seat": "feasibility",
+  "criteria": {
+    "C1": 55,
+    "C2": 62,
+    "C3": 56,
+    "C4": 63,
+    "C5": 58,
+    "C6": 58
+  },
+  "primary_score": 59,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "ep04.md s10b / 場面ep04",
+      "what": "板は輪ひとつ、s10b は印3",
+      "why": "key_image が状態と食い違う",
+      "fix": "新規 key にするか、板を staging と宣言"
+    },
+    {
+      "where": "ep04.md s02",
+      "what": "足元の画に body_parts が無い",
+      "why": "L52 の third-foot",
+      "fix": "{foot:2} を宣言"
+    },
+    {
+      "where": "ep04.md 参照（胎内）",
+      "what": "胎内の参照なし宣言が無い",
+      "why": "記憶の板は線路",
+      "fix": "参照なし・音と光から新規と宣言"
+    }
+  ],
+  "note": "22添付（21新規＋1再利用）は実行可能。板の輪数と s02 の足、胎内の参照が残る。"
+}

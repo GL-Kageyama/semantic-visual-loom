@@ -1,0 +1,41 @@
+{
+  "seat": "feasibility",
+  "criteria": {
+    "C1": 73,
+    "C2": 68,
+    "C3": 72,
+    "C4": 76,
+    "C5": 66,
+    "C6": 61
+  },
+  "primary_score": 69,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "ep04.md 食い違い#6 / 未決#2",
+      "what": "腰掛け is specified only as 低い (low); 素材・色・低さ remain 未決, yet the seat is in frame in s09, s10a, s10b, s16, s17 — roughly 6 of the 22 key_images.",
+      "why": "The one existing episode anchor (scene-board ep04) is discarded, so an undecided seat cannot be pinned consistently across those six images; each generation would invent its own stool.",
+      "fix": "Resolve the one-line 台帳 addition for 腰掛け (material/color/height) before generating s09 onward, or accept and record per-shot drift."
+    },
+    {
+      "where": "ep04.md key_image 枚数 / 参照画像",
+      "what": "22 new / 0 reuse removes the episode's only pre-existing visual consistency anchor (scene-board ep04 rejected: 浮く火 and 輪ひとつ vs s10b 掌の火 and 印3).",
+      "why": "Consistency now rests entirely on character identity references + the verbatim crossing geography + the verbatim fire block. One paraphrase in any of the 22 breaks the identity lock.",
+      "fix": "Feasible but discipline-heavy: the geography and fire text must be pasted verbatim into all 22 prompts (no paraphrase), matching PLAN §0-j's corrected crossing (gravel/earth, white-black bands, no lamp)."
+    },
+    {
+      "where": "ep04.md 未決#1",
+      "what": "s03 {arm:1} fallback only covers 片腕→両腕 ({arm:2}); it does not cover the generator rendering the child's full body (not just an arm) inside the fire.",
+      "why": "population 1 would stay correct (one body), but {arm:1} would then under-declare the visible parts; PLAN §0-i's '体を出したら population を2へ' addresses a second body, not the child's own full body.",
+      "fix": "Extend the fallback: if a full child form appears, declare body_parts to match (or re-split s03), and record the change."
+    },
+    {
+      "where": "ep04.md 未決#3 / PLAN.md §0-g, §0-l-1",
+      "what": "one-lamp-cel has no Motion character, so L20 ('Style Motion present but empty') stays unresolved and applies to all 22 shots.",
+      "why": "The work keeps motion as a bible constant, but the §18 Style Motion slot remains empty until the author decides (add to the distill card vs record the hole).",
+      "fix": "Settle or formally record this before ② breakdown, so L20 is a declared retention rather than an unplanned red."
+    }
+  ],
+  "note": "All v03 fixes check out: 22 attachments / 0 reuse / 22 new (every row 新規), s10b is a new key because the ep04 board's 浮く火＋輪ひとつ contradict the design's 掌の火＋印3, the 胎内 memory is declared 参照なし, s02 {foot:2} and s03 {arm:1} are valid BODY_PARTS with correct arithmetic, the seat is 'low' only, and the crossing geography is declared verbatim. The 22-new load is feasible. Two items should close before generation: the seat's material/color and the one-lamp-cel Motion character."
+}

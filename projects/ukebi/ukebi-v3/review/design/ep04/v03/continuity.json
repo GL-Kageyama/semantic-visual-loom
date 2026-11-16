@@ -1,0 +1,47 @@
+{
+  "seat": "continuity",
+  "criteria": {
+    "C1": 45,
+    "C2": 65,
+    "C3": 65,
+    "C4": 45,
+    "C5": 65,
+    "C6": 62
+  },
+  "primary_score": 58,
+  "must_below_31": [],
+  "critical": true,
+  "findings": [
+    {
+      "where": "episodes/ep04.md:54 vs :84/:105 (source: 台帳/舞台装置/魂火.md:15)",
+      "what": "魂火 position self-contradiction, unrecorded. The fire section (line 54) was v03-fixed to 「第4話では魂火は送り火の掌…浮かせない（浮遊は第9話以降の例外）」, but s11 (line 84) still says 「魂火が二人のあいだに低く浮いて下から照らす」 and 切る規則 s16 (line 105) still says 「魂火は s10b 以降、二人のあいだに浮く」.",
+      "why": "This is exactly the ep9+ floating exception (魂火.md:15). The v03 fix reached the fire section but not the shot table, so ep04 now contradicts both its own fixed rule and the source, and the 食い違い table does not record it.",
+      "fix": "Rewrite s11 and the s16 note to the palm wording (掌から低く差し出す), matching line 54, or record it as a two-coordinate contradiction if floating is intended."
+    },
+    {
+      "where": "episodes/ep04.md 人数 s03 vs 原作の食い違い #1, source PLAN.md §0-i",
+      "what": "s03 counts the child's arm as population 1 {arm:1} inside the PRESENT fire (送り火 out of frame), but PLAN §0-i states guests are fire at the crossing and 「体を持つのは記憶の中だけ」.",
+      "why": "Item #1 records only 「踏切では火。塊は火の内側の像」 and does not cite PLAN §0-i as the conflicting coordinate, so a body appearing in the present is under-declared.",
+      "fix": "Cite PLAN §0-i and state why the fetus's 塊-in-fire is an exception, or relocate the arm image into the memory."
+    },
+    {
+      "where": "台帳/人物/名なしの子.md:19 vs episodes/ep04.md s08",
+      "what": "名なしの子.md says 「子は喉の手前で止まる」 while ep04 s08 says 「喉の奥で火が脈打つ」 and s06b says 「火が喉へ入る」.",
+      "why": "Wording tension about where the child's fire halts — near side vs deep — not in the 食い違い table.",
+      "fix": "Reconcile 手前 vs 奥 (e.g., 喉の奥 = the throat, not the stomach; 手前 = not swallowed down), and record the reading."
+    },
+    {
+      "where": "台帳/README.md:11",
+      "what": "花 still listed 「1,4,5,6,8,9,10」 (includes ep1), while PLAN 0-l-9, ep01 #1, and ep04 #3 decide ep1 absent and say to fix the 「1」.",
+      "why": "The decided source edit is not yet applied, leaving the presence ledger inconsistent with the design.",
+      "fix": "Apply the README edit (remove 「1」)."
+    },
+    {
+      "where": "PLAN.md §0-l",
+      "what": "Numbering bug: the 「決めた」 list ends at 9 and 「決めなかった」 restarts at 9, giving two items numbered 9.",
+      "why": "Cosmetic but makes the decided/undecided boundary easy to miscount.",
+      "fix": "Renumber 決めなかった as 10-16."
+    }
+  ],
+  "note": "Five of the six v03 fixes landed. The core fix — 魂火 in palm, not floating — is only half-applied: the fire section was rewritten but s11 and the s16 note still say the 魂火 floats between the two, which is the ep9+ exception. That contradiction is unrecorded and would put a floating 魂火 on screen in ep4."
+}
