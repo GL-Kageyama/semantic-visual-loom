@@ -166,6 +166,7 @@ design の「bloom も lens flare も無し」と正面から衝突する。
 
 ⚠️ **`SVL_STYLES_DIR` を distill の `references/styles/` へ張る。**
 張らなければ `one-lamp-cel` は読めず、`L20` は「確かめられない」と註で言う。
+⚠️ **`SVL_FORMATS_DIR` を sVL 自身の `references/formats/` へ張る。** 映像・画像の形式カード（`video-spec` ほか）は sVL の側にあり、distill の隣には無い。**張らなければ `L22`／`L32` は「カードが無い」で鳴る**——`L32` は 4-b の②出口と手順7の保留一覧にも入れる。
 
 ### 0-h 経路＝**WAN 3.0。1ショット1枚の `key_image` を持つ**
 
@@ -375,6 +376,7 @@ S＝器官／現在のショット、M＝記憶。**両方ショットである�
    - `bible.world.rules`: 7律（送ることは受け取られることに先立たれる／文字は保たない／名は声にしかない／
      記憶は火の中／光は魂火ひとつ／死んだ者は一つの語で呼ばれる／送る者は決して受け取られない）
    - `bible.constants`: 八器官・火の段（話ごとの表）・印（話ごとの表）・カメラは踏切を出ない・文字なし
+     ⚠️ **1定数＝1文字列。** `bible.schema.json` の `constants` は `video` 以外を文字列に限る——**話ごとの表はブロックスカラーで一つの文字列に収める**（YAML の mapping/sequence にすると S1 が鳴り、S0 が別の違反に化ける）。
    - `bible.constants.video`: **映像の四定数**——`aspect: 16:9` / `resolution: 1920x1080` /
      `frame_rate: 24fps` / `orientation: Landscape`（`specmap.VIDEO_CONSTANTS`・L26。**L26 は大小を区別する**——既存作の綴りに合わせる）
    - `bible.negative_base`: design の禁止を**英語で**。文字・群衆・雨・太陽月星・bloom/flare・
