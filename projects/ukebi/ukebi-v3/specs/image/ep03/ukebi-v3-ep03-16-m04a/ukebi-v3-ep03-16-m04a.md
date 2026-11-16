@@ -28,7 +28,7 @@
 | `フミ.negatives` | — | Negative の一覧（画像ではない） |
 | `記憶.appearance` | `~/AI創作工房/distill-essence-engine/examples/works/novels/ukebi-anime/ukebi-anime-prop-sheet-記憶/霧深き線路に灯る記憶の灯火.png` | 物の設定画（机・窓・頁）。Desktop には無い——distill の採用済み |
 
-⚠️ **パスはこの端末の外にある。** clone しただけでは読めない。
+⚠️ **デスクトップの畫像はこの端末の外にある**——clone しただけでは讀めない。`reference/` の畫像は clone で讀める。
 ⚠️ **手だけのショットでも設定画を添える。** 添付はテキストに勝つので、`Negative` の「no face」「no second hand」を効かせる。
 
 ## 生成物の置き場

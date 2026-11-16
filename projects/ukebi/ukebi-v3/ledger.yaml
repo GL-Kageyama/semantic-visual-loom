@@ -29,8 +29,8 @@ characters:
       - "no readable text"
   サチ:
     identity: >-
-      ukebi-anime-character-sheet-サチ（設定画 版2）。痩せた女。布の履き物
-      ——設定画は草履形。再焼きまで、プロンプトで布と指定する。窄口の壺を片手に。
+      reference/サチ設定画/フードを纏う謎めいた女性の設定画.png（設定画。
+      痩せた女、布の履物、眉は水平）。窄口の壺を片手に。
     states: {}
     negatives:
       - "no readable text"
@@ -65,7 +65,9 @@ characters:
     negatives:
       - "no readable text"
   ナギ:
-    identity: ukebi-anime-character-sheet-ナギ（設定画）
+    identity: >-
+      reference/ナギ設定画/1面.png（4面の設定画から正面を切り抜いた。
+      出所と範圍は reference/ナギ設定画/1面.md）
     states:
       火:
         note: >-

@@ -29,7 +29,7 @@
 | `客の火.appearance` | — | 画像なし——第1話の客の火。block（青白い芯・温かい中間・暗い底） |
 | `魂火.appearance` | — | 画像なし——`_shared/fire.md` の block（掌・握り拳） |
 
-⚠️ **パスはこの端末の外にある。** clone しただけでは読めない。
+⚠️ **デスクトップの畫像はこの端末の外にある**——clone しただけでは讀めない。`reference/` の畫像は clone で讀める。
 ⚠️ **`魂火.appearance` と `客の火.appearance` は画像を持たない**（block）。**画像が無いことを、欄を消して隠さない。**
 ⚠️ **手だけのショットでも設定画を添える。** 添付はテキストに勝つので、`Negative` の「no face」「no second hand」を効かせる。
 

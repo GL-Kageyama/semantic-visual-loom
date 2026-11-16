@@ -29,7 +29,7 @@
 | `記憶.appearance` | `~/AI創作工房/distill-essence-engine/examples/works/novels/ukebi-anime/ukebi-anime-prop-sheet-記憶/霧深き線路に灯る記憶の灯火.png` | 物の設定画（机・窓・頁）。Desktop には無い——distill の採用済み |
 | `踏切.base` | — | 画像なし——記憶の縁。板は添えない（窓・別室を呼ぶ） |
 
-⚠️ **パスはこの端末の外にある。** clone しただけでは読めない。
+⚠️ **デスクトップの畫像はこの端末の外にある**——clone しただけでは讀めない。`reference/` の畫像は clone で讀める。
 ⚠️ **`踏切.base` は画像を持たない。** 踏切の板は台帳と三箇所食い違うので使わない（舗装・腕木・灯）。
 
 ## 生成物の置き場

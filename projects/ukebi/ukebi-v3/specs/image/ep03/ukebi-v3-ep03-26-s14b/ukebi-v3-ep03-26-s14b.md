@@ -30,7 +30,7 @@
 | `台帳.appearance` | `~/Desktop/受け火映像アセット/台帳.png` | 物の設定画（閉じた台帳・頁・焦げ跡） |
 | `魂火.appearance` | — | 画像なし——`_shared/fire.md` の block（掌・梅の大きさ・青白い芯） |
 
-⚠️ **パスはこの端末の外にある。** clone しただけでは読めない。
+⚠️ **デスクトップの畫像はこの端末の外にある**——clone しただけでは讀めない。`reference/` の畫像は clone で讀める。
 ⚠️ **`魂火.appearance` は画像を持たない**（`_shared/fire.md` の block）。**踏切の板は補正版を添える**（`reference/踏切/青い鬼火の無人踏切.png`）。**画像が無いことを、欄を消して隠さない。**
 ⚠️ **手だけのショットでも設定画を添える。** 添付はテキストに勝つので、`Negative` の「no face」「no second hand」を効かせる。
 

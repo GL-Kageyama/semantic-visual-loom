@@ -47,8 +47,15 @@ bible:
     根本律: "Being sent precedes being received. The one who sends is never received."
     器官: "八器官を一話ずつ——手・指・喉・腕・耳・目・声・背。第1話は序、第10話は終章。"
     火の段: >-
-      魂火は話ごとに小さい。第3話は梅（a plum）、第5話は胡桃から縮み、
-      第6話は小豆。第7・8話の板は胡桃なので、そのまま key_image に使わない。
+      魂火は話ごとに小さい。第1話は握り拳、第2話は梅（作中では枠外）、第3・4話は梅、
+      第5話は胡桃、第6話は小豆、第7話は米粒、第8話は芥子粒、第9・10話は炭。
+      第10話で消える。第7・8話の板は胡桃なので、そのまま key_image に使わない。
+      第2・4・7・8話の段は作業で決めたもので、著者の裁定ではない（reference/火.md）。
+    火の位置: >-
+      掌（in his palm）／二人のあいだに浮く（floating low between them）／
+      一人で浮く（floating low above the rails, held by no one）／枠外（off-frame, only its light）／
+      指先（at his fingertips）／輪郭（tracing the outline）。第5・9話は浮く。第10話 s28 は輪郭。
+      ゲストの火は場を照らさない。二つの火は混ざらない。
     印: "第3話の印は2（ペン先・一点）。印は数え、描写しない。"
     光: "光は魂火ひとつ。ゲストの火は内側だけを照らし、場を照らさない。"
     文字: "どの面にも読める文字を置かない。字幕も出さない。名は声にしかない。"
