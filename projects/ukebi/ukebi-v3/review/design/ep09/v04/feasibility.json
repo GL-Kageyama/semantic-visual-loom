@@ -1,0 +1,16 @@
+{
+  "seat": "feasibility",
+  "criteria": {"C1": 66, "C2": 64, "C3": 62, "C4": 84, "C5": 63, "C6": 63},
+  "primary_score": 67,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {"where": "ep09 L21", "what": "18座標の保留が PLAN 手順7に無い。", "why": "出口に載らない。", "fix": "PLAN へ、または雨を base から外す。"},
+    {"where": "ep09 s06–s08 の火", "what": "掌・枠外の句と block の範囲。", "why": "枠外の火を貼る。", "fix": "記憶の火を二つに分ける。"},
+    {"where": "ep09 s02", "what": "人数1で掌が枠の縁。", "why": "L52。", "fix": "火を枠外に。"},
+    {"where": "PLAN", "what": "SVL_FORMATS_DIR が無い。", "why": "L22/L32。", "fix": "宣言する。"},
+    {"where": "ep09 参照", "what": "フォルダ名で実ファイルでない。", "why": "C1。", "fix": "実ファイル名を。"},
+    {"where": "ep08 4面", "what": "4面設定画を生成に渡す問題。", "why": "四人になる。", "fix": "1面に切るか実測を根拠に。"}
+  ],
+  "note": "420秒・21本・21/21/0・部位の算術は通る。下げるのは L21 の出口、火の句、s02、環境変数、参照名。"
+}

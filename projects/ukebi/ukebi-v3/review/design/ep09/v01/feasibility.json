@@ -1,0 +1,17 @@
+{
+  "seat": "feasibility",
+  "criteria": {"C1": 58, "C2": 70, "C3": 64, "C4": 80, "C5": 58, "C6": 76},
+  "primary_score": 68,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {"where": "ep09 記憶", "what": "165秒を180秒と書く。", "why": "尺。", "fix": "180（m01–m06b）。"},
+    {"where": "ep09 m01a", "what": "対の m01b が無い。", "why": "本数と枚数。", "fix": "m01 へ。"},
+    {"where": "ep09 s05", "what": "光は枠外、block 群は s02–s05。", "why": "火の門。", "fix": "群から外す。"},
+    {"where": "ep09 記憶の block", "what": "記憶の像に block を貼らない例外が未宣言。", "why": "fire.md は逐語。", "fix": "著者へ、または枠外に。"},
+    {"where": "ep09 参照", "what": "記憶.appearance が無い。", "why": "props。", "fix": "使わないと宣言。"},
+    {"where": "ep09 s10/s12/s13", "what": "部分の枠に部位が無い。", "why": "L52。", "fix": "宣言。"},
+    {"where": "ep09 影", "what": "「2へ」は固定値。m03 は0。", "why": "基数＋1。", "fix": "基数＋1。"}
+  ],
+  "note": "21本420秒・人数・部位・21/21/0・経路・検査は通る。下げるのは記憶の算術、s05、block 例外、記憶.appearance。"
+}

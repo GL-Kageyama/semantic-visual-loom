@@ -1,0 +1,17 @@
+{
+  "seat": "feasibility",
+  "criteria": {"C1": 74, "C2": 64, "C3": 71, "C4": 79, "C5": 67, "C6": 67},
+  "primary_score": 70,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {"where": "ep09 雨 / negative_base", "what": "仕事の Negative に雨。L21 は per-shot の除外を持たない。", "why": "9本が L21 で落ちる。", "fix": "現在の画に no rain を書き、記憶だけ外す。または L21 の保留に。"},
+    {"where": "ep09 m06b", "what": "現在と記憶の二重ラベル。", "why": "尺と光が割れる。", "fix": "現在の拍と決め、M の数え方を記録。"},
+    {"where": "ep09 format", "what": "scene-board を全21本に。無人の本が4つ。", "why": "scene-board は人物を要る。", "fix": "無人の本は art-board。"},
+    {"where": "ep09 記憶の本", "what": "9本が未決の例外に依存。", "why": "焼ける本が決まらない。", "fix": "block を貼る（未決を閉じる）。"},
+    {"where": "ep09 s09/s02", "what": "人数2だが枠に彼の記述が無い。s02 は枠外と書いていない。", "why": "L51。", "fix": "構図を書く。"},
+    {"where": "ep09 s05", "what": "火の群に入れながら光は枠外。", "why": "門の数。", "fix": "群から外す。"},
+    {"where": "PLAN 0-j", "what": "ep09 の板を key_image に数えるが使わない。", "why": "世界の枚数。", "fix": "例外に加える。"}
+  ],
+  "note": "420秒・21本・部位・21/21/0 は通る。下げるのは雨と L21、m06b、format、記憶の本、人数の構図。"
+}

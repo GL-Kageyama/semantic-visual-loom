@@ -384,7 +384,7 @@ S＝器官／現在のショット、M＝記憶。**両方ショットである�
    - `locations`: `踏切` 1つ。`base` は補正済みの板の**意図**（0-j）。`geography` は台帳の形・カメラ・音。
    - `props`: `台帳`・`秤`・`判`・`記憶`・`魂火`・`手紙`。`appearance` と `negative`。
    - `disclosure`: 全話の変化点。話ごとの設計書から集める。全ショットを並べない。
-     **第2話の S16、第3話の S09/S11、第7話の S15a、第8話の S14 は `form_only: true` を付ける**（開示でなく伏線）。
+     **第2話の S16、第3話の S09/S11、第7話の S15a、第8話の S14、第9話の S13 は `form_only: true` を付ける**（開示でなく伏線）。
 3. **パイロット（第3話）の breakdown**——20行を変化で切る（`episodes/ep03.md`）。
    `unit` / `role` / `place` / `time` / `mode` / `motion` / `beats` / `duration` /
    `population` / `body_parts` / `cast` を埋める。
