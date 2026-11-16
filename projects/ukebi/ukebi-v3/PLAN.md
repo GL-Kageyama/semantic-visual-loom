@@ -384,19 +384,21 @@ S＝器官／現在のショット、M＝記憶。**両方ショットである�
    - `locations`: `踏切` 1つ。`base` は補正済みの板の**意図**（0-j）。`geography` は台帳の形・カメラ・音。
    - `props`: `台帳`・`秤`・`判`・`記憶`・`魂火`。`appearance` と `negative`。
    - `disclosure`: 全話の変化点。話ごとの設計書から集める。全ショットを並べない。
-     **第3話の S09/S11 は `form_only: true` を付ける**（開示でなく伏線）。
+     **第3話の S09/S11 と第7話の S15a は `form_only: true` を付ける**（開示でなく伏線）。
 3. **パイロット（第3話）の breakdown**——20行を変化で切る（`episodes/ep03.md`）。
    `unit` / `role` / `place` / `time` / `mode` / `motion` / `beats` / `duration` /
    `population` / `body_parts` / `cast` を埋める。
 4. **§1–20 と §18 の7スロット**——`L16`（motion）・`L17`（slot）・`L21`（BGM/字幕）・
    `L38`（演出要約）・`L6`（attached）・**`L51`／`L52`**（`population` と `body_parts` の英語2文と、
    その Negative 側の写し）の形を**先に**通す。`L20` は 0-g の裁定で決まる。
-5. **画像仕様（`key_image`）**——WAN の経路なので1本ずつ。既存の場面の板は、合う1本にだけ使う。
+5. **画像仕様（`key_image`）**——**画像の経路は `CHATGPT IMAGE 2.5`**（Prompt と Negative を一つの節の2段落として保ち、空行で繋ぐ）。**WAN は動画の経路**——key_image は WAN で焼かない。既存の場面の板は、合う1本にだけ使う。
 6. **`ledger` の導出**——`reference_set` / `forbidden_set` / `attached`。
    **参照画像の実ファイルを指す。** `attached` は宣言であって記録ではない。
 7. **`check.py` がゼロ（または記録した保留）になるまで。** ⚠️ **L20 は除外の席が無い**——
    `one-lamp-cel` に `## Motion character` が無いため、**L20 の1件は残る**。これを**設計の記録で保留**とし、
    「ゼロ」ではなく「**L20 の保留1件**」を終了条件に書く。カードを直すのは著者（distill の持ち物）。
+   ⚠️ **S0（jsonschema が無い）も残る**——`python3 -m pip install --user jsonschema` を先に入れ、
+   自己検査を再走して実測の N/N を書く。入れないなら **S0 を「スキーマ照合なし」の帰結つきで保留**に記録する。
    それから画像→全部見る→動画。
 8. **生成は最後。** 選別は著者。生成物は採用候補であって作品ではない。
 

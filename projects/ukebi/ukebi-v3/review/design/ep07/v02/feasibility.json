@@ -1,0 +1,20 @@
+{
+  "seat": "feasibility",
+  "criteria": {"C1": 55, "C2": 56, "C3": 46, "C4": 59, "C5": 53, "C6": 60},
+  "primary_score": 55,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {"where": "ep07 火の門", "what": "「s01–s18 のうち」で m01a–m03b を落とし、焼ける本を列挙しない。", "why": "記憶の灯り（{PLACE} 未決）が門の外。", "fix": "全26本と書き、今焼ける本を列挙。"},
+    {"where": "ep07 s04", "what": "population 1 だが体が無い。", "why": "生成が体を置く。", "fix": "0。"},
+    {"where": "ep07 s06", "what": "population 1 だが机と床だけ。", "why": "ep03 の同型は 0。", "fix": "0。"},
+    {"where": "ep07 s07/s10/s11", "what": "目の近景に体の部位が無い。", "why": "L52。", "fix": "{eye:2} を。"},
+    {"where": "ep07 参照", "what": "記憶.appearance が無い。", "why": "記憶の形が参照から落ちる。", "fix": "採用済みの記憶の板を。"},
+    {"where": "ep07 灯り", "what": "灯りは PLAN の props に無い。", "why": "持ち主の無い鍵。", "fix": "魂火の記憶内の状態と宣言。"},
+    {"where": "ep07 送り火.identity", "what": "立ち絵を使わないと書いていない。", "why": "握り拳の火。", "fix": "花と同じ注記。"},
+    {"where": "ep07 画像の経路", "what": "「chatgpt-image 系」で版名と段落数が曖昧。", "why": "経路カードと違う。", "fix": "CHATGPT IMAGE 2.5・2段落。"},
+    {"where": "ep07 場所", "what": "記憶の範囲に s06/s07 を入れていない。", "why": "場所が増える。", "fix": "s06・m01a–m03b・s07。"},
+    {"where": "PLAN 終了条件", "what": "S0（jsonschema 無し）を数えていない。", "why": "ゼロに届かない。", "fix": "jsonschema を入れるか第二の保留に。"}
+  ],
+  "note": "26/26/0 と L20 は通る。下げるのは火の門の範囲、s04/s06 の人数、記憶と灯りの参照鍵、S0。"
+}

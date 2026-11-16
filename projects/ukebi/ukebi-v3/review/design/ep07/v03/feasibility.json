@@ -1,0 +1,16 @@
+{
+  "seat": "feasibility",
+  "criteria": {"C1": 60, "C2": 62, "C3": 60, "C4": 84, "C5": 58, "C6": 58},
+  "primary_score": 64,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {"where": "ep07 参照 トワ.火／灯り", "what": "台帳から導けない鍵の形。props に states が無い。", "why": "reference_set に書けば L8。", "fix": "トワ.states.火。灯りは鍵にしない（著者）。"},
+    {"where": "ep07 記憶.appearance", "what": "板の火は握り拳・浮遊、像に人が一人。", "why": "添付が勝ち、握り拳・浮遊・余計な体を配る。", "fix": "そのまま渡さない。火は本文が決める。"},
+    {"where": "ep07 火の門", "what": "24/3 と書くが、s14c/s15a も火は枠外。22/5。", "why": "門の算術。", "fix": "光表と同じ集合に。"},
+    {"where": "ep07 s10/s11", "what": "{eye:2} だが花の目も枠に在れば4。s07 に eye が無い。", "why": "肯定の句が枠と違う。", "fix": "花の顔を枠外に、s07 に目2。"},
+    {"where": "PLAN 3-5", "what": "WAN を画像の経路とする。", "why": "目録は CHATGPT IMAGE 2.5。", "fix": "直す。"},
+    {"where": "PLAN 終了条件", "what": "S0 を数えていない。", "why": "スキーマ照合が走らない。", "fix": "jsonschema を入れるか保留に。"}
+  ],
+  "note": "27/27/0・人数27行・部位の算術は合う。下げるのは鍵の形、記憶の板、門の数、目の句、PLAN の二点。"
+}
