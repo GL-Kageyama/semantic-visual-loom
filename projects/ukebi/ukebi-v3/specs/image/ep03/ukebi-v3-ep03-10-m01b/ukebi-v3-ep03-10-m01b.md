@@ -3,18 +3,20 @@
 ⚠️ **この仕様は §1–20 を持たない。** 画像プロンプトは節ではなく**1枚の文**である。
 ⚠️ **`REF_FORMAT` と `REF_STYLE` が、どのカードの穴かを名乗る。** `L22` が読む。
 ⚠️ このショットは**動画の仕様をまだ持たない**（`spec:` を書いていない）。`L11` が1本ずつ報告する。
+⚠️ **人物0の画なので `scene-board` ではなく `art-board` である。** 人物の居ない板は
+「物はセル」の規則の外にあり、**全面が描き込み**でよい（`one-lamp-cel` の Scope、踏切の板 版4）。
 
 ## 主題
 
-- `REF_FORMAT`: `scene-board` —— 5つの穴（`SCENE`／`CHARACTERS`／`ACTION`／`LOCATION`／`LIGHT`）
-- `REF_STYLE`: `one-lamp-cel` —— 4つの穴（`SUBJECT`／`ACTION`／`LOCATION`／`ACCENT`）
-- `SCENE`: the same interior, the camera turning to a window whose panes stop the firelight
-- `CHARACTERS`: No figure is in the frame
-- `SUBJECT`: the window frame and the black beyond it
-- `ACTION`: reaching the window frame and stopping there
+- `REF_FORMAT`: `art-board` —— 4つの穴（`LOCATION`／`HOUR`／`LIGHT_SOURCE`／`DIRECTION`）
+- `REF_STYLE`: `one-lamp-cel` —— 5つの穴（`SUBJECT`／`ACTION`／`LOCATION`／`LIGHT`／`ACCENT`）
 - `LOCATION`: inside the guest fire — the desk room, a window at the far wall
-- `LIGHT`: one small guest fire from behind the camera, its light stopping at the window frame, and nothing else
+- `HOUR`: an hour without a clock — the room's darkness, no sky, no sun, no moon, no stars
+- `LIGHT_SOURCE`: the guest fire from behind the camera, its light stopping at the window frame
 - `DIRECTION`: from behind the camera
+- `SUBJECT`: the window frame and the black beyond it
+- `ACTION`: the light reaching the window frame and stopping there
+- `LIGHT`: one small guest fire from behind the camera, its light stopping at the window frame, and nothing else
 - `ACCENT`: the lit edge of the window frame against the black
 
 ## 参照画像
@@ -25,10 +27,10 @@
 | 台帳の鍵 | 添えるファイル | 何 |
 |---|---|---|
 | `記憶.appearance` | `~/AI創作工房/distill-essence-engine/examples/works/novels/ukebi-anime/ukebi-anime-prop-sheet-記憶/霧深き線路に灯る記憶の灯火.png` | 物の設定画（机・窓・頁）。Desktop には無い——distill の採用済み |
-| `踏切.base` | — | 画像なし——補正前の板は使わない。`base` は意図 |
+| `踏切.base` | — | 画像なし——記憶の縁。板は添えない（窓・別室を呼ぶ） |
 
 ⚠️ **パスはこの端末の外にある。** clone しただけでは読めない。
-⚠️ **`踏切.base` と `魂火.appearance` は画像を持たない。** 踏切の板は台帳と三箇所食い違うので使わない（舗装・腕木・灯）。魂火は block である。**画像が無いことを、欄を消して隠さない。**
+⚠️ **`踏切.base` は画像を持たない。** 踏切の板は台帳と三箇所食い違うので使わない（舗装・腕木・灯）。
 
 ## 生成物の置き場
 
@@ -38,6 +40,6 @@
 
 ## 投入する1本の文字列
 
-A scene board for the same interior, the camera turning to a window whose panes stop the firelight — the master staging of one scene from the story, in 16:9. No figure is in the frame. Reaching the window frame and stopping there, at inside the guest fire — the desk room, a window at the far wall, under one small guest fire from behind the camera, its light stopping at the window frame, and nothing else. The blocking, the camera and the light are fixed as the standard every cut of this scene must match. One scene, one staging. The subject is the window frame and the black beyond it, reaching the window frame and stopping there, in inside the guest fire — the desk room, a window at the far wall, lit by one small guest fire from behind the camera, its light stopping at the window frame, and nothing else, with the lit edge of the window frame against the black. Solid things are cel-painted: flat colour planes, clean closed lineart, hard-edged shadows in two clear steps, minimal specular highlights. Only the air is soft — a thin mist and fine ash suspended in it catch the single light at every depth, so the near ground, the middle distance and the far end separate into deep layers by value, never by a gradient laid across a surface. The light is small in the frame and the darkness around it is large; the shadows are long; wet gravel and standing water double the one light once. The camera pans from the desk to the window and stops. The light reaches the frame and goes no further; beyond the glass there is only black, with no sky, no moon and no stars.
+An art board of the desk room inside the guest fire in 16:9, empty of characters, the camera turned to a window. One lighting state — an hour that has no clock, and one small guest fire from behind the camera — establishing the palette, the light direction, the surface texture and the level of detail that every later shot of this place must match. Compositional space left open where the figure will stand. A background standard: one room, one state, no figures. The room is inside the flame and shallow: a window sits at the far wall, its panes dark and gridded, the frame plain and old; the desk is at the near edge, out of focus; the room beyond the window is black — no street, no yard, no second room, no horizon. The only light is the small guest fire behind the camera: one small pale blue-white body, palest at the centre and cooling to a faint blue at the edge with one thin rust-red rim, one closed contour, no tongue, no smoke, no steam, no sparks, no embers, no second flame; it is behind the lens and is not in the frame. Its light reaches the window frame and stops there; the panes are black, and the pool of light has a hard edge. There is no sky beyond the glass: no stars, no moon, no sun, no clouds, no horizon, no horizon glow, no gradient. No bloom, no lens flare, no glow ring, no god rays, no second light source, no ambient fill, no bounce light. The palette is limited to sunken indigo, rust red, pale white-blue, black, and the white of paper: three to five values, the pale blue-white only on the window frame, the rust only on the worn iron, everything else one deep indigo-black family. No warm amber, no orange, no yellow, no magenta, no gold; no bright green, no bright yellow, no metallic sheen. The plate is a painted anime background, with every surface finished to the same level as the painted background: the wood is painted grain by grain, the glass is painted as flat black, the air is the only soft thing — a thin mist and fine ash suspended at every depth, catching the light, never glowing. Not a photograph, not a 3D render, not a flat cel diagram, not a gradient across any surface; no airbrush, no painterly brush strokes, no photographic texture. The camera is close on the window; the light is small in the frame and the darkness around it is large.
 
-no bloom, no lens flare, no glow, no god rays, no secondary light source, no sun, no moon, no stars, no gradient across any surface, no airbrush, no painterly brush strokes, no photographic texture, not photorealistic, no 3D render, no watermark, no on-screen subtitles, no background music, no legible text, no crowds, no rain, no person, no figure, no sky, no moon, no stars
+no figure, no person, no hands, no crowd, no second room, no street beyond the glass, no yard, no horizon, no pavement, no asphalt, no concrete, no legible text, no stars, no moon, no sun, no sky, no clouds, no warm amber, no orange, no yellow, no magenta, no gold, no neon, no saturated red, no bloom, no lens flare, no glow, no god rays, no secondary light source, no gradient across any surface, no airbrush, no painterly brush strokes, no photographic texture, not photorealistic, no 3D render, no watermark, no on-screen subtitles, no background music, no crowds, no rain

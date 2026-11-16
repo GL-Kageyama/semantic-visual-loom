@@ -1,0 +1,21 @@
+# s05b / 画像 / 1 — CHATGPT IMAGE 2.5
+#
+# ⚠️ 採用は著者の「残った画像は採用」（2026-11-17）。
+# ⚠️ 定数を足した552語のプロンプトで燒いた。source は現在の仕様。
+# ⚠️ 幅・高さは PNG のヘッダから読んだ（画素そのもの）。
+take:
+  shot: ukebi-v3-ep03-07-s05b
+  kind: image
+  index: 1
+  provider:
+    model: CHATGPT IMAGE 2.5
+  params:
+    source: specs/image/ep03/ukebi-v3-ep03-07-s05b/ukebi-v3-ep03-07-s05b.md
+    aspect: "16:9"
+  file: "夜の線路で開く白紙の本.png"
+  verdict:
+    machine:
+      measured:
+        width: 1672
+        height: 941
+  adopted: true

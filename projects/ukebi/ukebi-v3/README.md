@@ -20,9 +20,18 @@ The successor to `_archive/ukebi-v2`. The old version stays. This work now has `
 | Revised prose | `.../草稿/draft_*.md` |
 | Shot tables | `.../草稿/ショット表_*.md` (ep2 is `第2話_送る_試作.md`) |
 | Thirty-one images | `distill-essence-engine/examples/works/novels/ukebi-anime/` (31/31 adopted) |
+| Crossing board (corrected) | `reference/踏切/board.md` — re-baked here; the old board contradicts the ledger (pavement, arms, lamp) |
 | Old version | `../_archive/ukebi-v2/`, `../_archive/ukebi-video-*` |
 
 ⚠️ The prose and the shot tables live outside this repository. A clone alone cannot read them. The work's records live here; the source stays outside.
+
+## Inheriting the original prompt materials
+
+**The prompts are not invented here.** The look was decided in `distill-essence-engine/examples/works/novels/ukebi-anime/`—the crossing art board, the episode-3 scene board, the character and prop sheets, and the `_shared/` blocks (fire, figures, common, the adoption table). Their `prompt.md` Merged prompts and `input.md` content are the source; the image specs under `specs/image/` inherit their palette, light, negatives and vocabulary. **They do not start from zero.**
+
+⚠️ **Measured.** A 332-word prompt composed only from the eight fields lost the crossing's white-black arms, the off-frame source, the palette and the "painted background" anchor; the image came back as a warm, photoreal night. A 736-word prompt that inherited the existing art board's constants recovered them. **The default is inheritance.**
+
+⚠️ `distill-essence-engine` is read-only: read its cards and examples, write the record here. The source lives outside this repository, so a clone cannot read it; the paths are recorded for the author.
 
 ## Holes to close before the pilot
 

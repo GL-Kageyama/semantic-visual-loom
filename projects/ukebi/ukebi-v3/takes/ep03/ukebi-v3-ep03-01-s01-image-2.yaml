@@ -1,0 +1,22 @@
+# s01 / 画像 / 2 — CHATGPT IMAGE 2.5
+#
+# ⚠️ 採用は著者の「これを採用」（2026-11-17）。
+# ⚠️ 1枚目（夜霧に沈む踏切の線路.png）は332語の旧プロンプトで焼いた。記録していない。
+# ⚠️ この2枚目は736語の art-board プロンプトで焼いた。source は現在の仕様。
+# ⚠️ 幅・高さは PNG のヘッダから読んだ（画素そのもの）。
+take:
+  shot: ukebi-v3-ep03-01-s01
+  kind: image
+  index: 2
+  provider:
+    model: CHATGPT IMAGE 2.5
+  params:
+    source: specs/image/ep03/ukebi-v3-ep03-01-s01/ukebi-v3-ep03-01-s01.md
+    aspect: "16:9"
+  file: "雨に濡れた無人踏切の夜.png"
+  verdict:
+    machine:
+      measured:
+        width: 1672
+        height: 941
+  adopted: true

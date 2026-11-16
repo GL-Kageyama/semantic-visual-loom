@@ -20,9 +20,18 @@
 | 改稿散文 | `.../草稿/draft_*.md` |
 | 镜头表 | `.../草稿/ショット表_*.md`（ep2 是 `第2話_送る_試作.md`） |
 | 31 张图 | `distill-essence-engine/examples/works/novels/ukebi-anime/`（31/31 已采用） |
+| 踏切板（修正版） | `reference/踏切/board.md`——在这里重烧。旧板与台账有三处不一致（铺装、腕木、灯） |
 | 旧版 | `../_archive/ukebi-v2/`、`../_archive/ukebi-video-*` |
 
 ⚠️ 正文与镜头表在本仓库之外。只 clone 本仓库读不到。work 的记录放在这里，正本放在外面。
+
+## 继承原有的提示词素材
+
+**提示词不在这里发明。** 外观是在 `distill-essence-engine/examples/works/novels/ukebi-anime/` 定下的——踏切的美术板、第 3 话的场面板、人物与物的设定画，以及 `_shared/` 的 block（火、人物、共通、采用表）。那些 `prompt.md` 的 Merged 与 `input.md` 是正本；`specs/image/` 的图像规格**继承它们的调色板、光、否定与语汇**。**不从零开始拼。**
+
+⚠️ **实测。** 只从 8 栏拼出的 332 词，丢掉了白黑腕木、画外光源、调色板与「描画背景」的锚，回来的是暖色的写实之夜。继承了既有美术板常数的 736 词，把它们带了回来。**默认是继承。**
+
+⚠️ `distill-essence-engine` 只读：卡片与例子都不改写，记录写在这边。正本在本仓库之外，只 clone 读不到；留下路径是为了作者。
 
 ## 试作前补上的洞
 

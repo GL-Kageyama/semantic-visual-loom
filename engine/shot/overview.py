@@ -339,7 +339,8 @@ def main():
           "——⚠️ **記録からは引けない** |")
     t_ok = sum(1 for sid in order if takes[sid])
     t_all = sum(len(takes[sid]) for sid in order)
-    print(f"| テイク（記録） | {t_ok}本ぶん／{t_all}枚 | {len(order)}本 | `takes/*.yaml` |")
+    print(f"| テイク（記録） | {t_ok}本ぶん／{t_all}枚 | {len(order)}本 | "
+          "`takes/*.yaml`・`takes/*/*.yaml`（話ごとの下位を一段だけ読む） |")
     adopted = sum(1 for sid in order for t in takes[sid] if t.get("adopted") is True)
     rejected = sum(1 for sid in order for t in takes[sid] if t.get("adopted") is False)
     undecided = t_all - adopted - rejected
