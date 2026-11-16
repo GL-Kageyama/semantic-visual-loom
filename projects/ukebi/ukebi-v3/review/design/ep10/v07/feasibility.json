@@ -1,0 +1,18 @@
+{
+  "seat": "feasibility",
+  "criteria": {"C1": 70, "C2": 72, "C3": 44, "C4": 88, "C5": 71, "C6": 75},
+  "primary_score": 70,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {"where": "ep10 二人写し", "what": "片方の部位だけ（torso:1 等）で population 2。", "why": "L52 が no second を書く。", "fix": "torso:2/face:2/head:2 か、全身なら部位なし。"},
+    {"where": "ep10 s13b/s27", "what": "hand:2 に finger:1、s27 は finger:1 で掌・腕・胸。", "why": "宣言と画が争う。", "fix": "指先の寄りに絞るか、部位を実際に。"},
+    {"where": "ep10 s29", "what": "3 と 5→なし。", "why": "二つ。", "fix": "5 に。"},
+    {"where": "ep10 identity", "what": "フォルダ名で実ファイルでない。", "why": "C1。", "fix": "紺色制服…png 等を。"},
+    {"where": "ep10 火 3–5", "what": "fire.md に無く、3枚が保留。", "why": "順序。", "fix": "PLAN の出口に保留として名指す。"},
+    {"where": "ep10 白頁", "what": "illustration は 16:9 を宣言しない。", "why": "欄が無い。", "fix": "Prompt に in 16:9。"},
+    {"where": "ep10 画像仕様", "what": "REF_FORMAT/REF_STYLE の名乗り行が無い。", "why": "L22。", "fix": "各仕様に1行。"},
+    {"where": "ep10 版", "what": "v07 と v06 実行中が同居。", "why": "回の境界。", "fix": "v06 を完了に。"}
+  ],
+  "note": "35行→36本・600秒・36/36/0・欄の和・白頁の肯定形・L20/S0 は通る。下げるのは二人写しの部位、指、s29、identity、保留の3枚。"
+}
