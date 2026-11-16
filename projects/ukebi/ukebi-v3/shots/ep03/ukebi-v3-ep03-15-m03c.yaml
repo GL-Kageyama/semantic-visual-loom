@@ -16,7 +16,7 @@ cast:
 disclosure_state:
   初頁.白: absent
   初頁.折れ目: absent
-key_image: specs/image/ep03/ukebi-v3-ep03-15-m03c.md
+key_image: specs/image/ep03/ukebi-v3-ep03-15-m03c/ukebi-v3-ep03-15-m03c.md
 motion:
   subject: 顔と、閉じた戸
   quality: 顔が上がり、目が戸で止まる。戸は開かない。

@@ -16,7 +16,7 @@ cast:
 disclosure_state:
   初頁.白: absent
   初頁.折れ目: absent
-key_image: specs/image/ep03/ukebi-v3-ep03-16-m04a.md
+key_image: specs/image/ep03/ukebi-v3-ep03-16-m04a/ukebi-v3-ep03-16-m04a.md
 motion:
   subject: 書いた頁と、読めない行
   quality: カメラだけが頁へ寄る。頁は動かない。

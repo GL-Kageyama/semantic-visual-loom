@@ -16,7 +16,7 @@ cast:
 disclosure_state:
   初頁.白: present
   初頁.折れ目: present
-key_image: specs/image/ep03/ukebi-v3-ep03-28-s16.md
+key_image: specs/image/ep03/ukebi-v3-ep03-28-s16/ukebi-v3-ep03-28-s16.md
 motion:
   subject: 台帳と、踏切
   quality: カメラだけが引く。彼は動かず、遮断機は上がったまま。

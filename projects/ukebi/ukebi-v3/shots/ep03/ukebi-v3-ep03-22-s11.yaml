@@ -18,7 +18,7 @@ cast:
 disclosure_state:
   初頁.白: present
   初頁.折れ目: present
-key_image: specs/image/ep03/ukebi-v3-ep03-22-s11.md
+key_image: specs/image/ep03/ukebi-v3-ep03-22-s11/ukebi-v3-ep03-22-s11.md
 motion:
   subject: 指と、折れ目
   quality: 指が折れ目へ伸び、触れて止まる。

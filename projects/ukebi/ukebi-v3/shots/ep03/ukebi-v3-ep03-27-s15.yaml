@@ -18,7 +18,7 @@ cast:
 disclosure_state:
   初頁.白: present
   初頁.折れ目: present
-key_image: specs/image/ep03/ukebi-v3-ep03-27-s15.md
+key_image: specs/image/ep03/ukebi-v3-ep03-27-s15/ukebi-v3-ep03-27-s15.md
 motion:
   subject: 指と、立った折れ目
   quality: 指が折れ目を押さえる。折れ目はその高さから下がらない。

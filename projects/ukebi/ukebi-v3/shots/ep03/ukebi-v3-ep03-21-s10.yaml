@@ -18,7 +18,7 @@ cast:
 disclosure_state:
   初頁.白: present
   初頁.折れ目: absent
-key_image: specs/image/ep03/ukebi-v3-ep03-21-s10.md
+key_image: specs/image/ep03/ukebi-v3-ep03-21-s10/ukebi-v3-ep03-21-s10.md
 motion:
   subject: 二頁目・三頁目の焦げ跡
   quality: カメラが頁を渡る。焦げ跡は増えない。

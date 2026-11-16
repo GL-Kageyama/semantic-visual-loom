@@ -15,7 +15,7 @@ cast: []
 disclosure_state:
   初頁.白: absent
   初頁.折れ目: absent
-key_image: specs/image/ep03/ukebi-v3-ep03-10-m01b.md
+key_image: specs/image/ep03/ukebi-v3-ep03-10-m01b/ukebi-v3-ep03-10-m01b.md
 motion:
   subject: 窓枠と、その先の黒
   quality: カメラが窓へ振る。光は窓枠で止まる。

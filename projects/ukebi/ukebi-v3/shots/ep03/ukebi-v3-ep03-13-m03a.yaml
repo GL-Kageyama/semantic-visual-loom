@@ -16,7 +16,7 @@ cast:
 disclosure_state:
   初頁.白: absent
   初頁.折れ目: absent
-key_image: specs/image/ep03/ukebi-v3-ep03-13-m03a.md
+key_image: specs/image/ep03/ukebi-v3-ep03-13-m03a/ukebi-v3-ep03-13-m03a.md
 motion:
   subject: ペン先と、最後の一行
   quality: ペンが最後の一行で止まる。指はペンの形を保つ。

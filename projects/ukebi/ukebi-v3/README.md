@@ -4,7 +4,7 @@
 
 # Ukebi V3 — filming the revised ten episodes
 
-The successor to `_archive/ukebi-v2`. The old version stays. This work now has `bible.yaml` / `ledger.yaml` / `shots/`. **Episode 3 is the pilot: 28 shot records and 28 image specs. Its video specs are deferred.** The other nine episodes are cut in [`episodes/`](episodes/index.md) but not yet recorded. The whole picture is in [`進捗表.md`](進捗表.md), the record-derived one-pager is [`概要.md`](概要.md), and episode 3's is [`概要/ep03.md`](概要/ep03.md).
+The successor to `_archive/ukebi-v2`. The old version stays. This work now has `bible.yaml` / `ledger.yaml` / `shots/`. **Episode 3 is the pilot: 28 shot records and 28 image specs. Its video specs are deferred.** Each shot's spec and outputs live in one folder: `specs/image/ep03/<the same name as the spec>/`. Outputs keep their own names—the folder carries the shot, and spec and folder sort together by number. The other nine episodes are cut in [`episodes/`](episodes/index.md) but not yet recorded. The whole picture is in [`進捗表.md`](進捗表.md), the record-derived one-pager is [`概要.md`](概要.md), and episode 3's is [`概要/ep03.md`](概要/ep03.md).
 
 ## What is made
 

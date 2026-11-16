@@ -18,7 +18,7 @@ cast:
 disclosure_state:
   初頁.白: present
   初頁.折れ目: present
-key_image: specs/image/ep03/ukebi-v3-ep03-26-s14b.md
+key_image: specs/image/ep03/ukebi-v3-ep03-26-s14b/ukebi-v3-ep03-26-s14b.md
 motion:
   subject: 揃えた頁と、立つ折れ目と、浮く表紙
   quality: 両手が頁を揃える。折れ目は立ち、表紙は浮いたまま。

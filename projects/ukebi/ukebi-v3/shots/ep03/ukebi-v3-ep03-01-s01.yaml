@@ -15,7 +15,7 @@ cast: []
 disclosure_state:
   初頁.白: absent
   初頁.折れ目: absent
-key_image: specs/image/ep03/ukebi-v3-ep03-01-s01.md
+key_image: specs/image/ep03/ukebi-v3-ep03-01-s01/ukebi-v3-ep03-01-s01.md
 motion:
   subject: 踏切・レール・濡れた砂利と水たまり
   quality: カメラだけがレールの高さへ下りる。主題は止まっている。

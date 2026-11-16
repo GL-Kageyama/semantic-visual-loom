@@ -18,7 +18,7 @@ cast:
 disclosure_state:
   初頁.白: present
   初頁.折れ目: present
-key_image: specs/image/ep03/ukebi-v3-ep03-24-s13.md
+key_image: specs/image/ep03/ukebi-v3-ep03-24-s13/ukebi-v3-ep03-24-s13.md
 motion:
   subject: 手と、頁の角
   quality: 指が頁の角を持ち上げ、止まる。頁は捲れない。

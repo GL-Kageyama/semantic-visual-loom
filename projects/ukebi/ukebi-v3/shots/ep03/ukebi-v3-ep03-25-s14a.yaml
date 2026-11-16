@@ -18,7 +18,7 @@ cast:
 disclosure_state:
   初頁.白: present
   初頁.折れ目: present
-key_image: specs/image/ep03/ukebi-v3-ep03-25-s14a.md
+key_image: specs/image/ep03/ukebi-v3-ep03-25-s14a/ukebi-v3-ep03-25-s14a.md
 motion:
   subject: 両手と、閉じかける台帳
   quality: 両手が表紙を立て、頁が閉じへ向かう。

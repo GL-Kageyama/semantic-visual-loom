@@ -16,7 +16,7 @@ cast:
 disclosure_state:
   初頁.白: absent
   初頁.折れ目: absent
-key_image: specs/image/ep03/ukebi-v3-ep03-14-m03b.md
+key_image: specs/image/ep03/ukebi-v3-ep03-14-m03b/ukebi-v3-ep03-14-m03b.md
 motion:
   subject: 頁と、それを離す手
   quality: 頁が机に置かれ、手が離れる。縁が少し浮いて戻る。

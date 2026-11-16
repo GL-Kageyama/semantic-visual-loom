@@ -18,7 +18,7 @@ cast:
 disclosure_state:
   初頁.白: absent
   初頁.折れ目: absent
-key_image: specs/image/ep03/ukebi-v3-ep03-06-s05a.md
+key_image: specs/image/ep03/ukebi-v3-ep03-06-s05a/ukebi-v3-ep03-06-s05a.md
 motion:
   subject: 手と、上がる指
   quality: 指が一つだけ上がる。他の指は動かない。
