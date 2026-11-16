@@ -1,0 +1,42 @@
+# 第3話「綴じる」 s12「「読んで」——指が強ばる」
+# 元の行: s12 / 24s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ（パイロット）。
+shot: ukebi-v3-ep03-23-s12
+unit:
+  before: 指は折れ目に置かれたままである
+  after: 「読んで」という声が鳴り、指がわずかに強ばる
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 24s
+population: 1
+body_parts:
+  finger: 1
+cast:
+- 送り火
+disclosure_state:
+  初頁.白: present
+  初頁.折れ目: present
+key_image: specs/image/ep03/ukebi-v3-ep03-23-s12.md
+motion:
+  subject: 指と、折れ目
+  quality: 指が強ばる。折れ目から離れない。
+  law: one-lamp-cel の物理。光は魂火ひとつ。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 台帳.appearance
+- 魂火.appearance
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 台帳.appearance
+- 魂火.appearance
+text_channel:
+- t: 0.0-24.0
+  kind: voice
+  speaker: フミ
+  line: 読んで

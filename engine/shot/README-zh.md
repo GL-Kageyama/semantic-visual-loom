@@ -19,7 +19,11 @@ python3 engine/shot/print_spec.py projects/<project> --shot <id>  # 只打印一
 ```bash
 python3 engine/shot/overview.py projects/<project>               # 整个作品
 python3 engine/shot/overview.py projects/<project> --no-changes  # 不打印变化的散文
+python3 engine/shot/overview.py projects/<project> --episode ep03  # 按话（shots/ep03/）
 ```
+
+⚠️ **`--episode` 按读到记录的目录筛**，不按 ID 前缀——命名因作品而异。空的话不打印。
+**保存名为 `概要/<话>.md`。**
 
 **用来读一个作品的一张。** 它是什么（`bible` ＋ `dramaturgy`）·各阶段的当前状态·
 幕与序列·镜头列表（含人物与每个镜头的变化。`unit.before` → `unit.after`）·曲的分段·

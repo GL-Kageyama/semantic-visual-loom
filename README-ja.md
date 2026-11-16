@@ -140,14 +140,14 @@ semantic-visual-loom/
 
 **⚠️ `projects/` には2種類が同居している**——**生の仕様書**（受け火・午前二時の §1–20。
 受け火の側は `projects/ukebi/_archive/` に保管）と、**構造化した記録**
-（`bible.yaml` / `ledger.yaml` / `shots/`。**19本**である——`drama-pilot`、`grammar-*` の
+（`bible.yaml` / `ledger.yaml` / `shots/`。**20本**である——`drama-pilot`、`grammar-*` の
 実験作7本、`habits`・`habits-mv`・`habits-promo-chinatsu`・`hakuchizu`・`hitosara`・
-`hitosara-ab`・`ippitsu`・`mado-fuki`・`migenzo`・`odyssey`、そして
-`ukebi/_archive/ukebi-v2`）。`projects/ukebi/ukebi-v3` は準備中（README のみ）。
+`hitosara-ab`・`ippitsu`・`mado-fuki`・`migenzo`・`odyssey`・`ukebi-v3`、そして
+`ukebi/_archive/ukebi-v2`）。
 `mado-fuki` は四つの目録
 ——カメラ・光・構図・画風——を全部引く見本である。
 ⚠️ **すべての作品は自分の `bible.yaml` と `ledger.yaml` を持ち、作品は作品を抱えない**
-——そしてこれが効く理由である：**`check.py` は再帰しない**ので、
+——そしてこれが効く理由である：**`check.py` は `shots/` を一段だけ読む**ので、
 **作品が作品を抱えていると、親を走らせても読まれない。** `L29` が、
 読まれなかった作品を名指しする。
 ⚠️ **生の仕様書の側には生成物を置かず、`reference/` の参照資産は残してある。**

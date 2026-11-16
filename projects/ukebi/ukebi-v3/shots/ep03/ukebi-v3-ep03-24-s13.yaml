@@ -1,0 +1,37 @@
+# 第3話「綴じる」 s13「頁を読もうとして、止まる」
+# 元の行: s13 / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ（パイロット）。
+shot: ukebi-v3-ep03-24-s13
+unit:
+  before: 指は折れ目の上にある
+  after: 手が頁を読もうとして動き、止まる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 1
+body_parts:
+  finger: 1
+cast:
+- 送り火
+disclosure_state:
+  初頁.白: present
+  初頁.折れ目: present
+key_image: specs/image/ep03/ukebi-v3-ep03-24-s13.md
+motion:
+  subject: 手と、頁の角
+  quality: 指が頁の角を持ち上げ、止まる。頁は捲れない。
+  law: one-lamp-cel の物理。光は魂火ひとつ。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 台帳.appearance
+- 魂火.appearance
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 台帳.appearance
+- 魂火.appearance

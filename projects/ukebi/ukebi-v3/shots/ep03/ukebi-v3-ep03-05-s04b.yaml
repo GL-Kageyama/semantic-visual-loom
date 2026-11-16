@@ -1,0 +1,40 @@
+# 第3話「綴じる」 s04b「「フミ」と、一度鳴る」
+# 元の行: s04b / 8s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ（パイロット）。
+shot: ukebi-v3-ep03-05-s04b
+unit:
+  before: 火は揺れていない
+  after: 「フミ」という声が一度鳴り、火が一度だけ揺れる
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 8s
+population: 1
+body_parts:
+  head: 1
+cast:
+- 送り火
+disclosure_state:
+  初頁.白: absent
+  初頁.折れ目: absent
+key_image: specs/image/ep03/ukebi-v3-ep03-05-s04b.md
+motion:
+  subject: 火の揺れと、名を言った口
+  quality: 火が一度だけ揺れ、戻る。二度目は無い。
+  law: one-lamp-cel の物理。光は魂火ひとつ。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 魂火.appearance
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 魂火.appearance
+text_channel:
+- t: 0.0-8.0
+  kind: voice
+  speaker: 送り火
+  line: フミ

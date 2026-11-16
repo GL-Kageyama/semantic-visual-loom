@@ -823,8 +823,9 @@ left unread. **A check that would fire on the corrected text is not a check.**
 ### L29 — does this run read every work below it
 
 ⚠️ **The decision** (2026-09-20, author): **a work must not hold a work.**
-`check.py` does not recurse — it loads `root/shots/*.yaml` with a **flat glob**, so
-**a nested work is invisible to a run over its parent.** ⚠️ **And the output says nothing about it.**
+`check.py` reads `root/shots/` one level deep — `root/shots/*.yaml` and, for
+episode subdirectories, `root/shots/*/*.yaml`. It does not walk into another work's own
+`shots/`, so **a nested work is invisible to a run over its parent.** ⚠️ **And the output says nothing about it.**
 
 ⚠️ **This is measured, not anticipated.** `python3 engine/ledger/check.py projects/habits`
 loaded **4 shots**, and its output contains **0 occurrences of `promo-chinatsu`**——

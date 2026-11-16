@@ -1,0 +1,26 @@
+# 第3話「綴じる」 s02「細い火が、低く漂って来る」
+# 元の行: s02 / 16s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ（パイロット）。
+shot: ukebi-v3-ep03-02-s02
+unit:
+  before: 線路の上は空である
+  after: 細い火が低く漂って来て、ペンだこの形が火の底に見える
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 16s
+population: 0
+cast: []
+disclosure_state:
+  初頁.白: absent
+  初頁.折れ目: absent
+key_image: specs/image/ep03/ukebi-v3-ep03-02-s02.md
+motion:
+  subject: 細いゲストの火と、火の底のペンだこ
+  quality: 火が低く漂い、止まる。速さは変わらない。
+  law: one-lamp-cel の物理。光は魂火ひとつ。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 踏切.base
+attached:
+- 踏切.base

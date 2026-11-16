@@ -20,7 +20,11 @@ python3 engine/shot/print_spec.py projects/<project> --shot <id>  # one shot
 ```bash
 python3 engine/shot/overview.py projects/<project>               # the whole work
 python3 engine/shot/overview.py projects/<project> --no-changes  # without the unit prose
+python3 engine/shot/overview.py projects/<project> --episode ep03  # one episode (shots/ep03/)
 ```
+
+⚠️ **`--episode` filters by the directory the record was read from**, not by the ID prefix—
+naming differs per work. It refuses to print an empty sheet. **The saved name is `概要/<episode>.md`.**
 
 **One sheet for reading a work.** What it is (bible + `dramaturgy`) · where each stage
 stands · acts and sequences · the shot list with cast and each shot's change (`unit.before` →

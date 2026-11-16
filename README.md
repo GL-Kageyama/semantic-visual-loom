@@ -142,13 +142,13 @@ semantic-visual-loom/
 
 **⚠️ Two kinds live side by side in `projects/`**—**raw specification trees** (§1–20 of Ukebi and
 Gozen Niji; Ukebi's are archived under `projects/ukebi/_archive/`) and **structured records**
-(`bible.yaml` / `ledger.yaml` / `shots/`; **nineteen** of them—`drama-pilot`, the seven
+(`bible.yaml` / `ledger.yaml` / `shots/`; **twenty** of them—`drama-pilot`, the seven
 `grammar-*` pilot works, `habits`, `habits-mv`, `habits-promo-chinatsu`, `hakuchizu`, `hitosara`,
-`hitosara-ab`, `ippitsu`, `mado-fuki`, `migenzo`, `odyssey`, and `ukebi/_archive/ukebi-v2`).
-`projects/ukebi/ukebi-v3` is in preparation (README only). `mado-fuki` is the sample that draws on all four
+`hitosara-ab`, `ippitsu`, `mado-fuki`, `migenzo`, `odyssey`, `ukebi-v3`, and
+`ukebi/_archive/ukebi-v2`). `mado-fuki` is the sample that draws on all four
 registries—camera, lighting, composition and style.
 ⚠️ **Every work carries its own `bible.yaml` and `ledger.yaml`, and a work does not hold a work**
-—and this is why that matters: **`check.py` does not recurse**, so **a work held by a work is not
+—and this is why that matters: **`check.py` reads `shots/` one level deep**, so **a work held by a work is not
 read by a run over its parent.** `L29` names the works a run does not read.
 ⚠️ **No generated output is placed beside the raw trees, while their `reference/` assets are
 kept.** Why input is not a sample, and what is lost if it is deleted, is in

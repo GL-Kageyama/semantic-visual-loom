@@ -799,7 +799,8 @@ bible:
 ### L29 — 这一跑读取下面所有的作品吗
 
 ⚠️ **决定（2026-09-20，作者）——作品不得抱着作品。**
-`check.py` 不递归——它**平着**读 `root/shots/*.yaml`。所以
+`check.py` 只读 `root/shots/` 的**一层**——`root/shots/*.yaml`，以及按话分的
+`root/shots/*/*.yaml`。它不会走进另一个作品自己的 `shots/`。所以
 **被抱着的作品，即使跑父目录也看不见。** ⚠️ **而且输出对此一言不发。**
 
 ⚠️ **这不是预想，是实测。** `python3 engine/ledger/check.py projects/habits` 读了 **4 本**，

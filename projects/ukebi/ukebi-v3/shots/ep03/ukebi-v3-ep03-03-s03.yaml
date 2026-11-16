@@ -1,0 +1,32 @@
+# 第3話「綴じる」 s03「火の内側が、開く」
+# 元の行: s03 / 16s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ（パイロット）。
+shot: ukebi-v3-ep03-03-s03
+unit:
+  before: 火は一つの閉じた炎である
+  after: 内側が開き、インクの染みた指・紙の束・擦り切れた袖が見える
+role: 質感
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 16s
+population: 1
+body_parts:
+  hand: 1
+  arm: 1
+cast:
+- フミ
+disclosure_state:
+  初頁.白: absent
+  初頁.折れ目: absent
+key_image: specs/image/ep03/ukebi-v3-ep03-03-s03.md
+motion:
+  subject: 開いた火の内側と、その中の指
+  quality: 火が長さの方向へ開く。指は動かない。
+  law: one-lamp-cel の物理。光は魂火ひとつ。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- フミ.identity
+- フミ.negatives
+attached:
+- フミ.identity
+- フミ.negatives

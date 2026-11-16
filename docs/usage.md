@@ -56,6 +56,7 @@ python3 engine/shot/look.py --style 水彩
 # the overview — what the work is, and how far it got. It writes nothing
 python3 engine/shot/overview.py projects/hitosara
 python3 engine/shot/overview.py projects/hitosara --no-changes
+python3 engine/shot/overview.py projects/ukebi/ukebi-v3 --episode ep03  # one episode
 
 # the repository's own document check — not used to make a work
 python3 tools/check_i18n.py                                # the document mirrors
@@ -127,12 +128,16 @@ is the sentence, and `L59` reports how many cards the list never names.
 |---|---|
 | *(positional)* | the path to a project directory. |
 | `--no-changes` | do not print the change column (`unit.before` → `unit.after`). |
+| `--episode <dir>` | print only the shots loaded from `shots/<dir>/` (one episode). |
 
 **It counts the records only.** It does not open `media/`—so it cannot say whether a
 sample exists, only whether a take records one. **Durations are `shot.duration` (intent),
 not measurements of generated film.** ⚠️ **It decides nothing**: it prints a derived
 sheet, and saving it is the author's act. What it prints, and what it cannot say, is in
 [`engine/shot/README.md`](../engine/shot/README.md).
+
+⚠️ **`--episode` filters by the directory the record was read from**, not by the ID. It refuses to print an empty sheet.
+⚠️ **A per-episode sheet is saved as `概要/<episode>.md`**; the whole-work sheet stays `概要.md`.
 
 ⚠️ **`check.py` and `print_spec.py` are not alternatives—they cover disjoint ground.**
 **A line `print_spec.py` prints is a line that goes silent the moment you copy it**
@@ -261,8 +266,9 @@ projects/<name>/
 > But a directory that holds a work is not necessarily a work itself.**
 > ⚠️ **The converse does not hold: a work must not hold a work.**
 
-⚠️ **`check.py` does not recurse**——it loads `root/shots/*.yaml` with a **flat glob**. So
-**a work held by a work is not read by a run over its parent, and the output does not say so.**
+⚠️ **`check.py` reads `root/shots/` one level deep**——`root/shots/*.yaml` and, for
+episode subdirectories, `root/shots/*/*.yaml`. It does not walk into another work's own
+`shots/`, so **a work held by a work is not read by a run over its parent, and the output does not say so.**
 `L29` names the works a run does not read.
 
 The checker reads `bible.yaml`, `ledger.yaml`, `shots/`, `takes/`, and **the

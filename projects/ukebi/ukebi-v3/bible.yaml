@@ -1,0 +1,76 @@
+# 作品台帳 — 受け火 V3（ukebi-v3）
+#
+# 出所: `PLAN.md` §3-1（design.md の世界律7・視覚の規則・禁止から）。
+# ⚠️ 不変部と可変部の線引きは未決定である（schemas/README.md）。
+#    ここは「作品に一つしか無いもの」だけを置いた。
+project: ukebi-v3
+
+bible:
+  # 様式カードの名前。中身は distill-essence-engine に在る。読むだけ。書き換えない。
+  style: one-lamp-cel
+
+  # 生成器へ渡る値は英語（CLAUDE.md）。L27 が読む。
+  language: Japanese
+
+  world:
+    concept: >-
+      A level crossing at night, where the dead are sent on one small fire at a time.
+      The sender carries a ledger; the sent is received by someone else.
+      No one who sends is ever received.
+    rules:
+      - "Being sent precedes being received. The fire is sent before anyone receives it."
+      - "Writing does not hold. What is written is not preserved by the page."
+      - "The name exists only in the voice. It is never legible on any surface."
+      - "Memory is inside the fire. The past is shown only within the flame that carries it."
+      - "There is one light: the soul fire in his palm. No second light exists."
+      - "The dead are called by one word."
+      - "The one who sends is never received."
+    visual_language:
+      art_direction: >-
+        One-lamp cel: solid things flat and cel-painted, clean closed lineart,
+        hard-edged two-step shadow; only the air is soft. One small pale fire is
+        the only light, and the darkness around it is large. No sky, no hour, no weather.
+      color_language: >-
+        Dark indigo, rust, and a pale blue-white core at the fire.
+        Three to five values; the fire is the only bright shape.
+      texture: >-
+        Wet gravel and standing water double the one light once.
+        Fine ash and dust hang in the air at every depth.
+      rendering: >-
+        Flat cel planes on every solid surface; no gradient across a surface;
+        no bloom, no flare, no glow.
+      era: "No era is shown. The crossing has rails, a barrier with black-and-white bands, gravel and earth."
+      weather: "No weather. No rain, no wind, no sky."
+
+  # 値はすべて文字列（bible.schema.json）。話ごとの表はブロックスカラーで1本に収める。
+  constants:
+    根本律: "Being sent precedes being received. The one who sends is never received."
+    器官: "八器官を一話ずつ——手・指・喉・腕・耳・目・声・背。第1話は序、第10話は終章。"
+    火の段: >-
+      魂火は話ごとに小さい。第3話は梅（a plum）、第5話は胡桃から縮み、
+      第6話は小豆。第7・8話の板は胡桃なので、そのまま key_image に使わない。
+    印: "第3話の印は2（ペン先・一点）。印は数え、描写しない。"
+    光: "光は魂火ひとつ。ゲストの火は内側だけを照らし、場を照らさない。"
+    文字: "どの面にも読める文字を置かない。字幕も出さない。名は声にしかない。"
+    video:
+      aspect: "16:9"
+      resolution: "1920x1080"
+      frame_rate: "24fps"
+      orientation: "Landscape"
+
+  # 基盤の床（specmap.BASE_NEGATIVES）に足す、この作品の禁制。
+  # ⚠️ 1項目＝1句。カンマで句を割らない——L21 は句の語幹で突き合わせる。
+  negative_base:
+    - "no legible text"
+    - "no crowds"
+    - "no rain"
+    - "no sun"
+    - "no moon"
+    - "no stars"
+    - "no bloom"
+    - "no lens flare"
+    - "no secondary light source"
+    - "no background music"
+    - "no on-screen subtitles"
+    - "no 3D render"
+    - "not photorealistic"

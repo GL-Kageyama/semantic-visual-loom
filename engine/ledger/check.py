@@ -94,12 +94,17 @@ class Project:
             self.read_errors.append(f"ledger.yaml が無い（{l}）")
 
         self.shots = {}   # ショットID → ショット記録（1本につき1枚）
+        self.shot_paths = {}  # ショットID → 読んだファイル（話ごとの概要が絞るために使う）
         self.takes = {}   # ショットID → テイクの列（1本につき何枚でも）
         d = self.root / "shots"
         if not d.is_dir():
             self.read_errors.append(f"shots/ が無い（{d}）")
         else:
-            for p in sorted(d.glob("*.y*ml")):
+            # ⚠️ **話ごとの下位ディレクトリを一段だけ読む**（`shots/ep03/*.yaml`）。
+            #    深さを1に限るのは、**作品が作品を抱える問題とは別だからである**——
+            #    子の作品は自分の `shots/` を持ち、親の `shots/` の下には無い。
+            #    ゆえにこの一段は、L29 が守っている「親を走らせても子は読まれない」を壊さない。
+            for p in sorted([*d.glob("*.y*ml"), *d.glob("*/*.y*ml")]):
                 doc = read(p)
                 key = doc.get("shot")
                 if not key:
@@ -109,12 +114,14 @@ class Project:
                     self.read_errors.append(f"{p.name}: ショット {key} が二重に在る")
                     continue
                 self.shots[key] = doc
+                self.shot_paths[key] = p
 
         d = self.root / "takes"
         if not d.is_dir():
             self.read_errors.append(f"takes/ が無い（{d}）— テイクの記録が1本も無い")
         else:
-            for p in sorted(d.glob("*.y*ml")):
+            # ⚠️ **テイクも一段だけ読む**（`takes/ep03/*.yaml`）——ショットと同じ深さである。
+            for p in sorted([*d.glob("*.y*ml"), *d.glob("*/*.y*ml")]):
                 doc = read(p)
                 key = (doc.get("take") or {}).get("shot")
                 if not key:
@@ -3430,8 +3437,11 @@ grammars:
     # ⚠️ **実物で鳴ること・鳴らないこと。**
     #    ⚠️ **相手が無ければ黙って飛ばさない**——**「検査しなかった」を緑に数えれば、
     #       自己検査は緑のまま何も見ていない**（`空の検査は OK と言う`）。
+    # ⚠️ **実物に依存する例である。** `ukebi-v3` が `bible.yaml`・`ledger.yaml`・`shots/` を
+    #    持ったので、`projects/ukebi` の下に在る作品は2本になった（`_archive/ukebi-v2` と `ukebi-v3`）。
+    #    数はデータの側で動く——**期待を先に直すのではなく、実物を数えて直す。**
     for label, rel, want_note in (
-            ("L29 実物 ukebi（題材が作品を抱える・註1件）", "projects/ukebi", "1 本在る"),
+            ("L29 実物 ukebi（題材が作品を抱える・註2本）", "projects/ukebi", "2 本在る"),
             ("L29 実物 gozen-niji（題材だけ・沈黙）", "projects/gozen-niji", None),
             ("L29 実物 hitosara（下に作品が無い・沈黙）", "projects/hitosara", None),
             ("L29 実物 habits（直下へ出した後・沈黙）", "projects/habits", None),

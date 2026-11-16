@@ -1,0 +1,31 @@
+# 第3話「綴じる」 m02b「火が、頁の端を食う」
+# 元の行: m02b / 10s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ（パイロット）。
+shot: ukebi-v3-ep03-12-m02b
+unit:
+  before: 頁の端は生成りのままである
+  after: 火が頁の端から食う
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 10s
+population: 1
+cast:
+- フミ
+disclosure_state:
+  初頁.白: absent
+  初頁.折れ目: absent
+key_image: specs/image/ep03/ukebi-v3-ep03-12-m02b.md
+motion:
+  subject: 火と、頁の端
+  quality: 火が端から食う。紙は暗くなり、卷れる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- フミ.identity
+- フミ.negatives
+- 記憶.appearance
+attached:
+- フミ.identity
+- フミ.negatives
+- 記憶.appearance

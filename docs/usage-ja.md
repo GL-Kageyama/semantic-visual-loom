@@ -53,6 +53,7 @@ python3 engine/shot/look.py --style 水彩
 # 概要——何を作るか、どこまで作ったか。何も書かない
 python3 engine/shot/overview.py projects/hitosara
 python3 engine/shot/overview.py projects/hitosara --no-changes
+python3 engine/shot/overview.py projects/ukebi/ukebi-v3 --episode ep03  # 話ごと
 
 # リポジトリ自身の文書検査——作品を作るのには使わない
 python3 tools/check_i18n.py                                # 文書のミラー
@@ -124,12 +125,16 @@ python3 tools/check_i18n.py                                # 文書のミラー
 |---|---|
 | （位置引数） | プロジェクトのディレクトリのパス。 |
 | `--no-changes` | 変化の列（`unit.before` → `unit.after`）を刷らない。 |
+| `--episode <dir>` | `shots/<dir>/` から読んだショットだけを刷る（話ごと）。 |
 
 **数えるのは記録だけである。** `media/` は開かない——だから**標本が在るか**は言えない。
 言えるのは**テイクとして記録されたか**だけである。**尺は `shot.duration`（意図）であって、
 生成物の実測ではない。** ⚠️ **この道具は何も決めない**——導出した1枚を刷るだけで、
 保存するかは著者が決める。何を刷り、何を言えないかは
 [`engine/shot/README.md`](../engine/shot/README-ja.md) に在る。
+
+⚠️ **`--episode` は、ID ではなく読み元のディレクトリで絞る。** 空なら刷らない。
+⚠️ **話ごとの1枚は `概要/<話>.md` に保存する。** 作品全体は `概要.md` のままである。
 
 ⚠️ **`check.py` と `print_spec.py` は択一ではない——覆っている範囲が食い違っている。**
 **`print_spec.py` が刷る行は、写した瞬間に黙る行である**（だから刷られた各行は、
@@ -252,7 +257,8 @@ projects/<name>/
 > だが、作品を抱えているディレクトリが、それ自体 作品であるとは限らない。**
 > ⚠️ **逆は成り立たない——作品が作品を抱えてはならない。**
 
-⚠️ **`check.py` は再帰しない**——`root/shots/*.yaml` を**平らに**読む。ゆえに
+⚠️ **`check.py` は `root/shots/` を一段だけ読む**——`root/shots/*.yaml` と、話ごとの
+`root/shots/*/*.yaml` である。別の作品の `shots/` へは降りない。ゆえに
 **作品が作品を抱えていると、親を走らせても読まれず、しかも出力はそれを言わない。**
 `L29` が、読まれなかった作品を名指しする。
 

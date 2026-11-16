@@ -1,0 +1,31 @@
+# 第3話「綴じる」 m03c「顔が上がり、閉じた戸を見る」
+# 元の行: m03c / 10s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ（パイロット）。
+shot: ukebi-v3-ep03-15-m03c
+unit:
+  before: 顔は伏せている
+  after: 顔が上がり、閉じた戸を見る
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 10s
+population: 1
+cast:
+- フミ
+disclosure_state:
+  初頁.白: absent
+  初頁.折れ目: absent
+key_image: specs/image/ep03/ukebi-v3-ep03-15-m03c.md
+motion:
+  subject: 顔と、閉じた戸
+  quality: 顔が上がり、目が戸で止まる。戸は開かない。
+  law: one-lamp-cel の物理。光は魂火ひとつ。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- フミ.identity
+- フミ.negatives
+- 記憶.appearance
+attached:
+- フミ.identity
+- フミ.negatives
+- 記憶.appearance

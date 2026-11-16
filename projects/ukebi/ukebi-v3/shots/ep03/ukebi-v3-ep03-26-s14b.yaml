@@ -1,0 +1,37 @@
+# 第3話「綴じる」 s14b「折れた縁が立ち、表紙が浮く」
+# 元の行: s14b / 12s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ（パイロット）。
+shot: ukebi-v3-ep03-26-s14b
+unit:
+  before: 台帳は閉じかけている
+  after: 頁を両手で揃えるが、折れた縁が立ち、表紙が浮いたままになる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 12s
+population: 1
+body_parts:
+  hand: 2
+cast:
+- 送り火
+disclosure_state:
+  初頁.白: present
+  初頁.折れ目: present
+key_image: specs/image/ep03/ukebi-v3-ep03-26-s14b.md
+motion:
+  subject: 揃えた頁と、立つ折れ目と、浮く表紙
+  quality: 両手が頁を揃える。折れ目は立ち、表紙は浮いたまま。
+  law: one-lamp-cel の物理。光は魂火ひとつ。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 台帳.appearance
+- 魂火.appearance
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 台帳.appearance
+- 魂火.appearance

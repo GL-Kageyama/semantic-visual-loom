@@ -1,0 +1,37 @@
+# 第3話「綴じる」 s09「初頁は、白い」
+# 元の行: s09 / 18s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ（パイロット）。
+shot: ukebi-v3-ep03-20-s09
+unit:
+  before: 初頁は伏せられている
+  after: 初頁が白い
+role: 開示
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 18s
+population: 1
+body_parts:
+  hand: 1
+cast:
+- 送り火
+disclosure_state:
+  初頁.白: present
+  初頁.折れ目: absent
+key_image: specs/image/ep03/ukebi-v3-ep03-20-s09.md
+motion:
+  subject: 白い初頁
+  quality: 頁が白い。折れ目は角度で枠の外にある。
+  law: one-lamp-cel の物理。光は魂火ひとつ。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 台帳.appearance
+- 魂火.appearance
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 台帳.appearance
+- 魂火.appearance

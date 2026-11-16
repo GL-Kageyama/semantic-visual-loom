@@ -1,0 +1,40 @@
+# 第3話「綴じる」 s16「引き——遮断機は上がったまま」
+# 元の行: s16 / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ（パイロット）。
+shot: ukebi-v3-ep03-28-s16
+unit:
+  before: 台帳が画面を満たしている
+  after: カメラが引いて踏切の全景になり、遮断機は上がったままである
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 1
+cast:
+- 送り火
+disclosure_state:
+  初頁.白: present
+  初頁.折れ目: present
+key_image: specs/image/ep03/ukebi-v3-ep03-28-s16.md
+motion:
+  subject: 台帳と、踏切
+  quality: カメラだけが引く。彼は動かず、遮断機は上がったまま。
+  law: one-lamp-cel の物理。光は魂火ひとつ。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 台帳.appearance
+- 魂火.appearance
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 台帳.appearance
+- 魂火.appearance
+text_channel:
+- t: 0.0-20.0
+  kind: voice
+  speaker: 送り火
+  line: 花は、花に、名付けられた

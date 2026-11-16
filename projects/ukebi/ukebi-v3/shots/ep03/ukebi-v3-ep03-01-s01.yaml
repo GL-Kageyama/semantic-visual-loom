@@ -1,0 +1,28 @@
+# 第3話「綴じる」 s01「踏切が、闇に沈んでいる」
+# 元の行: s01 / 14s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ（パイロット）。
+shot: ukebi-v3-ep03-01-s01
+unit:
+  before: 踏切は闇に沈んでいる
+  after: カメラがレールの高さへ下り、枠外の魂火の光が濡れた砂利と水たまりを拾う
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 14s
+population: 0
+cast: []
+disclosure_state:
+  初頁.白: absent
+  初頁.折れ目: absent
+key_image: specs/image/ep03/ukebi-v3-ep03-01-s01.md
+motion:
+  subject: 踏切・レール・濡れた砂利と水たまり
+  quality: カメラだけがレールの高さへ下りる。主題は止まっている。
+  law: one-lamp-cel の物理。光は魂火ひとつ。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 踏切.base
+- 魂火.appearance
+attached:
+- 踏切.base
+- 魂火.appearance

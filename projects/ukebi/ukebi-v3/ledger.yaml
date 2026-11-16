@@ -1,0 +1,119 @@
+# 制作台帳 — 受け火 V3（ukebi-v3）
+#
+# 連続性（世界の状態）と開示（観客の知識の状態）を同じファイルに持つ。
+# ⚠️ 二つに割ってはならない——参照集合も禁制集合も、この一点から導かれる。
+#
+# 正はこのリポジトリの外に在る（`soul-voice-teller/.../ukebi-anime/台帳/`）。
+# ここは写しである。写しの段で落ちる値は、著者が入れるまで設計側にしかない（PLAN 0-j 末）。
+#
+# 識別子 `identity` は採用済みの設定画を名指す（`distill-essence-engine/.../ukebi-anime/`）。
+
+characters:
+  送り火:
+    identity: >-
+      ukebi-anime-character-sheet-送り火（`紺色コートのキャラクター設定画.png`）。
+      中背、肩は普通、手だけが体に対して大きい。藍の短い髪、耳を出す、前髪は眉の上。
+      膝丈の藍のコート、襟は立てない、内側は濃い灰色、ボタンは無地。
+      細い目、薄い眉、閉じた口。表情を作らない。
+    states: {}
+    negatives:
+      - "no smile"
+      - "no tears"
+      - "no anger"
+      - "no readable text"
+      - "no second person"
+  花:
+    identity: ukebi-anime-character-sheet-花（設定画 版4）
+    states: {}
+    negatives:
+      - "no readable text"
+  サチ:
+    identity: ukebi-anime-character-sheet-サチ（設定画 版2）
+    states: {}
+    negatives:
+      - "no readable text"
+  フミ:
+    identity: >-
+      ukebi-anime-character-sheet-フミ（`疲れた青年のキャラクター設定画.png`）。
+      痩せて背が丸い。黒い短い髪、寝癖が残る。灰と焦げ茶の上着、襟は開き、袖口は擦り切れる。
+      指先と爪の縁にインク。目が窪み、眼鏡は無い。視線は紙の上で止まる。
+      ペンを置いた後も指がペンの形を保つ。
+    states: {}
+    negatives:
+      - "no readable text"
+      - "no glasses"
+      - "no second person"
+  名なしの子:
+    identity: ukebi-anime-character-sheet-名なしの子（設定画）
+    states: {}
+    negatives:
+      - "no readable text"
+  コダマ:
+    identity: ukebi-anime-character-sheet-コダマ（設定画 版2）
+    states: {}
+    negatives:
+      - "no readable text"
+  トワ:
+    identity: ukebi-anime-character-sheet-トワ（設定画）
+    states: {}
+    negatives:
+      - "no readable text"
+  ナギ:
+    identity: ukebi-anime-character-sheet-ナギ（設定画）
+    states: {}
+    negatives:
+      - "no readable text"
+
+locations:
+  踏切:
+    # ⚠️ 補正前の板は使わない。台帳と三箇所食い違う（舗装・腕木・灯）。
+    #    ゆえに `base` は資産ではなく意図である（PLAN 0-j）。
+    base: >-
+      夜の踏切。砂利と土、白黒の帯の腕木、灯は無い。
+      補正済みの板はまだ無い——意図であって資産ではない。
+    geography: >-
+      線路・遮断機・踏切板の位置関係。カメラは踏切を出ない。
+      遮断機は上がったまま。誰も渡らない。
+    states: {}
+
+props:
+  台帳:
+    appearance: >-
+      彼が腕に抱える台帳。初頁は白く、頁の内側に折れ目が一本。
+      頁にはペン先の形の焦げ跡が在る（第3話の印は2）。
+    negative:
+      - "readable text"
+      - "printed title on the cover"
+  秤:
+    appearance: 彼女を測ろうとする秤。目盛りは読めない。
+    negative: ["readable numerals", "a digital display"]
+  判:
+    appearance: 判。押すと印が残る。印は片側だけ薄い。
+    negative: ["readable text on the seal", "an ink pad with a label"]
+  記憶:
+    appearance: >-
+      火の中の記憶。机・窓・頁・伏せた顔。場所ではなく、火の内側の像。
+      画面の縁に踏切の板か水たまりを残す。
+    negative: ["a second room outside the fire", "a readable page"]
+  魂火:
+    appearance: >-
+      掌の上の魂火。唯一の光源。浮かない。第3話は梅の大きさ。
+      青白い芯と、暖かい縁。場を照らす。
+    negative: ["a floating fire", "a second flame", "a lantern"]
+  手紙:
+    appearance: 手紙。宛名は読めない。
+    negative: ["readable address", "a printed stamp with text"]
+
+# 変化点だけを持つ。全ショットは並べない。変化点の間は直前の状態が続く。
+# 第3話の二点は開示ではなく伏線（form-only）。意味（半身）は第9話まで言わない。
+disclosure:
+  - shot: ukebi-v3-ep03-20-s09
+    初頁.白: present
+    negative: covered
+    # form_only: true —— 開示ではなく伏線。意味（半身）は第9話まで言わない。
+    # ⚠️ 欄にすると `Project.disclosure` が**属性として数え**、概要の「変化点」が
+    #    2点ではなく4件になる（`form_only` を読む層は無い）。ゆえに註で置く。
+  - shot: ukebi-v3-ep03-22-s11
+    初頁.折れ目: present
+    negative: covered
+    # form_only: true —— 同上。

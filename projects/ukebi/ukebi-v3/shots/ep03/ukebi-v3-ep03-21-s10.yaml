@@ -1,0 +1,37 @@
+# 第3話「綴じる」 s10「二頁目・三頁目に、既にある焦げ跡」
+# 元の行: s10 / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ（パイロット）。
+shot: ukebi-v3-ep03-21-s10
+unit:
+  before: 初頁だけが白い
+  after: カメラが二頁目・三頁目へ移り、すでにある焦げ跡が写る（増えない）
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 1
+body_parts:
+  hand: 1
+cast:
+- 送り火
+disclosure_state:
+  初頁.白: present
+  初頁.折れ目: absent
+key_image: specs/image/ep03/ukebi-v3-ep03-21-s10.md
+motion:
+  subject: 二頁目・三頁目の焦げ跡
+  quality: カメラが頁を渡る。焦げ跡は増えない。
+  law: one-lamp-cel の物理。光は魂火ひとつ。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 台帳.appearance
+- 魂火.appearance
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 台帳.appearance
+- 魂火.appearance

@@ -1,0 +1,35 @@
+# 第3話「綴じる」 s04a「火が、彼の前で止まる」
+# 元の行: s04a / 10s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ（パイロット）。
+shot: ukebi-v3-ep03-04-s04a
+unit:
+  before: 火は漂っている
+  after: 火が彼の前で止まる
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 10s
+population: 1
+body_parts:
+  head: 1
+cast:
+- 送り火
+disclosure_state:
+  初頁.白: absent
+  初頁.折れ目: absent
+key_image: specs/image/ep03/ukebi-v3-ep03-04-s04a.md
+motion:
+  subject: ゲストの火と、彼の顔の下側
+  quality: 火が彼の前で止まる。止まり方は一定で、溜めない。
+  law: one-lamp-cel の物理。光は魂火ひとつ。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 魂火.appearance
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 魂火.appearance

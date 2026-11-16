@@ -1,0 +1,31 @@
+# 第3話「綴じる」 m02a「フミが、背を丸めて書く」
+# 元の行: m02a / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ（パイロット）。
+shot: ukebi-v3-ep03-11-m02a
+unit:
+  before: 頁は生成りのままである
+  after: フミが背を丸めて座り、ペンを動かす
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 1
+cast:
+- フミ
+disclosure_state:
+  初頁.白: absent
+  初頁.折れ目: absent
+key_image: specs/image/ep03/ukebi-v3-ep03-11-m02a.md
+motion:
+  subject: フミと、ペンと、頁
+  quality: フミが背を丸めたままペンを動かす。短い線を引く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- フミ.identity
+- フミ.negatives
+- 記憶.appearance
+attached:
+- フミ.identity
+- フミ.negatives
+- 記憶.appearance

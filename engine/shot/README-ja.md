@@ -19,7 +19,11 @@ python3 engine/shot/print_spec.py projects/<project> --shot <id>  # 1本だけ
 ```bash
 python3 engine/shot/overview.py projects/<project>               # 作品まるごと
 python3 engine/shot/overview.py projects/<project> --no-changes  # 変化の散文を除く
+python3 engine/shot/overview.py projects/<project> --episode ep03  # 話ごと（shots/ep03/）
 ```
+
+⚠️ **`--episode` は読み元のディレクトリで絞る。** ID の接頭辞では絞らない——
+命名は作品ごとに違う。空なら刷らない。**保存名は `概要/<話>.md`。**
 
 **作品を読むための1枚。** 何であるか（`bible` ＋ `dramaturgy`）・各段の現在地・幕と
 シーケンス・ショットの列（人物と各ショットの変化を含む。`unit.before` → `unit.after`）・曲の区切り・

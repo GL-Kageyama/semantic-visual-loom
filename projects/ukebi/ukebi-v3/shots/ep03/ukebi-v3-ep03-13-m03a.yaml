@@ -1,0 +1,31 @@
+# 第3話「綴じる」 m03a「ペンが、最後の一行で止まる」
+# 元の行: m03a / 10s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ（パイロット）。
+shot: ukebi-v3-ep03-13-m03a
+unit:
+  before: ペンが動いている
+  after: 最後の一行でペンが止まる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 10s
+population: 1
+cast:
+- フミ
+disclosure_state:
+  初頁.白: absent
+  初頁.折れ目: absent
+key_image: specs/image/ep03/ukebi-v3-ep03-13-m03a.md
+motion:
+  subject: ペン先と、最後の一行
+  quality: ペンが最後の一行で止まる。指はペンの形を保つ。
+  law: one-lamp-cel の物理。光は魂火ひとつ。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- フミ.identity
+- フミ.negatives
+- 記憶.appearance
+attached:
+- フミ.identity
+- フミ.negatives
+- 記憶.appearance

@@ -15,7 +15,7 @@
 | `_archive/ukebi-video-00…09/` | 旧 §1–20 の生仕様（30本） | 旧版。読み取り専用 |
 | `_archive/ukebi-video-00-series/` | 旧12本のシリーズ定数 | 旧版。読み取り専用 |
 
-親を走らせても `_archive/` には再帰しない（`check.py` は `root/shots/*.yaml` を読む）。`ukebi-v2` の `spec:` は work の内側を指すので、移しても壊れない。
+親を走らせても `_archive/` は読まれない（`check.py` は `shots/` を一段だけ読み、隣の作品へは降りない）。`ukebi-v2` の `spec:` は work の内側を指すので、移しても壊れない。
 
 ## 正
 

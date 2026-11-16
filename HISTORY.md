@@ -5,7 +5,42 @@
 
 ---
 
-## 0.53.0 — 2026-11-16 作品の概要を刷る——`overview.py`（記録だけを数え、`media/` を開かない）
+## 0.54.0 — 2026-11-17 話ごとの下位ディレクトリを読む——`shots/` と `takes/` を一段だけ
+
+### 発端
+
+`projects/ukebi/ukebi-v3` は10話を**1つの作品**に入れる。話ごとに `shots/ep03/` と
+`specs/image/ep03/` を切りたかった。画像仕様は `key_image:` のパスで読むので、動かしても壊れない。
+ショットは `root/shots/*.yaml` の**平らな glob** だったので、`shots/ep03/` の下は**0本**になった。
+
+### 置いたもの
+
+`check.py` の `Project` は `root/shots/*.yaml` と `root/shots/*/*.yaml` を読む。`takes/` も同じ深さ——**一段だけ**。
+深さを1に限るのは、**作品が作品を抱える問題とは別**だからである。子の作品は自分の `shots/` を持ち、
+親の `shots/` の下には無い。ゆえに `L29` が守っている「親を走らせても子は読まれない」は壊れない。
+
+`overview.py` の §1 の出所は `shots/*.yaml`・`shots/*/*.yaml` と書く。
+`CLAUDE.md`・`README`・`docs/usage`・`engine/ledger/README` の「再帰しない／flat glob」を
+「一段だけ読む」へ直した（3言語）。`semantic.py` の `L29` の註も同じ。
+
+### 同じ版で足したもの——話ごとの概要
+
+`overview.py --episode ep03` は `shots/ep03/` のショットだけを刷る。`Project.shot_paths` が
+読み元を持つ（`check.py`）。**ID の接頭辞では絞らない**——命名は作品ごとに違う。
+空なら刷らない。保存名は `概要/<話>.md`、作品全体は `概要.md` のまま。
+`ukebi-v3` は `概要/ep03.md`（28本）を置いた。
+
+### 検証
+
+- `python3 engine/ledger/check.py projects/ukebi/ukebi-v3` — 28本を読み、違反29／註69
+  （動画の仕様を後回しにした帰結。`L11` 28＋`L14` 1）。
+- `python3 engine/shot/overview.py projects/ukebi/ukebi-v3 --episode ep03` — 28本を刷る。
+- `python3 engine/ledger/check.py --self-test` — 513例中513例。
+- `python3 tools/check_i18n.py` — 違反0。
+
+---
+
+
 
 ### 発端
 

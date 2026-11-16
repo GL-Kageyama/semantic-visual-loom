@@ -53,6 +53,7 @@ python3 engine/shot/look.py --style 水彩
 # 概要——做什么、做到哪里。什么都不写
 python3 engine/shot/overview.py projects/hitosara
 python3 engine/shot/overview.py projects/hitosara --no-changes
+python3 engine/shot/overview.py projects/ukebi/ukebi-v3 --episode ep03  # 按话
 
 # 仓库自身的文档检查——不用来做作品
 python3 tools/check_i18n.py                                # 文档的镜像
@@ -124,12 +125,16 @@ python3 tools/check_i18n.py                                # 文档的镜像
 |---|---|
 | （位置参数） | 项目目录的路径。 |
 | `--no-changes` | 不打印变化列（`unit.before` → `unit.after`）。 |
+| `--episode <dir>` | 只打印从 `shots/<dir>/` 读到的镜头（按话）。 |
 
 **只数记录。** 它不打开 `media/`——所以它说不出**样本是否存在**，只能说出
 **是否作为 take 被记录**。**尺是 `shot.duration`（意图），不是生成物的实测。**
 ⚠️ **这个工具什么都不决定**——只打印导出的一张；是否保存，由作者决定。
 它打印什么、说不出什么，在
 [`engine/shot/README.md`](../engine/shot/README-zh.md) 里。
+
+⚠️ **`--episode` 按读到记录的目录筛，不按 ID。** 空的话不打印。
+⚠️ **按话的一张保存为 `概要/<话>.md`。** 整个作品仍是 `概要.md`。
 
 ⚠️ **`check.py` 与 `print_spec.py` 不是二选一——它们覆盖的范围不一样。**
 **`print_spec.py` 打印的行，是抄下去的瞬间就会沉默的行**（所以每一行都会报出它让谁沉默）。
@@ -250,7 +255,8 @@ projects/<name>/
 > 但抱着作品的目录，并不一定本身就是作品。**
 > ⚠️ **反过来不成立——作品不得抱着作品。**
 
-⚠️ **`check.py` 不递归**——它**平着**读 `root/shots/*.yaml`。所以
+⚠️ **`check.py` 只读 `root/shots/` 的一层**——`root/shots/*.yaml`，以及按话分的
+`root/shots/*/*.yaml`。它不会走进另一个作品自己的 `shots/`。所以
 **作品抱着作品时，跑父目录也读不到，而且输出不会说出来。**
 `L29` 会点名没有被读到的作品。
 

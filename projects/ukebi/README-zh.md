@@ -15,7 +15,7 @@
 | `_archive/ukebi-video-00…09/` | 旧 §1–20 原始规格（30 本） | 旧版；只读 |
 | `_archive/ukebi-video-00-series/` | 旧十二段的系列常量 | 旧版；只读 |
 
-对父目录运行时不会递归进入 `_archive/`（`check.py` 读取 `root/shots/*.yaml`）。`ukebi-v2` 的 `spec:` 指向 work 内部，所以移动不会断开。
+对父目录运行时不会读 `_archive/`（`check.py` 只读 `shots/` 的一层，不会走进邻近的作品）。`ukebi-v2` 的 `spec:` 指向 work 内部，所以移动不会断开。
 
 ## 正
 

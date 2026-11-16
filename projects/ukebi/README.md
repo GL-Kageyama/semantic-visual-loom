@@ -15,7 +15,7 @@ The revised ten episodes are filmed here. The old version is in `_archive/`.
 | `_archive/ukebi-video-00…09/` | The old raw §1–20 specs (30) | Old version; read-only |
 | `_archive/ukebi-video-00-series/` | The old twelve-segment constants | Old version; read-only |
 
-A run over the parent does not recurse into `_archive/` (`check.py` loads `root/shots/*.yaml`). The `spec:` paths of `ukebi-v2` point inside the work, so the move does not break them.
+A run over the parent does not read `_archive/` (`check.py` reads `shots/` one level deep; it does not walk into a sibling work). The `spec:` paths of `ukebi-v2` point inside the work, so the move does not break them.
 
 ## Source of truth
 

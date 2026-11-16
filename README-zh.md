@@ -139,14 +139,14 @@ semantic-visual-loom/
 
 **⚠️ `projects/` 里同居着两种东西**——**生的规格书**（Ukebi 与 Gozen-niji 的 §1–20；
 Ukebi 的一侧归档在 `projects/ukebi/_archive/`）与**结构化的记录**
-（`bible.yaml` / `ledger.yaml` / `shots/`；**十九本**——`drama-pilot`、`grammar-*` 的七个
+（`bible.yaml` / `ledger.yaml` / `shots/`；**二十本**——`drama-pilot`、`grammar-*` 的七个
 实验作、`habits`、`habits-mv`、`habits-promo-chinatsu`、`hakuchizu`、`hitosara`、
-`hitosara-ab`、`ippitsu`、`mado-fuki`、`migenzo`、`odyssey`，以及
-`ukebi/_archive/ukebi-v2`）。`projects/ukebi/ukebi-v3` 正在准备（仅 README）。
+`hitosara-ab`、`ippitsu`、`mado-fuki`、`migenzo`、`odyssey`、`ukebi-v3`，以及
+`ukebi/_archive/ukebi-v2`）。
 `mado-fuki` 是把四份目录
 ——摄影机、光、构图、画风——全部引用的样本。
 ⚠️ **所有作品都带着自己的 `bible.yaml` 和 `ledger.yaml`，作品不抱着作品**
-——而这正是它要紧的理由：**`check.py` 不递归**，所以
+——而这正是它要紧的理由：**`check.py` 只读 `shots/` 的一层**，所以
 **作品抱着作品时，跑父目录也读不到。** `L29` 会点名没有被读到的作品。
 ⚠️ **生的规格书那一侧不放生成物，而 `reference/` 里的参照资产留着。**
 **输入不是标本这件事、删掉会失去什么**，写在 [`docs/usage.md`](docs/usage-zh.md) 里。

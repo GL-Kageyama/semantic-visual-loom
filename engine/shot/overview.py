@@ -3,6 +3,10 @@
 
     使い方:  python3 engine/shot/overview.py projects/<project>
              python3 engine/shot/overview.py projects/<project> --no-changes
+             python3 engine/shot/overview.py projects/<project> --episode ep03
+
+⚠️ **`--episode` は `shots/<dir>/` から読んだショットだけを刷る。** ID の接頭辞では
+   絞らない——命名は作品ごとに違う。空なら刷らない。保存名は `概要/<話>.md`。
 
 ⚠️ **これは読み取り専用である。** 1バイトも書かない——`projects/` にも、仕様にも、
    どこにも。**刷られた1枚を保存するかどうかは、著者が決める。**
@@ -197,6 +201,8 @@ def main():
     ap.add_argument("project", help="projects/<project> のパス")
     ap.add_argument("--no-changes", action="store_true",
                     help="変化の列（unit.before / after）を刷らない")
+    ap.add_argument("--episode", metavar="DIR",
+                    help="話ごとの下位ディレクトリ名（例 ep03）。その話のショットだけを刷る")
     a = ap.parse_args()
 
     root = Path(a.project)
@@ -213,6 +219,16 @@ def main():
     if not order:
         sys.exit(f"{root} にショットが1本も無い"
                  "（⚠️ **「0件」は「違反0件」ではない**——`L0` が鳴らす形である）")
+
+    # ⚠️ **話ごとの1枚は、読み元のディレクトリで絞る。** ID の接頭辞では絞らない——
+    #    命名は作品ごとに違い、`shot_paths` は `Project` が読んだ事実そのものである。
+    if a.episode:
+        order = [s for s in order
+                 if project.shot_paths.get(s)
+                 and project.shot_paths[s].parent.name == a.episode]
+        if not order:
+            sys.exit(f"{root} の shots/{a.episode}/ にショットが無い"
+                     "（⚠️ **空の概要を刷らない。**）")
 
     bible = (project.bible or {}).get("bible") or {}
     ledger = project.ledger or {}
@@ -233,9 +249,13 @@ def main():
     board = sorted((project.root / "specs" / "board").glob("*.md")) \
         if (project.root / "specs" / "board").is_dir() else []
 
-    print(f"# 概要 — {project.name}")
+    print(f"# 概要 — {project.name}"
+          + (f" / {a.episode}" if a.episode else ""))
     print()
     print("⚠️ **この1枚は、記録から導出した。** 仕様でも記録でもない。")
+    if a.episode:
+        print(f"⚠️ **この1枚は `shots/{a.episode}/` の {len(order)}本だけを読んでいる。** "
+              "作品全体は `概要.md` である。")
     print("⚠️ **この道具は何も書かない。** 刷るだけであり、保存するかは著者が決める。")
     print("⚠️ **`media/` は開かない。** 標本が在るかは、この1枚では言えない——"
           "言えるのは**テイクとして記録されたか**だけである。")
@@ -273,7 +293,10 @@ def main():
     print(f"| 連続性の語彙 | 人物 {len(ledger.get('characters') or {})}／"
           f"場所 {len(ledger.get('locations') or {})}／"
           f"道具 {len(ledger.get('props') or {})} |")
-    print(f"| 開示の変化点 | {len(project.disclosure)} 件 |")
+    disc = project.disclosure
+    if a.episode:
+        disc = [d for d in disc if d.get("shot") in set(order)]
+    print(f"| 開示の変化点 | {len(disc)} 件 |")
     print()
 
     fields = (("premise", "何が起きるか"),
@@ -302,7 +325,8 @@ def main():
     print()
     print("| 段 | 現在 | 全体 | 出所 |")
     print("|---|---|---|---|")
-    print(f"| ショットの記録 | {len(order)}本 | {len(order)}本 | `shots/*.yaml` |")
+    print(f"| ショットの記録 | {len(order)}本 | {len(order)}本 | "
+          "`shots/*.yaml`・`shots/*/*.yaml`（話ごとの下位を一段だけ読む） |")
     v_ok = sum(1 for sid in order if video[sid][1])
     v_src = sum(1 for sid in order if video[sid][0])
     print(f"| 動画の仕様 | {v_ok}本 | {len(order)}本 | `spec:` が指すファイル"

@@ -1,0 +1,37 @@
+# 第3話「綴じる」 s08「焦げ跡が、ペン先の形で現れる」
+# 元の行: s08 / 18s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ（パイロット）。
+shot: ukebi-v3-ep03-19-s08
+unit:
+  before: 頁は生成りのままである
+  after: ペン先の形の焦げ跡が現れ、縁だけ赤い
+role: 質感
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 18s
+population: 1
+body_parts:
+  hand: 1
+cast:
+- 送り火
+disclosure_state:
+  初頁.白: absent
+  初頁.折れ目: absent
+key_image: specs/image/ep03/ukebi-v3-ep03-19-s08.md
+motion:
+  subject: 焦げ跡と、頁
+  quality: 焦げ跡が現れる。頁は動かない。
+  law: one-lamp-cel の物理。光は魂火ひとつ。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 台帳.appearance
+- 魂火.appearance
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+- 台帳.appearance
+- 魂火.appearance
