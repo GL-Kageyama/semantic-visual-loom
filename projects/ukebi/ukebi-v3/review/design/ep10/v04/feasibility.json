@@ -1,0 +1,23 @@
+{
+  "seat": "feasibility",
+  "criteria": {"C1": 50, "C2": 45, "C3": 60, "C4": 78, "C5": 50, "C6": 58},
+  "primary_score": 57,
+  "must_below_31": [],
+  "critical": true,
+  "findings": [
+    {"where": "PLAN cast", "what": "あなた が characters の8人に居ない。", "why": "L8。", "fix": "9人目か、cast を置かない。"},
+    {"where": "ep03 立ち絵", "what": "握り拳の火が大きさを先に決める。", "why": "参照が勝つ。", "fix": "渡さない、または先に段を決める。"},
+    {"where": "ep03 火", "what": "{SIZE} 未決で27枚が焼けない。", "why": "policy が閉じない。", "fix": "第3話の段を決める。"},
+    {"where": "ep10 s27/s28 の句", "what": "英語の {PLACE} 句が無い。s28 の no smoke を外す逐語も無い。", "why": "実行者が発明。", "fix": "句を書く。"},
+    {"where": "ep10 白頁 LIGHT", "what": "LIGHT: none は one-lamp-cel の「一光源」を満たさない（欄は非空）。", "why": "否定形は空欄。", "fix": "別様式か、肯定形の例外（頁の白）。"},
+    {"where": "ep10 format", "what": "illustration は MOOD、one-lamp-cel は DIRECTION/ACCENT を要する。", "why": "L22。", "fix": "欄を列挙して値を置く。"},
+    {"where": "ep10 s00–s25", "what": "§13 の文は画像仕様に届かない。", "why": "画像の LIGHT が空。", "fix": "画像仕様に英語句を。"},
+    {"where": "ep10 s26", "what": "掌と内側が同居。", "why": "位置が二つ。", "fix": "一つに。"},
+    {"where": "PLAN 0-j", "what": "10枚のうち4枚は使えない。", "why": "枚数の読み。", "fix": "使える6枚と条件付き4枚を分ける。"},
+    {"where": "PLAN L21", "what": "no watermark が negative_base に無い。", "why": "全仕様で L21。", "fix": "足す。"},
+    {"where": "PLAN constants", "what": "constants は video 以外 string のみ。", "why": "S1 で落ちる。", "fix": "表を文字列 block に。"},
+    {"where": "PLAN WAN 30秒", "what": "尺は可変。", "why": "切る理由。", "fix": "二変化で説明。"},
+    {"where": "ep03 s16/s03", "what": "人数と部位が未決。", "why": "記録できない。", "fix": "固定。"}
+  ],
+  "note": "36本・600秒・36/36/0・人数・部位・L20/S0 は通る。下げるのは画像仕様の欄、白頁の光、火の句、第3話の火。"
+}
