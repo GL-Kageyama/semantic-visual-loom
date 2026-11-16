@@ -1,0 +1,47 @@
+{
+  "seat": "feasibility",
+  "criteria": {
+    "C1": 62,
+    "C2": 60,
+    "C3": 53,
+    "C4": 65,
+    "C5": 55,
+    "C6": 52
+  },
+  "primary_score": 58,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "ep05.md 火・未決#1 vs ukebi-anime-scene-ep05/prompt.md",
+      "what": "The reused scene ep05 board carries ONE fire (a walnut, floating between the two, held by no one) and 送り火's hands 'open and empty' — but the design declares TWO fires (魂火 = 送り火の掌, 梅より小さい; ゲストの火 = コダマ). The board collapses the two fires into one floating fire.",
+      "why": "Using that board as s13c's key_image pins the wrong fire state: the design's 魂火-on-palm spec is absent and the single floating fire is neither fire as the design names them.",
+      "fix": "Before adopting scene ep05 for s13c, either re-bake to the two-fire spec or declare s13c as showing only the コダマ fire with 魂火 off-frame, and re-verify size."
+    },
+    {
+      "where": "ep05.md 火（魂火=梅より小さい）・食い違い#3 vs 採用表 #29（ep05=胡桃）",
+      "what": "The design fixes ep5's 魂火 as '梅より小さい', but the adopted board (and 採用表 fire column) fixed it as 胡桃 (walnut), not unambiguously smaller than 梅.",
+      "why": "The two wordings disagree and the 'shrinks each episode' narrative is not clearly realized by 胡桃.",
+      "fix": "Pick one word — accept 胡桃 as 'one step below 梅' and write it into the 火 line, or re-bake smaller than 梅."
+    },
+    {
+      "where": "ep05.md 人数 s03 + 切る規則",
+      "what": "s03 declares population=1 + {arm:2}, but the shot text says 伸ばしたままの両手 (two hands) and the two arms belong to コダマ's memory image inside the fire, not to the counted body.",
+      "why": "L52's arithmetic is strained when the 2 arms are a memory image and the counted body is 送り火; the field says arm while the text says hand.",
+      "fix": "State whether s03 is population 0 (fire interior only) or 1 (送り火 in frame), name the part to match the frame (hand:2 vs arm:2), and record the exception."
+    },
+    {
+      "where": "ep05.md m02/m03/m04 (30s each)",
+      "what": "Three memory shots sit exactly at the WAN 3.0 30-second ceiling with 運動=止め and no fire in frame to carry motion.",
+      "why": "30s of a near-static memory image is at the route's edge; no margin.",
+      "fix": "Confirm WAN 3.0 holds a 30s near-static shot, shave to 24–26s, or give each a camera event as the declared change."
+    },
+    {
+      "where": "ep05.md 参照画像・未決#4",
+      "what": "Crossing base intent-only, Motion character remainder, コダマ 版2 with 「彼」 are all declared.",
+      "why": "No silent defects.",
+      "fix": "None."
+    }
+  ],
+  "note": "v01 is a sound breakdown: count 25 (24 new + 1 reuse), timing 420s/7:00, population 0/1/2, single place/time, memory not a location, no disclosure. The one live risk is the s13c reuse: the board carries a single floating walnut fire with empty hands against the design's two fires."
+}

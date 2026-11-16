@@ -1,0 +1,41 @@
+{
+  "seat": "feasibility",
+  "criteria": {
+    "C1": 68,
+    "C2": 68,
+    "C3": 70,
+    "C4": 76,
+    "C5": 72,
+    "C6": 66
+  },
+  "primary_score": 70,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "ep05.md s03",
+      "what": "population 1 は像の体。cast は [コダマ] に",
+      "why": "L8 の cast と population の一致",
+      "fix": "cast を [コダマ] と記録する"
+    },
+    {
+      "where": "ep05.md 参照",
+      "what": "二火の参照なし",
+      "why": "最も危険な構図",
+      "fix": "二火の参照板を先に焼く"
+    },
+    {
+      "where": "ep05.md 参照 記憶",
+      "what": "記憶の prop を名指していない",
+      "why": "不在を決定として書く",
+      "fix": "記憶の板は使わない（戸口と影は像）と一行"
+    },
+    {
+      "where": "ep05.md 未決#2",
+      "what": "胡桃が決定と未決の二箇所",
+      "why": "同じ対象",
+      "fix": "決定へ、未決から落とす"
+    }
+  ],
+  "note": "27新規は実行可能。二火の参照だけが未着手。"
+}

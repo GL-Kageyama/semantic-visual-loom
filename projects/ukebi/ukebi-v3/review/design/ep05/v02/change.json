@@ -1,0 +1,59 @@
+{
+  "seat": "change",
+  "criteria": {
+    "C1": 85,
+    "C2": 65,
+    "C3": 78,
+    "C4": 80,
+    "C5": 62,
+    "C6": 85
+  },
+  "primary_score": 76,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {
+      "where": "ep05.md:89 (s13c)",
+      "what": "s13c bundles two changes: 花が彼を膝の上へ下ろす AND 魂火が二人のあいだに浮く.",
+      "why": "The soul-fire is 掌 through s13a (before) and floats between them only from s13c onward. Two visible changes in one shot.",
+      "fix": "Cut s13c into s13c (下ろす) and s13d (魂火が浮く), or rule explicitly that the floating is the same single receiving event."
+    },
+    {
+      "where": "ep05.md:74 (m01b)",
+      "what": "m01b 前→後 is 戸の隙の闇が深まり、敷居の前で止まる — 止まる has no subject, and it bundles the darkening with the presence-stopping.",
+      "why": "Source M01 is 気配が戸の前で止まる; the design dropped 気配, so 止まる dangles, and 闇が深まる is a second event.",
+      "fix": "Keep only 闇が深まる as the one change, or restore the subject and pick which single change m01b carries."
+    },
+    {
+      "where": "ep05.md:79 (s08)",
+      "what": "後 is 火が腕の中で揺れ続け、腕は離さない — the second clause is a negation.",
+      "why": "接地は肯定形で書く; 離さない is the absence of releasing.",
+      "fix": "「腕は抱いたまま」に。"
+    },
+    {
+      "where": "ep05.md:70 (s04)",
+      "what": "前→後 is 火は漂っている → 「コダマ」という声が一度鳴り、火が彼の足元で止まる — the voice is written into the change column.",
+      "why": "The change column carries the one visible change; audio belongs to 音.",
+      "fix": "after は「火が彼の足元で止まる」だけに。声は音欄。"
+    },
+    {
+      "where": "ep05.md:78 (s07)",
+      "what": "後 is 腕が動き、記憶が切れる — two named.",
+      "why": "The rule makes the cut a consequence of the arm moving; as written it names two.",
+      "fix": "「腕が動き、それが記憶を切る」の一変化と確認するか、現在への戻りを別ショットに。"
+    },
+    {
+      "where": "ep05.md:83 (s10c)",
+      "what": "火を見ている → 彼の目を見る — the subtlest gaze shift.",
+      "why": "It is visible but only legible if framed on the eyes.",
+      "fix": "目元の寄りと明記するか、s10b へ畳む。"
+    },
+    {
+      "where": "episodes/index.md:15",
+      "what": "The ep05 index row still reads 2:00, while ep05.md records M行 2:02／承2:30.",
+      "why": "ep03's index was updated; ep05's was left at the 台帳 value.",
+      "fix": "index を 2:02 に（または台帳の目標値と注記）。"
+    }
+  ],
+  "note": "v02 is substantially complete: 27 shots/420s, the four major multi-change rows cut, the negations positive, the count from the cut. Two multi-change rows remain: s13c (lowering + floating) and m01b (darkening + subject-less 止まる)."
+}
