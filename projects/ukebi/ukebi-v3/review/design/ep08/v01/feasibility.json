@@ -1,0 +1,15 @@
+{
+  "seat": "feasibility",
+  "criteria": {"C1": 64, "C2": 62, "C3": 52, "C4": 72, "C5": 64, "C6": 70},
+  "primary_score": 64,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {"where": "ep08 M行", "what": "2:00 と 130秒。", "why": "尺の層。", "fix": "2:10。"},
+    {"where": "ep08 s09/s11", "what": "population 2 だが枠は花だけ。", "why": "L51。", "fix": "彼を枠に、または1。"},
+    {"where": "ep08 m01b/m02a/m04", "what": "手の画に部位が無い。", "why": "L52。", "fix": "手・指を宣言。"},
+    {"where": "ep08 手紙", "what": "props に無い。", "why": "参照集合が運べない。", "fix": "props へ足す（文の外観）。"},
+    {"where": "ep08 火の門", "what": "魂火とゲストの火を区別しない。", "why": "焼ける本が決まらない。", "fix": "魂火の枠内を列挙。"}
+  ],
+  "note": "24/24/0・部位の算術・L20 は通る。下げるのは M行、s09/s11、手紙、門の範囲。"
+}
