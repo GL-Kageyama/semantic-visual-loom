@@ -1,0 +1,15 @@
+{
+  "seat": "feasibility",
+  "criteria": {"C1": 78, "C2": 40, "C3": 50, "C4": 80, "C5": 72, "C6": 84},
+  "primary_score": 67.3,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {"where": "ep10 白頁", "what": "illustration＋one-lamp-cel は LIGHT/DIRECTION を必須とし、設計は光を置かない。", "why": "経路の必須欄と光の法が衝突。", "fix": "LIGHT: none（頁の白）・DIRECTION: flat を宣言。"},
+    {"where": "ep10 火 block", "what": "貼る範囲が s29 で二重。block は No smoke で s28 の煙と衝突。{PLACE} の第三の句が無い。", "why": "逐語貼りが成り立たない。", "fix": "範囲を s26–s28 に、煙は局所例外、第三の句を著者へ。"},
+    {"where": "ep10 s28", "what": "population 0 だが輪郭が在る。", "why": "L51。", "fix": "1（torso）に。"},
+    {"where": "ep10 s27", "what": "指先の画に部位が無い。", "why": "L52。", "fix": "{finger:1}。"},
+    {"where": "ep10 光表", "what": "見出し「36行」だが35行・36本。", "why": "行と本の混同。", "fix": "36ショットへ。"}
+  ],
+  "note": "鍵・36本・600秒・36/36/0 は通る。下げるのは白頁の光欄、block の変種、s28/s27、見出し。"
+}

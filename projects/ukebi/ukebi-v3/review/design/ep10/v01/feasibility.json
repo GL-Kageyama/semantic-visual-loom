@@ -1,0 +1,15 @@
+{
+  "seat": "feasibility",
+  "criteria": {"C1": 74, "C2": 72, "C3": 36, "C4": 76, "C5": 50, "C6": 70},
+  "primary_score": 63,
+  "must_below_31": [],
+  "critical": true,
+  "findings": [
+    {"where": "ep10 s03/s07", "what": "`throat` は BODY_PARTS に無い。", "why": "L52 が句を導けない。", "fix": "{head:1} に。"},
+    {"where": "ep10 s15–s25", "what": "一括 2 で部位なし。目・口・耳の寄り。", "why": "L52。", "fix": "枠ごとに 1＋部位、または二人の部位。"},
+    {"where": "ep10 火", "what": "s00–s28 に block を貼るが、23本は枠外。{PLACE} は掌と浮遊だけ。", "why": "block を貼れない。", "fix": "第三の {PLACE} と終わりの状態を著者へ。"},
+    {"where": "ep10 煙", "what": "一本の煙の行が無い。", "why": "火の終わり。", "fix": "s28 か s29 に。"},
+    {"where": "ep10 format", "what": "白頁6本も scene-board。", "why": "場でなく物。", "fix": "illustration へ。"}
+  ],
+  "note": "36本・600秒・36/36/0 は通る。下げるのは語彙・部位・火の block・煙・format。"
+}

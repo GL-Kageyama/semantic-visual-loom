@@ -1,0 +1,20 @@
+{
+  "seat": "feasibility",
+  "criteria": {"C1": 78, "C2": 58, "C3": 60, "C4": 84, "C5": 60, "C6": 62},
+  "primary_score": 67,
+  "must_below_31": [],
+  "critical": false,
+  "findings": [
+    {"where": "ep10 白頁", "what": "one-lamp-cel は光源を要し、白頁は光なし。", "why": "様式か光の法か。", "fix": "様式の例外と宣言するか、頁の白を光源に。"},
+    {"where": "ep10 format", "what": "illustration は MOOD を要し、DIRECTION も要る。", "why": "L22。", "fix": "欄を揃えるか scene-board に。"},
+    {"where": "ep10 s28", "what": "block は No smoke、s28 は煙を一本。", "why": "Negative が勝つ。", "fix": "局所改変を宣言。"},
+    {"where": "ep10 s27", "what": "指先は第三の位置だが、未決#3 は輪郭だけ。", "why": "数が違う。", "fix": "二つの局所句を列挙。"},
+    {"where": "ep10 s12/s28", "what": "torso 1 だけで腕・輪郭の範囲が不明。", "why": "L52。", "fix": "arm 2 等を。"},
+    {"where": "ep10 s19–s23", "what": "population 2 で片面の部位だけ。", "why": "L51。", "fix": "枠を決める。"},
+    {"where": "ep10 台帳", "what": "板を使わないが、s00 以外の頁の形が未宣言。", "why": "20枚で揺れる。", "fix": "block を運び手に。"},
+    {"where": "PLAN 終了条件", "what": "L22/L23/L25/L31 が順序に無い。", "why": "ゼロに届かない。", "fix": "手順へ。"},
+    {"where": "PLAN key_image", "what": "「合う1本にだけ使う」と 0 再利用。", "why": "二つの答え。", "fix": "第10話は 0 と明記。"},
+    {"where": "PLAN 30秒", "what": "30秒上限は古い。", "why": "尺は可変。", "fix": "M01 を二変化で説明。"}
+  ],
+  "note": "35行→36本・600秒・36/36/0・部位の算術・検査は通る。下げるのは白頁の光と format、block の煙、人数。"
+}
