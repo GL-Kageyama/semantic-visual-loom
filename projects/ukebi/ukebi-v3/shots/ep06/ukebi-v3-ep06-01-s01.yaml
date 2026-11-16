@@ -1,0 +1,31 @@
+# 第6話「測る」 s01「二枚の皿と四本の鎖が輪郭を持つ」
+# 元の行: s01 / 20s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-01-s01
+unit:
+  before: 踏切の闇に、濡れた砂利が細く光を返す
+  after: カメラがレールの高さから寄り、二枚の皿と四本の鎖が輪郭を持つ
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 0
+cast: []
+disclosure_state:
+  花.測れない: absent
+  花.該当なし: absent
+  花.印なし: absent
+key_image: specs/image/ep06/ukebi-v3-ep06-01-s01/ukebi-v3-ep06-01-s01.md
+motion:
+  subject: 秤の二枚の皿と四本の鎖
+  quality: カメラだけが寄る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 秤.appearance
+- 踏切.base
+- 魂火.appearance
+attached:
+- 秤.appearance
+- 踏切.base
+- 魂火.appearance

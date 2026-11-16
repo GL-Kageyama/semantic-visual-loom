@@ -1,0 +1,35 @@
+# 第4話「呑む」 s15「喉が動き、小さく、途中で止まる」
+# 元の行: s15 / 30s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep04-19-s15
+unit:
+  before: 彼の喉は止まっている
+  after: 喉が動き、小さく、途中で止まる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 30s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  花.席: present
+key_image: specs/image/ep04/ukebi-v3-ep04-19-s15/ukebi-v3-ep04-19-s15.md
+motion:
+  subject: 喉と、少女
+  quality: 喉が少し動いて止まる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base

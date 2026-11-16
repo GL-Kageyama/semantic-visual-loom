@@ -1,0 +1,31 @@
+# 第9話「捨てる」 s08「雨が制服の縁を伝う花が、踏切の前に立っている」
+# 元の行: s08 / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep09-08-s08
+unit:
+  before: 踏切の前は空
+  after: 雨が制服の縁を伝う花が、踏切の前に立っている（歩いて来ない）
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 1
+cast:
+- 花
+disclosure_state:
+  花.半身: absent
+  折れ目.一致: absent
+key_image: specs/image/ep09/ukebi-v3-ep09-08-s08/ukebi-v3-ep09-08-s08.md
+motion:
+  subject: 濡れた花と、雨
+  quality: 雨が縁を伝う。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 花.identity
+- 魂火.appearance
+- 踏切.base

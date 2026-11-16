@@ -1,0 +1,31 @@
+# 第5話「預かる」 s04「火が彼の足元で止まる」
+# 元の行: s04 / 18s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep05-04-s04
+unit:
+  before: 火は漂っている
+  after: 火が彼の足元で止まる
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 18s
+population: 1
+cast:
+- 送り火
+disclosure_state: {}
+key_image: specs/image/ep05/ukebi-v3-ep05-04-s04/ukebi-v3-ep05-04-s04.md
+motion:
+  subject: 火と、足元
+  quality: 火が止まる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 客の火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 客の火.appearance
+- 踏切.base

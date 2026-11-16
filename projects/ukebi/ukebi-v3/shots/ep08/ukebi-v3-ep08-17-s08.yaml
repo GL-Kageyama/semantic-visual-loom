@@ -1,0 +1,30 @@
+# 第8話「悼む」 s08「火の光が花の輪郭を拾う（彼女は歩いて来ない）」
+# 元の行: s08 / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep08-17-s08
+unit:
+  before: 線路の脇は暗い
+  after: 火の光が花の輪郭を拾う（彼女は歩いて来ない）
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 1
+cast:
+- 花
+disclosure_state:
+  印.裂けた縁: absent
+key_image: specs/image/ep08/ukebi-v3-ep08-17-s08/ukebi-v3-ep08-17-s08.md
+motion:
+  subject: 花の輪郭と、火
+  quality: 光が輪郭を拾う。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 花.identity
+- 魂火.appearance
+- 踏切.base

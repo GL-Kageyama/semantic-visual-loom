@@ -1,0 +1,39 @@
+# 第6話「測る」 s07「カメラが針へ上がり、針は真上のまま」
+# 元の行: s07 / 20s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-09-s07
+unit:
+  before: 花は皿の上に立ち、送り火を見ている
+  after: カメラが針へ上がり、針は真上のまま
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  花.測れない: present
+  花.該当なし: absent
+  花.印なし: absent
+key_image: specs/image/ep06/ukebi-v3-ep06-09-s07/ukebi-v3-ep06-09-s07.md
+motion:
+  subject: 皿・鎖・針
+  quality: カメラだけが針へ上がる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 秤.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 秤.appearance
+- 魂火.appearance
+- 踏切.base

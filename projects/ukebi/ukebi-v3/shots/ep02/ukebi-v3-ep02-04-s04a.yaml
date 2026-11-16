@@ -1,0 +1,32 @@
+# 第2話「送る」 s04a「土の色の火が、低く漂って来る」
+# 元の行: s04a / 12s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep02-04-s04a
+unit:
+  before: 線路の上は空
+  after: 小さなゲストの火が低く漂って来る
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 12s
+population: 1
+cast:
+- 送り火
+disclosure_state:
+  印.片方薄い: absent
+key_image: specs/image/ep02/ukebi-v3-ep02-04-s04a/ukebi-v3-ep02-04-s04a.md
+motion:
+  subject: 土の色のゲストの火
+  quality: 火が低く漂って来る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 客の火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 客の火.appearance
+- 踏切.base

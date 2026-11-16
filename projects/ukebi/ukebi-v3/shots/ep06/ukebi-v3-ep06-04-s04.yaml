@@ -1,0 +1,38 @@
+# 第6話「測る」 s04「長い軋みが届き、彼の耳が一度動く」
+# 元の行: s04 / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-04-s04
+unit:
+  before: 肩越しの耳は音の側を向いたまま、動かない
+  after: 長い軋みが届き、彼の耳が一度動く
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 1
+body_parts:
+  head: 1
+cast:
+- 送り火
+disclosure_state:
+  花.測れない: absent
+  花.該当なし: absent
+  花.印なし: absent
+key_image: specs/image/ep06/ukebi-v3-ep06-04-s04/ukebi-v3-ep06-04-s04.md
+motion:
+  subject: 耳
+  quality: 耳が一度だけ動く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 秤.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 秤.appearance
+- 魂火.appearance
+- 踏切.base

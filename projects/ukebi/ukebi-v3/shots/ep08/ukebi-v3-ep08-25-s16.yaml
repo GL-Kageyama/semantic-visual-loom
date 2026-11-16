@@ -1,0 +1,40 @@
+# 第8話「悼む」 s16「カメラが引き、遮断機の上がったままの踏切と、立つ二人が残る」
+# 元の行: s16 / 15s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep08-25-s16
+unit:
+  before: 踏切は暗く、二人が立っている
+  after: カメラが引き、遮断機の上がったままの踏切と、立つ二人が残る
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 15s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  印.裂けた縁: present
+key_image: specs/image/ep08/ukebi-v3-ep08-25-s16/ukebi-v3-ep08-25-s16.md
+motion:
+  subject: 踏切と、二人
+  quality: カメラだけが引く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+text_channel:
+- t: 0.0-15.0
+  kind: voice
+  speaker: 送り火
+  line: この魂

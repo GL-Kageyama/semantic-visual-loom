@@ -1,0 +1,37 @@
+# 第7話「値付ける」 s12「彼が判を持つ（短い黒い木と鉄、面は白い）」
+# 元の行: s12 / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep07-18-s12
+unit:
+  before: 判は秤の台の脇にある
+  after: 彼が判を持つ（短い黒い木と鉄、面は白い）
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 1
+body_parts:
+  hand: 1
+cast:
+- 送り火
+disclosure_state:
+  判.押される: absent
+  印.片側が薄い: absent
+key_image: specs/image/ep07/ukebi-v3-ep07-18-s12/ukebi-v3-ep07-18-s12.md
+motion:
+  subject: 手と、判
+  quality: 手が判を取る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 判.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 判.appearance
+- 魂火.appearance
+- 踏切.base

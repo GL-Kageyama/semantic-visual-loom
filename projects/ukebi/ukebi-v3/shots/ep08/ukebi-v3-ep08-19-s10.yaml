@@ -1,0 +1,35 @@
+# 第8話「悼む」 s10「花が口を閉じる（彼は何も言わない）」
+# 元の行: s10 / 20s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep08-19-s10
+unit:
+  before: 花の口は開いている
+  after: 花が口を閉じる（彼は何も言わない）
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  印.裂けた縁: absent
+key_image: specs/image/ep08/ukebi-v3-ep08-19-s10/ukebi-v3-ep08-19-s10.md
+motion:
+  subject: 花の口
+  quality: 口が閉じる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base

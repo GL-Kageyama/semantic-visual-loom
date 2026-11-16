@@ -1,0 +1,32 @@
+# 第1話「迎え火」 s14c「目が火を透かし、火の底に小さな影が浮かぶ」
+# 元の行: s14c / 6s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep01-18-s14c
+unit:
+  before: 目は開いている
+  after: 目が火を透かし、火の底に小さな影が浮かぶ
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 6s
+population: 1
+cast:
+- 送り火
+disclosure_state:
+  喉.留まり: present
+key_image: specs/image/ep01/ukebi-v3-ep01-18-s14c/ukebi-v3-ep01-18-s14c.md
+motion:
+  subject: 目と、火の底の影
+  quality: 目が火を透かす。影が火の底に浮かぶ。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 客の火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 客の火.appearance
+- 踏切.base

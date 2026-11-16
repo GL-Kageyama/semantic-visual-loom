@@ -1,0 +1,36 @@
+# 第10話「該当なし」 s09「カメラが引き、線路の上にただの男が立っている」
+# 元の行: s09 / 6s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep10-10-s09
+unit:
+  before: 器官が止まったばかりの立ち姿
+  after: カメラが引き、線路の上にただの男が立っている（台帳は両手の中）
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 6s
+population: 1
+cast:
+- 送り火
+disclosure_state:
+  頁.白: absent
+  花.名: absent
+  受け火: absent
+key_image: specs/image/ep10/ukebi-v3-ep10-10-s09/ukebi-v3-ep10-10-s09.md
+motion:
+  subject: 男と、線路
+  quality: カメラだけが引く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 台帳.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 台帳.appearance
+- 魂火.appearance
+- 踏切.base

@@ -1,0 +1,38 @@
+# 第5話「預かる」 s16「コダマの火は花の胸、その上に魂火が低く浮く」
+# 元の行: s16 / 15s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep05-26-s16
+unit:
+  before: コダマの火は花の胸
+  after: コダマの火が二人のあいだにあり、その上に魂火が低く浮く
+role: 質感
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 15s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state: {}
+key_image: specs/image/ep05/ukebi-v3-ep05-26-s16/ukebi-v3-ep05-26-s16.md
+motion:
+  subject: 二つの火
+  quality: 魂火が低く浮く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 客の火.appearance
+- 魂火.appearance
+- 腰掛け.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 客の火.appearance
+- 魂火.appearance
+- 腰掛け.appearance
+- 踏切.base

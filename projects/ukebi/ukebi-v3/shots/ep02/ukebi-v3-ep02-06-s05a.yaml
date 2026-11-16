@@ -1,0 +1,32 @@
+# 第2話「送る」 s05a「火が踏切の内側で止まり、水たまりに映る」
+# 元の行: s05a / 13s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep02-06-s05a
+unit:
+  before: 火は踏切の外
+  after: 火が踏切の内側で止まり、水たまりに映る
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 13s
+population: 1
+cast:
+- 送り火
+disclosure_state:
+  印.片方薄い: absent
+key_image: specs/image/ep02/ukebi-v3-ep02-06-s05a/ukebi-v3-ep02-06-s05a.md
+motion:
+  subject: 止まったゲストの火と、水たまり
+  quality: 火が止まる。映りが結ぶ。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 客の火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 客の火.appearance
+- 踏切.base

@@ -1,0 +1,27 @@
+# 第5話「預かる」 m04「最後の影が過ぎ、戸口の前が空になり、手は上がったまま」
+# 元の行: m04 / 30s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep05-11-m04
+unit:
+  before: 最後の影が来る
+  after: 最後の影が過ぎ、戸口の前が空になり、手は上がったまま
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 30s
+population: 1
+cast:
+- コダマ
+disclosure_state: {}
+key_image: specs/image/ep05/ukebi-v3-ep05-11-m04/ukebi-v3-ep05-11-m04.md
+motion:
+  subject: コダマと、空の戸口
+  quality: 影が過ぎる。手は上がったまま。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- コダマ.identity
+- 客の火.appearance
+attached:
+- コダマ.identity
+- 客の火.appearance

@@ -1,0 +1,40 @@
+# 第7話「値付ける」 s14a「花が判を受け取る」
+# 元の行: s14a / 3s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep07-20-s14a
+unit:
+  before: 判は花の前で止まっている
+  after: 花が判を受け取る
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 3s
+population: 2
+body_parts:
+  hand: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  判.押される: absent
+  印.片側が薄い: absent
+key_image: specs/image/ep07/ukebi-v3-ep07-20-s14a/ukebi-v3-ep07-20-s14a.md
+motion:
+  subject: 二人の手と、判
+  quality: 判が渡る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 判.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 判.appearance
+- 魂火.appearance
+- 踏切.base

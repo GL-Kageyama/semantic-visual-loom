@@ -1,0 +1,32 @@
+# 第8話「悼む」 m02d「折り目に沿って半分に裂け、二枚になる」
+# 元の行: m02d / 10s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep08-12-m02d
+unit:
+  before: 折り目は爪で押さえられている
+  after: 折り目に沿って半分に裂け、二枚になる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 10s
+population: 1
+body_parts:
+  hand: 2
+cast:
+- ナギ
+disclosure_state:
+  印.裂けた縁: absent
+key_image: specs/image/ep08/ukebi-v3-ep08-12-m02d/ukebi-v3-ep08-12-m02d.md
+motion:
+  subject: 両手と、裂け線
+  quality: 紙が裂ける。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- ナギ.identity
+- 手紙.appearance
+- 魂火.appearance
+attached:
+- ナギ.identity
+- 手紙.appearance
+- 魂火.appearance

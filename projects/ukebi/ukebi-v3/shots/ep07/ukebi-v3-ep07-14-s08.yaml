@@ -1,0 +1,30 @@
+# 第7話「値付ける」 s08「火が送られ、影がほどける」
+# 元の行: s08 / 20s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep07-14-s08
+unit:
+  before: 火は影を抱えている
+  after: 火が送られ、影がほどける
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 0
+cast: []
+disclosure_state:
+  判.押される: absent
+  印.片側が薄い: absent
+key_image: specs/image/ep07/ukebi-v3-ep07-14-s08/ukebi-v3-ep07-14-s08.md
+motion:
+  subject: 火と、影
+  quality: 火が送られ、影がほどける。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- トワ.states.火
+- 踏切.base
+- 魂火.appearance
+attached:
+- トワ.states.火
+- 踏切.base
+- 魂火.appearance

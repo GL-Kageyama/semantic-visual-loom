@@ -1,0 +1,36 @@
+# 第5話「預かる」 s10a「花が彼の前に来る」
+# 元の行: s10a / 6s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep05-15-s10a
+unit:
+  before: 花は腰掛けの脇に立っている
+  after: 花が彼の前に来る
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 6s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state: {}
+key_image: specs/image/ep05/ukebi-v3-ep05-15-s10a/ukebi-v3-ep05-15-s10a.md
+motion:
+  subject: 花と、送り火
+  quality: 花が前に来る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 腰掛け.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 腰掛け.appearance
+- 踏切.base

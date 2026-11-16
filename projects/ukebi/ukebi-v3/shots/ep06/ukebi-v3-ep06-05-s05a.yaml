@@ -1,0 +1,39 @@
+# 第6話「測る」 s05a「花が秤の前に来る」
+# 元の行: s05a / 7s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-05-s05a
+unit:
+  before: 花は秤の外に立っている
+  after: 花が秤の前に来る
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 7s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  花.測れない: absent
+  花.該当なし: absent
+  花.印なし: absent
+key_image: specs/image/ep06/ukebi-v3-ep06-05-s05a/ukebi-v3-ep06-05-s05a.md
+motion:
+  subject: 花と、秤
+  quality: 花が前に来る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 秤.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 秤.appearance
+- 魂火.appearance
+- 踏切.base

@@ -1,0 +1,27 @@
+# 第1話「迎え火」 s07「青白い火が、低く滑って来る」
+# 元の行: s07 / 14s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep01-07-s07
+unit:
+  before: 線路の向こうは暗い
+  after: 青白い火がひとつ、低く滑って来る
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 14s
+population: 0
+cast: []
+disclosure_state:
+  喉.留まり: absent
+key_image: specs/image/ep01/ukebi-v3-ep01-07-s07/ukebi-v3-ep01-07-s07.md
+motion:
+  subject: 客の火と、その下のレール
+  quality: 火が低く滑る。速さは変わらない。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 踏切.base
+- 客の火.appearance
+attached:
+- 踏切.base
+- 客の火.appearance

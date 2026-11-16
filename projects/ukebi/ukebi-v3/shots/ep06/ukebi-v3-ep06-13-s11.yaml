@@ -1,0 +1,40 @@
+# 第6話「測る」 s11「彼が上体を針へ寄せる」
+# 元の行: s11 / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-13-s11
+unit:
+  before: 肩越しに秤を見ている彼
+  after: 彼が上体を針へ寄せる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 1
+body_parts:
+  head: 1
+  torso: 1
+  arm: 2
+cast:
+- 送り火
+disclosure_state:
+  花.測れない: present
+  花.該当なし: absent
+  花.印なし: absent
+key_image: specs/image/ep06/ukebi-v3-ep06-13-s11/ukebi-v3-ep06-13-s11.md
+motion:
+  subject: 上体
+  quality: 上体が針へ寄る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 秤.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 秤.appearance
+- 魂火.appearance
+- 踏切.base

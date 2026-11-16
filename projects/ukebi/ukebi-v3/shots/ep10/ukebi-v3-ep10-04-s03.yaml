@@ -1,0 +1,36 @@
+# 第10話「該当なし」 s03「喉の形がほどけ、顎が下りる」
+# 元の行: s03 / 13s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep10-04-s03
+unit:
+  before: 喉は呑み込む形（唇は閉じたまま）
+  after: 喉の形がほどけ、顎が下りる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 13s
+population: 1
+body_parts:
+  head: 1
+cast:
+- 送り火
+disclosure_state:
+  頁.白: absent
+  花.名: absent
+  受け火: absent
+key_image: specs/image/ep10/ukebi-v3-ep10-04-s03/ukebi-v3-ep10-04-s03.md
+motion:
+  subject: 喉と顎
+  quality: 喉の形がほどける。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base

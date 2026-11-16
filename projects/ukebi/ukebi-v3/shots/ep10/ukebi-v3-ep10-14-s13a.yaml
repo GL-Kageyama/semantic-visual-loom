@@ -1,0 +1,38 @@
+# 第10話「該当なし」 s13a「初頁が開かれる（白い・跡が無い・縁の片方が内側へ折れている）」
+# 元の行: s13a / 10s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep10-14-s13a
+unit:
+  before: 台帳は両腕の中
+  after: 初頁が開かれる（白い・跡が無い・縁の片方が内側へ折れている）
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 10s
+population: 1
+body_parts:
+  hand: 2
+cast:
+- 送り火
+disclosure_state:
+  頁.白: absent
+  花.名: absent
+  受け火: absent
+key_image: specs/image/ep10/ukebi-v3-ep10-14-s13a/ukebi-v3-ep10-14-s13a.md
+motion:
+  subject: 初頁と、折れ
+  quality: 初頁が開く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 台帳.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 台帳.appearance
+- 魂火.appearance
+- 踏切.base

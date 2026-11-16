@@ -1,0 +1,39 @@
+# 第6話「測る」 s06「花が片方の皿へ上がる」
+# 元の行: s06 / 20s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-08-s06
+unit:
+  before: 花は秤の前に立つ
+  after: 花が片方の皿へ上がる
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  花.測れない: absent
+  花.該当なし: absent
+  花.印なし: absent
+key_image: specs/image/ep06/ukebi-v3-ep06-08-s06/ukebi-v3-ep06-08-s06.md
+motion:
+  subject: 花と、皿
+  quality: 花が皿へ上がる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 秤.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 秤.appearance
+- 魂火.appearance
+- 踏切.base

@@ -4,7 +4,7 @@
 
 # Ukebi V3 — filming the revised ten episodes
 
-The successor to `_archive/ukebi-v2`. The old version stays. This work now has `bible.yaml` / `ledger.yaml` / `shots/`. **Episode 3 is the pilot: 28 shot records and 28 image specs. Its video specs are deferred.** Each shot's spec and outputs live in one folder: `specs/image/ep03/<the same name as the spec>/`. Outputs keep their own names—the folder carries the shot, and spec and folder sort together by number. The other nine episodes are cut in [`episodes/`](episodes/index.md) but not yet recorded. The whole picture is in [`進捗表.md`](進捗表.md), the record-derived one-pager is [`概要.md`](概要.md), and episode 3's is [`概要/ep03.md`](概要/ep03.md).
+The successor to `_archive/ukebi-v2`. The old version stays. This work now has `bible.yaml` / `ledger.yaml` / `shots/`. **All ten episodes are recorded: 28 + 27 + 34 + 22 + 27 + 25 + 27 + 25 + 21 + 36 = 272 shot records and 272 image specs. Their video specs are deferred.** Each shot's spec and outputs live in one folder: `specs/image/epNN/<the same name as the spec>/`. Outputs keep their own names—the folder carries the shot, and spec and folder sort together by number. The whole picture is in [`進捗表.md`](進捗表.md), the record-derived one-pager is [`概要.md`](概要.md), and the per-episode sheets are [`概要/ep03.md`](概要/ep03.md) through [`概要/ep10.md`](概要/ep10.md).
 
 ## What is made
 
@@ -55,10 +55,10 @@ V3 settled that shape at episode 3. The same hole should not be made 272 times.
 ## Order
 
 1. ✅ Write `bible.yaml` and `ledger.yaml` from the revision. Names: サチ, フミ, トワ, ナギ, 花. Disclosure: `構想/design.md`'s table.
-2. ✅ `breakdown` ep3 into `shots/` (28 records).
-3. ✅ Write the image specs for ep3 (28). ⏸ §1–20 and §18's seven slots are deferred; `L11` and `L14` name the empty video side.
+2. ✅ `breakdown` all ten episodes into `shots/` (272 records).
+3. ✅ Write the image specs for all 272 shots. ⏸ §1–20 and §18's seven slots are deferred; `L11` and `L14` name the empty video side. ⚠️ Nine ep9 memory shots drop `no rain` on purpose; `L21` reports them as a declared hold.
 4. ◐ `reference_set` / `attached` are written per shot. `forbidden_set` is not yet derived.
-5. Next: record the remaining 244 shots and their image specs. Then the video specs.
+5. Next: the video specs for all 272 shots, and the takes.
 
 ## Do not touch
 

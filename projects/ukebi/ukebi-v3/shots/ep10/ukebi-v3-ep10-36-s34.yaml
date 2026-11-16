@@ -1,0 +1,25 @@
+# 第10話「該当なし」 s34「表紙の暗い布が頁の縁を覆い、頁の面は白いまま閉じる」
+# 元の行: s34 / 10s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep10-36-s34
+unit:
+  before: 頁は開いている
+  after: 表紙の暗い布が頁の縁を覆い、頁の面は白いまま閉じる
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 10s
+population: 0
+cast: []
+disclosure_state:
+  頁.白: present
+  花.名: present
+  受け火: present
+key_image: specs/image/ep10/ukebi-v3-ep10-36-s34/ukebi-v3-ep10-36-s34.md
+motion:
+  subject: 頁と、表紙
+  quality: 表紙が頁を覆う。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set: []
+attached: []

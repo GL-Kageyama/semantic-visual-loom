@@ -1,0 +1,29 @@
+# 第8話「悼む」 s02「軍の外套の火が来る（徽章なし・帽子・若い）」
+# 元の行: s02 / 16s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep08-02-s02
+unit:
+  before: 線路の上は空
+  after: 軍の外套の火が来る（徽章なし・帽子・若い）
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 16s
+population: 0
+cast: []
+disclosure_state:
+  印.裂けた縁: absent
+key_image: specs/image/ep08/ukebi-v3-ep08-02-s02/ukebi-v3-ep08-02-s02.md
+motion:
+  subject: 外套の形の火
+  quality: 火が低く来る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- ナギ.states.火
+- 踏切.base
+- 魂火.appearance
+attached:
+- ナギ.states.火
+- 踏切.base
+- 魂火.appearance

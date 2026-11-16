@@ -1,0 +1,38 @@
+# 第7話「値付ける」 s11「もう一度、三度動き、何も浮かばない」
+# 元の行: s11 / 20s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep07-17-s11
+unit:
+  before: 彼の目は花を見ている
+  after: もう一度、三度動き、何も浮かばない
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 2
+body_parts:
+  eye: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  判.押される: absent
+  印.片側が薄い: absent
+key_image: specs/image/ep07/ukebi-v3-ep07-17-s11/ukebi-v3-ep07-17-s11.md
+motion:
+  subject: 彼の目
+  quality: 目がもう一度、三度動く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base

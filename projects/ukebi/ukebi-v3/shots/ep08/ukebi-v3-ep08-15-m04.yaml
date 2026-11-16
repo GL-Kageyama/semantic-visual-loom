@@ -1,0 +1,32 @@
+# 第8話「悼む」 m04「紙が外套の内側へ入る（彼は座ったまま）」
+# 元の行: m04 / 10s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep08-15-m04
+unit:
+  before: 紙は手にある
+  after: 紙が外套の内側へ入る（彼は座ったまま）
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 10s
+population: 1
+body_parts:
+  hand: 1
+cast:
+- ナギ
+disclosure_state:
+  印.裂けた縁: absent
+key_image: specs/image/ep08/ukebi-v3-ep08-15-m04/ukebi-v3-ep08-15-m04.md
+motion:
+  subject: 手と、外套の内側
+  quality: 紙が内側へ入る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- ナギ.identity
+- 手紙.appearance
+- 魂火.appearance
+attached:
+- ナギ.identity
+- 手紙.appearance
+- 魂火.appearance

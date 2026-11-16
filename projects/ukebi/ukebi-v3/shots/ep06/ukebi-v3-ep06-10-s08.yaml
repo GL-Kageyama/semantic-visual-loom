@@ -1,0 +1,36 @@
+# 第6話「測る」 s08「彼が頭を火の側へ向け、耳を澄ます」
+# 元の行: s08 / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-10-s08
+unit:
+  before: 肩越しの耳は音の側を向いたまま
+  after: 彼が頭を火の側へ向け、耳を澄ます
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 1
+body_parts:
+  head: 1
+cast:
+- 送り火
+disclosure_state:
+  花.測れない: present
+  花.該当なし: absent
+  花.印なし: absent
+key_image: specs/image/ep06/ukebi-v3-ep06-10-s08/ukebi-v3-ep06-10-s08.md
+motion:
+  subject: 耳
+  quality: 頭が火の側へ向く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base

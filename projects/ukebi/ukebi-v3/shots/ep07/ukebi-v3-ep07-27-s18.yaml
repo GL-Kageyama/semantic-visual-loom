@@ -1,0 +1,41 @@
+# 第7話「値付ける」 s18「カメラが引き、火が拾う中空の印と踏切が残る」
+# 元の行: s18 / 15s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep07-27-s18
+unit:
+  before: 彼の頭と上体、後ろに踏切
+  after: カメラが引き、火が拾う中空の印と踏切が残る
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 15s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  判.押される: present
+  印.片側が薄い: present
+key_image: specs/image/ep07/ukebi-v3-ep07-27-s18/ukebi-v3-ep07-27-s18.md
+motion:
+  subject: 踏切と、二人と、印
+  quality: カメラだけが引く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+text_channel:
+- t: 0.0-15.0
+  kind: voice
+  speaker: 送り火
+  line: この魂

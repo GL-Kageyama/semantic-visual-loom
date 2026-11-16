@@ -1,0 +1,36 @@
+# 第2話「送る」 s17「指が跡の縁から離れ、火は低い」
+# 元の行: s17 / 12s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep02-33-s17
+unit:
+  before: 手は頁の上
+  after: 指が跡の縁から離れ、火は低い
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 12s
+population: 1
+body_parts:
+  hand: 1
+cast:
+- 送り火
+disclosure_state:
+  印.片方薄い: present
+key_image: specs/image/ep02/ukebi-v3-ep02-33-s17/ukebi-v3-ep02-33-s17.md
+motion:
+  subject: 指と、跡
+  quality: 指が離れる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 台帳.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 台帳.appearance
+- 踏切.base

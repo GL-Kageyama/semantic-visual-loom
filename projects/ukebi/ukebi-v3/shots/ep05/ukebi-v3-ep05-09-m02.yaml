@@ -1,0 +1,27 @@
+# 第5話「預かる」 m02「コダマが外に立つ。大きすぎる上着、裸足、両手を上げる」
+# 元の行: m02 / 30s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep05-09-m02
+unit:
+  before: 戸口は暗い
+  after: コダマが外に立つ。大きすぎる上着、余った袖、裸足、両手を上げる
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 30s
+population: 1
+cast:
+- コダマ
+disclosure_state: {}
+key_image: specs/image/ep05/ukebi-v3-ep05-09-m02/ukebi-v3-ep05-09-m02.md
+motion:
+  subject: コダマと、上げた両手
+  quality: 立っている。両手は上げたまま。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- コダマ.identity
+- 客の火.appearance
+attached:
+- コダマ.identity
+- 客の火.appearance

@@ -1,0 +1,25 @@
+# 第1話「迎え火」 s03「レールの錆だけが赤い」
+# 元の行: s03 / 14s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep01-03-s03
+unit:
+  before: 線路が二本、闇へ伸びる
+  after: レールの錆だけが赤く、消失点へ続く
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 14s
+population: 0
+cast: []
+disclosure_state:
+  喉.留まり: absent
+key_image: specs/image/ep01/ukebi-v3-ep01-03-s03/ukebi-v3-ep01-03-s03.md
+motion:
+  subject: 二本のレールと、レールの頭の錆
+  quality: カメラが線路に沿って送る。レールは動かない。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 踏切.base
+attached:
+- 踏切.base

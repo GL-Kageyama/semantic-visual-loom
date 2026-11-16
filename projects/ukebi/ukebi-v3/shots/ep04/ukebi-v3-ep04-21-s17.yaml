@@ -1,0 +1,35 @@
+# 第4話「呑む」 s17「カメラが引き、上がったままの遮断機が入る」
+# 元の行: s17 / 20s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep04-21-s17
+unit:
+  before: 腰掛けの少女
+  after: カメラが引き、上がったままの遮断機が画面に入る
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  花.席: present
+key_image: specs/image/ep04/ukebi-v3-ep04-21-s17/ukebi-v3-ep04-21-s17.md
+motion:
+  subject: 少女と、遮断機
+  quality: カメラが引く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base

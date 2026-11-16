@@ -1,0 +1,34 @@
+# 第8話「悼む」 s15「胸の布が一度、遅れて持ち上がる」
+# 元の行: s15 / 15s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep08-24-s15
+unit:
+  before: 胸の布は静か
+  after: 布が一度、遅れて持ち上がる
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 15s
+population: 1
+body_parts:
+  torso: 1
+cast:
+- 送り火
+disclosure_state:
+  印.裂けた縁: present
+key_image: specs/image/ep08/ukebi-v3-ep08-24-s15/ukebi-v3-ep08-24-s15.md
+motion:
+  subject: 胸の布
+  quality: 布が遅れて持ち上がる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base

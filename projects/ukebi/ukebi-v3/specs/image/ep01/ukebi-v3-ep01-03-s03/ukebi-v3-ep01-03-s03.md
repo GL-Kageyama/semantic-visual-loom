@@ -1,0 +1,40 @@
+# 画像仕様 — 第1話「迎え火」 s03「レールの錆だけが赤い」
+
+⚠️ **この仕様は §1–20 を持たない。** 画像プロンプトは節ではなく**1枚の文**である。
+⚠️ **`REF_FORMAT` と `REF_STYLE` が、どのカードの穴かを名乗る。** `L22` が読む。
+⚠️ このショットは**動画の仕様をまだ持たない**（`spec:` を書いていない）。`L11` が1本ずつ報告する。
+
+## 主題
+
+- `REF_FORMAT`: `art-board` —— 4つの穴（`LOCATION`／`HOUR`／`LIGHT_SOURCE`／`DIRECTION`）
+- `REF_STYLE`: `one-lamp-cel` —— 5つの穴（`SUBJECT`／`ACTION`／`LOCATION`／`LIGHT`／`ACCENT`）
+- `LOCATION`: the boundary crossing at night — two rails running into the dark, gravel and earth, no pavement, no sky
+- `HOUR`: an hour without a clock — no time of day, no sky, no sun, no moon, no stars
+- `LIGHT_SOURCE`: a distant pale cold white light from beyond the crossing, low; the source is not in the frame
+- `DIRECTION`: from the far end, along the rails
+- `SUBJECT`: the two rails and the rust on the rail heads
+- `ACTION`: running into the dark, the rust red catching the distant light
+- `LIGHT`: one distant pale cold white light from the far end, low, and nothing else
+- `ACCENT`: the rust red on the rail heads as the only red
+
+## 参照画像
+
+**生成のときに添える画像である。** ⚠️ **この節は意図であって、添付の記録ではない**——何を添えたかは `takes/` に在る（まだ無い）。
+
+| 台帳の鍵 | 添えるファイル | 何 |
+|---|---|---|
+| `踏切.base` | `reference/踏切/青い鬼火の無人踏切.png` | 補正版の板（砂利と土・白黒の腕木・灯なし） |
+
+
+
+## 生成物の置き場
+
+`specs/image/ep01/ukebi-v3-ep01-03-s03/` —— **このフォルダは在る。この仕様もこの中に在る。**
+生成物はこの中へ、**名前を変えずに**置く。
+⚠️ **ファイル名は記録ではない。** どのショットの出力かは、フォルダが持つ。
+
+## 投入する1本の文字列
+
+An art board of the boundary crossing at night — two rails running into the dark, gravel and earth, no pavement, no sky in 16:9, empty of characters. One lighting state — an hour without a clock — no time of day, no sky, no sun, no moon, no stars, a distant pale cold white light from beyond the crossing, low; the source is not in the frame from from the far end, along the rails — establishing the palette, the light direction, the surface texture and the level of detail that every later shot of this place must match. Compositional space left open where the figure will stand. A background standard: one location, one state, no figures. The camera is low, at rail height, sending along the rails toward the vanishing point; the rails are off centre. The plate is a painted anime background, with every surface finished to the same level as the painted background, with texture and soft modelling, never a flat cel diagram, never a photograph, never a 3D render. The palette is limited to sunken indigo, rust red, pale white-blue, black, and the white of paper, with the skin a warm pale grey-brown; the rust is a thin red line along the rail heads and the fishplates, the only warm colour outside the fire. There is no sky: no stars, no moon, no sun, no clouds, no horizon, no horizon glow, no gradient. Where the crossing is in the frame, its two barrier arms are raised at sixty degrees with white and black bands of even width, left plain, with no sign, no signal, no lamp, no fence and no guardrail; the ground is gravel and earth with two wheel ruts, no pavement, no asphalt, no concrete and no painted line. The light is small in the frame and the darkness around it is large; the pool of light has a hard edge and reaches only the near ground and the water, and the rest falls into black. No gradient across any surface.
+
+no crowd, no pavement, no asphalt, no concrete, no painted road line, no yellow-black barrier, no yellow stripe, no warning light, no sign, no signal, no lamp, no fence, no guardrail, no stars, no moon, no sun, no sky, no horizon, no clouds, no warm amber, no orange, no yellow, no magenta, no gold, no neon, no saturated red, no bloom, no lens flare, no glow, no god rays, no secondary light source, no gradient across any surface, no airbrush, no painterly brush strokes, no photographic texture, not photorealistic, no 3D render, no watermark, no on-screen subtitles, no background music, no legible text, no crowds, no rain, no figure, no person, no hands, no flame in the frame, no visible light source, no point of light

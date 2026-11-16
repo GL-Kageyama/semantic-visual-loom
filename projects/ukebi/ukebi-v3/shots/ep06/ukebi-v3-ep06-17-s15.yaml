@@ -1,0 +1,41 @@
+# 第6話「測る」 s15「指の腹が手首の内側に当たる」
+# 元の行: s15 / 20s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-17-s15
+unit:
+  before: 彼女の指は手首の外
+  after: 指の腹が手首の内側に当たる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 2
+body_parts:
+  hand: 1
+  finger: 2
+  arm: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  花.測れない: present
+  花.該当なし: present
+  花.印なし: absent
+key_image: specs/image/ep06/ukebi-v3-ep06-17-s15/ukebi-v3-ep06-17-s15.md
+motion:
+  subject: 指と、手首
+  quality: 指が手首に当たる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base

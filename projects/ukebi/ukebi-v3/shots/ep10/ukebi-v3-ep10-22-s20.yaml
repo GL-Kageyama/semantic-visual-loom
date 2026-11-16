@@ -1,0 +1,44 @@
+# 第10話「該当なし」 s20「花が口を開き、問う」
+# 元の行: s20 / 18s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep10-22-s20
+unit:
+  before: 花の口は開きかけている
+  after: 花が口を開き、問う
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 18s
+population: 2
+body_parts:
+  face: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  頁.白: absent
+  花.名: absent
+  受け火: absent
+key_image: specs/image/ep10/ukebi-v3-ep10-22-s20/ukebi-v3-ep10-22-s20.md
+motion:
+  subject: 花の口
+  quality: 口が開き、問う。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+text_channel:
+- t: 0.0-18.0
+  kind: voice
+  speaker: 花
+  line: あんたは、なんと呼ばれたい

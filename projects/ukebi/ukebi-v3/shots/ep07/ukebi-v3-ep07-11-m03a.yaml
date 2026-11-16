@@ -1,0 +1,32 @@
+# 第7話「値付ける」 m03a「手が離れ、彼女は顎を元の高さへ戻す」
+# 元の行: m03a / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep07-11-m03a
+unit:
+  before: 数える指は止まっている
+  after: 手が離れ、彼女は顎を元の高さへ戻す
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 1
+body_parts:
+  hand: 1
+  head: 1
+cast:
+- トワ
+disclosure_state:
+  判.押される: absent
+  印.片側が薄い: absent
+key_image: specs/image/ep07/ukebi-v3-ep07-11-m03a/ukebi-v3-ep07-11-m03a.md
+motion:
+  subject: 手と、顎
+  quality: 手が離れる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- トワ.identity
+- 魂火.appearance
+attached:
+- トワ.identity
+- 魂火.appearance

@@ -1,0 +1,36 @@
+# 第7話「値付ける」 s14b「花が判を裏返し、白い面を見る」
+# 元の行: s14b / 3s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep07-21-s14b
+unit:
+  before: 花は判を手に持っている
+  after: 花が判を裏返し、白い面を見る
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 3s
+population: 1
+body_parts:
+  hand: 1
+  face: 1
+cast:
+- 花
+disclosure_state:
+  判.押される: absent
+  印.片側が薄い: absent
+key_image: specs/image/ep07/ukebi-v3-ep07-21-s14b/ukebi-v3-ep07-21-s14b.md
+motion:
+  subject: 花の手と、判の白い面
+  quality: 判が裏返る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 花.identity
+- 判.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 花.identity
+- 判.appearance
+- 魂火.appearance
+- 踏切.base

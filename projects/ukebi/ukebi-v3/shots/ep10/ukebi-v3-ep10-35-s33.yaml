@@ -1,0 +1,25 @@
+# 第10話「該当なし」 s33「頁の繊維に、視聴者の目の距離でピントが合う」
+# 元の行: s33 / 18s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep10-35-s33
+unit:
+  before: 頁は平らに開いている（ピントは遠い）
+  after: 頁の繊維に、視聴者の目の距離でピントが合う
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 18s
+population: 0
+cast: []
+disclosure_state:
+  頁.白: present
+  花.名: present
+  受け火: present
+key_image: specs/image/ep10/ukebi-v3-ep10-35-s33/ukebi-v3-ep10-35-s33.md
+motion:
+  subject: 頁の繊維
+  quality: ピントが合う。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set: []
+attached: []

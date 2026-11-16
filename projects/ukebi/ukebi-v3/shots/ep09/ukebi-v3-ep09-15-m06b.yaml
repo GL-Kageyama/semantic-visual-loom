@@ -1,0 +1,35 @@
+# 第9話「捨てる」 m06b「炭の揺れが縁から離れ、記憶が切れる」
+# 元の行: m06b / 15s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep09-15-m06b
+unit:
+  before: 現在の背は止まっている。炭の揺れが縁を滑っている
+  after: 炭の揺れが縁から離れ、記憶が切れる
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 15s
+population: 1
+body_parts:
+  torso: 1
+cast:
+- 送り火
+disclosure_state:
+  花.半身: absent
+  折れ目.一致: absent
+key_image: specs/image/ep09/ukebi-v3-ep09-15-m06b/ukebi-v3-ep09-15-m06b.md
+motion:
+  subject: 背と、炭の火
+  quality: 背が止まり、記憶が切れる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base

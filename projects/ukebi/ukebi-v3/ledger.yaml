@@ -28,10 +28,14 @@ characters:
     negatives:
       - "no readable text"
   サチ:
-    identity: ukebi-anime-character-sheet-サチ（設定画 版2）
+    identity: >-
+      ukebi-anime-character-sheet-サチ（設定画 版2）。痩せた女。布の履き物
+      ——設定画は草履形。再焼きまで、プロンプトで布と指定する。窄口の壺を片手に。
     states: {}
     negatives:
       - "no readable text"
+      - "no sandals"
+      - "no straw sandals"
   フミ:
     identity: >-
       ukebi-anime-character-sheet-フミ（`疲れた青年のキャラクター設定画.png`）。
@@ -55,14 +59,31 @@ characters:
       - "no readable text"
   トワ:
     identity: ukebi-anime-character-sheet-トワ（設定画）
-    states: {}
+    states:
+      火:
+        note: 細い火。縦に伸びる。火の底に伏せた目。自ら光るが、場を照らさない。
     negatives:
       - "no readable text"
   ナギ:
     identity: ukebi-anime-character-sheet-ナギ（設定画）
-    states: {}
+    states:
+      火:
+        note: >-
+          軍の外套の形の火。徽章なし・旗なし・帽子・若い。色は魂火と同じ青白・縁だけ赤。
+          外套の形は輪郭だけで、体ではない。
     negatives:
       - "no readable text"
+  あなた:
+    # POV only. 参照画像なし。足だけ。全身も顔も手も出さない（ep01 s02/s19）。
+    identity: >-
+      the viewer — POV only. No reference image. Only the two feet appear,
+      looking down. Never a full body, never a face, never the hands.
+    states: {}
+    negatives:
+      - "no full body"
+      - "no face"
+      - "no hands"
+      - "no second person"
 
 locations:
   踏切:
@@ -101,10 +122,85 @@ props:
   手紙:
     appearance: 手紙。宛名は読めない。
     negative: ["readable address", "a printed stamp with text"]
+  客の火:
+    appearance: >-
+      ゲストの火。送られる側の魂。踏切では小さい。色は魂ごとに違う——
+      第1話は青白い芯・温かい中間・暗い底。第2話は土の色で、青白い火ではない。
+    negative:
+      - "a face in the flame"
+      - "a memory inside the flame"
+      - "a second flame"
+      - "smoke"
+      - "sparks"
+  壺:
+    appearance: >-
+      窄口・無地・空の壺。土色の素焼き、片手に収まる、手首に紐。水は一滴も無い。
+    negative:
+      - "water"
+      - "a drop"
+      - "a pattern on the pot"
+      - "a handle"
+      - "a lid"
+  腰掛け:
+    appearance: >-
+      低い木の腰掛け。灰褐色、膝の高さ。台帳の脇。
+      s09/s10a は空、s10b で花が座る。
+    negative:
+      - "a back"
+      - "an armrest"
+      - "a cushion"
+      - "a table"
+      - "a chair with a back"
 
 # 変化点だけを持つ。全ショットは並べない。変化点の間は直前の状態が続く。
 # 第3話の二点は開示ではなく伏線（form-only）。意味（半身）は第9話まで言わない。
 disclosure:
+  - shot: ukebi-v3-ep01-15-s13
+    喉.留まり: present
+    negative: covered
+  - shot: ukebi-v3-ep02-32-s16
+    印.片方薄い: present
+    negative: covered
+    # form_only: true —— 開示ではなく伏線。意味（半身）は第9話まで言わない。
+  - shot: ukebi-v3-ep04-14-s10b
+    花.席: present
+    negative: covered
+  - shot: ukebi-v3-ep06-09-s07
+    花.測れない: present
+    negative: covered
+  - shot: ukebi-v3-ep06-14-s12
+    花.該当なし: present
+    negative: covered
+  - shot: ukebi-v3-ep06-22-s19b
+    花.印なし: present
+    negative: covered
+  - shot: ukebi-v3-ep07-22-s14c
+    判.押される: present
+    negative: covered
+  - shot: ukebi-v3-ep07-23-s15a
+    印.片側が薄い: present
+    negative: covered
+    # form_only: true —— 開示ではなく伏線。意味（半身）は第9話まで言わない。
+  - shot: ukebi-v3-ep08-23-s14
+    印.裂けた縁: present
+    negative: covered
+    # form_only: true —— 第9話「半身」の伏線。
+  - shot: ukebi-v3-ep09-17-s10
+    花.半身: present
+    negative: covered
+  - shot: ukebi-v3-ep09-20-s13
+    折れ目.一致: present
+    negative: covered
+    # form_only: true —— 初頁の折れ目と花が同じ画面（形の一致）。
+  - shot: ukebi-v3-ep10-24-s22
+    花.名: present
+    negative: covered
+  - shot: ukebi-v3-ep10-31-s29
+    頁.白: present
+    negative: changed
+  - shot: ukebi-v3-ep10-34-s32
+    受け火: present
+    negative: covered
   - shot: ukebi-v3-ep03-20-s09
     初頁.白: present
     negative: covered

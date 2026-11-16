@@ -1,0 +1,31 @@
+# 第7話「値付ける」 m03b「戸が開き、戸口を影が横切り、閉じる」
+# 元の行: m03b / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep07-12-m03b
+unit:
+  before: 戸は閉じている
+  after: 戸が開き、戸口を影が横切り、閉じる
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 1
+body_parts:
+  head: 1
+cast:
+- トワ
+disclosure_state:
+  判.押される: absent
+  印.片側が薄い: absent
+key_image: specs/image/ep07/ukebi-v3-ep07-12-m03b/ukebi-v3-ep07-12-m03b.md
+motion:
+  subject: 頭と、戸
+  quality: 戸が開き、影が過ぎ、閉じる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- トワ.identity
+- 魂火.appearance
+attached:
+- トワ.identity
+- 魂火.appearance

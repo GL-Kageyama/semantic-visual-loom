@@ -1,0 +1,33 @@
+# 第8話「悼む」 m02b「指が折り目をなぞる」
+# 元の行: m02b / 10s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep08-10-m02b
+unit:
+  before: 白い面は開いている
+  after: 指が折り目をなぞる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 10s
+population: 1
+body_parts:
+  hand: 1
+  finger: 2
+cast:
+- ナギ
+disclosure_state:
+  印.裂けた縁: absent
+key_image: specs/image/ep08/ukebi-v3-ep08-10-m02b/ukebi-v3-ep08-10-m02b.md
+motion:
+  subject: 指と、折り目
+  quality: 指がなぞる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- ナギ.identity
+- 手紙.appearance
+- 魂火.appearance
+attached:
+- ナギ.identity
+- 手紙.appearance
+- 魂火.appearance

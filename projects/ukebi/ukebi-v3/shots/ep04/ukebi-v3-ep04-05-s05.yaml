@@ -1,0 +1,30 @@
+# 第4話「呑む」 s05「喉が一度目の嚥下をする」
+# 元の行: s05 / 26s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep04-05-s05
+unit:
+  before: 喉は動いていない
+  after: 喉が一度目の嚥下をする
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 26s
+population: 1
+cast:
+- 送り火
+disclosure_state:
+  花.席: absent
+key_image: specs/image/ep04/ukebi-v3-ep04-05-s05/ukebi-v3-ep04-05-s05.md
+motion:
+  subject: 喉
+  quality: 喉が一度動く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 踏切.base

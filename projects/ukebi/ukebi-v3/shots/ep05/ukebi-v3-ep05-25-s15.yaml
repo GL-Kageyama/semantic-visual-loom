@@ -1,0 +1,35 @@
+# 第5話「預かる」 s15「頁の上に、子の上げた両手の小さな手形が二つ並ぶ」
+# 元の行: s15 / 15s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep05-25-s15
+unit:
+  before: 頁に送り火の指がある
+  after: 頁の上に、子の上げた両手の小さな手形が二つ並ぶ（送り火の指と同じ画面）
+role: 質感
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 15s
+population: 1
+body_parts:
+  hand: 1
+cast:
+- 送り火
+disclosure_state: {}
+key_image: specs/image/ep05/ukebi-v3-ep05-25-s15/ukebi-v3-ep05-25-s15.md
+motion:
+  subject: 頁と、二つの手形
+  quality: 手形が二つ並ぶ。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 台帳.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 台帳.appearance
+- 踏切.base

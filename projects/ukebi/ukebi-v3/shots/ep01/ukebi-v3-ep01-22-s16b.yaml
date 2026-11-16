@@ -1,0 +1,32 @@
+# 第1話「迎え火」 s16b「火が小さくなり、彼方の白い光に触れる」
+# 元の行: s16b / 6s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep01-22-s16b
+unit:
+  before: 火は細い
+  after: 火が小さくなり、彼方の白い光に触れて一度だけ明るむ
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 6s
+population: 1
+cast:
+- 送り火
+disclosure_state:
+  喉.留まり: present
+key_image: specs/image/ep01/ukebi-v3-ep01-22-s16b/ukebi-v3-ep01-22-s16b.md
+motion:
+  subject: 客の火と、彼方の白い光
+  quality: 火が小さくなり、一度だけ明るむ。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 客の火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 客の火.appearance
+- 踏切.base

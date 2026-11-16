@@ -1,0 +1,30 @@
+# 第10話「該当なし」 s32「紙の地の濃淡が一本、横切る」
+# 元の行: s32 / 20s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep10-34-s32
+unit:
+  before: 頁は白いまま
+  after: 語りが重なり、紙の地の濃淡が一本、横切る
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 0
+cast: []
+disclosure_state:
+  頁.白: present
+  花.名: present
+  受け火: present
+key_image: specs/image/ep10/ukebi-v3-ep10-34-s32/ukebi-v3-ep10-34-s32.md
+motion:
+  subject: 頁と、繊維
+  quality: 繊維が横切る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set: []
+attached: []
+text_channel:
+- t: 0.0-20.0
+  kind: voice
+  speaker: 語り
+  line: 受け火は、あなただった。

@@ -1,0 +1,37 @@
+# 第7話「値付ける」 s16「その頁に、伏せた目の跡が増える（五つ目）」
+# 元の行: s16 / 15s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep07-25-s16
+unit:
+  before: 四つ目の跡の次の頁は白い
+  after: その頁に、伏せた目の跡が増える（五つ目）
+role: 質感
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 15s
+population: 1
+body_parts:
+  hand: 1
+cast:
+- 送り火
+disclosure_state:
+  判.押される: present
+  印.片側が薄い: present
+key_image: specs/image/ep07/ukebi-v3-ep07-25-s16/ukebi-v3-ep07-25-s16.md
+motion:
+  subject: 頁と、五つ目の跡
+  quality: 跡が一つ増える。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 台帳.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 台帳.appearance
+- 魂火.appearance
+- 踏切.base

@@ -1,0 +1,34 @@
+# 第2話「送る」 s16「足跡の焦げ跡が一対増え、片方だけ薄い」
+# 元の行: s16 / 18s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep02-32-s16
+unit:
+  before: 頁に跡は無い
+  after: 足跡の焦げ跡が一対増え、片方だけ薄く、縁だけ赤い
+role: 質感
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 18s
+population: 1
+cast:
+- 送り火
+disclosure_state:
+  印.片方薄い: present
+key_image: specs/image/ep02/ukebi-v3-ep02-32-s16/ukebi-v3-ep02-32-s16.md
+motion:
+  subject: 頁と、一対の焦げ跡
+  quality: 跡が一対現れる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 台帳.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 台帳.appearance
+- 踏切.base

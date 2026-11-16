@@ -1,0 +1,35 @@
+# 第7話「値付ける」 s03「火の底に、二重の瞼の線が下を向いて現れる」
+# 元の行: s03 / 16s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep07-03-s03
+unit:
+  before: 火は縦に伸びている
+  after: 火の底に、二重の瞼の線が下を向いて現れる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 16s
+population: 1
+body_parts:
+  eye: 2
+cast:
+- トワ
+disclosure_state:
+  判.押される: absent
+  印.片側が薄い: absent
+key_image: specs/image/ep07/ukebi-v3-ep07-03-s03/ukebi-v3-ep07-03-s03.md
+motion:
+  subject: 火の底の伏せた目
+  quality: 瞼の線が現れる。開かない。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- トワ.identity
+- トワ.states.火
+- 踏切.base
+- 魂火.appearance
+attached:
+- トワ.identity
+- トワ.states.火
+- 踏切.base
+- 魂火.appearance

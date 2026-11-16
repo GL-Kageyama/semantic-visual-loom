@@ -1,0 +1,35 @@
+# 第9話「捨てる」 s05「背が流れのほうへ向き直り、止まる」
+# 元の行: s05 / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep09-05-s05
+unit:
+  before: 背は半分だけ戻っている
+  after: 背が流れのほうへ向き直り、止まる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 1
+body_parts:
+  torso: 1
+cast:
+- 送り火
+disclosure_state:
+  花.半身: absent
+  折れ目.一致: absent
+key_image: specs/image/ep09/ukebi-v3-ep09-05-s05/ukebi-v3-ep09-05-s05.md
+motion:
+  subject: 背
+  quality: 背が向き直って止まる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base

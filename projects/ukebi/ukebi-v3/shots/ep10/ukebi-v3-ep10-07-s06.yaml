@@ -1,0 +1,38 @@
+# 第10話「該当なし」 s06「まぶたが閉じる」
+# 元の行: s06 / 13s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep10-07-s06
+unit:
+  before: 睫毛が頁の焦げ跡を追っている
+  after: まぶたが閉じる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 13s
+population: 1
+body_parts:
+  eye: 2
+cast:
+- 送り火
+disclosure_state:
+  頁.白: absent
+  花.名: absent
+  受け火: absent
+key_image: specs/image/ep10/ukebi-v3-ep10-07-s06/ukebi-v3-ep10-07-s06.md
+motion:
+  subject: まぶた
+  quality: まぶたが閉じる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 台帳.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 台帳.appearance
+- 魂火.appearance
+- 踏切.base

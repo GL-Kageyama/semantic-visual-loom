@@ -1,0 +1,42 @@
+# 第6話「測る」 s18「花が口を閉じる」
+# 元の行: s18 / 20s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-20-s18
+unit:
+  before: 花の口は開いている
+  after: 花が口を閉じる
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 2
+body_parts:
+  head: 2
+  torso: 2
+  hand: 2
+  finger: 4
+cast:
+- 送り火
+- 花
+disclosure_state:
+  花.測れない: present
+  花.該当なし: present
+  花.印なし: absent
+key_image: specs/image/ep06/ukebi-v3-ep06-20-s18/ukebi-v3-ep06-20-s18.md
+motion:
+  subject: 花の口と、二人の手首
+  quality: 口が閉じる。指は離れない。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base

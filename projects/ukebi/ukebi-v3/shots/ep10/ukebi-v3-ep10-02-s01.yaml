@@ -1,0 +1,36 @@
+# 第10話「該当なし」 s01「指が一本ずつ離れ、手のひらが上を向いたまま止まる」
+# 元の行: s01 / 13s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep10-02-s01
+unit:
+  before: 手は火をすくう形
+  after: 指が一本ずつ離れ、手のひらが上を向いたまま止まる（火をすくわない）
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 13s
+population: 1
+body_parts:
+  hand: 2
+cast:
+- 送り火
+disclosure_state:
+  頁.白: absent
+  花.名: absent
+  受け火: absent
+key_image: specs/image/ep10/ukebi-v3-ep10-02-s01/ukebi-v3-ep10-02-s01.md
+motion:
+  subject: 両手
+  quality: 指が一本ずつ離れる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base

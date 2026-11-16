@@ -1,0 +1,38 @@
+# 第8話「悼む」 s11「花が長く吸い、長く吐く（一息）」
+# 元の行: s11 / 20s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep08-20-s11
+unit:
+  before: 花の息は浅い
+  after: 花が長く吸い、長く吐く（一息。襟もとが沈む）
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 2
+body_parts:
+  head: 2
+  face: 1
+cast:
+- 送り火
+- 花
+disclosure_state:
+  印.裂けた縁: absent
+key_image: specs/image/ep08/ukebi-v3-ep08-20-s11/ukebi-v3-ep08-20-s11.md
+motion:
+  subject: 花の息と、襟もと
+  quality: 長く吸い、長く吐く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base

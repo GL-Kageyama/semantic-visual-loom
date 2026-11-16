@@ -1,0 +1,24 @@
+# 第5話「預かる」 s01「カメラがレールの高さへ下り、濡れた砂利が闇を返す」
+# 元の行: s01 / 14s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep05-01-s01
+unit:
+  before: 暗い踏切
+  after: カメラがレールの高さへ下り、濡れた砂利が闇を返す
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 14s
+population: 0
+cast: []
+disclosure_state: {}
+key_image: specs/image/ep05/ukebi-v3-ep05-01-s01/ukebi-v3-ep05-01-s01.md
+motion:
+  subject: 踏切と、濡れた砂利
+  quality: カメラだけが下りる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 踏切.base
+attached:
+- 踏切.base

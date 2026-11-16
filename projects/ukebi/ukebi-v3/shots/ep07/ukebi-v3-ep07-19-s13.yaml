@@ -1,0 +1,38 @@
+# 第7話「値付ける」 s13「判が彼女の前で止まる」
+# 元の行: s13 / 12s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep07-19-s13
+unit:
+  before: 判は彼の手にある
+  after: 彼が掌に載せて差し出し、判が彼女の前で止まる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 12s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  判.押される: absent
+  印.片側が薄い: absent
+key_image: specs/image/ep07/ukebi-v3-ep07-19-s13/ukebi-v3-ep07-19-s13.md
+motion:
+  subject: 判と、花の手
+  quality: 判が止まる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 判.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 判.appearance
+- 魂火.appearance
+- 踏切.base

@@ -1,0 +1,42 @@
+# 第8話「悼む」 s04「火の内側で「ナギ」の声が一度鳴り、彼の喉が一度動く」
+# 元の行: s04 / 18s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep08-04-s04
+unit:
+  before: 火は静か
+  after: 火の内側で「ナギ」の声が一度鳴り、彼の喉が一度動く
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 18s
+population: 1
+body_parts:
+  head: 1
+  hand: 1
+cast:
+- 送り火
+disclosure_state:
+  印.裂けた縁: absent
+key_image: specs/image/ep08/ukebi-v3-ep08-04-s04/ukebi-v3-ep08-04-s04.md
+motion:
+  subject: 喉と、火
+  quality: 喉が一度動く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- ナギ.states.火
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- ナギ.states.火
+- 魂火.appearance
+- 踏切.base
+text_channel:
+- t: 0.0-18.0
+  kind: voice
+  speaker: ナギ
+  line: ナギ

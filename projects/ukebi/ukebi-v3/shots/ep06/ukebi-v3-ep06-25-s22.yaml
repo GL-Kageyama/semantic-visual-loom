@@ -1,0 +1,44 @@
+# 第6話「測る」 s22「カメラが引き、遮断機の上がったままの踏切の全景が残る」
+# 元の行: s22 / 20s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-25-s22
+unit:
+  before: 上がったままの遮断機の帯が枠いっぱい
+  after: カメラが引き、遮断機の上がったままの踏切の全景が残る
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  花.測れない: present
+  花.該当なし: present
+  花.印なし: present
+key_image: specs/image/ep06/ukebi-v3-ep06-25-s22/ukebi-v3-ep06-25-s22.md
+motion:
+  subject: 踏切と、秤と、二人
+  quality: カメラだけが引く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 秤.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 秤.appearance
+- 魂火.appearance
+- 踏切.base
+text_channel:
+- t: 0.0-20.0
+  kind: voice
+  speaker: 送り火
+  line: この魂

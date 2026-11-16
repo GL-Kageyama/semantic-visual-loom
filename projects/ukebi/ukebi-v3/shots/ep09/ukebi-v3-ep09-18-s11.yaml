@@ -1,0 +1,36 @@
+# 第9話「捨てる」 s11「からだがゆっくり回り、靴が軋む」
+# 元の行: s11 / 15s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep09-18-s11
+unit:
+  before: 彼は花に背を向けている
+  after: からだがゆっくり回り、靴が軋む
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 15s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  花.半身: present
+  折れ目.一致: absent
+key_image: specs/image/ep09/ukebi-v3-ep09-18-s11/ukebi-v3-ep09-18-s11.md
+motion:
+  subject: 体と、靴
+  quality: 体が回る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base

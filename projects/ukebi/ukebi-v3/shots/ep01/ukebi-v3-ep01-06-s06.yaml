@@ -1,0 +1,25 @@
+# 第1話「迎え火」 s06「手前のレールが、画面の下端で止まる」
+# 元の行: s06 / 12s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep01-06-s06
+unit:
+  before: 視聴者は立ち尽くしている
+  after: カメラがわずかに前へ出て、手前のレールが画面の下端で止まる
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 12s
+population: 0
+cast: []
+disclosure_state:
+  喉.留まり: absent
+key_image: specs/image/ep01/ukebi-v3-ep01-06-s06/ukebi-v3-ep01-06-s06.md
+motion:
+  subject: 手前のレールと、砂利
+  quality: カメラだけがわずかに前へ出る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 踏切.base
+attached:
+- 踏切.base

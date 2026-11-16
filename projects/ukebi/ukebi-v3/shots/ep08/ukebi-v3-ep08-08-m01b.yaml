@@ -1,0 +1,33 @@
+# 第8話「悼む」 m01b「四つに折った紙が膝に置かれる」
+# 元の行: m01b / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep08-08-m01b
+unit:
+  before: 紙は膝の上に無い
+  after: 四つに折った紙が膝に置かれる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 1
+body_parts:
+  hand: 1
+  torso: 1
+cast:
+- ナギ
+disclosure_state:
+  印.裂けた縁: absent
+key_image: specs/image/ep08/ukebi-v3-ep08-08-m01b/ukebi-v3-ep08-08-m01b.md
+motion:
+  subject: 紙と、膝
+  quality: 紙が膝に置かれる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- ナギ.identity
+- 手紙.appearance
+- 魂火.appearance
+attached:
+- ナギ.identity
+- 手紙.appearance
+- 魂火.appearance

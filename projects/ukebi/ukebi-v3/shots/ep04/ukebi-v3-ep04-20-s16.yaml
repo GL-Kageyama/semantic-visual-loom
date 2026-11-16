@@ -1,0 +1,39 @@
+# 第4話「呑む」 s16「喉の子の火・頁の空の輪・輪の外の魂火が同じ画面に入る」
+# 元の行: s16 / 20s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep04-20-s16
+unit:
+  before: 頁の空の輪だけが画にある
+  after: カメラが引き、喉の子の火・頁の空の輪・輪の外の魂火（掌）が同じ画面に入る
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  花.席: present
+key_image: specs/image/ep04/ukebi-v3-ep04-20-s16/ukebi-v3-ep04-20-s16.md
+motion:
+  subject: 二つの火と、頁の輪
+  quality: カメラが引く。三つが同じ画に入る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 客の火.appearance
+- 台帳.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 客の火.appearance
+- 台帳.appearance
+- 踏切.base

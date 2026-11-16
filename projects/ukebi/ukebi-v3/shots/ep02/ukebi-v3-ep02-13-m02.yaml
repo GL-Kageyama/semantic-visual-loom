@@ -1,0 +1,30 @@
+# 第2話「送る」 m02「壺を傾け、一滴も出ない」
+# 元の行: m02 / 24s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep02-13-m02
+unit:
+  before: 壺は手の中
+  after: 壺を傾け、乾いた音が一度鳴り、一滴も出ない
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 24s
+population: 1
+cast:
+- サチ
+disclosure_state:
+  印.片方薄い: absent
+key_image: specs/image/ep02/ukebi-v3-ep02-13-m02/ukebi-v3-ep02-13-m02.md
+motion:
+  subject: 壺と、傾ける手
+  quality: 壺を傾ける。一滴も出ない。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- サチ.identity
+- 壺.appearance
+- 客の火.appearance
+attached:
+- サチ.identity
+- 壺.appearance
+- 客の火.appearance

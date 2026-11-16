@@ -1,0 +1,24 @@
+# 第5話「預かる」 m01b「戸の隙の闇が深まる」
+# 元の行: m01b / 16s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep05-08-m01b
+unit:
+  before: 戸は半開きのまま
+  after: 戸の隙の闇が深まる
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 16s
+population: 0
+cast: []
+disclosure_state: {}
+key_image: specs/image/ep05/ukebi-v3-ep05-08-m01b/ukebi-v3-ep05-08-m01b.md
+motion:
+  subject: 戸の隙と、闇
+  quality: 闇が深まる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 客の火.appearance
+attached:
+- 客の火.appearance

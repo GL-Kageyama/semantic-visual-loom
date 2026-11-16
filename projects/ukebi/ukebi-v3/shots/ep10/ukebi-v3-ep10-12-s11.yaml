@@ -1,0 +1,36 @@
+# 第10話「該当なし」 s11「呼吸が深くなり、胸の上下が大きくなる」
+# 元の行: s11 / 18s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep10-12-s11
+unit:
+  before: 胸は上下している（s10 の後）
+  after: 呼吸が深くなり、胸の上下が大きくなる
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 18s
+population: 1
+body_parts:
+  torso: 1
+cast:
+- 送り火
+disclosure_state:
+  頁.白: absent
+  花.名: absent
+  受け火: absent
+key_image: specs/image/ep10/ukebi-v3-ep10-12-s11/ukebi-v3-ep10-12-s11.md
+motion:
+  subject: 胸
+  quality: 胸の上下が大きくなる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base

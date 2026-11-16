@@ -1,0 +1,39 @@
+# 第9話「捨てる」 s10「光が背を越え、花の顔に届く」
+# 元の行: s10 / 15s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep09-17-s10
+unit:
+  before: 彼の背は花のほうを向いている
+  after: 光が背を越え、花の顔に届く（頁は枠に入らない）
+role: 開示
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 15s
+population: 2
+body_parts:
+  torso: 1
+  face: 1
+cast:
+- 送り火
+- 花
+disclosure_state:
+  花.半身: present
+  折れ目.一致: absent
+key_image: specs/image/ep09/ukebi-v3-ep09-17-s10/ukebi-v3-ep09-17-s10.md
+motion:
+  subject: 花の顔と、火
+  quality: 光が顔に届く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base

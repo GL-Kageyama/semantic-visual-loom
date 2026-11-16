@@ -1,0 +1,31 @@
+# 第6話「測る」 s21「空の皿の内側と、その上の空が同じ画面に入る」
+# 元の行: s21 / 20s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-24-s21
+unit:
+  before: カメラは空の皿に寄っている
+  after: カメラが引き、空の皿の内側と、その上の空が同じ画面に入る
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 0
+cast: []
+disclosure_state:
+  花.測れない: present
+  花.該当なし: present
+  花.印なし: present
+key_image: specs/image/ep06/ukebi-v3-ep06-24-s21/ukebi-v3-ep06-24-s21.md
+motion:
+  subject: 空の皿と、その上
+  quality: カメラだけが引く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 秤.appearance
+- 踏切.base
+- 魂火.appearance
+attached:
+- 秤.appearance
+- 踏切.base
+- 魂火.appearance

@@ -1,0 +1,36 @@
+# 第6話「測る」 s13「花の足が皿を離れ、皿が一度揺れて止まる」
+# 元の行: s13 / 15s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-15-s13
+unit:
+  before: 花は皿の上に立っている
+  after: 花の足が皿を離れ、皿が一度揺れて止まる（鎖が一度鳴る）
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 15s
+population: 1
+body_parts:
+  foot: 2
+cast:
+- 花
+disclosure_state:
+  花.測れない: present
+  花.該当なし: present
+  花.印なし: absent
+key_image: specs/image/ep06/ukebi-v3-ep06-15-s13/ukebi-v3-ep06-15-s13.md
+motion:
+  subject: 花の足と、皿
+  quality: 足が離れ、皿が一度揺れる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 花.identity
+- 秤.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 花.identity
+- 秤.appearance
+- 魂火.appearance
+- 踏切.base

@@ -1,0 +1,27 @@
+# 第8話「悼む」 s06「枠の縁に遠い火が見え、夜の野の地面が照らされる」
+# 元の行: s06 / 20s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep08-06-s06
+unit:
+  before: 野は暗い
+  after: 枠の縁に遠い火が見え、夜の野の地面が照らされる
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 0
+cast: []
+disclosure_state:
+  印.裂けた縁: absent
+key_image: specs/image/ep08/ukebi-v3-ep08-06-s06/ukebi-v3-ep08-06-s06.md
+motion:
+  subject: 夜の野と、遠い火
+  quality: 野が開き、地面が照らされる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 魂火.appearance
+- 踏切.base
+attached:
+- 魂火.appearance
+- 踏切.base

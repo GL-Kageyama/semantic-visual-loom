@@ -1,0 +1,33 @@
+# 第7話「値付ける」 m02b「爪の先が数える」
+# 元の行: m02b / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep07-10-m02b
+unit:
+  before: 指は顎の先
+  after: 爪の先が数える
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 1
+body_parts:
+  hand: 1
+  finger: 2
+  head: 1
+cast:
+- トワ
+disclosure_state:
+  判.押される: absent
+  印.片側が薄い: absent
+key_image: specs/image/ep07/ukebi-v3-ep07-10-m02b/ukebi-v3-ep07-10-m02b.md
+motion:
+  subject: 爪と、顎
+  quality: 爪が数える。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- トワ.identity
+- 魂火.appearance
+attached:
+- トワ.identity
+- 魂火.appearance

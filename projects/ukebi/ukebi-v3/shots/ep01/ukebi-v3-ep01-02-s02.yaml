@@ -1,0 +1,30 @@
+# 第1話「迎え火」 s02「水たまりが、視聴者の足元で止まる」
+# 元の行: s02 / 14s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep01-02-s02
+unit:
+  before: 濡れた砂利の上が見える
+  after: 水たまりが黒い空を映し、視聴者の足元で止まる
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 14s
+population: 1
+body_parts:
+  foot: 2
+cast:
+- あなた
+disclosure_state:
+  喉.留まり: absent
+key_image: specs/image/ep01/ukebi-v3-ep01-02-s02/ukebi-v3-ep01-02-s02.md
+motion:
+  subject: 水たまりと、視聴者の両足
+  quality: 足は動かない。映り込みだけが黒くなる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- あなた
+- 踏切.base
+attached:
+- あなた
+- 踏切.base

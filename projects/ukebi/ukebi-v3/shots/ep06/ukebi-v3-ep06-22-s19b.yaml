@@ -1,0 +1,38 @@
+# 第6話「測る」 s19b「四つ目の跡の頁が開き、次の頁は白い」
+# 元の行: s19b / 5s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-22-s19b
+unit:
+  before: 四つ目の跡の頁が開き、次の頁は白い
+  after: 彼が頁を閉じる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 5s
+population: 1
+body_parts:
+  hand: 1
+cast:
+- 送り火
+disclosure_state:
+  花.測れない: present
+  花.該当なし: present
+  花.印なし: present
+key_image: specs/image/ep06/ukebi-v3-ep06-22-s19b/ukebi-v3-ep06-22-s19b.md
+motion:
+  subject: 頁と、四つ目の跡
+  quality: 頁が閉じる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 台帳.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 台帳.appearance
+- 魂火.appearance
+- 踏切.base

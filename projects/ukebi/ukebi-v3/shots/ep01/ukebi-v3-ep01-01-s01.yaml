@@ -1,0 +1,25 @@
+# 第1話「迎え火」 s01「闇の底から、踏切の輪郭が浮かぶ」
+# 元の行: s01 / 12s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep01-01-s01
+unit:
+  before: 闇に遠いレールの唸りだけがある
+  after: 闇の底から踏切の輪郭が浮かぶ
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 12s
+population: 0
+cast: []
+disclosure_state:
+  喉.留まり: absent
+key_image: specs/image/ep01/ukebi-v3-ep01-01-s01/ukebi-v3-ep01-01-s01.md
+motion:
+  subject: 踏切の輪郭と、レール・砂利
+  quality: カメラだけがわずかに寄る。主題は止まっている。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 踏切.base
+attached:
+- 踏切.base

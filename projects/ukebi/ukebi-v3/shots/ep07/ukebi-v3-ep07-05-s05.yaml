@@ -1,0 +1,37 @@
+# 第7話「値付ける」 s05「彼の目が火を透かし、火の底に低く縮こまった影が浮かぶ」
+# 元の行: s05 / 26s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep07-05-s05
+unit:
+  before: 彼の目は開いている
+  after: 彼の目が火を透かし、火の底に低く縮こまった影が浮かぶ
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 26s
+population: 1
+body_parts:
+  eye: 2
+cast:
+- 送り火
+disclosure_state:
+  判.押される: absent
+  印.片側が薄い: absent
+key_image: specs/image/ep07/ukebi-v3-ep07-05-s05/ukebi-v3-ep07-05-s05.md
+motion:
+  subject: 彼の目と、火の底の影
+  quality: 目が火を透かす。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- トワ.states.火
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- トワ.states.火
+- 魂火.appearance
+- 踏切.base

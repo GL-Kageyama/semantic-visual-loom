@@ -1,0 +1,24 @@
+# 第5話「預かる」 m01a「古い戸が半開きになり、中は暗い」
+# 元の行: m01a / 16s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep05-07-m01a
+unit:
+  before: 記憶は閉じている
+  after: 古い戸が半開きになり、中は暗い
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 16s
+population: 0
+cast: []
+disclosure_state: {}
+key_image: specs/image/ep05/ukebi-v3-ep05-07-m01a/ukebi-v3-ep05-07-m01a.md
+motion:
+  subject: 古い戸と、闇
+  quality: 戸が半開きになる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 客の火.appearance
+attached:
+- 客の火.appearance

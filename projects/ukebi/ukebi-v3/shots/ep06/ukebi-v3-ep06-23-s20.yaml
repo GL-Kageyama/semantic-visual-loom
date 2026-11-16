@@ -1,0 +1,31 @@
+# 第6話「測る」 s20「カメラが梁へ寄り、火の当たる上辺だけが淡い」
+# 元の行: s20 / 20s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-23-s20
+unit:
+  before: カメラは秤の正面、梁は暗い
+  after: カメラが梁へ寄り、火の当たる上辺だけが淡い梁の面が入る
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 0
+cast: []
+disclosure_state:
+  花.測れない: present
+  花.該当なし: present
+  花.印なし: present
+key_image: specs/image/ep06/ukebi-v3-ep06-23-s20/ukebi-v3-ep06-23-s20.md
+motion:
+  subject: 梁と、空の皿
+  quality: カメラだけが梁へ寄る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 秤.appearance
+- 踏切.base
+- 魂火.appearance
+attached:
+- 秤.appearance
+- 踏切.base
+- 魂火.appearance

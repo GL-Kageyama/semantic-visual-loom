@@ -1,0 +1,25 @@
+# 第1話「迎え火」 s04「二本の腕木が、六十度で上がったまま」
+# 元の行: s04 / 14s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep01-04-s04
+unit:
+  before: 遮断機の腕木が画面の外にある
+  after: 二本の腕木が六十度で上がったまま、影を線路へ落とす
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 14s
+population: 0
+cast: []
+disclosure_state:
+  喉.留まり: absent
+key_image: specs/image/ep01/ukebi-v3-ep01-04-s04/ukebi-v3-ep01-04-s04.md
+motion:
+  subject: 二本の腕木と、線路へ落ちる影
+  quality: カメラが腕木へチルトする。腕木は上がったまま動かない。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 踏切.base
+attached:
+- 踏切.base

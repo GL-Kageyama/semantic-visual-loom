@@ -1,0 +1,32 @@
+# 第2話「送る」 s04b「内側で「サチ」という名が一度鳴る」
+# 元の行: s04b / 8s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep02-05-s04b
+unit:
+  before: 内側は無音
+  after: 内側で「サチ」という名が一度鳴り、歩き続けた足・乾いた喉・届かなかった場所が一瞬見える
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 8s
+population: 0
+cast: []
+disclosure_state:
+  印.片方薄い: absent
+key_image: specs/image/ep02/ukebi-v3-ep02-05-s04b/ukebi-v3-ep02-05-s04b.md
+motion:
+  subject: 火の内側と、三つの一瞬の像
+  quality: 名が一度鳴る。像が一瞬だけ結ぶ。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 客の火.appearance
+- 踏切.base
+attached:
+- 客の火.appearance
+- 踏切.base
+text_channel:
+- t: 0.0-8.0
+  kind: voice
+  speaker: サチ
+  line: サチ

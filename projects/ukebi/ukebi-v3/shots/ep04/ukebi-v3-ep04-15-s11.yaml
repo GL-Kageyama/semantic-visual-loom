@@ -1,0 +1,37 @@
+# 第4話「呑む」 s11「魂火が掌から低く差し出され、彼女を下から照らす」
+# 元の行: s11 / 20s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep04-15-s11
+unit:
+  before: 彼女の手は膝の上にある
+  after: 魂火が彼の掌から低く差し出され、彼女を下から照らす
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  花.席: present
+key_image: specs/image/ep04/ukebi-v3-ep04-15-s11/ukebi-v3-ep04-15-s11.md
+motion:
+  subject: 魂火と、少女
+  quality: 火が低く差し出される。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 腰掛け.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 腰掛け.appearance
+- 踏切.base

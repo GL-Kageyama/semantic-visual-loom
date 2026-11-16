@@ -1,0 +1,36 @@
+# 第6話「測る」 s10「カメラが横木を水平に押し、針の真上で止まる」
+# 元の行: s10 / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-12-s10
+unit:
+  before: カメラは横木の手前、皿の縁に花の足
+  after: カメラが横木を水平に押し、針の真上で止まる
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 1
+body_parts:
+  foot: 2
+cast:
+- 花
+disclosure_state:
+  花.測れない: present
+  花.該当なし: absent
+  花.印なし: absent
+key_image: specs/image/ep06/ukebi-v3-ep06-12-s10/ukebi-v3-ep06-12-s10.md
+motion:
+  subject: 横木・針・花の足
+  quality: カメラだけが水平に押す。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 花.identity
+- 秤.appearance
+- 踏切.base
+- 魂火.appearance
+attached:
+- 花.identity
+- 秤.appearance
+- 踏切.base
+- 魂火.appearance

@@ -1,0 +1,39 @@
+# 第6話「測る」 s17「花が一度息を吸い、口を開いて「あなたの重さは」と言う」
+# 元の行: s17 / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-19-s17
+unit:
+  before: 花は口を閉じている
+  after: 花が一度息を吸い、口を開いて「あなたの重さは」と言う
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 1
+body_parts:
+  face: 1
+cast:
+- 花
+disclosure_state:
+  花.測れない: present
+  花.該当なし: present
+  花.印なし: absent
+key_image: specs/image/ep06/ukebi-v3-ep06-19-s17/ukebi-v3-ep06-19-s17.md
+motion:
+  subject: 花の口
+  quality: 息を吸い、口が開く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 花.identity
+- 踏切.base
+- 魂火.appearance
+attached:
+- 花.identity
+- 踏切.base
+- 魂火.appearance
+text_channel:
+- t: 0.0-20.0
+  kind: voice
+  speaker: 花
+  line: あなたの重さは

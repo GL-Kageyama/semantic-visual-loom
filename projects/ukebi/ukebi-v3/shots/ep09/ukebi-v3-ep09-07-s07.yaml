@@ -1,0 +1,28 @@
+# 第9話「捨てる」 s07「雨の踏切が開き、線路が濡れている」
+# 元の行: s07 / 20s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep09-07-s07
+unit:
+  before: 火の内側に雨が降っている
+  after: 雨の踏切が開き、線路が濡れている
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 0
+cast: []
+disclosure_state:
+  花.半身: absent
+  折れ目.一致: absent
+key_image: specs/image/ep09/ukebi-v3-ep09-07-s07/ukebi-v3-ep09-07-s07.md
+motion:
+  subject: 雨の踏切と、線路
+  quality: 踏切が開く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 魂火.appearance
+- 踏切.base
+attached:
+- 魂火.appearance
+- 踏切.base

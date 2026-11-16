@@ -1,0 +1,27 @@
+# 第1話「迎え火」 s08「火が、視聴者の前で止まる」
+# 元の行: s08 / 14s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep01-08-s08
+unit:
+  before: 火は漂っている
+  after: 火が視聴者の前で止まり、顔を確かめるように揺れる
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 14s
+population: 0
+cast: []
+disclosure_state:
+  喉.留まり: absent
+key_image: specs/image/ep01/ukebi-v3-ep01-08-s08/ukebi-v3-ep01-08-s08.md
+motion:
+  subject: 止まった客の火
+  quality: 火が止まり、一度だけ揺れる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 踏切.base
+- 客の火.appearance
+attached:
+- 踏切.base
+- 客の火.appearance

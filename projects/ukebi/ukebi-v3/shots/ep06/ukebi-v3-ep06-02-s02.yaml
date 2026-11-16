@@ -1,0 +1,31 @@
+# 第6話「測る」 s02「横木が水平で針が真上を指す」
+# 元の行: s02 / 20s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-02-s02
+unit:
+  before: 支柱の下部だけが枠に入り、横木は枠の外
+  after: カメラが針へ寄り、横木が水平で針が真上を指す
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 0
+cast: []
+disclosure_state:
+  花.測れない: absent
+  花.該当なし: absent
+  花.印なし: absent
+key_image: specs/image/ep06/ukebi-v3-ep06-02-s02/ukebi-v3-ep06-02-s02.md
+motion:
+  subject: 横木と針
+  quality: カメラだけが針へ寄る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 秤.appearance
+- 踏切.base
+- 魂火.appearance
+attached:
+- 秤.appearance
+- 踏切.base
+- 魂火.appearance

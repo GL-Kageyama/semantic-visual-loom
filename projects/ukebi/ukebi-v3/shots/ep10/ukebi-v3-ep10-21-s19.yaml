@@ -1,0 +1,39 @@
+# 第10話「該当なし」 s19「花が息を吸い、唇が開きかける（まだ開かない）」
+# 元の行: s19 / 12s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep10-21-s19
+unit:
+  before: 花の口は閉じている
+  after: 花が息を吸い、唇が開きかける（まだ開かない）
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 12s
+population: 2
+body_parts:
+  face: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  頁.白: absent
+  花.名: absent
+  受け火: absent
+key_image: specs/image/ep10/ukebi-v3-ep10-21-s19/ukebi-v3-ep10-21-s19.md
+motion:
+  subject: 花の唇
+  quality: 唇が開きかける。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base

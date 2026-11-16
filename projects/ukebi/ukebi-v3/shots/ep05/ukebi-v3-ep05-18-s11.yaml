@@ -1,0 +1,41 @@
+# 第5話「預かる」 s11「花が口を開き、「代わりに、あんたを預からせて」と言う」
+# 元の行: s11 / 18s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep05-18-s11
+unit:
+  before: 花は口を閉じている
+  after: 花が口を開き、「代わりに、あんたを預からせて」と言う
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 18s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state: {}
+key_image: specs/image/ep05/ukebi-v3-ep05-18-s11/ukebi-v3-ep05-18-s11.md
+motion:
+  subject: 花の口と目
+  quality: 口が開き、一度だけ言う。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 腰掛け.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 腰掛け.appearance
+- 踏切.base
+text_channel:
+- t: 0.0-18.0
+  kind: voice
+  speaker: 花
+  line: 代わりに、あんたを預からせて

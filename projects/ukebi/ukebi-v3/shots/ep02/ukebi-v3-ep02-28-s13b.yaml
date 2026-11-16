@@ -1,0 +1,37 @@
+# 第2話「送る」 s13b「火が問う（境の声）」
+# 元の行: s13b / 8s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep02-28-s13b
+unit:
+  before: 火は問わない
+  after: 火が問う（境の声）
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 8s
+population: 1
+cast:
+- 送り火
+disclosure_state:
+  印.片方薄い: absent
+key_image: specs/image/ep02/ukebi-v3-ep02-28-s13b/ukebi-v3-ep02-28-s13b.md
+motion:
+  subject: 火と、送り火
+  quality: 火は動かない。声だけが問う。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base
+text_channel:
+- t: 0.0-8.0
+  kind: voice
+  speaker: 境
+  line: あなたは、誰に送られるの

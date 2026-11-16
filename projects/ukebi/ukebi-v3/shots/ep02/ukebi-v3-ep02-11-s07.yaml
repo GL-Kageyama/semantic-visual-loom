@@ -1,0 +1,32 @@
+# 第2話「送る」 s07「炎の内側に像が結び始める」
+# 元の行: s07 / 12s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep02-11-s07
+unit:
+  before: 火は土の色
+  after: 炎の内側に像が結び始める
+role: 質感
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 12s
+population: 1
+cast:
+- 送り火
+disclosure_state:
+  印.片方薄い: absent
+key_image: specs/image/ep02/ukebi-v3-ep02-11-s07/ukebi-v3-ep02-11-s07.md
+motion:
+  subject: 火の内側の像
+  quality: 像が結び始める。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 客の火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 客の火.appearance
+- 踏切.base

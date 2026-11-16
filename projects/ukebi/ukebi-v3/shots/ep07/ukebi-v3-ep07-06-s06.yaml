@@ -1,0 +1,26 @@
+# 第7話「値付ける」 s06「机の上が照らされ、部屋が開く」
+# 元の行: s06 / 20s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep07-06-s06
+unit:
+  before: 机の上は暗い
+  after: 机の上が照らされ、部屋が開く
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 0
+cast: []
+disclosure_state:
+  判.押される: absent
+  印.片側が薄い: absent
+key_image: specs/image/ep07/ukebi-v3-ep07-06-s06/ukebi-v3-ep07-06-s06.md
+motion:
+  subject: 机と、机の灯り
+  quality: 机が照らされる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 魂火.appearance
+attached:
+- 魂火.appearance

@@ -1,0 +1,33 @@
+# 第8話「悼む」 m03b「裂けた縁を指が押さえる（縁が四角に開く）」
+# 元の行: m03b / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep08-14-m03b
+unit:
+  before: 重ねた紙は折られている
+  after: 裂けた縁を指が押さえる（縁が四角に開く）
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 1
+body_parts:
+  hand: 1
+  finger: 1
+cast:
+- ナギ
+disclosure_state:
+  印.裂けた縁: absent
+key_image: specs/image/ep08/ukebi-v3-ep08-14-m03b/ukebi-v3-ep08-14-m03b.md
+motion:
+  subject: 指と、裂けた縁
+  quality: 縁が四角に開く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- ナギ.identity
+- 手紙.appearance
+- 魂火.appearance
+attached:
+- ナギ.identity
+- 手紙.appearance
+- 魂火.appearance

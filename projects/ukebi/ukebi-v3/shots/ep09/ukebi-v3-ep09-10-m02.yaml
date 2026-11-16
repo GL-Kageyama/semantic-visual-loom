@@ -1,0 +1,34 @@
+# 第9話「捨てる」 m02「睫毛の雨のひとつが頬を伝う（拭わない）」
+# 元の行: m02 / 30s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep09-10-m02
+unit:
+  before: 睫毛に雨が溜まっている
+  after: そのひとつが頬を伝う（拭わない）
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 30s
+population: 1
+body_parts:
+  head: 1
+  face: 1
+cast:
+- 花
+disclosure_state:
+  花.半身: absent
+  折れ目.一致: absent
+key_image: specs/image/ep09/ukebi-v3-ep09-10-m02/ukebi-v3-ep09-10-m02.md
+motion:
+  subject: 睫毛と、頬の一滴
+  quality: 一滴が頬を伝う。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 花.identity
+- 魂火.appearance
+- 踏切.base

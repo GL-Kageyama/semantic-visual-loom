@@ -1,0 +1,37 @@
+# 第2話「送る」 s18「カメラが引いて、誰も渡らない」
+# 元の行: s18 / 12s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep02-34-s18
+unit:
+  before: 踏切の全景
+  after: カメラが引いて、遮断機は上がったまま、誰も渡らない
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 12s
+population: 1
+cast:
+- 送り火
+disclosure_state:
+  印.片方薄い: present
+key_image: specs/image/ep02/ukebi-v3-ep02-34-s18/ukebi-v3-ep02-34-s18.md
+motion:
+  subject: 踏切と、送り火
+  quality: カメラだけが引く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base
+text_channel:
+- t: 0.0-12.0
+  kind: voice
+  speaker: 送り火
+  line: この魂

@@ -1,0 +1,28 @@
+# 第9話「捨てる」 m01「水たまりに腕木の白黒の帯が映り、揺れる」
+# 元の行: m01 / 30s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep09-09-m01
+unit:
+  before: 雨は線路に落ちている
+  after: 水たまりに腕木の白黒の帯が映り、揺れる
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 30s
+population: 0
+cast: []
+disclosure_state:
+  花.半身: absent
+  折れ目.一致: absent
+key_image: specs/image/ep09/ukebi-v3-ep09-09-m01/ukebi-v3-ep09-09-m01.md
+motion:
+  subject: 水たまりと、映り
+  quality: 映りが揺れる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 魂火.appearance
+- 踏切.base
+attached:
+- 魂火.appearance
+- 踏切.base

@@ -1,0 +1,37 @@
+# 第6話「測る」 s09「火が揺れ、頬の光がわずかに移る」
+# 元の行: s09 / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-11-s09
+unit:
+  before: 肩越しの頬に、火の光が同じところにある
+  after: 火が揺れ、頬の光がわずかに移る
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 1
+body_parts:
+  head: 1
+  shoulder: 2
+cast:
+- 送り火
+disclosure_state:
+  花.測れない: present
+  花.該当なし: absent
+  花.印なし: absent
+key_image: specs/image/ep06/ukebi-v3-ep06-11-s09/ukebi-v3-ep06-11-s09.md
+motion:
+  subject: 火と、頬
+  quality: 火が揺れ、光が移る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base

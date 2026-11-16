@@ -1,0 +1,27 @@
+# 第5話「預かる」 m03「影が足音だけを残して過ぎ、足元が見える」
+# 元の行: m03 / 30s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep05-10-m03
+unit:
+  before: 戸口の前は静か
+  after: 影が足音だけを残して過ぎ、足元が見える
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 30s
+population: 1
+cast:
+- コダマ
+disclosure_state: {}
+key_image: specs/image/ep05/ukebi-v3-ep05-10-m03/ukebi-v3-ep05-10-m03.md
+motion:
+  subject: 足元と、過ぎる影
+  quality: 影が過ぎる。足は動かない。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- コダマ.identity
+- 客の火.appearance
+attached:
+- コダマ.identity
+- 客の火.appearance

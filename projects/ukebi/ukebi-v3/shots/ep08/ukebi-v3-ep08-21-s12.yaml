@@ -1,0 +1,35 @@
+# 第8話「悼む」 s12「白い息が火の光を横切り、彼へ渡る」
+# 元の行: s12 / 20s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep08-21-s12
+unit:
+  before: 息は花の側にある
+  after: 白い息が火の光を横切り、彼へ渡る
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  印.裂けた縁: absent
+key_image: specs/image/ep08/ukebi-v3-ep08-21-s12/ukebi-v3-ep08-21-s12.md
+motion:
+  subject: 息と、火の光
+  quality: 息が光を横切る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base

@@ -1,0 +1,41 @@
+# 第5話「預かる」 s17「カメラが引いて、遮断機の上がった踏切が残る」
+# 元の行: s17 / 15s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep05-27-s17
+unit:
+  before: 踏切の全景
+  after: カメラが引いて、遮断機の上がった踏切が残る
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 15s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state: {}
+key_image: specs/image/ep05/ukebi-v3-ep05-27-s17/ukebi-v3-ep05-27-s17.md
+motion:
+  subject: 踏切と、二人
+  quality: カメラだけが引く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 客の火.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 客の火.appearance
+- 魂火.appearance
+- 踏切.base
+text_channel:
+- t: 0.0-15.0
+  kind: voice
+  speaker: 送り火
+  line: この魂

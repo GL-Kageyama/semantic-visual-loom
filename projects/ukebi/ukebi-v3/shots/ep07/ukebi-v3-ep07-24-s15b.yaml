@@ -1,0 +1,36 @@
+# 第7話「値付ける」 s15b「彼が指でなぞる」
+# 元の行: s15b / 7s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep07-24-s15b
+unit:
+  before: 印は輪郭だけ、片側が薄い
+  after: 彼が指でなぞる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 7s
+population: 1
+body_parts:
+  head: 1
+  hand: 1
+cast:
+- 送り火
+disclosure_state:
+  判.押される: present
+  印.片側が薄い: present
+key_image: specs/image/ep07/ukebi-v3-ep07-24-s15b/ukebi-v3-ep07-24-s15b.md
+motion:
+  subject: 指と、額の印
+  quality: 指がなぞる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base

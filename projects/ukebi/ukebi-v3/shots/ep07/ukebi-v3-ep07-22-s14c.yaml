@@ -1,0 +1,41 @@
+# 第7話「値付ける」 s14c「花が彼の額へ押し当てる」
+# 元の行: s14c / 2s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep07-22-s14c
+unit:
+  before: 白い面は花の手にある
+  after: 花が彼の額へ押し当てる
+role: 開示
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 2s
+population: 2
+body_parts:
+  hand: 2
+  head: 1
+cast:
+- 送り火
+- 花
+disclosure_state:
+  判.押される: present
+  印.片側が薄い: absent
+key_image: specs/image/ep07/ukebi-v3-ep07-22-s14c/ukebi-v3-ep07-22-s14c.md
+motion:
+  subject: 花の手と、彼の額
+  quality: 判が額に押し当てられる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 判.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 判.appearance
+- 魂火.appearance
+- 踏切.base

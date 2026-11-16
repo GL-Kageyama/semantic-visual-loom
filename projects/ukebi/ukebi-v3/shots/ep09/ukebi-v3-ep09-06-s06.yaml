@@ -1,0 +1,28 @@
+# 第9話「捨てる」 s06「火の内側で雨が降り出す」
+# 元の行: s06 / 20s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep09-06-s06
+unit:
+  before: 火の内側は暗い
+  after: 火の内側で雨が降り出す
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 0
+cast: []
+disclosure_state:
+  花.半身: absent
+  折れ目.一致: absent
+key_image: specs/image/ep09/ukebi-v3-ep09-06-s06/ukebi-v3-ep09-06-s06.md
+motion:
+  subject: 火の内側と、雨
+  quality: 雨が降り出す。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 魂火.appearance
+- 踏切.base
+attached:
+- 魂火.appearance
+- 踏切.base

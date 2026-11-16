@@ -1,0 +1,39 @@
+# 第9話「捨てる」 s09「炭の光が、花の顔を拾う（雨は降っていない）」
+# 元の行: s09 / 15s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep09-16-s09
+unit:
+  before: 現在の枠は暗い
+  after: 炭の光が、花の顔を拾う（雨は降っていない）
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 15s
+population: 2
+body_parts:
+  torso: 1
+  face: 1
+cast:
+- 送り火
+- 花
+disclosure_state:
+  花.半身: absent
+  折れ目.一致: absent
+key_image: specs/image/ep09/ukebi-v3-ep09-16-s09/ukebi-v3-ep09-16-s09.md
+motion:
+  subject: 花の顔と、火
+  quality: 光が顔を拾う。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base

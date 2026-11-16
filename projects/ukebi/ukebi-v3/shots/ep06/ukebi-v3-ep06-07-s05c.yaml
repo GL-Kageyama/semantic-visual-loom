@@ -1,0 +1,41 @@
+# 第6話「測る」 s05c「花が掌を下ろす」
+# 元の行: s05c / 6s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep06-07-s05c
+unit:
+  before: 花の掌は火の側にある
+  after: 花が掌を下ろす
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 6s
+population: 2
+body_parts:
+  hand: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  花.測れない: absent
+  花.該当なし: absent
+  花.印なし: absent
+key_image: specs/image/ep06/ukebi-v3-ep06-07-s05c/ukebi-v3-ep06-07-s05c.md
+motion:
+  subject: 花の掌
+  quality: 掌が下りる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 秤.appearance
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 秤.appearance
+- 魂火.appearance
+- 踏切.base

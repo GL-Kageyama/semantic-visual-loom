@@ -1,0 +1,36 @@
+# 第9話「捨てる」 s03「彼が花へ背を向け、流れへ向ける」
+# 元の行: s03 / 20s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep09-03-s03
+unit:
+  before: 彼は花の側を向いている
+  after: 彼が花へ背を向け、流れへ向ける
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  花.半身: absent
+  折れ目.一致: absent
+key_image: specs/image/ep09/ukebi-v3-ep09-03-s03/ukebi-v3-ep09-03-s03.md
+motion:
+  subject: 背と、花
+  quality: 背が向きを変える。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base

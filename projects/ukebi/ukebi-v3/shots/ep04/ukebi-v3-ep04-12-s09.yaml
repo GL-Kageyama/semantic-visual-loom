@@ -1,0 +1,36 @@
+# 第4話「呑む」 s09「焦げた輪がひとつ増え、中は空、縁だけ赤い」
+# 元の行: s09 / 30s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep04-12-s09
+unit:
+  before: 頁に輪は無い
+  after: 焦げた輪がひとつ増え、中は空、縁だけ赤い。脇に低い腰掛け
+role: 質感
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 30s
+population: 1
+cast:
+- 送り火
+disclosure_state:
+  花.席: absent
+key_image: specs/image/ep04/ukebi-v3-ep04-12-s09/ukebi-v3-ep04-12-s09.md
+motion:
+  subject: 頁の輪と、腰掛け
+  quality: 輪がひとつ増える。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 台帳.appearance
+- 腰掛け.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 台帳.appearance
+- 腰掛け.appearance
+- 踏切.base

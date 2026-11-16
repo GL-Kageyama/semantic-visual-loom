@@ -1,0 +1,39 @@
+# 第10話「該当なし」 s23「花が頭を傾け、音を受け取る」
+# 元の行: s23 / 20s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep10-25-s23
+unit:
+  before: 花の耳は彼のほうを向いている
+  after: 花が頭を傾け、音を受け取る
+role: 反応
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 2
+body_parts:
+  head: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  頁.白: absent
+  花.名: present
+  受け火: absent
+key_image: specs/image/ep10/ukebi-v3-ep10-25-s23/ukebi-v3-ep10-25-s23.md
+motion:
+  subject: 花の耳
+  quality: 頭が傾く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base

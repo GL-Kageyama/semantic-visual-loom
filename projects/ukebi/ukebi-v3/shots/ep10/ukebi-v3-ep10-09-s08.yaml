@@ -1,0 +1,36 @@
+# 第10話「該当なし」 s08「背が枠の正面を向く（顔は入らない）」
+# 元の行: s08 / 13s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep10-09-s08
+unit:
+  before: 背は線路の側を向いている
+  after: 背が枠の正面を向く（顔は入らない）
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 13s
+population: 1
+body_parts:
+  torso: 1
+cast:
+- 送り火
+disclosure_state:
+  頁.白: absent
+  花.名: absent
+  受け火: absent
+key_image: specs/image/ep10/ukebi-v3-ep10-09-s08/ukebi-v3-ep10-09-s08.md
+motion:
+  subject: 背
+  quality: 背が正面を向く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base

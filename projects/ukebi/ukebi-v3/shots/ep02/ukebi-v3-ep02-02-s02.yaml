@@ -1,0 +1,25 @@
+# 第2話「送る」 s02「乾いた白い光が一瞬だけ差す」
+# 元の行: s02 / 14s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep02-02-s02
+unit:
+  before: 線路の消失点は暗い
+  after: 乾いた白い光が一瞬だけ差す
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 14s
+population: 0
+cast: []
+disclosure_state:
+  印.片方薄い: absent
+key_image: specs/image/ep02/ukebi-v3-ep02-02-s02/ukebi-v3-ep02-02-s02.md
+motion:
+  subject: 消失点と、レール
+  quality: 光が一度だけ差す。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 踏切.base
+attached:
+- 踏切.base

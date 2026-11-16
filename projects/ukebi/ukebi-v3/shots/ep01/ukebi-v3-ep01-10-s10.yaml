@@ -1,0 +1,27 @@
+# 第1話「迎え火」 s10「縁だけ赤く、青と赤のあいだで揺れる」
+# 元の行: s10 / 14s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep01-10-s10
+unit:
+  before: 火は青白い
+  after: 縁だけ赤く、青と赤のあいだで揺れる
+role: 質感
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 14s
+population: 0
+cast: []
+disclosure_state:
+  喉.留まり: absent
+key_image: specs/image/ep01/ukebi-v3-ep01-10-s10/ukebi-v3-ep01-10-s10.md
+motion:
+  subject: 客の火の縁
+  quality: 火の縁が青と赤のあいだで揺れる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 踏切.base
+- 客の火.appearance
+attached:
+- 踏切.base
+- 客の火.appearance

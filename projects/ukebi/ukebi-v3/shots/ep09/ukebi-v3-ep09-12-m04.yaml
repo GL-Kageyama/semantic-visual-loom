@@ -1,0 +1,33 @@
+# 第9話「捨てる」 m04「落ち影が前を通り、彼女の足元の水が跳ねる」
+# 元の行: m04 / 30s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep09-12-m04
+unit:
+  before: 彼女の足元は濡れている
+  after: 落ち影が前を通り、彼女の足元の水が跳ねる（影の体は枠の外。彼女は見ない）
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 30s
+population: 1
+body_parts:
+  foot: 2
+cast:
+- 花
+disclosure_state:
+  花.半身: absent
+  折れ目.一致: absent
+key_image: specs/image/ep09/ukebi-v3-ep09-12-m04/ukebi-v3-ep09-12-m04.md
+motion:
+  subject: 足元と、水
+  quality: 水が跳ねる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 花.identity
+- 魂火.appearance
+- 踏切.base

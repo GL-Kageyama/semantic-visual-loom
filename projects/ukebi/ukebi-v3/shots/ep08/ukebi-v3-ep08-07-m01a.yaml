@@ -1,0 +1,31 @@
+# 第8話「悼む」 m01a「ナギが外套の上に座る」
+# 元の行: m01a / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep08-07-m01a
+unit:
+  before: 外套は草の上に敷かれている
+  after: ナギがその上に座る
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 1
+body_parts:
+  hand: 1
+  torso: 1
+cast:
+- ナギ
+disclosure_state:
+  印.裂けた縁: absent
+key_image: specs/image/ep08/ukebi-v3-ep08-07-m01a/ukebi-v3-ep08-07-m01a.md
+motion:
+  subject: ナギと、外套
+  quality: ナギが座る。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- ナギ.identity
+- 魂火.appearance
+attached:
+- ナギ.identity
+- 魂火.appearance

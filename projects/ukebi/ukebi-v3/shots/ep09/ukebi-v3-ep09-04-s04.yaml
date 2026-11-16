@@ -1,0 +1,36 @@
+# 第9話「捨てる」 s04「背が半分だけ花のほうへ戻り、止まる」
+# 元の行: s04 / 20s / 人 2
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep09-04-s04
+unit:
+  before: 背は流れを向いている
+  after: 背が半分だけ花のほうへ戻り、止まる
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 20s
+population: 2
+cast:
+- 送り火
+- 花
+disclosure_state:
+  花.半身: absent
+  折れ目.一致: absent
+key_image: specs/image/ep09/ukebi-v3-ep09-04-s04/ukebi-v3-ep09-04-s04.md
+motion:
+  subject: 背と、花
+  quality: 背が半分戻って止まる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 花.identity
+- 魂火.appearance
+- 踏切.base

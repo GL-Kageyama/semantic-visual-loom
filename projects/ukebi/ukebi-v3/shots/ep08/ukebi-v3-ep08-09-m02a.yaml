@@ -1,0 +1,33 @@
+# 第8話「悼む」 m02a「紙が開かれる（白い面、字は無い）」
+# 元の行: m02a / 10s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep08-09-m02a
+unit:
+  before: 紙は四つに折られている
+  after: 紙が開かれる（白い面、字は無い）
+role: 所作
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 10s
+population: 1
+body_parts:
+  hand: 1
+  finger: 1
+cast:
+- ナギ
+disclosure_state:
+  印.裂けた縁: absent
+key_image: specs/image/ep08/ukebi-v3-ep08-09-m02a/ukebi-v3-ep08-09-m02a.md
+motion:
+  subject: 紙と、手
+  quality: 紙が開かれる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- ナギ.identity
+- 手紙.appearance
+- 魂火.appearance
+attached:
+- ナギ.identity
+- 手紙.appearance
+- 魂火.appearance

@@ -1,0 +1,34 @@
+# 第10話「該当なし」 s26「輪郭が薄れ始め、体の形が透ける」
+# 元の行: s26 / 20s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep10-28-s26
+unit:
+  before: 火は枠の外（位置3）
+  after: 輪郭が薄れ始め、体の形が透ける
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 20s
+population: 1
+cast:
+- 送り火
+disclosure_state:
+  頁.白: absent
+  花.名: present
+  受け火: absent
+key_image: specs/image/ep10/ukebi-v3-ep10-28-s26/ukebi-v3-ep10-28-s26.md
+motion:
+  subject: 輪郭
+  quality: 輪郭が薄れる。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base
+attached:
+- 送り火.identity
+- 送り火.negatives
+- 魂火.appearance
+- 踏切.base

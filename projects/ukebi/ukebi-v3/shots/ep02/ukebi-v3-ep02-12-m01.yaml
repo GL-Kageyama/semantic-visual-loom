@@ -1,0 +1,30 @@
+# 第2話「送る」 m01「熱い道が開き、サチが壺を持って歩く」
+# 元の行: m01 / 24s / 人 1
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep02-12-m01
+unit:
+  before: 記憶は閉じている
+  after: 熱い道が開き、サチが窄口の壺を持って歩く
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: motion
+duration: 24s
+population: 1
+cast:
+- サチ
+disclosure_state:
+  印.片方薄い: absent
+key_image: specs/image/ep02/ukebi-v3-ep02-12-m01/ukebi-v3-ep02-12-m01.md
+motion:
+  subject: サチと、窄口の壺
+  quality: サチが道を歩く。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set:
+- サチ.identity
+- 壺.appearance
+- 客の火.appearance
+attached:
+- サチ.identity
+- 壺.appearance
+- 客の火.appearance

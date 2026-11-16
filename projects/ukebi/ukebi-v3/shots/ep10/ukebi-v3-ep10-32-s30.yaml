@@ -1,0 +1,25 @@
+# 第10話「該当なし」 s30「初頁と同じ大きさの頁の湾曲した縁が、白と白の境として浮かぶ」
+# 元の行: s30 / 24s / 人 0
+# ⚠️ 動画の仕様（§1–20）はまだ無い。画像の仕様だけを持つ。
+shot: ukebi-v3-ep10-32-s30
+unit:
+  before: 白い画面
+  after: 初頁と同じ大きさの頁の湾曲した縁が、線ではなく白と白の境として浮かぶ
+role: 情景
+place: 踏切
+time: 時刻を持たない
+mode: still
+duration: 24s
+population: 0
+cast: []
+disclosure_state:
+  頁.白: present
+  花.名: present
+  受け火: absent
+key_image: specs/image/ep10/ukebi-v3-ep10-32-s30/ukebi-v3-ep10-32-s30.md
+motion:
+  subject: 頁の縁
+  quality: 縁が浮かぶ。
+  law: one-lamp-cel の物理。光は魂火ひとつ。ゲストの火は形で、場を照らさない。止まるのは主題であって、画面ではない——空気と埃は動く。
+reference_set: []
+attached: []
