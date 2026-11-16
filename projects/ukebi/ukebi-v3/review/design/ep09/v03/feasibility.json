@@ -1,0 +1,16 @@
+{
+  "seat": "feasibility",
+  "criteria": {"C1": 58, "C2": 48, "C3": 48, "C4": 70, "C5": 52, "C6": 44},
+  "primary_score": 53,
+  "must_below_31": [],
+  "critical": true,
+  "findings": [
+    {"where": "ep09 記憶.appearance", "what": "使わない註と参照表の添付が矛盾。", "why": "鍵の扱いが決まらない。", "fix": "用法を一つに。"},
+    {"where": "ep09 記憶の火", "what": "{PLACE} の第三句が無く、炎の可否も矛盾。", "why": "block を貼れない。", "fix": "句と規則を決める。"},
+    {"where": "ep09 format", "what": "art-board は HOUR を要する。", "why": "時刻を持たないと衝突。", "fix": "scene-board＋CHARACTERS: none。"},
+    {"where": "ep09 部位", "what": "s09/s10/s12 が空。", "why": "L52。", "fix": "宣言。"},
+    {"where": "ep09 L21", "what": "保留は9本×2経路＝18。", "why": "出口に載らない。", "fix": "18座標を記録。"},
+    {"where": "pilot", "what": "索引は第3話をパイロットとする。", "why": "評価対象の表示。", "fix": "第9話を reviewed と書く。"}
+  ],
+  "note": "21/21/0・部位の算術・検査は通る。下げるのは記憶の鍵・火・format・部位・L21。"
+}
