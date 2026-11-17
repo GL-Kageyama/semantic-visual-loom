@@ -1,0 +1,21 @@
+# s07 / 画像 / 1 — CHATGPT IMAGE 2.5
+#
+# ⚠️ 2026-11-18 著者「再焼きの可能性を残しつつ、一旦残す」。
+# ⚠️ カメラが正面、花は皿の後ろ——再焼きの候補。
+# ⚠️ 幅・高さは PNG のヘッダから読んだ（画素そのもの）。
+take:
+  shot: ukebi-v3-ep06-09-s07
+  kind: image
+  index: 1
+  provider:
+    model: CHATGPT IMAGE 2.5
+  params:
+    source: specs/image/ep06/ukebi-v3-ep06-09-s07/ukebi-v3-ep06-09-s07.md
+    aspect: "16:9"
+  file: "錆びた天秤と青い精霊火.png"
+  verdict:
+    machine:
+      measured:
+        width: 1672
+        height: 941
+  adopted: true
