@@ -1,0 +1,21 @@
+# s02 / 画像 / 2 — CHATGPT IMAGE 2.5
+#
+# ⚠️ 2026-11-17 著者「これも良くなった」。
+# ⚠️ 1枚目（雨夜の踏切と遠い灯り.png）は四角い光で不採用。記録していない。
+# ⚠️ 幅・高さは PNG のヘッダから読んだ（画素そのもの）。
+take:
+  shot: ukebi-v3-ep01-02-s02
+  kind: image
+  index: 2
+  provider:
+    model: CHATGPT IMAGE 2.5
+  params:
+    source: specs/image/ep01/ukebi-v3-ep01-02-s02/ukebi-v3-ep01-02-s02.md
+    aspect: "16:9"
+  file: "雨夜の水たまりと黒い革靴.png"
+  verdict:
+    machine:
+      measured:
+        width: 1672
+        height: 941
+  adopted: true
