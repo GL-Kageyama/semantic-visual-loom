@@ -1,0 +1,21 @@
+# s10b / 画像 / 1 — CHATGPT IMAGE 2.5
+#
+# ⚠️ 2026-11-17 著者「この２つは一旦良いものとして記録」。
+# ⚠️ 幅・高さは PNG のヘッダから読んだ（画素そのもの）。
+# ⚠️ 石の席が二つ、火の根元が黃——著者は一旦受けた。
+take:
+  shot: ukebi-v3-ep04-14-s10b
+  kind: image
+  index: 1
+  provider:
+    model: CHATGPT IMAGE 2.5
+  params:
+    source: specs/image/ep04/ukebi-v3-ep04-14-s10b/ukebi-v3-ep04-14-s10b.md
+    aspect: "16:9"
+  file: "夜の踏切と小さな青い炎.png"
+  verdict:
+    machine:
+      measured:
+        width: 1672
+        height: 941
+  adopted: true

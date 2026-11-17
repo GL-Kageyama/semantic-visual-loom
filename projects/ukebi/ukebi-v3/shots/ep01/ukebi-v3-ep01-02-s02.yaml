@@ -25,6 +25,8 @@ motion:
 reference_set:
 - あなた
 - 踏切.base
+- 魂火.appearance
 attached:
 - あなた
 - 踏切.base
+- 魂火.appearance
